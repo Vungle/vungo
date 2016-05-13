@@ -1,0 +1,14 @@
+.idea
+*.iml
+*.sublime-*
+.DS_Store
+
+vendor/*
+_pprof/*
+_out/*
+*/_out/
+*.out
+*.svg
+*.prof
+*.test
+!Dockerfile.*

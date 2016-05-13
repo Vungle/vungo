@@ -1,0 +1,25 @@
+{
+  "id": "d2ae6794cd3e02160755abd460d69008",
+  "video": {
+    "mimes": ["video/mp4", "video/mpeg"],
+    "minduration": 1,
+    "maxduration": 15,
+    "protocols": [2, 3, 5, 6],
+    "w": 480,
+    "h": 640,
+    "startdelay": 10,
+    "linearity": 1,
+    "minbitrate": 128,
+    "maxbitrate": 256,
+    "boxingallowed": 1,
+    "playbackmethods": [1, 2],
+    "delivery": [1, 2],
+    "pos": 30,
+    "api": [1, 2]
+  },
+  "displaymanager": "Vungle Exchange",
+  "displaymanagerver": "Vungle iOS/3.3.1",
+  "instl": 1,
+  "bidfloor": 85.1290,
+  "bidfloorcur": "USD"
+}

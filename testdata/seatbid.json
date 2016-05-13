@@ -1,0 +1,14 @@
+{
+  "bid": [
+    {
+      "id": "1",
+      "impid": "d2ae6794cd3e02160755abd460d69008",
+      "price": 35.500,
+      "adid": "d2ae6794cd3e02160755abd460d65008",
+      "nurl": "http://demand.gopro.com/win?won=${AUCTION_PRICE}",
+      "adm": "<vast/>"
+    }
+  ],
+  "seat": "d2ae6794cd3e02160755abd460d67008",
+  "group": 2
+}

@@ -1,0 +1,18 @@
+{
+  "id": "d2ae6794cd3e02160755abd460d61008",
+  "buyeruid": "d2ae6794cd3e02160755abd460d61108",
+  "yob": 1985,
+  "gender": "F",
+  "keywords": "chanel,millionaire,iwatch,tesla,ferrari,ducati",
+  "customdata": "A4(9GAKYMp@rGmhF!*bI6V0j/2#",
+  "geo": {
+    "country": "USA",
+    "lat": 35.012345,
+    "lon": -115.12345,
+    "city": "Los Angeles",
+    "metro": "803",
+    "region": "CA",
+    "zip": "90049"
+  },
+  "ext": {"vungle":{"some_field":"some_value"}}
+}

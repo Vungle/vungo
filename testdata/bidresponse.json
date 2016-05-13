@@ -1,0 +1,24 @@
+{
+  "id": "d2ae6794cd3e02160755abd460d61008",
+  "seatbid": [
+    {
+      "bid": [
+        {
+          "id": "1",
+          "impid": "d2ae6794cd3e02160755abd460d69008",
+          "price": 35.500,
+          "adid": "d2ae6794cd3e02160755abd460d65008",
+          "nurl": "http://demand.gopro.com/win?won=${AUCTION_PRICE}",
+          "adm": "<vast/>"
+        }
+      ],
+      "seat": "d2ae6794cd3e02160755abd460d67008",
+      "group": 2
+    }
+  ],
+  "bidid": "1",
+  "cur": "USD",
+  "customdata": "A4(9GAKYMp@rGmhF!*bI6V0j/2#",
+  "nbr": 2,
+  "ext": {"vungle":{"some_field":"some_value"}}
+}

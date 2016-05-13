@@ -1,0 +1,28 @@
+{
+  "id": "d2ae6794cd3e02160755abd460d63008",
+  "name": "Spotify Music",
+  "bundle": "com.spotify",
+  "domain": "www.spotify.com",
+  "storeurl": "https://itunes.apple.com/6263795659",
+  "cat": [
+    "IAB1",
+    "IAB3",
+    "IAB15-10"
+  ],
+  "sectioncat": [
+    "IAB3"
+  ],
+  "pagecat": [
+    "IAB5"
+  ],
+  "ver": "1.0.2",
+  "privacypolicy": 1,
+  "paid": 1,
+  "publisher": {
+    "id": "d2ae6794cd3e02160755abd460d64008",
+    "name": "Spotify",
+    "domain": "www.spotify.com"
+  },
+  "keywords": "music,streaming,internet",
+  "ext": {"vungle":{"key":"value"}}
+}

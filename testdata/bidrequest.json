@@ -1,0 +1,120 @@
+{
+  "id": "d2ae6794cd3e02160755abd460d61008",
+  "imp": [
+    {
+      "id": "d2ae6794cd3e02160755abd460d69008",
+      "video": {
+        "mimes": ["video/mp4", "video/mpeg"],
+        "minduration": 1,
+        "maxduration": 15,
+        "protocols": [2, 3, 5, 6],
+        "w": 480,
+        "h": 640,
+        "startdelay": 10,
+        "linearity": 1,
+        "minbitrate": 128,
+        "maxbitrate": 256,
+        "boxingallowed": 1,
+        "playbackmethods": [1, 2],
+        "delivery": [1, 2],
+        "pos": 30,
+        "api": [1, 2]
+      },
+      "displaymanager": "Vungle Exchange",
+      "displaymanagerver": "Vungle iOS/3.3.1",
+      "instl": 1,
+      "bidfloor": 85.1290,
+      "bidfloorcur": "USD"
+    }
+  ],
+  "app": {
+    "id": "d2ae6794cd3e02160755abd460d63008",
+    "name": "Spotify Music",
+    "bundle": "com.spotify",
+    "domain": "www.spotify.com",
+    "storeurl": "https://itunes.apple.com/6263795659",
+    "cat": [
+      "IAB1",
+      "IAB3",
+      "IAB15-10"
+    ],
+    "sectioncat": [
+      "IAB3"
+    ],
+    "pagecat": [
+      "IAB5"
+    ],
+    "ver": "1.0.2",
+    "privacypolicy": 1,
+    "paid": 1,
+    "publisher": {
+      "id": "d2ae6794cd3e02160755abd460d64008",
+      "name": "Spotify",
+      "domain": "www.spotify.com"
+    },
+    "keywords": "music,streaming,internet"
+  },
+  "device": {
+    "ua": "Mozilla/5.0 (iPhone; CPU iPhone OS 6_1 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3",
+    "geo": {
+      "country": "USA",
+      "lat": 35.012345,
+      "lon": -115.12345,
+      "city": "Los Angeles",
+      "metro": "803",
+      "region": "CA",
+      "zip": "90049"
+    },
+    "dnt": 1,
+    "lmt": 1,
+    "ip": "192.145.167.189",
+    "ipv6": "fe80::aebc:32ef:fe84:3d6c",
+    "devicetype": 1,
+    "make": "Apple",
+    "model": "iPhone",
+    "os": "iOS",
+    "osv": "6.1",
+    "hwv": "6S",
+    "h": 100,
+    "w": 300,
+    "ppi": 996,
+    "pxratio": 0.32,
+    "js": 1,
+    "flashver": "10.1",
+    "language": "en",
+    "carrier": "VERIZON",
+    "connectiontype": 3,
+    "ifa": "08afd6f9ae0c6017d105b4ce580de885",
+    "didsha1": "eb7ff18b50ae38e58d9c5308ecfcdc3bfa50359c",
+    "didmd5": "08afd6f9ae0c6017d105b4ce580de885",
+    "dpidsha1": "eb7ff18b50ae38e58d9c5308ecfcdc3bfa50359c",
+    "dpidmd5": "08afd6f9ae0c6017d105b4ce580de885",
+    "macsha1": "eb7ff18b50ae38e58d9c5308ecfcdc3bfa50359c",
+    "macmd5": "08afd6f9ae0c6017d105b4ce580de885"
+  },
+  "user": {
+    "id": "d2ae6794cd3e02160755abd460d61008",
+    "buyeruid": "d2ae6794cd3e02160755abd460d61108",
+    "yob": 1985,
+    "gender": "F",
+    "keywords": "chanel,millionaire,iwatch,tesla,ferrari,ducati",
+    "customdata": "A4(9GAKYMp@rGmhF!*bI6V0j/2#",
+    "geo": {
+      "country": "USA",
+      "lat": 35.012345,
+      "lon": -115.12345,
+      "city": "Los Angeles",
+      "metro": "803",
+      "region": "CA",
+      "zip": "90049"
+    }
+  },
+  "test": 1,
+  "at": 1,
+  "tmax": 500,
+  "cur": ["USD", "CNY"],
+  "bcat": ["IAB7-39"],
+  "regs": {
+    "coppa": 1
+  }
+}

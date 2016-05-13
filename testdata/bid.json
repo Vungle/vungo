@@ -1,0 +1,24 @@
+{
+  "id": "1",
+  "impid": "d2ae6794cd3e02160755abd460d69008",
+  "price": 3.14159,
+  "adid": "d2ae6794cd3e02160755abd460d65008",
+  "nurl": "http://demand.gopro.com/win?won=${AUCTION_PRICE}",
+  "adm": "<vast/>",
+  "bundle": "com.gopro",
+  "adomain": [
+    "gopro.com"
+  ],
+  "iurl": "http://demand.gopro.com/quality.jpeg",
+  "cid": "d2ae6794cd3e02160755abd460d65108",
+  "crid": "d2ae6794cd3e02160755abd460d65118",
+  "attr": [1, 4, 6, 9],
+  "cat": [
+    "IAB1",
+    "IAB3",
+    "IAB15-10"
+  ],
+  "h": 100,
+  "w": 200,
+  "ext": {"vungle":{"some_field":"some_value"}}
+}

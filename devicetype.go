@@ -1,0 +1,14 @@
+package openrtb
+
+type DeviceType int
+
+const (
+	_ DeviceType = iota
+	DEVICE_MOBILE
+	DEVICE_PC
+	DEVICE_TV
+	DEVICE_PHONE
+	DEVICE_TABLET
+	DEVICE_CONNECTED_DEVICE
+	DEVICE_SET_TOP_BOX
+)

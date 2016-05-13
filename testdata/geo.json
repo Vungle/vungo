@@ -1,0 +1,11 @@
+{
+  "lat": 35.012345,
+  "lon": -115.12345,
+  "type": 1,
+  "country": "USA",
+  "region": "CA",
+  "metro": "803",
+  "city": "Los Angeles",
+  "zip": "90049",
+  "utcoffset": 8
+}
