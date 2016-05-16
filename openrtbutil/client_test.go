@@ -56,16 +56,16 @@ func TestClientDoShouldDiscardResidualAndReuseConnection(t *testing.T) {
 	connDiscardHook = func(*http.Response) {
 		idle <- struct{}{}
 	}
-	defer func() {
-		connDiscardHook = nil
-	}()
 
 	// Make a simple request.
 	if _, err := MakeSimpleRequest(t, ts.URL); err != nil {
 		t.Error("Bid request should not respond with error: ", err)
 	}
 
-	<-idle
+	select {
+	case <-idle:
+		connDiscardHook = nil
+	}
 
 	// Make another simple request after payload has been discarded.
 	if _, err := MakeSimpleRequest(t, ts.URL); err != nil {
@@ -118,9 +118,6 @@ func TestClientDoShouldDiscardResidualOnInvalidHttpResponse(t *testing.T) {
 	connDiscardHook = func(*http.Response) {
 		idle <- struct{}{}
 	}
-	defer func() {
-		connDiscardHook = nil
-	}()
 
 	// When making requests one at a time.
 	for i, test := range tests {
@@ -158,6 +155,8 @@ func TestClientDoShouldDiscardResidualOnInvalidHttpResponse(t *testing.T) {
 		<-idle
 	}
 
+	connDiscardHook = nil
+
 	// Expect only one connection is used.
 	if connCounter != 1 {
 		t.Error("Underlying HTTP client should have made exactly one persistent connection instead of ", connCounter)
@@ -194,9 +193,6 @@ func TestClientDoShouldGiveUpDiscardingOnSlowConnection(t *testing.T) {
 	connDiscardHook = func(*http.Response) {
 		idle <- struct{}{}
 	}
-	defer func() {
-		connDiscardHook = nil
-	}()
 
 	// When making a simple bid request.
 	if resp, err := MakeSimpleRequest(t, ts.URL); err != nil {
@@ -207,8 +203,9 @@ func TestClientDoShouldGiveUpDiscardingOnSlowConnection(t *testing.T) {
 
 	select {
 	case <-idle:
+		connDiscardHook = nil
 	case <-time.After(defaultDiscardDuration * 2):
-		t.Error("Test took took long!")
+		t.Fatal("Test took took long!")
 	}
 
 	// And then make another simple bid request.
@@ -260,6 +257,7 @@ func TestClientDoHttpShouldDiscardResidualPayloadWhenContextCompletes(t *testing
 	ts := httptest.NewServer(http.HandlerFunc(func(resp http.ResponseWriter, req *http.Request) {
 		resp.Write([]byte("hi"))
 		cancel()
+		time.Sleep(500 * time.Millisecond)
 		resp.Write([]byte("ther"))
 	}))
 	defer ts.Close()
@@ -274,19 +272,17 @@ func TestClientDoHttpShouldDiscardResidualPayloadWhenContextCompletes(t *testing
 	connDiscardHook = func(*http.Response) {
 		close(idle)
 	}
-	defer func() {
-		connDiscardHook = nil
-	}()
 
 	// When making an HTTP request.
 	_, err = DefaultClient.doHttp(ctx, req)
 	if err != context.Canceled {
-		t.Fatal(err)
+		t.Fatal("Expected error to be canceled context instead of ", err)
 	}
 
 	// Expect connection to have been discarded.
 	select {
 	case <-idle:
+		connDiscardHook = nil
 	case <-time.After(time.Second):
 		t.Error("Test took too long!")
 	}

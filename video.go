@@ -20,7 +20,7 @@ type Video struct {
 	MinBitRate      int              `json:"minbitrate,omitempty"`
 	MaxBitRate      int              `json:"maxbitrate,omitempty"`
 	IsBoxingAllowed NumericBool      `json:"boxingallowed,omitempty"`
-	PlaybackMethods []PlaybackMethod `json:"playbackmethods,omitempty"`
+	PlaybackMethods []PlaybackMethod `json:"playbackmethod,omitempty"`
 	DeliveryMethods []DeliveryMethod `json:"delivery,omitempty"`
 	Position        AdPosition       `json:"pos,omitempty"`
 

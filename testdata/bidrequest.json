@@ -15,7 +15,7 @@
         "minbitrate": 128,
         "maxbitrate": 256,
         "boxingallowed": 1,
-        "playbackmethods": [1, 2],
+        "playbackmethod": [1, 2],
         "delivery": [1, 2],
         "pos": 30,
         "api": [1, 2]
