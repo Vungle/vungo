@@ -1,5 +1,7 @@
 package openrtb
 
+//go:generate easyjson $GOFILE
+//easyjson:json
 type SeatBid struct {
 	Bids  []*Bid `json:"bid,omitempty"`
 	Seat  string `json:"seat,omitempty"`

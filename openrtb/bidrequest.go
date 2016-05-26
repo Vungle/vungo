@@ -2,10 +2,12 @@ package openrtb
 
 import "fmt"
 
+//go:generate easyjson $GOFILE
+//easyjson:json
 type BidRequest struct {
 	Id string `json:"id"`
 
-	Impressions []*Impression `json:"imp,omitempty"`
+	Impressions []*Impression `json:"imp"`
 
 	// No Site(site).
 

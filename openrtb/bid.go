@@ -2,6 +2,8 @@ package openrtb
 
 import "encoding/json"
 
+//go:generate easyjson $GOFILE
+//easyjson:json
 type Bid struct {
 	Id string `json:"id"`
 
