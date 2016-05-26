@@ -54,7 +54,7 @@ func TestNewRequestError(t *testing.T) {
 	for i, test := range tests {
 		t.Logf("Testing %d...", i)
 
-		_, err := openrtbutil.NewRequest(context.Background(), test.br, test.endpoint)
+		_, err := openrtbutil.NewRequest(context.Background(), test.br, test.endpoint, nil)
 		if err == nil {
 			t.Error("An error should have occurred.")
 			continue

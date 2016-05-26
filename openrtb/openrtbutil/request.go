@@ -2,7 +2,6 @@ package openrtbutil
 
 import (
 	"bytes"
-	"encoding/json"
 	"net/http"
 
 	"github.com/Vungle/vungo/openrtb"
@@ -34,23 +33,25 @@ func (r *Request) context() context.Context {
 }
 
 // NewRequest method creates a new high-level bid request to request for a bid.
-func NewRequest(parent context.Context, br *openrtb.BidRequest, endpoint string) (*Request, error) {
+func NewRequest(parent context.Context, br *openrtb.BidRequest, endpoint string, encoder Encoder) (*Request, error) {
 	if br == nil {
 		return nil, ErrNilBidRequest
 	} else if len(endpoint) == 0 {
 		return nil, ErrEmptyUrl
 	}
 
-	// NOTE: Use json.Marshal for now since json.Encoder will add an additional sentinel character
-	// that's unnecessary for this case. See stdlib stream.go:199.
+	if encoder == nil {
+		encoder = DefaultEncoder
+	}
+
 	// TODO(@garukun): Consider implementing another constructor that does not marshal bid request
 	// object to JSON reader every single time.
-	buf, err := json.Marshal(br)
-	if err != nil {
+	buf := bytes.NewBuffer(nil)
+	if err := encoder.EncodeToWriter(buf, br); err != nil {
 		return nil, err
 	}
 
-	hr, err := http.NewRequest(http.MethodPost, endpoint, bytes.NewReader(buf))
+	hr, err := http.NewRequest(http.MethodPost, endpoint, buf)
 	if err != nil {
 		return nil, err
 	}

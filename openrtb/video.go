@@ -1,5 +1,7 @@
 package openrtb
 
+//go:generate easyjson $GOFILE
+//easyjson:json
 type Video struct {
 	MimeTypes   []string `json:"mimes"`
 	MinDuration int      `json:"minduration"`

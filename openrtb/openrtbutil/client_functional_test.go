@@ -82,7 +82,7 @@ func TestClientDoShouldNotOverrideExistingOpenRtbHeaders(t *testing.T) {
 		Id: "br-with-custom-header",
 	}
 
-	req, err := openrtbutil.NewRequest(ctx, br, ts.URL)
+	req, err := openrtbutil.NewRequest(ctx, br, ts.URL, nil)
 	if err != nil {
 		t.Fatal("Cannot create a bid request: ", err)
 	}
@@ -199,7 +199,7 @@ func TestClientDoShouldRespondNoBid(t *testing.T) {
 			Id: "br-for-no-bid",
 		}
 
-		req, err := openrtbutil.NewRequest(ctx, br, ts.URL)
+		req, err := openrtbutil.NewRequest(ctx, br, ts.URL, nil)
 		if err != nil {
 			t.Fatal("Cannot create a bid request: ", err)
 		}

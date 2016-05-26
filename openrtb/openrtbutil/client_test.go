@@ -26,7 +26,7 @@ func MakeSimpleRequest(t *testing.T, url string) (*Response, error) {
 		Id: "没%创%意%真%可%怕",
 	}
 
-	req, err := NewRequest(ctx, br, url)
+	req, err := NewRequest(ctx, br, url, nil)
 	if err != nil {
 		t.Fatal("Cannot create a bid request: ", err)
 	}
@@ -140,7 +140,7 @@ func TestClientDoShouldDiscardResidualOnInvalidHttpResponse(t *testing.T) {
 			Id: "br-for-no-bid",
 		}
 
-		req, err := NewRequest(ctx, br, ts.URL)
+		req, err := NewRequest(ctx, br, ts.URL, nil)
 		if err != nil {
 			t.Fatal("Cannot create a bid request: ", err)
 		}

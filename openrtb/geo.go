@@ -1,5 +1,7 @@
 package openrtb
 
+//go:generate easyjson $GOFILE
+//easyjson:json
 type Geo struct {
 	Latitude  float64 `json:"lat,omitempty"`
 	Longitude float64 `json:"lon,omitempty"`

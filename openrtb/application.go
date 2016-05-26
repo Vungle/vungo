@@ -1,5 +1,7 @@
 package openrtb
 
+//go:generate easyjson $GOFILE
+//easyjson:json
 type Application struct {
 	Id string `json:"id"`
 

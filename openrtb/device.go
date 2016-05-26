@@ -1,5 +1,7 @@
 package openrtb
 
+//go:generate easyjson $GOFILE
+//easyjson:json
 type Device struct {
 	BrowserUserAgent     string         `json:"ua,omitempty"`
 	Geo                  *Geo           `json:"geo,omitempty"`

@@ -2,7 +2,6 @@ package openrtbutil
 
 import (
 	"bytes"
-	"encoding/json"
 	"io"
 	"io/ioutil"
 	"log"
@@ -50,6 +49,7 @@ var DefaultClient = NewClient(nil)
 // Client also provides an embeddable log.Logger hook for capturing internal states during the
 // transactions; although most states are revealed via the returned error as well.
 type Client struct {
+	Decoder
 	*log.Logger
 
 	hc *http.Client
@@ -170,7 +170,7 @@ func (c *Client) handleNoBid(r *http.Response) error {
 
 func (c *Client) decode(body io.Reader) (*openrtb.BidResponse, error) {
 	br := &openrtb.BidResponse{}
-	if err := json.NewDecoder(body).Decode(br); err != nil {
+	if err := c.DecodeToReader(body, br); err != nil {
 		return nil, err
 	}
 
@@ -224,7 +224,8 @@ func NewClient(l *log.Logger) *Client {
 	}
 
 	return &Client{
-		Logger: l,
-		hc:     defaultHttpClient,
+		Decoder: DefaultDecoder,
+		Logger:  l,
+		hc:      defaultHttpClient,
 	}
 }

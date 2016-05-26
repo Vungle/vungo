@@ -13,7 +13,7 @@ import (
 // An optional client can be provided; otherwise, a sane default client will be used to perform the
 // bid request.
 func RequestBid(ctx context.Context, br *openrtb.BidRequest, endpoint string, c *Client) (*Response, error) {
-	req, err := NewRequest(ctx, br, endpoint)
+	req, err := NewRequest(ctx, br, endpoint, DefaultEncoder)
 	if err != nil {
 		return nil, err
 	}

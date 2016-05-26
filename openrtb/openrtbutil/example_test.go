@@ -23,7 +23,7 @@ func ExampleClient() {
 
 	endpoint := "http://127.0.0.1:8080/requestBid"
 
-	req, err := openrtbutil.NewRequest(ctx, br, endpoint)
+	req, err := openrtbutil.NewRequest(ctx, br, endpoint, nil)
 	if err != nil {
 		panic(err)
 	}

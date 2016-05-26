@@ -1,5 +1,7 @@
 package openrtb
 
+//go:generate easyjson $GOFILE
+//easyjson:json
 type Impression struct {
 	Id string `json:"id"`
 

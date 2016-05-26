@@ -8,6 +8,8 @@ import (
 
 var emptyBid BidResponse
 
+//go:generate easyjson $GOFILE
+//easyjson:json
 type BidResponse struct {
 	Id string `json:"id"`
 
