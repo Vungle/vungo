@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VAST version="2.0">
+  <Ad id="wrapper1-ad" sequence="2">
+    <Wrapper>
+      <AdSystem version="1.1"><![CDATA[wrapper1 crazy wrapper]]></AdSystem>
+      <VASTAdTagURI><![CDATA[http://wrapper1]]></VASTAdTagURI>
+      <Impression id="wrapper1-imp0"><![CDATA[http://wrapper1/impression]]></Impression>
+      <Creatives>
+        <Creative
+            id="wrapper1-creative"
+            sequence="1"
+            AdID="wrapper1-ab12cd34ef56">
+          <Linear>
+            <TrackingEvents>
+              <Tracking event="firstQuartile"><![CDATA[http://wrapper1/firstQuartile]]></Tracking>
+              <Tracking event="thirdQuartile"><![CDATA[http://wrapper1/thirdQuartile]]></Tracking>
+            </TrackingEvents>
+            <VideoClicks>
+              <ClickThrough id="wrapper1-clickthrough"><![CDATA[http://wrapper1/clickthrough]]></ClickThrough>
+              <ClickTracking id="wrapper1-clicktracking"><![CDATA[http://wrapper1/clicktracking]]></ClickTracking>
+            </VideoClicks>
+          </Linear>
+        </Creative>
+      </Creatives>
+    </Wrapper>
+  </Ad>
+</VAST>

@@ -1,0 +1,76 @@
+package vast
+
+import "github.com/Vungle/vungo/vast/defaults"
+
+// Linear type represents an <Linear> element within a <InLine> element.
+type Linear struct {
+	SkipOffset *Offset `xml:"skipoffset,attr,omitempty"` // Time delay at which ad becomes skippable; if absent, the ad is unskippable.
+
+	Duration     Duration      `xml:"Duration"`
+	AdParameters *AdParameters `xml:"AdParameters,omitempty"`
+	Icons        []*Icon       `xml:"Icons>Icon"`
+	Trackings    []*Tracking   `xml:"TrackingEvents>Tracking,omitempty"`
+	VideoClicks  *VideoClicks  `xml:"VideoClicks,omitempty"`
+	MediaFiles   []*MediaFile  `xml:"MediaFiles>MediaFile,omitempty"`
+	Extensions   []*Extension  `xml:"CreativeExtensions>CreativeExtension,omitempty"`
+}
+
+// Validate methods validate the Linear element according to the VAST.
+// MediaFiles and Duration are required.
+// Icons are optional, but if contained, we'll also validate it.
+func (linear *Linear) Validate() error {
+
+	if len(linear.MediaFiles) == 0 {
+		return ErrLinearMissMediaFiles
+	}
+
+	if err := linear.Duration.Validate(); err != nil {
+		return err
+	}
+
+	if linear.Duration > Duration(defaults.MAX_VIDEO_DURATION) {
+		return ErrVideoDurationTooLong
+	}
+
+	if linear.Duration < Duration(defaults.MIN_VIDEO_DURATION) {
+		return ErrVideoDurationTooShort
+	}
+
+	if linear.VideoClicks != nil {
+		if err := linear.VideoClicks.Validate(); err != nil {
+			return err
+		}
+	}
+
+	if linear.SkipOffset != nil {
+		if err := linear.SkipOffset.Validate(); err != nil {
+			return err
+		}
+	}
+
+	if linear.AdParameters != nil {
+		if err := linear.AdParameters.Validate(); err != nil {
+			return err
+		}
+	}
+
+	for _, mediaFile := range linear.MediaFiles {
+		if err := mediaFile.Validate(); err != nil {
+			return err
+		}
+	}
+
+	for _, icon := range linear.Icons {
+		if err := icon.Validate(); err != nil {
+			return err
+		}
+	}
+
+	for _, tracking := range linear.Trackings {
+		if err := tracking.Validate(); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}

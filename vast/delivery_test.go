@@ -1,0 +1,18 @@
+package vast_test
+
+import (
+	"github.com/Vungle/vungo/vast"
+	"github.com/Vungle/vungo/vast/vasttest"
+	"testing"
+)
+
+func TestDeliveryValidateErrors(t *testing.T) {
+	delivery1 := vast.Delivery("test")
+	delivery2 := vast.Delivery(vast.DELIVERY_PROGRESSIVE)
+	delivery3 := vast.Delivery(vast.DELIVERY_STREAMING)
+	delivery4 := vast.Delivery("")
+	vasttest.VerifyVastElementErrorAsExpected(t, delivery1, delivery1.Validate(), vast.ErrUnsupportedDeliveryType)
+	vasttest.VerifyVastElementErrorAsExpected(t, delivery2, delivery2.Validate(), nil)
+	vasttest.VerifyVastElementErrorAsExpected(t, delivery3, delivery3.Validate(), nil)
+	vasttest.VerifyVastElementErrorAsExpected(t, delivery4, delivery4.Validate(), vast.ErrUnsupportedDeliveryType)
+}

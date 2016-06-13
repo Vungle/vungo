@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Creative
+id="some-id"
+sequence="1"
+AdID="ab12cd34ef56">
+
+<NonLinearAds>
+  <TrackingEvents>
+    <Tracking event="mute"><![CDATA[http://mute/me]]></Tracking>
+    <Tracking event="unmute"></Tracking>
+  </TrackingEvents>
+</NonLinearAds>
+</Creative>

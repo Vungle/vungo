@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VAST version="2.0">
+  <Ad id="wrapper3ads-ad" sequence="2">
+    <Wrapper>
+      <AdSystem version="1.1"><![CDATA[wrapper3ads crazy wrapper]]></AdSystem>
+      <VASTAdTagURI><![CDATA[http://wrapper3ads]]></VASTAdTagURI>
+      <Impression id="wrapper3ads-imp0"><![CDATA[http://wrapper3ads/impression]]></Impression>
+      <Creatives>
+        <Creative
+            id="wrapper3ads-creative"
+            sequence="1"
+            AdID="wrapper3ads-ab12cd34ef56">
+          <Linear>
+            <TrackingEvents>
+              <Tracking event="firstQuartile"><![CDATA[http://wrapper3ads/firstQuartile]]></Tracking>
+              <Tracking event="thirdQuartile"><![CDATA[http://wrapper3ads/thirdQuartile]]></Tracking>
+            </TrackingEvents>
+            <VideoClicks>
+              <ClickThrough id="wrapper3ads-clickthrough"><![CDATA[http://wrapper3ads/clickthrough]]></ClickThrough>
+              <ClickTracking id="wrapper3ads-clicktracking"><![CDATA[http://wrapper3ads/clicktracking]]></ClickTracking>
+            </VideoClicks>
+          </Linear>
+        </Creative>
+      </Creatives>
+    </Wrapper>
+  </Ad>
+  <Ad id="wrapper3ads-ad" sequence="2">
+    <Wrapper>
+      <AdSystem version="1.1"><![CDATA[wrapper3ads crazy wrapper]]></AdSystem>
+      <VASTAdTagURI><![CDATA[http://wrapper3ads]]></VASTAdTagURI>
+      <Impression id="wrapper3ads-imp0"><![CDATA[http://wrapper3ads/impression]]></Impression>
+      <Creatives>
+        <Creative
+            id="wrapper3ads-creative"
+            sequence="1"
+            AdID="wrapper3ads-ab12cd34ef56">
+          <Linear>
+            <TrackingEvents>
+              <Tracking event="firstQuartile"><![CDATA[http://wrapper3ads/firstQuartile]]></Tracking>
+              <Tracking event="thirdQuartile"><![CDATA[http://wrapper3ads/thirdQuartile]]></Tracking>
+            </TrackingEvents>
+            <VideoClicks>
+              <ClickThrough id="wrapper3ads-clickthrough"><![CDATA[http://wrapper3ads/clickthrough]]></ClickThrough>
+              <ClickTracking id="wrapper3ads-clicktracking"><![CDATA[http://wrapper3ads/clicktracking]]></ClickTracking>
+            </VideoClicks>
+          </Linear>
+        </Creative>
+      </Creatives>
+    </Wrapper>
+  </Ad>
+  <Ad id="wrapper3ads-ad" sequence="2">
+    <Wrapper>
+      <AdSystem version="1.1"><![CDATA[wrapper3ads crazy wrapper]]></AdSystem>
+      <VASTAdTagURI><![CDATA[http://wrapper3ads]]></VASTAdTagURI>
+      <Impression id="wrapper3ads-imp0"><![CDATA[http://wrapper3ads/impression]]></Impression>
+      <Creatives>
+        <Creative
+            id="wrapper3ads-creative"
+            sequence="1"
+            AdID="wrapper3ads-ab12cd34ef56">
+          <Linear>
+            <TrackingEvents>
+              <Tracking event="firstQuartile"><![CDATA[http://wrapper3ads/firstQuartile]]></Tracking>
+              <Tracking event="thirdQuartile"><![CDATA[http://wrapper3ads/thirdQuartile]]></Tracking>
+            </TrackingEvents>
+            <VideoClicks>
+              <ClickThrough id="wrapper3ads-clickthrough"><![CDATA[http://wrapper3ads/clickthrough]]></ClickThrough>
+              <ClickTracking id="wrapper3ads-clicktracking"><![CDATA[http://wrapper3ads/clicktracking]]></ClickTracking>
+            </VideoClicks>
+          </Linear>
+        </Creative>
+      </Creatives>
+    </Wrapper>
+  </Ad>
+</VAST>

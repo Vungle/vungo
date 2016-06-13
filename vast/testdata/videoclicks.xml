@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VideoClicks>
+  <ClickThrough id="clickthrough-1"><![CDATA[http://link/to/clickthrough/1]]></ClickThrough>
+  <ClickThrough id="clickthrough-2"><![CDATA[http://link/to/clickthrough/2]]></ClickThrough>
+  <ClickTracking id="clicktraccking-3"><![CDATA[http://link/to/clicktraccking/3]]></ClickTracking>
+  <ClickTracking id="clicktraccking-1"><![CDATA[http://link/to/clicktraccking/1]]></ClickTracking>
+  <ClickTracking id="clicktraccking-2"><![CDATA[http://link/to/clicktraccking/2]]></ClickTracking>
+  <CustomClick id="customclick-1"><![CDATA[http://link/to/customclick/1]]></CustomClick>
+  <CustomClick id="customclick-2"><![CDATA[http://link/to/customclick/2]]></CustomClick>
+  <CustomClick id="customclick-3"><![CDATA[http://link/to/customclick/3]]></CustomClick>
+</VideoClicks>
