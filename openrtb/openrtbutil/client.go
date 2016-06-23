@@ -35,7 +35,7 @@ var defaultHttpClient = &http.Client{
 		ExpectContinueTimeout: time.Second,
 	},
 
-	Timeout: 5 * time.Second, // Timeout including latency, redirect, reading the response body.
+	Timeout: 10 * time.Second, // Timeout including latency, redirect, reading the response body.
 }
 
 // DefaultClient is a default OpenRTB client for making bid requests.
