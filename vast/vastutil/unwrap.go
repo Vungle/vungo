@@ -2,10 +2,11 @@ package vastutil
 
 import (
 	"encoding/xml"
+	"net/http"
+
 	"github.com/Vungle/vungo/vast"
 	"golang.org/x/net/context"
 	"golang.org/x/net/context/ctxhttp"
-	"net/http"
 )
 
 var defaultUnwrapClient = http.DefaultClient

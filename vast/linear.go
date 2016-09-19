@@ -54,10 +54,21 @@ func (linear *Linear) Validate() error {
 		}
 	}
 
+	var err error
+	var validMedia *MediaFile
 	for _, mediaFile := range linear.MediaFiles {
-		if err := mediaFile.Validate(); err != nil {
-			return err
+		err = mediaFile.Validate()
+		if err == nil {
+			validMedia = mediaFile
+			break
 		}
+	}
+	if err != nil {
+		// TODO(tiagozortea): The error being returned is just the last media error, we should
+		// apply the proper error generalizations.
+		return err
+	} else {
+		linear.MediaFiles = []*MediaFile{validMedia}
 	}
 
 	for _, icon := range linear.Icons {

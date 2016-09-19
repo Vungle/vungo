@@ -2,10 +2,11 @@ package vast_test
 
 import (
 	"encoding/xml"
-	"github.com/Vungle/vungo/vast"
-	"github.com/Vungle/vungo/vast/vasttest"
 	"reflect"
 	"testing"
+
+	"github.com/Vungle/vungo/vast"
+	"github.com/Vungle/vungo/vast/vasttest"
 )
 
 var VastModelType = reflect.TypeOf(vast.Vast{})
