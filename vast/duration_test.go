@@ -1,10 +1,11 @@
 package vast_test
 
 import (
-	"github.com/Vungle/vungo/vast"
-	"github.com/Vungle/vungo/vast/vasttest"
 	"testing"
 	"time"
+
+	"github.com/Vungle/vungo/vast"
+	"github.com/Vungle/vungo/vast/vasttest"
 )
 
 type durationTest struct {

@@ -7,9 +7,9 @@ type Icon struct {
 	Height       int      `xml:"height,attr"`
 	XPosition    string   `xml:"xPosition,attr"`              // Horizontal alignment in format of ([0-9]*|left|right).
 	YPosition    string   `xml:"yPosition,attr"`              // Vertical alignment in format of ([0-9]*|top|bottom).
-	Offset       Offset   `xml:"offset,attr"`                 // Time delay from which the icon should be displayed.
 	Duration     Duration `xml:"duration,attr"`               // Duration for which the icon must be displayed.
 	ApiFramework string   `xml:"apiFramework,attr,omitempty"` // API used to interact with the icon.
+	Offset       Offset   `xml:"offset,attr"`                 // Time delay from which the icon should be displayed.
 
 	ClickThrough   string          `xml:"IconClicks>IconClickThrough,omitempty"`
 	ClickTrackings []string        `xml:"IconClicks>IconClickTracking,omitempty"`

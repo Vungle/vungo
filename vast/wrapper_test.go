@@ -1,10 +1,11 @@
 package vast_test
 
 import (
-	"github.com/Vungle/vungo/vast"
-	"github.com/Vungle/vungo/vast/vasttest"
 	"reflect"
 	"testing"
+
+	"github.com/Vungle/vungo/vast"
+	"github.com/Vungle/vungo/vast/vasttest"
 )
 
 var WrapperModelType = reflect.TypeOf(vast.Wrapper{})

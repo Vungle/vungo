@@ -7,10 +7,10 @@ type NonLinear struct {
 	Height                    int       `xml:"height,attr"`
 	ExpandedWidth             int       `xml:"expandedWidth,attr"`
 	ExpandedHeight            int       `xml:"expandedHeight,attr"`
-	IsScalable                bool      `xml:"scalable,attr,omitempty"`
-	ShouldMaintainAspectRatio bool      `xml:"maintainAspectRatio,attr,omitempty"`
 	MinSuggestedDuration      *Duration `xml:"minSuggestedDuration,attr,omitempty"`
 	ApiFramework              string    `xml:"apiFramework,attr,omitempty"`
+	IsScalable                bool      `xml:"scalable,attr,omitempty"`
+	ShouldMaintainAspectRatio bool      `xml:"maintainAspectRatio,attr,omitempty"`
 
 	ClickTracking  []string        `xml:"NonLinearClickTracking,omitempty"`
 	ClickThrough   string          `xml:"NonLinearClickThrough,omitempty"`

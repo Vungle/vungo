@@ -1,9 +1,10 @@
 package vast_test
 
 import (
+	"testing"
+
 	"github.com/Vungle/vungo/vast"
 	"github.com/Vungle/vungo/vast/vasttest"
-	"testing"
 )
 
 func TestDeliveryValidateErrors(t *testing.T) {
