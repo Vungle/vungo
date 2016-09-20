@@ -5,8 +5,8 @@ package openrtb
 type Device struct {
 	BrowserUserAgent     string         `json:"ua,omitempty"`
 	Geo                  *Geo           `json:"geo,omitempty"`
-	HasDoNotTrack        NumericBool    `json:"dnt,omitempty"`
-	HasLimitedAdTracking NumericBool    `json:"lmt,omitempty"`
+	HasDoNotTrack        *NumericBool   `json:"dnt,omitempty"`
+	HasLimitedAdTracking *NumericBool   `json:"lmt,omitempty"`
 	Ip                   string         `json:"ip,omitempty"`
 	Ipv6                 string         `json:"ipv6,omitempty"`
 	Type                 DeviceType     `json:"devicetype,omitempty"`
@@ -19,7 +19,7 @@ type Device struct {
 	Width                int            `json:"w,omitempty"`
 	Ppi                  int            `json:"ppi,omitempty"`
 	PixelRatio           float64        `json:"pxratio,omitempty"`
-	SupportsJavaScript   NumericBool    `json:"js,omitempty"`
+	SupportsJavaScript   *NumericBool   `json:"js,omitempty"`
 	FlashVersion         string         `json:"flashver,omitempty"`
 	Language             string         `json:"language,omitempty"`
 	Carrier              string         `json:"carrier,omitempty"`
