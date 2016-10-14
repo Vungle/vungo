@@ -1,14 +1,20 @@
+# IDE Miscellany
 .idea
 *.iml
 *.sublime-*
 .DS_Store
 
-vendor/*
-_pprof/*
-_out/*
-*/_out/
-*.out
+# Project Tech Stack Specific
+# -- Glide Dependency tool
+.glide
+# -- Vendoring
+vendor
+# -- Temporary build
+_pprof
 *.svg
 *.prof
+_out
+*.out
 *.test
+# -- Organizational
 !Dockerfile.*
