@@ -62,26 +62,23 @@ func TestBidResponseShouldReturnTheOnlyBid(t *testing.T) {
 }
 
 func TestBidResponseShouldValidateInvalidNoBidReasons(t *testing.T) {
-	// Given a BidResponse object whose no bid reason is not one of the enumerated values.
-	br := &openrtb.BidResponse{Id: "some-id", NoBidReason: openrtb.NoBidReason(1000)}
-
-	// When validating the bid response.
-	err := br.Validate(openrtbtest.NewBidRequestForTesting("some-id", ""))
-
-	// Expect the validation to return an error.
-	if err != openrtb.ErrInvalidNoBidReasonValue {
-		t.Error("Bid response should fail validation on invalid no bid reson.")
+	tests := []struct {
+		nbr     openrtb.NoBidReason
+		isValid bool
+	}{
+		{openrtb.NO_BID_BELOW_FLOOR, true},
+		{openrtb.NoBidReason(1010), false},
+		{openrtb.NO_BID_VUNGLE_DATASCI_NO_SERVE, true},
+		{openrtb.NO_BID_BELOW_FLOOR, true},
 	}
 
-	// After we update the value to a valid no bid reson.
-	br.NoBidReason = openrtb.NO_BID_INVALID_REQUEST
-
-	// When validating the bid response.
-	err = br.Validate(openrtbtest.NewBidRequestForTesting("some-id", ""))
-
-	// Expect the validation to pass.
-	if err != nil {
-		t.Error("Bid response validation should pass.")
+	for i, test := range tests {
+		t.Logf("Testing %d...", i)
+		resp := &openrtb.BidResponse{Id: "some-id", NoBidReason: test.nbr}
+		err := resp.Validate(openrtbtest.NewBidRequestForTesting("some-id", ""))
+		if (test.isValid && err != nil) || (!test.isValid && err != openrtb.ErrInvalidNoBidReasonValue) {
+			t.Errorf("Expected no-bid reason to be valid: %t, when the validation error is %v", test.isValid, err)
+		}
 	}
 }
 
