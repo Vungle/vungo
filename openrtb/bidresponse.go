@@ -44,11 +44,7 @@ func (br *BidResponse) Validate(bidReq *BidRequest) error {
 	}
 
 	if len(br.SeatBids) == 0 {
-		if !br.isValidateNoBidReason() {
-			return ErrInvalidNoBidReasonValue
-		} else {
-			return nil
-		}
+		return br.NoBidReason.Validate()
 	}
 
 	if len(br.SeatBids) != 1 {
@@ -80,25 +76,6 @@ func (br *BidResponse) Validate(bidReq *BidRequest) error {
 	}
 
 	return nil
-}
-
-// isValidateNoBidReason method checks if the value of the no-bid-reason is a valid enum value.
-func (br *BidResponse) isValidateNoBidReason() bool {
-	switch br.NoBidReason {
-	case
-		NO_BID_UNKNOWN,
-		NO_BID_TECHNICAL_ERROR,
-		NO_BID_INVALID_REQUEST,
-		NO_BID_KNOWN_WEB_SPIDER,
-		NO_BID_NON_HUMAN_TRAFFIC,
-		NO_BID_PROXY_IP,
-		NO_BID_UNSUPPORTED_DEVICE,
-		NO_BID_BLOCKED_PUBLISHER,
-		NO_BID_UNMATCHED_USER:
-		return true
-	default:
-		return false
-	}
 }
 
 // GetOnlyBid methods returns the only bid object iff there is exactly one SeatBid object in which

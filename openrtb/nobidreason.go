@@ -14,6 +14,16 @@ func (n NoBidReason) String() string {
 	return name
 }
 
+// Validate method validates the no-bid reason is one of the valid values, or returns an error
+// otherwise.
+func (n NoBidReason) Validate() error {
+	if _, ok := NO_BID_REASON_NAMES[n]; !ok {
+		return ErrInvalidNoBidReasonValue
+	}
+
+	return nil
+}
+
 // Standard no-bid reasons specified by OpenRTB 2.3.1.
 // See http://www.iab.net/media/file/OpenRTB_API_Specification_Version_2_3_1.pdf.
 //
