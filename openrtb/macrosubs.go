@@ -25,20 +25,20 @@ const (
 )
 
 // createSubValues creates a map from the list of macro strings to their values in the given bidResponse.
-func createSubValues(bidRes *BidResponse) (subValues map[macro]string, err error) {
+func createSubValues(bidRes *BidResponse, s Settlement) (subValues map[macro]string, err error) {
 	bid, err := bidRes.GetOnlyBid()
 	if err != nil {
 		return nil, err
 	}
-	seatbid := bidRes.SeatBids[0]
+	seatBid := bidRes.SeatBids[0]
 
 	subValues = map[macro]string{
 		auctionID:       bidRes.Id,
 		auctionBidID:    bid.Id,
 		auctionImpID:    bid.ImpressionId,
-		auctionSeatID:   seatbid.Seat,
+		auctionSeatID:   seatBid.Seat,
 		auctionAdID:     bid.AdId,
-		auctionPrice:    strconv.FormatFloat(bid.Price, 'f', 2, 64),
+		auctionPrice:    strconv.FormatFloat(s.Price(), 'f', 2, 64),
 		auctionCurrency: string(bidRes.Currency),
 	}
 
@@ -96,8 +96,8 @@ var findMatchesPool = sync.Pool{
 // It takes a string which the substitutions should be performed on, and a *BidResponse to determine the values to be substituted.
 // MacroSubs assumes that the BidResponse has exactly one seat, which has exactly one bid.
 // If this is not true, it will return empty string and an error.
-func MacroSubs(stringToSub string, bidRes *BidResponse) (result string, err error) {
-	subValues, err := createSubValues(bidRes)
+func MacroSubs(stringToSub string, bidRes *BidResponse, s Settlement) (result string, err error) {
+	subValues, err := createSubValues(bidRes, s)
 	if err != nil {
 		return "", err
 	}
@@ -114,8 +114,8 @@ func MacroSubs(stringToSub string, bidRes *BidResponse) (result string, err erro
 // Use this when you are going to be doing many substitutions using the same BidResponse data.
 // CreateMacroSubstituter assumes that the BidResponse has exactly one seat, which has exactly one
 // bid. If this is not true, it will return nil and an error.
-func CreateMacroSubstituter(bidRes *BidResponse) (substituter *MacroSubstituter, err error) {
-	subValues, err := createSubValues(bidRes)
+func CreateMacroSubstituter(bidRes *BidResponse, s Settlement) (substituter *MacroSubstituter, err error) {
+	subValues, err := createSubValues(bidRes, s)
 	if err != nil {
 		return nil, err
 	}
