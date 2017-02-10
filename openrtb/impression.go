@@ -17,8 +17,8 @@ type Impression struct {
 
 	// No TagId(tagid).
 
-	BidFloorPrice    *float64  `json:"bidfloor"`
-	BidFloorCurrency Currency  `json:"bidfloorcur,omitempty"`
+	BidFloorPrice    *float64 `json:"bidfloor,omitempty"`
+	BidFloorCurrency Currency `json:"bidfloorcur,omitempty"`
 
 	// No IsSecure(secure).
 	// No IFrameBusters(iframebuster).
