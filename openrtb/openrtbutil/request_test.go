@@ -40,7 +40,7 @@ func TestNewRequestError(t *testing.T) {
 				},
 			},
 			"http://localhost",
-			reflect.TypeOf(&json.MarshalerError{}),
+			reflect.TypeOf(&json.UnsupportedTypeError{}),
 		},
 
 		// Should return URL parsing error.
