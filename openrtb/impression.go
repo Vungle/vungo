@@ -17,7 +17,7 @@ type Impression struct {
 
 	// No TagId(tagid).
 
-	BidFloorPrice    *float64 `json:"bidfloor"`
+	BidFloorPrice    float64  `json:"bidfloor"`
 	BidFloorCurrency Currency `json:"bidfloorcur,omitempty"`
 
 	// No IsSecure(secure).

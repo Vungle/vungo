@@ -66,10 +66,8 @@ func (br *BidResponse) Validate(bidReq *BidRequest) error {
 						return ErrIncorrectBidResponseCurrency
 					}
 
-					if imp.BidFloorPrice != nil {
-						if bid.Price < *imp.BidFloorPrice {
-							return ErrBidPriceBelowBidFloor
-						}
+					if bid.Price < imp.BidFloorPrice {
+						return ErrBidPriceBelowBidFloor
 					}
 					break
 				}
