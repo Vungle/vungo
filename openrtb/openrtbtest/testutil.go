@@ -152,7 +152,7 @@ func NewBidRequestForTesting(id string, impId string) *openrtb.BidRequest {
 // NewBidRequestWithFloorPriceForTesting method creates a bid request with a price in USD.
 func NewBidRequestWithFloorPriceForTesting(id string, impId string, price float64) *openrtb.BidRequest {
 	br := NewBidRequestForTesting(id, impId)
-	br.Impressions[0].BidFloorPrice = price
+	br.Impressions[0].BidFloorPrice = &price
 
 	return br
 }

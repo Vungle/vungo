@@ -12,12 +12,13 @@ import (
 func ExampleClient() {
 	ctx := context.Background()
 
+	var floor float64
 	br := &openrtb.BidRequest{
 		Id: "1234",
 		Impressions: []*openrtb.Impression{&openrtb.Impression{
 			Id:            "imp-1234",
 			Video:         &openrtb.Video{},
-			BidFloorPrice: 4,
+			BidFloorPrice: &floor,
 		}},
 	}
 
