@@ -23,5 +23,6 @@ type Impression struct {
 	// No IsSecure(secure).
 	// No IFrameBusters(iframebuster).
 	// No PrivateMarketplace(pmp).
-	// No Extension(ext).
+
+	Extension interface{} `json:"ext,omitempty"`
 }
