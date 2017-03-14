@@ -106,10 +106,11 @@ func getNumOfJsonFields(modelType reflect.Type) (result int) {
 		tag := modelType.Field(i).Tag.Get("json")
 		if len(tag) > 0 && tag != "-" {
 			result++
-		} else {
-			if modelType.Field(i).Type.Kind() == reflect.Struct {
-				result += getNumOfJsonFields(modelType.Field(i).Type)
-			}
+			continue
+		}
+
+		if modelType.Field(i).Type.Kind() == reflect.Struct {
+			result += getNumOfJsonFields(modelType.Field(i).Type)
 		}
 	}
 
