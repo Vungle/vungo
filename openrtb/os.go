@@ -6,10 +6,10 @@ import "encoding/json"
 // TODO(@garukun: The values of these types are case-sensitive to data science; consider decoupling
 // this dependency by implementing a normalizer for data science.
 const (
-	OS_UNKNOWN OS = "unknown"
-	OS_IOS     OS = "iOS"
-	OS_ANDROID OS = "android"
-	OS_WINDOWS OS = "windows"
+	OSUnknown OS = "unknown"
+	OSIOS     OS = "iOS"
+	OSAndroid OS = "android"
+	OSWindows OS = "windows"
 )
 
 // OS type represents the normalized value of device OS type, e.g. iOS, Android, and Windows.
@@ -19,21 +19,21 @@ type OS string
 // is not known.
 func (o OS) Normalize() OS {
 	if len(o) == 0 {
-		return OS_UNKNOWN
+		return OSUnknown
 	}
 
 	switch o[0] {
 	case 'i', 'I':
-		return OS_IOS
+		return OSIOS
 	case 'a', 'A':
-		return OS_ANDROID
+		return OSAndroid
 	case 'w', 'W':
-		return OS_WINDOWS
+		return OSWindows
 
 		// Other OS supports should be added here.
 	}
 
-	return OS_UNKNOWN
+	return OSUnknown
 }
 
 // UnmarshalJSON method implements the json.Unmarshaler interface and unmarshals and normalizes the

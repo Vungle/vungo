@@ -19,8 +19,8 @@ import (
 // Caller is also responsible for closing the server when done.
 func setupTestServer(t *testing.T, fn http.HandlerFunc) *httptest.Server {
 	return httptest.NewServer(http.HandlerFunc(func(resp http.ResponseWriter, req *http.Request) {
-		if h := req.Header.Get(openrtb.HeaderOpenRTBVersion); h != openrtb.VERSION {
-			t.Errorf("HTTP header for OpenRTB bid requests should contain `%s: %s` header instead of %s.", openrtb.HeaderOpenRTBVersion, openrtb.VERSION, h)
+		if h := req.Header.Get(openrtb.HeaderOpenRTBVersion); h != openrtb.OpenRTBVersion {
+			t.Errorf("HTTP header for OpenRTB bid requests should contain `%s: %s` header instead of %s.", openrtb.HeaderOpenRTBVersion, openrtb.OpenRTBVersion, h)
 		}
 
 		resp.Header().Set("Content-Type", "application/json")

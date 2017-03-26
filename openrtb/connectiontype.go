@@ -1,13 +1,16 @@
 package openrtb
 
+// ConnectionType type denotes the network connection type.
+// See OpenRTB 2.3.1 Sec 5.18.
 type ConnectionType int
 
+// Possible values from the OpenRTB spec.
 const (
-	CONNECTION_UNKNOWN ConnectionType = iota
-	CONNECTION_ETHERNET
-	CONNECTION_WIFI
-	CONNECTION_CELLULAR_UNKNOWN
-	CONNECTION_CELLULAR_2G
-	CONNECTION_CELLULAR_3G
-	CONNECTION_CELLULAR_4G
+	ConnectionTypeUnknown ConnectionType = iota
+	ConnectionTypeEthernet
+	ConnectionTypeWiFi
+	ConnectionTypeCellularUnknown
+	ConnectionTypeCellular2G
+	ConnectionTypeCellular3G
+	ConnectionTypeCellular4G
 )

@@ -1,23 +1,26 @@
 package openrtb
 
+// CreativeAttribute type describes attributes of the ad creative being served or filtered by the
+// exchange server.
+// See OpenRTB 2.3.1 Sec 5.3.
 type CreativeAttribute int
 
+// Possible values as specified in OpenRTB spec.
 const (
-	_ CreativeAttribute = iota
-	CREATIVE_AUDIO_AUTO
-	CREATIVE_AUDIO_USER
-	CREATIVE_EXPANDABLE_AUTO
-	CREATIVE_EXPANDABLE_USER_CLICK
-	CREATIVE_EXPANDABLE_USER_ROLLOVER
-	CREATIVE_IN_BANNER_VIDEO_AUTO
-	CREATIVE_IN_BANNER_VIDEO_USER
-	CREATIVE_POP
-	CREATIVE_PROVOCATIVE
-	CREATIVE_SMILEY
-	CREATIVE_SURVEY
-	CREATIVE_TEXT
-	CREATIVE_INTERACTIVE
-	CREATIVE_DIALOG
-	CREATIVE_HAS_AUDIO_ON_OFF
-	CREATIVE_SKIPPABLE
+	CreativeAttributeAudioAuto CreativeAttribute = iota + 1
+	CreativeAttributeAudioUser
+	CreativeAttributeExpandableAuto
+	CreativeAttributeExpandableUserClick
+	CreativeAttributeExpandableUserRollover
+	CreativeAttributeInBannerVideoAuto
+	CreativeAttributeInBannerVideoUser
+	CreativeAttributePop
+	CreativeAttributeProactive
+	CreativeAttributeSmiley
+	CreativeAttributeSurvey
+	CreativeAttributeText
+	CreativeAttributeInteractive
+	CreativeAttributeDialog
+	CreativeAttributeHasAudioOnOff
+	CreativeAttributeSkippable
 )

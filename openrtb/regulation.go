@@ -1,5 +1,8 @@
 package openrtb
 
+// Regulation types denotes any industry, legal, or governmental regulations with respect to the
+// parent bid request object.
+// See OpenRTB 2.3.1 Sec 3.2.16.
 //go:generate easyjson $GOFILE
 //easyjson:json
 type Regulation struct {
