@@ -1,7 +1,5 @@
 package openrtb
 
-import "github.com/garukun/gotools/.glide/cache/src/https-github.com-aws-aws-sdk-go/aws/request"
-
 // NoBidReason indicates the reason why a bidder did not send a bid in response to a BidRequest.
 type NoBidReason int
 
