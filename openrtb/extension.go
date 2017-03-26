@@ -12,11 +12,11 @@ func (e Extension) MarshalJSON() ([]byte, error) {
 		return e.Raw.MarshalJSON()
 	}
 
-	if m, ok := e.Normalized.(json.Marshaler); ok {
-		return m.MarshalJSON()
+	if e.Normalized == nil {
+		return []byte("null"), nil
 	}
 
-	return []byte("null"), nil
+	return json.Marshal(e.Normalized)
 }
 
 func (e *Extension) UnmarshalJSON(data []byte) error {
@@ -29,9 +29,11 @@ func (e *Extension) UnmarshalJSON(data []byte) error {
 		return err
 	}
 
-	if u, ok := e.Normalized.(json.Unmarshaler); ok {
-		return u.UnmarshalJSON(data)
+	// Don't normalize if Normalized does not implement json.Unmarshaler.
+	u, ok := e.Normalized.(json.Unmarshaler)
+	if !ok {
+		return nil
 	}
 
-	return nil
+	return u.UnmarshalJSON(data)
 }
