@@ -11,8 +11,8 @@ const (
 )
 
 var (
-	nbTrueJson  = []byte{nbTrue}
-	nbFalseJson = []byte{nbFalse}
+	nbTrueJSON  = []byte{nbTrue}
+	nbFalseJSON = []byte{nbFalse}
 )
 
 // NumericBool type represents boolean value that should be marshaled to 0 or 1 for OpenRTB
@@ -25,9 +25,9 @@ type NumericBool bool
 // example, false will be converted into `0`, and true to `1`.
 func (nb NumericBool) MarshalJSON() ([]byte, error) {
 	if nb {
-		return nbTrueJson, nil
+		return nbTrueJSON, nil
 	}
-	return nbFalseJson, nil
+	return nbFalseJSON, nil
 }
 
 // UnmarshalJSON method takes the bytes input argument and converts to NumericBool typed true or

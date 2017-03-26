@@ -69,7 +69,7 @@ type Client struct {
 // underlying HTTP or TCP connection states but just use the resp to perform additional application
 // logic.
 func (c *Client) Do(req *Request) (resp *Response, err error) {
-	if h := req.Http().Header; len(h.Get(openrtb.HEADER_VERSION)) == 0 {
+	if h := req.Http().Header; len(h.Get(openrtb.HeaderOpenRTBVersion)) == 0 {
 		openrtb.SetHeaders(h)
 	}
 

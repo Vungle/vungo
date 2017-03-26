@@ -81,8 +81,8 @@ func TestSeatBidValidation(t *testing.T) {
 		{
 			&openrtb.SeatBid{
 				Bids: []*openrtb.Bid{
-					&openrtb.Bid{Id: "abidid", ImpressionId: "impid", Price: 1},
-					&openrtb.Bid{Id: "abidid1", ImpressionId: "impid1", Price: 1},
+					&openrtb.Bid{ID: "abidid", ImpressionID: "impid", Price: 1},
+					&openrtb.Bid{ID: "abidid1", ImpressionID: "impid1", Price: 1},
 				},
 			},
 			openrtbtest.NewBidRequestForTesting("", ""),
@@ -92,7 +92,7 @@ func TestSeatBidValidation(t *testing.T) {
 		{
 			&openrtb.SeatBid{
 				Bids: []*openrtb.Bid{
-					&openrtb.Bid{Id: ""},
+					&openrtb.Bid{ID: ""},
 				},
 			},
 			openrtbtest.NewBidRequestForTesting("", ""),
@@ -102,7 +102,7 @@ func TestSeatBidValidation(t *testing.T) {
 		{
 			&openrtb.SeatBid{
 				Bids: []*openrtb.Bid{
-					&openrtb.Bid{Id: "abidid", ImpressionId: "impid", Price: 1},
+					&openrtb.Bid{ID: "abidid", ImpressionID: "impid", Price: 1},
 				},
 			},
 			openrtbtest.NewBidRequestForTesting("", "impid"),

@@ -91,9 +91,9 @@ func macroSubsWorker(sub string, in <-chan *openrtb.BidResponse, out chan<- stri
 // fakeBidResponse creates an example bid response for testing purposes.
 func fakeBidResponse() *openrtb.BidResponse {
 	var bid = openrtb.Bid{
-		AdId:         "Some ad id goes here",
-		Id:           "TheBidId!",
-		ImpressionId: "ImpressionIdForBid",
+		AdID:         "Some ad id goes here",
+		ID:           "TheBidId!",
+		ImpressionID: "ImpressionIdForBid",
 		Price:        testPrice,
 	}
 	var seatbid = openrtb.SeatBid{
@@ -101,9 +101,9 @@ func fakeBidResponse() *openrtb.BidResponse {
 		Bids: []*openrtb.Bid{&bid},
 	}
 	var bidRes = &openrtb.BidResponse{
-		Id:       "1234",
+		ID:       "1234",
 		SeatBids: []*openrtb.SeatBid{&seatbid},
-		Currency: openrtb.CURRENCY_USD,
+		Currency: openrtb.CurrencyUSD,
 	}
 	return bidRes
 }

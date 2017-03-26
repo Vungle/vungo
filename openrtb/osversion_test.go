@@ -37,7 +37,7 @@ func TestOsVersionIsAbove(t *testing.T) {
 	for i, test := range tests {
 		t.Logf("Testing %d...", i)
 
-		v1, v2 := openrtb.OsVersion(test.v1), openrtb.OsVersion(test.v2)
+		v1, v2 := openrtb.OSVersion(test.v1), openrtb.OSVersion(test.v2)
 
 		if v1.IsAbove(v2) != test.isAbove {
 			t.Errorf("Expects version %s above %s to be %v.", v1, v2, test.isAbove)

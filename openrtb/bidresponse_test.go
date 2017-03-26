@@ -66,15 +66,15 @@ func TestBidResponseShouldValidateInvalidNoBidReasons(t *testing.T) {
 		nbr     openrtb.NoBidReason
 		isValid bool
 	}{
-		{openrtb.NO_BID_BELOW_FLOOR, true},
+		{openrtb.NoBidReasonBelowFloor, true},
 		{openrtb.NoBidReason(1010), false},
-		{openrtb.NO_BID_VUNGLE_DATASCI_NO_SERVE, true},
-		{openrtb.NO_BID_BELOW_FLOOR, true},
+		{openrtb.NoBidReasonVungleDataSciNoServe, true},
+		{openrtb.NoBidReasonBelowFloor, true},
 	}
 
 	for i, test := range tests {
 		t.Logf("Testing %d...", i)
-		resp := &openrtb.BidResponse{Id: "some-id", NoBidReason: test.nbr}
+		resp := &openrtb.BidResponse{ID: "some-id", NoBidReason: test.nbr}
 		err := resp.Validate(openrtbtest.NewBidRequestForTesting("some-id", ""))
 		if (test.isValid && err != nil) || (!test.isValid && err != openrtb.ErrInvalidNoBidReasonValue) {
 			t.Errorf("Expected no-bid reason to be valid: %t, when the validation error is %v", test.isValid, err)
@@ -115,7 +115,7 @@ func TestBidResponseValidation(t *testing.T) {
 		// empty id
 		{
 			&openrtb.BidResponse{
-				Id:       "",
+				ID:       "",
 				SeatBids: []*openrtb.SeatBid{},
 			},
 			openrtbtest.NewBidRequestForTesting("", ""),
@@ -124,7 +124,7 @@ func TestBidResponseValidation(t *testing.T) {
 		// different id from bid request
 		{
 			&openrtb.BidResponse{
-				Id:       "a-bid-request-id",
+				ID:       "a-bid-request-id",
 				SeatBids: []*openrtb.SeatBid{},
 			},
 			openrtbtest.NewBidRequestForTesting("b-bid-request-id", ""),
@@ -141,7 +141,7 @@ func TestBidResponseValidation(t *testing.T) {
 		// 2 seat bids
 		{
 			&openrtb.BidResponse{
-				Id:       "some-id",
+				ID:       "some-id",
 				SeatBids: []*openrtb.SeatBid{&openrtb.SeatBid{}, &openrtb.SeatBid{}},
 			},
 			openrtbtest.NewBidRequestForTesting("some-id", ""),
@@ -150,7 +150,7 @@ func TestBidResponseValidation(t *testing.T) {
 		// empty seat bid
 		{
 			&openrtb.BidResponse{
-				Id:       "some-id",
+				ID:       "some-id",
 				SeatBids: []*openrtb.SeatBid{&openrtb.SeatBid{}},
 			},
 			openrtbtest.NewBidRequestForTesting("some-id", ""),
@@ -159,12 +159,12 @@ func TestBidResponseValidation(t *testing.T) {
 		// incorrect currency
 		{
 			&openrtb.BidResponse{
-				Id:       "some-id",
+				ID:       "some-id",
 				Currency: openrtb.Currency("CNY"),
 				SeatBids: []*openrtb.SeatBid{
 					{
 						Bids: []*openrtb.Bid{
-							&openrtb.Bid{Id: "abidid", ImpressionId: "some-impid", Price: 1},
+							&openrtb.Bid{ID: "abidid", ImpressionID: "some-impid", Price: 1},
 						},
 					},
 				},
@@ -176,21 +176,21 @@ func TestBidResponseValidation(t *testing.T) {
 		// incorrect currency against non-default currency in bid request.
 		{
 			&openrtb.BidResponse{
-				Id: "some-id-for-default-currency",
+				ID: "some-id-for-default-currency",
 				SeatBids: []*openrtb.SeatBid{
 					{
 						Bids: []*openrtb.Bid{
-							&openrtb.Bid{Id: "abidid", ImpressionId: "some-impid", Price: 1},
+							&openrtb.Bid{ID: "abidid", ImpressionID: "some-impid", Price: 1},
 						},
 					},
 				},
 			},
 			&openrtb.BidRequest{
-				Id: "some-id-for-default-currency",
+				ID: "some-id-for-default-currency",
 				Impressions: []*openrtb.Impression{
 					&openrtb.Impression{
-						Id:               "some-impid",
-						BidFloorCurrency: openrtb.CURRENCY_CNY, // custom currency in bid request
+						ID:               "some-impid",
+						BidFloorCurrency: openrtb.CurrencyCNY, // custom currency in bid request
 					},
 				},
 				Application: &openrtb.Application{},
@@ -202,12 +202,12 @@ func TestBidResponseValidation(t *testing.T) {
 		// incorrect price
 		{
 			&openrtb.BidResponse{
-				Id:       "some-id",
+				ID:       "some-id",
 				Currency: openrtb.Currency("USD"),
 				SeatBids: []*openrtb.SeatBid{
 					{
 						Bids: []*openrtb.Bid{
-							&openrtb.Bid{Id: "abidid", ImpressionId: "some-impid", Price: 1},
+							&openrtb.Bid{ID: "abidid", ImpressionID: "some-impid", Price: 1},
 						},
 					},
 				},
@@ -218,12 +218,12 @@ func TestBidResponseValidation(t *testing.T) {
 		// valid data
 		{
 			&openrtb.BidResponse{
-				Id:       "some-id",
+				ID:       "some-id",
 				Currency: openrtb.Currency("USD"),
 				SeatBids: []*openrtb.SeatBid{
 					{
 						Bids: []*openrtb.Bid{
-							&openrtb.Bid{Id: "abidid", ImpressionId: "some-impid", Price: 1},
+							&openrtb.Bid{ID: "abidid", ImpressionID: "some-impid", Price: 1},
 						},
 					},
 				},

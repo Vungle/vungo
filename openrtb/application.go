@@ -1,14 +1,19 @@
 package openrtb
 
+import "encoding/json"
+
+// Application type denotes that the parent bid request object represents an opportunity to auction
+// within the context of a mobile application.
+// See OpenRTB 2.3.1 Sec 3.2.7.
 //go:generate easyjson $GOFILE
 //easyjson:json
 type Application struct {
-	Id string `json:"id"`
+	ID string `json:"id"`
 
 	Name              string      `json:"name,omitempty"`
 	Bundle            string      `json:"bundle,omitempty"`
 	Domain            string      `json:"domain,omitempty"`
-	StoreUrl          string      `json:"storeurl,omitempty"`
+	StoreURL          string      `json:"storeurl,omitempty"`
 	Categories        []Category  `json:"cat,omitempty"`
 	SectionCategories []Category  `json:"sectioncat,omitempty"`
 	PageCategories    []Category  `json:"pagecat,omitempty"`
@@ -21,11 +26,12 @@ type Application struct {
 
 	Keywords string `json:"keywords,omitempty"`
 
-	Extension interface{} `json:"ext,omitempty"`
+	RawExtension json.RawMessage `json:"ext"`
+	Extension    interface{}     `json:"-"` // Opaque value that can be used to store unmarshaled value in ext field.
 }
 
 // Validate method checks to see if the Application object contains required and well-formatted data
 // and returns a corresponding error when the check fails.
-func (a *Application) Validate() error {
+func (a Application) Validate() error {
 	return nil
 }

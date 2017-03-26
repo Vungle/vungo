@@ -22,37 +22,37 @@ func TestBidValidation(t *testing.T) {
 	}{
 		// with empty id
 		{
-			&openrtb.Bid{Id: ""},
+			&openrtb.Bid{ID: ""},
 			openrtbtest.NewBidRequestForTesting("", ""),
 			openrtb.ErrMissingBidId,
 		},
 		// with empty impression id
 		{
-			&openrtb.Bid{Id: "abidid", ImpressionId: ""},
+			&openrtb.Bid{ID: "abidid", ImpressionID: ""},
 			openrtbtest.NewBidRequestForTesting("", ""),
 			openrtb.ErrMissingBidImpressionId,
 		},
 		// with zero price
 		{
-			&openrtb.Bid{Id: "abidid", ImpressionId: "impid", Price: 0},
+			&openrtb.Bid{ID: "abidid", ImpressionID: "impid", Price: 0},
 			openrtbtest.NewBidRequestForTesting("", "impid"),
 			openrtb.ErrIncorrectBidPrice,
 		},
 		// with minus price
 		{
-			&openrtb.Bid{Id: "abidid", ImpressionId: "impid", Price: -1},
+			&openrtb.Bid{ID: "abidid", ImpressionID: "impid", Price: -1},
 			openrtbtest.NewBidRequestForTesting("", "impid"),
 			openrtb.ErrIncorrectBidPrice,
 		},
 		// with different impression id
 		{
-			&openrtb.Bid{Id: "abidid", ImpressionId: "impid", Price: 1},
+			&openrtb.Bid{ID: "abidid", ImpressionID: "impid", Price: 1},
 			openrtbtest.NewBidRequestForTesting("", "another-impid"),
 			openrtb.ErrIncorrectImpressionId,
 		},
 		// with valid data
 		{
-			&openrtb.Bid{Id: "abidid", ImpressionId: "impid", Price: 1},
+			&openrtb.Bid{ID: "abidid", ImpressionID: "impid", Price: 1},
 			openrtbtest.NewBidRequestForTesting("", "impid"),
 			nil,
 		},

@@ -5,8 +5,8 @@ import (
 	"strings"
 )
 
-// ValidateHttpResponse checks the http header
-func ValidateHttpResponse(res *http.Response) error {
+// ValidateHTTPResponse checks the http header
+func ValidateHTTPResponse(res *http.Response) error {
 	contentType := res.Header.Get("Content-Type")
 	if len(contentType) == 0 {
 		return ErrIncorrectHttpContentType

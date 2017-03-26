@@ -1,12 +1,13 @@
 package openrtb
 
-type ApiFramework int
+// APIFramework type represents API framework supported in the video impression.
+type APIFramework int
 
+// Possible values according to the OpenRTB spec.
 const (
-	_ ApiFramework = iota
-	API_VPAID_1
-	API_VPAID_2
-	API_MRAID_1
-	API_ORMMA
-	API_MRAID_2
+	APIFramworkVPAID1 APIFramework = iota + 1
+	APIFramworkVPAID2
+	APIFrameworkMRAID1
+	APIFrameworkORMMA
+	APIFrameworkMRAID2
 )

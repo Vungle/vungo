@@ -1,5 +1,8 @@
 package openrtb
 
+// SeatBid type encapsulates a set of bids submitted on behalf of a buyer, or a bidder seat, via
+// the containing bid response object.
+// See OpenRTB 2.3.1 Sec 4.2.2.
 //go:generate easyjson $GOFILE
 //easyjson:json
 type SeatBid struct {
@@ -10,25 +13,25 @@ type SeatBid struct {
 	// No Extension(ext).
 }
 
-// GetOnlyBid methods returns the only bid object iff the SeatBid object contains exactly one bid,
+// GetOnlyBid method returns the only bid object iff the SeatBid object contains exactly one bid,
 // or an error otherwise.
-func (sb *SeatBid) GetOnlyBid() (b *Bid, err error) {
-	if len(sb.Bids) != 1 {
+func (b *SeatBid) GetOnlyBid() (bid *Bid, err error) {
+	if len(b.Bids) != 1 {
 		err = ErrIncorrectBidCount
 	} else {
-		b = sb.Bids[0]
+		bid = b.Bids[0]
 	}
 
 	return
 }
 
 // Validate method validates a seatbid object.
-func (sb *SeatBid) Validate(bidRequest *BidRequest) error {
-	if len(sb.Bids) != 1 {
+func (b *SeatBid) Validate(bidRequest *BidRequest) error {
+	if len(b.Bids) != 1 {
 		return ErrIncorrectBidCount
 	}
 
-	for _, bid := range sb.Bids {
+	for _, bid := range b.Bids {
 		if err := bid.Validate(bidRequest); err != nil {
 			return err
 		}

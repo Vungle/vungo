@@ -4,7 +4,7 @@ import (
 	"github.com/Vungle/vungo/openrtb/vercmp"
 )
 
-// OsVersion type is used for representing OS versions and comparing them. The version considers
+// OSVersion type is used for representing OS versions and comparing them. The version considers
 // only numeric parts to be valid and takes the generic semver like format of
 // MAJOR.MINOR.[BUILD.]PATCH<any-trailing-parts>. It supports an optional build part which is
 // considered insignificant. For instance unofficial releases containing "alpha", "beta", "rc".
@@ -18,10 +18,10 @@ import (
 // 	https://en.wikipedia.org/wiki/IOS_version_history
 // 	https://en.wikipedia.org/wiki/Android_version_history
 // 	https://en.wikipedia.org/wiki/Windows_Phone_version_history
-type OsVersion string
+type OSVersion string
 
-// IsAbove method checks whether the OsVersion is above the other given OsVersion.
-func (o OsVersion) IsAbove(ver OsVersion) bool {
-	v := vercmp.Version(o)
-	return v.IsAbove(vercmp.Version(ver))
+// IsAbove method checks whether the OSVersion is above the other given OSVersion.
+func (v OSVersion) IsAbove(ver OSVersion) bool {
+	osv := vercmp.Version(v)
+	return osv.IsAbove(vercmp.Version(ver))
 }

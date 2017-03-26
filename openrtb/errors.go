@@ -31,3 +31,12 @@ var ErrMissingBidImpressionId = errors.New("Bid must have an impression ID.")
 var ErrMissingBidRequestId = errors.New("BidRequest must have a unique ID.")
 
 var ErrMissingBidResponseId = errors.New("BidResponse must have a unique ID.")
+
+type BidRequestError struct {
+	Field  string
+	Reason string
+}
+
+func (e BidRequestError) Error() string {
+	return ""
+}

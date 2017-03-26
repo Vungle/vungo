@@ -1,9 +1,13 @@
 package openrtb
 
+import "errors"
+
+// Video types annotates the parent impression as an video impression.
+// See OpenRTB 2.3.1 Sec 3.2.4.
 //go:generate easyjson $GOFILE
 //easyjson:json
 type Video struct {
-	MimeTypes   []string `json:"mimes"`
+	MIMETypes   []string `json:"mimes"`
 	MinDuration int      `json:"minduration"`
 	MaxDuration int      `json:"maxduration"`
 
@@ -29,7 +33,20 @@ type Video struct {
 	// No CompanionAds(companionad).
 	// No CompanionTypes(companiontype).
 
-	ApiFrameworks []ApiFramework `json:"api,omitempty"`
+	APIFrameworks []APIFramework `json:"api,omitempty"`
 
 	// No Extension(ext).
+}
+
+// Validate method implements a Validater interface and return a validation error according to the
+// OpenRTB spec.
+func (v Video) Validate() error {
+	if len(v.MIMETypes) < 1 {
+		return errors.New("TODO: but need mime types here")
+	}
+
+	if v.Protocols != nil && len(v.Protocols) < 1 {
+		return errors.New("TODO get an error type: but the number of video protocols must contain at least 1. %d")
+	}
+	return nil
 }

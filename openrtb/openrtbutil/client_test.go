@@ -23,7 +23,7 @@ import (
 func MakeSimpleRequest(t *testing.T, url string) (*Response, error) {
 	ctx := context.Background()
 	br := &openrtb.BidRequest{
-		Id: "没%创%意%真%可%怕",
+		ID: "没%创%意%真%可%怕",
 	}
 
 	req, err := NewRequest(ctx, br, url, nil)
@@ -137,7 +137,7 @@ func TestClientDoShouldDiscardResidualOnInvalidHttpResponse(t *testing.T) {
 
 		ctx := context.Background()
 		br := &openrtb.BidRequest{
-			Id: "br-for-no-bid",
+			ID: "br-for-no-bid",
 		}
 
 		req, err := NewRequest(ctx, br, ts.URL, nil)
@@ -197,7 +197,7 @@ func TestClientDoShouldGiveUpDiscardingOnSlowConnection(t *testing.T) {
 	// When making a simple bid request.
 	if resp, err := MakeSimpleRequest(t, ts.URL); err != nil {
 		t.Error("There should be a valid bid.", err)
-	} else if resp == nil || resp.OpenRtb().Id != "abc" {
+	} else if resp == nil || resp.OpenRtb().ID != "abc" {
 		t.Error("Unexpected resp: ", resp)
 	}
 
@@ -211,7 +211,7 @@ func TestClientDoShouldGiveUpDiscardingOnSlowConnection(t *testing.T) {
 	// And then make another simple bid request.
 	if resp, err := MakeSimpleRequest(t, ts.URL); err != nil {
 		t.Error("There should be a valid bid.", err)
-	} else if resp == nil || resp.OpenRtb().Id != "abc" {
+	} else if resp == nil || resp.OpenRtb().ID != "abc" {
 		t.Error("Unexpected resp: ", resp)
 	}
 
@@ -296,9 +296,9 @@ func TestClientHandleNoBid(t *testing.T) {
 		nbr     openrtb.NoBidReason
 		logged  string
 	}{
-		{http.StatusNoContent, http.Header{"Content-Type": []string{"application/json"}}, bytes.NewReader([]byte("extra payload")), openrtb.NO_BID_HTTP_NO_CONTENT, "extra payload"},
-		{http.StatusBadGateway, http.Header{"Content-Type": []string{"application/json"}}, bytes.NewReader([]byte("extra payload")), openrtb.NO_BID_NON_STANDARD_HTTP_STATUS, "extra payload"},
-		{http.StatusOK, http.Header{"Content-Type": []string{"some-non/json"}}, bytes.NewReader([]byte("{}")), openrtb.NO_BID_INVALID_HTTP_HEADER, ""},
+		{http.StatusNoContent, http.Header{"Content-Type": []string{"application/json"}}, bytes.NewReader([]byte("extra payload")), openrtb.NoBidReasonNoContent, "extra payload"},
+		{http.StatusBadGateway, http.Header{"Content-Type": []string{"application/json"}}, bytes.NewReader([]byte("extra payload")), openrtb.NoBidReasonNonStandardHTTPStatus, "extra payload"},
+		{http.StatusOK, http.Header{"Content-Type": []string{"some-non/json"}}, bytes.NewReader([]byte("{}")), openrtb.NoBidReasonInvalidHTTPHeader, ""},
 	}
 
 	logged := bytes.NewBuffer(nil)

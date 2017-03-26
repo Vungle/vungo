@@ -13,15 +13,15 @@ func (ar auctionResult) Price() float64 {
 }
 
 const (
-	testPrice = 2.345
+	testPrice         = 2.345
 	testAuctionResult = auctionResult(2.345)
 )
 
 func TestMacroSubs(t *testing.T) {
 	bid := openrtb.Bid{
-		AdId:         "Some ad id goes here",
-		Id:           "TheBidId!",
-		ImpressionId: "ImpressionIdForBid",
+		AdID:         "Some ad id goes here",
+		ID:           "TheBidId!",
+		ImpressionID: "ImpressionIdForBid",
 		Price:        testPrice,
 	}
 	seatBid := openrtb.SeatBid{
@@ -29,9 +29,9 @@ func TestMacroSubs(t *testing.T) {
 		Bids: []*openrtb.Bid{&bid},
 	}
 	bidRes := &openrtb.BidResponse{
-		Id:       "1234",
+		ID:       "1234",
 		SeatBids: []*openrtb.SeatBid{&seatBid},
-		Currency: openrtb.CURRENCY_USD,
+		Currency: openrtb.CurrencyUSD,
 	}
 	tests := []struct {
 		input    string
@@ -82,13 +82,13 @@ func TestMacroSubsDifferentSettlementPrice(t *testing.T) {
 // TestMacroSubsErrCases checks cases where MacroSubs might have an error.
 // MacroSubs expects that the BidResponse has exactly one seat with exactly one bid.
 func TestMacroSubsErrCases(t *testing.T) {
-	bid1, bid2 := openrtb.Bid{Id: "bid1"}, openrtb.Bid{Id: "bid2"}
+	bid1, bid2 := openrtb.Bid{ID: "bid1"}, openrtb.Bid{ID: "bid2"}
 	seatBidWith2Bids := openrtb.SeatBid{
 		Seat: "seatbidWith2Bids",
 		Bids: []*openrtb.Bid{&bid1, &bid2},
 	}
 	bidResWith2Bids := &openrtb.BidResponse{
-		Id:       "bidResWith2Bids",
+		ID:       "bidResWith2Bids",
 		SeatBids: []*openrtb.SeatBid{&seatBidWith2Bids},
 	}
 	seatBid1 := openrtb.SeatBid{
@@ -100,7 +100,7 @@ func TestMacroSubsErrCases(t *testing.T) {
 		Bids: []*openrtb.Bid{&bid2},
 	}
 	bidResWith2SeatBids := &openrtb.BidResponse{
-		Id:       "bidResWith2Seatbids",
+		ID:       "bidResWith2Seatbids",
 		SeatBids: []*openrtb.SeatBid{&seatBid1, &seatBid2},
 	}
 	result, err := openrtb.MacroSubs("${AUCTION_ID}${AUCTION_BID_ID}", bidResWith2Bids, testAuctionResult)

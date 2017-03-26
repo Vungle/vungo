@@ -1,11 +1,13 @@
 package openrtb
 
+// PlaybackMethod type represents how the video should playback.
+// See OpenRTB 2.3.1 Sec 5.9.
 type PlaybackMethod int
 
+// Possible values according to the OpenRTB spec.
 const (
-	_ PlaybackMethod = iota
-	PLAYBACK_AUTO_PLAY_SOUND_ON
-	PLAYBACK_AUTO_PLAY_SOUND_OFF
-	PLAYBACK_CLICK_TO_PLAY
-	PLAYBACK_MOUSE_OVER
+	PlaybackMethodAutoPlaySoundOn PlaybackMethod = iota + 1
+	PlaybackMethodAutoPlaySoundOff
+	PlaybackMethodClickToPlay
+	PlaybackMethodMouseOver
 )

@@ -1,9 +1,11 @@
 package openrtb
 
+// Currency type denotes the currency in use according to ISO-4217 alpha codes.
 type Currency string
 
+// Possible supported currencies.
 const (
-	CURRENCY_USD Currency = "USD"
-	CURRENCY_CNY Currency = "CNY"
-	CURRENCY_EUR Currency = "EUR"
+	CurrencyUSD Currency = "USD"
+	CurrencyCNY Currency = "CNY"
+	CurrencyEUR Currency = "EUR"
 )

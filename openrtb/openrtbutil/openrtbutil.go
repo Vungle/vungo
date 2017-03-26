@@ -3,6 +3,7 @@ package openrtbutil
 import (
 	"github.com/Vungle/vungo/openrtb"
 	"golang.org/x/net/context"
+	"net/http"
 )
 
 // RequestBid method sends a high-level bid request to a given endpoint for a bid response over the
@@ -23,4 +24,9 @@ func RequestBid(ctx context.Context, br *openrtb.BidRequest, endpoint string, c 
 	}
 
 	return c.Do(req)
+}
+
+// VersionFromHTTPHeader returns
+func VersionFromHTTPHeader(header http.Header) string {
+	header
 }
