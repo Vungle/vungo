@@ -1,7 +1,5 @@
 package openrtb
 
-import "encoding/json"
-
 // Application type denotes that the parent bid request object represents an opportunity to auction
 // within the context of a mobile application.
 // See OpenRTB 2.3.1 Sec 3.2.7.
@@ -26,8 +24,7 @@ type Application struct {
 
 	Keywords string `json:"keywords,omitempty"`
 
-	RawExtension json.RawMessage `json:"ext"`
-	Extension    interface{}     `json:"-"` // Opaque value that can be used to store unmarshaled value in ext field.
+	Extension *Extension `json:"ext,omitempty"`
 }
 
 // Validate method checks to see if the Application object contains required and well-formatted data

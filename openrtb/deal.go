@@ -1,7 +1,5 @@
 package openrtb
 
-import "encoding/json"
-
 // Deal type represents a way to describe a specific slice of the exchange's supply via a unique ID
 // shared between sellers and buyers to facilitate selling of an impressions.
 // See OpenRTB 2.3.1 Sec 3.2.18.
@@ -17,6 +15,5 @@ type Deal struct {
 
 	WhitelistedSeats []string `json:"wseat,omitempty"`
 
-	RawExtension json.RawMessage `json:"ext"`
-	Extension    interface{}     `json:"-"` // Opaque value that can be used to store unmarshaled value in ext field.
+	Extension *Extension `json:"ext,omitempty"`
 }

@@ -28,5 +28,5 @@ func RequestBid(ctx context.Context, br *openrtb.BidRequest, endpoint string, c 
 
 // VersionFromHTTPHeader returns
 func VersionFromHTTPHeader(header http.Header) string {
-	header
+	return ""
 }

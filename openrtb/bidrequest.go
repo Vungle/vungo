@@ -1,7 +1,6 @@
 package openrtb
 
 import (
-	"encoding/json"
 	"fmt"
 )
 
@@ -34,8 +33,7 @@ type BidRequest struct {
 
 	Regulation *Regulation `json:"regs,omitempty"`
 
-	RawExtension json.RawMessage `json:"ext"`
-	Extension    interface{}     `json:"-"` // Opaque value that can be used to store unmarshaled value in ext field.
+	Extension *Extension `json:"ext,omitempty"`
 }
 
 // Validate method checks to see if the BidRequest object contains required and well-formatted data

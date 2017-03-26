@@ -14,5 +14,5 @@
     "region": "CA",
     "zip": "90049"
   },
-  "ext": {"vungle":{"some_field":"some_value"}}
+  "ext": {"vungle":{"some":["arbitrary value","that","must be","compact JSON"]}}
 }

@@ -1,7 +1,5 @@
 package openrtb
 
-import "encoding/json"
-
 // Impression type describes an ad placement or impression being auctioned.
 // See OpenRTB 2.3.1 Sec 3.2.2.
 //go:generate easyjson $GOFILE
@@ -29,6 +27,5 @@ type Impression struct {
 
 	PrivateMarketplace *PrivateMarketplace `json:"pmp,omitempty"`
 
-	RawExtension json.RawMessage `json:"ext"`
-	Extension    interface{}     `json:"-"` // Opaque value that can be used to store unmarshaled value in ext field.
+	Extension *Extension `json:"ext,omitempty"`
 }

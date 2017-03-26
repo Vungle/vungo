@@ -17,5 +17,5 @@ type User struct {
 
 	// No DataList(data).
 
-	Extension interface{} `json:"ext,omitempty"`
+	Extension *Extension `json:"ext,omitempty"`
 }

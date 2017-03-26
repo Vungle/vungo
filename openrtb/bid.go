@@ -1,7 +1,5 @@
 package openrtb
 
-import "encoding/json"
-
 // Bid type represents an offer, submitted by a buyer, to buy a specific impression within the
 // bid request object.
 // See OpenRTB 2.3.1 Sec 4.2.3.
@@ -30,9 +28,7 @@ type Bid struct {
 	Height int `json:"h,omitempty"`
 	Width  int `json:"w,omitempty"`
 
-	// TODO(@WeiVungle): Need to be unmarshaled manually.
-	RawExtension json.RawMessage `json:"ext,omitempty"`
-	Extension    interface{}     `json:"-"` // Opaque value that can be used to store unmarshaled value in ext field.
+	Extension *Extension `json:"ext,omitempty"`
 }
 
 // Validate method validates a bid object.

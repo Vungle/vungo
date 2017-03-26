@@ -36,5 +36,5 @@ type Device struct {
 	MACSHA1        string `json:"macsha1,omitempty"`
 	MACMD5         string `json:"macmd5,omitempty"`
 
-	Extension interface{} `json:"ext,omitempty"`
+	Extension *Extension `json:"ext,omitempty"`
 }

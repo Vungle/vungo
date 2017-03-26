@@ -1,7 +1,6 @@
 package openrtb
 
 import (
-	"encoding/json"
 	"fmt"
 	"reflect"
 )
@@ -22,17 +21,13 @@ type BidResponse struct {
 	CustomData  string      `json:"customdata,omitempty"`
 	NoBidReason NoBidReason `json:"nbr,omitempty"`
 
-	RawExtension json.RawMessage `json:"ext,omitempty"`
-	Extension    interface{}     `json:"-"` // Opaque value that can be used to store unmarshaled value in ext field.
+	Extension *Extension `json:"ext,omitempty"`
 }
 
 // Validate method validates whether the BidResponse object contains valid data, or returns an
 // error otherwise.
 func (r *BidResponse) Validate(bidReq *BidRequest) error {
 	brCopy := *r
-	if brCopy.RawExtension != nil {
-		brCopy.RawExtension = nil
-	}
 
 	if reflect.DeepEqual(emptyBid, brCopy) {
 		return nil

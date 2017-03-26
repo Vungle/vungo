@@ -35,5 +35,5 @@
   "dpidmd5": "08afd6f9ae0c6017d105b4ce580de885",
   "macsha1": "eb7ff18b50ae38e58d9c5308ecfcdc3bfa50359c",
   "macmd5": "08afd6f9ae0c6017d105b4ce580de885",
-  "ext": {"vungle":{"some_field":"some_value"}}
+  "ext": {"vungle":{"some":["arbitrary value","that","must be","compact JSON"]}}
 }
