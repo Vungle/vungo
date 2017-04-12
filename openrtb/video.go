@@ -4,8 +4,8 @@ package openrtb
 //easyjson:json
 type Video struct {
 	MimeTypes   []string `json:"mimes"`
-	MinDuration int      `json:"minduration"`
-	MaxDuration int      `json:"maxduration"`
+	MinDuration *int     `json:"minduration,omitempty"`
+	MaxDuration *int     `json:"maxduration,omitempty"`
 
 	// No Protocol(protocol). Use Protocols instead.
 
