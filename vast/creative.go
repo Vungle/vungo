@@ -8,7 +8,7 @@ type Creative struct {
 	Id           string `xml:"id,attr,omitempty"`           // ID of the creative defined by the ad server.
 	Sequence     int    `xml:"sequence,attr,omitempty"`     // Sequence number in which the creative should be displayed.
 	AdId         string `xml:"AdID,attr,omitempty"`         // Id of ad associated with the creative.
-	ApiFramework string `xml:"apiFramework,attr,omitempty"` // Ad serving API used.
+	ApiFramework string `xml:"apiFramework,attr,omitempty"` // Ad serving API used. VAST3.0.
 
 	Linear       *Linear       `xml:"Linear,omitempty"`
 	CompanionAds *CompanionAds `xml:"CompanionAds,omitempty"`
@@ -18,7 +18,7 @@ type Creative struct {
 // Validate methods validate the Creative element according to the VAST.
 // Creative must contain EXACTLY ONE of any of Linear, CompanionAds, or NonLinearAds.
 func (creative *Creative) Validate() error {
-
+	// Linear, CompanionAds, NonLinearAds are all optional?
 	if creative.Linear != nil {
 		if creative.CompanionAds != nil || creative.NonLinearAds != nil {
 			return ErrCreativeType

@@ -2,7 +2,7 @@ package vast
 
 // VideoClicks type represents a <VideoClicks> element that contains various types of VideoClick's.
 type VideoClicks struct {
-	ClickThroughs  []*VideoClick `xml:"ClickThrough,omitempty"`
+	ClickThroughs  []*VideoClick `xml:"ClickThrough,omitempty"` // ClickThrough should be an VideoClick not a slice in VAST2.0.
 	ClickTrackings []*VideoClick `xml:"ClickTracking,omitempty"`
 	CustomClicks   []*VideoClick `xml:"CustomClick,omitempty"`
 }

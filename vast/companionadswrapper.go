@@ -3,7 +3,7 @@ package vast
 // CompanionAdsWrapper type represents a <CompanionAds> element within a <Wrapper> element that
 // contains companion creatives in a wrapper.
 type CompanionAdsWrapper struct {
-	Required   Mode                `xml:"required,attr,omitempty"`
+	Required   Mode                `xml:"required,attr,omitempty"` // VAST3.0.
 	Companions []*CompanionWrapper `xml:"Companion,omitempty"`
 }
 

@@ -3,7 +3,7 @@ package vast
 // NonLinearAds type represents a <NonLinearAds> element that contains non-linear creatives.
 type NonLinearAds struct {
 	Trackings  []*Tracking  `xml:"TrackingEvents>Tracking,omitempty"`
-	NonLinears []*NonLinear `xml:"NonLinear,omitempty"`
+	NonLinears []*NonLinear `xml:"NonLinear,omitempty"` // Required, at least one item.
 }
 
 // Validate method validates the NonLinearAds according to the VAST.

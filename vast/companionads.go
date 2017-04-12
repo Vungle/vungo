@@ -2,7 +2,7 @@ package vast
 
 // CompanionAds type represents a <CompanionAds> element that contains companion creatives.
 type CompanionAds struct {
-	Required   Mode         `xml:"required,attr,omitempty"`
+	Required   Mode         `xml:"required,attr,omitempty"` // VAST3.0.
 	Companions []*Companion `xml:"Companion,omitempty"`
 }
 

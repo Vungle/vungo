@@ -4,15 +4,15 @@ import "github.com/Vungle/vungo/vast/defaults"
 
 // Linear type represents an <Linear> element within a <InLine> element.
 type Linear struct {
-	SkipOffset *Offset `xml:"skipoffset,attr,omitempty"` // Time delay at which ad becomes skippable; if absent, the ad is unskippable.
+	SkipOffset *Offset `xml:"skipoffset,attr,omitempty"` // Time delay at which ad becomes skippable; if absent, the ad is unskippable. VAST3.0.
 
-	Duration     Duration      `xml:"Duration"`
-	AdParameters *AdParameters `xml:"AdParameters,omitempty"`
-	Icons        []*Icon       `xml:"Icons>Icon"`
+	Duration     Duration      `xml:"Duration"`               // Required.
+	AdParameters *AdParameters `xml:"AdParameters,omitempty"` // Just string in VAST2.0.
+	Icons        []*Icon       `xml:"Icons>Icon"`             // VAST3.0.
 	Trackings    []*Tracking   `xml:"TrackingEvents>Tracking,omitempty"`
 	VideoClicks  *VideoClicks  `xml:"VideoClicks,omitempty"`
 	MediaFiles   []*MediaFile  `xml:"MediaFiles>MediaFile,omitempty"`
-	Extensions   []*Extension  `xml:"CreativeExtensions>CreativeExtension,omitempty"`
+	Extensions   []*Extension  `xml:"CreativeExtensions>CreativeExtension,omitempty"` // VAST3.0.
 }
 
 // Validate methods validate the Linear element according to the VAST.
@@ -21,7 +21,7 @@ type Linear struct {
 func (linear *Linear) Validate() error {
 
 	if len(linear.MediaFiles) == 0 {
-		return ErrLinearMissMediaFiles
+		return ErrLinearMissMediaFiles // Can be zero?
 	}
 
 	if err := linear.Duration.Validate(); err != nil {

@@ -3,10 +3,13 @@ package vast
 // LinearWrapper type represents a <Linear> element within a <Wrapper> element that defines a
 // wrapped linear creative.
 type LinearWrapper struct {
-	Icons       []*Icon      `xml:"Icons>Icon,omitempty"`
+	Icons       []*Icon      `xml:"Icons>Icon,omitempty"` // VAST3.0.
 	Trackings   []*Tracking  `xml:"TrackingEvents>Tracking,omitempty"`
-	VideoClicks *VideoClicks `xml:"VideoClicks,omitempty"`
-	Extensions  []*Extension `xml:"CreativeExtensions>CreativeExtension,omitempty"`
+	VideoClicks *VideoClicks `xml:"VideoClicks,omitempty"` // VideoClicks here is different from the Linear one.
+	// VideoClicks should be a slice of ClickTracking in VAST2.0. This line should be like :
+	// VideoClicks []*VideoClick `xml:"VideoClicks>ClickTracking,omitempty"`
+
+	Extensions []*Extension `xml:"CreativeExtensions>CreativeExtension,omitempty"` // VAST3.0.
 }
 
 // Validate method validates the LinearWrapper according to the VAST.

@@ -13,7 +13,7 @@ func (ar auctionResult) Price() float64 {
 }
 
 const (
-	testPrice = 2.345
+	testPrice         = 2.345
 	testAuctionResult = auctionResult(2.345)
 )
 
