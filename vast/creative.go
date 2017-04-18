@@ -19,23 +19,47 @@ type Creative struct {
 // Creative must contain EXACTLY ONE of any of Linear, CompanionAds, or NonLinearAds.
 func (creative *Creative) Validate() error {
 	// Linear, CompanionAds, NonLinearAds are all optional?
+	errors := make([]error, 0)
 	if creative.Linear != nil {
 		if creative.CompanionAds != nil || creative.NonLinearAds != nil {
-			return ErrCreativeType
+			errors = append(errors, ErrCreativeType)
 		}
-		return creative.Linear.Validate()
+	} else if creative.CompanionAds != nil {
+		if creative.NonLinearAds != nil {
+			errors = append(errors, ErrCreativeType)
+		}
+	} else if creative.NonLinearAds == nil {
+		errors = append(errors, ErrCreativeType)
+	}
+
+	if creative.Linear != nil {
+		if err := creative.Linear.Validate(); err != nil {
+			ve, ok := err.(ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
+		}
 	}
 
 	if creative.CompanionAds != nil {
-		if creative.NonLinearAds != nil {
-			return ErrCreativeType
+		if err := creative.CompanionAds.Validate(); err != nil {
+			ve, ok := err.(ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
 		}
-		return creative.CompanionAds.Validate()
 	}
 
-	if creative.NonLinearAds == nil {
-		return ErrCreativeType
+	if creative.NonLinearAds != nil {
+		if err := creative.NonLinearAds.Validate(); err != nil {
+			ve, ok := err.(ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
+		}
 	}
-
-	return creative.NonLinearAds.Validate()
+	if len(errors) > 0 {
+		return ValidationError{Errs: errors}
+	}
+	return nil
 }

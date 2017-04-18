@@ -13,7 +13,7 @@ type Impression struct {
 func (impression *Impression) Validate() error {
 
 	if len(impression.Uri) == 0 {
-		return ErrImpressionMissUri
+		return ValidationError{Errs: []error{ErrImpressionMissUri}}
 	}
 
 	return nil

@@ -46,14 +46,19 @@ func (o *Offset) UnmarshalText(data []byte) error {
 
 // Validate method validate Offset.
 func (o *Offset) Validate() error {
-
+	errors := make([]error, 0)
 	if o.Percent < 0 {
-		return ErrOffsetPercentNegative
+		errors = append(errors, ErrOffsetPercentNegative)
 	}
 
 	if err := o.Duration.Validate(); err != nil {
-		return err
+		ve, ok := err.(ValidationError)
+		if ok {
+			errors = append(errors, ve.Errs...)
+		}
 	}
-
+	if len(errors) > 0 {
+		return ValidationError{Errs: errors}
+	}
 	return nil
 }

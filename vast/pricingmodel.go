@@ -20,7 +20,7 @@ func (module PricingModel) Validate() error {
 	case PRICING_MODEL_CPE:
 	case PRICING_MODEL_CPV:
 	default:
-		return ErrUnsupportedPriceModelType
+		return ValidationError{Errs: []error{ErrUnsupportedPriceModelType}}
 	}
 	return nil
 }

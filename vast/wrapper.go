@@ -17,30 +17,42 @@ type Wrapper struct {
 // AdSystem, VastAdTagUri, and Impressions are required.
 // Creatives are optional, if it exists, we'll also validate it.
 func (w *Wrapper) Validate() error {
-
+	errors := make([]error, 0)
 	if err := w.AdSystem.Validate(); err != nil {
-		return err
+		ve, ok := err.(ValidationError)
+		if ok {
+			errors = append(errors, ve.Errs...)
+		}
 	}
 
 	if len(w.VastAdTagUri) == 0 {
-		return ErrWrapperMissVastAdTagUri
+		errors = append(errors, ErrWrapperMissVastAdTagUri)
 	}
 
 	if len(w.Impressions) == 0 {
-		return ErrWrapperMissImpressions
+		errors = append(errors, ErrWrapperMissImpressions)
 	}
 
 	for _, impression := range w.Impressions {
 		if err := impression.Validate(); err != nil {
-			return err
+			ve, ok := err.(ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
 		}
 	}
 
 	for _, c := range w.Creatives {
 		if err := c.Validate(); err != nil {
-			return err
+			ve, ok := err.(ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
 		}
 	}
 
+	if len(errors) > 0 {
+		return ValidationError{Errs: errors}
+	}
 	return nil
 }

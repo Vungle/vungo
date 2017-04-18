@@ -10,9 +10,8 @@ type AdParameters struct {
 // Validate method validates the AdParameters according to the VAST.
 // Parameters are required.
 func (p *AdParameters) Validate() error {
-
 	if len(p.Parameters) == 0 {
-		return ErrAdParametersMissParameters
+		return ValidationError{Errs: []error{ErrAdParametersMissParameters}}
 	}
 
 	return nil

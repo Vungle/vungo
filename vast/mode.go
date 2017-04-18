@@ -12,9 +12,8 @@ const (
 
 // Validate method validates Mode according to the VAST.
 func (mode Mode) Validate() error {
-
 	if mode != MODE_ALL && mode != MODE_ANY && mode != MODE_NONE {
-		return ErrUnsupportedMode
+		return ValidationError{Errs: []error{ErrUnsupportedMode}}
 	}
 
 	return nil

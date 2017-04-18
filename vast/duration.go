@@ -73,10 +73,10 @@ func (d Duration) String() string {
 // The Duration should never less than zero.
 func (d Duration) Validate() error {
 	if d < 0 {
-		return ErrDurationNegative
+		return ValidationError{Errs: []error{ErrDurationNegative}}
 	}
 	if d == 0 {
-		return ErrDurationEqualZero
+		return ValidationError{Errs: []error{ErrDurationEqualZero}}
 	}
 	return nil
 }

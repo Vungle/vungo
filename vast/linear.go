@@ -19,9 +19,9 @@ type Linear struct {
 // MediaFiles and Duration are required.
 // Icons are optional, but if contained, we'll also validate it.
 func (linear *Linear) Validate() error {
-
+	errors := make([]error, 0)
 	if len(linear.MediaFiles) == 0 {
-		return ErrLinearMissMediaFiles // Can be zero?
+		errors = append(errors, ErrLinearMissMediaFiles) // Can be zero?
 	}
 
 	if err := linear.Duration.Validate(); err != nil {
@@ -29,28 +29,37 @@ func (linear *Linear) Validate() error {
 	}
 
 	if linear.Duration > Duration(defaults.MAX_VIDEO_DURATION) {
-		return ErrVideoDurationTooLong
+		errors = append(errors, ErrVideoDurationTooLong)
 	}
 
 	if linear.Duration < Duration(defaults.MIN_VIDEO_DURATION) {
-		return ErrVideoDurationTooShort
+		errors = append(errors, ErrVideoDurationTooShort)
 	}
 
 	if linear.VideoClicks != nil {
 		if err := linear.VideoClicks.Validate(); err != nil {
-			return err
+			ve, ok := err.(ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
 		}
 	}
 
 	if linear.SkipOffset != nil {
 		if err := linear.SkipOffset.Validate(); err != nil {
-			return err
+			ve, ok := err.(ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
 		}
 	}
 
 	if linear.AdParameters != nil {
 		if err := linear.AdParameters.Validate(); err != nil {
-			return err
+			ve, ok := err.(ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
 		}
 	}
 
@@ -66,22 +75,33 @@ func (linear *Linear) Validate() error {
 	if err != nil {
 		// TODO(tiagozortea): The error being returned is just the last media error, we should
 		// apply the proper error generalizations.
-		return err
+		ve, ok := err.(ValidationError)
+		if ok {
+			errors = append(errors, ve.Errs...)
+		}
 	} else {
 		linear.MediaFiles = []*MediaFile{validMedia}
 	}
 
 	for _, icon := range linear.Icons {
 		if err := icon.Validate(); err != nil {
-			return err
+			ve, ok := err.(ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
 		}
 	}
 
 	for _, tracking := range linear.Trackings {
 		if err := tracking.Validate(); err != nil {
-			return err
+			ve, ok := err.(ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
 		}
 	}
-
+	if len(errors) > 0 {
+		return ValidationError{Errs: errors}
+	}
 	return nil
 }

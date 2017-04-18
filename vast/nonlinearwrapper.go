@@ -13,26 +13,16 @@ type NonLinearWrapper struct {
 	MinSuggestedDuration      *Duration `xml:"minSuggestedDuration,attr,omitempty"`
 	ApiFramework              string    `xml:"apiFramework,attr,omitempty"`
 
-	// Missing fields in VAST2.0.
-	// ClickThrough   string          `xml:"NonLinearClickThrough,omitempty"`
-	// AdParameters   string          `xml:"AdParameters,omitempty"`
-	// StaticResource *StaticResource `xml:"StaticResource,omitempty"`
-	// IFrameResource string          `xml:"IFrameResource,omitempty"`
-	// HtmlResource   string          `xml:"HTMLResource,omitempty"`
-
-	Trackings      []*Tracking  `xml:"TrackingEvents>Tracking,omitempty"`              // Not in VAST 2.0/3.0.
 	ClickTrackings []string     `xml:"NonLinearClickTracking,omitempty"`               // VAST 3.0.
-	Extensions     []*Extension `xml:"CreativeExtensions>CreativeExtension,omitempty"` // Not in VAST 2.0/3.0.
+	Extensions     []*Extension `xml:"CreativeExtensions>CreativeExtension,omitempty"` // VAST 3.0.
 }
 
 // Validate method validates NonLinearWrapper according to the VAST.
 func (n *NonLinearWrapper) Validate() error {
-
-	for _, tracking := range n.Trackings {
-		if err := tracking.Validate(); err != nil {
+	if n.MinSuggestedDuration != nil {
+		if err := n.MinSuggestedDuration.Validate(); err != nil {
 			return err
 		}
 	}
-
 	return nil
 }

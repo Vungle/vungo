@@ -10,9 +10,8 @@ type StaticResource struct {
 // Validate method validates the StaticResource according to the VAST.
 // Uri is required.
 func (r *StaticResource) Validate() error {
-
 	if len(r.Uri) == 0 {
-		return ErrStaticResourceMissUri
+		return ValidationError{Errs: []error{ErrStaticResourceMissUri}}
 	}
 
 	return nil

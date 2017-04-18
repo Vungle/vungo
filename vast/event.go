@@ -48,7 +48,7 @@ func (e Event) Validate() error {
 	case EVENT_SKIP:
 	case EVENT_PROGRESS:
 	default:
-		return ErrUnsupportedEvent
+		return ValidationError{Errs: []error{ErrUnsupportedEvent}}
 	}
 	return nil
 }

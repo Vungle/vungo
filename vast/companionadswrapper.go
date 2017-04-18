@@ -9,22 +9,31 @@ type CompanionAdsWrapper struct {
 
 // Validate method validates the CompanionAdsWrapper according to the VAST.
 func (cw *CompanionAdsWrapper) Validate() error {
-
+	errors := make([]error, 0)
 	if len(cw.Companions) == 0 {
-		return ErrCompanionAdsWrapperMissCompanions
+		errors = append(errors, ErrCompanionAdsWrapperMissCompanions)
 	}
 
 	if len(cw.Required) != 0 {
 		if err := cw.Required.Validate(); err != nil {
-			return err
+			ve, ok := err.(ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
 		}
 	}
 
 	for _, c := range cw.Companions {
 		if err := c.Validate(); err != nil {
-			return err
+			ve, ok := err.(ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
 		}
 	}
 
+	if len(errors) > 0 {
+		return ValidationError{Errs: errors}
+	}
 	return nil
 }

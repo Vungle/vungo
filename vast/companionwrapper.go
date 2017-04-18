@@ -26,36 +26,51 @@ type CompanionWrapper struct {
 
 // Validate method validates the CompanionWrapper according to the VAST.
 func (c *CompanionWrapper) Validate() error {
-
+	errors := make([]error, 0)
 	if c.AdParameters != nil {
 		if err := c.AdParameters.Validate(); err != nil {
-			return err
+			ve, ok := err.(ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
 		}
 	}
 
 	for _, tracking := range c.Trackings {
 		if err := tracking.Validate(); err != nil {
-			return err
+			ve, ok := err.(ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
 		}
 	}
 
 	if c.StaticResource != nil {
 		if c.HtmlResource != nil || len(c.IFrameResource) != 0 {
-			return ErrCompanionWrapperResourceFormat
+			errors = append(errors, ErrCompanionWrapperResourceFormat)
 		}
 		if err := c.StaticResource.Validate(); err != nil {
-			return err
+			ve, ok := err.(ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
 		}
 	} else if c.HtmlResource != nil {
 		if len(c.IFrameResource) != 0 {
-			return ErrCompanionWrapperResourceFormat
+			errors = append(errors, ErrCompanionWrapperResourceFormat)
 		}
 		if err := c.HtmlResource.Validate(); err != nil {
-			return err
+			ve, ok := err.(ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
 		}
 	} else if len(c.IFrameResource) == 0 {
-		return ErrCompanionWrapperResourceFormat
+		errors = append(errors, ErrCompanionWrapperResourceFormat)
 	}
 
+	if len(errors) > 0 {
+		return ValidationError{Errs: errors}
+	}
 	return nil
 }

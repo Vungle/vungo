@@ -31,20 +31,28 @@ func (v Vast) FindFirstInlineLinearCreative() *Linear {
 // Validate method validates the Vast element according to the VAST.
 // Version, and Ads are required.
 func (vast *Vast) Validate() error {
-
+	errors := make([]error, 0)
 	if err := vast.Version.Validate(); err != nil {
-		return err
+		ve, ok := err.(ValidationError)
+		if ok {
+			errors = append(errors, ve.Errs...)
+		}
 	}
 
 	if len(vast.Ads) == 0 {
-		return ErrVastMissAd
+		errors = append(errors, ErrVastMissAd)
 	}
 
 	for _, ad := range vast.Ads {
 		if err := ad.Validate(); err != nil {
-			return err
+			ve, ok := err.(ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
 		}
 	}
-
+	if len(errors) > 0 {
+		return ValidationError{Errs: errors}
+	}
 	return nil
 }

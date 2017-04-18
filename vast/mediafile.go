@@ -25,59 +25,62 @@ type MediaFile struct {
 // Delivery and MimeType, Width, and Height are required.
 // Since the width, and height might be zero, we'll only make sure they are not less than zero.
 func (mediaFile *MediaFile) Validate() error {
-
+	errors := make([]error, 0)
 	if len(mediaFile.Delivery) == 0 {
-		return ErrMediaFileMissDelivery
+		errors = append(errors, ErrMediaFileMissDelivery)
 	}
 
 	if err := mediaFile.Delivery.Validate(); err != nil {
-		return err
+		ve, ok := err.(ValidationError)
+		if ok {
+			errors = append(errors, ve.Errs...)
+		}
 	}
 
 	if len(mediaFile.MimeType) == 0 {
-		return ErrMediaFileMissMimeType
+		errors = append(errors, ErrMediaFileMissMimeType)
 	}
 
 	if mediaFile.Width < 0 || mediaFile.Height < 0 {
-		return ErrMediaFileSize
+		errors = append(errors, ErrMediaFileSize)
 	}
 
 	if len(mediaFile.Uri) == 0 {
-		return ErrMediaFileMissUri
+		errors = append(errors, ErrMediaFileMissUri)
 	}
 
 	if mediaFile.Bitrate != 0 {
 		if mediaFile.Bitrate < defaults.MIN_VIDEO_BITRATE {
-			return ErrMediaFileBitrateTooLow
+			errors = append(errors, ErrMediaFileBitrateTooLow)
 		}
 
 		if mediaFile.Bitrate > defaults.MAX_VIDEO_BITRATE {
-			return ErrMediaFileBitrateTooHigh
+			errors = append(errors, ErrMediaFileBitrateTooHigh)
 		}
 	} else {
 		if mediaFile.MaxBitrate < defaults.MIN_VIDEO_BITRATE {
-			return ErrMediaFileBitrateTooLow
+			errors = append(errors, ErrMediaFileBitrateTooLow)
 		}
 
 		if mediaFile.MinBitrate > defaults.MAX_VIDEO_BITRATE {
-			return ErrMediaFileBitrateTooHigh
+			errors = append(errors, ErrMediaFileBitrateTooHigh)
 		}
 	}
 
 	if mediaFile.Width > defaults.MAX_VIDEO_WIDTH {
-		return ErrMediaFileWidthTooHigh
+		errors = append(errors, ErrMediaFileWidthTooHigh)
 	}
 
 	if mediaFile.Width < defaults.MIN_VIDEO_WIDTH {
-		return ErrMediaFileWidthTooLow
+		errors = append(errors, ErrMediaFileWidthTooLow)
 	}
 
 	if mediaFile.Height > defaults.MAX_VIDEO_HEIGHT {
-		return ErrMediaFileHeightTooHigh
+		errors = append(errors, ErrMediaFileHeightTooHigh)
 	}
 
 	if mediaFile.Height < defaults.MIN_VIDEO_HEIGHT {
-		return ErrMediaFileHeightTooLow
+		errors = append(errors, ErrMediaFileHeightTooLow)
 	}
 
 	mimeTypeIsSupported := false
@@ -88,8 +91,10 @@ func (mediaFile *MediaFile) Validate() error {
 		}
 	}
 	if !mimeTypeIsSupported {
-		return ErrMediaFileUnsupportedMimeType
+		errors = append(errors, ErrMediaFileUnsupportedMimeType)
 	}
-
+	if len(errors) > 0 {
+		return ValidationError{Errs: errors}
+	}
 	return nil
 }

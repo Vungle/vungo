@@ -15,26 +15,37 @@ type CreativeWrapper struct {
 // Validate method validates the CreativeWrapper.
 // CreativeWrapper should contain exactly one of LinearWrapper, CompanionAdsWrapper, and NonLinearAdsWrapper.
 func (cw *CreativeWrapper) Validate() error {
-
+	errors := make([]error, 0)
 	if cw.Linear != nil {
 		if cw.CompanionAds != nil || cw.NonLinearAds != nil {
-			return ErrCreativeWrapperType
+			errors = append(errors, ErrCreativeWrapperType)
 		}
 		if err := cw.Linear.Validate(); err != nil {
-			return err
+			ve, ok := err.(ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
 		}
 	} else if cw.CompanionAds != nil {
 		if cw.NonLinearAds != nil {
-			return ErrCreativeWrapperType
+			errors = append(errors, ErrCreativeWrapperType)
 		}
 		if err := cw.CompanionAds.Validate(); err != nil {
-			return err
+			ve, ok := err.(ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
 		}
 	} else if cw.NonLinearAds == nil {
-		return ErrCreativeWrapperType
+		errors = append(errors, ErrCreativeWrapperType)
 	} else if err := cw.NonLinearAds.Validate(); err != nil {
-		return err
+		ve, ok := err.(ValidationError)
+		if ok {
+			errors = append(errors, ve.Errs...)
+		}
 	}
-
+	if len(errors) > 0 {
+		return ValidationError{Errs: errors}
+	}
 	return nil
 }

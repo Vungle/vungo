@@ -25,35 +25,51 @@ type Companion struct {
 
 // Validate methods validate the Companion element according to the VAST.
 func (companion *Companion) Validate() error {
-
+	errors := make([]error, 0)
 	if companion.StaticResource != nil {
 		if len(companion.IFrameResource) != 0 || companion.HtmlResource != nil {
-			return ErrCompanionResourceFormat
+			errors = append(errors, ErrCompanionResourceFormat)
 		}
 		if err := companion.StaticResource.Validate(); err != nil {
-			return err
+			ve, ok := err.(ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
 		}
 	} else if companion.HtmlResource != nil {
 		if len(companion.IFrameResource) != 0 {
-			return ErrCompanionResourceFormat
+			errors = append(errors, ErrCompanionResourceFormat)
 		}
 		if err := companion.HtmlResource.Validate(); err != nil {
-			return err
+			ve, ok := err.(ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
 		}
 	} else if len(companion.IFrameResource) == 0 {
-		return ErrCompanionResourceFormat
+		errors = append(errors, ErrCompanionResourceFormat)
 	}
 
 	for _, tracking := range companion.Trackings {
 		if err := tracking.Validate(); err != nil {
-			return err
+			ve, ok := err.(ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
 		}
 	}
 
 	if companion.AdParameters != nil {
 		if err := companion.AdParameters.Validate(); err != nil {
-			return err
+			ve, ok := err.(ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
 		}
+	}
+
+	if len(errors) > 0 {
+		return ValidationError{Errs: errors}
 	}
 	return nil
 }

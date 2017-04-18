@@ -15,24 +15,35 @@ type LinearWrapper struct {
 // Validate method validates the LinearWrapper according to the VAST.
 // If icons exist, we'll validate it.
 func (lw *LinearWrapper) Validate() error {
-
+	errors := make([]error, 0)
 	if lw.VideoClicks != nil {
 		if err := lw.VideoClicks.Validate(); err != nil {
-			return err
+			ve, ok := err.(ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
 		}
 	}
 
 	for _, icon := range lw.Icons {
 		if err := icon.Validate(); err != nil {
-			return err
+			ve, ok := err.(ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
 		}
 	}
 
 	for _, tracking := range lw.Trackings {
 		if err := tracking.Validate(); err != nil {
-			return err
+			ve, ok := err.(ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
 		}
 	}
-
+	if len(errors) > 0 {
+		return ValidationError{Errs: errors}
+	}
 	return nil
 }

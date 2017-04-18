@@ -22,25 +22,32 @@ type NonLinear struct {
 }
 
 func (nonLinear *NonLinear) Validate() error {
+	errors := make([]error, 0)
+	// TODO(@DevKai): In VAST3.0, NonLinear resources should contain only one of StaticResource, IFrameResource, HtmlResource.
 	if nonLinear.StaticResource != nil {
-		if nonLinear.HtmlResource != nil || len(nonLinear.IFrameResource) != 0 {
-			return ErrNonLinearResourceFormat
-		} else if err := nonLinear.StaticResource.Validate(); err != nil {
-			return err
+		if err := nonLinear.StaticResource.Validate(); err != nil {
+			ve, ok := err.(ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
 		}
-	} else if nonLinear.HtmlResource != nil {
-		if len(nonLinear.IFrameResource) != 0 {
-			return ErrNonLinearResourceFormat
-		} else if err := nonLinear.HtmlResource.Validate(); err != nil {
-			return err
-		}
-	} else if len(nonLinear.IFrameResource) == 0 {
-		return ErrNonLinearResourceFormat
 	}
-
+	if nonLinear.HtmlResource != nil {
+		if err := nonLinear.HtmlResource.Validate(); err != nil {
+			ve, ok := err.(ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
+		}
+	}
 	if err := nonLinear.MinSuggestedDuration.Validate(); err != nil && err != ErrDurationEqualZero {
-		return err
+		ve, ok := err.(ValidationError)
+		if ok {
+			errors = append(errors, ve.Errs...)
+		}
 	}
-
+	if len(errors) > 0 {
+		return ValidationError{Errs: errors}
+	}
 	return nil
 }
