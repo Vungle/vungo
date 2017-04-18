@@ -2,10 +2,11 @@ package vasttest
 
 import (
 	"encoding/xml"
-	"github.com/Vungle/vungo/vast"
 	"io/ioutil"
 	"reflect"
 	"testing"
+
+	"github.com/Vungle/vungo/vast"
 )
 
 // VastTest is a test case container, VastElement indicates which element to test.
