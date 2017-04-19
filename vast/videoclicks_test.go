@@ -16,7 +16,7 @@ func TestVideoClicksMarshalUnmarshal(t *testing.T) {
 
 func TestVideoClicksValidateErrors(t *testing.T) {
 	vasttest.VerifyVastElementFromFile(t, "testdata/videoclicks.xml", &vast.VideoClicks{}, nil)
-	vasttest.VerifyVastElementFromBytes(t, []byte("<VideoClicks></VideoClicks>"), &vast.VideoClicks{}, vast.ErrVideoClicksMissClickThroughs)
+	vasttest.VerifyVastElementFromBytes(t, []byte("<VideoClicks></VideoClicks>"), &vast.VideoClicks{}, nil)
 	vasttest.VerifyVastElementFromFile(t, "testdata/videoclicks_error_clickthrough.xml", &vast.VideoClicks{}, vast.ErrVideoClickMissUri)
 	vasttest.VerifyVastElementFromFile(t, "testdata/videoclicks_error_clicktrack.xml", &vast.VideoClicks{}, vast.ErrVideoClickMissUri)
 	vasttest.VerifyVastElementFromFile(t, "testdata/videoclicks_error_customclick.xml", &vast.VideoClicks{}, vast.ErrVideoClickMissUri)

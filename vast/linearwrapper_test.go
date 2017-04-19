@@ -19,7 +19,7 @@ var linearWrapperTests = []vasttest.VastTest{
 	vasttest.VastTest{&vast.LinearWrapper{}, nil, "linearwrapper_valid.xml"},
 	vasttest.VastTest{&vast.LinearWrapper{}, vast.ErrIconResourcesFormat, "linearwrapper_error_icon.xml"},
 	vasttest.VastTest{&vast.LinearWrapper{}, vast.ErrTrackingMissUri, "linearwrapper_error_tracking.xml"},
-	vasttest.VastTest{&vast.LinearWrapper{}, vast.ErrVideoClicksMissClickThroughs, "linearwrapper_error_videoclicks.xml"},
+	vasttest.VastTest{&vast.LinearWrapper{}, nil, "linearwrapper_error_videoclicks.xml"},
 }
 
 func TestLinearWrapperValidateErrors(t *testing.T) {

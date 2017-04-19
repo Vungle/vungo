@@ -6,8 +6,6 @@ type LinearWrapper struct {
 	Icons       []*Icon      `xml:"Icons>Icon,omitempty"` // VAST3.0.
 	Trackings   []*Tracking  `xml:"TrackingEvents>Tracking,omitempty"`
 	VideoClicks *VideoClicks `xml:"VideoClicks,omitempty"` // VideoClicks here is different from the Linear one.
-	// VideoClicks should be a slice of ClickTracking in VAST2.0. This line should be like :
-	// VideoClicks []*VideoClick `xml:"VideoClicks>ClickTracking,omitempty"`
 
 	Extensions []*Extension `xml:"CreativeExtensions>CreativeExtension,omitempty"` // VAST3.0.
 }

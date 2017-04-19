@@ -2,7 +2,7 @@ package vast
 
 // VideoClicks type represents a <VideoClicks> element that contains various types of VideoClick's.
 type VideoClicks struct {
-	ClickThroughs  []*VideoClick `xml:"ClickThrough,omitempty"` // ClickThrough should be an VideoClick not a slice in VAST2.0.
+	ClickThroughs  []*VideoClick `xml:"ClickThrough,omitempty"`
 	ClickTrackings []*VideoClick `xml:"ClickTracking,omitempty"`
 	CustomClicks   []*VideoClick `xml:"CustomClick,omitempty"`
 }
@@ -11,9 +11,11 @@ type VideoClicks struct {
 // ClickThroughs element is required.
 func (vc *VideoClicks) Validate() error {
 	errors := make([]error, 0)
-	if len(vc.ClickThroughs) == 0 {
-		errors = append(errors, ErrVideoClicksMissClickThroughs)
-	}
+
+	// TODO(@DevKai): VAST3.0 require ClickThroughs not be empty.
+	//if len(vc.ClickThroughs) == 0 {
+	//	errors = append(errors, ErrVideoClicksMissClickThroughs)
+	//}
 
 	for _, click := range vc.ClickThroughs {
 		if err := click.Validate(); err != nil {

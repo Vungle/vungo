@@ -110,7 +110,7 @@ func isXmlField(field reflect.StructField) bool {
 	return len(tag) != 0 && tag != "-"
 }
 
-// VerifyErrorAsExpected method verifies whether the actual error is expected.
+// VerifyVastElementErrorAsExpected method verifies whether the actual error is expected.
 func VerifyVastElementErrorAsExpected(t testing.TB, element Validator, err error, expectedError error) {
 	if err != expectedError {
 		ve, ok := err.(vast.ValidationError)
