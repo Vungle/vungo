@@ -11,7 +11,7 @@ type InLine struct {
 	Description string        `xml:"Description,omitempty"`
 	Advertiser  string        `xml:"Advertiser,omitempty"` // VAST3.0.
 	SurveyUrl   string        `xml:"Survey,omitempty"`
-	Errors      []string      `xml:"Error,omitempty"`   // Error should be an URI in VAST2.0.
+	Errors      []string      `xml:"Error,omitempty"`
 	Pricing     *Pricing      `xml:"Pricing,omitempty"` // VAST3.0.
 	Extensions  []*Extension  `xml:"Extensions>Extension,omitempty"`
 }

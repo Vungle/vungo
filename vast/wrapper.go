@@ -5,10 +5,10 @@ package vast
 // content will be served. The vendor ad server may also provide additional wrapper which
 // eventually resolves to the actual ad.
 type Wrapper struct {
-	AdSystem     *AdSystem          `xml:"AdSystem"`           // Required.
-	VastAdTagUri string             `xml:"VASTAdTagURI"`       // Required.
-	Impressions  []*Impression      `xml:"Impression"`         // Required. should be a URI slice in VAST2.0.
-	Errors       []string           `xml:"Error,omitempty"`    // Error should be an URI instead of a slice in VAST2.0.
+	AdSystem     *AdSystem          `xml:"AdSystem"`     // Required.
+	VastAdTagUri string             `xml:"VASTAdTagURI"` // Required.
+	Impressions  []*Impression      `xml:"Impression"`   // Required.
+	Errors       []string           `xml:"Error,omitempty"`
 	Creatives    []*CreativeWrapper `xml:"Creatives>Creative"` // Required.
 	Extensions   []*Extension       `xml:"Extensions>Extension,omitempty"`
 }
