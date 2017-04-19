@@ -4,7 +4,9 @@ import "github.com/Vungle/vungo/vast/defaults"
 
 // Linear type represents an <Linear> element within a <InLine> element.
 type Linear struct {
-	SkipOffset *Offset `xml:"skipoffset,attr,omitempty"` // Time delay at which ad becomes skippable; if absent, the ad is unskippable. VAST3.0.
+	// SkipOffset is time delay at which ad becomes skippable;
+	// if absent, the ad is unskippable. VAST3.0.
+	SkipOffset *Offset `xml:"skipoffset,attr,omitempty"`
 
 	Duration     Duration      `xml:"Duration"`               // Required.
 	AdParameters *AdParameters `xml:"AdParameters,omitempty"` // Just string in VAST2.0.
