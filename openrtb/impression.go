@@ -20,7 +20,7 @@ type Impression struct {
 	BidFloorPrice    float64  `json:"bidfloor"`
 	BidFloorCurrency Currency `json:"bidfloorcur,omitempty"`
 
-	// No IsSecure(secure).
+	IsSecure NumericBool `json:"secure,omitempty"`
 	// No IFrameBusters(iframebuster).
 	// No PrivateMarketplace(pmp).
 
