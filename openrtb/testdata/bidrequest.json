@@ -111,6 +111,7 @@
   },
   "test": 1,
   "at": 1,
+  "allimps": 0,
   "tmax": 500,
   "cur": ["USD", "CNY"],
   "bcat": ["IAB7-39"],
