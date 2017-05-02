@@ -13,9 +13,6 @@ func (vc *VideoClicks) Validate() error {
 	errors := make([]error, 0)
 
 	// TODO(@DevKai): VAST3.0 require ClickThroughs not be empty.
-	//if len(vc.ClickThroughs) == 0 {
-	//	errors = append(errors, ErrVideoClicksMissClickThroughs)
-	//}
 
 	for _, click := range vc.ClickThroughs {
 		if err := click.Validate(); err != nil {
