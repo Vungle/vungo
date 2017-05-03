@@ -44,13 +44,13 @@ func TestMacroSubs(t *testing.T) {
 		{"abc${AUCTION_IMP_ID}def", "abcImpressionIdForBiddef"},
 		{"abc${AUCTION_SEAT_ID}def", "abcSeatBidIdentifierdef"},
 		{"abc${AUCTION_AD_ID}def", "abcSome ad id goes heredef"},
-		{"abc${AUCTION_PRICE}def", "abc2.35def"},
+		{"abc${AUCTION_PRICE}def", "abc2.345000000def"},
 		{"abc${AUCTION_CURRENCY}def", "abcUSDdef"},
 		{
 			"${AUCTION_ID}${AUCTION_BID_ID}${AUCTION_IMP_ID}${AUCTION_SEAT_ID}" +
 				"${AUCTION_AD_ID}${AUCTION_AD_ID:B64}${AUCTION_PRICE}${AUCTION_CURRENCY}",
 			"1234TheBidId!ImpressionIdForBidSeatBidIdentifierSome ad id goes here" +
-				"U29tZSBhZCBpZCBnb2VzIGhlcmU=2.35USD",
+				"U29tZSBhZCBpZCBnb2VzIGhlcmU=2.345000000USD",
 		},
 		{"abc${AUCTION_ID}${AUCTION_ID}def", "abc12341234def"},
 	}
@@ -74,8 +74,8 @@ func TestMacroSubsDifferentSettlementPrice(t *testing.T) {
 	if err != nil {
 		t.Errorf("MacroSubsDifferentPrices: %s", err)
 	}
-	if actual != "price:11.11" {
-		t.Errorf(`Expected "price:11.11" but got: "%s"`, actual)
+	if actual != "price:11.110000000" {
+		t.Errorf(`Expected "price:11.110000000" but got: "%s"`, actual)
 	}
 }
 
