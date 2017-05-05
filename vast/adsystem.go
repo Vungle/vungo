@@ -11,7 +11,7 @@ type AdSystem struct {
 // System is required.
 func (as *AdSystem) Validate() error {
 	if len(as.System) == 0 {
-		return ErrAdSystemMissSystem
+		return ValidationError{Errs: []error{ErrAdSystemMissSystem}}
 	}
 	return nil
 }

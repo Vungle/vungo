@@ -15,14 +15,14 @@ func TestNonLinearMarshalUnmarshal(t *testing.T) {
 }
 
 var nonLinearTests = []vasttest.VastTest{
-	vasttest.VastTest{&vast.NonLinear{}, vast.ErrNonLinearResourceFormat, "nonlinear.xml"},
+	vasttest.VastTest{&vast.NonLinear{}, nil, "nonlinear.xml"},
 	vasttest.VastTest{&vast.NonLinear{}, nil, "nonlinear_with_staticresource.xml"},
 	vasttest.VastTest{&vast.NonLinear{}, nil, "nonlinear_with_iframeresource.xml"},
 	vasttest.VastTest{&vast.NonLinear{}, nil, "nonlinear_with_htmlresource.xml"},
-	vasttest.VastTest{&vast.NonLinear{}, vast.ErrNonLinearResourceFormat, "nonlinear_without_staticresource.xml"},
-	vasttest.VastTest{&vast.NonLinear{}, vast.ErrNonLinearResourceFormat, "nonlinear_without_iframeresource.xml"},
-	vasttest.VastTest{&vast.NonLinear{}, vast.ErrNonLinearResourceFormat, "nonlinear_without_htmlresource.xml"},
-	vasttest.VastTest{&vast.NonLinear{}, vast.ErrNonLinearResourceFormat, "nonlinear_without_resource.xml"},
+	vasttest.VastTest{&vast.NonLinear{}, nil, "nonlinear_without_staticresource.xml"},
+	vasttest.VastTest{&vast.NonLinear{}, nil, "nonlinear_without_iframeresource.xml"},
+	vasttest.VastTest{&vast.NonLinear{}, nil, "nonlinear_without_htmlresource.xml"},
+	vasttest.VastTest{&vast.NonLinear{}, nil, "nonlinear_without_resource.xml"},
 	vasttest.VastTest{&vast.NonLinear{}, vast.ErrStaticResourceMissUri, "nonlinear_error_staticresource.xml"},
 	vasttest.VastTest{&vast.NonLinear{}, vast.ErrHtmlResourceMissHtml, "nonlinear_error_htmlresource.xml"},
 }

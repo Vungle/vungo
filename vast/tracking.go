@@ -2,22 +2,27 @@ package vast
 
 // Tracking type represents a <Tracking> element that contains a URL to track an event.
 type Tracking struct {
-	Event  Event       `xml:"event,attr"`
-	Offset *Offset     `xml:"offset,attr,omitempty"` // Time at which the event should be triggered.
+	Event  Event       `xml:"event,attr"`            // Required.
+	Offset *Offset     `xml:"offset,attr,omitempty"` // Time at which the event should be triggered. VAST3.0.
 	Uri    TrimmedData `xml:",cdata"`
 }
 
 // Validate methods validate the Tracking element according to the VAST.
 // Uri is required.
 func (t *Tracking) Validate() error {
-
+	errors := make([]error, 0)
 	if len(t.Uri) == 0 {
-		return ErrTrackingMissUri
+		errors = append(errors, ErrTrackingMissUri)
 	}
 
 	if err := t.Event.Validate(); err != nil {
-		return err
+		ve, ok := err.(ValidationError)
+		if ok {
+			errors = append(errors, ve.Errs...)
+		}
 	}
-
+	if len(errors) > 0 {
+		return ValidationError{Errs: errors}
+	}
 	return nil
 }

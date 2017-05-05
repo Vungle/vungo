@@ -5,8 +5,8 @@ package vast
 //
 // Each <Ad> contains either EXACTLY ONE <InLine> element or <Wrapper> element (but never both).
 type Ad struct {
-	Id       string `xml:"id,attr,omitempty"`       // Id of the ad, defined by ad server.
-	Sequence int    `xml:"sequence,attr,omitempty"` // Sequence number in which an ad should play
+	Id       string `xml:"id,attr,omitempty"`       // Id of the ad, defined by ad server. Required in VAST2.0.
+	Sequence int    `xml:"sequence,attr,omitempty"` // Sequence number in which an ad should play. VAST3.0.
 
 	InLine  *InLine  `xml:",omitempty"`
 	Wrapper *Wrapper `xml:",omitempty"`
@@ -15,21 +15,30 @@ type Ad struct {
 // Validate methods validate the Ad element according to the VAST.
 // Each <Ad> contains either EXACTLY ONE <InLine> element or <Wrapper> element (but never both).
 func (ad *Ad) Validate() error {
-
+	errors := make([]error, 0)
 	if ad.InLine != nil {
 		if ad.Wrapper != nil {
-			return ErrAdType
+			errors = append(errors, ErrAdType)
 		}
 		if err := ad.InLine.Validate(); err != nil {
-			return err
+			ve, ok := err.(ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
 		}
 	} else {
 		if ad.Wrapper == nil {
-			return ErrAdType
+			errors = append(errors, ErrAdType)
 		}
 		if err := ad.Wrapper.Validate(); err != nil {
-			return err
+			ve, ok := err.(ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
 		}
+	}
+	if len(errors) > 0 {
+		return ValidationError{Errs: errors}
 	}
 	return nil
 }

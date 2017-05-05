@@ -11,7 +11,7 @@ type HtmlResource struct {
 func (r *HtmlResource) Validate() error {
 
 	if len(r.Html) == 0 {
-		return ErrHtmlResourceMissHtml
+		return ValidationError{Errs: []error{ErrHtmlResourceMissHtml}}
 	}
 
 	return nil

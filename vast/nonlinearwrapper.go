@@ -4,8 +4,8 @@ package vast
 // a non-linear ad in a wrapper.
 type NonLinearWrapper struct {
 	Id                        string    `xml:"id,attr,omitempty"`
-	Width                     int       `xml:"width,attr"`
-	Height                    int       `xml:"height,attr"`
+	Width                     int       `xml:"width,attr"`  // Required.
+	Height                    int       `xml:"height,attr"` // Required.
 	ExpandedWidth             int       `xml:"expandedWidth,attr"`
 	ExpandedHeight            int       `xml:"expandedHeight,attr"`
 	IsScalable                bool      `xml:"scalable,attr,omitempty"`
@@ -13,19 +13,16 @@ type NonLinearWrapper struct {
 	MinSuggestedDuration      *Duration `xml:"minSuggestedDuration,attr,omitempty"`
 	ApiFramework              string    `xml:"apiFramework,attr,omitempty"`
 
-	Trackings      []*Tracking  `xml:"TrackingEvents>Tracking,omitempty"`
-	ClickTrackings []string     `xml:"NonLinearClickTracking,omitempty"`
-	Extensions     []*Extension `xml:"CreativeExtensions>CreativeExtension,omitempty"`
+	ClickTrackings []string     `xml:"NonLinearClickTracking,omitempty"`               // VAST 3.0.
+	Extensions     []*Extension `xml:"CreativeExtensions>CreativeExtension,omitempty"` // VAST 3.0.
 }
 
 // Validate method validates NonLinearWrapper according to the VAST.
 func (n *NonLinearWrapper) Validate() error {
-
-	for _, tracking := range n.Trackings {
-		if err := tracking.Validate(); err != nil {
+	if n.MinSuggestedDuration != nil {
+		if err := n.MinSuggestedDuration.Validate(); err != nil {
 			return err
 		}
 	}
-
 	return nil
 }
