@@ -10,28 +10,38 @@ type VideoClicks struct {
 // Validate method validates the VideoClicks according to the VAST.
 // ClickThroughs element is required.
 func (vc *VideoClicks) Validate() error {
+	errors := make([]error, 0)
 
-	if len(vc.ClickThroughs) == 0 {
-		return ErrVideoClicksMissClickThroughs
-	}
+	// TODO(@DevKai): VAST3.0 require ClickThroughs not be empty.
 
 	for _, click := range vc.ClickThroughs {
 		if err := click.Validate(); err != nil {
-			return err
+			ve, ok := err.(ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
 		}
 	}
 
 	for _, click := range vc.ClickTrackings {
 		if err := click.Validate(); err != nil {
-			return err
+			ve, ok := err.(ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
 		}
 	}
 
 	for _, click := range vc.CustomClicks {
 		if err := click.Validate(); err != nil {
-			return err
+			ve, ok := err.(ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
 		}
 	}
-
+	if len(errors) > 0 {
+		return ValidationError{Errs: errors}
+	}
 	return nil
 }

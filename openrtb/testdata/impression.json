@@ -28,6 +28,7 @@
   "displaymanager": "Vungle Exchange",
   "displaymanagerver": "Vungle iOS/3.3.1",
   "instl": 1,
+  "secure": 1,
   "bidfloor": 85.1290,
   "bidfloorcur": "USD",
   "ext": {"vungle":{"some":["arbitrary value","that","must be","compact JSON"]}}

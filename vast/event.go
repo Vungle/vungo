@@ -17,13 +17,13 @@ const (
 	EVENT_REWIND            Event = "rewind"
 	EVENT_RESUME            Event = "resume"
 	EVENT_FULLSCREEN        Event = "fullscreen"
-	EVENT_EXIT_FULLSCREEN   Event = "exitFullscreen"
+	EVENT_EXIT_FULLSCREEN   Event = "exitFullscreen" //VAST3.0.
 	EVENT_EXPAND            Event = "expand"
 	EVENT_COLLAPSE          Event = "collapse"
 	EVENT_ACCEPT_INVITATION Event = "acceptInvitation"
 	EVENT_CLOSE             Event = "close"
-	EVENT_SKIP              Event = "skip"
-	EVENT_PROGRESS          Event = "progress"
+	EVENT_SKIP              Event = "skip"     // VAST3.0.
+	EVENT_PROGRESS          Event = "progress" // VAST3.0.
 )
 
 func (e Event) Validate() error {
@@ -48,7 +48,7 @@ func (e Event) Validate() error {
 	case EVENT_SKIP:
 	case EVENT_PROGRESS:
 	default:
-		return ErrUnsupportedEvent
+		return ValidationError{Errs: []error{ErrUnsupportedEvent}}
 	}
 	return nil
 }

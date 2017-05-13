@@ -5,6 +5,8 @@ import (
 	"io/ioutil"
 	"reflect"
 	"testing"
+
+	"github.com/Vungle/vungo/vast"
 )
 
 // VastTest is a test case container, VastElement indicates which element to test.
@@ -108,10 +110,20 @@ func isXmlField(field reflect.StructField) bool {
 	return len(tag) != 0 && tag != "-"
 }
 
-// VerifyErrorAsExpected method verifies whether the actual error is expected.
+// VerifyVastElementErrorAsExpected method verifies whether the actual error is expected.
 func VerifyVastElementErrorAsExpected(t testing.TB, element Validator, err error, expectedError error) {
 	if err != expectedError {
-		t.Fatalf("Verify Vast element %v failed; expected error %v, actual error %v.", reflect.TypeOf(element), expectedError, err)
+		ve, ok := err.(vast.ValidationError)
+		if ok {
+			for _, err := range ve.Errs {
+				if expectedError == err {
+					return
+				}
+			}
+			t.Fatalf("Verify Vast element %v failed; expected trigger error %v, actual error %v.", reflect.TypeOf(element), expectedError, err)
+		} else {
+			t.Fatalf("Verify Vast element %v failed; expected error %v, actual error %v.", reflect.TypeOf(element), expectedError, err)
+		}
 	}
 }
 

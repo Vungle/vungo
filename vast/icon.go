@@ -22,32 +22,46 @@ type Icon struct {
 // Program, XPosition, YPosition, Width, Height are required.
 // Icon should contain exactly one of StaticResource, HtmlResource, IFrameResource.
 func (icon *Icon) Validate() error {
-
+	errors := make([]error, 0)
 	if len(icon.Program) == 0 {
-		return ErrIconMissProgram
+		errors = append(errors, ErrIconMissProgram)
 	}
 
 	if len(icon.XPosition) == 0 || len(icon.YPosition) == 0 {
-		return ErrIconMissPosition
+		errors = append(errors, ErrIconMissPosition)
 	}
 
 	if icon.StaticResource != nil {
 		if len(icon.IFrameResource) != 0 || icon.HtmlResource != nil {
-			return ErrIconResourcesFormat
+			errors = append(errors, ErrIconResourcesFormat)
 		}
-		return icon.StaticResource.Validate()
+	} else if icon.HtmlResource != nil {
+		if len(icon.IFrameResource) != 0 {
+			errors = append(errors, ErrIconResourcesFormat)
+		}
+	} else if len(icon.IFrameResource) == 0 {
+		errors = append(errors, ErrIconResourcesFormat)
+	}
+	if icon.StaticResource != nil {
+		if err := icon.StaticResource.Validate(); err != nil {
+			ve, ok := err.(ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
+		}
 	}
 
 	if icon.HtmlResource != nil {
-		if len(icon.IFrameResource) != 0 {
-			return ErrIconResourcesFormat
+		if err := icon.HtmlResource.Validate(); err != nil {
+			ve, ok := err.(ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
 		}
-		return icon.HtmlResource.Validate()
 	}
 
-	if len(icon.IFrameResource) == 0 {
-		return ErrIconResourcesFormat
+	if len(errors) > 0 {
+		return ValidationError{Errs: errors}
 	}
-
 	return nil
 }

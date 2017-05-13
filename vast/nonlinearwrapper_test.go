@@ -16,5 +16,5 @@ func TestNonLinearWrapperMarshalUnmarshal(t *testing.T) {
 
 func TestNonLinearWrapperValidateErrors(t *testing.T) {
 	vasttest.VerifyVastElementFromFile(t, "testdata/nonlinearwrapper.xml", &vast.NonLinearWrapper{}, nil)
-	vasttest.VerifyVastElementFromFile(t, "testdata/nonlinearwrapper_error_tracking.xml", &vast.NonLinearWrapper{}, vast.ErrTrackingMissUri)
+	vasttest.VerifyVastElementFromFile(t, "testdata/nonlinearwrapper_error_tracking.xml", &vast.NonLinearWrapper{}, nil)
 }

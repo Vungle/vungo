@@ -12,7 +12,7 @@ const (
 // Validate method validates Delivery according to the VAST.
 func (delivery Delivery) Validate() error {
 	if delivery != DELIVERY_PROGRESSIVE && delivery != DELIVERY_STREAMING {
-		return ErrUnsupportedDeliveryType
+		return ValidationError{Errs: []error{ErrUnsupportedDeliveryType}}
 	}
 	return nil
 }

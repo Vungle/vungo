@@ -10,9 +10,8 @@ type VideoClick struct {
 // Validate method validates VideoClick according to the VAST.
 // Uri is required.
 func (click *VideoClick) Validate() error {
-
 	if len(click.Uri) == 0 {
-		return ErrVideoClickMissUri
+		return ValidationError{Errs: []error{ErrVideoClickMissUri}}
 	}
 
 	return nil

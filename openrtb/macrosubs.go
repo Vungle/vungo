@@ -38,7 +38,7 @@ func createSubValues(bidRes *BidResponse, s Settlement) (subValues map[macro]str
 		auctionImpID:    bid.ImpressionID,
 		auctionSeatID:   seatBid.Seat,
 		auctionAdID:     bid.AdID,
-		auctionPrice:    strconv.FormatFloat(s.Price(), 'f', 2, 64),
+		auctionPrice:    strconv.FormatFloat(s.Price(), 'f', 9, 64),
 		auctionCurrency: string(bidRes.Currency),
 	}
 
