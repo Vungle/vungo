@@ -5,8 +5,8 @@ type APIFramework int
 
 // Possible values according to the OpenRTB spec.
 const (
-	APIFramworkVPAID1 APIFramework = iota + 1
-	APIFramworkVPAID2
+	APIFrameworkVPAID1 APIFramework = iota + 1
+	APIFrameworkVPAID2
 	APIFrameworkMRAID1
 	APIFrameworkORMMA
 	APIFrameworkMRAID2
