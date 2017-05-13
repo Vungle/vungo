@@ -8,6 +8,6 @@ type AuctionType int
 
 // Possible values of auction types.
 const (
-	AuctionTypeFirstPrice  AuctionType = 1
-	AuctionTypeSecondPrice AuctionType = 2
+	AuctionTypeFirstPrice AuctionType = iota + 1
+	AuctionTypeSecondPrice
 )
