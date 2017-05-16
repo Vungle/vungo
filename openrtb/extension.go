@@ -2,11 +2,13 @@ package openrtb
 
 import "encoding/json"
 
+// Extension represents a generic OpenRTB extension.
 type Extension struct {
 	Raw        json.RawMessage
 	Normalized interface{}
 }
 
+// MarshalJSON returns the JSON encoding of the Extension.
 func (e Extension) MarshalJSON() ([]byte, error) {
 	if len(e.Raw) > 0 {
 		return e.Raw.MarshalJSON()
@@ -19,6 +21,7 @@ func (e Extension) MarshalJSON() ([]byte, error) {
 	return json.Marshal(e.Normalized)
 }
 
+// UnmarshalJSON extends the Extension with the data provided.
 func (e *Extension) UnmarshalJSON(data []byte) error {
 	if len(data) > 0 {
 		*e = Extension{}

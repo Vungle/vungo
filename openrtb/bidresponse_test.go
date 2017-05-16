@@ -14,53 +14,6 @@ func TestBidResponseMarshalUnmarshal(t *testing.T) {
 	openrtbtest.VerifyModelAgainstFile(t, "bidresponse.json", BidResponseModelType)
 }
 
-func TestBidResponseShouldReturnErrorWithMoreThanOneSeatBid(t *testing.T) {
-	// Given a BidResponse object with more than one seat bids.
-	br := &openrtb.BidResponse{SeatBids: []*openrtb.SeatBid{
-		&openrtb.SeatBid{},
-		&openrtb.SeatBid{},
-	}}
-
-	// When getting the only bid.
-	_, err := br.GetOnlyBid()
-
-	// Expect error returns.
-	if err != openrtb.ErrIncorrectSeatCount {
-		t.Error("GetOnlyBid should return an error.")
-	}
-}
-
-func TestBidResponseShouldReturnErrorWithNoSeatBids(t *testing.T) {
-	// Given a BidResponse object with no seat bids.
-	br := &openrtb.BidResponse{}
-
-	// When getting the only bid.
-	_, err := br.GetOnlyBid()
-
-	// Expect error returns.
-	if err != openrtb.ErrIncorrectSeatCount {
-		t.Error("GetOnlyBid should return an error")
-	}
-}
-
-func TestBidResponseShouldReturnTheOnlyBid(t *testing.T) {
-	// Given a BidResponse object with just one bid.
-	bid := openrtb.Bid{}
-	br := &openrtb.BidResponse{SeatBids: []*openrtb.SeatBid{
-		&openrtb.SeatBid{Bids: []*openrtb.Bid{&bid}},
-	}}
-
-	// When getting the only bid.
-	b, err := br.GetOnlyBid()
-
-	// Expect the only bid returns with no error.
-	if err != nil {
-		t.Error("GetOnlyBid should not return an error.")
-	} else if !reflect.DeepEqual(b, &bid) {
-		t.Errorf("Expected the only bid to be %v instead of %v.\n", &bid, b)
-	}
-}
-
 func TestBidResponseShouldValidateInvalidNoBidReasons(t *testing.T) {
 	tests := []struct {
 		nbr     openrtb.NoBidReason
@@ -119,7 +72,7 @@ func TestBidResponseValidation(t *testing.T) {
 				SeatBids: []*openrtb.SeatBid{},
 			},
 			openrtbtest.NewBidRequestForTesting("", ""),
-			openrtb.ErrMissingBidResponseId,
+			openrtb.ErrMissingBidResponseID,
 		},
 		// different id from bid request
 		{
@@ -128,7 +81,7 @@ func TestBidResponseValidation(t *testing.T) {
 				SeatBids: []*openrtb.SeatBid{},
 			},
 			openrtbtest.NewBidRequestForTesting("b-bid-request-id", ""),
-			openrtb.ErrIncorrectBidResponseId,
+			openrtb.ErrIncorrectBidResponseID,
 		},
 		// empty seat bids
 		{
@@ -136,25 +89,7 @@ func TestBidResponseValidation(t *testing.T) {
 				SeatBids: []*openrtb.SeatBid{},
 			},
 			openrtbtest.NewBidRequestForTesting("", ""),
-			openrtb.ErrMissingBidResponseId,
-		},
-		// 2 seat bids
-		{
-			&openrtb.BidResponse{
-				ID:       "some-id",
-				SeatBids: []*openrtb.SeatBid{&openrtb.SeatBid{}, &openrtb.SeatBid{}},
-			},
-			openrtbtest.NewBidRequestForTesting("some-id", ""),
-			openrtb.ErrIncorrectSeatCount,
-		},
-		// empty seat bid
-		{
-			&openrtb.BidResponse{
-				ID:       "some-id",
-				SeatBids: []*openrtb.SeatBid{&openrtb.SeatBid{}},
-			},
-			openrtbtest.NewBidRequestForTesting("some-id", ""),
-			openrtb.ErrIncorrectBidCount,
+			openrtb.ErrMissingBidResponseID,
 		},
 		// incorrect currency
 		{

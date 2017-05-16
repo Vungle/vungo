@@ -2,41 +2,50 @@ package openrtb
 
 import "errors"
 
-// Please keep the variables alphabetized.
+// ErrBidPriceBelowBidFloor is returned when the Bid's price is below the
+// Impression's floor price or the Deal's floor price.
+var ErrBidPriceBelowBidFloor = errors.New("bid price must be higher than or equal to impression floor price")
 
-var ErrBidPriceBelowBidFloor = errors.New("Bid price must be higher than impression floor price.")
+// ErrIncorrectBidPrice is returned when the Bid's price is invalid.
+var ErrIncorrectBidPrice = errors.New("bid price must be a positive number")
 
-var ErrIncorrectBidCount = errors.New("BidResponse has incorrect number of bids.")
+// ErrIncorrectBidResponseCurrency is returned when the BidResponse's currency
+// is invalid.
+var ErrIncorrectBidResponseCurrency = errors.New("currency does not match BidRequest's allowed currencies")
 
-var ErrIncorrectBidPrice = errors.New("Bid price must be a positive number.")
+// ErrIncorrectBidResponseID is returned when the BidResponse has an ID that
+// does not match the ID of the corresponding BidRequest.
+var ErrIncorrectBidResponseID = errors.New("response ID must equal to request ID")
 
-var ErrIncorrectBidResponseCurrency = errors.New("BidResponse currency must exist in BidRequest.")
+// ErrIncorrectHTTPContentType is returned when the Content-Type of an HTTP
+// request or response is invalid.
+var ErrIncorrectHTTPContentType = errors.New("content type is invalid")
 
-var ErrIncorrectBidResponseId = errors.New("BidResponse ID must equal to BidRequest ID.")
+// ErrIncorrectImpressionCount is returned when a BidRequest has the wrong
+// number of impressions.
+var ErrIncorrectImpressionCount = errors.New("bid request has incorrect number of impressions")
 
-var ErrIncorrectHttpContentType = errors.New("Http content type is invalid.")
+// ErrIncorrectImpressionID is returned when an Impression does not have an
+// ID.
+var ErrIncorrectImpressionID = errors.New("impression ID must exist in BidRequest")
 
-var ErrIncorrectImpressionCount = errors.New("Bid request has incorrect number of impressions.")
+// ErrInvalidNoBidReasonValue is returned when a bid does not have a valid no-
+// bid reason.
+var ErrInvalidNoBidReasonValue = errors.New("invalid no-bid reason value")
 
-var ErrIncorrectImpressionId = errors.New("Impression ID must exist in BidRequest.")
+// ErrMissingBidID is returned when a bid does not have an ID.
+var ErrMissingBidID = errors.New("bid must have a unique ID")
 
-var ErrIncorrectSeatCount = errors.New("BidResponse has incorrect number of seats.")
+// ErrMissingBidImpressionID is returned when a Bid does not have an
+// impression ID.
+var ErrMissingBidImpressionID = errors.New("bid must have an impression ID")
 
-var ErrInvalidNoBidReasonValue = errors.New("Invalid no-bid reason value.")
+// ErrMissingBidRequestID is returned when a BidRequest does not have an ID.
+var ErrMissingBidRequestID = errors.New("request does not have an ID")
 
-var ErrMissingBidId = errors.New("Bid must have a unique ID.")
+// ErrMissingBidResponseID is returned when a BidResponse does not have an ID.
+var ErrMissingBidResponseID = errors.New("response does not have an ID")
 
-var ErrMissingBidImpressionId = errors.New("Bid must have an impression ID.")
-
-var ErrMissingBidRequestId = errors.New("BidRequest must have a unique ID.")
-
-var ErrMissingBidResponseId = errors.New("BidResponse must have a unique ID.")
-
-type BidRequestError struct {
-	Field  string
-	Reason string
-}
-
-func (e BidRequestError) Error() string {
-	return ""
-}
+// ErrMissingBidImpressions is returned when a bid request has a nil imps
+// value or has no Impressions in the imps array.
+var ErrMissingBidImpressions = errors.New("request must have impressions")

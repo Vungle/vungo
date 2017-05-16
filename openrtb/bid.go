@@ -6,39 +6,33 @@ package openrtb
 //go:generate easyjson $GOFILE
 //easyjson:json
 type Bid struct {
-	ID string `json:"id"`
-
-	ImpressionID       string  `json:"impid"`
-	Price              float64 `json:"price"`
-	AdID               string  `json:"adid,omitempty"`
-	WinNotificationURL string  `json:"nurl,omitempty"`
-	AdMarkup           string  `json:"adm,omitempty"`
-	Bundle             string  `json:"bundle,omitempty"`
-
+	ID                 string              `json:"id"`
+	ImpressionID       string              `json:"impid"`
+	Price              float64             `json:"price"`
+	AdID               string              `json:"adid,omitempty"`
+	WinNotificationURL string              `json:"nurl,omitempty"`
+	AdMarkup           string              `json:"adm,omitempty"`
 	AdvertiserDomains  []string            `json:"adomain,omitempty"`
+	Bundle             string              `json:"bundle,omitempty"`
 	QualityImageURL    string              `json:"iurl,omitempty"`
 	CampaignID         string              `json:"cid,omitempty"`
 	CreativeID         string              `json:"crid,omitempty"`
+	Categories         []Category          `json:"cat,omitempty"`
 	CreativeAttributes []CreativeAttribute `json:"attr,omitempty"`
-
-	Categories []Category `json:"cat,omitempty"`
-
-	DealID string `json:"dealid"`
-
-	Height int `json:"h,omitempty"`
-	Width  int `json:"w,omitempty"`
-
-	Extension *Extension `json:"ext,omitempty"`
+	DealID             string              `json:"dealid,omitempty"`
+	Height             int                 `json:"h,omitempty"`
+	Width              int                 `json:"w,omitempty"`
+	Extension          *Extension          `json:"ext,omitempty"`
 }
 
 // Validate method validates a bid object.
 func (bid *Bid) Validate(bidReq *BidRequest) error {
 	if len(bid.ID) == 0 {
-		return ErrMissingBidId
+		return ErrMissingBidID
 	}
 
 	if len(bid.ImpressionID) == 0 {
-		return ErrMissingBidImpressionId
+		return ErrMissingBidImpressionID
 	}
 
 	// Find a matching impression ID from the list of impressions in the bid request object.
@@ -53,7 +47,7 @@ func (bid *Bid) Validate(bidReq *BidRequest) error {
 		}
 	}
 	if !match {
-		return ErrIncorrectImpressionId
+		return ErrIncorrectImpressionID
 	}
 
 	if bid.Price <= 0 {

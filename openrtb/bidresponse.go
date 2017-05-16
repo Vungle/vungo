@@ -13,15 +13,13 @@ var emptyBid BidResponse
 //go:generate easyjson $GOFILE
 //easyjson:json
 type BidResponse struct {
-	ID string `json:"id"`
-
+	ID          string      `json:"id"`
 	SeatBids    []*SeatBid  `json:"seatbid,omitempty"`
 	BidID       string      `json:"bidid,omitempty"`
 	Currency    Currency    `json:"cur,omitempty"`
 	CustomData  string      `json:"customdata,omitempty"`
 	NoBidReason NoBidReason `json:"nbr,omitempty"`
-
-	Extension *Extension `json:"ext,omitempty"`
+	Extension   *Extension  `json:"ext,omitempty"`
 }
 
 // Validate method validates whether the BidResponse object contains valid data, or returns an
@@ -34,19 +32,15 @@ func (r *BidResponse) Validate(bidReq *BidRequest) error {
 	}
 
 	if len(r.ID) == 0 {
-		return ErrMissingBidResponseId
+		return ErrMissingBidResponseID
 	}
 
 	if r.ID != bidReq.ID {
-		return ErrIncorrectBidResponseId
+		return ErrIncorrectBidResponseID
 	}
 
 	if len(r.SeatBids) == 0 {
 		return r.NoBidReason.Validate()
-	}
-
-	if len(r.SeatBids) != 1 {
-		return ErrIncorrectSeatCount
 	}
 
 	for _, seatBid := range r.SeatBids {
@@ -74,18 +68,6 @@ func (r *BidResponse) Validate(bidReq *BidRequest) error {
 	}
 
 	return nil
-}
-
-// GetOnlyBid method returns the only bid object iff there is exactly one SeatBid object in which
-// there is exactly one one bid; it returns an error otherwise.
-func (r *BidResponse) GetOnlyBid() (b *Bid, err error) {
-	if len(r.SeatBids) != 1 {
-		err = ErrIncorrectSeatCount
-	} else {
-		b, err = r.SeatBids[0].GetOnlyBid()
-	}
-
-	return
 }
 
 // IsNoBid checks whether a BidResponse object is a no-bid response. A BidResponse object is a

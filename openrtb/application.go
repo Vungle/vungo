@@ -2,12 +2,12 @@ package openrtb
 
 // Application type denotes that the parent bid request object represents an opportunity to auction
 // within the context of a mobile application.
+// The "content" key is unused and has been omitted.
 // See OpenRTB 2.3.1 Sec 3.2.7.
 //go:generate easyjson $GOFILE
 //easyjson:json
 type Application struct {
-	ID string `json:"id"`
-
+	ID                string      `json:"id"`
 	Name              string      `json:"name,omitempty"`
 	Bundle            string      `json:"bundle,omitempty"`
 	Domain            string      `json:"domain,omitempty"`
@@ -19,12 +19,8 @@ type Application struct {
 	HasPrivacyPolicy  NumericBool `json:"privacypolicy,omitempty"`
 	IsPaid            NumericBool `json:"paid,omitempty"`
 	Publisher         *Publisher  `json:"publisher,omitempty"`
-
-	// No Content(content).
-
-	Keywords string `json:"keywords,omitempty"`
-
-	Extension *Extension `json:"ext,omitempty"`
+	Keywords          string      `json:"keywords,omitempty"`
+	Extension         *Extension  `json:"ext,omitempty"`
 }
 
 // Validate method checks to see if the Application object contains required and well-formatted data

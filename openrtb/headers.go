@@ -19,7 +19,7 @@ func SetHeaders(header http.Header) {
 // returns an error if it contains invalid headers w.r.t. OpenRTB spec.
 func ValidateResponseHeaders(resp *http.Response) error {
 	if ct := resp.Header.Get("Content-Type"); !strings.HasPrefix(ct, "application/json") {
-		return ErrIncorrectHttpContentType
+		return ErrIncorrectHTTPContentType
 	}
 
 	return nil

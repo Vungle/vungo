@@ -9,11 +9,11 @@ import (
 func ValidateHTTPResponse(res *http.Response) error {
 	contentType := res.Header.Get("Content-Type")
 	if len(contentType) == 0 {
-		return ErrIncorrectHttpContentType
+		return ErrIncorrectHTTPContentType
 	}
 	contentType = strings.TrimSpace(contentType)
 	if !strings.HasPrefix(contentType, "application/json") {
-		return ErrIncorrectHttpContentType
+		return ErrIncorrectHTTPContentType
 	}
 
 	return nil

@@ -3,39 +3,27 @@ package openrtb
 import "errors"
 
 // Video types annotates the parent impression as an video impression.
+// The "protocol", "sequence", "battr", "maxextended", "companionad",
+// "companiontype", and "ext" keys are unused and have been omitted.
 // See OpenRTB 2.3.1 Sec 3.2.4.
 //go:generate easyjson $GOFILE
 //easyjson:json
 type Video struct {
-	MIMETypes   []string `json:"mimes"`
-	MinDuration *int     `json:"minduration,omitempty"`
-	MaxDuration *int     `json:"maxduration,omitempty"`
-
-	// No Protocol(protocol). Use Protocols instead.
-
-	Protocols  []VideoProtocol `json:"protocols,omitempty"`
-	Width      int             `json:"w,omitempty"`
-	Height     int             `json:"h,omitempty"`
-	StartDelay int             `json:"startdelay,omitempty"`
-	Linearity  Linearity       `json:"linearity,omitempty"`
-
-	// No Sequence(sequence).
-	// No BlockedCreativeAttributes(battr).
-	// No MaxExtendedDuration(maxextended).
-
+	MIMETypes       []string         `json:"mimes"`
+	MinDuration     *int             `json:"minduration,omitempty"`
+	MaxDuration     *int             `json:"maxduration,omitempty"`
+	Protocols       []VideoProtocol  `json:"protocols,omitempty"`
+	Width           int              `json:"w,omitempty"`
+	Height          int              `json:"h,omitempty"`
+	StartDelay      int              `json:"startdelay,omitempty"`
+	Linearity       Linearity        `json:"linearity,omitempty"`
 	MinBitRate      int              `json:"minbitrate,omitempty"`
 	MaxBitRate      int              `json:"maxbitrate,omitempty"`
 	IsBoxingAllowed NumericBool      `json:"boxingallowed,omitempty"`
 	PlaybackMethods []PlaybackMethod `json:"playbackmethod,omitempty"`
 	DeliveryMethods []DeliveryMethod `json:"delivery,omitempty"`
 	Position        AdPosition       `json:"pos,omitempty"`
-
-	// No CompanionAds(companionad).
-	// No CompanionTypes(companiontype).
-
-	APIFrameworks []APIFramework `json:"api,omitempty"`
-
-	// No Extension(ext).
+	APIFrameworks   []APIFramework   `json:"api,omitempty"`
 }
 
 // Validate method implements a Validater interface and return a validation error according to the

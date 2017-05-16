@@ -64,7 +64,7 @@ func TestValidateResponseHeaders(t *testing.T) {
 	}{
 		{http.Header{"Content-Type": []string{"application/json"}}, nil},
 		{http.Header{"Content-Type": []string{"application/json; charset=utf-8"}}, nil},
-		{http.Header{"Content-Type": []string{"text/json"}}, openrtb.ErrIncorrectHttpContentType},
+		{http.Header{"Content-Type": []string{"text/json"}}, openrtb.ErrIncorrectHTTPContentType},
 	}
 
 	for i, test := range tests {

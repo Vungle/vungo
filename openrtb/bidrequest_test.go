@@ -26,7 +26,7 @@ func TestBidRequestValidateShouldValidateAgainstId(t *testing.T) {
 	// Expect the validate to fail when the Id field is empty.
 	bidRequest.ID = ""
 
-	if err := bidRequest.Validate(); err == nil || err != openrtb.ErrMissingBidRequestId {
+	if err := bidRequest.Validate(); err == nil || err != openrtb.ErrMissingBidRequestID {
 		t.Errorf("BidRequest.Id (%s) must be non-empty to be valid.", bidRequest.ID)
 	}
 }

@@ -24,13 +24,13 @@ func TestBidValidation(t *testing.T) {
 		{
 			&openrtb.Bid{ID: ""},
 			openrtbtest.NewBidRequestForTesting("", ""),
-			openrtb.ErrMissingBidId,
+			openrtb.ErrMissingBidID,
 		},
 		// with empty impression id
 		{
 			&openrtb.Bid{ID: "abidid", ImpressionID: ""},
 			openrtbtest.NewBidRequestForTesting("", ""),
-			openrtb.ErrMissingBidImpressionId,
+			openrtb.ErrMissingBidImpressionID,
 		},
 		// with zero price
 		{
@@ -48,7 +48,7 @@ func TestBidValidation(t *testing.T) {
 		{
 			&openrtb.Bid{ID: "abidid", ImpressionID: "impid", Price: 1},
 			openrtbtest.NewBidRequestForTesting("", "another-impid"),
-			openrtb.ErrIncorrectImpressionId,
+			openrtb.ErrIncorrectImpressionID,
 		},
 		// with valid data
 		{

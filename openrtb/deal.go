@@ -6,14 +6,10 @@ package openrtb
 //go:generate easyjson $GOFILE
 //easyjson:json
 type Deal struct {
-	ID string `json:"id"`
-
-	AuctionType AuctionType `json:"at,omitempty"`
-
-	BidFloorPrice    float64  `json:"bidfloor"`
-	BidFloorCurrency Currency `json:"bidfloorcur,omitempty"`
-
-	WhitelistedSeats []string `json:"wseat,omitempty"`
-
-	Extension *Extension `json:"ext,omitempty"`
+	ID               string      `json:"id"`
+	BidFloorPrice    float64     `json:"bidfloor"`
+	BidFloorCurrency Currency    `json:"bidfloorcur,omitempty"`
+	AuctionType      AuctionType `json:"at,omitempty"`
+	WhitelistedSeats []string    `json:"wseat,omitempty"`
+	Extension        *Extension  `json:"ext,omitempty"`
 }

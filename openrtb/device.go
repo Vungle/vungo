@@ -28,13 +28,11 @@ type Device struct {
 	Carrier              string         `json:"carrier,omitempty"`
 	ConnectionType       ConnectionType `json:"connectiontype,omitempty"`
 	IFA                  string         `json:"ifa,omitempty"`
-
-	HardwareIDSHA1 string `json:"didsha1,omitempty"`
-	HardwareIDMD5  string `json:"didmd5,omitempty"`
-	PlatformIDSHA1 string `json:"dpidsha1,omitempty"`
-	PlatformIDMD5  string `json:"dpidmd5,omitempty"`
-	MACSHA1        string `json:"macsha1,omitempty"`
-	MACMD5         string `json:"macmd5,omitempty"`
-
-	Extension *Extension `json:"ext,omitempty"`
+	HardwareIDSHA1       string         `json:"didsha1,omitempty"`
+	HardwareIDMD5        string         `json:"didmd5,omitempty"`
+	PlatformIDSHA1       string         `json:"dpidsha1,omitempty"`
+	PlatformIDMD5        string         `json:"dpidmd5,omitempty"`
+	MACSHA1              string         `json:"macsha1,omitempty"`
+	MACMD5               string         `json:"macmd5,omitempty"`
+	Extension            *Extension     `json:"ext,omitempty"`
 }

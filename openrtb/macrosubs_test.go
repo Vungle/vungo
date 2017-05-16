@@ -55,10 +55,7 @@ func TestMacroSubs(t *testing.T) {
 		{"abc${AUCTION_ID}${AUCTION_ID}def", "abc12341234def"},
 	}
 	for _, test := range tests {
-		actual, err := openrtb.MacroSubs(test.input, bidRes, testAuctionResult)
-		if err != nil {
-			t.Errorf("MacroSubs err: %s", err)
-		}
+		actual := openrtb.MacroSubs(test.input, bidRes, testAuctionResult)
 		if actual != test.expected {
 			t.Errorf(`Expected "%s", but got: "%s"`, test.expected, actual)
 		}
@@ -70,10 +67,7 @@ func TestMacroSubsDifferentSettlementPrice(t *testing.T) {
 	seatBid := &openrtb.SeatBid{Bids: []*openrtb.Bid{bid}}
 	bidRes := &openrtb.BidResponse{SeatBids: []*openrtb.SeatBid{seatBid}}
 	ar := auctionResult(11.11)
-	actual, err := openrtb.MacroSubs("price:${AUCTION_PRICE}", bidRes, ar)
-	if err != nil {
-		t.Errorf("MacroSubsDifferentPrices: %s", err)
-	}
+	actual := openrtb.MacroSubs("price:${AUCTION_PRICE}", bidRes, ar)
 	if actual != "price:11.110000000" {
 		t.Errorf(`Expected "price:11.110000000" but got: "%s"`, actual)
 	}
@@ -104,16 +98,10 @@ func TestMacroSubsErrCases(t *testing.T) {
 		SeatBids: []*openrtb.SeatBid{&seatBid1, &seatBid2},
 	}
 	result, err := openrtb.MacroSubs("${AUCTION_ID}${AUCTION_BID_ID}", bidResWith2Bids, testAuctionResult)
-	if err != openrtb.ErrIncorrectBidCount {
-		t.Error("bidResWith2Bids should give ErrIncorrectBidCount")
-	}
 	if result != "" {
 		t.Error("MacroSubs should empty string when there is an error")
 	}
 	result, err = openrtb.MacroSubs("${AUCTION_ID}${AUCTION_SEAT_ID}", bidResWith2SeatBids, testAuctionResult)
-	if err != openrtb.ErrIncorrectSeatCount {
-		t.Error("bidResWith2SeatBids should give ErrIncorrectSeatCount")
-	}
 	if result != "" {
 		t.Error("MacroSubs should empty string when there is an error")
 	}
