@@ -14,19 +14,19 @@ func TestHttpResponseContentTypeValidation(t *testing.T) {
 	}{
 		{
 			&http.Response{Header: http.Header{}},
-			openrtb.ErrIncorrectHttpContentType,
+			openrtb.ErrIncorrectHTTPContentType,
 		},
 		{
 			&http.Response{Header: http.Header{"Content-Type": []string{"a"}}},
-			openrtb.ErrIncorrectHttpContentType,
+			openrtb.ErrIncorrectHTTPContentType,
 		},
 		{
 			&http.Response{Header: http.Header{"Content-Type": []string{"application/text"}}},
-			openrtb.ErrIncorrectHttpContentType,
+			openrtb.ErrIncorrectHTTPContentType,
 		},
 		{
 			&http.Response{Header: http.Header{"Content-Type": []string{"some-application/json"}}},
-			openrtb.ErrIncorrectHttpContentType,
+			openrtb.ErrIncorrectHTTPContentType,
 		},
 		{
 			&http.Response{Header: http.Header{"Content-Type": []string{"application/json; charset=utf-8"}}},

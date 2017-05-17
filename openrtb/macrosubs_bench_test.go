@@ -36,11 +36,8 @@ func benchmarkMacroSubs(subs int, b *testing.B) {
         abc${AUCTION_CURRENCY}def${AUCTION_ID}${AUCTION_BID_ID}
         ${AUCTION_IMP_ID}${AUCTION_SEAT_ID}${AUCTION_AD_ID}${AUCTION_AD_ID:B64}
         ${AUCTION_PRICE}${AUCTION_CURRENCY}abc${AUCTION_ID}${AUCTION_ID}def/n`, subs)
-
-	expectedOut, err := openrtb.MacroSubs(in, fakeBidResponse(), testAuctionResult)
-	if err != nil {
-		b.Fatalf("Expected a succeful macro substitution for %v but got error %v instead.", in, err)
-	}
+	br := fakeBidResponse()
+	expectedOut := openrtb.MacroSubs(in, br, br.SeatBids[0], br.SeatBids[0].Bids[0], testAuctionResult)
 	inCh := make(chan *openrtb.BidResponse)
 	outCh := make(chan string, b.N)
 
@@ -79,11 +76,7 @@ func benchmarkMacroSubs(subs int, b *testing.B) {
 // macroSubsWorker is a worker for performing openrtb.MacroSubs in BidResponses sent through its channel.
 func macroSubsWorker(sub string, in <-chan *openrtb.BidResponse, out chan<- string, wg *sync.WaitGroup, b *testing.B) {
 	for bidRes := range in {
-		if o, err := openrtb.MacroSubs(sub, bidRes, testAuctionResult); err == nil {
-			out <- o
-		} else {
-			b.Fatalf("Expected a succeful macro substitution for %v but got error %v instead.", in, err)
-		}
+		out <- openrtb.MacroSubs(sub, bidRes, bidRes.SeatBids[0], bidRes.SeatBids[0].Bids[0], testAuctionResult)
 	}
 	wg.Done()
 }
