@@ -3,12 +3,15 @@ package openrtb_test
 import (
 	"testing"
 
+	"fmt"
+
 	"github.com/Vungle/vungo/openrtb"
 )
 
 type auctionResult struct {
 	price    float64
 	currency openrtb.Currency
+	id       string
 }
 
 func (ar auctionResult) Price() float64 {
@@ -19,11 +22,16 @@ func (ar auctionResult) Currency() openrtb.Currency {
 	return ar.currency
 }
 
+func (ar auctionResult) AuctionID() string {
+	return ar.id
+}
+
 const testPrice = 2.345
 
 var testAuctionResult = auctionResult{
 	price:    2.345,
 	currency: openrtb.CurrencyUSD,
+	id:       "auction1234",
 }
 
 func TestMacroSubs(t *testing.T) {
@@ -46,9 +54,9 @@ func TestMacroSubs(t *testing.T) {
 		input    string
 		expected string
 	}{
-		{"abc${AUCTION_ID}def", "abc1234def"},
+		{"abc${AUCTION_ID}def", "abcauction1234def"},
 		{"abc${AUCTION_IDD}def", "abc${AUCTION_IDD}def"},
-		{"abc${AUCTION_ID:B64}def", "abcMTIzNA==def"},
+		{"abc${AUCTION_ID:B64}def", "abcYXVjdGlvbjEyMzQ=def"},
 		{"abc${AUCTION_BID_ID}def", "abcTheBidId!def"},
 		{"abc${AUCTION_IMP_ID}def", "abcImpressionIdForBiddef"},
 		{"abc${AUCTION_SEAT_ID}def", "abcSeatBidIdentifierdef"},
@@ -58,16 +66,18 @@ func TestMacroSubs(t *testing.T) {
 		{
 			"${AUCTION_ID}${AUCTION_BID_ID}${AUCTION_IMP_ID}${AUCTION_SEAT_ID}" +
 				"${AUCTION_AD_ID}${AUCTION_AD_ID:B64}${AUCTION_PRICE}${AUCTION_CURRENCY}",
-			"1234TheBidId!ImpressionIdForBidSeatBidIdentifierSome ad id goes here" +
+			"auction1234TheBidId!ImpressionIdForBidSeatBidIdentifierSome ad id goes here" +
 				"U29tZSBhZCBpZCBnb2VzIGhlcmU=2.345000000USD",
 		},
-		{"abc${AUCTION_ID}${AUCTION_ID}def", "abc12341234def"},
+		{"abc${AUCTION_ID}${AUCTION_ID}def", "abcauction1234auction1234def"},
 	}
-	for _, test := range tests {
-		actual := openrtb.MacroSubs(test.input, bidRes, bidRes.SeatBids[0], bidRes.SeatBids[0].Bids[0], testAuctionResult)
-		if actual != test.expected {
-			t.Errorf(`Expected "%s", but got "%s" instead.`, test.expected, actual)
-		}
+	for i, test := range tests {
+		t.Run(fmt.Sprintf("%d", i), func(t *testing.T) {
+			actual := openrtb.MacroSubs(test.input, bidRes, bidRes.SeatBids[0], bidRes.SeatBids[0].Bids[0], testAuctionResult)
+			if actual != test.expected {
+				t.Errorf(`Expected "%s", but got "%s" instead.`, test.expected, actual)
+			}
+		})
 	}
 }
 
@@ -110,11 +120,11 @@ func TestMacroSubsErrCases(t *testing.T) {
 		SeatBids: []*openrtb.SeatBid{&seatBid1, &seatBid2},
 	}
 	result := openrtb.MacroSubs("${AUCTION_ID}${AUCTION_BID_ID}", bidResWith2Bids, bidResWith2Bids.SeatBids[0], bidResWith2Bids.SeatBids[0].Bids[1], testAuctionResult)
-	if result != "bidResWith2Bidsbid2" {
-		t.Errorf(`Expected "bidResWith2Bidsbid2", got "%s" instead.`, result)
+	if result != "auction1234bid2" {
+		t.Errorf(`Expected "auction1234bid2", got "%s" instead.`, result)
 	}
 	result = openrtb.MacroSubs("${AUCTION_ID}${AUCTION_SEAT_ID}", bidResWith2SeatBids, bidResWith2SeatBids.SeatBids[0], bidResWith2SeatBids.SeatBids[0].Bids[0], testAuctionResult)
-	if result != "bidResWith2Seatbidsseatbid1" {
-		t.Errorf(`Expected "bidResWith2Seatbidsseatbid1", got "%s" instead.`, result)
+	if result != "auction1234seatbid1" {
+		t.Errorf(`Expected "auction1234seatbid1", got "%s" instead.`, result)
 	}
 }

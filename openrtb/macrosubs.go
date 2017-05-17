@@ -72,7 +72,7 @@ var findMatchesPool = sync.Pool{
 // If this is not true, it will return empty string and an error.
 func MacroSubs(stringToSub string, response *BidResponse, seat *SeatBid, bid *Bid, settlement Settlement) string {
 	m := map[macro]string{
-		auctionID:       response.ID,
+		auctionID:       settlement.AuctionID(),
 		auctionBidID:    bid.ID,
 		auctionImpID:    bid.ImpressionID,
 		auctionSeatID:   seat.Seat,
