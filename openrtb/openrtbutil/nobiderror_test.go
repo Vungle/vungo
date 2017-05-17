@@ -16,7 +16,7 @@ func TestNobidReason(t *testing.T) {
 		{&nobid{br: &openrtb.BidResponse{NoBidReason: openrtb.NoBidReasonNonHumanTraffic}}, openrtb.NoBidReasonNonHumanTraffic},
 		{&nobid{status: http.StatusNoContent}, openrtb.NoBidReasonNoContent},
 		{&nobid{status: http.StatusBadRequest}, openrtb.NoBidReasonNonStandardHTTPStatus},
-		{&nobid{err: openrtb.ErrIncorrectHttpContentType}, openrtb.NoBidReasonInvalidHTTPHeader},
+		{&nobid{err: openrtb.ErrIncorrectHTTPContentType}, openrtb.NoBidReasonInvalidHTTPHeader},
 		{&nobid{err: &json.SyntaxError{}}, openrtb.NoBidReasonMalformattedPayload},
 		{&nobid{err: &json.UnmarshalTypeError{}}, openrtb.NoBidReasonMalformattedPayload},
 		{&nobid{err: &json.UnmarshalFieldError{}}, openrtb.NoBidReasonMalformattedPayload},
