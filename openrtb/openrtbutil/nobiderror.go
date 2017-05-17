@@ -57,7 +57,7 @@ func (n *nobid) Reason() openrtb.NoBidReason {
 		return openrtb.NoBidReasonNonStandardHTTPStatus
 	}
 
-	if n.err == openrtb.ErrIncorrectHttpContentType {
+	if n.err == openrtb.ErrIncorrectHTTPContentType {
 		return openrtb.NoBidReasonInvalidHTTPHeader
 	}
 
