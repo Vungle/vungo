@@ -6,6 +6,4 @@ type Currency string
 // Possible supported currencies.
 const (
 	CurrencyUSD Currency = "USD"
-	CurrencyCNY Currency = "CNY"
-	CurrencyEUR Currency = "EUR"
 )

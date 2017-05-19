@@ -125,7 +125,7 @@ func TestBidResponseValidation(t *testing.T) {
 				Impressions: []*openrtb.Impression{
 					&openrtb.Impression{
 						ID:               "some-impid",
-						BidFloorCurrency: openrtb.CurrencyCNY, // custom currency in bid request
+						BidFloorCurrency: "FAKE", // custom currency in bid request
 					},
 				},
 				Application: &openrtb.Application{},
