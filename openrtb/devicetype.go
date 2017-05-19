@@ -6,7 +6,7 @@ type DeviceType int
 
 // Possible values from the OpenRTB spec.
 const (
-	DeviceTypeMobile DeviceType = iota + 1
+	DeviceTypeMobileTablet DeviceType = iota + 1
 	DeviceTypePC
 	DeviceTypeTV
 	DeviceTypePhone
