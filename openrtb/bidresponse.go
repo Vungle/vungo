@@ -24,10 +24,8 @@ type BidResponse struct {
 
 // Validate method validates whether the BidResponse object contains valid data, or returns an
 // error otherwise.
-func (r *BidResponse) Validate(bidReq *BidRequest) error {
-	brCopy := *r
-
-	if reflect.DeepEqual(emptyBid, brCopy) {
+func (r BidResponse) Validate(bidReq *BidRequest) error {
+	if reflect.DeepEqual(emptyBid, r) {
 		return nil
 	}
 
@@ -72,13 +70,13 @@ func (r *BidResponse) Validate(bidReq *BidRequest) error {
 
 // IsNoBid checks whether a BidResponse object is a no-bid response. A BidResponse object is a
 // no-bid if it is empty or it has no seatbids.
-func (r *BidResponse) IsNoBid() bool {
+func (r BidResponse) IsNoBid() bool {
 	hasNoSeatBids := r.SeatBids == nil || len(r.SeatBids) == 0
-	return hasNoSeatBids || reflect.DeepEqual(emptyBid, *r)
+	return hasNoSeatBids || reflect.DeepEqual(emptyBid, r)
 }
 
 // String method returns a human-readable representation of the bid response object also suitable
 // for logging with %s, or %v.
-func (r *BidResponse) String() string {
+func (r BidResponse) String() string {
 	return fmt.Sprintf("[%s;%s;%v;%d]", r.ID, r.Currency, r.NoBidReason, len(r.SeatBids))
 }
