@@ -18,16 +18,16 @@ func TestBidRequestValidateShouldValidateAgainstId(t *testing.T) {
 	var bidRequest openrtb.BidRequest
 	openrtbtest.UnmarshalFromJsonFile("bidrequest.json", &bidRequest)
 
-	// Expect the validation to pass when Id field is non-empty.
+	// Expect the validation to pass when ID field is non-empty.
 	if err := bidRequest.Validate(); err != nil {
-		t.Errorf("BidRequest.Id (%s) when not empty should be valid.\n", bidRequest.ID)
+		t.Errorf("BidRequest.ID (%s) when not empty should be valid.\n", bidRequest.ID)
 	}
 
-	// Expect the validate to fail when the Id field is empty.
+	// Expect the validate to fail when the ID field is empty.
 	bidRequest.ID = ""
 
 	if err := bidRequest.Validate(); err == nil || err != openrtb.ErrMissingBidRequestID {
-		t.Errorf("BidRequest.Id (%s) must be non-empty to be valid.", bidRequest.ID)
+		t.Errorf("BidRequest.ID (%s) must be non-empty to be valid.", bidRequest.ID)
 	}
 }
 
