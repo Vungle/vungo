@@ -1,10 +1,9 @@
 package openrtb_test
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
-
-	"fmt"
 
 	"github.com/Vungle/vungo/openrtb"
 	"github.com/Vungle/vungo/openrtb/openrtbtest"
