@@ -7,7 +7,7 @@ import (
 
 // HeaderOpenRTBVersion is the HTTP header name that should be included in every bid request
 // according the OpenRTB spec.
-const HeaderOpenRTBVersion = "X-OPENRTB-VERSION"
+const HeaderOpenRTBVersion = "x-openrtb-version"
 
 // SetHeaders method sets the bid request headers required by OpenRTB spec.
 func SetHeaders(header http.Header) {
