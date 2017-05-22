@@ -24,17 +24,13 @@ type BidResponse struct {
 
 // Validate method validates whether the BidResponse object contains valid data, or returns an
 // error otherwise.
-func (r BidResponse) Validate(bidReq *BidRequest) error {
+func (r BidResponse) Validate() error {
 	if reflect.DeepEqual(emptyBid, r) {
 		return nil
 	}
 
 	if len(r.ID) == 0 {
-		return ErrMissingBidResponseID
-	}
-
-	if r.ID != bidReq.ID {
-		return ErrIncorrectBidResponseID
+		return ErrInvalidBidResponseID
 	}
 
 	if len(r.SeatBids) == 0 {
@@ -42,26 +38,8 @@ func (r BidResponse) Validate(bidReq *BidRequest) error {
 	}
 
 	for _, seatBid := range r.SeatBids {
-		if err := seatBid.Validate(bidReq); err != nil {
+		if err := seatBid.Validate(); err != nil {
 			return err
-		}
-		for _, bid := range seatBid.Bids {
-			for _, imp := range bidReq.Impressions {
-				if bid.ImpressionID == imp.ID {
-					cur := r.Currency
-					if len(cur) == 0 {
-						cur = CurrencyUSD
-					}
-					if cur != imp.BidFloorCurrency {
-						return ErrIncorrectBidResponseCurrency
-					}
-
-					if bid.Price < imp.BidFloorPrice {
-						return ErrBidPriceBelowBidFloor
-					}
-					break
-				}
-			}
 		}
 	}
 

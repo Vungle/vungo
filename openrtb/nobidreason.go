@@ -18,7 +18,7 @@ func (n NoBidReason) String() string {
 // otherwise.
 func (n NoBidReason) Validate() error {
 	if _, ok := NoBidReasonNames[n]; !ok {
-		return ErrInvalidNoBidReasonValue
+		return ErrInvalidNoBidReason
 	}
 
 	return nil

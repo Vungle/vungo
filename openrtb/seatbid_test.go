@@ -18,19 +18,16 @@ func TestSeatBidMarshalUnmarshal(t *testing.T) {
 func TestSeatBidValidation(t *testing.T) {
 	testCases := []struct {
 		seatBid *openrtb.SeatBid
-		bidReq  *openrtb.BidRequest
 		err     error
 	}{
 		// with empty seat bid
 		{
 			&openrtb.SeatBid{},
-			openrtbtest.NewBidRequestForTesting("", ""),
 			nil,
 		},
 		// with empty bids
 		{
 			&openrtb.SeatBid{Bids: []*openrtb.Bid{}},
-			openrtbtest.NewBidRequestForTesting("", ""),
 			nil,
 		},
 		// with 2 bids
@@ -41,8 +38,7 @@ func TestSeatBidValidation(t *testing.T) {
 					&openrtb.Bid{ID: "abidid1", ImpressionID: "impid1", Price: 1},
 				},
 			},
-			openrtbtest.NewBidRequestForTesting("", ""),
-			openrtb.ErrIncorrectImpressionID,
+			nil,
 		},
 		// with invalid bid
 		{
@@ -51,8 +47,7 @@ func TestSeatBidValidation(t *testing.T) {
 					&openrtb.Bid{ID: ""},
 				},
 			},
-			openrtbtest.NewBidRequestForTesting("", ""),
-			openrtb.ErrMissingBidID,
+			openrtb.ErrInvalidBidID,
 		},
 		// with valid data
 		{
@@ -61,13 +56,12 @@ func TestSeatBidValidation(t *testing.T) {
 					&openrtb.Bid{ID: "abidid", ImpressionID: "impid", Price: 1},
 				},
 			},
-			openrtbtest.NewBidRequestForTesting("", "impid"),
 			nil,
 		},
 	}
 	for i, testCase := range testCases {
 		t.Run(fmt.Sprintf("%d", i), func(t *testing.T) {
-			err := testCase.seatBid.Validate(testCase.bidReq)
+			err := testCase.seatBid.Validate()
 			if err != testCase.err {
 				t.Errorf("%v should return error (%s) instead of (%s).", testCase.seatBid, testCase.err, err)
 			}

@@ -26,32 +26,17 @@ type Bid struct {
 }
 
 // Validate method validates a bid object.
-func (bid *Bid) Validate(bidReq *BidRequest) error {
+func (bid Bid) Validate() error {
 	if len(bid.ID) == 0 {
-		return ErrMissingBidID
+		return ErrInvalidBidID
 	}
 
 	if len(bid.ImpressionID) == 0 {
-		return ErrMissingBidImpressionID
-	}
-
-	// Find a matching impression ID from the list of impressions in the bid request object.
-	// The general efficiency for a bid request with M impressions and a bid response with N seat
-	// bids and Q bids is O(M * N * Q).
-	// TODO(@WeiVungle): Consider performing set comparisons at a higher level, e.g. BidResponse.Validate().
-	match := false
-	for _, imp := range bidReq.Impressions {
-		if bid.ImpressionID == imp.ID {
-			match = true
-			break
-		}
-	}
-	if !match {
-		return ErrIncorrectImpressionID
+		return ErrInvalidImpressionID
 	}
 
 	if bid.Price <= 0 {
-		return ErrIncorrectBidPrice
+		return ErrInvalidBidPrice
 	}
 
 	return nil

@@ -12,9 +12,9 @@ type SeatBid struct {
 }
 
 // Validate method validates a seatbid object.
-func (b *SeatBid) Validate(bidRequest *BidRequest) error {
+func (b SeatBid) Validate() error {
 	for _, bid := range b.Bids {
-		if err := bid.Validate(bidRequest); err != nil {
+		if err := bid.Validate(); err != nil {
 			return err
 		}
 	}

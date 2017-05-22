@@ -32,22 +32,12 @@ type BidRequest struct {
 // and returns a corresponding error when the check fails.
 func (r BidRequest) Validate() error {
 	if r.ID == "" {
-		return ErrMissingBidRequestID
+		return ErrInvalidBidRequestID
 	}
 	if r.Impressions == nil || len(r.Impressions) == 0 {
-		return ErrMissingBidImpressions
+		return ErrInvalidBidRequestImpressions
 	}
 	return nil
-}
-
-// OnlyImpression method returns the only impression contained in the bid request object; otherwise,
-// it will return an error.
-func (r BidRequest) OnlyImpression() (*Impression, error) {
-	if len(r.Impressions) != 1 {
-		return nil, ErrIncorrectImpressionCount
-	}
-
-	return r.Impressions[0], nil
 }
 
 // String method returns a human-readable representation of the bid request object also suitable

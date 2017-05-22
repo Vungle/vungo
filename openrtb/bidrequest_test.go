@@ -26,33 +26,7 @@ func TestBidRequestValidateShouldValidateAgainstId(t *testing.T) {
 	// Expect the validate to fail when the ID field is empty.
 	bidRequest.ID = ""
 
-	if err := bidRequest.Validate(); err == nil || err != openrtb.ErrMissingBidRequestID {
+	if err := bidRequest.Validate(); err == nil || err != openrtb.ErrInvalidBidRequestID {
 		t.Errorf("BidRequest.ID (%s) must be non-empty to be valid.", bidRequest.ID)
-	}
-}
-
-func TestBidRequestOnlyImpressionShouldReturnError(t *testing.T) {
-	// Given a bid request object that contains more than one impressions.
-	br := &openrtb.BidRequest{
-		Impressions: []*openrtb.Impression{&openrtb.Impression{}, &openrtb.Impression{}},
-	}
-
-	// When getting the only impression.
-	_, err := br.OnlyImpression()
-
-	// Expect error to have been returned.
-	if err != openrtb.ErrIncorrectImpressionCount {
-		t.Errorf("Expected the error returned is %v instead of %v.", openrtb.ErrIncorrectImpressionCount, err)
-	}
-
-	// Given a bid request object that contains no impressions.
-	br = &openrtb.BidRequest{}
-
-	// When getting the only impression.
-	_, err = br.OnlyImpression()
-
-	// Expect error to have been returned.
-	if err != openrtb.ErrIncorrectImpressionCount {
-		t.Errorf("Expected the error returned is %v instead of %v.", openrtb.ErrIncorrectImpressionCount, err)
 	}
 }
