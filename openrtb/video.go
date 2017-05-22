@@ -15,7 +15,7 @@ type Video struct {
 	Protocols       []VideoProtocol  `json:"protocols,omitempty"`
 	Width           int              `json:"w,omitempty"`
 	Height          int              `json:"h,omitempty"`
-	StartDelay      int              `json:"startdelay,omitempty"`
+	StartDelay      *int             `json:"startdelay,omitempty"`
 	Linearity       Linearity        `json:"linearity,omitempty"`
 	MinBitRate      int              `json:"minbitrate,omitempty"`
 	MaxBitRate      int              `json:"maxbitrate,omitempty"`
