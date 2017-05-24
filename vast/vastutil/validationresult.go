@@ -60,15 +60,12 @@ const (
 	RESULT_PRICING_CURRENCY_FORMAT               VastValidationResult = 20027
 	RESULT_PRICING_MISS_MODEL                    VastValidationResult = 20028
 	RESULT_PRICING_MISS_PRICE                    VastValidationResult = 20029
-	RESULT_STATIC_RESOURCE_MISS_URI              VastValidationResult = 20030
-	RESULT_TRACKING_MISS_URI                     VastValidationResult = 20031
 	RESULT_UNSUPPORTED_DELIVERY_TYPE             VastValidationResult = 20032
 	RESULT_UNSUPPORTED_EVENT                     VastValidationResult = 20033
 	RESULT_UNSUPPORTED_MODE                      VastValidationResult = 20034
 	RESULT_UNSUPPORTED_PRICE_MODEL_TYPE          VastValidationResult = 20035
 	RESULT_UNSUPPORTED_VERSION                   VastValidationResult = 20036
 	RESULT_VAST_MISS_AD                          VastValidationResult = 20037
-	RESULT_VIDEO_CLICK_MISS_URI                  VastValidationResult = 20038
 	RESULT_VIDEO_CLICKS_MISS_CLICK_THROUGHS      VastValidationResult = 20039
 	RESULT_WRAPPER_MISS_IMPRESSIONS              VastValidationResult = 20040
 	RESULT_WRAPPER_MISS_VAST_AD_TAG_URI          VastValidationResult = 20041
@@ -177,10 +174,6 @@ func getValidationResultFromErr(err error) VastValidationResult {
 		return RESULT_PRICING_MISS_MODEL
 	case vast.ErrPricingMissPrice:
 		return RESULT_PRICING_MISS_PRICE
-	case vast.ErrStaticResourceMissUri:
-		return RESULT_STATIC_RESOURCE_MISS_URI
-	case vast.ErrTrackingMissUri:
-		return RESULT_TRACKING_MISS_URI
 	case vast.ErrUnsupportedDeliveryType:
 		return RESULT_UNSUPPORTED_DELIVERY_TYPE
 	case vast.ErrUnsupportedEvent:
@@ -193,8 +186,6 @@ func getValidationResultFromErr(err error) VastValidationResult {
 		return RESULT_UNSUPPORTED_VERSION
 	case vast.ErrVastMissAd:
 		return RESULT_VAST_MISS_AD
-	case vast.ErrVideoClickMissUri:
-		return RESULT_VIDEO_CLICK_MISS_URI
 	case vast.ErrVideoClicksMissClickThroughs:
 		return RESULT_VIDEO_CLICKS_MISS_CLICK_THROUGHS
 	case vast.ErrVideoDurationTooLong:

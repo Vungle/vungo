@@ -17,8 +17,6 @@ func TestVideoClickMarshalUnmarshal(t *testing.T) {
 
 func TestVideoClickValidateErrors(t *testing.T) {
 	vasttest.VerifyVastElementFromFile(t, "testdata/videoclick.xml", &vast.VideoClick{}, nil)
-	vasttest.VerifyVastElementFromBytes(t, []byte(`<NotImportant id="some-id"></NotImportant>`),
-		&vast.VideoClick{}, vast.ErrVideoClickMissUri)
 }
 
 func TestVideoClickWithWhitespace(t *testing.T) {

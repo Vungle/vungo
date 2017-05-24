@@ -20,8 +20,6 @@ func TestStaticResourceValidateErrors(t *testing.T) {
 	vasttest.VerifyVastElementFromBytes(t,
 		[]byte(`<StaticResource><![CDATA[http://where/is/my/gif]]></StaticResource>`),
 		&vast.StaticResource{}, nil)
-	vasttest.VerifyVastElementFromBytes(t, []byte(`<StaticResource creativeType="image/gif"></StaticResource>`),
-		&vast.StaticResource{}, vast.ErrStaticResourceMissUri)
 }
 
 func TestStaticResourceWithWhitespace(t *testing.T) {

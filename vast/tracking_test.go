@@ -17,7 +17,6 @@ func TestTrackingMarshalUnmarshal(t *testing.T) {
 
 func TestTrackingValidateErrors(t *testing.T) {
 	vasttest.VerifyVastElementFromFile(t, "testdata/tracking.xml", &vast.Tracking{}, nil)
-	vasttest.VerifyVastElementFromBytes(t, []byte(`<Tracking event="mute" offset="11:22:33"></Tracking>`), &vast.Tracking{}, vast.ErrTrackingMissUri)
 }
 
 func TestTrackingWithWhitespace(t *testing.T) {

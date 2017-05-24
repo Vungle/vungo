@@ -12,7 +12,8 @@ type TrimmedData string
 
 // UnmarshalText implements the encoding.TextUnmarshaler interface.
 func (d *TrimmedData) UnmarshalText(data []byte) error {
-	*d = TrimmedData(bytes.TrimSpace(data))
-
+	if d != nil {
+		*d = TrimmedData(bytes.TrimSpace(data))
+	}
 	return nil
 }
