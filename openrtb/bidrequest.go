@@ -19,7 +19,7 @@ type BidRequest struct {
 	Timeout     int          `json:"tmax,omitempty"`
 
 	// No SeatWhitelist(wseat).
-	// No HasAllImpressions(allimps).
+	HasAllImpressions NumericBool `json:"allimps,omitempty"`
 
 	Currencies        []Currency `json:"cur,omitempty"`
 	BlockedCategories []Category `json:"bcat,omitempty"`
