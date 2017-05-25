@@ -14,6 +14,7 @@
   <NonLinearClickTracking><![CDATA[http://track/me/3]]></NonLinearClickTracking>
   <NonLinearClickTracking><![CDATA[http://track/me/4]]></NonLinearClickTracking>
   <NonLinearClickThrough><![CDATA[http://clickthrough/url]]></NonLinearClickThrough>
+  <NonLinearClickThrough/>
   <AdParameters xmlEncoded="true"><![CDATA[Some ad parameters.]]></AdParameters>
   <StaticResource creativeType="image/gif"><![CDATA[http://where/is/my/gif]]></StaticResource>
   <CreativeExtensions>
