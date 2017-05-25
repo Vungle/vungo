@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Companion
-        id="some-id"
-        width="128"
-        height="256"
-        assetWidth="64"
-        assetHeight="32"
-        expandedHeight="16"
-        expandedWidth="8"
-        apiFramework="Vungle Exchange"
-        adSlotId="ad-slot-id">
+    id="some-id"
+    width="128"
+    height="256"
+    assetWidth="64"
+    assetHeight="32"
+    expandedHeight="16"
+    expandedWidth="8"
+    apiFramework="Vungle Exchange"
+    adSlotId="ad-slot-id">
   <CompanionClickThrough><![CDATA[http://clickthrough/url]]></CompanionClickThrough>
   <AltText><![CDATA[Alt text for HTML rendering.]]></AltText>
   <TrackingEvents>
