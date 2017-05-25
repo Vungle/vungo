@@ -23,7 +23,6 @@ var iconTests = []vasttest.VastTest{
 	vasttest.VastTest{&vast.Icon{}, vast.ErrIconResourcesFormat, "icon_without_htmlresource.xml"},
 	vasttest.VastTest{&vast.Icon{}, vast.ErrIconResourcesFormat, "icon_without_iframeresource.xml"},
 	vasttest.VastTest{&vast.Icon{}, vast.ErrIconResourcesFormat, "icon_without_resource.xml"},
-	vasttest.VastTest{&vast.Icon{}, vast.ErrStaticResourceMissUri, "icon_error_staticresource.xml"},
 	vasttest.VastTest{&vast.Icon{}, vast.ErrHtmlResourceMissHtml, "icon_error_htmlresource.xml"},
 }
 

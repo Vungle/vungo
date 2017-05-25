@@ -18,7 +18,6 @@ var nonLinearAdsTests = []vasttest.VastTest{
 	vasttest.VastTest{&vast.NonLinearAds{}, nil, "nonlinearads.xml"},
 	vasttest.VastTest{&vast.NonLinearAds{}, nil, "nonlinearads_valid.xml"},
 	vasttest.VastTest{&vast.NonLinearAds{}, vast.ErrNonLinearAdsMissNonLinears, "nonlinearads_without_nonlinears.xml"},
-	vasttest.VastTest{&vast.NonLinearAds{}, vast.ErrTrackingMissUri, "nonlinearads_error_tracking.xml"},
 }
 
 func TestNonLinearAdsValidateErrors(t *testing.T) {

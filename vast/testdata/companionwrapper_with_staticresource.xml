@@ -12,7 +12,8 @@
   <CompanionClickThrough><![CDATA[http://clickthrough/url]]></CompanionClickThrough>
   <CompanionClickTracking><![CDATA[http://clicktracking/url/1]]></CompanionClickTracking>
   <CompanionClickTracking><![CDATA[http://clicktracking/url/2]]></CompanionClickTracking>
-  <CompanionClickTracking><![CDATA[http://clicktracking/url/3]]></CompanionClickTracking>
+  <CompanionClickTracking/>
+  <CompanionClickTracking></CompanionClickTracking>
   <AltText><![CDATA[Alt text for HTML rendering.]]></AltText>
   <TrackingEvents>
     <Tracking event="mute"><![CDATA[http://mute/me]]></Tracking>

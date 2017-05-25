@@ -19,8 +19,6 @@ var companionTests = []vasttest.VastTest{
 	vasttest.VastTest{&vast.Companion{}, nil, "companion_with_staticresource.xml"},
 	vasttest.VastTest{&vast.Companion{}, nil, "companion_with_iframeresource.xml"},
 	vasttest.VastTest{&vast.Companion{}, nil, "companion_with_htmlresource.xml"},
-	vasttest.VastTest{&vast.Companion{}, vast.ErrStaticResourceMissUri, "companion_error_staticresource.xml"},
-	vasttest.VastTest{&vast.Companion{}, vast.ErrTrackingMissUri, "companion_error_tracking.xml"},
 	vasttest.VastTest{&vast.Companion{}, vast.ErrAdParametersMissParameters, "companion_error_adparameters.xml"},
 	vasttest.VastTest{&vast.Companion{}, vast.ErrHtmlResourceMissHtml, "companion_error_htmlresource.xml"},
 	vasttest.VastTest{&vast.Companion{}, vast.ErrCompanionResourceFormat, "companion_without_resource.xml"},

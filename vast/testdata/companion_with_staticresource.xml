@@ -16,7 +16,7 @@
     <Tracking event="unmute"><![CDATA[http://unmute/me]]></Tracking>
   </TrackingEvents>
   <AdParameters xmlEncoded="true"><![CDATA[Some ad parameters.]]></AdParameters>
-  <StaticResource creativeType="image/gif"><![CDATA[http://where/is/my/gif]]></StaticResource>
+  <StaticResource creativeType="image/gif"></StaticResource>
   <CreativeExtensions>
     <CreativeExtension>
       <Random><XMLDATA>Is Cool</XMLDATA></Random>

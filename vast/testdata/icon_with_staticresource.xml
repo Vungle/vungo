@@ -13,6 +13,8 @@
     <IconClickTracking><![CDATA[http://clicktracking/url/1]]></IconClickTracking>
     <IconClickTracking><![CDATA[http://clicktracking/url/2]]></IconClickTracking>
     <IconClickTracking><![CDATA[http://clicktracking/url/3]]></IconClickTracking>
+    <IconClickTracking/>
+    <IconClickTracking></IconClickTracking>
   </IconClicks>
   <StaticResource creativeType="image/gif"><![CDATA[http://where/is/my/gif]]></StaticResource>
 </Icon>
