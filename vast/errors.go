@@ -78,10 +78,6 @@ var ErrPricingMissModel = errors.New("Pricing misses Model.")
 
 var ErrPricingMissPrice = errors.New("Pricing misses Price.")
 
-var ErrStaticResourceMissUri = errors.New("StaticResource misses Uri.")
-
-var ErrTrackingMissUri = errors.New("Tracking misses Uri.")
-
 var ErrUnsupportedDeliveryType = errors.New("Delivery does not equal `progressive` and `streaming`.")
 
 var ErrUnsupportedEvent = errors.New("Event type is unsupported.")
@@ -93,8 +89,6 @@ var ErrUnsupportedPriceModelType = errors.New("PriceModelType is unsuppored.")
 var ErrUnsupportedVersion = errors.New("Version is not supported.")
 
 var ErrVastMissAd = errors.New("Vast misses Ad.")
-
-var ErrVideoClickMissUri = errors.New("VideoClick misses Uri.")
 
 var ErrVideoClicksMissClickThroughs = errors.New("ClickThroughs are missed.")
 

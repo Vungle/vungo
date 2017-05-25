@@ -8,12 +8,8 @@ type Tracking struct {
 }
 
 // Validate methods validate the Tracking element according to the VAST.
-// Uri is required.
 func (t *Tracking) Validate() error {
 	errors := make([]error, 0)
-	if len(t.Uri) == 0 {
-		errors = append(errors, ErrTrackingMissUri)
-	}
 
 	if err := t.Event.Validate(); err != nil {
 		ve, ok := err.(ValidationError)

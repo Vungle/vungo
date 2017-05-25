@@ -25,8 +25,6 @@ var companionWrapperTests = []vasttest.VastTest{
 	vasttest.VastTest{&vast.CompanionWrapper{}, vast.ErrCompanionWrapperResourceFormat, "companionwrapper_without_htmlresource.xml"},
 	vasttest.VastTest{&vast.CompanionWrapper{}, vast.ErrAdParametersMissParameters, "companionwrapper_error_adparameters.xml"},
 	vasttest.VastTest{&vast.CompanionWrapper{}, vast.ErrHtmlResourceMissHtml, "companionwrapper_error_htmlresource.xml"},
-	vasttest.VastTest{&vast.CompanionWrapper{}, vast.ErrStaticResourceMissUri, "companionwrapper_error_staticresource.xml"},
-	vasttest.VastTest{&vast.CompanionWrapper{}, vast.ErrTrackingMissUri, "companionwrapper_error_tracking.xml"},
 }
 
 func TestCompanionWrapperValidateErrors(t *testing.T) {

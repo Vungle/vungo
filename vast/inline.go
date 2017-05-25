@@ -5,7 +5,7 @@ package vast
 // The <InLine> element contains all necessary assets, URI's, creatives, etc, to display the ad.
 type InLine struct {
 	AdSystem    *AdSystem     `xml:"AdSystem"`           // Required.
-	AdTitle     string        `xml:"AdTitle"`            // Required.
+	AdTitle     *string       `xml:"AdTitle"`            // Required.
 	Impressions []*Impression `xml:"Impression"`         // Required.
 	Creatives   []*Creative   `xml:"Creatives>Creative"` // Creatives node is required.
 	Description string        `xml:"Description,omitempty"`
@@ -27,7 +27,7 @@ func (inline *InLine) Validate() error {
 		}
 	}
 
-	if len(inline.AdTitle) == 0 {
+	if inline.AdTitle == nil {
 		errors = append(errors, ErrInlineMissAdTitle)
 	}
 
