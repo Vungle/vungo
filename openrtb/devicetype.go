@@ -1,14 +1,16 @@
 package openrtb
 
+// DeviceType type denotes the type of the device.
+// See OpenRTB 2.3.1 Sec 5.17.
 type DeviceType int
 
+// Possible values from the OpenRTB spec.
 const (
-	_ DeviceType = iota
-	DEVICE_MOBILE
-	DEVICE_PC
-	DEVICE_TV
-	DEVICE_PHONE
-	DEVICE_TABLET
-	DEVICE_CONNECTED_DEVICE
-	DEVICE_SET_TOP_BOX
+	DeviceTypeMobileTablet DeviceType = iota + 1
+	DeviceTypePC
+	DeviceTypeTV
+	DeviceTypePhone
+	DeviceTypeTablet
+	DeviceTypeConnectedDevice
+	DeviceTypeSetTopBox
 )

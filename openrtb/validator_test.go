@@ -14,19 +14,19 @@ func TestHttpResponseContentTypeValidation(t *testing.T) {
 	}{
 		{
 			&http.Response{Header: http.Header{}},
-			openrtb.ErrIncorrectHttpContentType,
+			openrtb.ErrInvalidHTTPContentType,
 		},
 		{
 			&http.Response{Header: http.Header{"Content-Type": []string{"a"}}},
-			openrtb.ErrIncorrectHttpContentType,
+			openrtb.ErrInvalidHTTPContentType,
 		},
 		{
 			&http.Response{Header: http.Header{"Content-Type": []string{"application/text"}}},
-			openrtb.ErrIncorrectHttpContentType,
+			openrtb.ErrInvalidHTTPContentType,
 		},
 		{
 			&http.Response{Header: http.Header{"Content-Type": []string{"some-application/json"}}},
-			openrtb.ErrIncorrectHttpContentType,
+			openrtb.ErrInvalidHTTPContentType,
 		},
 		{
 			&http.Response{Header: http.Header{"Content-Type": []string{"application/json; charset=utf-8"}}},
@@ -36,7 +36,7 @@ func TestHttpResponseContentTypeValidation(t *testing.T) {
 	for i, testCase := range testCases {
 		t.Logf("Testing %d...", i)
 
-		if err := openrtb.ValidateHttpResponse(testCase.response); err != testCase.err {
+		if err := openrtb.ValidateHTTPResponse(testCase.response); err != testCase.err {
 			t.Errorf("%v should return error (%s) instead of (%v).", testCase.response, testCase.err, err)
 		}
 	}

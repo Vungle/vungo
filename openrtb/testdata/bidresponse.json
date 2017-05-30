@@ -20,5 +20,5 @@
   "cur": "USD",
   "customdata": "A4(9GAKYMp@rGmhF!*bI6V0j/2#",
   "nbr": 2,
-  "ext": {"vungle":{"some_field":"some_value"}}
+  "ext": {"vungle":{"some":["arbitrary value","that","must be","compact JSON"]}}
 }

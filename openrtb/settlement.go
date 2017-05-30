@@ -6,5 +6,7 @@ package openrtb
 //
 // Price returns the auction settlement price.
 type Settlement interface {
+	AuctionID() string
+	Currency() Currency
 	Price() float64
 }

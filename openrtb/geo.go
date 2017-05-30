@@ -1,5 +1,7 @@
 package openrtb
 
+// Geo type encapsulates various methods of specifying a geographic location.
+// See OpenRTB 2.3.1 Sec 3.2.12.
 //go:generate easyjson $GOFILE
 //easyjson:json
 type Geo struct {
@@ -11,7 +13,7 @@ type Geo struct {
 	Metro     string  `json:"metro,omitempty"`
 	City      string  `json:"city,omitempty"`
 	ZipCode   string  `json:"zip,omitempty"`
-	UtcOffset int     `json:"utcoffset,omitempty"`
+	UTCOffset int     `json:"utcoffset,omitempty"`
 
 	// No Extension(ext).
 }

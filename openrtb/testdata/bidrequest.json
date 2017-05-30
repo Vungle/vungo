@@ -24,7 +24,8 @@
       "displaymanagerver": "Vungle iOS/3.3.1",
       "instl": 1,
       "bidfloor": 85.1290,
-      "bidfloorcur": "USD"
+      "bidfloorcur": "USD",
+      "ext": {"vungle":{"some":["arbitrary value","that","must be","compact JSON"]}}
     }
   ],
   "app": {
@@ -52,7 +53,8 @@
       "name": "Spotify",
       "domain": "www.spotify.com"
     },
-    "keywords": "music,streaming,internet"
+    "keywords": "music,streaming,internet",
+    "ext": {"vungle":{"some":["arbitrary value","that","must be","compact JSON"]}}
   },
   "device": {
     "ua": "Mozilla/5.0 (iPhone; CPU iPhone OS 6_1 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3",
@@ -90,7 +92,8 @@
     "dpidsha1": "eb7ff18b50ae38e58d9c5308ecfcdc3bfa50359c",
     "dpidmd5": "08afd6f9ae0c6017d105b4ce580de885",
     "macsha1": "eb7ff18b50ae38e58d9c5308ecfcdc3bfa50359c",
-    "macmd5": "08afd6f9ae0c6017d105b4ce580de885"
+    "macmd5": "08afd6f9ae0c6017d105b4ce580de885",
+    "ext": {"vungle":{"some":["arbitrary value","that","must be","compact JSON"]}}
   },
   "user": {
     "id": "d2ae6794cd3e02160755abd460d61008",
@@ -107,14 +110,19 @@
       "metro": "803",
       "region": "CA",
       "zip": "90049"
-    }
+    },
+    "ext": {"vungle":{"some":["arbitrary value","that","must be","compact JSON"]}}
   },
   "test": 1,
   "at": 1,
   "tmax": 500,
+  "allimps": 1,
+  "wseat": ["111", "1ab"],
+  "badv": ["supercell.com", "machinezone.com"],
   "cur": ["USD", "CNY"],
   "bcat": ["IAB7-39"],
   "regs": {
     "coppa": 1
-  }
+  },
+  "ext": {"vungle":{"some":["arbitrary value","that","must be","compact JSON"]}}
 }

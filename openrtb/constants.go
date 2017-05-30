@@ -1,4 +1,4 @@
 package openrtb
 
-// VERSION is the spec version at which this package is supporting.
-const VERSION = "2.3"
+// OpenRTBVersion denotes the supported the OpenRTB spec version in this package.
+const OpenRTBVersion = "2.3"

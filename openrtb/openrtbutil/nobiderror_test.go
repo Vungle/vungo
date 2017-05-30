@@ -13,14 +13,14 @@ func TestNobidReason(t *testing.T) {
 		n   *nobid
 		nbr openrtb.NoBidReason
 	}{
-		{&nobid{br: &openrtb.BidResponse{NoBidReason: openrtb.NO_BID_NON_HUMAN_TRAFFIC}}, openrtb.NO_BID_NON_HUMAN_TRAFFIC},
-		{&nobid{status: http.StatusNoContent}, openrtb.NO_BID_HTTP_NO_CONTENT},
-		{&nobid{status: http.StatusBadRequest}, openrtb.NO_BID_NON_STANDARD_HTTP_STATUS},
-		{&nobid{err: openrtb.ErrIncorrectHttpContentType}, openrtb.NO_BID_INVALID_HTTP_HEADER},
-		{&nobid{err: &json.SyntaxError{}}, openrtb.NO_BID_MALFORMATTED_PAYLOAD},
-		{&nobid{err: &json.UnmarshalTypeError{}}, openrtb.NO_BID_MALFORMATTED_PAYLOAD},
-		{&nobid{err: &json.UnmarshalFieldError{}}, openrtb.NO_BID_MALFORMATTED_PAYLOAD},
-		{&nobid{}, openrtb.NO_BID_UNKNOWN},
+		{&nobid{br: &openrtb.BidResponse{NoBidReason: openrtb.NoBidReasonNonHumanTraffic}}, openrtb.NoBidReasonNonHumanTraffic},
+		{&nobid{status: http.StatusNoContent}, openrtb.NoBidReasonNoContent},
+		{&nobid{status: http.StatusBadRequest}, openrtb.NoBidReasonNonStandardHTTPStatus},
+		{&nobid{err: openrtb.ErrInvalidHTTPContentType}, openrtb.NoBidReasonInvalidHTTPHeader},
+		{&nobid{err: &json.SyntaxError{}}, openrtb.NoBidReasonMalformattedPayload},
+		{&nobid{err: &json.UnmarshalTypeError{}}, openrtb.NoBidReasonMalformattedPayload},
+		{&nobid{err: &json.UnmarshalFieldError{}}, openrtb.NoBidReasonMalformattedPayload},
+		{&nobid{}, openrtb.NoBidReasonUnknown},
 	}
 
 	for i, test := range tests {

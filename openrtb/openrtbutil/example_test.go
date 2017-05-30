@@ -13,9 +13,9 @@ func ExampleClient() {
 	ctx := context.Background()
 
 	br := &openrtb.BidRequest{
-		Id: "1234",
+		ID: "1234",
 		Impressions: []*openrtb.Impression{&openrtb.Impression{
-			Id:            "imp-1234",
+			ID:            "imp-1234",
 			Video:         &openrtb.Video{},
 			BidFloorPrice: 4,
 		}},

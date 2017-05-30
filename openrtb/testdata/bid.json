@@ -1,6 +1,7 @@
 {
   "id": "1",
   "impid": "d2ae6794cd3e02160755abd460d69008",
+  "dealid": "4ffd33faaa00f",
   "price": 3.14159,
   "adid": "d2ae6794cd3e02160755abd460d65008",
   "nurl": "http://demand.gopro.com/win?won=${AUCTION_PRICE}",
@@ -20,5 +21,5 @@
   ],
   "h": 100,
   "w": 200,
-  "ext": {"vungle":{"some_field":"some_value"}}
+  "ext": {"vungle":{"some":["arbitrary value","that","must be","compact JSON"]}}
 }

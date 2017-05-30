@@ -56,6 +56,9 @@ func VerifyModelAgainstFile(t Testing, file string, modelType reflect.Type) {
 	}
 
 	if !reflect.DeepEqual(model1, model2) {
+		m1JSON, _ := json.MarshalIndent(model1, "", "  ")
+		m2JSON, _ := json.MarshalIndent(model2, "", "  ")
+		t.Logf("Unmarshaled: %s\nRe-marshaled: %s.", m1JSON, m2JSON)
 		t.Error("Unmarshaled model should be the same as re-marshaled model.")
 	}
 
@@ -142,11 +145,11 @@ func getJsonPropertyNameFromFieldTag(field reflect.StructField) (string, bool) {
 // NewBidRequestForTesting method creates *openrtb.BidRequest with specified id and impression id for testing.
 func NewBidRequestForTesting(id string, impId string) *openrtb.BidRequest {
 	return &openrtb.BidRequest{
-		Id: id,
+		ID: id,
 		Impressions: []*openrtb.Impression{
 			&openrtb.Impression{
-				Id:               impId,
-				BidFloorCurrency: openrtb.CURRENCY_USD,
+				ID:               impId,
+				BidFloorCurrency: openrtb.CurrencyUSD,
 			},
 		},
 		Application: &openrtb.Application{},

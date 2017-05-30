@@ -11,7 +11,7 @@ import (
 
 func TestSetHeaders(t *testing.T) {
 	expectedFromEmptyHeader := http.Header{
-		textproto.CanonicalMIMEHeaderKey(openrtb.HEADER_VERSION): []string{openrtb.VERSION},
+		textproto.CanonicalMIMEHeaderKey(openrtb.HeaderOpenRTBVersion): []string{openrtb.OpenRTBVersion},
 		"Content-Type": []string{"application/json; charset=utf-8"},
 	}
 
@@ -33,7 +33,7 @@ func TestSetHeaders(t *testing.T) {
 
 		// Should replace the old OpenRTB spec version.
 		{
-			http.Header{textproto.CanonicalMIMEHeaderKey(openrtb.HEADER_VERSION): []string{"2.1"}},
+			http.Header{textproto.CanonicalMIMEHeaderKey(openrtb.HeaderOpenRTBVersion): []string{"2.1"}},
 			expectedFromEmptyHeader,
 		},
 
@@ -41,7 +41,7 @@ func TestSetHeaders(t *testing.T) {
 		{
 			http.Header{"X-Additional-Header": []string{"for test"}},
 			http.Header{
-				textproto.CanonicalMIMEHeaderKey(openrtb.HEADER_VERSION): []string{openrtb.VERSION},
+				textproto.CanonicalMIMEHeaderKey(openrtb.HeaderOpenRTBVersion): []string{openrtb.OpenRTBVersion},
 				"Content-Type":        []string{"application/json; charset=utf-8"},
 				"X-Additional-Header": []string{"for test"},
 			},
@@ -64,7 +64,7 @@ func TestValidateResponseHeaders(t *testing.T) {
 	}{
 		{http.Header{"Content-Type": []string{"application/json"}}, nil},
 		{http.Header{"Content-Type": []string{"application/json; charset=utf-8"}}, nil},
-		{http.Header{"Content-Type": []string{"text/json"}}, openrtb.ErrIncorrectHttpContentType},
+		{http.Header{"Content-Type": []string{"text/json"}}, openrtb.ErrInvalidHTTPContentType},
 	}
 
 	for i, test := range tests {

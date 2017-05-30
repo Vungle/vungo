@@ -1,6 +1,7 @@
 package openrtb_test
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
 
@@ -14,105 +15,56 @@ func TestSeatBidMarshalUnmarshal(t *testing.T) {
 	openrtbtest.VerifyModelAgainstFile(t, "seatbid.json", SeatBidModelType)
 }
 
-func TestSeatBidShouldReturnErrorWithMoreThanOneBid(t *testing.T) {
-	// Given a SeatBid object with more than one bids.
-	sb := &openrtb.SeatBid{Bids: []*openrtb.Bid{
-		&openrtb.Bid{},
-		&openrtb.Bid{},
-	}}
-
-	// When getting the only bid.
-	_, err := sb.GetOnlyBid()
-
-	// Expect error returns.
-	if err != openrtb.ErrIncorrectBidCount {
-		t.Error("GetOnlyBid should return an error.")
-	}
-}
-
-func TestSeatBidShouldReturnErrorWithNoBids(t *testing.T) {
-	// Given a BidResponse object with no seat bids.
-	sb := &openrtb.SeatBid{}
-
-	// When getting the only bid.
-	_, err := sb.GetOnlyBid()
-
-	// Expect error returns.
-	if err != openrtb.ErrIncorrectBidCount {
-		t.Error("GetOnlyBid should return an error")
-	}
-}
-
-func TestSeatBidShouldReturnTheOnlyBid(t *testing.T) {
-	// Given a SeatBid object with just one bid.
-	bid := openrtb.Bid{}
-	sb := &openrtb.SeatBid{Bids: []*openrtb.Bid{&bid}}
-
-	// When getting the only bid.
-	b, err := sb.GetOnlyBid()
-
-	// Expect the only bid returns with no error.
-	if err != nil {
-		t.Error("GetOnlyBid should not return an error.")
-	} else if !reflect.DeepEqual(b, &bid) {
-		t.Errorf("Expected the only bid to be %v instead of %v.\n", &bid, b)
-	}
-}
-
 func TestSeatBidValidation(t *testing.T) {
 	testCases := []struct {
 		seatBid *openrtb.SeatBid
-		bidReq  *openrtb.BidRequest
 		err     error
 	}{
 		// with empty seat bid
 		{
 			&openrtb.SeatBid{},
-			openrtbtest.NewBidRequestForTesting("", ""),
-			openrtb.ErrIncorrectBidCount,
+			nil,
 		},
 		// with empty bids
 		{
 			&openrtb.SeatBid{Bids: []*openrtb.Bid{}},
-			openrtbtest.NewBidRequestForTesting("", ""),
-			openrtb.ErrIncorrectBidCount,
+			nil,
 		},
 		// with 2 bids
 		{
 			&openrtb.SeatBid{
 				Bids: []*openrtb.Bid{
-					&openrtb.Bid{Id: "abidid", ImpressionId: "impid", Price: 1},
-					&openrtb.Bid{Id: "abidid1", ImpressionId: "impid1", Price: 1},
+					&openrtb.Bid{ID: "abidid", ImpressionID: "impid", Price: 1},
+					&openrtb.Bid{ID: "abidid1", ImpressionID: "impid1", Price: 1},
 				},
 			},
-			openrtbtest.NewBidRequestForTesting("", ""),
-			openrtb.ErrIncorrectBidCount,
+			nil,
 		},
 		// with invalid bid
 		{
 			&openrtb.SeatBid{
 				Bids: []*openrtb.Bid{
-					&openrtb.Bid{Id: ""},
+					&openrtb.Bid{ID: ""},
 				},
 			},
-			openrtbtest.NewBidRequestForTesting("", ""),
-			openrtb.ErrMissingBidId,
+			openrtb.ErrInvalidBidID,
 		},
 		// with valid data
 		{
 			&openrtb.SeatBid{
 				Bids: []*openrtb.Bid{
-					&openrtb.Bid{Id: "abidid", ImpressionId: "impid", Price: 1},
+					&openrtb.Bid{ID: "abidid", ImpressionID: "impid", Price: 1},
 				},
 			},
-			openrtbtest.NewBidRequestForTesting("", "impid"),
 			nil,
 		},
 	}
-	for _, testCase := range testCases {
-		err := testCase.seatBid.Validate(testCase.bidReq)
-		if err != testCase.err {
-			t.Errorf("%v should return error (%s) instead of (%s).", testCase.seatBid, testCase.err, err)
-		}
+	for i, testCase := range testCases {
+		t.Run(fmt.Sprintf("%d", i), func(t *testing.T) {
+			err := testCase.seatBid.Validate()
+			if err != testCase.err {
+				t.Errorf("%v should return error (%s) instead of (%s).", testCase.seatBid, testCase.err, err)
+			}
+		})
 	}
 }

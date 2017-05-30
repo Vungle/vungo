@@ -52,21 +52,21 @@ func (n *nobid) Reason() openrtb.NoBidReason {
 	}
 
 	if n.status == http.StatusNoContent {
-		return openrtb.NO_BID_HTTP_NO_CONTENT
+		return openrtb.NoBidReasonNoContent
 	} else if n.status > 0 {
-		return openrtb.NO_BID_NON_STANDARD_HTTP_STATUS
+		return openrtb.NoBidReasonNonStandardHTTPStatus
 	}
 
-	if n.err == openrtb.ErrIncorrectHttpContentType {
-		return openrtb.NO_BID_INVALID_HTTP_HEADER
+	if n.err == openrtb.ErrInvalidHTTPContentType {
+		return openrtb.NoBidReasonInvalidHTTPHeader
 	}
 
 	if n.err != nil {
 		switch n.err.(type) {
 		case *json.SyntaxError, *json.UnmarshalTypeError, *json.UnmarshalFieldError:
-			return openrtb.NO_BID_MALFORMATTED_PAYLOAD
+			return openrtb.NoBidReasonMalformattedPayload
 		}
 	}
 
-	return openrtb.NO_BID_UNKNOWN
+	return openrtb.NoBidReasonUnknown
 }

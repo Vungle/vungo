@@ -2,32 +2,34 @@ package openrtb
 
 import "errors"
 
-// Please keep the variables alphabetized.
+// ErrInvalidBidID is returned when a bid does not have an ID.
+var ErrInvalidBidID = errors.New("bid.id is invalid")
 
-var ErrBidPriceBelowBidFloor = errors.New("Bid price must be higher than impression floor price.")
+// ErrInvalidBidPrice represents a validation error in which the Bid price is
+// not a valid value (for example, if the bid price is not a number or is a
+// negative value).
+var ErrInvalidBidPrice = errors.New("bid.price is invalid")
 
-var ErrIncorrectBidCount = errors.New("BidResponse has incorrect number of bids.")
+// ErrInvalidBidRequestID represents a validation error when a BidRequest does
+// not have a valid ID.
+var ErrInvalidBidRequestID = errors.New("bidrequest.id is invalid")
 
-var ErrIncorrectBidPrice = errors.New("Bid price must be a positive number.")
+// ErrInvalidBidRequestImpressions represents a validation error when a
+// BidRequest does not have any impressions.
+var ErrInvalidBidRequestImpressions = errors.New("bidrequest.imps is invalid")
 
-var ErrIncorrectBidResponseCurrency = errors.New("BidResponse currency must exist in BidRequest.")
+// ErrInvalidBidResponseID represents a validation error when a BidResponse
+// does not have a valid ID.
+var ErrInvalidBidResponseID = errors.New("bidresponse.id is invalid")
 
-var ErrIncorrectBidResponseId = errors.New("BidResponse ID must equal to BidRequest ID.")
+// ErrInvalidHTTPContentType represents a validation error in which the
+// Content-Type of an HTTP request or response is invalid.
+var ErrInvalidHTTPContentType = errors.New("HTTP content type is invalid")
 
-var ErrIncorrectHttpContentType = errors.New("Http content type is invalid.")
+// ErrInvalidNoBidReason represents a validation error when a Bid does not
+// have a valid no-bid reason.
+var ErrInvalidNoBidReason = errors.New("bidresponse.nbr is invalid")
 
-var ErrIncorrectImpressionCount = errors.New("Bid request has incorrect number of impressions.")
-
-var ErrIncorrectImpressionId = errors.New("Impression ID must exist in BidRequest.")
-
-var ErrIncorrectSeatCount = errors.New("BidResponse has incorrect number of seats.")
-
-var ErrInvalidNoBidReasonValue = errors.New("Invalid no-bid reason value.")
-
-var ErrMissingBidId = errors.New("Bid must have a unique ID.")
-
-var ErrMissingBidImpressionId = errors.New("Bid must have an impression ID.")
-
-var ErrMissingBidRequestId = errors.New("BidRequest must have a unique ID.")
-
-var ErrMissingBidResponseId = errors.New("BidResponse must have a unique ID.")
+// ErrInvalidImpressionID represents a validation error when an impression in
+// a Bid of a BidResponse does not have a valid ID.
+var ErrInvalidImpressionID = errors.New("imp.id is invalid")

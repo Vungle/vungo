@@ -17,11 +17,19 @@
     "pos": 30,
     "api": [1, 2]
   },
+  "tagid": "d1f00f0d0a122fd8847ee",
+  "secure": 1,
+  "pmp": {
+    "private_auction": 1,
+    "deals": [{
+      "id": "110aaa000ff0d"
+    }]
+  },
   "displaymanager": "Vungle Exchange",
   "displaymanagerver": "Vungle iOS/3.3.1",
   "instl": 1,
   "secure": 1,
   "bidfloor": 85.1290,
   "bidfloorcur": "USD",
-  "ext": null
+  "ext": {"vungle":{"some":["arbitrary value","that","must be","compact JSON"]}}
 }

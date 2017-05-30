@@ -1,62 +1,47 @@
 package openrtb
 
-import "fmt"
+import (
+	"fmt"
+)
 
+// BidRequest type represents a top-level object to send to buyers by an ad exchange server for an
+// opportunity to auction one or multiple impressions.
+// The "site" is unused and has been omitted.
+// See OpenRTB 2.3.1 Sec 3.2.1.
 //go:generate easyjson $GOFILE
 //easyjson:json
 type BidRequest struct {
-	Id string `json:"id"`
-
-	Impressions []*Impression `json:"imp"`
-
-	// No Site(site).
-
-	Application *Application `json:"app,omitempty"`
-	Device      *Device      `json:"device,omitempty"`
-	User        *User        `json:"user,omitempty"`
-	IsTestMode  NumericBool  `json:"test,omitempty"`
-	AuctionType AuctionType  `json:"at"`
-	Timeout     int          `json:"tmax,omitempty"`
-
-	// No SeatWhitelist(wseat).
-	// No HasAllImpressions(allimps).
-
-	Currencies        []Currency `json:"cur,omitempty"`
-	BlockedCategories []Category `json:"bcat,omitempty"`
-
-	// No BlockedAdvertisers(badv).
-
-	Regulation *Regulation `json:"regs,omitempty"`
+	ID                 string        `json:"id"`
+	Impressions        []*Impression `json:"imp"`
+	Application        *Application  `json:"app,omitempty"`
+	Device             *Device       `json:"device,omitempty"`
+	User               *User         `json:"user,omitempty"`
+	IsTestMode         NumericBool   `json:"test,omitempty"`
+	AuctionType        AuctionType   `json:"at"`
+	Timeout            int           `json:"tmax,omitempty"`
+	WhitelistedSeats   []string      `json:"wseat,omitempty"`
+	HasAllImpressions  NumericBool   `json:"allimps,omitempty"`
+	Currencies         []Currency    `json:"cur,omitempty"`
+	BlockedCategories  []Category    `json:"bcat,omitempty"`
+	BlockedAdvertisers []string      `json:"badv,omitempty"`
+	Regulation         *Regulation   `json:"regs,omitempty"`
+	Extension          *Extension    `json:"ext,omitempty"`
 }
 
 // Validate method checks to see if the BidRequest object contains required and well-formatted data
 // and returns a corresponding error when the check fails.
-func (br *BidRequest) Validate() error {
-	if br.Id == "" {
-		return ErrMissingBidRequestId
+func (r BidRequest) Validate() error {
+	if r.ID == "" {
+		return ErrInvalidBidRequestID
 	}
-
-	if br.Application != nil {
-		if err := br.Application.Validate(); err != nil {
-			return err
-		}
+	if r.Impressions == nil || len(r.Impressions) == 0 {
+		return ErrInvalidBidRequestImpressions
 	}
-
 	return nil
-}
-
-// OnlyImpression method returns the only impression contained in the bid request object; otherwise,
-// it will return an error.
-func (br *BidRequest) OnlyImpression() (*Impression, error) {
-	if len(br.Impressions) != 1 {
-		return nil, ErrIncorrectImpressionCount
-	}
-
-	return br.Impressions[0], nil
 }
 
 // String method returns a human-readable representation of the bid request object also suitable
 // for logging with %s, or %v.
-func (br *BidRequest) String() string {
-	return fmt.Sprintf("[%s;%d]", br.Id, len(br.Impressions))
+func (r BidRequest) String() string {
+	return fmt.Sprintf("[%s;%d]", r.ID, len(r.Impressions))
 }

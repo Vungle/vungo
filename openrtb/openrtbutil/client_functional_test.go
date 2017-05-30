@@ -19,8 +19,8 @@ import (
 // Caller is also responsible for closing the server when done.
 func setupTestServer(t *testing.T, fn http.HandlerFunc) *httptest.Server {
 	return httptest.NewServer(http.HandlerFunc(func(resp http.ResponseWriter, req *http.Request) {
-		if h := req.Header.Get(openrtb.HEADER_VERSION); h != openrtb.VERSION {
-			t.Errorf("HTTP header for OpenRTB bid requests should contain `%s: %s` header instead of %s.", openrtb.HEADER_VERSION, openrtb.VERSION, h)
+		if h := req.Header.Get(openrtb.HeaderOpenRTBVersion); h != openrtb.OpenRTBVersion {
+			t.Errorf("HTTP header for OpenRTB bid requests should contain `%s: %s` header instead of %s.", openrtb.HeaderOpenRTBVersion, openrtb.OpenRTBVersion, h)
 		}
 
 		resp.Header().Set("Content-Type", "application/json")
@@ -69,7 +69,7 @@ func TestClientDoShouldNotOverrideExistingOpenRtbHeaders(t *testing.T) {
 	// Setup a test server that would always return a no-bid.
 	ts := httptest.NewServer(http.HandlerFunc(func(resp http.ResponseWriter, req *http.Request) {
 		resp.WriteHeader(http.StatusNoContent)
-		if v := req.Header.Get(openrtb.HEADER_VERSION); v != version {
+		if v := req.Header.Get(openrtb.HeaderOpenRTBVersion); v != version {
 			t.Errorf("Expected request header to have override X-OpenRtb-Header to be %s rather than %s.", version, v)
 		}
 		close(done)
@@ -79,7 +79,7 @@ func TestClientDoShouldNotOverrideExistingOpenRtbHeaders(t *testing.T) {
 	// Make a custom request.
 	ctx := context.Background()
 	br := &openrtb.BidRequest{
-		Id: "br-with-custom-header",
+		ID: "br-with-custom-header",
 	}
 
 	req, err := openrtbutil.NewRequest(ctx, br, ts.URL, nil)
@@ -88,7 +88,7 @@ func TestClientDoShouldNotOverrideExistingOpenRtbHeaders(t *testing.T) {
 	}
 
 	// Set custom OpenRTB version header.
-	req.Http().Header.Set(openrtb.HEADER_VERSION, version)
+	req.Http().Header.Set(openrtb.HeaderOpenRTBVersion, version)
 
 	// Make the request to test server.
 	c := openrtbutil.NewClient(nil)
@@ -196,7 +196,7 @@ func TestClientDoShouldRespondNoBid(t *testing.T) {
 
 		ctx, _ := context.WithTimeout(context.Background(), tmax)
 		br := &openrtb.BidRequest{
-			Id: "br-for-no-bid",
+			ID: "br-for-no-bid",
 		}
 
 		req, err := openrtbutil.NewRequest(ctx, br, ts.URL, nil)
