@@ -44,12 +44,6 @@ func TestBidValidation(t *testing.T) {
 			openrtbtest.NewBidRequestForTesting("", "impid"),
 			openrtb.ErrInvalidBidPrice,
 		},
-		// with different impression id
-		//{
-		//	&openrtb.Bid{ID: "abidid", ImpressionID: "impid", Price: 1},
-		//	openrtbtest.NewBidRequestForTesting("", "another-impid"),
-		//	openrtb.ErrMissingImpressionID,
-		//},
 		// with valid data
 		{
 			&openrtb.Bid{ID: "abidid", ImpressionID: "impid", Price: 1},

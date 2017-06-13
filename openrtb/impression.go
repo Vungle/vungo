@@ -17,5 +17,5 @@ type Impression struct {
 	BidFloorCurrency      Currency            `json:"bidfloorcur,omitempty"`
 	IsSecure              NumericBool         `json:"secure,omitempty"`
 	PrivateMarketplace    *PrivateMarketplace `json:"pmp,omitempty"`
-	Extension             *Extension          `json:"ext,omitempty"`
+	Extension             interface{}         `json:"ext,omitempty"`
 }

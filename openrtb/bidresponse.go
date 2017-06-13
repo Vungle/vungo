@@ -1,6 +1,7 @@
 package openrtb
 
 import (
+	"encoding/json"
 	"fmt"
 	"reflect"
 )
@@ -19,7 +20,9 @@ type BidResponse struct {
 	Currency    Currency    `json:"cur,omitempty"`
 	CustomData  string      `json:"customdata,omitempty"`
 	NoBidReason NoBidReason `json:"nbr,omitempty"`
-	Extension   *Extension  `json:"ext,omitempty"`
+
+	RawExtension json.RawMessage `json:"ext,omitempty"`
+	Extension    interface{}     `json:"-"` // Opaque value that can be used to store unmarshaled value in ext field.
 }
 
 // Validate method validates whether the BidResponse object contains valid data, or returns an

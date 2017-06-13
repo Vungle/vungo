@@ -7,12 +7,12 @@ package openrtb
 //go:generate easyjson $GOFILE
 //easyjson:json
 type User struct {
-	ID         string     `json:"id"`
-	BuyerID    string     `json:"buyeruid,omitempty"`
-	BirthYear  int        `json:"yob,omitempty"`
-	Gender     Gender     `json:"gender,omitempty"`
-	Keywords   string     `json:"keywords,omitempty"`
-	CustomData string     `json:"customdata,omitempty"`
-	Geo        *Geo       `json:"geo,omitempty"`
-	Extension  *Extension `json:"ext,omitempty"`
+	ID         string      `json:"id"`
+	BuyerID    string      `json:"buyeruid,omitempty"`
+	BirthYear  int         `json:"yob,omitempty"`
+	Gender     Gender      `json:"gender,omitempty"`
+	Keywords   string      `json:"keywords,omitempty"`
+	CustomData string      `json:"customdata,omitempty"`
+	Geo        *Geo        `json:"geo,omitempty"`
+	Extension  interface{} `json:"ext,omitempty"`
 }
