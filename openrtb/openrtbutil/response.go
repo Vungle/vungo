@@ -19,12 +19,12 @@ type Response struct {
 
 // HTTP method returns the underlying HTTP response involved in retrieving the bid response.
 // NOTE: Callers must not manage its lifecycle, such as reading from, or closing, the body.
-func (r *Response) Http() *http.Response {
+func (r *Response) HTTP() *http.Response {
 	return r.hr
 }
 
-// OpenRtb method returns a bid response object that is guaranteed to be not nil or no-bid; callers
+// OpenRTB method returns a bid response object that is guaranteed to be not nil or no-bid; callers
 // still need to validate data integrity with the corresponding bid request object.
-func (r *Response) OpenRtb() *openrtb.BidResponse {
+func (r *Response) OpenRTB() *openrtb.BidResponse {
 	return r.br
 }

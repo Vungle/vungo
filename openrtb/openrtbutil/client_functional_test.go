@@ -52,11 +52,11 @@ func TestClientDo(t *testing.T) {
 		t.Fatal("Bid response should be non-nil when there is no error.")
 	}
 
-	if resp.Http() == nil {
+	if resp.HTTP() == nil {
 		t.Error("HTTP response should always be non-nil.")
 	}
 
-	if resp.OpenRtb() == nil {
+	if resp.OpenRTB() == nil {
 		t.Error("OpenRTB bid response should always be non-nil.")
 	}
 }
@@ -70,7 +70,7 @@ func TestClientDoShouldNotOverrideExistingOpenRtbHeaders(t *testing.T) {
 	ts := httptest.NewServer(http.HandlerFunc(func(resp http.ResponseWriter, req *http.Request) {
 		resp.WriteHeader(http.StatusNoContent)
 		if v := req.Header.Get(openrtb.HeaderOpenRTBVersion); v != version {
-			t.Errorf("Expected request header to have override X-OpenRtb-Header to be %s rather than %s.", version, v)
+			t.Errorf("Expected request header to have override X-OpenRTB-Header to be %s rather than %s.", version, v)
 		}
 		close(done)
 	}))
@@ -118,7 +118,7 @@ func TestClientDoShouldContainExtraHeaders(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if v := resp.Http().Header.Get(header); v != value {
+	if v := resp.HTTP().Header.Get(header); v != value {
 		t.Errorf("Custom header %s should have value of `%s` instead of\n`%s`.", header, value, v)
 	}
 }

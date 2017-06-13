@@ -143,12 +143,12 @@ func getJsonPropertyNameFromFieldTag(field reflect.StructField) (string, bool) {
 }
 
 // NewBidRequestForTesting method creates *openrtb.BidRequest with specified id and impression id for testing.
-func NewBidRequestForTesting(id string, impId string) *openrtb.BidRequest {
+func NewBidRequestForTesting(id string, impressionID string) *openrtb.BidRequest {
 	return &openrtb.BidRequest{
 		ID: id,
 		Impressions: []*openrtb.Impression{
 			&openrtb.Impression{
-				ID:               impId,
+				ID:               impressionID,
 				BidFloorCurrency: openrtb.CurrencyUSD,
 			},
 		},

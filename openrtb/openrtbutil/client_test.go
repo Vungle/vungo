@@ -197,7 +197,7 @@ func TestClientDoShouldGiveUpDiscardingOnSlowConnection(t *testing.T) {
 	// When making a simple bid request.
 	if resp, err := MakeSimpleRequest(t, ts.URL); err != nil {
 		t.Error("There should be a valid bid.", err)
-	} else if resp == nil || resp.OpenRtb().ID != "abc" {
+	} else if resp == nil || resp.OpenRTB().ID != "abc" {
 		t.Error("Unexpected resp: ", resp)
 	}
 
@@ -211,7 +211,7 @@ func TestClientDoShouldGiveUpDiscardingOnSlowConnection(t *testing.T) {
 	// And then make another simple bid request.
 	if resp, err := MakeSimpleRequest(t, ts.URL); err != nil {
 		t.Error("There should be a valid bid.", err)
-	} else if resp == nil || resp.OpenRtb().ID != "abc" {
+	} else if resp == nil || resp.OpenRTB().ID != "abc" {
 		t.Error("Unexpected resp: ", resp)
 	}
 
