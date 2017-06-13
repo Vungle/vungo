@@ -36,11 +36,11 @@ func TestNewRequestError(t *testing.T) {
 			&openrtb.BidRequest{
 				Application: &openrtb.Application{
 					// Fake a JSON marshaling error by creating an impossible-to-marshal value.
-					Extension: &openrtb.Extension{Normalized: func() {}},
+					Extension: func() {},
 				},
 			},
 			"http://localhost",
-			reflect.TypeOf(&json.MarshalerError{}),
+			reflect.TypeOf(&json.UnsupportedTypeError{}),
 		},
 
 		// Should return URL parsing error.

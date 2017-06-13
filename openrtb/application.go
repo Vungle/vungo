@@ -20,7 +20,7 @@ type Application struct {
 	IsPaid            NumericBool `json:"paid,omitempty"`
 	Publisher         *Publisher  `json:"publisher,omitempty"`
 	Keywords          string      `json:"keywords,omitempty"`
-	Extension         *Extension  `json:"ext,omitempty"`
+	Extension         interface{} `json:"ext,omitempty"`
 }
 
 // Validate method checks to see if the Application object contains required and well-formatted data

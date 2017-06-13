@@ -25,7 +25,6 @@ type BidRequest struct {
 	BlockedCategories  []Category    `json:"bcat,omitempty"`
 	BlockedAdvertisers []string      `json:"badv,omitempty"`
 	Regulation         *Regulation   `json:"regs,omitempty"`
-	Extension          *Extension    `json:"ext,omitempty"`
 }
 
 // Validate method checks to see if the BidRequest object contains required and well-formatted data
