@@ -8,5 +8,4 @@ package openrtb
 type PrivateMarketplace struct {
 	IsPrivateAuction NumericBool `json:"private_auction"`
 	Deals            []*Deal     `json:"deals"`
-	Extension        interface{} `json:"ext,omitempty"`
 }

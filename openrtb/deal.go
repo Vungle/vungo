@@ -11,5 +11,4 @@ type Deal struct {
 	BidFloorCurrency Currency    `json:"bidfloorcur,omitempty"`
 	AuctionType      AuctionType `json:"at,omitempty"`
 	WhitelistedSeats []string    `json:"wseat,omitempty"`
-	Extension        interface{} `json:"ext,omitempty"`
 }
