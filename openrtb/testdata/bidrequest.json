@@ -123,6 +123,5 @@
   "bcat": ["IAB7-39"],
   "regs": {
     "coppa": 1
-  },
-  "ext": {"vungle":{"some":["arbitrary value","that","must be","compact JSON"]}}
+  }
 }

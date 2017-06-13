@@ -1,5 +1,7 @@
 package openrtb
 
+import "encoding/json"
+
 // Bid type represents an offer, submitted by a buyer, to buy a specific impression within the
 // bid request object.
 // See OpenRTB 2.3.1 Sec 4.2.3.
@@ -22,7 +24,7 @@ type Bid struct {
 	DealID             string              `json:"dealid,omitempty"`
 	Height             int                 `json:"h,omitempty"`
 	Width              int                 `json:"w,omitempty"`
-	Extension          *Extension          `json:"ext,omitempty"`
+	Extension          json.RawMessage     `json:"ext,omitempty"`
 }
 
 // Validate method validates a bid object.
