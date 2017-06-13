@@ -88,7 +88,7 @@ func TestClientDoShouldNotOverrideExistingOpenRtbHeaders(t *testing.T) {
 	}
 
 	// Set custom OpenRTB version header.
-	req.Http().Header.Set(openrtb.HeaderOpenRTBVersion, version)
+	req.HTTP().Header.Set(openrtb.HeaderOpenRTBVersion, version)
 
 	// Make the request to test server.
 	c := openrtbutil.NewClient(nil)

@@ -17,7 +17,7 @@ type Response struct {
 	br *openrtb.BidResponse
 }
 
-// Http method returns the underlying HTTP response involved in retrieving the bid response.
+// HTTP method returns the underlying HTTP response involved in retrieving the bid response.
 // NOTE: Callers must not manage its lifecycle, such as reading from, or closing, the body.
 func (r *Response) Http() *http.Response {
 	return r.hr

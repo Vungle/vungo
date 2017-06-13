@@ -21,10 +21,10 @@ type Request struct {
 	br  *openrtb.BidRequest
 }
 
-// Http method returns the underlying HTTP request object. Callers may use the object obtained from
+// HTTP method returns the underlying HTTP request object. Callers may use the object obtained from
 // this method to customize the underlying HTTP request, such as adding additional HTTP headers.
 // NOTE: Callers should not set the request URI or the body, or unpredictable result will occur.
-func (r *Request) Http() *http.Request {
+func (r *Request) HTTP() *http.Request {
 	return r.hr
 }
 
@@ -37,7 +37,7 @@ func NewRequest(parent context.Context, br *openrtb.BidRequest, endpoint string,
 	if br == nil {
 		return nil, ErrNilBidRequest
 	} else if len(endpoint) == 0 {
-		return nil, ErrEmptyUrl
+		return nil, ErrEmptyURL
 	}
 
 	if encoder == nil {
