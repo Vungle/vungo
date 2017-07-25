@@ -90,13 +90,16 @@ const (
 // NOTE: Don't rearrange the order. Add new ones to the bottom, above lastVungleNoBidReason, as
 // well as to NoBidReasonNames.
 const (
-	// NoBidReasonVungleNoCandidates signals he exchange server that a no-bid is due to no viable
-	// ad candidates.
-	NoBidReasonVungleNoCandidates NoBidReason = 11000 + iota
+	// NoBidReasonVungleNoCampaigns signals he exchange server that a no-bid is due to no viable campaigns.
+	NoBidReasonVungleNoCampaigns NoBidReason = 11000 + iota
 
 	// NoBidReasonVungleDataSciNoServe signals the exchange server that a no-bid is due to data
 	// science rejection.
 	NoBidReasonVungleDataSciNoServe
+
+	// NoBidReasonVungleNoCreatives signals the exchange server that a no-bid is due to no viable creatives.
+	NoBidReasonVungleNoCreatives
+
 	// Add new entries here.
 
 	lastVungleNoBidReason
@@ -123,6 +126,7 @@ var NoBidReasonNames = map[NoBidReason]string{
 	NoBidReasonBelowFloor:            "NO_BID_BELOW_FLOOR",
 	NoBidReasonInvalidContent:        "NO_BID_INVALID_CONTENT",
 
-	NoBidReasonVungleNoCandidates:   "NO_BID_VUNGLE_NO_CANDIDATES",
+	NoBidReasonVungleNoCampaigns:    "NO_BID_VUNGLE_NO_CAMPAIGNS",
+	NoBidReasonVungleNoCreatives:    "NO_BID_VUNGLE_NO_CREATIVES",
 	NoBidReasonVungleDataSciNoServe: "NO_BID_VUNGLE_DATASCI_NO_SERVE",
 }
