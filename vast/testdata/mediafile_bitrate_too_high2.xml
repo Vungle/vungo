@@ -4,7 +4,7 @@
     delivery="progressive"
     type="video/mp4"
     codec="H-264"
-    bitrate="1001"
+    bitrate="10001"
     width="8"
     height="16"
     scalable="true"
