@@ -5,7 +5,7 @@ import "time"
 const MAX_VIDEO_DURATION = 60 * time.Second
 const MIN_VIDEO_DURATION = 1 * time.Second
 
-const MAX_VIDEO_BITRATE = 1000 // in Kbps
+const MAX_VIDEO_BITRATE = 10000 // in Kbps
 const MIN_VIDEO_BITRATE = 1
 
 const MAX_VIDEO_WIDTH = 5000
