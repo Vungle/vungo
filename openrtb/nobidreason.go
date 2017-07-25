@@ -90,7 +90,7 @@ const (
 // NOTE: Don't rearrange the order. Add new ones to the bottom, above lastVungleNoBidReason, as
 // well as to NoBidReasonNames.
 const (
-	// NoBidReasonVungleNoCampaigns signals he exchange server that a no-bid is due to no viable campaigns.
+	// NoBidReasonVungleNoCampaigns signals the exchange server that a no-bid is due to no viable campaigns.
 	NoBidReasonVungleNoCampaigns NoBidReason = 11000 + iota
 
 	// NoBidReasonVungleDataSciNoServe signals the exchange server that a no-bid is due to data
