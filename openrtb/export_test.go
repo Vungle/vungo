@@ -5,6 +5,5 @@ package openrtb
 var NoBidReasonSections = map[NoBidReason]NoBidReason{
 	NoBidReasonUnknown:           lastOpenRTBNoBidReason,
 	NoBidReasonResponseTimeout:   lastVungleExchangeNoBidReason,
-	NoBidReasonVungleNoCampaigns: NoBidReasonVungleNoCampaigns,
-	NoBidReasonVungleNoCreatives: lastVungleNoBidReason,
+	NoBidReasonVungleNoCampaigns: lastVungleNoBidReason,
 }
