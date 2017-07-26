@@ -3,7 +3,7 @@ package openrtb
 // NoBidReasonSections contains a mapping of starting no-bid reason to ending no-bid reasons of each
 // section that is offered in nobidreason.go.
 var NoBidReasonSections = map[NoBidReason]NoBidReason{
-	NoBidReasonUnknown:            lastOpenRTBNoBidReason,
-	NoBidReasonResponseTimeout:    lastVungleExchangeNoBidReason,
-	NoBidReasonVungleNoCandidates: lastVungleNoBidReason,
+	NoBidReasonUnknown:           lastOpenRTBNoBidReason,
+	NoBidReasonResponseTimeout:   lastVungleExchangeNoBidReason,
+	NoBidReasonVungleNoCampaigns: lastVungleNoBidReason,
 }
