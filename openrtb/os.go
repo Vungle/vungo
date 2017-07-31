@@ -9,6 +9,7 @@ const (
 	OSUnknown OS = "unknown"
 	OSIOS     OS = "iOS"
 	OSAndroid OS = "android"
+	OSAmazon  OS = "amazon"
 	OSWindows OS = "windows"
 )
 
@@ -26,7 +27,12 @@ func (o OS) Normalize() OS {
 	case 'i', 'I':
 		return OSIOS
 	case 'a', 'A':
-		return OSAndroid
+		switch o[1] {
+		case 'm', 'M':
+			return OSAmazon
+		default:
+			return OSAndroid
+		}
 	case 'w', 'W':
 		return OSWindows
 
