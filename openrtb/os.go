@@ -1,6 +1,9 @@
 package openrtb
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"strings"
+)
 
 // An enumeration of the known device OS types.
 // TODO(@garukun: The values of these types are case-sensitive to data science; consider decoupling
@@ -9,6 +12,7 @@ const (
 	OSUnknown OS = "unknown"
 	OSIOS     OS = "iOS"
 	OSAndroid OS = "android"
+	OSAmazon  OS = "amazon"
 	OSWindows OS = "windows"
 )
 
@@ -22,12 +26,14 @@ func (o OS) Normalize() OS {
 		return OSUnknown
 	}
 
-	switch o[0] {
-	case 'i', 'I':
+	switch strings.ToLower(string(o)) {
+	case "ios":
 		return OSIOS
-	case 'a', 'A':
+	case "android":
 		return OSAndroid
-	case 'w', 'W':
+	case "amazon":
+		return OSAmazon
+	case "windows":
 		return OSWindows
 
 		// Other OS supports should be added here.
