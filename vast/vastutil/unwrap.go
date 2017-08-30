@@ -4,7 +4,6 @@ import (
 	"encoding/xml"
 	"net/http"
 
-	internalvast "github.com/Vungle/jaeger/internal/vast"
 	"github.com/Vungle/vungo/vast"
 	"golang.org/x/net/context"
 	"golang.org/x/net/context/ctxhttp"
@@ -19,10 +18,10 @@ var defaultUnwrapClient = http.DefaultClient
 // 	1) Unwrapping context, ctx, is done;
 // 	2) Invalid XML format;
 // 	3) Invalid VAST content, (currently, there should be exactly one <Ad> within <VAST>.
-func Unwrap(ctx context.Context, data []byte) ([]*vast.Vast, internalvast.VastError) {
+func Unwrap(ctx context.Context, data []byte) ([]*vast.Vast, error) {
 	var v vast.Vast
 	if err := xml.Unmarshal(data, &v); err != nil {
-		return nil, internalvast.VastError{err, internalvast.XMLParsingError}
+		return nil, err
 	}
 
 	return unwrap(ctx, &v, nil)
@@ -31,7 +30,7 @@ func Unwrap(ctx context.Context, data []byte) ([]*vast.Vast, internalvast.VastEr
 // unwrap method is a helper function that invokes performs the actual HTTP request to get
 // additional VAST XML and updates the unwrappedList. The unwrap method is invoked recursively until
 // the first Inline VAST is reached or until an error occurs.
-func unwrap(ctx context.Context, v *vast.Vast, unwrappedList []*vast.Vast) ([]*vast.Vast, internalvast.VastError) {
+func unwrap(ctx context.Context, v *vast.Vast, unwrappedList []*vast.Vast) ([]*vast.Vast, error) {
 	if len(v.Ads) != 1 {
 		return nil, ErrUnwrapWithMultipleAds
 	} else if v.Ads[0].Wrapper == nil {
@@ -50,12 +49,13 @@ func unwrap(ctx context.Context, v *vast.Vast, unwrappedList []*vast.Vast) ([]*v
 			resp.Body.Close()
 		}
 	}()
+
 	if err != nil {
-		return nil, internalvast.VastError{err, internalvast.WrapperTimeout}
+		return nil, err
 	}
 
 	if err = xml.NewDecoder(resp.Body).Decode(&innerVast); err != nil {
-		return nil, internalvast.VastError{err, internalvast.GeneralWrapperError}
+		return nil, err
 	} else {
 		// TODO(@garukun): Given a set of super fast VAST hosts and a starting wrapper VAST XML that
 		// wraps the VAST infinitely, this implementation could cause disastrous stack overflow that
