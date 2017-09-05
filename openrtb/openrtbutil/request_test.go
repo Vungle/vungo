@@ -28,7 +28,7 @@ func TestNewRequestError(t *testing.T) {
 		{
 			&openrtb.BidRequest{},
 			"",
-			openrtbutil.ErrEmptyUrl.Error(),
+			openrtbutil.ErrEmptyURL.Error(),
 		},
 
 		// Should return JSON marshaling error.

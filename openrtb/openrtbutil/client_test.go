@@ -42,7 +42,7 @@ func TestClientDoShouldDiscardResidualAndReuseConnection(t *testing.T) {
 		resp.Write([]byte(`{"id":"abc","seatbid":[{"bid":[{"id":"1"}]}]}\nahz`))
 	}))
 
-	var connCounter uint32 = 0
+	var connCounter uint32
 	ts.Config.ConnState = func(conn net.Conn, connState http.ConnState) {
 		if connState == http.StateNew {
 			atomic.AddUint32(&connCounter, 1)
@@ -104,7 +104,7 @@ func TestClientDoShouldDiscardResidualOnInvalidHttpResponse(t *testing.T) {
 		middleware(resp, req)
 	}))
 
-	var connCounter uint32 = 0
+	var connCounter uint32
 	ts.Config.ConnState = func(conn net.Conn, connState http.ConnState) {
 		if connState == http.StateNew {
 			atomic.AddUint32(&connCounter, 1)
@@ -179,7 +179,7 @@ func TestClientDoShouldGiveUpDiscardingOnSlowConnection(t *testing.T) {
 		resp.Write([]byte(`oh, I'm not done yet!`))
 	}))
 
-	var connCounter uint32 = 0
+	var connCounter uint32
 	ts.Config.ConnState = func(conn net.Conn, connState http.ConnState) {
 		if connState == http.StateNew {
 			atomic.AddUint32(&connCounter, 1)
@@ -197,7 +197,7 @@ func TestClientDoShouldGiveUpDiscardingOnSlowConnection(t *testing.T) {
 	// When making a simple bid request.
 	if resp, err := MakeSimpleRequest(t, ts.URL); err != nil {
 		t.Error("There should be a valid bid.", err)
-	} else if resp == nil || resp.OpenRtb().ID != "abc" {
+	} else if resp == nil || resp.OpenRTB().ID != "abc" {
 		t.Error("Unexpected resp: ", resp)
 	}
 
@@ -211,7 +211,7 @@ func TestClientDoShouldGiveUpDiscardingOnSlowConnection(t *testing.T) {
 	// And then make another simple bid request.
 	if resp, err := MakeSimpleRequest(t, ts.URL); err != nil {
 		t.Error("There should be a valid bid.", err)
-	} else if resp == nil || resp.OpenRtb().ID != "abc" {
+	} else if resp == nil || resp.OpenRTB().ID != "abc" {
 		t.Error("Unexpected resp: ", resp)
 	}
 
@@ -236,7 +236,7 @@ func TestClientDoHttp(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	resp, err := DefaultClient.doHttp(context.Background(), req)
+	resp, err := DefaultClient.doHTTP(context.Background(), req)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -274,7 +274,7 @@ func TestClientDoHttpShouldDiscardResidualPayloadWhenContextCompletes(t *testing
 	}
 
 	// When making an HTTP request.
-	_, err = DefaultClient.doHttp(ctx, req)
+	_, err = DefaultClient.doHTTP(ctx, req)
 	if err != context.Canceled {
 		t.Fatal("Expected error to be canceled context instead of ", err)
 	}

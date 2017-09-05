@@ -11,29 +11,35 @@ type replay struct {
 	Args         []interface{}
 }
 
-func (trec *TestingRecorder) Error(args ...interface{}) {
-	trec.replays = append(trec.replays, replay{Type: "Error", Args: args})
+// Error method implements the Testing interface.
+func (r *TestingRecorder) Error(args ...interface{}) {
+	r.replays = append(r.replays, replay{Type: "Error", Args: args})
 }
 
-func (trec *TestingRecorder) Errorf(format string, args ...interface{}) {
-	trec.replays = append(trec.replays, replay{Type: "Errorf", Format: format, Args: args})
+// Errorf method implements the Testing interface.
+func (r *TestingRecorder) Errorf(format string, args ...interface{}) {
+	r.replays = append(r.replays, replay{Type: "Errorf", Format: format, Args: args})
 }
 
-func (trec *TestingRecorder) Fatal(args ...interface{}) {
-	trec.replays = append(trec.replays, replay{Type: "Fatal", Args: args})
+// Fatal method implements the Testing interface.
+func (r *TestingRecorder) Fatal(args ...interface{}) {
+	r.replays = append(r.replays, replay{Type: "Fatal", Args: args})
 }
 
-func (trec *TestingRecorder) Fatalf(format string, args ...interface{}) {
-	trec.replays = append(trec.replays, replay{Type: "Fatalf", Format: format, Args: args})
+// Fatalf method implements the Testing interface.
+func (r *TestingRecorder) Fatalf(format string, args ...interface{}) {
+	r.replays = append(r.replays, replay{Type: "Fatalf", Format: format, Args: args})
 }
 
-func (trec *TestingRecorder) Log(args ...interface{}) {}
+// Log method implements the Testing interface.
+func (r *TestingRecorder) Log(args ...interface{}) {}
 
-func (trec *TestingRecorder) Logf(format string, args ...interface{}) {}
+// Logf method implements the Testing interface.
+func (r *TestingRecorder) Logf(format string, args ...interface{}) {}
 
 // Replays methods records a list of methods invoked in the test helper method.
-func (trec *TestingRecorder) Replays() []replay {
-	return trec.replays
+func (r *TestingRecorder) Replays() []replay {
+	return r.replays
 }
 
 // NewTestingRecorder methods returns a new TestingRecorder object that implements the Testing
