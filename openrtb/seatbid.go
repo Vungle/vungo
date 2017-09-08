@@ -20,3 +20,13 @@ func (b SeatBid) Validate() error {
 	}
 	return nil
 }
+
+func (sb *SeatBid) Copy() *SeatBid {
+	sbCopy := &SeatBid{}
+	*sbCopy = *sb
+	sbCopy.Bids = []*Bid{}
+	for _, b := range sb.Bids {
+		sbCopy.Bids = append(sbCopy.Bids, b.Copy())
+	}
+	return sbCopy
+}

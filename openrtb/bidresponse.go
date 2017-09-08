@@ -61,3 +61,13 @@ func (r BidResponse) IsNoBid() bool {
 func (r BidResponse) String() string {
 	return fmt.Sprintf("[%s;%s;%v;%d]", r.ID, r.Currency, r.NoBidReason, len(r.SeatBids))
 }
+
+func (r *BidResponse) Copy() *BidResponse {
+	brCopy := &BidResponse{}
+	*brCopy = *r
+	brCopy.SeatBids = []*SeatBid{}
+	for _, sb := range r.SeatBids {
+		brCopy.SeatBids = append(brCopy.SeatBids, sb.Copy())
+	}
+	return brCopy
+}

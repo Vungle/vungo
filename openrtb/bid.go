@@ -43,3 +43,8 @@ func (bid Bid) Validate() error {
 
 	return nil
 }
+
+func (b *Bid) Copy() *Bid {
+	bCopy := *b
+	return &bCopy
+}
