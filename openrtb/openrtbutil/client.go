@@ -21,9 +21,9 @@ import (
 // beyond which the connection is discarded regardless.
 const defaultDiscardDuration = 3 * time.Second
 
-// defaultHttpClient is an HTTP client with sane configurations that makes sense while making bid
+// defaultHTTPClient is an HTTP client with sane configurations that makes sense while making bid
 // requests.
-var defaultHttpClient = &http.Client{
+var defaultHTTPClient = &http.Client{
 	Transport: &http.Transport{
 		// No Proxy.
 
@@ -69,11 +69,11 @@ type Client struct {
 // underlying HTTP or TCP connection states but just use the resp to perform additional application
 // logic.
 func (c *Client) Do(req *Request) (resp *Response, err error) {
-	if h := req.Http().Header; len(h.Get(openrtb.HeaderOpenRTBVersion)) == 0 {
+	if h := req.HTTP().Header; len(h.Get(openrtb.HeaderOpenRTBVersion)) == 0 {
 		openrtb.SetHeaders(h)
 	}
 
-	r, err := c.doHttp(req.context(), req.Http())
+	r, err := c.doHTTP(req.context(), req.HTTP())
 	defer func() {
 		if r == nil || r.Body == nil {
 			return
@@ -116,13 +116,13 @@ type respAndErr struct {
 	err  error
 }
 
-// doHttp method performs the actual HTTP request, sending the bid request buffer via HTTP, while
+// doHTTP method performs the actual HTTP request, sending the bid request buffer via HTTP, while
 // respecting the given context. The method returns unaltered HTTP response and errors if any; so,
 // caller is responsible for draining and closing the response body if the underlying connection is
 // to be reused. In case of when the context ended before a response is received, this method will
 // perform a best effort drainage on the response body hoping the underlying connection can be
 // reused.
-func (c *Client) doHttp(ctx context.Context, r *http.Request) (*http.Response, error) {
+func (c *Client) doHTTP(ctx context.Context, r *http.Request) (*http.Response, error) {
 	reCh := make(chan respAndErr)
 	go func() {
 		resp, err := c.hc.Do(r)
@@ -226,6 +226,6 @@ func NewClient(l *log.Logger) *Client {
 	return &Client{
 		Decoder: DefaultDecoder,
 		Logger:  l,
-		hc:      defaultHttpClient,
+		hc:      defaultHTTPClient,
 	}
 }

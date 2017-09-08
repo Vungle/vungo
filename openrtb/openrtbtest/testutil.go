@@ -10,9 +10,9 @@ import (
 	"github.com/Vungle/vungo/openrtb"
 )
 
-// UnmarshalFromJsonFile method reads from a testdata/*.json file and unmarshals the content into
+// UnmarshalFromJSONFile method reads from a testdata/*.json file and unmarshals the content into
 // one of the OpenRTB model object.
-func UnmarshalFromJsonFile(file string, model interface{}) error {
+func UnmarshalFromJSONFile(file string, model interface{}) error {
 	jsonBytes, err := ioutil.ReadFile("testdata/" + file)
 
 	if err != nil {
@@ -46,12 +46,12 @@ func VerifyModelAgainstFile(t Testing, file string, modelType reflect.Type) {
 		t.Fatalf("Cannot unmarshal JSON data into %v because of\n%v.", modelType, err)
 	}
 
-	newJsonBytes, err := json.Marshal(model1)
+	newJSONBytes, err := json.Marshal(model1)
 	if err != nil {
 		t.Fatalf("Cannot marshal model %v into JSON data because of\n%v.", modelType, err)
 	}
 
-	if err := json.Unmarshal(newJsonBytes, model2); err != nil {
+	if err := json.Unmarshal(newJSONBytes, model2); err != nil {
 		t.Fatalf("Cannot unmarshal JSON data into %v because of\n%v.", modelType, err)
 	}
 
@@ -80,7 +80,7 @@ func verifyModelNonEmptyFields(t Testing, jsonBytes []byte, modelType reflect.Ty
 		t.Fatalf("Cannot unmarshal json onto %v.\n%v", modelType, err)
 	}
 
-	n := getNumOfJsonFields(modelType)
+	n := getNumOfJSONFields(modelType)
 	if len(m) != n {
 		t.Errorf("JSON contains %d properties but the model %v declared %d.", len(m), modelType, n)
 	}
@@ -88,7 +88,7 @@ func verifyModelNonEmptyFields(t Testing, jsonBytes []byte, modelType reflect.Ty
 	// Compare JSON properties on the model type against the keys of the unmarshaled map.
 	total := modelType.NumField()
 	for i := 0; i < total; i++ {
-		if name, ok := getJsonPropertyNameFromFieldTag(modelType.Field(i)); ok {
+		if name, ok := getJSONPropertyNameFromFieldTag(modelType.Field(i)); ok {
 			if len(name) == 0 {
 				// Ignore fields without a JSON tag.
 				continue
@@ -101,8 +101,8 @@ func verifyModelNonEmptyFields(t Testing, jsonBytes []byte, modelType reflect.Ty
 	}
 }
 
-// getNumOfJsonFields method returns the number of fields that are not annotated with JSON encoding.
-func getNumOfJsonFields(modelType reflect.Type) (result int) {
+// getNumOfJSONFields method returns the number of fields that are not annotated with JSON encoding.
+func getNumOfJSONFields(modelType reflect.Type) (result int) {
 	n := modelType.NumField()
 
 	for i := 0; i < n; i++ {
@@ -113,17 +113,17 @@ func getNumOfJsonFields(modelType reflect.Type) (result int) {
 		}
 
 		if modelType.Field(i).Type.Kind() == reflect.Struct {
-			result += getNumOfJsonFields(modelType.Field(i).Type)
+			result += getNumOfJSONFields(modelType.Field(i).Type)
 		}
 	}
 
 	return
 }
 
-// getJsonPropertyNameFromFieldTag method returns the name of the JSON property embedded in the tag
+// getJSONPropertyNameFromFieldTag method returns the name of the JSON property embedded in the tag
 // information of a particular field and a boolean indicating if such field is a valid JSON
 // property. The implementation borrows the tag parsing from "encoding/json" package.
-func getJsonPropertyNameFromFieldTag(field reflect.StructField) (string, bool) {
+func getJSONPropertyNameFromFieldTag(field reflect.StructField) (string, bool) {
 	tag := field.Tag.Get("json")
 
 	if len(tag) == 0 {
@@ -143,12 +143,12 @@ func getJsonPropertyNameFromFieldTag(field reflect.StructField) (string, bool) {
 }
 
 // NewBidRequestForTesting method creates *openrtb.BidRequest with specified id and impression id for testing.
-func NewBidRequestForTesting(id string, impId string) *openrtb.BidRequest {
+func NewBidRequestForTesting(id string, impressionID string) *openrtb.BidRequest {
 	return &openrtb.BidRequest{
 		ID: id,
 		Impressions: []*openrtb.Impression{
 			&openrtb.Impression{
-				ID:               impId,
+				ID:               impressionID,
 				BidFloorCurrency: openrtb.CurrencyUSD,
 			},
 		},
@@ -158,8 +158,8 @@ func NewBidRequestForTesting(id string, impId string) *openrtb.BidRequest {
 }
 
 // NewBidRequestWithFloorPriceForTesting method creates a bid request with a price in USD.
-func NewBidRequestWithFloorPriceForTesting(id string, impId string, price float64) *openrtb.BidRequest {
-	br := NewBidRequestForTesting(id, impId)
+func NewBidRequestWithFloorPriceForTesting(id string, impressionID string, price float64) *openrtb.BidRequest {
+	br := NewBidRequestForTesting(id, impressionID)
 	br.Impressions[0].BidFloorPrice = price
 
 	return br

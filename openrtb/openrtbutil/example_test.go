@@ -29,7 +29,7 @@ func ExampleClient() {
 	}
 
 	// Setting some custom HTTP header.
-	req.Http().Header.Set("X-Auction-Platform", "Vungle Exchange")
+	req.HTTP().Header.Set("X-Auction-Platform", "Vungle Exchange")
 
 	resp, err := openrtbutil.DefaultClient.Do(req)
 

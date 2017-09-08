@@ -16,7 +16,7 @@ func TestBidRequestMarshalUnmarshal(t *testing.T) {
 
 func TestBidRequestValidateShouldValidateAgainstId(t *testing.T) {
 	var bidRequest openrtb.BidRequest
-	openrtbtest.UnmarshalFromJsonFile("bidrequest.json", &bidRequest)
+	openrtbtest.UnmarshalFromJSONFile("bidrequest.json", &bidRequest)
 
 	// Expect the validation to pass when ID field is non-empty.
 	if err := bidRequest.Validate(); err != nil {

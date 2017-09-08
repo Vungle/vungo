@@ -12,7 +12,7 @@ func TestUnmarshalFromJsonFileShouldReturnErrorGivenWrongFilePath(t *testing.T) 
 	file := "/omg/this/is/so/bad/I/dont/even/know/where/it/is/mounted"
 
 	// When trying to unmarshal the JSON located at the file location.
-	err := openrtbtest.UnmarshalFromJsonFile(file, reflect.TypeOf(file))
+	err := openrtbtest.UnmarshalFromJSONFile(file, reflect.TypeOf(file))
 
 	// Expect that an error should have been returned.
 	if err == nil {
