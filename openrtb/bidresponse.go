@@ -63,11 +63,10 @@ func (r BidResponse) String() string {
 }
 
 func (r *BidResponse) Copy() *BidResponse {
-	brCopy := &BidResponse{}
-	*brCopy = *r
+	brCopy := *r
 	brCopy.SeatBids = []*SeatBid{}
-	for _, sb := range r.SeatBids {
-		brCopy.SeatBids = append(brCopy.SeatBids, sb.Copy())
+	for _, seat := range r.SeatBids {
+		brCopy.SeatBids = append(brCopy.SeatBids, seat.Copy())
 	}
-	return brCopy
+	return &brCopy
 }

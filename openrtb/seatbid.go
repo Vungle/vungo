@@ -21,12 +21,11 @@ func (b SeatBid) Validate() error {
 	return nil
 }
 
-func (sb *SeatBid) Copy() *SeatBid {
-	sbCopy := &SeatBid{}
-	*sbCopy = *sb
-	sbCopy.Bids = []*Bid{}
-	for _, b := range sb.Bids {
-		sbCopy.Bids = append(sbCopy.Bids, b.Copy())
+func (b *SeatBid) Copy() *SeatBid {
+	bCopy := *b
+	bCopy.Bids = []*Bid{}
+	for _, bid := range b.Bids {
+		bCopy.Bids = append(bCopy.Bids, bid.Copy())
 	}
-	return sbCopy
+	return &bCopy
 }
