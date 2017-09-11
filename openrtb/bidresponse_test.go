@@ -4,6 +4,8 @@ import (
 	"reflect"
 	"testing"
 
+	"encoding/json"
+
 	"github.com/Vungle/vungo/openrtb"
 	"github.com/Vungle/vungo/openrtb/openrtbtest"
 )
@@ -99,6 +101,51 @@ func TestBidResponseValidation(t *testing.T) {
 		err := testCase.bidResp.Validate()
 		if err != testCase.err {
 			t.Errorf("%v should return error (%s) instead of (%s).", testCase.bidResp, testCase.err, err)
+		}
+	}
+}
+
+func TestBidResponse_Copy(t *testing.T) {
+	testCases := []struct {
+		bidresponse *openrtb.BidResponse
+	}{
+		{
+			&openrtb.BidResponse{},
+		},
+		{
+			&openrtb.BidResponse{
+				ID: "",
+				SeatBids: []*openrtb.SeatBid{
+					&openrtb.SeatBid{},
+				},
+				BidID:       "testBidID",
+				Currency:    openrtb.CurrencyUSD,
+				CustomData:  "testCustomData",
+				NoBidReason: openrtb.NoBidReasonUnknown,
+			},
+		},
+	}
+	for _, testCase := range testCases {
+		b2 := testCase.bidresponse.Copy()
+
+		if b2 == testCase.bidresponse {
+			t.Errorf("Address of bidresponse should not be the same in copied bidrequest. bidresponse1: %v bidresponse2: %v", &testCase.bidresponse, &b2)
+		}
+
+		for i := range testCase.bidresponse.SeatBids {
+			if &testCase.bidresponse.SeatBids[i] == &b2.SeatBids[i] {
+				t.Errorf("Address of seatbids should not be the same in copied bidrequest. seatbid1: %v seatbid2: %v.", &testCase.bidresponse.SeatBids[i], &b2.SeatBids[i])
+			}
+		}
+
+		// Remove pointer slices so we can check other values with reflect.DeepEqual().
+		testCase.bidresponse.SeatBids = nil
+		b2.SeatBids = nil
+
+		if !reflect.DeepEqual(testCase.bidresponse, b2) {
+			b1JSON, _ := json.MarshalIndent(testCase.bidresponse, "", "  ")
+			b2JSON, _ := json.MarshalIndent(b2, "", "  ")
+			t.Errorf("Seatbids should hold the same values.\nExpected: %s\n Got: %s", b1JSON, b2JSON)
 		}
 	}
 }

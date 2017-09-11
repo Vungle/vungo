@@ -62,6 +62,7 @@ func (r BidResponse) String() string {
 	return fmt.Sprintf("[%s;%s;%v;%d]", r.ID, r.Currency, r.NoBidReason, len(r.SeatBids))
 }
 
+// Copy returns a pointer to a copy of the bidresponse object.
 func (r *BidResponse) Copy() *BidResponse {
 	brCopy := *r
 	brCopy.SeatBids = []*SeatBid{}

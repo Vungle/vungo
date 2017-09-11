@@ -44,7 +44,8 @@ func (bid Bid) Validate() error {
 	return nil
 }
 
-func (b *Bid) Copy() *Bid {
-	bCopy := *b
+// Copy returns a pointer to a copy of the bid object.
+func (b Bid) Copy() *Bid {
+	bCopy := b
 	return &bCopy
 }
