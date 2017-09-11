@@ -1,11 +1,10 @@
 package openrtb_test
 
 import (
+	"encoding/json"
 	"fmt"
 	"reflect"
 	"testing"
-
-	"encoding/json"
 
 	"github.com/Vungle/vungo/openrtb"
 	"github.com/Vungle/vungo/openrtb/openrtbtest"
