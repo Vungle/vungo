@@ -12,6 +12,12 @@ import "strconv"
 // characters are considered as version 0.
 type Version string
 
+// cmp returns a value which indicates the Version's natural ordering relative to the given other Version. If the value
+// returned is negative, it indicates that the Version is less than the given other Version. If the value returned is
+// positive, it indicates that the Version is greater than the given other Version. If the value returned is equal to
+// zero, it indicates that the versions are equivalent. Versions are compared sequentially starting at the major
+// version with only digits in consideration. In other words, version 2 is greater than version 1 regardless of what
+// the minor version may be, and "alpha" is not comparable to "beta".
 func (v Version) cmp(other Version) int {
 	for nL, nR, idxL, idxR := 0, 0, 0, 0; idxL < len(v) || idxR < len(other); {
 		nL, idxL = scanInt(string(v), idxL)
