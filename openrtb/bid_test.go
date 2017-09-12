@@ -1,9 +1,9 @@
 package openrtb_test
 
 import (
-	"encoding/json"
 	"reflect"
 	"testing"
+	"encoding/json"
 
 	"github.com/Vungle/vungo/openrtb"
 	"github.com/Vungle/vungo/openrtb/openrtbtest"
@@ -87,6 +87,26 @@ func TestBid_Copy(t *testing.T) {
 				Width:              0,
 			},
 		},
+		{
+			&openrtb.Bid{
+				ID:                 "test",
+				ImpressionID:       "testImpId",
+				Price:              0,
+				AdID:               "testAdID",
+				WinNotificationURL: "testWinNURL",
+				AdMarkup:           "testAdm",
+				AdvertiserDomains:  []string{"123"},
+				Bundle:             "testBundle",
+				QualityImageURL:    "testQualityImgURL",
+				CampaignID:         "testCID",
+				CreativeID:         "testCrID",
+				Categories:         []openrtb.Category{openrtb.CategoryArtsEntertainment},
+				CreativeAttributes: []openrtb.CreativeAttribute{openrtb.CreativeAttributeAudioAuto},
+				DealID:             "testDealID",
+				Height:             0,
+				Width:              0,
+			},
+		},
 	}
 	for _, testCase := range testCases {
 		b2 := testCase.bid.Copy()
@@ -99,6 +119,18 @@ func TestBid_Copy(t *testing.T) {
 			b1JSON, _ := json.MarshalIndent(testCase.bid, "", "  ")
 			b2JSON, _ := json.MarshalIndent(b2, "", "  ")
 			t.Errorf("Bids should hold the same values.\nExpected: %s\n Got: %s", b1JSON, b2JSON)
+		}
+
+		b2.ID = "1234"
+		if testCase.bid.ID == "1234" {
+			t.Errorf("bid b2 should not be pointing to original bid object.\n%+v\n%+v", testCase.bid, b2)
+		}
+
+		if len(b2.AdvertiserDomains) > 0 {
+			b2.AdvertiserDomains[0] = "456"
+			if testCase.bid.AdvertiserDomains[0] == "456" {
+				t.Errorf("bid b2 should not be pointing to original bid object attribute AdvertiserDomains.\n%+v\n%+v", testCase.bid.AdvertiserDomains, b2.AdvertiserDomains)
+			}
 		}
 	}
 }

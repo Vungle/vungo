@@ -47,5 +47,20 @@ func (bid Bid) Validate() error {
 // Copy returns a pointer to a copy of the bid object.
 func (b Bid) Copy() *Bid {
 	bCopy := b
+
+	// Copy over slices
+	if b.AdvertiserDomains != nil {
+		bCopy.AdvertiserDomains = make([]string, len(b.AdvertiserDomains))
+		copy(bCopy.AdvertiserDomains, b.AdvertiserDomains)
+	}
+	if b.Categories != nil {
+		bCopy.Categories = make([]Category, len(b.Categories))
+		copy(bCopy.Categories, b.Categories)
+	}
+	if b.CreativeAttributes != nil {
+		bCopy.CreativeAttributes = make([]CreativeAttribute, len(b.CreativeAttributes))
+		copy(bCopy.CreativeAttributes, b.CreativeAttributes)
+	}
+
 	return &bCopy
 }
