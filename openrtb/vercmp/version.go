@@ -12,20 +12,41 @@ import "strconv"
 // characters are considered as version 0.
 type Version string
 
-// IsAbove method checks whether the Version is above the other given Version. Both versions are
-// compared sequentially starting at the major version. E.g. version 2 > version 1, regardless of
-// what the minor version may be.
-func (v Version) IsAbove(ver Version) bool {
-	for nL, nR, idxL, idxR := 0, 0, 0, 0; idxL < len(v) || idxR < len(ver); {
+func (v Version) cmp(other Version) int {
+	for nL, nR, idxL, idxR := 0, 0, 0, 0; idxL < len(v) || idxR < len(other); {
 		nL, idxL = scanInt(string(v), idxL)
-		nR, idxR = scanInt(string(ver), idxR)
-
-		if nL != nR {
-			return nL > nR
+		nR, idxR = scanInt(string(other), idxR)
+		if nL == nR {
+			continue
 		}
+		return nL - nR
 	}
+	return 0
+}
 
-	return false
+// IsAbove returns whether the Version is strictly above the given other Version.
+func (v Version) IsAbove(other Version) bool {
+	return v.cmp(other) > 0
+}
+
+// IsAboveOrEqual returns whether the Version is above or equal to the given other Version.
+func (v Version) IsAboveOrEqual(other Version) bool {
+	return v.cmp(other) >= 0
+}
+
+// IsBelow returns whether the Version is strictly below the given other Version.
+func (v Version) IsBelow(other Version) bool {
+	return v.cmp(other) < 0
+}
+
+// IsBelowOrEqual returns whether the Version is below or equal the given other Version.
+func (v Version) IsBelowOrEqual(other Version) bool {
+	return v.cmp(other) <= 0
+}
+
+// IsEqual returns whether the Version is strictly equal to the given other Version.
+func (v Version) IsEqual(other Version) bool {
+	return v.cmp(other) == 0
 }
 
 // scanInt method takes a string and a starting index within the string and scans for the next
