@@ -16,10 +16,9 @@ func (v Version) cmp(other Version) int {
 	for nL, nR, idxL, idxR := 0, 0, 0, 0; idxL < len(v) || idxR < len(other); {
 		nL, idxL = scanInt(string(v), idxL)
 		nR, idxR = scanInt(string(other), idxR)
-		if nL == nR {
-			continue
+		if nL != nR {
+			return nL - nR
 		}
-		return nL - nR
 	}
 	return 0
 }
