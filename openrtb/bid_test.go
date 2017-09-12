@@ -1,9 +1,9 @@
 package openrtb_test
 
 import (
+	"encoding/json"
 	"reflect"
 	"testing"
-	"encoding/json"
 
 	"github.com/Vungle/vungo/openrtb"
 	"github.com/Vungle/vungo/openrtb/openrtbtest"
@@ -123,13 +123,13 @@ func TestBid_Copy(t *testing.T) {
 
 		b2.ID = "1234"
 		if testCase.bid.ID == "1234" {
-			t.Errorf("bid b2 should not be pointing to original bid object.\n%+v\n%+v", testCase.bid, b2)
+			t.Errorf("Bid b2 should not be pointing to original bid object.\ntestCase: %+v\nCopy: %+v", testCase.bid, b2)
 		}
 
 		if len(b2.AdvertiserDomains) > 0 {
 			b2.AdvertiserDomains[0] = "456"
 			if testCase.bid.AdvertiserDomains[0] == "456" {
-				t.Errorf("bid b2 should not be pointing to original bid object attribute AdvertiserDomains.\n%+v\n%+v", testCase.bid.AdvertiserDomains, b2.AdvertiserDomains)
+				t.Errorf("Bid b2 should not be pointing to original bid object attribute AdvertiserDomains.\ntestCase: %+v\nCopy: %+v", testCase.bid.AdvertiserDomains, b2.AdvertiserDomains)
 			}
 		}
 	}
