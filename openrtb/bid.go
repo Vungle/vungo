@@ -61,6 +61,10 @@ func (b Bid) Copy() *Bid {
 		bCopy.CreativeAttributes = make([]CreativeAttribute, len(b.CreativeAttributes))
 		copy(bCopy.CreativeAttributes, b.CreativeAttributes)
 	}
+	if b.Extension != nil {
+		bCopy.Extension = make(json.RawMessage, len(b.Extension))
+		copy(bCopy.Extension, b.Extension)
+	}
 
 	return &bCopy
 }

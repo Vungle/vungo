@@ -5,6 +5,8 @@ import (
 	"reflect"
 	"testing"
 
+	"bytes"
+
 	"github.com/Vungle/vungo/openrtb"
 	"github.com/Vungle/vungo/openrtb/openrtbtest"
 )
@@ -117,10 +119,11 @@ func TestBidResponse_Copy(t *testing.T) {
 				SeatBids: []*openrtb.SeatBid{
 					&openrtb.SeatBid{},
 				},
-				BidID:       "testBidID",
-				Currency:    openrtb.CurrencyUSD,
-				CustomData:  "testCustomData",
-				NoBidReason: openrtb.NoBidReasonUnknown,
+				BidID:        "testBidID",
+				Currency:     openrtb.CurrencyUSD,
+				CustomData:   "testCustomData",
+				NoBidReason:  openrtb.NoBidReasonUnknown,
+				RawExtension: json.RawMessage([]byte(`rawr`)),
 			},
 		},
 	}
@@ -137,9 +140,18 @@ func TestBidResponse_Copy(t *testing.T) {
 			}
 		}
 
+		if len(b2.RawExtension) > 0 {
+			b2.RawExtension = json.RawMessage([]byte(`rawr2`))
+			if bytes.Compare(testCase.bidresponse.RawExtension, json.RawMessage([]byte(`rawr2`))) == 0 {
+				t.Errorf("Bid b2 should not be pointing to original bid object attribute RawExtension.\ntestCase: %+v\nCopy: %+v", testCase.bidresponse.RawExtension, b2.RawExtension)
+			}
+		}
+
 		// Remove pointer slices so we can check other values with reflect.DeepEqual().
 		testCase.bidresponse.SeatBids = nil
 		b2.SeatBids = nil
+		testCase.bidresponse.RawExtension = nil
+		b2.RawExtension = nil
 
 		if !reflect.DeepEqual(testCase.bidresponse, b2) {
 			b1JSON, _ := json.MarshalIndent(testCase.bidresponse, "", "  ")

@@ -5,6 +5,8 @@ import (
 	"reflect"
 	"testing"
 
+	"bytes"
+
 	"github.com/Vungle/vungo/openrtb"
 	"github.com/Vungle/vungo/openrtb/openrtbtest"
 )
@@ -105,6 +107,7 @@ func TestBid_Copy(t *testing.T) {
 				DealID:             "testDealID",
 				Height:             0,
 				Width:              0,
+				Extension:          json.RawMessage([]byte(`rawr`)),
 			},
 		},
 	}
@@ -130,6 +133,13 @@ func TestBid_Copy(t *testing.T) {
 			b2.AdvertiserDomains[0] = "456"
 			if testCase.bid.AdvertiserDomains[0] == "456" {
 				t.Errorf("Bid b2 should not be pointing to original bid object attribute AdvertiserDomains.\ntestCase: %+v\nCopy: %+v", testCase.bid.AdvertiserDomains, b2.AdvertiserDomains)
+			}
+		}
+
+		if len(b2.Extension) > 0 {
+			b2.Extension = json.RawMessage([]byte(`rawr2`))
+			if bytes.Compare(testCase.bid.Extension, json.RawMessage([]byte(`rawr2`))) == 0 {
+				t.Errorf("Bid b2 should not be pointing to original bid object attribute Extension.\ntestCase: %+v\nCopy: %+v", testCase.bid.Extension, b2.Extension)
 			}
 		}
 	}

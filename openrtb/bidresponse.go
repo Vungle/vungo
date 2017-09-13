@@ -65,9 +65,16 @@ func (r BidResponse) String() string {
 // Copy returns a pointer to a copy of the bidresponse object.
 func (r *BidResponse) Copy() *BidResponse {
 	brCopy := *r
+
 	brCopy.SeatBids = []*SeatBid{}
 	for _, seat := range r.SeatBids {
 		brCopy.SeatBids = append(brCopy.SeatBids, seat.Copy())
 	}
+
+	if r.Extension != nil {
+		brCopy.RawExtension = make(json.RawMessage, len(r.RawExtension))
+		copy(brCopy.RawExtension, r.RawExtension)
+	}
+
 	return &brCopy
 }
