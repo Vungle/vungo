@@ -20,3 +20,14 @@ func (b SeatBid) Validate() error {
 	}
 	return nil
 }
+
+// Copy returns a pointer to a copy of the seatbid object.
+func (b *SeatBid) Copy() *SeatBid {
+	bCopy := *b
+	bCopy.Bids = []*Bid{}
+	for _, bid := range b.Bids {
+		bidCopy := bid.Copy()
+		bCopy.Bids = append(bCopy.Bids, bidCopy)
+	}
+	return &bCopy
+}
