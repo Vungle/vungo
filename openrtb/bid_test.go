@@ -5,8 +5,6 @@ import (
 	"reflect"
 	"testing"
 
-	"bytes"
-
 	"github.com/Vungle/vungo/openrtb"
 	"github.com/Vungle/vungo/openrtb/openrtbtest"
 )
@@ -115,7 +113,7 @@ func TestBid_Copy(t *testing.T) {
 		b2 := testCase.bid.Copy()
 
 		if b2 == testCase.bid {
-			t.Errorf("Address of bid should not be the same. b1: %v b2: %v.", &testCase.bid, &b2)
+			t.Errorf("Address of bid should not be the same. b1: %p b2: %p.", testCase.bid, b2)
 		}
 
 		if !reflect.DeepEqual(testCase.bid, b2) {
@@ -129,18 +127,17 @@ func TestBid_Copy(t *testing.T) {
 			t.Errorf("Bid b2 should not be pointing to original bid object.\ntestCase: %+v\nCopy: %+v", testCase.bid, b2)
 		}
 
-		if len(b2.AdvertiserDomains) > 0 {
-			b2.AdvertiserDomains[0] = "456"
-			if testCase.bid.AdvertiserDomains[0] == "456" {
-				t.Errorf("Bid b2 should not be pointing to original bid object attribute AdvertiserDomains.\ntestCase: %+v\nCopy: %+v", testCase.bid.AdvertiserDomains, b2.AdvertiserDomains)
+		for i := range testCase.bid.AdvertiserDomains {
+			if &testCase.bid.AdvertiserDomains[i] == &b2.AdvertiserDomains[i] {
+				t.Errorf("Address of AdvertiserDomains should not be the same in copied bid. seatbid1: %p seatbid2: %p.", testCase.bid.AdvertiserDomains[i], b2.AdvertiserDomains[i])
 			}
 		}
 
-		if len(b2.Extension) > 0 {
-			b2.Extension = json.RawMessage([]byte(`rawr2`))
-			if bytes.Compare(testCase.bid.Extension, json.RawMessage([]byte(`rawr2`))) == 0 {
-				t.Errorf("Bid b2 should not be pointing to original bid object attribute Extension.\ntestCase: %+v\nCopy: %+v", testCase.bid.Extension, b2.Extension)
+		for i := range testCase.bid.Extension {
+			if &testCase.bid.Extension[i] == &b2.Extension[i] {
+				t.Errorf("Address of Extension should not be the same in copied bid. seatbid1: %p seatbid2: %p.", testCase.bid.Extension[i], b2.Extension[i])
 			}
 		}
+
 	}
 }

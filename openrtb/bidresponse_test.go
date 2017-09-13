@@ -1,11 +1,10 @@
 package openrtb_test
 
 import (
+	"bytes"
 	"encoding/json"
 	"reflect"
 	"testing"
-
-	"bytes"
 
 	"github.com/Vungle/vungo/openrtb"
 	"github.com/Vungle/vungo/openrtb/openrtbtest"
@@ -131,12 +130,18 @@ func TestBidResponse_Copy(t *testing.T) {
 		b2 := testCase.bidresponse.Copy()
 
 		if b2 == testCase.bidresponse {
-			t.Errorf("Address of bidresponse should not be the same in copied bidrequest. bidresponse1: %v bidresponse2: %v", &testCase.bidresponse, &b2)
+			t.Errorf("Address of bidresponse should not be the same in copied bidrequest. bidresponse1: %p bidresponse2: %p", testCase.bidresponse, b2)
 		}
 
 		for i := range testCase.bidresponse.SeatBids {
 			if &testCase.bidresponse.SeatBids[i] == &b2.SeatBids[i] {
-				t.Errorf("Address of seatbids should not be the same in copied bidrequest. seatbid1: %v seatbid2: %v.", &testCase.bidresponse.SeatBids[i], &b2.SeatBids[i])
+				t.Errorf("Address of seatbids should not be the same in copied bidrequest. seatbid1: %p seatbid2: %p.", testCase.bidresponse.SeatBids[i], b2.SeatBids[i])
+			}
+		}
+
+		if testCase.bidresponse.RawExtension != nil {
+			if &testCase.bidresponse.RawExtension == &b2.RawExtension {
+				t.Errorf("Address of RawExtensions should not be the same in copied bidrequest. RawExtension1: %p RawExtension2: %p.", testCase.bidresponse.RawExtension, b2.RawExtension)
 			}
 		}
 
