@@ -37,7 +37,7 @@ func benchmarkMacroSubs(subs int, b *testing.B) {
         ${AUCTION_IMP_ID}${AUCTION_SEAT_ID}${AUCTION_AD_ID}${AUCTION_AD_ID:B64}
         ${AUCTION_PRICE}${AUCTION_CURRENCY}abc${AUCTION_ID}${AUCTION_ID}def/n`, subs)
 	br := fakeBidResponse()
-	expectedOut := openrtb.MacroSubs(in, br, br.SeatBids[0], br.SeatBids[0].Bids[0], testAuctionResult)
+	expectedOut := openrtb.MacroSubs(in, br.SeatBids[0], br.SeatBids[0].Bids[0], testAuctionResult)
 	inCh := make(chan *openrtb.BidResponse)
 	outCh := make(chan string, b.N)
 
@@ -76,7 +76,7 @@ func benchmarkMacroSubs(subs int, b *testing.B) {
 // macroSubsWorker is a worker for performing openrtb.MacroSubs in BidResponses sent through its channel.
 func macroSubsWorker(sub string, in <-chan *openrtb.BidResponse, out chan<- string, wg *sync.WaitGroup, b *testing.B) {
 	for bidRes := range in {
-		out <- openrtb.MacroSubs(sub, bidRes, bidRes.SeatBids[0], bidRes.SeatBids[0].Bids[0], testAuctionResult)
+		out <- openrtb.MacroSubs(sub, bidRes.SeatBids[0], bidRes.SeatBids[0].Bids[0], testAuctionResult)
 	}
 	wg.Done()
 }

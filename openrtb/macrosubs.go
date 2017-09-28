@@ -70,7 +70,7 @@ var findMatchesPool = sync.Pool{
 // It takes a string which the substitutions should be performed on, and a *BidResponse to determine the values to be substituted.
 // MacroSubs assumes that the BidResponse has exactly one seat, which has exactly one bid.
 // If this is not true, it will return empty string and an error.
-func MacroSubs(stringToSub string, response *BidResponse, seat *SeatBid, bid *Bid, settlement Settlement) string {
+func MacroSubs(stringToSub string, seat *SeatBid, bid *Bid, settlement Settlement) string {
 	m := map[macro]string{
 		auctionID:       settlement.AuctionID(),
 		auctionBidID:    bid.ID,
