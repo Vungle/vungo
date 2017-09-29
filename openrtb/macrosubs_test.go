@@ -73,7 +73,7 @@ func TestMacroSubs(t *testing.T) {
 	}
 	for i, test := range tests {
 		t.Run(fmt.Sprintf("%d", i), func(t *testing.T) {
-			actual := openrtb.MacroSubs(test.input, bidRes, bidRes.SeatBids[0], bidRes.SeatBids[0].Bids[0], testAuctionResult)
+			actual := openrtb.MacroSubs(test.input, bidRes.SeatBids[0], bidRes.SeatBids[0].Bids[0], testAuctionResult)
 			if actual != test.expected {
 				t.Errorf(`Expected "%s", but got "%s" instead.`, test.expected, actual)
 			}
@@ -89,7 +89,7 @@ func TestMacroSubsDifferentSettlementPrice(t *testing.T) {
 		price:    11.11,
 		currency: openrtb.CurrencyUSD,
 	}
-	actual := openrtb.MacroSubs("price:${AUCTION_PRICE}", bidRes, bidRes.SeatBids[0], bidRes.SeatBids[0].Bids[0], ar)
+	actual := openrtb.MacroSubs("price:${AUCTION_PRICE}", bidRes.SeatBids[0], bidRes.SeatBids[0].Bids[0], ar)
 	if actual != "price:11.110000000" {
 		t.Errorf(`Expected "price:11.110000000" but got: "%s"`, actual)
 	}
@@ -119,11 +119,11 @@ func TestMacroSubsErrCases(t *testing.T) {
 		ID:       "bidResWith2Seatbids",
 		SeatBids: []*openrtb.SeatBid{&seatBid1, &seatBid2},
 	}
-	result := openrtb.MacroSubs("${AUCTION_ID}${AUCTION_BID_ID}", bidResWith2Bids, bidResWith2Bids.SeatBids[0], bidResWith2Bids.SeatBids[0].Bids[1], testAuctionResult)
+	result := openrtb.MacroSubs("${AUCTION_ID}${AUCTION_BID_ID}", bidResWith2Bids.SeatBids[0], bidResWith2Bids.SeatBids[0].Bids[1], testAuctionResult)
 	if result != "auction1234bid2" {
 		t.Errorf(`Expected "auction1234bid2", got "%s" instead.`, result)
 	}
-	result = openrtb.MacroSubs("${AUCTION_ID}${AUCTION_SEAT_ID}", bidResWith2SeatBids, bidResWith2SeatBids.SeatBids[0], bidResWith2SeatBids.SeatBids[0].Bids[0], testAuctionResult)
+	result = openrtb.MacroSubs("${AUCTION_ID}${AUCTION_SEAT_ID}", bidResWith2SeatBids.SeatBids[0], bidResWith2SeatBids.SeatBids[0].Bids[0], testAuctionResult)
 	if result != "auction1234seatbid1" {
 		t.Errorf(`Expected "auction1234seatbid1", got "%s" instead.`, result)
 	}
