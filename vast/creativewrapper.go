@@ -13,7 +13,7 @@ type CreativeWrapper struct {
 }
 
 // Validate method validates the CreativeWrapper.
-// CreativeWrapper should contain exactly one of LinearWrapper, CompanionAdsWrapper, and NonLinearAdsWrapper.
+// CreativeWrapper can contain up to one of LinearWrapper, CompanionAdsWrapper, and NonLinearAdsWrapper.
 func (cw *CreativeWrapper) Validate() error {
 	errors := make([]error, 0)
 	// Empty creative is valid for wrapper creative.
