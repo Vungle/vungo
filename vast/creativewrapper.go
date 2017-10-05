@@ -16,6 +16,10 @@ type CreativeWrapper struct {
 // CreativeWrapper should contain exactly one of LinearWrapper, CompanionAdsWrapper, and NonLinearAdsWrapper.
 func (cw *CreativeWrapper) Validate() error {
 	errors := make([]error, 0)
+	// Empty creative is valid for wrapper creative.
+	//if cw.Linear == nil && cw.CompanionAds == nil && cw.NonLinearAds == nil {
+	//	return nil
+	//}
 	if cw.Linear != nil {
 		if cw.CompanionAds != nil || cw.NonLinearAds != nil {
 			errors = append(errors, ErrCreativeWrapperType)
