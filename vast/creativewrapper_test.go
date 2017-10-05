@@ -24,7 +24,7 @@ var creativeWrapperTests = []vasttest.VastTest{
 	vasttest.VastTest{&vast.CreativeWrapper{}, vast.ErrCreativeWrapperType, "creativewrapper_without_companionads.xml"},
 	vasttest.VastTest{&vast.CreativeWrapper{}, vast.ErrIconResourcesFormat, "creativewrapper_error_linear.xml"},
 	vasttest.VastTest{&vast.CreativeWrapper{}, vast.ErrCompanionAdsWrapperMissCompanions, "creativewrapper_error_companionads.xml"},
-	vasttest.VastTest{&vast.CreativeWrapper{}, vast.ErrCreativeWrapperType, "creativewrapper_without_ads.xml"},
+	vasttest.VastTest{&vast.CreativeWrapper{}, nil, "creativewrapper_without_ads.xml"},
 }
 
 func TestCreativeWrapperValidateErrors(t *testing.T) {

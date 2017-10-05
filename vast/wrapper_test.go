@@ -15,7 +15,7 @@ func TestWrapperMarshalUnmarshal(t *testing.T) {
 }
 
 var wrapperTests = []vasttest.VastTest{
-	vasttest.VastTest{&vast.Wrapper{}, vast.ErrCreativeWrapperType, "wrapper.xml"},
+	vasttest.VastTest{&vast.Wrapper{}, vast.ErrIconResourcesFormat, "wrapper.xml"},
 	vasttest.VastTest{&vast.Wrapper{}, nil, "wrapper_valid.xml"},
 	vasttest.VastTest{&vast.Wrapper{}, vast.ErrAdSystemMissSystem, "wrapper_error_adsystem.xml"},
 	vasttest.VastTest{&vast.Wrapper{}, vast.ErrImpressionMissUri, "wrapper_error_impression.xml"},
