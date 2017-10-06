@@ -24,33 +24,25 @@ func (creative *Creative) Validate() error {
 		if creative.CompanionAds != nil || creative.NonLinearAds != nil {
 			errors = append(errors, ErrCreativeType)
 		}
-	} else if creative.CompanionAds != nil {
-		if creative.NonLinearAds != nil {
-			errors = append(errors, ErrCreativeType)
-		}
-	} else if creative.NonLinearAds == nil {
-		errors = append(errors, ErrCreativeType)
-	}
-
-	if creative.Linear != nil {
 		if err := creative.Linear.Validate(); err != nil {
 			ve, ok := err.(ValidationError)
 			if ok {
 				errors = append(errors, ve.Errs...)
 			}
 		}
-	}
-
-	if creative.CompanionAds != nil {
+	} else if creative.CompanionAds != nil {
+		if creative.NonLinearAds != nil {
+			errors = append(errors, ErrCreativeType)
+		}
 		if err := creative.CompanionAds.Validate(); err != nil {
 			ve, ok := err.(ValidationError)
 			if ok {
 				errors = append(errors, ve.Errs...)
 			}
 		}
-	}
-
-	if creative.NonLinearAds != nil {
+	} else if creative.NonLinearAds == nil {
+		errors = append(errors, ErrCreativeType)
+	} else if creative.NonLinearAds != nil {
 		if err := creative.NonLinearAds.Validate(); err != nil {
 			ve, ok := err.(ValidationError)
 			if ok {
