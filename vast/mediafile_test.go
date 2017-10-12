@@ -24,6 +24,7 @@ var mediaFileTests = []vasttest.VastTest{
 	vasttest.VastTest{&vast.MediaFile{}, vast.ErrMediaFileMissUri, "mediafile_without_uri.xml"},
 	vasttest.VastTest{&vast.MediaFile{}, vast.ErrMediaFileBitrateTooHigh, "mediafile_bitrate_too_high.xml"},
 	vasttest.VastTest{&vast.MediaFile{}, vast.ErrMediaFileBitrateTooLow, "mediafile_bitrate_too_low.xml"},
+	vasttest.VastTest{&vast.MediaFile{}, nil, "mediafile_without_bitrate.xml"},
 	vasttest.VastTest{&vast.MediaFile{}, vast.ErrMediaFileHeightTooHigh, "mediafile_height_too_high.xml"},
 	vasttest.VastTest{&vast.MediaFile{}, vast.ErrMediaFileHeightTooLow, "mediafile_height_too_low.xml"},
 	vasttest.VastTest{&vast.MediaFile{}, vast.ErrMediaFileWidthTooHigh, "mediafile_width_too_high.xml"},
