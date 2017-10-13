@@ -1,6 +1,8 @@
 package vast
 
-import "github.com/Vungle/vungo/vast/defaults"
+import (
+	"github.com/Vungle/vungo/vast/defaults"
+)
 
 // MediaFile represents a <MediaFile> element that contains a reference to the creative asset in a
 // linear creative.
@@ -9,9 +11,9 @@ type MediaFile struct {
 	Delivery                  Delivery `xml:"delivery,attr"`             // Required.
 	MimeType                  string   `xml:"type,attr"`                 // Required.
 	Codec                     string   `xml:"codec,attr,omitempty"`      // VAST3.0.
-	Bitrate                   int      `xml:"bitrate,attr,omitempty"`    // In Kbps; absent if MaxBitrate and MinBitrate are present.
-	MinBitrate                int      `xml:"minBitrate,attr,omitempty"` // In Kbps; absent if Bitrate is present. VAST3.0.
-	MaxBitrate                int      `xml:"maxBitrate,attr,omitempty"` // In Kbps; absent if Bitrate is present. VAST3.0.
+	Bitrate                   *int     `xml:"bitrate,attr,omitempty"`    // In Kbps; absent if MaxBitrate and MinBitrate are present.
+	MinBitrate                *int     `xml:"minBitrate,attr,omitempty"` // In Kbps; absent if Bitrate is present. VAST3.0.
+	MaxBitrate                *int     `xml:"maxBitrate,attr,omitempty"` // In Kbps; absent if Bitrate is present. VAST3.0.
 	Width                     int      `xml:"width,attr"`                // Required.
 	Height                    int      `xml:"height,attr"`               // Required.
 	IsScalable                bool     `xml:"scalable,attr,omitempty"`
@@ -49,22 +51,19 @@ func (mediaFile *MediaFile) Validate() error {
 		errors = append(errors, ErrMediaFileMissUri)
 	}
 
-	if mediaFile.Bitrate != 0 {
-		if mediaFile.Bitrate < defaults.MIN_VIDEO_BITRATE {
+	if mediaFile.Bitrate != nil {
+		if *mediaFile.Bitrate < defaults.MIN_VIDEO_BITRATE {
 			errors = append(errors, ErrMediaFileBitrateTooLow)
 		}
-
-		if mediaFile.Bitrate > defaults.MAX_VIDEO_BITRATE {
+		if *mediaFile.Bitrate > defaults.MAX_VIDEO_BITRATE {
 			errors = append(errors, ErrMediaFileBitrateTooHigh)
 		}
-	} else {
-		if mediaFile.MaxBitrate < defaults.MIN_VIDEO_BITRATE {
-			errors = append(errors, ErrMediaFileBitrateTooLow)
-		}
-
-		if mediaFile.MinBitrate > defaults.MAX_VIDEO_BITRATE {
-			errors = append(errors, ErrMediaFileBitrateTooHigh)
-		}
+	}
+	if mediaFile.MaxBitrate != nil && *mediaFile.MaxBitrate < defaults.MIN_VIDEO_BITRATE {
+		errors = append(errors, ErrMediaFileBitrateTooLow)
+	}
+	if mediaFile.MinBitrate != nil && *mediaFile.MinBitrate > defaults.MAX_VIDEO_BITRATE {
+		errors = append(errors, ErrMediaFileBitrateTooHigh)
 	}
 
 	if mediaFile.Width > defaults.MAX_VIDEO_WIDTH {
