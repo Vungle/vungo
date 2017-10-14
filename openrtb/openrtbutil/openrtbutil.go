@@ -1,9 +1,10 @@
 package openrtbutil
 
 import (
-	"github.com/Vungle/vungo/openrtb"
-	"golang.org/x/net/context"
+	"context"
 	"net/http"
+
+	"github.com/Vungle/vungo/openrtb"
 )
 
 // RequestBid method sends a high-level bid request to a given endpoint for a bid response over the

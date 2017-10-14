@@ -1,17 +1,18 @@
 package vastutil_test
 
 import (
+	"context"
 	"encoding/xml"
 	"fmt"
 	"io/ioutil"
 	"net/http"
 	"os"
 	"reflect"
+	"strings"
 	"testing"
 
 	"github.com/Vungle/vungo/vast"
 	"github.com/Vungle/vungo/vast/vastutil"
-	"golang.org/x/net/context"
 )
 
 func TestUnwrap(t *testing.T) {
@@ -82,8 +83,8 @@ func TestUnwrapShouldRespectContext(t *testing.T) {
 	_, err = vastutil.Unwrap(ctx, data)
 
 	// Expect error to occur.
-	if err != context.Canceled {
-		t.Errorf("Error should have been %v instead of %v.", context.Canceled, err)
+	if !strings.Contains(err.Error(), context.Canceled.Error()) {
+		t.Errorf("Expected %v, got %v.", context.Canceled, err)
 	}
 }
 

@@ -1,12 +1,11 @@
 package vastutil
 
 import (
+	"context"
 	"encoding/xml"
 	"net/http"
 
 	"github.com/Vungle/vungo/vast"
-	"golang.org/x/net/context"
-	"golang.org/x/net/context/ctxhttp"
 )
 
 var defaultUnwrapClient = http.DefaultClient
@@ -43,7 +42,16 @@ func unwrap(ctx context.Context, v *vast.Vast, unwrappedList []*vast.Vast) ([]*v
 	}
 
 	var innerVast vast.Vast
-	resp, err := ctxhttp.Get(ctx, defaultUnwrapClient, w.VastAdTagUri)
+
+	req, err := http.NewRequest("GET", w.VastAdTagUri, nil)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	resp, err := defaultUnwrapClient.Do(req)
+	if err != nil {
+		return nil, err
+	}
 	defer func() {
 		if resp != nil && resp.Body != nil {
 			resp.Body.Close()

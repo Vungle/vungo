@@ -1,6 +1,7 @@
 package openrtbutil_test
 
 import (
+	"context"
 	"encoding/json"
 	"net/url"
 	"reflect"
@@ -8,7 +9,6 @@ import (
 
 	"github.com/Vungle/vungo/openrtb"
 	"github.com/Vungle/vungo/openrtb/openrtbutil"
-	"golang.org/x/net/context"
 )
 
 func TestNewRequestError(t *testing.T) {

@@ -1,6 +1,7 @@
 package openrtbutil_test
 
 import (
+	"context"
 	"io/ioutil"
 	"net"
 	"net/http"
@@ -10,7 +11,6 @@ import (
 
 	"github.com/Vungle/vungo/openrtb"
 	"github.com/Vungle/vungo/openrtb/openrtbutil"
-	"golang.org/x/net/context"
 )
 
 // setupTestServer method starts up a test server and returns a dummy bid response. Caller may

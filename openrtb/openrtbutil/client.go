@@ -2,6 +2,7 @@ package openrtbutil
 
 import (
 	"bytes"
+	"context"
 	"io"
 	"io/ioutil"
 	"log"
@@ -10,7 +11,6 @@ import (
 	"time"
 
 	"github.com/Vungle/vungo/openrtb"
-	"golang.org/x/net/context"
 )
 
 // defaultDiscardDuration is the default amount of time the client will spend on trying to discard
