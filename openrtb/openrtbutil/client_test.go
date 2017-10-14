@@ -2,6 +2,7 @@ package openrtbutil
 
 import (
 	"bytes"
+	"context"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -15,7 +16,6 @@ import (
 	"time"
 
 	"github.com/Vungle/vungo/openrtb"
-	"golang.org/x/net/context"
 )
 
 // MakeSimpleRequest sends a dummy bid request to the specified url just to get some bid response

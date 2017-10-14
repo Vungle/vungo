@@ -2,10 +2,10 @@ package openrtbutil
 
 import (
 	"bytes"
+	"context"
 	"net/http"
 
 	"github.com/Vungle/vungo/openrtb"
-	"golang.org/x/net/context"
 )
 
 // Request represents a high-level bid request object constructed with an existing bid request, HTTP
