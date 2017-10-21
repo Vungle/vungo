@@ -56,15 +56,6 @@ func (linear *Linear) Validate() error {
 		}
 	}
 
-	if linear.AdParameters != nil {
-		if err := linear.AdParameters.Validate(); err != nil {
-			ve, ok := err.(ValidationError)
-			if ok {
-				errors = append(errors, ve.Errs...)
-			}
-		}
-	}
-
 	var err error
 	var validMedia *MediaFile
 	for _, mediaFile := range linear.MediaFiles {

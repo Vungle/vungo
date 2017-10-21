@@ -27,14 +27,6 @@ type CompanionWrapper struct {
 // Validate method validates the CompanionWrapper according to the VAST.
 func (c *CompanionWrapper) Validate() error {
 	errors := make([]error, 0)
-	if c.AdParameters != nil {
-		if err := c.AdParameters.Validate(); err != nil {
-			ve, ok := err.(ValidationError)
-			if ok {
-				errors = append(errors, ve.Errs...)
-			}
-		}
-	}
 
 	for _, tracking := range c.Trackings {
 		if err := tracking.Validate(); err != nil {

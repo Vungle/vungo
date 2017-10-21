@@ -6,13 +6,3 @@ type AdParameters struct {
 
 	IsXmlEncoded bool `xml:"xmlEncoded,attr,omitempty"` // VAST3.0.
 }
-
-// Validate method validates the AdParameters according to the VAST.
-// Parameters are required.
-func (p *AdParameters) Validate() error {
-	if len(p.Parameters) == 0 {
-		return ValidationError{Errs: []error{ErrAdParametersMissParameters}}
-	}
-
-	return nil
-}
