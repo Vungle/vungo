@@ -15,12 +15,6 @@ func TestAdParametersMarshalUnmarshal(t *testing.T) {
 	vasttest.VerifyModelAgainstFile(t, "AdParameters", "adparameters.xml", AdParametersModelType)
 }
 
-func TestAdParametersValidateError(t *testing.T) {
-	vasttest.VerifyVastElementFromFile(t, "testdata/adparameters.xml", &vast.AdParameters{}, nil)
-	vasttest.VerifyVastElementFromBytes(t, []byte(`<AdParameters xmlEncoded="true"></AdParameters>`),
-		&vast.AdParameters{}, vast.ErrAdParametersMissParameters)
-}
-
 func TestAdParametersWithWhitespace(t *testing.T) {
 	xmlData := `<AdParameters>
 	<![CDATA[just me]]>

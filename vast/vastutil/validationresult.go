@@ -30,7 +30,6 @@ const (
 	RESULT_UNWRAP_WITH_MULTIPLE_ADS   VastValidationResult = 10000
 	RESULT_WRAPPER_MISSING_AD_TAG_URI VastValidationResult = 10001
 
-	RESULT_AD_PARAMETERS_MISS_PARAMETERS         VastValidationResult = 20000
 	RESULT_AD_SYSTEM_MISS_SYSTEM                 VastValidationResult = 20001
 	RESULT_AD_TYPE                               VastValidationResult = 20002
 	RESULT_COMPANION_ADS_MISS_COMPANIONS         VastValidationResult = 20003
@@ -100,8 +99,6 @@ func getValidationResultFromErr(err error) VastValidationResult {
 	case ErrWrapperMissingAdTagUri:
 		return RESULT_WRAPPER_MISSING_AD_TAG_URI
 
-	case vast.ErrAdParametersMissParameters:
-		return RESULT_AD_PARAMETERS_MISS_PARAMETERS
 	case vast.ErrAdSystemMissSystem:
 		return RESULT_AD_SYSTEM_MISS_SYSTEM
 	case vast.ErrAdType:
