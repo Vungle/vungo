@@ -21,7 +21,7 @@ var linearTests = []vasttest.VastTest{
 	vasttest.VastTest{&vast.Linear{}, nil, "linear_valid.xml"},
 	vasttest.VastTest{&vast.Linear{}, nil, "linear_at_least_one_valid_mediafile.xml"},
 	vasttest.VastTest{&vast.Linear{}, vast.ErrLinearMissMediaFiles, "linear_without_mediafiles.xml"},
-	vasttest.VastTest{&vast.Linear{}, vast.ErrAdParametersMissParameters, "linear_error_adparameters.xml"},
+	vasttest.VastTest{&vast.Linear{}, nil, "linear_error_adparameters.xml"},
 	vasttest.VastTest{&vast.Linear{}, vast.ErrDurationEqualZero, "linear_error_duration.xml"},
 	vasttest.VastTest{&vast.Linear{}, vast.ErrIconResourcesFormat, "linear_error_icon.xml"},
 	vasttest.VastTest{&vast.Linear{}, vast.ErrMediaFileSize, "linear_error_mediafiles.xml"},

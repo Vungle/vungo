@@ -59,15 +59,6 @@ func (companion *Companion) Validate() error {
 		}
 	}
 
-	if companion.AdParameters != nil {
-		if err := companion.AdParameters.Validate(); err != nil {
-			ve, ok := err.(ValidationError)
-			if ok {
-				errors = append(errors, ve.Errs...)
-			}
-		}
-	}
-
 	if len(errors) > 0 {
 		return ValidationError{Errs: errors}
 	}

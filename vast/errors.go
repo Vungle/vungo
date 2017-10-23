@@ -4,8 +4,6 @@ import "errors"
 
 // Please keep the variables alphabetized.
 
-var ErrAdParametersMissParameters = errors.New("AdParameters misses Parameters.")
-
 var ErrAdSystemMissSystem = errors.New("AdSystem misses system.")
 
 var ErrAdType = errors.New("Ad should only contain one of Inline and Wrapper.")
