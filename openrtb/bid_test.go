@@ -100,7 +100,7 @@ func TestBid_Copy(t *testing.T) {
 				QualityImageURL:    "testQualityImgURL",
 				CampaignID:         "testCID",
 				CreativeID:         "testCrID",
-				Categories:         []openrtb.Category{openrtb.CategoryArtsEntertainment},
+				Categories:         []openrtb.Category{openrtb.CategoryArtsAndEntertainment},
 				CreativeAttributes: []openrtb.CreativeAttribute{openrtb.CreativeAttributeAudioAuto},
 				DealID:             "testDealID",
 				Height:             0,
