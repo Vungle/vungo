@@ -37,30 +37,6 @@ func (c *CompanionWrapper) Validate() error {
 		}
 	}
 
-	if c.StaticResource != nil {
-		if c.HtmlResource != nil || len(c.IFrameResource) != 0 {
-			errors = append(errors, ErrCompanionWrapperResourceFormat)
-		}
-		if err := c.StaticResource.Validate(); err != nil {
-			ve, ok := err.(ValidationError)
-			if ok {
-				errors = append(errors, ve.Errs...)
-			}
-		}
-	} else if c.HtmlResource != nil {
-		if len(c.IFrameResource) != 0 {
-			errors = append(errors, ErrCompanionWrapperResourceFormat)
-		}
-		if err := c.HtmlResource.Validate(); err != nil {
-			ve, ok := err.(ValidationError)
-			if ok {
-				errors = append(errors, ve.Errs...)
-			}
-		}
-	} else if len(c.IFrameResource) == 0 {
-		errors = append(errors, ErrCompanionWrapperResourceFormat)
-	}
-
 	if len(errors) > 0 {
 		return ValidationError{Errs: errors}
 	}

@@ -14,8 +14,6 @@ var ErrCompanionAdsWrapperMissCompanions = errors.New("CompanionAdsWrapper misse
 
 var ErrCompanionResourceFormat = errors.New("Companion should only contain one of IFrameResource, StaticResource, and HtmlResource.")
 
-var ErrCompanionWrapperResourceFormat = errors.New("CompanionWrapperResource should only contain one of IFrameResource, StaticResource, and HtmlResource.")
-
 var ErrCreativeType = errors.New("Creative should contain one type of NonLinearAds, Linear, CompanionAds.")
 
 var ErrCreativeWrapperType = errors.New("CreativeWrapper should contain one type of NonLinearAds, Linear, CompanionAds.")
