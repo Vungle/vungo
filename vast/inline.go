@@ -31,10 +31,6 @@ func (inline *InLine) Validate() error {
 		errors = append(errors, ErrInlineMissAdTitle)
 	}
 
-	if len(inline.Impressions) == 0 {
-		errors = append(errors, ErrInlineMissImpressions)
-	}
-
 	if len(inline.Creatives) == 0 {
 		errors = append(errors, ErrInlineMissCreatives)
 	}
