@@ -29,10 +29,6 @@ func (w *Wrapper) Validate() error {
 		errors = append(errors, ErrWrapperMissVastAdTagUri)
 	}
 
-	if len(w.Impressions) == 0 {
-		errors = append(errors, ErrWrapperMissImpressions)
-	}
-
 	for _, impression := range w.Impressions {
 		if err := impression.Validate(); err != nil {
 			ve, ok := err.(ValidationError)
