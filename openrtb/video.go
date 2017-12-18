@@ -38,3 +38,50 @@ func (v Video) Validate() error {
 	}
 	return nil
 }
+
+// Copy returns a pointer to a copy of the Video object.
+func (v *Video) Copy() *Video {
+	vCopy := *v
+
+	if v.MIMETypes != nil {
+		vCopy.MIMETypes = make([]string, len(v.MIMETypes))
+		copy(vCopy.MIMETypes, v.MIMETypes)
+	}
+
+	if v.MinDuration != nil {
+		minDurationCopy := *v.MinDuration
+		vCopy.MinDuration = &minDurationCopy
+	}
+
+	if v.MaxDuration != nil {
+		MaxDurationCopy := *v.MaxDuration
+		vCopy.MaxDuration = &MaxDurationCopy
+	}
+
+	if v.Protocols != nil {
+		vCopy.Protocols = make([]VideoProtocol, len(v.Protocols))
+		copy(vCopy.Protocols, v.Protocols)
+	}
+
+	if v.StartDelay != nil {
+		StartDelayCopy := *v.StartDelay
+		vCopy.StartDelay = &StartDelayCopy
+	}
+
+	if v.PlaybackMethods != nil {
+		vCopy.PlaybackMethods = make([]PlaybackMethod, len(v.PlaybackMethods))
+		copy(vCopy.PlaybackMethods, v.PlaybackMethods)
+	}
+
+	if v.DeliveryMethods != nil {
+		vCopy.DeliveryMethods = make([]DeliveryMethod, len(v.DeliveryMethods))
+		copy(vCopy.DeliveryMethods, v.DeliveryMethods)
+	}
+
+	if v.APIFrameworks != nil {
+		vCopy.APIFrameworks = make([]APIFramework, len(v.APIFrameworks))
+		copy(vCopy.APIFrameworks, v.APIFrameworks)
+	}
+
+	return &vCopy
+}

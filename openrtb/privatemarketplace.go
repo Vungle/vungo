@@ -9,3 +9,17 @@ type PrivateMarketplace struct {
 	IsPrivateAuction NumericBool `json:"private_auction"`
 	Deals            []*Deal     `json:"deals"`
 }
+
+// Copy returns a pointer to a copy of the Impression object.
+func (pmp *PrivateMarketplace) Copy() *PrivateMarketplace {
+	pmpCopy := *pmp
+
+	if pmp.Deals != nil {
+		pmpCopy.Deals = []*Deal{}
+		for i := range pmp.Deals {
+			pmpCopy.Deals = append(pmpCopy.Deals, pmp.Deals[i].Copy())
+		}
+	}
+
+	return &pmpCopy
+}

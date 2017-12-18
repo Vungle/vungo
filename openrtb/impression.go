@@ -19,3 +19,20 @@ type Impression struct {
 	PrivateMarketplace    *PrivateMarketplace `json:"pmp,omitempty"`
 	Extension             interface{}         `json:"ext,omitempty"`
 }
+
+// Copy returns a pointer to a copy of the Impression object.
+func (imp *Impression) Copy() *Impression {
+	impressionCopy := *imp
+	if imp.Video != nil {
+		impressionCopy.Video = imp.Video.Copy()
+	}
+
+	if imp.PrivateMarketplace != nil {
+		impressionCopy.PrivateMarketplace = imp.PrivateMarketplace.Copy()
+	}
+
+	// extension copying has to be done by the user of this package manually.
+	impressionCopy.Extension = nil
+
+	return &impressionCopy
+}
