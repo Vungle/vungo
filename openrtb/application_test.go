@@ -1,10 +1,9 @@
 package openrtb_test
 
 import (
+	"encoding/json"
 	"reflect"
 	"testing"
-
-	"encoding/json"
 
 	"github.com/Vungle/vungo/openrtb"
 	"github.com/Vungle/vungo/openrtb/openrtbtest"
@@ -40,7 +39,7 @@ func TestApplication_Copy(t *testing.T) {
 				Publisher: &openrtb.Publisher{
 					ID:         "testPublisher",
 					Name:       "testName",
-					Categories: []openrtb.Category{},
+					Categories: []openrtb.Category{openrtb.CategoryAdvertising},
 					Domain:     "testDomain",
 				},
 				Keywords:  "testKeywords",
