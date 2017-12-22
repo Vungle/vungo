@@ -11,3 +11,15 @@ type Publisher struct {
 	Categories []Category `json:"cat,omitempty"`
 	Domain     string     `json:"domain,omitempty"`
 }
+
+// Copy returns a pointer to a copy of the Publisher object.
+func (p *Publisher) Copy() *Publisher {
+	pubCopy := *p
+
+	if p.Categories != nil {
+		pubCopy.Categories = make([]Category, len(p.Categories))
+		copy(pubCopy.Categories, p.Categories)
+	}
+
+	return &pubCopy
+}

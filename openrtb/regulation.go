@@ -8,3 +8,14 @@ package openrtb
 type Regulation struct {
 	IsCoppaCompliant *NumericBool `json:"coppa,omitempty"`
 }
+
+// Copy returns a pointer to a copy of the Regulation object.
+func (r *Regulation) Copy() *Regulation {
+	regulationCopy := *r
+	if r.IsCoppaCompliant != nil {
+		coppaCopy := *r.IsCoppaCompliant
+		regulationCopy.IsCoppaCompliant = &coppaCopy
+	}
+
+	return &regulationCopy
+}

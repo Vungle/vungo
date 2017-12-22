@@ -44,3 +44,53 @@ func (r BidRequest) Validate() error {
 func (r BidRequest) String() string {
 	return fmt.Sprintf("[%s;%d]", r.ID, len(r.Impressions))
 }
+
+// Copy returns a pointer to a copy of the BidRequest object.
+func (r *BidRequest) Copy() *BidRequest {
+	brCopy := *r
+
+	if r.Impressions != nil {
+		brCopy.Impressions = []*Impression{}
+		for i := range r.Impressions {
+			brCopy.Impressions = append(brCopy.Impressions, r.Impressions[i].Copy())
+		}
+	}
+
+	if r.Application != nil {
+		brCopy.Application = r.Application.Copy()
+	}
+
+	if r.Device != nil {
+		brCopy.Device = r.Device.Copy()
+	}
+
+	if r.User != nil {
+		brCopy.User = r.User.Copy()
+	}
+
+	if r.WhitelistedSeats != nil {
+		brCopy.WhitelistedSeats = make([]string, len(r.WhitelistedSeats))
+		copy(brCopy.WhitelistedSeats, r.WhitelistedSeats)
+	}
+
+	if r.Currencies != nil {
+		brCopy.Currencies = make([]Currency, len(r.Currencies))
+		copy(brCopy.Currencies, r.Currencies)
+	}
+
+	if r.BlockedCategories != nil {
+		brCopy.BlockedCategories = make([]Category, len(r.BlockedCategories))
+		copy(brCopy.BlockedCategories, r.BlockedCategories)
+	}
+
+	if r.BlockedAdvertisers != nil {
+		brCopy.BlockedAdvertisers = make([]string, len(r.BlockedAdvertisers))
+		copy(brCopy.BlockedAdvertisers, r.BlockedAdvertisers)
+	}
+
+	if r.Regulation != nil {
+		brCopy.Regulation = r.Regulation.Copy()
+	}
+
+	return &brCopy
+}

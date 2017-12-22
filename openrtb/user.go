@@ -16,3 +16,15 @@ type User struct {
 	Geo        *Geo        `json:"geo,omitempty"`
 	Extension  interface{} `json:"ext,omitempty"`
 }
+
+// Copy returns a pointer to a copy of the User object.
+func (u *User) Copy() *User {
+	userCopy := *u
+
+	if u.Geo != nil {
+		GeoCopy := *u.Geo
+		userCopy.Geo = &GeoCopy
+	}
+
+	return &userCopy
+}

@@ -36,3 +36,29 @@ type Device struct {
 	MACMD5               string         `json:"macmd5,omitempty"`
 	Extension            interface{}    `json:"ext,omitempty"`
 }
+
+func (d *Device) Copy() *Device {
+	deviceCopy := *d
+
+	if d.Geo != nil {
+		geoCopy := *d.Geo
+		deviceCopy.Geo = &geoCopy
+	}
+
+	if d.HasDoNotTrack != nil {
+		HasDoNotTrackCopy := *d.HasDoNotTrack
+		deviceCopy.HasDoNotTrack = &HasDoNotTrackCopy
+	}
+
+	if d.HasLimitedAdTracking != nil {
+		HasLimitedAdTrackingCopy := *d.HasLimitedAdTracking
+		deviceCopy.HasLimitedAdTracking = &HasLimitedAdTrackingCopy
+	}
+
+	if d.SupportsJavaScript != nil {
+		SupportsJavaScriptCopy := *d.SupportsJavaScript
+		deviceCopy.SupportsJavaScript = &SupportsJavaScriptCopy
+	}
+
+	return &deviceCopy
+}

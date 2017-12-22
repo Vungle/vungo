@@ -28,3 +28,28 @@ type Application struct {
 func (a Application) Validate() error {
 	return nil
 }
+
+func (a *Application) Copy() *Application {
+	appCopy := *a
+
+	if appCopy.Categories != nil {
+		appCopy.Categories = make([]Category, len(a.Categories))
+		copy(appCopy.Categories, a.Categories)
+	}
+
+	if appCopy.SectionCategories != nil {
+		appCopy.SectionCategories = make([]Category, len(a.SectionCategories))
+		copy(appCopy.SectionCategories, a.SectionCategories)
+	}
+
+	if appCopy.PageCategories != nil {
+		appCopy.PageCategories = make([]Category, len(a.PageCategories))
+		copy(appCopy.PageCategories, a.PageCategories)
+	}
+
+	if a.Publisher != nil {
+		appCopy.Publisher = a.Publisher.Copy()
+	}
+
+	return &appCopy
+}

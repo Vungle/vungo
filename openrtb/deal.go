@@ -12,3 +12,14 @@ type Deal struct {
 	AuctionType      AuctionType `json:"at,omitempty"`
 	WhitelistedSeats []string    `json:"wseat,omitempty"`
 }
+
+func (d *Deal) Copy() *Deal {
+	dealCopy := *d
+
+	if d.WhitelistedSeats != nil {
+		dealCopy.WhitelistedSeats = make([]string, len(d.WhitelistedSeats))
+		copy(dealCopy.WhitelistedSeats, d.WhitelistedSeats)
+	}
+
+	return &dealCopy
+}
