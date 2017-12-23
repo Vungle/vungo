@@ -24,7 +24,7 @@ var companionWrapperTests = []vasttest.VastTest{
 	vasttest.VastTest{&vast.CompanionWrapper{}, nil, "companionwrapper_without_iframeresource.xml"},
 	vasttest.VastTest{&vast.CompanionWrapper{}, nil, "companionwrapper_without_htmlresource.xml"},
 	vasttest.VastTest{&vast.CompanionWrapper{}, nil, "companionwrapper_error_adparameters.xml"},
-	vasttest.VastTest{&vast.CompanionWrapper{}, vast.ErrHtmlResourceMissHtml, "companionwrapper_error_htmlresource.xml"},
+	vasttest.VastTest{&vast.CompanionWrapper{}, nil, "companionwrapper_error_htmlresource.xml"},
 }
 
 func TestCompanionWrapperValidateErrors(t *testing.T) {

@@ -51,15 +51,6 @@ func (icon *Icon) Validate() error {
 		}
 	}
 
-	if icon.HtmlResource != nil {
-		if err := icon.HtmlResource.Validate(); err != nil {
-			ve, ok := err.(ValidationError)
-			if ok {
-				errors = append(errors, ve.Errs...)
-			}
-		}
-	}
-
 	if len(errors) > 0 {
 		return ValidationError{Errs: errors}
 	}

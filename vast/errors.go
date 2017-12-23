@@ -20,8 +20,6 @@ var ErrDurationEqualZero = errors.New("Duration is less than zero.")
 
 var ErrDurationNegative = errors.New("Duration is negative.")
 
-var ErrHtmlResourceMissHtml = errors.New("HtmlResource misses Html.")
-
 var ErrIconMissPosition = errors.New("Icon misses position.")
 
 var ErrIconMissProgram = errors.New("Icon misses program.")

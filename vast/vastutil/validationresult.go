@@ -115,8 +115,6 @@ func getValidationResultFromErr(err error) VastValidationResult {
 		return RESULT_DURATION_EQUAL_ZERO
 	case vast.ErrDurationNegative:
 		return RESULT_DURATION_NEGATIVE
-	case vast.ErrHtmlResourceMissHtml:
-		return RESULT_HTML_RESOURCE_MISS_HTML
 	case vast.ErrIconMissPosition:
 		return RESULT_ICON_MISS_POSITION
 	case vast.ErrIconMissProgram:

@@ -23,7 +23,7 @@ var nonLinearTests = []vasttest.VastTest{
 	vasttest.VastTest{&vast.NonLinear{}, nil, "nonlinear_without_iframeresource.xml"},
 	vasttest.VastTest{&vast.NonLinear{}, nil, "nonlinear_without_htmlresource.xml"},
 	vasttest.VastTest{&vast.NonLinear{}, nil, "nonlinear_without_resource.xml"},
-	vasttest.VastTest{&vast.NonLinear{}, vast.ErrHtmlResourceMissHtml, "nonlinear_error_htmlresource.xml"},
+	vasttest.VastTest{&vast.NonLinear{}, nil, "nonlinear_error_htmlresource.xml"},
 }
 
 func TestNonLinearValidateErrors(t *testing.T) {
