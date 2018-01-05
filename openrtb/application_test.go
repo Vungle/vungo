@@ -42,8 +42,7 @@ func TestApplication_Copy(t *testing.T) {
 					Categories: []openrtb.Category{openrtb.CategoryAdvertising},
 					Domain:     "testDomain",
 				},
-				Keywords:  "testKeywords",
-				Extension: "testExtension",
+				Keywords: "testKeywords",
 			},
 		},
 	}
