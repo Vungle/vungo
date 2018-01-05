@@ -51,5 +51,8 @@ func (a *Application) Copy() *Application {
 		appCopy.Publisher = a.Publisher.Copy()
 	}
 
+	// extension copying has to be done by the user of this package manually.
+	appCopy.Extension = nil
+
 	return &appCopy
 }

@@ -59,6 +59,8 @@ func (d *Device) Copy() *Device {
 		SupportsJavaScriptCopy := *d.SupportsJavaScript
 		deviceCopy.SupportsJavaScript = &SupportsJavaScriptCopy
 	}
+	// extension copying has to be done by the user of this package manually.
+	deviceCopy.Extension = nil
 
 	return &deviceCopy
 }

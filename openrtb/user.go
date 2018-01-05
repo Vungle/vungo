@@ -26,5 +26,8 @@ func (u *User) Copy() *User {
 		userCopy.Geo = &GeoCopy
 	}
 
+	// extension copying has to be done by the user of this package manually.
+	userCopy.Extension = nil
+
 	return &userCopy
 }
