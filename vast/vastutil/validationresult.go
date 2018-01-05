@@ -107,10 +107,6 @@ func getValidationResultFromErr(err error) VastValidationResult {
 		return RESULT_COMPANION_ADS_MISS_COMPANIONS
 	case vast.ErrCompanionAdsWrapperMissCompanions:
 		return RESULT_COMPANION_ADS_WRAPPER_MISS_COMPANIONS
-	case vast.ErrCompanionResourceFormat:
-		return RESULT_COMPANION_RESOURCE_FORMAT
-	case vast.ErrCompanionWrapperResourceFormat:
-		return RESULT_COMPANION_WRAPPER_RESOURCE_FORMAT
 	case vast.ErrCreativeType:
 		return RESULT_CREATIVE_TYPE
 	case vast.ErrCreativeWrapperType:
@@ -119,8 +115,6 @@ func getValidationResultFromErr(err error) VastValidationResult {
 		return RESULT_DURATION_EQUAL_ZERO
 	case vast.ErrDurationNegative:
 		return RESULT_DURATION_NEGATIVE
-	case vast.ErrHtmlResourceMissHtml:
-		return RESULT_HTML_RESOURCE_MISS_HTML
 	case vast.ErrIconMissPosition:
 		return RESULT_ICON_MISS_POSITION
 	case vast.ErrIconMissProgram:

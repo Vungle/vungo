@@ -23,7 +23,7 @@ var iconTests = []vasttest.VastTest{
 	vasttest.VastTest{&vast.Icon{}, vast.ErrIconResourcesFormat, "icon_without_htmlresource.xml"},
 	vasttest.VastTest{&vast.Icon{}, vast.ErrIconResourcesFormat, "icon_without_iframeresource.xml"},
 	vasttest.VastTest{&vast.Icon{}, vast.ErrIconResourcesFormat, "icon_without_resource.xml"},
-	vasttest.VastTest{&vast.Icon{}, vast.ErrHtmlResourceMissHtml, "icon_error_htmlresource.xml"},
+	vasttest.VastTest{&vast.Icon{}, nil, "icon_error_htmlresource.xml"},
 }
 
 func TestIconValidateErrors(t *testing.T) {

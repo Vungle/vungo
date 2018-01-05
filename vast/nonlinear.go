@@ -32,14 +32,6 @@ func (nonLinear *NonLinear) Validate() error {
 			}
 		}
 	}
-	if nonLinear.HtmlResource != nil {
-		if err := nonLinear.HtmlResource.Validate(); err != nil {
-			ve, ok := err.(ValidationError)
-			if ok {
-				errors = append(errors, ve.Errs...)
-			}
-		}
-	}
 	if err := nonLinear.MinSuggestedDuration.Validate(); err != nil && err != ErrDurationEqualZero {
 		ve, ok := err.(ValidationError)
 		if ok {

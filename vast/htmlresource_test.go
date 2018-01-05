@@ -15,15 +15,6 @@ func TestHtmlResourceMarshalUnmarshal(t *testing.T) {
 	vasttest.VerifyModelAgainstFile(t, "HTMLResource", "htmlresource.xml", HtmlResourceModelType)
 }
 
-func TestHtmlResourceValidateErrors(t *testing.T) {
-	vasttest.VerifyVastElementFromFile(t, "testdata/htmlresource.xml", &vast.HtmlResource{}, nil)
-	vasttest.VerifyVastElementFromBytes(t,
-		[]byte(`<HTMLResource><![CDATA[<html><body>Say Hi!</body></html>]]></HTMLResource>`),
-		&vast.HtmlResource{}, nil)
-	vasttest.VerifyVastElementFromBytes(t, []byte(`<HTMLResource xmlEncoded="true"></HTMLResource>`),
-		&vast.HtmlResource{}, vast.ErrHtmlResourceMissHtml)
-}
-
 func TestHtmlResourceWithWhitespace(t *testing.T) {
 	xmlData := `<HtmlResource>
 	<![CDATA[just me]]>

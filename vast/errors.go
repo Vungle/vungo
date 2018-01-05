@@ -12,10 +12,6 @@ var ErrCompanionAdsMissCompanions = errors.New("CompanionAds miss Companions.")
 
 var ErrCompanionAdsWrapperMissCompanions = errors.New("CompanionAdsWrapper misses Companions.")
 
-var ErrCompanionResourceFormat = errors.New("Companion should only contain one of IFrameResource, StaticResource, and HtmlResource.")
-
-var ErrCompanionWrapperResourceFormat = errors.New("CompanionWrapperResource should only contain one of IFrameResource, StaticResource, and HtmlResource.")
-
 var ErrCreativeType = errors.New("Creative should contain one type of NonLinearAds, Linear, CompanionAds.")
 
 var ErrCreativeWrapperType = errors.New("CreativeWrapper should contain one type of NonLinearAds, Linear, CompanionAds.")
@@ -23,8 +19,6 @@ var ErrCreativeWrapperType = errors.New("CreativeWrapper should contain one type
 var ErrDurationEqualZero = errors.New("Duration is less than zero.")
 
 var ErrDurationNegative = errors.New("Duration is negative.")
-
-var ErrHtmlResourceMissHtml = errors.New("HtmlResource misses Html.")
 
 var ErrIconMissPosition = errors.New("Icon misses position.")
 
