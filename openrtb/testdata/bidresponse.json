@@ -20,5 +20,6 @@
   "cur": "USD",
   "customdata": "A4(9GAKYMp@rGmhF!*bI6V0j/2#",
   "nbr": 2,
+  "bundle" : "com.appname.version",
   "ext": {"vungle":{"some":["arbitrary value","that","must be","compact JSON"]}}
 }
