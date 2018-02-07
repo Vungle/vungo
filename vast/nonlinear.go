@@ -32,10 +32,12 @@ func (nonLinear *NonLinear) Validate() error {
 			}
 		}
 	}
-	if err := nonLinear.MinSuggestedDuration.Validate(); err != nil && err != ErrDurationEqualZero {
-		ve, ok := err.(ValidationError)
-		if ok {
-			errors = append(errors, ve.Errs...)
+	if nonLinear.MinSuggestedDuration != nil {
+		if err := nonLinear.MinSuggestedDuration.Validate(); err != nil && err != ErrDurationEqualZero {
+			ve, ok := err.(ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
 		}
 	}
 	if len(errors) > 0 {
