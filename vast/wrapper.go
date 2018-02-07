@@ -29,8 +29,14 @@ func (w *Wrapper) Validate() error {
 		errors = append(errors, ErrWrapperMissVastAdTagUri)
 	}
 
-	for _, impression := range w.Impressions {
-		if err := impression.Validate(); err != nil {
+	if len(w.Impressions) == 0 {
+		errors = append(errors, ErrWrapperMissImpressions)
+	}
+
+	// We don't want to over validate, as long as the first impression contains a valid tracker
+	// we accept it.
+	if len(w.Impressions) > 0 {
+		if err := w.Impressions[0].Validate(); err != nil {
 			ve, ok := err.(ValidationError)
 			if ok {
 				errors = append(errors, ve.Errs...)
