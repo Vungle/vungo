@@ -1,7 +1,7 @@
 package vast
 
 // Wrapper type represents a <Wrapper> element in VAST document that contains a single URI
-// reference to a vendor ad server, a.k.a. third party ad server, where the actual VAST inline
+// reference to a vendor ad server, a.k.a. third party ad server, where the actual VAST w
 // content will be served. The vendor ad server may also provide additional wrapper which
 // eventually resolves to the actual ad.
 type Wrapper struct {
@@ -33,15 +33,23 @@ func (w *Wrapper) Validate() error {
 		errors = append(errors, ErrWrapperMissImpressions)
 	}
 
-	// We don't want to over validate, as long as the first impression contains a valid tracker
+	// We don't want to over validate, as long as one impression contains a valid tracker
 	// we accept it.
-	if len(w.Impressions) > 0 {
-		if err := w.Impressions[0].Validate(); err != nil {
+	var impressionErr []error
+	for i := range w.Impressions {
+		if err := w.Impressions[i].Validate(); err != nil {
 			ve, ok := err.(ValidationError)
 			if ok {
-				errors = append(errors, ve.Errs...)
+				impressionErr = append(impressionErr, ve.Errs...)
 			}
+		} else {
+			impressionErr = nil
+			break
 		}
+	}
+
+	if len(impressionErr) > 0 {
+		errors = append(errors, impressionErr...)
 	}
 
 	for _, c := range w.Creatives {
