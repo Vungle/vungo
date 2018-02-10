@@ -48,25 +48,6 @@ func (inline *InLine) Validate() error {
 		errors = append(errors, ErrInlineMissImpressions)
 	}
 
-	// We don't want to over validate, as long as one impression contains a valid tracker
-	// we accept it.
-	var impressionErr []error
-	for i := range inline.Impressions {
-		if err := inline.Impressions[i].Validate(); err != nil {
-			ve, ok := err.(ValidationError)
-			if ok {
-				impressionErr = append(impressionErr, ve.Errs...)
-			}
-		} else {
-			impressionErr = nil
-			break
-		}
-	}
-
-	if len(impressionErr) > 0 {
-		errors = append(errors, impressionErr...)
-	}
-
 	for _, creative := range inline.Creatives {
 		if err := creative.Validate(); err != nil {
 			ve, ok := err.(ValidationError)

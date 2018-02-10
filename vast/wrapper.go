@@ -33,25 +33,6 @@ func (w *Wrapper) Validate() error {
 		errors = append(errors, ErrWrapperMissImpressions)
 	}
 
-	// We don't want to over validate, as long as one impression contains a valid tracker
-	// we accept it.
-	var impressionErr []error
-	for i := range w.Impressions {
-		if err := w.Impressions[i].Validate(); err != nil {
-			ve, ok := err.(ValidationError)
-			if ok {
-				impressionErr = append(impressionErr, ve.Errs...)
-			}
-		} else {
-			impressionErr = nil
-			break
-		}
-	}
-
-	if len(impressionErr) > 0 {
-		errors = append(errors, impressionErr...)
-	}
-
 	for _, c := range w.Creatives {
 		if err := c.Validate(); err != nil {
 			ve, ok := err.(ValidationError)
