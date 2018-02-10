@@ -44,13 +44,8 @@ func (inline *InLine) Validate() error {
 		}
 	}
 
-	for _, impression := range inline.Impressions {
-		if err := impression.Validate(); err != nil {
-			ve, ok := err.(ValidationError)
-			if ok {
-				errors = append(errors, ve.Errs...)
-			}
-		}
+	if len(inline.Impressions) == 0 {
+		errors = append(errors, ErrInlineMissImpressions)
 	}
 
 	for _, creative := range inline.Creatives {
