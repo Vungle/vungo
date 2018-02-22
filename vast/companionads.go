@@ -9,9 +9,6 @@ type CompanionAds struct {
 // Validate methods validate the CompanionAds element according to the VAST.
 func (companionAds *CompanionAds) Validate() error {
 	errors := make([]error, 0)
-	if len(companionAds.Companions) == 0 {
-		errors = append(errors, ErrCompanionAdsMissCompanions)
-	}
 
 	if len(companionAds.Required) != 0 {
 		if err := companionAds.Required.Validate(); err != nil {

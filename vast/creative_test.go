@@ -25,7 +25,7 @@ var creativeTests = []vasttest.VastTest{
 	vasttest.VastTest{&vast.Creative{}, vast.ErrCreativeType, "creative_without_ads.xml"},
 	vasttest.VastTest{&vast.Creative{}, vast.ErrLinearMissMediaFiles, "creative_error_linear.xml"},
 	vasttest.VastTest{&vast.Creative{}, vast.ErrNonLinearAdsMissNonLinears, "creative_error_nonlinearads.xml"},
-	vasttest.VastTest{&vast.Creative{}, vast.ErrCompanionAdsMissCompanions, "creative_error_companionads.xml"},
+	vasttest.VastTest{&vast.Creative{}, nil, "creative_error_companionads.xml"},
 }
 
 func TestCreativeValidateErrors(t *testing.T) {
