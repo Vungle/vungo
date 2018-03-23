@@ -51,7 +51,7 @@ func TestUnwrap(t *testing.T) {
 			t.Fatal(err)
 		}
 
-		vasts, err := vastutil.Unwrap(ctx, data)
+		vasts, err := vastutil.Unwrap(ctx, data, "fake-ua", "1.2.3.4")
 
 		if err != nil && !reflect.DeepEqual(err, test.expectedError) {
 			t.Log(reflect.TypeOf(err))
@@ -80,7 +80,7 @@ func TestUnwrapShouldRespectContext(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	_, err = vastutil.Unwrap(ctx, data)
+	_, err = vastutil.Unwrap(ctx, data, "fake-ua", "1.2.3.4")
 
 	// Expect error to occur.
 	if !strings.Contains(err.Error(), context.Canceled.Error()) {
