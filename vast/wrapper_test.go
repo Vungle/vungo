@@ -19,6 +19,7 @@ var wrapperTests = []vasttest.VastTest{
 	vasttest.VastTest{&vast.Wrapper{}, nil, "wrapper_valid.xml"},
 	vasttest.VastTest{&vast.Wrapper{}, vast.ErrAdSystemMissSystem, "wrapper_error_adsystem.xml"},
 	vasttest.VastTest{&vast.Wrapper{}, nil, "wrapper_error_impression.xml"},
+	vasttest.VastTest{&vast.Wrapper{}, vast.ErrWrapperMissAdSystem, "wrapper_without_adsystem.xml"},
 	vasttest.VastTest{&vast.Wrapper{}, vast.ErrWrapperMissVastAdTagUri, "wrapper_without_adtaguri.xml"},
 	vasttest.VastTest{&vast.Wrapper{}, vast.ErrWrapperMissImpressions, "wrapper_without_impression.xml"},
 }

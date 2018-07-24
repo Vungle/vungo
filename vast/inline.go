@@ -20,11 +20,15 @@ type InLine struct {
 // AdSystem, AdTitle, Impression, Creatives are required.
 func (inline *InLine) Validate() error {
 	errors := make([]error, 0)
-	if err := inline.AdSystem.Validate(); err != nil {
-		ve, ok := err.(ValidationError)
-		if ok {
-			errors = append(errors, ve.Errs...)
+	if inline.AdSystem != nil {
+		if err := inline.AdSystem.Validate(); err != nil {
+			ve, ok := err.(ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
 		}
+	} else {
+		errors = append(errors, ErrInlineMissAdSystem)
 	}
 
 	if inline.AdTitle == nil {

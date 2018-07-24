@@ -129,13 +129,13 @@ func TestBid_Copy(t *testing.T) {
 
 		for i := range testCase.bid.AdvertiserDomains {
 			if &testCase.bid.AdvertiserDomains[i] == &b2.AdvertiserDomains[i] {
-				t.Errorf("Address of AdvertiserDomains should not be the same in copied bid. seatbid1: %p seatbid2: %p.", testCase.bid.AdvertiserDomains[i], b2.AdvertiserDomains[i])
+				t.Errorf("Address of AdvertiserDomains should not be the same in copied bid. seatbid1: %v seatbid2: %v.", testCase.bid.AdvertiserDomains[i], b2.AdvertiserDomains[i])
 			}
 		}
 
 		for i := range testCase.bid.Extension {
 			if &testCase.bid.Extension[i] == &b2.Extension[i] {
-				t.Errorf("Address of Extension should not be the same in copied bid. seatbid1: %p seatbid2: %p.", testCase.bid.Extension[i], b2.Extension[i])
+				t.Errorf("Address of Extension should not be the same in copied bid. seatbid1: %v seatbid2: %v.", testCase.bid.Extension[i], b2.Extension[i])
 			}
 		}
 
