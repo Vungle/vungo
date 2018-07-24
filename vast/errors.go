@@ -60,6 +60,8 @@ var (
 
 	ErrMediaFileWidthTooLow = errors.New("The width of the MediaFile is too low")
 
+	ErrMissAdInline = errors.New("Ad should only contain one of Inline and Wrapper")
+
 	ErrNonLinearAdsMissNonLinears = errors.New("NonLinearAds miss NonLinears")
 
 	ErrNonLinearResourceFormat = errors.New("NonLinear resources should contain only one of StaticResource, IFrameResource, HtmlResource")

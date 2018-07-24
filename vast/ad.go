@@ -16,29 +16,46 @@ type Ad struct {
 // Each <Ad> contains either EXACTLY ONE <InLine> element or <Wrapper> element (but never both).
 func (ad *Ad) Validate() error {
 	errors := make([]error, 0)
-	if ad.InLine != nil {
-		if ad.Wrapper != nil {
-			errors = append(errors, ErrAdType)
-		}
-		if err := ad.InLine.Validate(); err != nil {
-			ve, ok := err.(ValidationError)
-			if ok {
-				errors = append(errors, ve.Errs...)
-			}
-		}
-	} else {
-		if ad.Wrapper == nil {
-			errors = append(errors, ErrAdType)
-		}
-		if err := ad.Wrapper.Validate(); err != nil {
-			ve, ok := err.(ValidationError)
-			if ok {
-				errors = append(errors, ve.Errs...)
-			}
-		}
+
+	if ad.InLine != nil && ad.Wrapper != nil {
+		errors = append(errors, ErrAdType)
+		return ValidationError{Errs: errors}
 	}
+
+	if ad.InLine != nil {
+		errors = append(errors, ad.validateInline()...)
+	} else if ad.Wrapper != nil {
+		errors = append(errors, ad.validateWrapper()...)
+	} else {
+		errors = append(errors, ErrAdType)
+	}
+
 	if len(errors) > 0 {
 		return ValidationError{Errs: errors}
 	}
 	return nil
+}
+
+func (ad *Ad) validateInline() []error {
+	errors := make([]error, 0)
+	if err := ad.InLine.Validate(); err != nil {
+		ve, ok := err.(ValidationError)
+		if ok {
+			errors = append(errors, ve.Errs...)
+		}
+	}
+
+	return errors
+}
+
+func (ad *Ad) validateWrapper() []error {
+	errors := make([]error, 0)
+	if err := ad.Wrapper.Validate(); err != nil {
+		ve, ok := err.(ValidationError)
+		if ok {
+			errors = append(errors, ve.Errs...)
+		}
+	}
+
+	return errors
 }
