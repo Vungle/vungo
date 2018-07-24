@@ -7,6 +7,7 @@ package openrtb
 //easyjson:json
 type Regulation struct {
 	IsCoppaCompliant *NumericBool `json:"coppa,omitempty"`
+	Extension        interface{}  `json:"ext,omitempty"`
 }
 
 // Copy returns a pointer to a copy of the Regulation object.
