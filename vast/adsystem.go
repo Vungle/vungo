@@ -9,7 +9,7 @@ type AdSystem struct {
 
 // Validate methods validate the AdSystem element according to the VAST.
 // System is required.
-func (as AdSystem) Validate() error {
+func (as *AdSystem) Validate() error {
 	if len(as.System) == 0 {
 		return ValidationError{Errs: []error{ErrAdSystemMissSystem}}
 	}
