@@ -17,19 +17,19 @@ var defaultUnwrapClient = http.DefaultClient
 // 	1) Unwrapping context, ctx, is done;
 // 	2) Invalid XML format;
 // 	3) Invalid VAST content, (currently, there should be exactly one <Ad> within <VAST>.
-func Unwrap(ctx context.Context, data []byte) ([]*vast.Vast, error) {
+func Unwrap(ctx context.Context, data []byte, userAgent, ip string) ([]*vast.Vast, error) {
 	var v vast.Vast
 	if err := xml.Unmarshal(data, &v); err != nil {
 		return nil, err
 	}
 
-	return unwrap(ctx, &v, nil)
+	return unwrap(ctx, &v, nil, userAgent, ip)
 }
 
 // unwrap method is a helper function that invokes performs the actual HTTP request to get
 // additional VAST XML and updates the unwrappedList. The unwrap method is invoked recursively until
 // the first Inline VAST is reached or until an error occurs.
-func unwrap(ctx context.Context, v *vast.Vast, unwrappedList []*vast.Vast) ([]*vast.Vast, error) {
+func unwrap(ctx context.Context, v *vast.Vast, unwrappedList []*vast.Vast, ua, ip string) ([]*vast.Vast, error) {
 	if len(v.Ads) != 1 {
 		return nil, ErrUnwrapWithMultipleAds
 	} else if v.Ads[0].Wrapper == nil {
@@ -47,6 +47,8 @@ func unwrap(ctx context.Context, v *vast.Vast, unwrappedList []*vast.Vast) ([]*v
 	if err != nil {
 		return nil, err
 	}
+	req.Header.Set("User-Agent", ua)
+	req.Header.Set("X-Forwarded-For", ip)
 	req = req.WithContext(ctx)
 	resp, err := defaultUnwrapClient.Do(req)
 	if err != nil {
@@ -67,6 +69,6 @@ func unwrap(ctx context.Context, v *vast.Vast, unwrappedList []*vast.Vast) ([]*v
 		// wraps the VAST infinitely, this implementation could cause disastrous stack overflow that
 		// even the ctx.Done() cannot enforce exit. We will need to update the logic here eventually
 		// to be more resource aware yet robust. *wink* *wink*, consider channels and goroutines.
-		return unwrap(ctx, &innerVast, append(unwrappedList, v))
+		return unwrap(ctx, &innerVast, append(unwrappedList, v), ua, ip)
 	}
 }
