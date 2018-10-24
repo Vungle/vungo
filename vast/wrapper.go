@@ -18,17 +18,6 @@ type Wrapper struct {
 // Creatives are optional, if it exists, we'll also validate it.
 func (w *Wrapper) Validate() error {
 	errors := make([]error, 0)
-	if w.AdSystem != nil {
-		if err := w.AdSystem.Validate(); err != nil {
-			ve, ok := err.(ValidationError)
-			if ok {
-				errors = append(errors, ve.Errs...)
-			}
-		}
-	} else {
-		errors = append(errors, ErrWrapperMissAdSystem)
-	}
-
 	if len(w.VastAdTagUri) == 0 {
 		errors = append(errors, ErrWrapperMissVastAdTagUri)
 	}
