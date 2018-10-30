@@ -13,5 +13,6 @@
   "playbackmethod": [1, 2],
   "delivery": [1, 2],
   "pos": 30,
-  "api": [1, 2]
+  "api": [1, 2],
+  "ext":{"videotype":"rewarded","skip":1}
 }
