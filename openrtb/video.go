@@ -24,6 +24,7 @@ type Video struct {
 	DeliveryMethods []DeliveryMethod `json:"delivery,omitempty"`
 	Position        AdPosition       `json:"pos,omitempty"`
 	APIFrameworks   []APIFramework   `json:"api,omitempty"`
+	Extension       interface{}      `json:"ext,omitempty"`
 }
 
 // Validate method implements a Validater interface and return a validation error according to the
@@ -82,6 +83,9 @@ func (v *Video) Copy() *Video {
 		vCopy.APIFrameworks = make([]APIFramework, len(v.APIFrameworks))
 		copy(vCopy.APIFrameworks, v.APIFrameworks)
 	}
+
+	// extension copying has to be done by the user of this package manually.
+	vCopy.Extension = nil
 
 	return &vCopy
 }
