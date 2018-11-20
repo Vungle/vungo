@@ -51,21 +51,6 @@ func (mediaFile *MediaFile) Validate() error {
 		errors = append(errors, ErrMediaFileMissUri)
 	}
 
-	if mediaFile.Bitrate != nil {
-		if *mediaFile.Bitrate < defaults.MIN_VIDEO_BITRATE {
-			errors = append(errors, ErrMediaFileBitrateTooLow)
-		}
-		if *mediaFile.Bitrate > defaults.MAX_VIDEO_BITRATE {
-			errors = append(errors, ErrMediaFileBitrateTooHigh)
-		}
-	}
-	if mediaFile.MaxBitrate != nil && *mediaFile.MaxBitrate < defaults.MIN_VIDEO_BITRATE {
-		errors = append(errors, ErrMediaFileBitrateTooLow)
-	}
-	if mediaFile.MinBitrate != nil && *mediaFile.MinBitrate > defaults.MAX_VIDEO_BITRATE {
-		errors = append(errors, ErrMediaFileBitrateTooHigh)
-	}
-
 	if mediaFile.Width > defaults.MAX_VIDEO_WIDTH {
 		errors = append(errors, ErrMediaFileWidthTooHigh)
 	}
