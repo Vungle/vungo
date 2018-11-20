@@ -38,10 +38,6 @@ var (
 
 	ErrLinearMissMediaFiles = errors.New("MediaFiles are missed")
 
-	ErrMediaFileBitrateTooHigh = errors.New("The bitrate of the MediaFile is too high")
-
-	ErrMediaFileBitrateTooLow = errors.New("The bitrate of the MediaFile is too low")
-
 	ErrMediaFileHeightTooHigh = errors.New("The height of the MediaFile is too high")
 
 	ErrMediaFileHeightTooLow = errors.New("The height of the MediaFile is too low")

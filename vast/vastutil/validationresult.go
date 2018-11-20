@@ -70,8 +70,6 @@ const (
 	RESULT_WRAPPER_MISS_VAST_AD_TAG_URI          VastValidationResult = 20041
 	RESULT_VIDEO_DURATION_TOO_SHORT              VastValidationResult = 20042
 	RESULT_VIDEO_DURATION_TOO_LONG               VastValidationResult = 20043
-	RESULT_MEDIA_FILE_BITRATE_TOO_HIGH           VastValidationResult = 20044
-	RESULT_MEDIA_FILE_BITRATE_TOO_LOW            VastValidationResult = 20045
 	RESULT_MEDIA_FILE_HEIGHT_TOO_HIGH            VastValidationResult = 20046
 	RESULT_MEDIA_FILE_HEIGHT_TOO_LOW             VastValidationResult = 20047
 	RESULT_MEDIA_FILE_UNSUPPORTED_MIME_TYPE      VastValidationResult = 20048
@@ -131,10 +129,6 @@ func getValidationResultFromErr(err error) VastValidationResult {
 		return RESULT_INLINE_MISS_IMPRESSIONS
 	case vast.ErrLinearMissMediaFiles:
 		return RESULT_LINEAR_MISS_MEDIA_FILES
-	case vast.ErrMediaFileBitrateTooHigh:
-		return RESULT_MEDIA_FILE_BITRATE_TOO_HIGH
-	case vast.ErrMediaFileBitrateTooLow:
-		return RESULT_MEDIA_FILE_BITRATE_TOO_LOW
 	case vast.ErrMediaFileHeightTooHigh:
 		return RESULT_MEDIA_FILE_HEIGHT_TOO_HIGH
 	case vast.ErrMediaFileHeightTooLow:
