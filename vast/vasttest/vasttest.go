@@ -127,7 +127,7 @@ func VerifyVastElementErrorAsExpected(t testing.TB, element Validator, err error
 	}
 }
 
-// VerifyVastElementFromString method verifies Validate errors for the vast element object.
+// VerifyVastElementFromBytes method verifies Validate errors for the vast element object.
 func VerifyVastElementFromBytes(t testing.TB, xmlData []byte, element Validator, expectedError error) {
 	if err := xml.Unmarshal(xmlData, element); err != nil {
 		t.Fatalf("Cannot unmarshal XML data. %v.\n", err)
@@ -135,7 +135,7 @@ func VerifyVastElementFromBytes(t testing.TB, xmlData []byte, element Validator,
 	VerifyVastElementErrorAsExpected(t, element, element.Validate(), expectedError)
 }
 
-// VerifyVastElementFromString method verifies Validate errors for the Unmarshal object generated from the given file.
+// VerifyVastElementFromFile method verifies Validate errors for the Unmarshal object generated from the given file.
 func VerifyVastElementFromFile(t testing.TB, file string, element Validator, expectedError error) {
 	xmlData, err := ioutil.ReadFile(file)
 
