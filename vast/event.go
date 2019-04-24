@@ -26,29 +26,9 @@ const (
 	EVENT_PROGRESS          Event = "progress" // VAST3.0.
 )
 
+// Validate function returns error of event.
+// We do not do the strict validation. If the event type is not defined, just skipped it rather than return validate failure.
+// Please refer to https://vungle.atlassian.net/browse/PBJ-685 for more details.
 func (e Event) Validate() error {
-	switch e {
-	case EVENT_CREATIVE_VIEW:
-	case EVENT_START:
-	case EVENT_FIRST_QUARTILE:
-	case EVENT_MIDPOINT:
-	case EVENT_THIRD_QUARTILE:
-	case EVENT_COMPLETE:
-	case EVENT_MUTE:
-	case EVENT_UNMUTE:
-	case EVENT_PAUSE:
-	case EVENT_REWIND:
-	case EVENT_RESUME:
-	case EVENT_FULLSCREEN:
-	case EVENT_EXIT_FULLSCREEN:
-	case EVENT_EXPAND:
-	case EVENT_COLLAPSE:
-	case EVENT_ACCEPT_INVITATION:
-	case EVENT_CLOSE:
-	case EVENT_SKIP:
-	case EVENT_PROGRESS:
-	default:
-		return ValidationError{Errs: []error{ErrUnsupportedEvent}}
-	}
 	return nil
 }
