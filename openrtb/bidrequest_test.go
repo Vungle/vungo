@@ -150,12 +150,13 @@ func TestBidRequest_Copy(t *testing.T) {
 						UTCOffset: 1,
 					},
 				},
-				AuctionType:        1,
-				Timeout:            1,
-				WhitelistedSeats:   []string{"1"},
-				Currencies:         []openrtb.Currency{openrtb.CurrencyUSD},
-				BlockedCategories:  []openrtb.Category{openrtb.Category712Education},
-				BlockedAdvertisers: []string{"advertiser1"},
+				AuctionType:                  1,
+				Timeout:                      1,
+				WhitelistedSeats:             []string{"1"},
+				Currencies:                   []openrtb.Currency{openrtb.CurrencyUSD},
+				BlockedCategories:            []openrtb.Category{openrtb.Category712Education},
+				BlockedAdvertisers:           []string{"advertiser1"},
+				BlockedAdvertisersByMarketID: []string{"403639508", "479706646"},
 				Regulation: &openrtb.Regulation{
 					IsCoppaCompliant: &testBool,
 				},
@@ -214,6 +215,10 @@ func TestBidRequest_Copy(t *testing.T) {
 
 		if &testCase.bidrequest.BlockedAdvertisers == &b2.BlockedAdvertisers {
 			t.Errorf("Address of blocked advertisers should not be the same in copied bidrequest. BlockedAdvertisers1: %p BlockedAdvertisers2: %p.", testCase.bidrequest.BlockedAdvertisers, b2.BlockedAdvertisers)
+		}
+
+		if &testCase.bidrequest.BlockedAdvertisersByMarketID == &b2.BlockedAdvertisersByMarketID {
+			t.Errorf("Address of blocked advertisers MarketID should not be the same in copied bidrequest. BlockedAdvertisersByMarketID1: %p BlockedAdvertisersByMarketID2: %p.", testCase.bidrequest.BlockedAdvertisersByMarketID, b2.BlockedAdvertisersByMarketID)
 		}
 
 		if testCase.bidrequest.Regulation != nil {
