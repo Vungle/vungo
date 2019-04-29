@@ -27,8 +27,8 @@ var eventTests = []vasttest.VastTest{
 	vasttest.VastTest{vast.Event(vast.EVENT_CLOSE), nil, ""},
 	vasttest.VastTest{vast.Event(vast.EVENT_SKIP), nil, ""},
 	vasttest.VastTest{vast.Event(vast.EVENT_PROGRESS), nil, ""},
-	vasttest.VastTest{vast.Event("test"), vast.ErrUnsupportedEvent, ""},
-	vasttest.VastTest{vast.Event(""), vast.ErrUnsupportedEvent, ""},
+	vasttest.VastTest{vast.Event("test"), nil, ""},
+	vasttest.VastTest{vast.Event(""), nil, ""},
 }
 
 func TestEventValidateErrors(t *testing.T) {

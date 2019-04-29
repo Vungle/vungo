@@ -48,7 +48,10 @@ func (e Event) Validate() error {
 	case EVENT_SKIP:
 	case EVENT_PROGRESS:
 	default:
-		return ValidationError{Errs: []error{ErrUnsupportedEvent}}
+		// Validate function returns error of event.
+		// We do not do the strict validation. If the event type is not defined, just skipped it rather than return validate failure.
+		// Please refer to https://vungle.atlassian.net/browse/PBJ-685 for more details.
+		return nil
 	}
 	return nil
 }
