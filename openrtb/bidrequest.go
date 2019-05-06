@@ -24,7 +24,7 @@ type BidRequest struct {
 	Currencies                   []Currency    `json:"cur,omitempty"`
 	BlockedCategories            []Category    `json:"bcat,omitempty"`
 	BlockedAdvertisers           []string      `json:"badv,omitempty"`
-	BlockedAdvertisersByMarketID []string      `json:"bapp,omitempty"` // bapp is for OpenRTB 2.5 onwards
+	BlockedAdvertisersByMarketID []string      `json:"bapp,omitempty"` // bapp is for OpenRTB 2.5 onwards.
 	Regulation                   *Regulation   `json:"regs,omitempty"`
 }
 
