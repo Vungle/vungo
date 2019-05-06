@@ -1,0 +1,25 @@
+{
+  "w": 100,
+  "h": 200,
+  "id": "test",
+  "btype": [
+    1,
+    2
+  ],
+  "battr": [
+    1,
+    2
+  ],
+  "pos": 1,
+  "mimes": [
+    "image/jpg"
+  ],
+  "topframe": 1,
+  "expdir": [
+    1
+  ],
+  "api": [
+    1
+  ],
+  "ext": {}
+}
