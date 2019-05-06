@@ -7,12 +7,12 @@ package openrtb
 type Banner struct {
 	Width             int         `json:"w,omitempty"`
 	Height            int         `json:"h,omitempty"`
-	ID                *string      `json:"id,omitempty"`
+	ID                *string     `json:"id,omitempty"`
 	BlockedTypes      []int       `json:"btype,omitempty"`
 	BlockedAttributes []int       `json:"battr,omitempty"`
-	Position          *int         `json:"pos,omitempty"`
+	Position          *int        `json:"pos,omitempty"`
 	MIMETypes         []string    `json:"mimes,omitempty"`
-	TopFrame          *int         `json:"topframe,omitempty"`
+	TopFrame          *int        `json:"topframe,omitempty"`
 	ExpandDirections  []int       `json:"expdir,omitempty"`
 	APIFrameworks     []int       `json:"api,omitempty"`
 	Extension         interface{} `json:"ext,omitempty"`
