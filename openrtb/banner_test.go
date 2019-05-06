@@ -31,7 +31,7 @@ func TestBannerCopy(t *testing.T) {
 				ID:                &testString,
 				BlockedTypes:      []int{1},
 				BlockedAttributes: []int{2},
-				Position:          &testInt,
+				Position:          openrtb.AdPositionAboveFold,
 				TopFrame:          &testInt,
 				ExpandDirections:  []int{3},
 				APIFrameworks:     []int{4},
@@ -59,12 +59,6 @@ func TestBannerCopy(t *testing.T) {
 		if testCase.banner.BlockedAttributes != nil {
 			if &testCase.banner.BlockedAttributes == &bannerCopy.BlockedAttributes {
 				t.Errorf("Address of BlockedAttributes should not be the same in copied banner. BlockedAttributes1: %p BlockedAttributes2: %p.", testCase.banner.BlockedAttributes, bannerCopy.BlockedAttributes)
-			}
-		}
-
-		if testCase.banner.Position != nil {
-			if &testCase.banner.Position == &bannerCopy.Position {
-				t.Errorf("Address of Position should not be the same in copied banner. Position1: %p Position2: %p.", testCase.banner.Position, bannerCopy.Position)
 			}
 		}
 

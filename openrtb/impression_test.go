@@ -52,7 +52,7 @@ func TestImpression_Copy(t *testing.T) {
 					MIMETypes:         []string{"testMime"},
 					BlockedTypes:      []int{1},
 					BlockedAttributes: []int{2},
-					Position:          &testInt,
+					Position:          openrtb.AdPositionAboveFold,
 					TopFrame:          &testInt,
 					ExpandDirections:  []int{3},
 					APIFrameworks:     []int{4},

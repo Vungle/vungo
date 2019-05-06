@@ -10,7 +10,7 @@ type Banner struct {
 	ID                *string     `json:"id,omitempty"`
 	BlockedTypes      []int       `json:"btype,omitempty"`
 	BlockedAttributes []int       `json:"battr,omitempty"`
-	Position          *int        `json:"pos,omitempty"`
+	Position          AdPosition  `json:"pos,omitempty"`
 	MIMETypes         []string    `json:"mimes,omitempty"`
 	TopFrame          *int        `json:"topframe,omitempty"`
 	ExpandDirections  []int       `json:"expdir,omitempty"`
@@ -40,11 +40,6 @@ func (v *Banner) Copy() *Banner {
 	if v.BlockedAttributes != nil {
 		vCopy.BlockedAttributes = make([]int, len(v.BlockedAttributes))
 		copy(vCopy.BlockedAttributes, v.BlockedAttributes)
-	}
-
-	if v.Position != nil {
-		positionCopy := *v.Position
-		vCopy.Position = &positionCopy
 	}
 
 	if v.TopFrame != nil {
