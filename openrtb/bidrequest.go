@@ -11,20 +11,21 @@ import (
 //go:generate easyjson $GOFILE
 //easyjson:json
 type BidRequest struct {
-	ID                 string        `json:"id"`
-	Impressions        []*Impression `json:"imp"`
-	Application        *Application  `json:"app,omitempty"`
-	Device             *Device       `json:"device,omitempty"`
-	User               *User         `json:"user,omitempty"`
-	IsTestMode         NumericBool   `json:"test,omitempty"`
-	AuctionType        AuctionType   `json:"at"`
-	Timeout            int           `json:"tmax,omitempty"`
-	WhitelistedSeats   []string      `json:"wseat,omitempty"`
-	HasAllImpressions  NumericBool   `json:"allimps,omitempty"`
-	Currencies         []Currency    `json:"cur,omitempty"`
-	BlockedCategories  []Category    `json:"bcat,omitempty"`
-	BlockedAdvertisers []string      `json:"badv,omitempty"`
-	Regulation         *Regulation   `json:"regs,omitempty"`
+	ID                           string        `json:"id"`
+	Impressions                  []*Impression `json:"imp"`
+	Application                  *Application  `json:"app,omitempty"`
+	Device                       *Device       `json:"device,omitempty"`
+	User                         *User         `json:"user,omitempty"`
+	IsTestMode                   NumericBool   `json:"test,omitempty"`
+	AuctionType                  AuctionType   `json:"at"`
+	Timeout                      int           `json:"tmax,omitempty"`
+	WhitelistedSeats             []string      `json:"wseat,omitempty"`
+	HasAllImpressions            NumericBool   `json:"allimps,omitempty"`
+	Currencies                   []Currency    `json:"cur,omitempty"`
+	BlockedCategories            []Category    `json:"bcat,omitempty"`
+	BlockedAdvertisers           []string      `json:"badv,omitempty"`
+	BlockedAdvertisersByMarketID []string      `json:"bapp,omitempty"` // bapp is for OpenRTB 2.5 onwards.
+	Regulation                   *Regulation   `json:"regs,omitempty"`
 }
 
 // Validate method checks to see if the BidRequest object contains required and well-formatted data
