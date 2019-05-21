@@ -7,12 +7,12 @@ import "errors"
 //go:generate easyjson $GOFILE
 //easyjson:json
 type Banner struct {
-	Width             int         `json:"w"`
-	Height            int         `json:"h"`
-	MaxWidth          int         `json:"wmax,omotempty"`
-	MaxHeight         int         `json:"hmax,omotempty"`
-	MinWidth          int         `json:"wmin,omitempty"`
-	MinHeight         int         `json:"hmin,omitempty"`
+	Width             int         `json:"w,omitempty"`
+	Height            int         `json:"h,omitempty"`
+	MaxWidth          *int        `json:"wmax,omitempty"`
+	MaxHeight         *int        `json:"hmax,omitempty"`
+	MinWidth          *int        `json:"wmin,omitempty"`
+	MinHeight         *int        `json:"hmin,omitempty"`
 	ID                *string     `json:"id,omitempty"`
 	BlockedTypes      []int       `json:"btype,omitempty"`
 	BlockedAttributes []int       `json:"battr,omitempty"`
@@ -40,6 +40,22 @@ func (v *Banner) Copy() *Banner {
 
 	if v.ID != nil {
 		vCopy.ID = v.ID
+	}
+
+	if v.MaxHeight != nil {
+		vCopy.MaxHeight = v.MaxHeight
+	}
+
+	if v.MaxWidth != nil {
+		vCopy.MaxWidth = v.MaxWidth
+	}
+
+	if v.MinHeight != nil {
+		vCopy.MinHeight = v.MinHeight
+	}
+
+	if v.MinWidth != nil {
+		vCopy.MinWidth = v.MinWidth
 	}
 
 	if v.BlockedTypes != nil {

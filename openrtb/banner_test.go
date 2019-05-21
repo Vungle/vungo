@@ -35,8 +35,12 @@ func TestBannerCopy(t *testing.T) {
 				TopFrame:          &testInt,
 				ExpandDirections:  []int{3},
 				APIFrameworks:     []int{4},
-				Width:             1,
-				Height:            1,
+				Width:             2,
+				Height:            2,
+				MinHeight:         &testInt,
+				MaxHeight:         &testInt,
+				MinWidth:          &testInt,
+				MaxWidth:          &testInt,
 			},
 		},
 	}
@@ -89,6 +93,30 @@ func TestBannerCopy(t *testing.T) {
 		if testCase.banner.ID != nil {
 			if &testCase.banner.ID == &bannerCopy.ID {
 				t.Errorf("Address of ID should not be the same in copied banner. ID1: %p ID2: %p.", testCase.banner.ID, bannerCopy.ID)
+			}
+		}
+
+		if testCase.banner.MinWidth != nil {
+			if &testCase.banner.MinWidth == &bannerCopy.MinWidth {
+				t.Errorf("Address of MinWidth should not be the same in copied banner. MinWidth1: %p MinWidth2: %p.", testCase.banner.MinWidth, bannerCopy.MinWidth)
+			}
+		}
+
+		if testCase.banner.MinHeight != nil {
+			if &testCase.banner.MinHeight == &bannerCopy.MinHeight {
+				t.Errorf("Address of MinHeight should not be the same in copied banner. MinHeight1: %p MinHeight2: %p.", testCase.banner.MinHeight, bannerCopy.MinHeight)
+			}
+		}
+
+		if testCase.banner.MaxWidth != nil {
+			if &testCase.banner.MaxWidth == &bannerCopy.MaxWidth {
+				t.Errorf("Address of MaxWidth should not be the same in copied banner. MaxWidth1: %p MaxWidth2: %p.", testCase.banner.MaxWidth, bannerCopy.MaxWidth)
+			}
+		}
+
+		if testCase.banner.MaxHeight != nil {
+			if &testCase.banner.MaxHeight == &bannerCopy.MaxHeight {
+				t.Errorf("Address of MaxHeight should not be the same in copied banner. MaxHeight1: %p MaxHeight2: %p.", testCase.banner.MaxHeight, bannerCopy.MaxHeight)
 			}
 		}
 
