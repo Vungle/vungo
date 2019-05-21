@@ -18,6 +18,7 @@ func TestImpressionMarshalUnmarshal(t *testing.T) {
 
 func TestImpression_Copy(t *testing.T) {
 	testInt := 1
+	testString := "TEST"
 	testCases := []struct {
 		impression *openrtb.Impression
 	}{
@@ -44,6 +45,18 @@ func TestImpression_Copy(t *testing.T) {
 					Position:        openrtb.AdPositionAboveFold,
 					APIFrameworks:   []openrtb.APIFramework{openrtb.APIFrameworkVPAID1},
 				},
+				Banner: &openrtb.Banner{
+					ID:                &testString,
+					Height:            100,
+					Width:             200,
+					MIMETypes:         []string{"testMime"},
+					BlockedTypes:      []int{1},
+					BlockedAttributes: []int{2},
+					Position:          openrtb.AdPositionAboveFold,
+					TopFrame:          &testInt,
+					ExpandDirections:  []int{3},
+					APIFrameworks:     []int{4},
+				},
 				BidFloorPrice:      1.0,
 				BidFloorCurrency:   openrtb.CurrencyUSD,
 				PrivateMarketplace: &openrtb.PrivateMarketplace{},
@@ -61,6 +74,12 @@ func TestImpression_Copy(t *testing.T) {
 		if testCase.impression.Video != nil {
 			if &testCase.impression.Video == &imp2.Video {
 				t.Errorf("Address of Video should not be the same in copied impression. Video1: %p Video2: %p.", testCase.impression.Video, imp2.Video)
+			}
+		}
+
+		if testCase.impression.Banner != nil {
+			if &testCase.impression.Banner == &imp2.Banner {
+				t.Errorf("Address of Banner should not be the same in copied impression. Banner1: %p Banner: %p.", testCase.impression.Banner, imp2.Banner)
 			}
 		}
 

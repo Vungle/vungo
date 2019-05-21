@@ -17,6 +17,18 @@
     "pos": 30,
     "api": [1, 2]
   },
+  "banner": {
+    "w": 100,
+    "h": 200,
+    "id": "test",
+    "btype": [1,2],
+    "battr": [1,2],
+    "pos": 1,
+    "mines": ["image/jpg"],
+    "topframe": 1,
+    "expdir": [1],
+    "api": [1]
+  },
   "tagid": "d1f00f0d0a122fd8847ee",
   "secure": 1,
   "pmp": {

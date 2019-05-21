@@ -9,6 +9,7 @@ package openrtb
 type Impression struct {
 	ID                    string              `json:"id"`
 	Video                 *Video              `json:"video,omitempty"`
+	Banner                *Banner             `json:"banner,omitempty"`
 	DisplayManager        string              `json:"displaymanager,omitempty"`
 	DisplayManagerVersion string              `json:"displaymanagerver,omitempty"`
 	IsInterstitial        NumericBool         `json:"instl,omitempty"`
@@ -25,6 +26,10 @@ func (imp *Impression) Copy() *Impression {
 	impressionCopy := *imp
 	if imp.Video != nil {
 		impressionCopy.Video = imp.Video.Copy()
+	}
+
+	if imp.Banner != nil {
+		impressionCopy.Banner = imp.Banner.Copy()
 	}
 
 	if imp.PrivateMarketplace != nil {
