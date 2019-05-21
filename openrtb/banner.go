@@ -1,12 +1,18 @@
 package openrtb
 
+import "errors"
+
 // Banner types annotates the parent impression as an banner impression.
 // See OpenRTB 2.3.1 Sec 3.2.3.
 //go:generate easyjson $GOFILE
 //easyjson:json
 type Banner struct {
-	Width             int         `json:"w,omitempty"`
-	Height            int         `json:"h,omitempty"`
+	Width             int         `json:"w"`
+	Height            int         `json:"h"`
+	MaxWidth          int         `json:"wmax,omotempty"`
+	MaxHeight         int         `json:"hmax,omotempty"`
+	MinWidth          int         `json:"wmin,omitempty"`
+	MinHeight         int         `json:"hmin,omitempty"`
 	ID                *string     `json:"id,omitempty"`
 	BlockedTypes      []int       `json:"btype,omitempty"`
 	BlockedAttributes []int       `json:"battr,omitempty"`
@@ -21,6 +27,10 @@ type Banner struct {
 // Validate method implements a Validater interface and return a validation error according to the
 // OpenRTB spec.
 func (v Banner) Validate() error {
+	if len(v.MIMETypes) < 1 {
+		return errors.New("TODO: but need mime types here")
+	}
+
 	return nil
 }
 
