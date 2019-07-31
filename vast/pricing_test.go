@@ -19,9 +19,9 @@ func TestPricingValidateErrors(t *testing.T) {
 	vasttest.VerifyVastElementFromBytes(t, []byte(`<Pricing model="cpm" currency="USD"></Pricing>`),
 		&vast.Pricing{}, vast.ErrPricingMissPrice)
 	vasttest.VerifyVastElementFromBytes(t, []byte(`<Pricing model="cpm">1.20</Pricing>`),
-		&vast.Pricing{}, vast.ErrPricingCurrencyFormat)
+		&vast.Pricing{}, nil)
 	vasttest.VerifyVastElementFromBytes(t, []byte(`<Pricing currency="USD">1.20</Pricing>`),
-		&vast.Pricing{}, vast.ErrPricingMissModel)
+		&vast.Pricing{}, nil)
 	vasttest.VerifyVastElementFromBytes(t, []byte(`<Pricing model="c" currency="USD">1.20</Pricing>`),
-		&vast.Pricing{}, vast.ErrUnsupportedPriceModelType)
+		&vast.Pricing{}, nil)
 }
