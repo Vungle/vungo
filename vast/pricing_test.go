@@ -17,7 +17,7 @@ func TestPricingMarshalUnmarshal(t *testing.T) {
 func TestPricingValidateErrors(t *testing.T) {
 	vasttest.VerifyVastElementFromFile(t, "testdata/pricing.xml", &vast.Pricing{}, nil)
 	vasttest.VerifyVastElementFromBytes(t, []byte(`<Pricing model="cpm" currency="USD"></Pricing>`),
-		&vast.Pricing{}, vast.ErrPricingMissPrice)
+		&vast.Pricing{}, nil)
 	vasttest.VerifyVastElementFromBytes(t, []byte(`<Pricing model="cpm">1.20</Pricing>`),
 		&vast.Pricing{}, nil)
 	vasttest.VerifyVastElementFromBytes(t, []byte(`<Pricing currency="USD">1.20</Pricing>`),

@@ -12,12 +12,5 @@ type Pricing struct {
 // Validate methods validates the Pricing according to the VAST.
 // Model, Price is required. Currency should be ISO-4217 3 letter format.
 func (pricing *Pricing) Validate() error {
-	errors := make([]error, 0)
-	if len(pricing.Price) == 0 {
-		errors = append(errors, ErrPricingMissPrice)
-	}
-	if len(errors) > 0 {
-		return ValidationError{Errs: errors}
-	}
 	return nil
 }
