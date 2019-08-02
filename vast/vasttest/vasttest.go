@@ -114,19 +114,14 @@ func isXmlField(field reflect.StructField) bool {
 func VerifyVastElementErrorAsExpected(t testing.TB, element Validator, err error, expectedError error) {
 	if err != expectedError {
 		ve, ok := err.(vast.ValidationError)
-		ev,eOk := expectedError.(*vast.ValidationError)
+		ev, eOk := expectedError.(*vast.ValidationError)
 		if ok {
 			for i, err := range ve.Errs {
-				if eOk {
-					if ev.Errs[i] == err{
-						return
-					}
-				}else{
-					if expectedError == err {
-						return
-					}
+				if eOk && ev.Errs[i] == err {
+					return
+				} else if expectedError == err {
+					return
 				}
-
 			}
 			t.Fatalf("Verify Vast element %v failed; expected trigger error %v, actual error %v.", reflect.TypeOf(element), expectedError, err)
 		} else {
@@ -152,5 +147,3 @@ func VerifyVastElementFromFile(t testing.TB, file string, element Validator, exp
 	}
 	VerifyVastElementFromBytes(t, xmlData, element, expectedError)
 }
-
-
