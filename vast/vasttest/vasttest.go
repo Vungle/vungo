@@ -114,9 +114,12 @@ func isXmlField(field reflect.StructField) bool {
 func VerifyVastElementErrorAsExpected(t testing.TB, element Validator, err error, expectedError error) {
 	if err != expectedError {
 		ve, ok := err.(vast.ValidationError)
+		ev, eOk := expectedError.(*vast.ValidationError)
 		if ok {
-			for _, err := range ve.Errs {
-				if expectedError == err {
+			for i, err := range ve.Errs {
+				if eOk && ev.Errs[i] == err {
+					return
+				} else if expectedError == err {
 					return
 				}
 			}

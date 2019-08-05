@@ -28,6 +28,19 @@ type MediaFile struct {
 // Since the width, and height might be zero, we'll only make sure they are not less than zero.
 func (mediaFile *MediaFile) Validate() error {
 	errors := make([]error, 0)
+
+	mimeTypeIsSupported := false
+	for _, mimeType := range defaults.SUPPORTED_MIME_TYPES {
+		if mimeType == mediaFile.MimeType {
+			mimeTypeIsSupported = true
+			break
+		}
+	}
+	if !mimeTypeIsSupported {
+		errors = append(errors, ErrMediaFileUnsupportedMimeType)
+		return ValidationError{Errs: errors}
+	}
+
 	if len(mediaFile.Delivery) == 0 {
 		errors = append(errors, ErrMediaFileMissDelivery)
 	}
@@ -37,10 +50,6 @@ func (mediaFile *MediaFile) Validate() error {
 		if ok {
 			errors = append(errors, ve.Errs...)
 		}
-	}
-
-	if len(mediaFile.MimeType) == 0 {
-		errors = append(errors, ErrMediaFileMissMimeType)
 	}
 
 	if mediaFile.Width < 0 || mediaFile.Height < 0 {
@@ -67,16 +76,6 @@ func (mediaFile *MediaFile) Validate() error {
 		errors = append(errors, ErrMediaFileHeightTooLow)
 	}
 
-	mimeTypeIsSupported := false
-	for _, mimeType := range defaults.SUPPORTED_MIME_TYPES {
-		if mimeType == mediaFile.MimeType {
-			mimeTypeIsSupported = true
-			break
-		}
-	}
-	if !mimeTypeIsSupported {
-		errors = append(errors, ErrMediaFileUnsupportedMimeType)
-	}
 	if len(errors) > 0 {
 		return ValidationError{Errs: errors}
 	}

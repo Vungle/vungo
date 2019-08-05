@@ -29,6 +29,24 @@ var linearTests = []vasttest.VastTest{
 	vasttest.VastTest{&vast.Linear{}, vast.ErrDurationEqualZero, "linear_error_skipoffset.xml"},
 	vasttest.VastTest{&vast.Linear{}, vast.ErrVideoDurationTooLong, "linear_error_too_long.xml"},
 	vasttest.VastTest{&vast.Linear{}, vast.ErrVideoDurationTooShort, "linear_error_too_short.xml"},
+	vasttest.VastTest{
+		&vast.Linear{},
+		&vast.ValidationError{
+			Errs: []error{
+				vast.ErrMediaFileWidthTooLow,
+				vast.ErrMediaFileHeightTooLow,
+			},
+		}, "linear_at_least_one_invalid_mediafile.xml"},
+	vasttest.VastTest{
+		&vast.Linear{},
+		&vast.ValidationError{
+			Errs: []error{
+				vast.ErrMediaFileWidthTooLow,
+				vast.ErrMediaFileHeightTooLow,
+				vast.ErrMediaFileWidthTooHigh,
+				vast.ErrMediaFileHeightTooHigh,
+			},
+		}, "invalid_mediafiles_with_invalid_mimetype.xml"},
 }
 
 func TestLinearValidateErrors(t *testing.T) {
