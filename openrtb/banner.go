@@ -9,6 +9,7 @@ import "errors"
 type Banner struct {
 	Width             int         `json:"w,omitempty"`
 	Height            int         `json:"h,omitempty"`
+	Format            []Format    `json:"format,omitempty"` // Format is a field for OpenRTB 2.5
 	MaxWidth          *int        `json:"wmax,omitempty"`
 	MaxHeight         *int        `json:"hmax,omitempty"`
 	MinWidth          *int        `json:"wmin,omitempty"`
@@ -86,6 +87,11 @@ func (v *Banner) Copy() *Banner {
 	if v.APIFrameworks != nil {
 		vCopy.APIFrameworks = make([]int, len(v.APIFrameworks))
 		copy(vCopy.APIFrameworks, v.APIFrameworks)
+	}
+
+	if v.Format != nil {
+		vCopy.Format = make([]Format, len(v.Format))
+		copy(vCopy.Format, v.Format)
 	}
 
 	// extension copying has to be done by the user of this package manually.

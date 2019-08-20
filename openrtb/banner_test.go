@@ -37,6 +37,7 @@ func TestBannerCopy(t *testing.T) {
 				APIFrameworks:     []int{4},
 				Width:             2,
 				Height:            2,
+				Format:            []openrtb.Format{{320, 50}, {728, 90}},
 				MinHeight:         &testInt,
 				MaxHeight:         &testInt,
 				MinWidth:          &testInt,
@@ -63,6 +64,12 @@ func TestBannerCopy(t *testing.T) {
 		if testCase.banner.BlockedAttributes != nil {
 			if &testCase.banner.BlockedAttributes == &bannerCopy.BlockedAttributes {
 				t.Errorf("Address of BlockedAttributes should not be the same in copied banner. BlockedAttributes1: %p BlockedAttributes2: %p.", testCase.banner.BlockedAttributes, bannerCopy.BlockedAttributes)
+			}
+		}
+
+		if testCase.banner.Format != nil {
+			if &testCase.banner.Format == &bannerCopy.Format {
+				t.Errorf("Address of Format should not be the same in copied banner. Format1: %p Format2: %p.", testCase.banner.Format, bannerCopy.Format)
 			}
 		}
 
