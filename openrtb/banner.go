@@ -9,7 +9,7 @@ import "errors"
 type Banner struct {
 	Width             int         `json:"w,omitempty"`
 	Height            int         `json:"h,omitempty"`
-	Format            []Format    `json:"format,omitempty"`
+	Format            []Format    `json:"format,omitempty"` // Format is a field for OpenRTB 2.5
 	MaxWidth          *int        `json:"wmax,omitempty"`
 	MaxHeight         *int        `json:"hmax,omitempty"`
 	MinWidth          *int        `json:"wmin,omitempty"`
