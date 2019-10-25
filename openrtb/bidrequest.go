@@ -26,6 +26,7 @@ type BidRequest struct {
 	BlockedAdvertisers           []string      `json:"badv,omitempty"`
 	BlockedAdvertisersByMarketID []string      `json:"bapp,omitempty"` // bapp is for OpenRTB 2.5 onwards.
 	Regulation                   *Regulation   `json:"regs,omitempty"`
+	Source                       *Source       `json:"source,omitempty"`
 }
 
 // Validate method checks to see if the BidRequest object contains required and well-formatted data
@@ -91,6 +92,10 @@ func (r *BidRequest) Copy() *BidRequest {
 
 	if r.Regulation != nil {
 		brCopy.Regulation = r.Regulation.Copy()
+	}
+
+	if r.Source != nil {
+		brCopy.Source = r.Source.Copy()
 	}
 
 	return &brCopy
