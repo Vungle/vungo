@@ -65,7 +65,7 @@ type SupplyChainNode struct {
 	//   The canonical domain name of the SSP, Exchange, Header Wrapper, etc system that bidders connect to.
 	//   This may be the operational domain of the system, if that is different than the parent corporate domain, to facilitate WHOIS and reverse IP lookups to establish clear ownership of the delegate system.
 	//   This should be the same value as used to identify sellers in an ads.txt file if one exists.
-	ASI int8 `json:"asi"`
+	ASI string `json:"asi"`
 
 	// Attribute:
 	//   sid
