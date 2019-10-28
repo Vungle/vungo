@@ -38,36 +38,12 @@ type Source struct {
 	//   object
 	// Description:
 	//   Placeholder for exchange-specific extensions to OpenRTB.
-	Ext *SourceExt `json:"ext,omitempty"`
+	Ext interface{} `json:"ext,omitempty"`
 }
 
 // Copy returns a pointer to a copy of the Source object.
 func (s *Source) Copy() *Source {
 	sourceCopy := *s
-	if s.Ext != nil {
-		sourceCopy.Ext = s.Ext.Copy()
-	}
-
+	sourceCopy.Ext = nil
 	return &sourceCopy
-}
-
-// This object describes the extended objects under source Object.
-type SourceExt struct {
-	// Attribute:
-	//   schain
-	// Type:
-	//   object
-	// Description:
-	//   This object represents both the links in the supply chain as well as an indicator whether or not the supply chain is complete.
-	SChain *SChain `json:"schain,omitempty"`
-}
-
-// Copy returns a pointer to a copy of the SourceExt object.
-func (ext *SourceExt) Copy() *SourceExt {
-	extCopy := *ext
-	if ext.SChain != nil {
-		extCopy.SChain = ext.SChain.Copy()
-	}
-
-	return &extCopy
 }
