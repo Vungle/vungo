@@ -13,6 +13,7 @@ type Bid struct {
 	Price              float64             `json:"price"`
 	AdID               string              `json:"adid,omitempty"`
 	WinNotificationURL string              `json:"nurl,omitempty"`
+	LossNoticeURL      string              `json:"lurl,omitempty"`
 	AdMarkup           string              `json:"adm,omitempty"`
 	AdvertiserDomains  []string            `json:"adomain,omitempty"`
 	Bundle             string              `json:"bundle,omitempty"`

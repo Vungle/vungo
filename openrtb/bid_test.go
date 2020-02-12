@@ -108,6 +108,28 @@ func TestBid_Copy(t *testing.T) {
 				Extension:          json.RawMessage([]byte(`rawr`)),
 			},
 		},
+		{
+			&openrtb.Bid{
+				ID:                 "test",
+				ImpressionID:       "testImpId",
+				Price:              0,
+				AdID:               "testAdID",
+				WinNotificationURL: "testWinNURL",
+				LossNoticeURL:      "lossURL",
+				AdMarkup:           "testAdm",
+				AdvertiserDomains:  []string{"123"},
+				Bundle:             "testBundle",
+				QualityImageURL:    "testQualityImgURL",
+				CampaignID:         "testCID",
+				CreativeID:         "testCrID",
+				Categories:         []openrtb.Category{openrtb.CategoryArtsAndEntertainment},
+				CreativeAttributes: []openrtb.CreativeAttribute{openrtb.CreativeAttributeAudioAuto},
+				DealID:             "testDealID",
+				Height:             0,
+				Width:              0,
+				Extension:          json.RawMessage([]byte(`rawr`)),
+			},
+		},
 	}
 	for _, testCase := range testCases {
 		b2 := testCase.bid.Copy()
