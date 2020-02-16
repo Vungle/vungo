@@ -5,6 +5,7 @@
   "price": 3.14159,
   "adid": "d2ae6794cd3e02160755abd460d65008",
   "nurl": "http://demand.gopro.com/win?won=${AUCTION_PRICE}",
+  "lurl": "http://demand.gopro.com/loss?won=${AUCTION_PRICE}",
   "adm": "<vast/>",
   "bundle": "com.gopro",
   "adomain": [
