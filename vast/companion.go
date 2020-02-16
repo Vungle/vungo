@@ -13,6 +13,7 @@ type Companion struct {
 	AdSlotId       string `xml:"adSlotId,attr,omitempty"` // VAST3.0.
 
 	ClickThrough   string          `xml:"CompanionClickThrough,omitempty"`
+	ClickTracking  string          `xml:"CompanionClickTracking,omitempty"` // VAST3.0.
 	AltText        string          `xml:"AltText,omitempty"`
 	Trackings      []*Tracking     `xml:"TrackingEvents>Tracking,omitempty"` // Required tracking: EVENT_CREATIVE_VIEW
 	AdParameters   *AdParameters   `xml:"AdParameters,omitempty"`            // Just string in VAST2.0.
