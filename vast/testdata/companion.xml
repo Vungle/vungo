@@ -10,6 +10,7 @@
     apiFramework="Vungle Exchange"
     adSlotId="ad-slot-id">
   <CompanionClickThrough><![CDATA[http://clickthrough/url]]></CompanionClickThrough>
+  <CompanionClickTracking><![CDATA[http://ClickTracking/url]]></CompanionClickTracking>
   <AltText><![CDATA[Alt text for HTML rendering.]]></AltText>
   <TrackingEvents>
     <Tracking event="mute"><![CDATA[http://mute/me]]></Tracking>
