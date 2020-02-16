@@ -8,24 +8,24 @@ import "encoding/json"
 //go:generate easyjson $GOFILE
 //easyjson:json
 type Bid struct {
-	ID                 string              `json:"id"`
-	ImpressionID       string              `json:"impid"`
-	Price              float64             `json:"price"`
-	AdID               string              `json:"adid,omitempty"`
-	WinNotificationURL string              `json:"nurl,omitempty"`
-	LossNoticeURL      string              `json:"lurl,omitempty"`
-	AdMarkup           string              `json:"adm,omitempty"`
-	AdvertiserDomains  []string            `json:"adomain,omitempty"`
-	Bundle             string              `json:"bundle,omitempty"`
-	QualityImageURL    string              `json:"iurl,omitempty"`
-	CampaignID         string              `json:"cid,omitempty"`
-	CreativeID         string              `json:"crid,omitempty"`
-	Categories         []Category          `json:"cat,omitempty"`
-	CreativeAttributes []CreativeAttribute `json:"attr,omitempty"`
-	DealID             string              `json:"dealid,omitempty"`
-	Height             int                 `json:"h,omitempty"`
-	Width              int                 `json:"w,omitempty"`
-	Extension          json.RawMessage     `json:"ext,omitempty"`
+	ID                  string              `json:"id"`
+	ImpressionID        string              `json:"impid"`
+	Price               float64             `json:"price"`
+	AdID                string              `json:"adid,omitempty"`
+	WinNotificationURL  string              `json:"nurl,omitempty"`
+	LossNotificationURL string              `json:"lurl,omitempty"` //Loss notice URL called by the exchange when a bid is known to have been lost.
+	AdMarkup            string              `json:"adm,omitempty"`
+	AdvertiserDomains   []string            `json:"adomain,omitempty"`
+	Bundle              string              `json:"bundle,omitempty"`
+	QualityImageURL     string              `json:"iurl,omitempty"`
+	CampaignID          string              `json:"cid,omitempty"`
+	CreativeID          string              `json:"crid,omitempty"`
+	Categories          []Category          `json:"cat,omitempty"`
+	CreativeAttributes  []CreativeAttribute `json:"attr,omitempty"`
+	DealID              string              `json:"dealid,omitempty"`
+	Height              int                 `json:"h,omitempty"`
+	Width               int                 `json:"w,omitempty"`
+	Extension           json.RawMessage     `json:"ext,omitempty"`
 }
 
 // Validate method validates a bid object.
