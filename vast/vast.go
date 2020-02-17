@@ -28,6 +28,23 @@ func (v Vast) FindFirstInlineLinearCreative() *Linear {
 	return nil
 }
 
+// FindFirstInlineCompanionAdsCreative method inspects through all of its inline ads and finds the first
+// CompanionAds creative within, or returns nil when found nothing.
+func (v Vast) FindFirstInlineCompanionAdsCreative() *CompanionAds {
+	for _, ad := range v.Ads {
+		if ad.InLine == nil {
+			continue
+		}
+
+		for _, c := range ad.InLine.Creatives {
+			if c.CompanionAds != nil {
+				return c.CompanionAds
+			}
+		}
+	}
+	return nil
+}
+
 // Validate method validates the Vast element according to the VAST.
 // Version, and Ads are required.
 func (vast *Vast) Validate() error {
