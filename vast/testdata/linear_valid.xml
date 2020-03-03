@@ -1,91 +1,25 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Linear skipoffset="11:22:00.123">
-  <Duration>00:00:33.123</Duration>
-  <AdParameters xmlEncoded="true"><![CDATA[Some ad parameters.]]></AdParameters>
-  <Icons>
-    <Icon
-        program="Vungle"
-        width="128"
-        height="256"
-        xPosition="64"
-        yPosition="32"
-        offset="75%"
-        duration="00:30:00.123"
-        apiFramework="Vungle Exchange">
-      <IconClicks>
-        <IconClickThrough><![CDATA[http://clickthrough/url]]></IconClickThrough>
-        <IconClickTracking><![CDATA[http://clicktracking/url/1]]></IconClickTracking>
-        <IconClickTracking><![CDATA[http://clicktracking/url/2]]></IconClickTracking>
-        <IconClickTracking><![CDATA[http://clicktracking/url/3]]></IconClickTracking>
-      </IconClicks>
-      <StaticResource creativeType="image/gif"><![CDATA[http://where/is/my/gif]]></StaticResource>
-    </Icon>
-    <Icon
-        program="Vungle"
-        width="128"
-        height="256"
-        xPosition="64"
-        yPosition="32"
-        offset="75%"
-        duration="00:30:00.123"
-        apiFramework="Vungle Exchange">
-      <IconClicks>
-        <IconClickThrough><![CDATA[http://clickthrough/url]]></IconClickThrough>
-        <IconClickTracking><![CDATA[http://clicktracking/url/1]]></IconClickTracking>
-        <IconClickTracking><![CDATA[http://clicktracking/url/2]]></IconClickTracking>
-        <IconClickTracking><![CDATA[http://clicktracking/url/3]]></IconClickTracking>
-      </IconClicks>
-      <IFrameResource><![CDATA[http://where/is/the/iframe]]></IFrameResource>
-    </Icon>
-  </Icons>
-  <TrackingEvents>
-    <Tracking event="firstQuartile"><![CDATA[http://firstQuartile/me]]></Tracking>
-    <Tracking event="thirdQuartile"><![CDATA[http://thirdQuartile/me]]></Tracking>
-  </TrackingEvents>
-  <VideoClicks>
-    <ClickThrough id="clickthrough-1"><![CDATA[http://link/to/clickthrough/1]]></ClickThrough>
-    <ClickThrough id="clickthrough-2"><![CDATA[http://link/to/clickthrough/2]]></ClickThrough>
-    <ClickTracking id="clicktraccking-3"><![CDATA[http://link/to/clicktraccking/3]]></ClickTracking>
-    <ClickTracking id="clicktraccking-1"><![CDATA[http://link/to/clicktraccking/1]]></ClickTracking>
-    <ClickTracking id="clicktraccking-2"><![CDATA[http://link/to/clicktraccking/2]]></ClickTracking>
-    <CustomClick id="customclick-1"><![CDATA[http://link/to/customclick/1]]></CustomClick>
-    <CustomClick id="customclick-2"><![CDATA[http://link/to/customclick/2]]></CustomClick>
-    <CustomClick id="customclick-3"><![CDATA[http://link/to/customclick/3]]></CustomClick>
-  </VideoClicks>
-  <MediaFiles>
-    <MediaFile
-        id="some-id"
-        delivery="progressive"
-        type="video/mp4"
-        codec="H-264"
-        bitrate="256"
-        minBitrate="488"
-        maxBitrate="900"
-        width="8"
-        height="16"
-        scalable="true"
-        maintainAspectRatio="true"
-        apiFramework="Vungle Exchange"><![CDATA[http://link/to/the/video]]></MediaFile>
-    <MediaFile
-        id="some-id"
-        delivery="progressive"
-        type="video/mp4"
-        codec="H-264"
-        bitrate="256"
-        minBitrate="488"
-        maxBitrate="900"
-        width="8"
-        height="16"
-        scalable="true"
-        maintainAspectRatio="true"
-        apiFramework="Vungle Exchange"><![CDATA[http://link/to/the/video]]></MediaFile>
-  </MediaFiles>
-  <CreativeExtensions>
-    <CreativeExtension>
-      <Random><XMLDATA>Is Cool</XMLDATA></Random>
-    </CreativeExtension>
-    <CreativeExtension>
-      <With><AChance>Of Jägermeister</AChance></With>
-    </CreativeExtension>
-  </CreativeExtensions>
-</Linear>
+<VAST version="2.0">
+  <Ad id="">
+    <InLine>
+      <AdTitle>翡翠严品</AdTitle>
+      <Description>母亲节送什么？这才是超暖心礼物的正确打开方式！</Description>
+      <Impression id="1"><![CDATA[https://wn.pos.baidu.com/adx.php?c=d25pZD1lNDMwODRiZjllZjFiZWI0XzAAcz1lNDMwODRiZjllZjFiZWI0AHQ9MTU1NzIxMTg1NgBzZT0xMDE5AGJ1PTEwAHByaWNlPVhORXEwQUFGeFZGN2pFcGdXNUlBOGpMYTM1NUJHcDRMSmN6c3pnAGNoYXJnZV9wcmljZT0xOTA3AHNoYXJpbmdfcHJpY2U9MTkwNzAwMAB3aW5fZHNwPTEwAGNobWQ9MQBiZGlkPQBjcHJvaWQ9AHdkPTEyMTY2OTUyNTY2NQB0dT0xODgwMTMxODUwMDEwMTE1MjYAYWRjbGFzcz0yOABzcmN0PTQAcG9zPTAAYmNobWQ9MABjbWg9OTA4AHY9MQBpPWNjOWNkOGIz&vungles=1&sprice=${AUCTION_PRICE}]]></Impression>
+      <Impression id="1"><![CDATA[https://als.baidu.com/clog/glog?productId=24&_client_type=2&_client_version=api_4.0&_os_type=1&_os_version=12.2.0&net_type=1&cuid=6FE34D072A9274E920C95F8F1246BF598879261ECORHSTFHQMJ&da_type=3&da_page=0&ext_info=AFD5vYlNESyUyRjQuOC43JnRzPXt7VFN9fSZwaWQ9MTA0MzkxNDg2JnVpZD00MDAwOTE2NzgxJmFpZD0xMjE2Njk1MjU2NjUmY2xpY2tfaWQ9e3tDTElDS19JRH19JmNhbGxiYWNrX3VybD17e0NBTExCQUNLX1VSTH19JnNpZ249e3tTSUdOfX0mYWtleT1Nall3TWpNeU5UQT0iLCJmbWlkIjoiODU5MjgyMDY1NzgxMTI1MzIxIiwidHJpZ2dlcl93b3JkIjoiXHU1MzE3XHU0ZWFjXHU0ZTcwXHU3ZmUxXHU3ZmUwXHU2MjRiXHU5NTZmXHU1M2JiXHU1NGVhXHU5MWNjIiwiZGFfbWVudTEiOiIxODgwMTMxODUwMDEwMTE1MjYiLCJmZWVkX2NvdW50IjowLCJvdmlkX2VpZF9saXN0IjoiMTAwMDAyOS0yIzEwMDAwMzItZHojMTAwMDAzNS1keiMyODk2NC01IzMwOTcwLTIjMzE1MDktMSMzMjA0NS1keiMzMjE3MC1keiMzMjE5Ny1keiMzMjI5My0xIzMyNTQ3LWR6IzMyNjM4LWR6IzMyNzExLTIjMzI4NzUtMSMzMzAwNC1keiMzMzAwNi1keiMzMzA4Mi0xIzMzMTQ3LTEjMzMxNTUtMiMzMzE2Mi1keiMzMzE2Ni1keiMzMzE4Ni1keiMzMzIzNC1keiMzMzI0MS0zIzMzMjk0LWR6IzMzMzA5LWR6IiwiYmVzX3RyYWRlX2lkIjpbNjIwMl0sInNpcCI6IjEyMi4xNDAuOTAuMTA2Iiwic2lwdjYiOm51bGwsImR1cmF0aW9uIjoiMTAiLCJyZW5kZXJfYWZkIjp7ImR1cmF0aW9uIjoiMTAifSwicHJvZHVjdF9pZCI6MjQsInJlcV9udW0iOjEsInBpY19oZWlnaHQiOjIwMDEsInBpY193aWR0aCI6MTEyNSwiYXBwX3RyYWRlMSI6MzcsImFwcF9pZCI6IjViYTBjYmZmMzU5MGMyMDJhN2EzMWY4NSIsInNvdXJjZV90eXBlIjo0fQ%3D%3DTMxMTU3MTY0ZSsxOSwiYnJhbmRfc2lnbiI6MS42NDgwMDQ4Njc2MTYyZSsxOSwicGF5X3R5cGUiOjEsImZlZWRfY3NpZF9saXN0IjoiNDA4MDgxNDAwNzgwNjIyMTc1MCIsInRpdGxlX3NpZ25fc3RyIjoiMTE5ODEzMTE1NzE2NDA0MjA2MDYiLCJicmFuZF9zaWduX3N0ciI6IjE2NDgwMDQ4Njc2MTYxOTAwNDk3IiwidmlkZW9pZCI6IjM5Mzg0NjkiLCJnZF9leHRfaW5mbyI6IiIsImdkX2V4cGVuZCI6IiIsImFydGljbGVfYWRfcG9zaXRpb24iOjAsImRldmljZV9pZCI6IkI0MjQxRTNELUY3M0EtNEEwRi05REEzLTMwMTlBNjFBQzZENiIsImJlc19sZXZlbCI6MCwiaXNfZGVlcGxpbmsiOjAsIm9ubHlfZGVlcGxpbmsiOjAsInN1YmplY3Rfc2lnbiI6IjQyODY5NDg0MCIsInJlZnJlc2hfc3RhdGUiOiItIiwiYWRfcGljX3dpZHRoIjo3MjAsImFkX3BpY19oZWlnaHQiOjEyODAsIm9yaV9hZF9jcG0iOjAsInZpZGVvX3NpZ25fc3RyIjoiMTA4MTIyNDMzMDkwOTU4MzY1MjkiLCJtZWRpYV9wYWNrYWdlX3RhZyI6IjAiLCJtZWRpYV9wYWNrYWdlX3RhZ192ZXJzaW9uIjoiMCIsImhhc19sZWFndWUiOjAsImlzX29jcGNfZGVlcCI6MCwiZGVlcF90cmFuc190eXBlIjowLCJkZWVwX29jcGNfYmlkIjowLCJhcHBfaW5mbyI6IjAiLCJhbmRyb2lkX2lkIjoiIiwib3JpX3FsZWZ0Ijo5MDgzOCwib3JpX3FyaWdodCI6OTA4MzgsImJpZCI6MjEsInJvaXEiOjE5MjE1LCJjcGlkIjoxMDAxLCJsb2dpZCI6MzA1NjM3OTQzMCwiZnJvbSI6IkZDIiwicGxhY2VfaWQiOiIxNTUxMTg1Njg3MDg0IiwiaWRjIjoibmoiLCJuZXRUeXBlIjoxLCJzZWFyY2hfdGltZSI6MTU1NzIxMTg1Niwic2VhcmNoX2lkIjo3MjE5NDE2MTYxMjE1MTY4NTEyLCJlaWRfbGlzdCI6IjE5ODYxMDMjMTk4NjEwMiM1MDA1NTEyIzUyMDAwMDEiLCJ3aW5mb19pZCI6MTIxNjY1MjQzNzI3LCJpZGVhX2lkIjoxMjE2Njk1MjU2NjUsInVzZXJfaWQiOjI2MDIzMjUwLCJwbGFuX2lkIjoxMDQzOTE0ODYsInVuaXRfaWQiOjQwMDA5MTY3ODEsInBsIjoxMDQzOTE0ODYsInVuIjo0MDAwOTE2NzgxLCJhZF9jcG0iOjE5MDc1OTgsImFkX3R5cGUiOjE4OCwiYWRfZmxhZyI6MiwicmFuayI6MSwiY20iOjkwOCwic3JjIjoxNTI3LCJwb3NpdGlvbl9zdGVwIjowLCJwdiI6MTgsImN0Ijo0MiwiYWRpZCI6MTIxNjY1MjQzNzI3LCJ1c2VyaWQiOjI2MDIzMjUwLCJjbWF0Y2giOjkwOCwibXQiOiIxNjUzOCIsImFkX3ByaWNlIjoyMSwiYXNxX3JlcXQiOjE1NTcyMTE4NTY0MDIsImNsaWNrX3VybCI6Imh0dHA6XC9cL2FkLmdvdWN1aS5uZXQ6MzMzM1wvcG9ydGFsX21pbmlwcm9ncmFtXC9hZE1vbml0b3JcL2Jkcz90ZW1wbGF0ZUlkPTIwOWM4YzA1NjJkMDQyMDY4NzA2YjIxYzMwOWI1YzM4JmlkZmE9QjQyNDFFM0QtRjczQS00QTBGLTlEQTMtMzAxOUE2MUFDNkQ2Jm9zPTEmaXA9MTIyLjE0MC45MC4xMDYmaXBfdHlwZT12NCZ1YT1Nb3ppbGxhJTJGNS4wKyUyOGlQaG9uZSUzQitDUFUraVBob25lK09TKzEyXzIrbGlrZStNYWMrT1MrWCUyOStBcHBsZVdlYktpdCUyRjYwNS4xLjE1KyUyOEtIVE1MJTJDK2xpa2UrR2Vja28lMjkrTW9iaWxlJTJGMTVFMTQ4K0dEVE1eyJ3b3JkX2lkIjoxMDAxMTU5NjY1LCJtYXRjaF90eXBlIjoxMCwiYXRwX2lkIjowLCJwcmljZXNvcnRfcSI6OTA4MywiY2hhcmdlX21ldGhvZCI6IjIiLCJhZF9icmFuZCI6Ilx1N2ZlMVx1N2ZlMFx1NGUyNVx1NTRjMSIsInNlY29uZF9pbmR1c3RyeV9jYXRlZ29yeSI6Ilx1OTk3MFx1NTRjMSIsInByb2R1Y3RfdHlwZSI6MzM1MzksImZlZWRfcmV3cml0ZV9xdWVyeSI6Ilx1NTE3M1x1NGU4ZVx1NGUwOVx1NTZmZFx1NmUzOFx1NjIwZiIsIm10cyI6IjE2NTM4IiwicG9zaXRpb24iOjAsImJpZF90eXBlIjozLCJvY3BjX2xldmVsIjoxLCJ0cmFuc190eXBlIjo0LCJvcmlfYmlkIjoyMTAsIm9jcGNfYmlkIjo5MDAwLCJvY3BjX3RyYW5zX2Zyb20iOjEsImlzX29jcGNfY2FuY2VsXzFzdGFnZSI6ZmFsc2UsIm9jcGNfbGFiX3N0YXR1cyI6MCwiY2hhcmdlX21vZGUiOjAsInN1YmplY3QiOiI0Mjg2OTQ4NDAiLCJ0cmlnZ2VyZWRfcXVlcnkiOiIwIiwicGFfcHJvZHVjdF9saXN0IjoiIiwiaXNfb2NwY19jYW5jZWxfMXN0YWdlX25ldyI6MCwiZnR5cGUiOjAsIm9yaV9tdF9pZCI6MTY1MzgsInp0Y19jcGFfaW5mbyI6IntcImFuZGVyc2VuX3NlbGZcIjowLFwiYW5kZXJzZW5fc2VsZl9zd2l0Y2hcIjowLFwiYW5kZXJzZW5fc3RhdHVzXCI6MCxcImFuZGVyc2VuX3N3aXRjaFwiOjAsXCJyZWNtdGl0bGVpZFwiOlwiMjkwMDA5NDg3OTcxXCIsXCJ0aXRfdFwiOjAsXCJ1c2VQdWJsaWNcIjoxLFwidmlkZW9pZFwiOjM5Mzg0Njl9IiwibXNhX3BlZ2FzdXNfY3RycSI6MzM1MzksInRpdGxlX3NpZ24iOjEuMTk4M&encryptMethod=new&origin_time=%25%25origin_time%25%25&model=1]]></Impression>
+      <Creatives>
+        <Creative>
+          <Linear>
+            <Duration>00:00:10</Duration>
+            <VideoClicks>
+              <ClickThrough><![CDATA[https://itunes.apple.com/cn/app/id1380567884]]></ClickThrough>
+              <ClickTracking><![CDATA[http://m.baidu.com/baidu.php?url=K60000K--x96ZIuJk4j6N9MO9ygCszTj6DiWzoSObXjN8iZtiWwZlGBgEi-aecRl-fznXuSHgjt_pC-bJudb3qTBwCvx1t5GQ5ZbjscIpJRRXKcZVOU8Nx3sUhO-uxDNJpOpuhextyJGEE4i5rd9ddTZSk7bL-74lrYL83muj7nt47UcQ6.DY_NR2Ar5Od66xfswFWthTXrB-DDnRjr5ZKBo3eQPLH3ePMm_HAeWuu_e2qMQjWhyAp7W_LUlqz6.U1Yk0ZDq8IWHv_Wq8xoH1_SL0Zfq_UASJTQzqriY4noyeSLcGTHDsrt0pyYqrH030ATq0ZNG5i98Iyk_2fKspyfqnH60mv-b5Hfz0AdY5HDvPHn30AFW5Hc0pvbqn0K-pyfqnHb3PWDsndtkrH6vnH0zg1RsnjRdnHFxPHcsnj0snfKBpHY0Uynq0Z7spyfqn0Kkmv-b5H00ThIYmyTqn0KEIhsqnH0snj0zriYzg1Dsnj0sn1cVuZGxnH0snj01PidbX-tzrjbvPaYdg1nsrHTsQHFxn1DdnjbVnNt1nW0YPidbX-t1nWDLnadbX-t1nWD4PzdbX-t1nWc4nzYkg1nzPHfLQywlg1nzPWn3Qywlg1nzP1DkQHFxn1c3P1RVnNt1n10sPadbX-t1n10sPBdbX-t1n103nBYkg1n1nHfLQH7xn1nkPHRVn-t1n1DvnBdbX-t1n1DvPBdbX-t1n1D3PBdbX-t1n1c1PadbX-t1n1cYniY1g1n1nWbYQywlg1n1n104Qywl0A7B5HKxn0K-ThTqn0KsTjYs0A4vTjYsQW0snj0snj0s0AdYTjY0uAwETjY0ThCqn0K1XWY0IZN15HDzP1TYnWDLPWT4PWDLnHD3n1040ZF-TgfqnHRdP1cknH6dPWfsn6K1pyfqPWf1nj6Ymhm4uymkm10sn0KsUWYs0Aq15HD0IvbqnH00uh3qPHnsnj6YnH9xmLKz0APYp1Y0IZRqnH63njD1nH6dnj0knjDkPHcv0A7bmvk9TLnqnW60IAYq0A7Wpyfq0ZPbpdqv5Hf0TLPs5HDsnHb0IAfq0APC5fK8IZws5Hn0mgKsgLPGujYdmhDsmvFhuWndrHKWnW0zmHI9n17hrjR0Ugw4TARqnH00mywYXgK-5HD3r0K9IZKGujYs0APspyfqnH0snfKsUA-b5HDdPHDkrjRvrjTsrjf0mv9GujY0mgKsIh3qmgKGg1f8n0KYmg6q0AdYT1YkPWR1r0KEmLKW5HnWninYc1bsnj0WnHbznHRWnHbznHRWnWDWPankc1D8nj0sc1D8nj0sc1D8nj0sc10Wnankc108nj0snj0sg10Wnansc10Wninsc10Wnanznansc1cknansc10WninkQW0sc1D8nj0sc1D8nj0sc108nj0sc108nj0sc108nj0sc1D8nj0Wnansc10WnankQW0snansc10Wnan1njD1njRY0ZKY5Hn1PHn40ZKETv-Ypyq85H00TAq1pgwGUv4xmv99UhI-gLF-mgPEUWYs0AqzpNqVIjYkPWR1r0KVI7qsIjYs0A7WmLfqn6KbmvPb5fKbmLFs5HD1Pj03n1mkPHc0uANvIZ0qpNKCUv4-PzYk0ZP85iY0TZFEujYzr0KEmLKWgvk9m-q1IA7YIgnqn0KEmLKWgvP_pyPo5H0Wnansc10Wnansc1D8nj0sc1D8nj0s0AuYXgK-5H00TMPz5yRYn103PAFhryNhnyF-mWwxn0KBTZTqnHDzPfKBTA6qnW0snfK9uZP8gLnqn0K9uZP8gv-15fKBUysqnH010AdsIjYs0AdsIZmqn0K_IjYs0ZPW5H00Ih-buyqGujY1rHn3Pjm40AF-Tvsqn0KGTvw_5H00UvkbUjYs0ZKzUvI9uZmqn0K9TLbqn0K9uZKL5HTzn0K9uZKC5HDzrj00pgPs5y4JUZD0pZP_u1Ys0jDqn00z5f015RcYnWfkwHPDQRmLnYDVPDDswBY4wDD1QHnsnH-KPW7Kf1uDP60Y5HD0PHYknj0snjD0PWYs0jTqn0035H00mLFW5HfsPHbv]]></ClickTracking>
+              <ClickTracking><![CDATA[https://als.baidu.com/clog/glog?productId=24&_client_type=2&_client_version=api_4.0&_os_type=1&_os_version=12.2.0&net_type=1&cuid=6FE34D072A9274E920C95F8F1246BF598879261ECORHSTFHQMJ&da_type=2&da_page=0&ext_info=AFD5vYlNESyUyRjQuOC43JnRzPXt7VFN9fSZwaWQ9MTA0MzkxNDg2JnVpZD00MDAwOTE2NzgxJmFpZD0xMjE2Njk1MjU2NjUmY2xpY2tfaWQ9e3tDTElDS19JRH19JmNhbGxiYWNrX3VybD17e0NBTExCQUNLX1VSTH19JnNpZ249e3tTSUdOfX0mYWtleT1Nall3TWpNeU5UQT0iLCJmbWlkIjoiODU5MjgyMDY1NzgxMTI1MzIxIiwidHJpZ2dlcl93b3JkIjoiXHU1MzE3XHU0ZWFjXHU0ZTcwXHU3ZmUxXHU3ZmUwXHU2MjRiXHU5NTZmXHU1M2JiXHU1NGVhXHU5MWNjIiwiZGFfbWVudTEiOiIxODgwMTMxODUwMDEwMTE1MjYiLCJmZWVkX2NvdW50IjowLCJvdmlkX2VpZF9saXN0IjoiMTAwMDAyOS0yIzEwMDAwMzItZHojMTAwMDAzNS1keiMyODk2NC01IzMwOTcwLTIjMzE1MDktMSMzMjA0NS1keiMzMjE3MC1keiMzMjE5Ny1keiMzMjI5My0xIzMyNTQ3LWR6IzMyNjM4LWR6IzMyNzExLTIjMzI4NzUtMSMzMzAwNC1keiMzMzAwNi1keiMzMzA4Mi0xIzMzMTQ3LTEjMzMxNTUtMiMzMzE2Mi1keiMzMzE2Ni1keiMzMzE4Ni1keiMzMzIzNC1keiMzMzI0MS0zIzMzMjk0LWR6IzMzMzA5LWR6IiwiYmVzX3RyYWRlX2lkIjpbNjIwMl0sInNpcCI6IjEyMi4xNDAuOTAuMTA2Iiwic2lwdjYiOm51bGwsImR1cmF0aW9uIjoiMTAiLCJyZW5kZXJfYWZkIjp7ImR1cmF0aW9uIjoiMTAifSwicHJvZHVjdF9pZCI6MjQsInJlcV9udW0iOjEsInBpY19oZWlnaHQiOjIwMDEsInBpY193aWR0aCI6MTEyNSwiYXBwX3RyYWRlMSI6MzcsImFwcF9pZCI6IjViYTBjYmZmMzU5MGMyMDJhN2EzMWY4NSIsInNvdXJjZV90eXBlIjo0fQ%3D%3DTMxMTU3MTY0ZSsxOSwiYnJhbmRfc2lnbiI6MS42NDgwMDQ4Njc2MTYyZSsxOSwicGF5X3R5cGUiOjEsImZlZWRfY3NpZF9saXN0IjoiNDA4MDgxNDAwNzgwNjIyMTc1MCIsInRpdGxlX3NpZ25fc3RyIjoiMTE5ODEzMTE1NzE2NDA0MjA2MDYiLCJicmFuZF9zaWduX3N0ciI6IjE2NDgwMDQ4Njc2MTYxOTAwNDk3IiwidmlkZW9pZCI6IjM5Mzg0NjkiLCJnZF9leHRfaW5mbyI6IiIsImdkX2V4cGVuZCI6IiIsImFydGljbGVfYWRfcG9zaXRpb24iOjAsImRldmljZV9pZCI6IkI0MjQxRTNELUY3M0EtNEEwRi05REEzLTMwMTlBNjFBQzZENiIsImJlc19sZXZlbCI6MCwiaXNfZGVlcGxpbmsiOjAsIm9ubHlfZGVlcGxpbmsiOjAsInN1YmplY3Rfc2lnbiI6IjQyODY5NDg0MCIsInJlZnJlc2hfc3RhdGUiOiItIiwiYWRfcGljX3dpZHRoIjo3MjAsImFkX3BpY19oZWlnaHQiOjEyODAsIm9yaV9hZF9jcG0iOjAsInZpZGVvX3NpZ25fc3RyIjoiMTA4MTIyNDMzMDkwOTU4MzY1MjkiLCJtZWRpYV9wYWNrYWdlX3RhZyI6IjAiLCJtZWRpYV9wYWNrYWdlX3RhZ192ZXJzaW9uIjoiMCIsImhhc19sZWFndWUiOjAsImlzX29jcGNfZGVlcCI6MCwiZGVlcF90cmFuc190eXBlIjowLCJkZWVwX29jcGNfYmlkIjowLCJhcHBfaW5mbyI6IjAiLCJhbmRyb2lkX2lkIjoiIiwib3JpX3FsZWZ0Ijo5MDgzOCwib3JpX3FyaWdodCI6OTA4MzgsImJpZCI6MjEsInJvaXEiOjE5MjE1LCJjcGlkIjoxMDAxLCJsb2dpZCI6MzA1NjM3OTQzMCwiZnJvbSI6IkZDIiwicGxhY2VfaWQiOiIxNTUxMTg1Njg3MDg0IiwiaWRjIjoibmoiLCJuZXRUeXBlIjoxLCJzZWFyY2hfdGltZSI6MTU1NzIxMTg1Niwic2VhcmNoX2lkIjo3MjE5NDE2MTYxMjE1MTY4NTEyLCJlaWRfbGlzdCI6IjE5ODYxMDMjMTk4NjEwMiM1MDA1NTEyIzUyMDAwMDEiLCJ3aW5mb19pZCI6MTIxNjY1MjQzNzI3LCJpZGVhX2lkIjoxMjE2Njk1MjU2NjUsInVzZXJfaWQiOjI2MDIzMjUwLCJwbGFuX2lkIjoxMDQzOTE0ODYsInVuaXRfaWQiOjQwMDA5MTY3ODEsInBsIjoxMDQzOTE0ODYsInVuIjo0MDAwOTE2NzgxLCJhZF9jcG0iOjE5MDc1OTgsImFkX3R5cGUiOjE4OCwiYWRfZmxhZyI6MiwicmFuayI6MSwiY20iOjkwOCwic3JjIjoxNTI3LCJwb3NpdGlvbl9zdGVwIjowLCJwdiI6MTgsImN0Ijo0MiwiYWRpZCI6MTIxNjY1MjQzNzI3LCJ1c2VyaWQiOjI2MDIzMjUwLCJjbWF0Y2giOjkwOCwibXQiOiIxNjUzOCIsImFkX3ByaWNlIjoyMSwiYXNxX3JlcXQiOjE1NTcyMTE4NTY0MDIsImNsaWNrX3VybCI6Imh0dHA6XC9cL2FkLmdvdWN1aS5uZXQ6MzMzM1wvcG9ydGFsX21pbmlwcm9ncmFtXC9hZE1vbml0b3JcL2Jkcz90ZW1wbGF0ZUlkPTIwOWM4YzA1NjJkMDQyMDY4NzA2YjIxYzMwOWI1YzM4JmlkZmE9QjQyNDFFM0QtRjczQS00QTBGLTlEQTMtMzAxOUE2MUFDNkQ2Jm9zPTEmaXA9MTIyLjE0MC45MC4xMDYmaXBfdHlwZT12NCZ1YT1Nb3ppbGxhJTJGNS4wKyUyOGlQaG9uZSUzQitDUFUraVBob25lK09TKzEyXzIrbGlrZStNYWMrT1MrWCUyOStBcHBsZVdlYktpdCUyRjYwNS4xLjE1KyUyOEtIVE1MJTJDK2xpa2UrR2Vja28lMjkrTW9iaWxlJTJGMTVFMTQ4K0dEVE1eyJ3b3JkX2lkIjoxMDAxMTU5NjY1LCJtYXRjaF90eXBlIjoxMCwiYXRwX2lkIjowLCJwcmljZXNvcnRfcSI6OTA4MywiY2hhcmdlX21ldGhvZCI6IjIiLCJhZF9icmFuZCI6Ilx1N2ZlMVx1N2ZlMFx1NGUyNVx1NTRjMSIsInNlY29uZF9pbmR1c3RyeV9jYXRlZ29yeSI6Ilx1OTk3MFx1NTRjMSIsInByb2R1Y3RfdHlwZSI6MzM1MzksImZlZWRfcmV3cml0ZV9xdWVyeSI6Ilx1NTE3M1x1NGU4ZVx1NGUwOVx1NTZmZFx1NmUzOFx1NjIwZiIsIm10cyI6IjE2NTM4IiwicG9zaXRpb24iOjAsImJpZF90eXBlIjozLCJvY3BjX2xldmVsIjoxLCJ0cmFuc190eXBlIjo0LCJvcmlfYmlkIjoyMTAsIm9jcGNfYmlkIjo5MDAwLCJvY3BjX3RyYW5zX2Zyb20iOjEsImlzX29jcGNfY2FuY2VsXzFzdGFnZSI6ZmFsc2UsIm9jcGNfbGFiX3N0YXR1cyI6MCwiY2hhcmdlX21vZGUiOjAsInN1YmplY3QiOiI0Mjg2OTQ4NDAiLCJ0cmlnZ2VyZWRfcXVlcnkiOiIwIiwicGFfcHJvZHVjdF9saXN0IjoiIiwiaXNfb2NwY19jYW5jZWxfMXN0YWdlX25ldyI6MCwiZnR5cGUiOjAsIm9yaV9tdF9pZCI6MTY1MzgsInp0Y19jcGFfaW5mbyI6IntcImFuZGVyc2VuX3NlbGZcIjowLFwiYW5kZXJzZW5fc2VsZl9zd2l0Y2hcIjowLFwiYW5kZXJzZW5fc3RhdHVzXCI6MCxcImFuZGVyc2VuX3N3aXRjaFwiOjAsXCJyZWNtdGl0bGVpZFwiOlwiMjkwMDA5NDg3OTcxXCIsXCJ0aXRfdFwiOjAsXCJ1c2VQdWJsaWNcIjoxLFwidmlkZW9pZFwiOjM5Mzg0Njl9IiwibXNhX3BlZ2FzdXNfY3RycSI6MzM1MzksInRpdGxlX3NpZ24iOjEuMTk4M&encryptMethod=new&origin_time=%25%25origin_time%25%25&model=1]]></ClickTracking>
+            </VideoClicks>
+            <MediaFiles>
+              <MediaFile type="video/mp4" bitrate="520" width="720" height="1280"><![CDATA[https://fcvideo.cdn.bcebos.com/5d3bb453236c1563a9b2832d565961c2_2_720_1280_mp4.mp4]]></MediaFile>
+            </MediaFiles>
+          </Linear>
+        </Creative>
+      </Creatives>
+    </InLine>
+  </Ad>
+</VAST>

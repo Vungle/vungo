@@ -23,14 +23,7 @@ func (lw *LinearWrapper) Validate() error {
 		}
 	}
 
-	for _, icon := range lw.Icons {
-		if err := icon.Validate(); err != nil {
-			ve, ok := err.(ValidationError)
-			if ok {
-				errors = append(errors, ve.Errs...)
-			}
-		}
-	}
+	// No necessary to validate Icon which for VAST 3.0 only
 
 	for _, tracking := range lw.Trackings {
 		if err := tracking.Validate(); err != nil {
