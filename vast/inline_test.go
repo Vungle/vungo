@@ -21,7 +21,7 @@ var inlineTests = []vasttest.VastTest{
 	vasttest.VastTest{&vast.InLine{}, vast.ErrInlineMissImpressions, "inline_without_impressions.xml"},
 	vasttest.VastTest{&vast.InLine{}, vast.ErrCreativeType, "inline_error_creatives.xml"},
 	vasttest.VastTest{&vast.InLine{}, nil, "inline_error_impressions.xml"},
-	vasttest.VastTest{&vast.InLine{}, vast.ErrPricingCurrencyFormat, "inline_error_pricing.xml"},
+	vasttest.VastTest{&vast.InLine{}, nil, "inline_error_pricing.xml"},
 }
 
 func TestInlineValidateErrors(t *testing.T) {
