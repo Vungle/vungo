@@ -20,14 +20,18 @@ const (
 	LossReasonMissingCreativeID
 	LossReasonMissingBidPrice
 	LossReasonMissingMinimumCreativeApprovalData
+)
 
-	LossReasonBidWasBelowAuctionFloor LossReason = 100
+const (
+	LossReasonBidWasBelowAuctionFloor LossReason = 100 + iota
 	LossReasonBidWasBelowDealFloor
 	LossReasonLostToHigherBid
 	LossReasonLostToABidForAPMPDeal
 	LossReasonBuyerSeatBlocked
+)
 
-	LossReasonCreativeFilterGeneral LossReason = 200
+const (
+	LossReasonCreativeFilterGeneral LossReason = 200 + iota
 	LossReasonCreativeFilterPendingByExchange
 	LossReasonCreativeFilterDisapprovedByExchange
 	LossReasonCreativeFilterSizeNotAllowed
@@ -41,8 +45,4 @@ const (
 	LossReasonCreativeFilterAdTypeExclusions
 	LossReasonCreativeFilterAnimationTooLong
 	LossReasonCreativeFilterNotAllowedInPMPDeal
-
-	// Add new entries here.
-
-	lastOpenRTBLossReason
 )
