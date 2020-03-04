@@ -14,14 +14,7 @@ func (cw *CompanionAdsWrapper) Validate() error {
 		errors = append(errors, ErrCompanionAdsWrapperMissCompanions)
 	}
 
-	if len(cw.Required) != 0 {
-		if err := cw.Required.Validate(); err != nil {
-			ve, ok := err.(ValidationError)
-			if ok {
-				errors = append(errors, ve.Errs...)
-			}
-		}
-	}
+	// No need to validate Required which is for VAST 3.0 only.
 
 	for _, c := range cw.Companions {
 		if err := c.Validate(); err != nil {

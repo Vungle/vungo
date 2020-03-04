@@ -61,7 +61,6 @@ func newInlineLinearAd(id string) vast.Ad {
 // vastTests is the test set for Vast element.
 // there are other test sets like adTest which is used for Ad element.
 var vastTests = []vasttest.VastTest{
-	vasttest.VastTest{&vast.Vast{}, vast.ErrIconResourcesFormat, "vast.xml"},
 	vasttest.VastTest{&vast.Vast{}, nil, "vast_valid.xml"},
 	vasttest.VastTest{&vast.Vast{}, vast.ErrVastMissAd, "vast_without_ad.xml"},
 	vasttest.VastTest{&vast.Vast{}, vast.ErrUnsupportedVersion, "vast_error_version.xml"},
