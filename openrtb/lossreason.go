@@ -21,13 +21,13 @@ const (
 	LossReasonMissingBidPrice
 	LossReasonMissingMinimumCreativeApprovalData
 
-	LossReasonBidWasBelowAuctionFloor = 100
+	LossReasonBidWasBelowAuctionFloor LossReason = 100
 	LossReasonBidWasBelowDealFloor
 	LossReasonLostToHigherBid
 	LossReasonLostToABidForAPMPDeal
 	LossReasonBuyerSeatBlocked
 
-	LossReasonCreativeFilterGeneral = 200
+	LossReasonCreativeFilterGeneral LossReason = 200
 	LossReasonCreativeFilterPendingByExchange
 	LossReasonCreativeFilterDisapprovedByExchange
 	LossReasonCreativeFilterSizeNotAllowed
