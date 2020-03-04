@@ -1,0 +1,33 @@
+{
+  "w": 100,
+  "h": 200,
+  "format": [{
+    "w": 320,
+    "h": 50
+  }],
+  "hmin": 1,
+  "wmin": 1,
+  "hmax": 200,
+  "wmax": 100,
+  "id": "test",
+  "btype": [
+    1,
+    2
+  ],
+  "battr": [
+    1,
+    2
+  ],
+  "pos": 1,
+  "mimes": [
+    "image/jpg"
+  ],
+  "topframe": 1,
+  "expdir": [
+    1
+  ],
+  "api": [
+    1
+  ],
+  "ext": {}
+}

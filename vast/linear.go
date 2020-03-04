@@ -56,21 +56,31 @@ func (linear *Linear) Validate() error {
 		}
 	}
 
-	var err error
 	var validMedia *MediaFile
+
+	var err error
+	noneMimeTypeErrors := make([]error, 0)
 	for _, mediaFile := range linear.MediaFiles {
 		err = mediaFile.Validate()
 		if err == nil {
 			validMedia = mediaFile
 			break
+		} else {
+			ve, ok := err.(ValidationError)
+			if ok {
+				// Merge all errors which are not mime type errors.
+				if ve.Errs[0] != ErrMediaFileUnsupportedMimeType {
+					noneMimeTypeErrors = append(noneMimeTypeErrors, ve.Errs...)
+				}
+			}
 		}
 	}
+
 	if err != nil {
-		// TODO(tiagozortea): The error being returned is just the last media error, we should
-		// apply the proper error generalizations.
-		ve, ok := err.(ValidationError)
-		if ok {
-			errors = append(errors, ve.Errs...)
+		if len(noneMimeTypeErrors) > 0 {
+			errors = append(errors, noneMimeTypeErrors...)
+		} else {
+			errors = append(errors, ErrMediaFileUnsupportedMimeType)
 		}
 	} else {
 		linear.MediaFiles = []*MediaFile{validMedia}

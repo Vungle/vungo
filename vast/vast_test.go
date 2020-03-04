@@ -93,3 +93,73 @@ func TestVastMarshalUnmarshalError(t *testing.T) {
 		}
 	}
 }
+
+func TestVast_FindFirstInlineCompanionAdsCreative(t *testing.T) {
+	tests := []struct {
+		desc   string
+		v      vast.Vast
+		expect *vast.CompanionAds
+	}{
+		{
+			desc: "Has CompanionAds.",
+			v: vast.Vast{
+				Ads: []*vast.Ad{
+					{
+						InLine: &vast.InLine{
+							Creatives: []*vast.Creative{
+								{
+									Linear: &vast.Linear{},
+								},
+								{
+									CompanionAds: &vast.CompanionAds{
+										Companions: []*vast.Companion{
+											{
+												StaticResource: &vast.StaticResource{
+													MimeType: "jpg",
+													Uri:      "http://abc/a.jpg",
+												},
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+				}},
+			expect: &vast.CompanionAds{
+				Companions: []*vast.Companion{
+					{
+						StaticResource: &vast.StaticResource{
+							MimeType: "jpg",
+							Uri:      "http://abc/a.jpg",
+						},
+					},
+				},
+			},
+		},
+		{
+			desc: "No CompanionAds.",
+			v: vast.Vast{
+				Ads: []*vast.Ad{
+					{
+						InLine: &vast.InLine{
+							Creatives: []*vast.Creative{
+								{
+									Linear: &vast.Linear{},
+								},
+							},
+						},
+					},
+				}},
+			expect: nil,
+		},
+	}
+	for _, test := range tests {
+		t.Run(test.desc, func(t *testing.T) {
+			c := test.v.FindFirstInlineCompanionAdsCreative()
+			if !reflect.DeepEqual(c, test.expect) {
+				t.Errorf("Expect %#v,\n get %#v", test.expect, c)
+			}
+		})
+	}
+}
