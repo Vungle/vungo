@@ -10,7 +10,7 @@ type CompanionAds struct {
 func (companionAds *CompanionAds) Validate() error {
 	errors := make([]error, 0)
 
-	// No necessary to validate Required which for VAST 3.0 only.
+	// No need to validate Required which is for VAST 3.0 only.
 
 	for _, companion := range companionAds.Companions {
 		if err := companion.Validate(); err != nil {

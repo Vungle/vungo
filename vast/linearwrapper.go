@@ -23,7 +23,7 @@ func (lw *LinearWrapper) Validate() error {
 		}
 	}
 
-	// No necessary to validate Icon which for VAST 3.0 only
+	// No need to validate Icon which is for VAST 3.0 only.
 
 	for _, tracking := range lw.Trackings {
 		if err := tracking.Validate(); err != nil {
