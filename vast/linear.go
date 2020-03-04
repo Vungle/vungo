@@ -86,14 +86,7 @@ func (linear *Linear) Validate() error {
 		linear.MediaFiles = []*MediaFile{validMedia}
 	}
 
-	for _, icon := range linear.Icons {
-		if err := icon.Validate(); err != nil {
-			ve, ok := err.(ValidationError)
-			if ok {
-				errors = append(errors, ve.Errs...)
-			}
-		}
-	}
+	// No need to validate Icon which is for VAST 3.0 only.
 
 	for _, tracking := range linear.Trackings {
 		if err := tracking.Validate(); err != nil {

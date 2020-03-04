@@ -28,14 +28,7 @@ func (inline *InLine) Validate() error {
 		errors = append(errors, ErrInlineMissCreatives)
 	}
 
-	if inline.Pricing != nil {
-		if err := inline.Pricing.Validate(); err != nil {
-			ve, ok := err.(ValidationError)
-			if ok {
-				errors = append(errors, ve.Errs...)
-			}
-		}
-	}
+	// No need to validate Pricing which is for VAST 3.0 only.
 
 	if len(inline.Impressions) == 0 {
 		errors = append(errors, ErrInlineMissImpressions)
