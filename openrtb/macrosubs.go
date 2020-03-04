@@ -17,6 +17,7 @@ const (
 	auctionAdID     macro = "AUCTION_AD_ID"
 	auctionPrice    macro = "AUCTION_PRICE"
 	auctionCurrency macro = "AUCTION_CURRENCY"
+	auctionLoss     macro = "AUCTION_LOSS"
 )
 
 // matchMacroRegexp is a regexp for macro matching and should not be used, use matchMacro instead.
@@ -70,7 +71,7 @@ var findMatchesPool = sync.Pool{
 // It takes a string which the substitutions should be performed on, and a *BidResponse to determine the values to be substituted.
 // MacroSubs assumes that the BidResponse has exactly one seat, which has exactly one bid.
 // If this is not true, it will return empty string and an error.
-func MacroSubs(stringToSub string, response *BidResponse, seat *SeatBid, bid *Bid, settlement Settlement) string {
+func MacroSubs(stringToSub string, seat *SeatBid, bid *Bid, settlement Settlement, reason LossReason) string {
 	m := map[macro]string{
 		auctionID:       settlement.AuctionID(),
 		auctionBidID:    bid.ID,
@@ -79,6 +80,7 @@ func MacroSubs(stringToSub string, response *BidResponse, seat *SeatBid, bid *Bi
 		auctionAdID:     bid.AdID,
 		auctionPrice:    strconv.FormatFloat(settlement.Price(), 'f', 9, 64),
 		auctionCurrency: string(settlement.Currency()),
+		auctionLoss:     strconv.Itoa(int(reason)),
 	}
 	replacer := createReplacer(m)
 	var re = findMatchesPool.Get().(*regexp.Regexp)
