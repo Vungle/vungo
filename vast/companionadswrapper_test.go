@@ -18,7 +18,6 @@ var companionAdsWrapperTests = []vasttest.VastTest{
 	vasttest.VastTest{&vast.CompanionAdsWrapper{}, vast.ErrCompanionAdsWrapperMissCompanions, "companionadswrapper_without_companion.xml"},
 	vasttest.VastTest{&vast.CompanionAdsWrapper{}, nil, "companionadswrapper_valid.xml"},
 	vasttest.VastTest{&vast.CompanionAdsWrapper{}, nil, "companionadswrapper.xml"},
-	vasttest.VastTest{&vast.CompanionAdsWrapper{}, vast.ErrUnsupportedMode, "companionadswrapper_error_required.xml"},
 }
 
 func TestCompanionAdsWrapperValidateErrors(t *testing.T) {

@@ -15,9 +15,7 @@ func TestLinearWrapperMarshalUnmarshal(t *testing.T) {
 }
 
 var linearWrapperTests = []vasttest.VastTest{
-	vasttest.VastTest{&vast.LinearWrapper{}, vast.ErrIconResourcesFormat, "linearwrapper.xml"},
 	vasttest.VastTest{&vast.LinearWrapper{}, nil, "linearwrapper_valid.xml"},
-	vasttest.VastTest{&vast.LinearWrapper{}, vast.ErrIconResourcesFormat, "linearwrapper_error_icon.xml"},
 	vasttest.VastTest{&vast.LinearWrapper{}, nil, "linearwrapper_error_videoclicks.xml"},
 }
 
