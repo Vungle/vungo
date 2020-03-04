@@ -67,7 +67,7 @@ func TestMacroSubs(t *testing.T) {
 		{"abc${AUCTION_LOSS}def", "abc0def"},
 		{
 			"${AUCTION_ID}${AUCTION_BID_ID}${AUCTION_IMP_ID}${AUCTION_SEAT_ID}" +
-				"${AUCTION_AD_ID}${AUCTION_AD_ID:B64}${AUCTION_PRICE}${AUCTION_CURRENCY}{AUCTION_LOSS}",
+				"${AUCTION_AD_ID}${AUCTION_AD_ID:B64}${AUCTION_PRICE}${AUCTION_CURRENCY}${AUCTION_LOSS}",
 			"auction1234TheBidId!ImpressionIdForBidSeatBidIdentifierSome ad id goes here" +
 				"U29tZSBhZCBpZCBnb2VzIGhlcmU=2.345000000USD0",
 		},
