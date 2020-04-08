@@ -65,7 +65,6 @@ func (r *BidRequest) Copy() *BidRequest {
 		}
 	}
 
-	brCopy.Site = r.Site.Copy()
 	brCopy.Application = r.Application.Copy()
 	brCopy.Device = r.Device.Copy()
 	brCopy.User = r.User.Copy()

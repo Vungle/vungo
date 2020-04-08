@@ -29,7 +29,7 @@ type BidResponse struct {
 // Validate method validates whether the BidResponse object contains valid data, or returns an
 // error otherwise.
 func (r *BidResponse) Validate() error {
-	if reflect.DeepEqual(emptyBid, r) {
+	if reflect.DeepEqual(emptyBid, *r) {
 		return nil
 	}
 
@@ -54,7 +54,7 @@ func (r *BidResponse) Validate() error {
 // no-bid if it is empty or it has no seatbids.
 func (r *BidResponse) IsNoBid() bool {
 	hasNoSeatBids := r.SeatBids == nil || len(r.SeatBids) == 0
-	return hasNoSeatBids || reflect.DeepEqual(emptyBid, r)
+	return hasNoSeatBids || reflect.DeepEqual(emptyBid, *r)
 }
 
 // String method returns a human-readable representation of the bid response object also suitable
