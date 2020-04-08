@@ -12,6 +12,9 @@ type PrivateMarketplace struct {
 
 // Copy returns a pointer to a copy of the Impression object.
 func (pmp *PrivateMarketplace) Copy() *PrivateMarketplace {
+	if pmp == nil {
+		return nil
+	}
 	pmpCopy := *pmp
 
 	if pmp.Deals != nil {

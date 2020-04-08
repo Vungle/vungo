@@ -23,18 +23,13 @@ type Impression struct {
 
 // Copy returns a pointer to a copy of the Impression object.
 func (imp *Impression) Copy() *Impression {
+	if imp == nil {
+		return nil
+	}
 	impressionCopy := *imp
-	if imp.Video != nil {
-		impressionCopy.Video = imp.Video.Copy()
-	}
-
-	if imp.Banner != nil {
-		impressionCopy.Banner = imp.Banner.Copy()
-	}
-
-	if imp.PrivateMarketplace != nil {
-		impressionCopy.PrivateMarketplace = imp.PrivateMarketplace.Copy()
-	}
+	impressionCopy.Video = imp.Video.Copy()
+	impressionCopy.Banner = imp.Banner.Copy()
+	impressionCopy.PrivateMarketplace = imp.PrivateMarketplace.Copy()
 
 	// extension copying has to be done by the user of this package manually.
 	impressionCopy.Extension = nil

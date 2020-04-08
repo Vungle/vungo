@@ -37,6 +37,10 @@ func (v Banner) Validate() error {
 
 // Copy returns a pointer to a copy of the Banner object.
 func (v *Banner) Copy() *Banner {
+	if v == nil {
+		return nil
+	}
+
 	vCopy := *v
 
 	if v.ID != nil {

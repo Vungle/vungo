@@ -43,6 +43,9 @@ type Source struct {
 
 // Copy returns a pointer to a copy of the Source object.
 func (s *Source) Copy() *Source {
+	if s == nil {
+		return nil
+	}
 	sourceCopy := *s
 	sourceCopy.Ext = nil
 	return &sourceCopy

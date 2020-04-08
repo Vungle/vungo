@@ -28,7 +28,7 @@ type BidResponse struct {
 
 // Validate method validates whether the BidResponse object contains valid data, or returns an
 // error otherwise.
-func (r BidResponse) Validate() error {
+func (r *BidResponse) Validate() error {
 	if reflect.DeepEqual(emptyBid, r) {
 		return nil
 	}
@@ -52,19 +52,23 @@ func (r BidResponse) Validate() error {
 
 // IsNoBid checks whether a BidResponse object is a no-bid response. A BidResponse object is a
 // no-bid if it is empty or it has no seatbids.
-func (r BidResponse) IsNoBid() bool {
+func (r *BidResponse) IsNoBid() bool {
 	hasNoSeatBids := r.SeatBids == nil || len(r.SeatBids) == 0
 	return hasNoSeatBids || reflect.DeepEqual(emptyBid, r)
 }
 
 // String method returns a human-readable representation of the bid response object also suitable
 // for logging with %s, or %v.
-func (r BidResponse) String() string {
+func (r *BidResponse) String() string {
 	return fmt.Sprintf("[%s;%s;%v;%d]", r.ID, r.Currency, r.NoBidReason, len(r.SeatBids))
 }
 
 // Copy returns a pointer to a copy of the bidresponse object.
 func (r *BidResponse) Copy() *BidResponse {
+	if r == nil {
+		return nil
+	}
+
 	brCopy := *r
 
 	brCopy.SeatBids = []*SeatBid{}

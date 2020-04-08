@@ -23,6 +23,9 @@ func (b SeatBid) Validate() error {
 
 // Copy returns a pointer to a copy of the seatbid object.
 func (b *SeatBid) Copy() *SeatBid {
+	if b == nil {
+		return nil
+	}
 	bCopy := *b
 	bCopy.Bids = []*Bid{}
 	for _, bid := range b.Bids {

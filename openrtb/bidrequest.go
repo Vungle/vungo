@@ -32,7 +32,7 @@ type BidRequest struct {
 
 // Validate method checks to see if the BidRequest object contains required and well-formatted data
 // and returns a corresponding error when the check fails.
-func (r BidRequest) Validate() error {
+func (r *BidRequest) Validate() error {
 	if r.ID == "" {
 		return ErrInvalidBidRequestID
 	}
@@ -44,12 +44,16 @@ func (r BidRequest) Validate() error {
 
 // String method returns a human-readable representation of the bid request object also suitable
 // for logging with %s, or %v.
-func (r BidRequest) String() string {
+func (r *BidRequest) String() string {
 	return fmt.Sprintf("[%s;%d]", r.ID, len(r.Impressions))
 }
 
 // Copy returns a pointer to a copy of the BidRequest object.
 func (r *BidRequest) Copy() *BidRequest {
+	if r == nil {
+		return nil
+	}
+
 	brCopy := *r
 
 	if r.Impressions != nil {
@@ -59,17 +63,10 @@ func (r *BidRequest) Copy() *BidRequest {
 		}
 	}
 
-	if r.Application != nil {
-		brCopy.Application = r.Application.Copy()
-	}
-
-	if r.Device != nil {
-		brCopy.Device = r.Device.Copy()
-	}
-
-	if r.User != nil {
-		brCopy.User = r.User.Copy()
-	}
+	brCopy.Site = r.Site.Copy()
+	brCopy.Application = r.Application.Copy()
+	brCopy.Device = r.Device.Copy()
+	brCopy.User = r.User.Copy()
 
 	if r.WhitelistedSeats != nil {
 		brCopy.WhitelistedSeats = make([]string, len(r.WhitelistedSeats))
@@ -91,13 +88,8 @@ func (r *BidRequest) Copy() *BidRequest {
 		copy(brCopy.BlockedAdvertisers, r.BlockedAdvertisers)
 	}
 
-	if r.Regulation != nil {
-		brCopy.Regulation = r.Regulation.Copy()
-	}
-
-	if r.Source != nil {
-		brCopy.Source = r.Source.Copy()
-	}
+	brCopy.Regulation = r.Regulation.Copy()
+	brCopy.Source = r.Source.Copy()
 
 	brCopy.Extension = nil
 	return &brCopy

@@ -19,6 +19,9 @@ type User struct {
 
 // Copy returns a pointer to a copy of the User object.
 func (u *User) Copy() *User {
+	if u == nil {
+		return nil
+	}
 	userCopy := *u
 
 	if u.Geo != nil {

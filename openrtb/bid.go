@@ -29,16 +29,16 @@ type Bid struct {
 }
 
 // Validate method validates a bid object.
-func (bid Bid) Validate() error {
-	if len(bid.ID) == 0 {
+func (b *Bid) Validate() error {
+	if len(b.ID) == 0 {
 		return ErrInvalidBidID
 	}
 
-	if len(bid.ImpressionID) == 0 {
+	if len(b.ImpressionID) == 0 {
 		return ErrInvalidImpressionID
 	}
 
-	if bid.Price <= 0 {
+	if b.Price <= 0 {
 		return ErrInvalidBidPrice
 	}
 
@@ -46,8 +46,12 @@ func (bid Bid) Validate() error {
 }
 
 // Copy returns a pointer to a copy of the bid object.
-func (b Bid) Copy() *Bid {
-	bCopy := b
+func (b *Bid) Copy() *Bid {
+	if b == nil {
+		return nil
+	}
+
+	bCopy := *b
 
 	// Copy over slices
 	if b.AdvertiserDomains != nil {
