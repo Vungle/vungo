@@ -1,6 +1,10 @@
 package openrtb
 
-import "errors"
+import (
+	"errors"
+
+	"github.com/Vungle/vungo/internal/util"
+)
 
 // Banner types annotates the parent impression as an banner impression.
 // See OpenRTB 2.3.1 Sec 3.2.3.
@@ -42,56 +46,17 @@ func (v *Banner) Copy() *Banner {
 	}
 
 	vCopy := *v
-
-	if v.ID != nil {
-		vCopy.ID = v.ID
-	}
-
-	if v.MaxHeight != nil {
-		vCopy.MaxHeight = v.MaxHeight
-	}
-
-	if v.MaxWidth != nil {
-		vCopy.MaxWidth = v.MaxWidth
-	}
-
-	if v.MinHeight != nil {
-		vCopy.MinHeight = v.MinHeight
-	}
-
-	if v.MinWidth != nil {
-		vCopy.MinWidth = v.MinWidth
-	}
-
-	if v.BlockedTypes != nil {
-		vCopy.BlockedTypes = make([]int, len(v.BlockedTypes))
-		copy(vCopy.BlockedTypes, v.BlockedTypes)
-	}
-
-	if v.BlockedAttributes != nil {
-		vCopy.BlockedAttributes = make([]int, len(v.BlockedAttributes))
-		copy(vCopy.BlockedAttributes, v.BlockedAttributes)
-	}
-
-	if v.TopFrame != nil {
-		topFrameCopy := *v.TopFrame
-		vCopy.TopFrame = &topFrameCopy
-	}
-
-	if v.MIMETypes != nil {
-		vCopy.MIMETypes = make([]string, len(v.MIMETypes))
-		copy(vCopy.MIMETypes, v.MIMETypes)
-	}
-
-	if v.ExpandDirections != nil {
-		vCopy.ExpandDirections = make([]int, len(v.ExpandDirections))
-		copy(vCopy.ExpandDirections, v.ExpandDirections)
-	}
-
-	if v.APIFrameworks != nil {
-		vCopy.APIFrameworks = make([]int, len(v.APIFrameworks))
-		copy(vCopy.APIFrameworks, v.APIFrameworks)
-	}
+	vCopy.ID = util.DeepCopyStr(v.ID)
+	vCopy.MaxHeight = util.DeepCopyInt(v.MaxHeight)
+	vCopy.MaxWidth = util.DeepCopyInt(v.MaxWidth)
+	vCopy.MinHeight = util.DeepCopyInt(v.MinHeight)
+	vCopy.MinWidth = util.DeepCopyInt(v.MinWidth)
+	vCopy.BlockedTypes = util.DeepCopyIntSlice(v.BlockedTypes)
+	vCopy.BlockedAttributes = util.DeepCopyIntSlice(v.BlockedAttributes)
+	vCopy.TopFrame = util.DeepCopyInt(v.TopFrame)
+	vCopy.MIMETypes = util.DeepCopyStrSlice(v.MIMETypes)
+	vCopy.ExpandDirections = util.DeepCopyIntSlice(v.ExpandDirections)
+	vCopy.APIFrameworks = util.DeepCopyIntSlice(v.APIFrameworks)
 
 	if v.Format != nil {
 		vCopy.Format = make([]Format, len(v.Format))

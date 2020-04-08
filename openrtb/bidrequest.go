@@ -2,6 +2,8 @@ package openrtb
 
 import (
 	"fmt"
+
+	"github.com/Vungle/vungo/internal/util"
 )
 
 // BidRequest type represents a top-level object to send to buyers by an ad exchange server for an
@@ -67,11 +69,7 @@ func (r *BidRequest) Copy() *BidRequest {
 	brCopy.Application = r.Application.Copy()
 	brCopy.Device = r.Device.Copy()
 	brCopy.User = r.User.Copy()
-
-	if r.WhitelistedSeats != nil {
-		brCopy.WhitelistedSeats = make([]string, len(r.WhitelistedSeats))
-		copy(brCopy.WhitelistedSeats, r.WhitelistedSeats)
-	}
+	brCopy.WhitelistedSeats = util.DeepCopyStrSlice(r.WhitelistedSeats)
 
 	if r.Currencies != nil {
 		brCopy.Currencies = make([]Currency, len(r.Currencies))
@@ -83,14 +81,9 @@ func (r *BidRequest) Copy() *BidRequest {
 		copy(brCopy.BlockedCategories, r.BlockedCategories)
 	}
 
-	if r.BlockedAdvertisers != nil {
-		brCopy.BlockedAdvertisers = make([]string, len(r.BlockedAdvertisers))
-		copy(brCopy.BlockedAdvertisers, r.BlockedAdvertisers)
-	}
-
+	brCopy.BlockedAdvertisers = util.DeepCopyStrSlice(r.BlockedAdvertisers)
 	brCopy.Regulation = r.Regulation.Copy()
 	brCopy.Source = r.Source.Copy()
-
-	brCopy.Extension = nil
+	brCopy.Extension = util.DeepCopyCopiable(r.Extension)
 	return &brCopy
 }

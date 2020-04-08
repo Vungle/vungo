@@ -1,5 +1,7 @@
 package openrtb
 
+import "github.com/Vungle/vungo/internal/util"
+
 // Deal type represents a way to describe a specific slice of the exchange's supply via a unique ID
 // shared between sellers and buyers to facilitate selling of an impressions.
 // See OpenRTB 2.3.1 Sec 3.2.18.
@@ -13,17 +15,14 @@ type Deal struct {
 	WhitelistedSeats []string    `json:"wseat,omitempty"`
 }
 
+// Copy do deep copy of Deal.
 func (d *Deal) Copy() *Deal {
 	if d == nil {
 		return nil
 	}
 
 	dealCopy := *d
-
-	if d.WhitelistedSeats != nil {
-		dealCopy.WhitelistedSeats = make([]string, len(d.WhitelistedSeats))
-		copy(dealCopy.WhitelistedSeats, d.WhitelistedSeats)
-	}
+	dealCopy.WhitelistedSeats = util.DeepCopyStrSlice(d.WhitelistedSeats)
 
 	return &dealCopy
 }

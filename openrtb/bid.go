@@ -1,6 +1,10 @@
 package openrtb
 
-import "encoding/json"
+import (
+	"encoding/json"
+
+	"github.com/Vungle/vungo/internal/util"
+)
 
 // Bid type represents an offer, submitted by a buyer, to buy a specific impression within the
 // bid request object.
@@ -53,11 +57,7 @@ func (b *Bid) Copy() *Bid {
 
 	bCopy := *b
 
-	// Copy over slices
-	if b.AdvertiserDomains != nil {
-		bCopy.AdvertiserDomains = make([]string, len(b.AdvertiserDomains))
-		copy(bCopy.AdvertiserDomains, b.AdvertiserDomains)
-	}
+	bCopy.AdvertiserDomains = util.DeepCopyStrSlice(b.AdvertiserDomains)
 
 	if b.Categories != nil {
 		bCopy.Categories = make([]Category, len(b.Categories))

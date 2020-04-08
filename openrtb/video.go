@@ -1,6 +1,10 @@
 package openrtb
 
-import "errors"
+import (
+	"errors"
+
+	"github.com/Vungle/vungo/internal/util"
+)
 
 // Video types annotates the parent impression as an video impression.
 // The "protocol", "sequence", "battr", "maxextended", "companionad",
@@ -46,31 +50,16 @@ func (v *Video) Copy() *Video {
 		return nil
 	}
 	vCopy := *v
-
-	if v.MIMETypes != nil {
-		vCopy.MIMETypes = make([]string, len(v.MIMETypes))
-		copy(vCopy.MIMETypes, v.MIMETypes)
-	}
-
-	if v.MinDuration != nil {
-		minDurationCopy := *v.MinDuration
-		vCopy.MinDuration = &minDurationCopy
-	}
-
-	if v.MaxDuration != nil {
-		MaxDurationCopy := *v.MaxDuration
-		vCopy.MaxDuration = &MaxDurationCopy
-	}
+	vCopy.MIMETypes = util.DeepCopyStrSlice(v.MIMETypes)
+	vCopy.MinDuration = util.DeepCopyInt(v.MinDuration)
+	vCopy.MaxDuration = util.DeepCopyInt(v.MaxDuration)
 
 	if v.Protocols != nil {
 		vCopy.Protocols = make([]VideoProtocol, len(v.Protocols))
 		copy(vCopy.Protocols, v.Protocols)
 	}
 
-	if v.StartDelay != nil {
-		StartDelayCopy := *v.StartDelay
-		vCopy.StartDelay = &StartDelayCopy
-	}
+	vCopy.StartDelay = util.DeepCopyInt(v.StartDelay)
 
 	if v.PlaybackMethods != nil {
 		vCopy.PlaybackMethods = make([]PlaybackMethod, len(v.PlaybackMethods))
@@ -87,8 +76,7 @@ func (v *Video) Copy() *Video {
 		copy(vCopy.APIFrameworks, v.APIFrameworks)
 	}
 
-	// extension copying has to be done by the user of this package manually.
-	vCopy.Extension = nil
+	vCopy.Extension = util.DeepCopyCopiable(v.Extension)
 
 	return &vCopy
 }
