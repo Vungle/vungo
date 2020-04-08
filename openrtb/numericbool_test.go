@@ -56,3 +56,21 @@ func TestNumericBoolUnmarshal(t *testing.T) {
 		t.Error("Value 0 should be unmarshaled into false.")
 	}
 }
+
+func TestNumericBool_Copy(t *testing.T) {
+	nb := openrtb.NumericBool(true)
+	nbCopy := nb.Copy()
+	if nbCopy == nil {
+		t.Errorf("Copy() normal bool value from %#v with %v, got nil",
+			&nb, nb)
+	} else if &nb == nbCopy || *nbCopy != nb {
+		t.Errorf("Copy() normal bool value from %#v with %v, got %#v %v",
+			&nb, nb, nbCopy, *nbCopy)
+	}
+
+	var nilNC *openrtb.NumericBool
+	nilCopy := nilNC.Copy()
+	if nilCopy != nil {
+		t.Errorf("Copy() from nil got %#v, want nil", nilCopy)
+	}
+}

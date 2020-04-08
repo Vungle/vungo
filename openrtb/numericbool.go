@@ -47,3 +47,11 @@ func (nb *NumericBool) UnmarshalJSON(data []byte) error {
 
 	return nil
 }
+
+func (nb *NumericBool) Copy() *NumericBool {
+	if nb == nil {
+		return nil
+	}
+	nbCopy := *nb
+	return &nbCopy
+}
