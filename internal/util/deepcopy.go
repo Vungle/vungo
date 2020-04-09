@@ -1,7 +1,5 @@
 package util
 
-import "reflect"
-
 // Copiable indicates that an object can be deep copied.
 type Copiable interface {
 	Copy() interface{}
@@ -10,7 +8,7 @@ type Copiable interface {
 // DeepCopyInt deep copy int. If src is nil, return nil too.
 func DeepCopyInt(src *int) *int {
 	if src == nil {
-		return (*int)(nil)
+		return nil
 	}
 	srcCopy := *src
 	return &srcCopy
@@ -19,7 +17,7 @@ func DeepCopyInt(src *int) *int {
 // DeepCopyStr deep copy string. If src is nil, return nil too.
 func DeepCopyStr(src *string) *string {
 	if src == nil {
-		return (*string)(nil)
+		return nil
 	}
 	srcCopy := *src
 	return &srcCopy
@@ -28,7 +26,7 @@ func DeepCopyStr(src *string) *string {
 // DeepCopyIntSlice deep copy int slice. If src is nil, return nil too.
 func DeepCopyIntSlice(src []int) []int {
 	if src == nil {
-		return ([]int)(nil)
+		return nil
 	}
 	srcCopy := make([]int, len(src))
 	copy(srcCopy, src)
@@ -38,7 +36,7 @@ func DeepCopyIntSlice(src []int) []int {
 // DeepCopyStrSlice deep copy string slice. If src is nil, return nil too.
 func DeepCopyStrSlice(src []string) []string {
 	if src == nil {
-		return ([]string)(nil)
+		return nil
 	}
 	srcCopy := make([]string, len(src))
 	copy(srcCopy, src)
@@ -48,7 +46,7 @@ func DeepCopyStrSlice(src []string) []string {
 // DeepCopyCopiable deep copy Copiable objects.
 // If src is not copiable, will return nil.
 func DeepCopyCopiable(src interface{}) interface{} {
-	if copiableSrc, ok := src.(Copiable); ok && !reflect.ValueOf(src).IsNil() {
+	if copiableSrc, ok := src.(Copiable); ok {
 		return copiableSrc.Copy()
 	}
 	return nil

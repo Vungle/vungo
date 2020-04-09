@@ -160,7 +160,7 @@ func TestDeepCopyCopiable(t *testing.T) {
 		},
 		{
 			name: "nil Copiable",
-			src:  (*MockCopiable)(nil),
+			src:  nil,
 			want: nil,
 		},
 		{
