@@ -4,12 +4,13 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"github.com/Vungle/vungo/openrtb"
-	"github.com/go-test/deep"
 	"io/ioutil"
 	"reflect"
 	"strconv"
 	"strings"
+
+	"github.com/Vungle/vungo/openrtb"
+	"github.com/go-test/deep"
 )
 
 // UnmarshalFromJSONFile method reads from a testdata/*.json file and unmarshals the content into
