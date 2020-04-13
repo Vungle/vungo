@@ -47,10 +47,18 @@ type Metric struct {
 
 // Validate method implements a Validater interface and return a validation error according to the
 // OpenRTB spec.
-func (m Metric) Validate() error {
+func (m *Metric) Validate() error {
 	if m.Type == "" {
 		return errors.New("TODO: metric type is required")
 	}
 
 	return nil
+}
+
+func (m *Metric) Copy() *Metric {
+	if m == nil {
+		return nil
+	}
+	mCopy := *m
+	return &mCopy
 }

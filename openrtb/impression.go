@@ -34,10 +34,9 @@ func (imp *Impression) Copy() *Impression {
 	}
 	impressionCopy := *imp
 	if imp.Metrics != nil {
-		impressionCopy.Metrics = []*Metric{}
-		for _, m := range imp.Metrics {
-			newM := *m
-			impressionCopy.Metrics = append(impressionCopy.Metrics, &newM)
+		impressionCopy.Metrics = make([]*Metric, len(imp.Metrics))
+		for i, m := range imp.Metrics {
+			impressionCopy.Metrics[i] = m.Copy()
 		}
 	}
 	impressionCopy.Video = imp.Video.Copy()

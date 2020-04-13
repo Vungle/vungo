@@ -59,7 +59,6 @@ func VerifyModelAgainstFile(t Testing, file string, modelType reflect.Type) {
 	}
 
 	if !reflect.DeepEqual(model1, model2) {
-		t.Log(deep.Equal(model1, model2))
 		m1JSON, _ := json.MarshalIndent(model1, "", "  ")
 		m2JSON, _ := json.MarshalIndent(model2, "", "  ")
 		t.Logf("Unmarshaled: %s\nRe-marshaled: %s.", m1JSON, m2JSON)
