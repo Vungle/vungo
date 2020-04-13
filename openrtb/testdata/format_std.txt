@@ -1,0 +1,21 @@
+Attribute
+Type
+Description
+w
+integer
+Width in device independent pixels (DIPS).
+h
+integer
+Height in device independent pixels (DIPS).
+wratio
+integer
+Relative width when expressing size as a ratio.
+hratio
+integer
+Relative height when expressing size as a ratio.
+wmin
+integer
+The minimum width in device independent pixels (DIPS) at which the ad will be displayed the size is expressed as a ratio.
+ext
+object
+Placeholder for exchange-specific extensions to OpenRTB.

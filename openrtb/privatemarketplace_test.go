@@ -3,8 +3,17 @@ package openrtb_test
 import (
 	"testing"
 
+	"github.com/Vungle/vungo/openrtb/openrtbtest"
+
 	"github.com/Vungle/vungo/openrtb"
 )
+
+func TestPrivateMarketplace_Fields(t *testing.T) {
+	if err := openrtbtest.VerifyStructFieldNameWithStandardTextFile(
+		(*openrtb.PrivateMarketplace)(nil), "testdata/pmp_std.txt"); err != "" {
+		t.Error(err)
+	}
+}
 
 func TestPrivateMarketplace_Copy(t *testing.T) {
 	testCases := []struct {

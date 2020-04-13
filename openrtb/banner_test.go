@@ -16,6 +16,13 @@ func TestBannerMarshalUnmarshal(t *testing.T) {
 	openrtbtest.VerifyModelAgainstFile(t, "banner.json", BannerModelType)
 }
 
+func TestBanner_Fields(t *testing.T) {
+	if err := openrtbtest.VerifyStructFieldNameWithStandardTextFile(
+		(*openrtb.Banner)(nil), "testdata/banner_std.txt"); err != "" {
+		t.Error(err)
+	}
+}
+
 func TestBannerCopy(t *testing.T) {
 	testInt := 1
 	testString := "TEST"
@@ -37,19 +44,19 @@ func TestBannerCopy(t *testing.T) {
 				APIFrameworks:     []int{4},
 				Width:             2,
 				Height:            2,
-				Format:            []openrtb.Format{{
-						W:320,
-						H:50,
-						WMin:50,
-					},{
-						WRatio:50,
-						HRatio:80,
-					},
+				Format: []openrtb.Format{{
+					W:    320,
+					H:    50,
+					WMin: 50,
+				}, {
+					WRatio: 50,
+					HRatio: 80,
 				},
-				MinHeight:         &testInt,
-				MaxHeight:         &testInt,
-				MinWidth:          &testInt,
-				MaxWidth:          &testInt,
+				},
+				MinHeight: &testInt,
+				MaxHeight: &testInt,
+				MinWidth:  &testInt,
+				MaxWidth:  &testInt,
 			},
 		},
 	}

@@ -14,6 +14,13 @@ func TestDeviceMarshalUnmarshal(t *testing.T) {
 	openrtbtest.VerifyModelAgainstFile(t, "device.json", DeviceModelType)
 }
 
+func TestDevice_Fields(t *testing.T) {
+	if err := openrtbtest.VerifyStructFieldNameWithStandardTextFile(
+		(*openrtb.Device)(nil), "testdata/device_std.txt"); err != "" {
+		t.Error(err)
+	}
+}
+
 func TestDevice_Copy(t *testing.T) {
 	d := openrtb.Device{}
 	openrtbtest.FillWithNonNilValue(&d)

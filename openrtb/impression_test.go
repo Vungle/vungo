@@ -16,6 +16,13 @@ func TestImpressionMarshalUnmarshal(t *testing.T) {
 	openrtbtest.VerifyModelAgainstFile(t, "impression.json", ImpressionModelType)
 }
 
+func TestImpression_Fields(t *testing.T) {
+	if err := openrtbtest.VerifyStructFieldNameWithStandardTextFile(
+		(*openrtb.Impression)(nil), "testdata/imp_std.txt"); err != "" {
+		t.Error(err)
+	}
+}
+
 func TestImpression_Copy(t *testing.T) {
 	testInt := 1
 	testString := "TEST"

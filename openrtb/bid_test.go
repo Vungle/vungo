@@ -15,6 +15,13 @@ func TestBidMarshalUnmarshal(t *testing.T) {
 	openrtbtest.VerifyModelAgainstFile(t, "bid.json", BidModelType)
 }
 
+func TestBid_Fields(t *testing.T) {
+	if err := openrtbtest.VerifyStructFieldNameWithStandardTextFile(
+		(*openrtb.Bid)(nil), "testdata/bid_std.txt"); err != "" {
+		t.Error(err)
+	}
+}
+
 func TestBidValidation(t *testing.T) {
 	testCases := []struct {
 		bid    *openrtb.Bid

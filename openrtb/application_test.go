@@ -14,6 +14,13 @@ func TestApplicationMarshalUnmarshal(t *testing.T) {
 	openrtbtest.VerifyModelAgainstFile(t, "application.json", ApplicationModelType)
 }
 
+func TestApplication_Fields(t *testing.T) {
+	if err := openrtbtest.VerifyStructFieldNameWithStandardTextFile(
+		(*openrtb.Application)(nil), "testdata/app_std.txt"); err != "" {
+		t.Error(err)
+	}
+}
+
 func TestApplication_Copy(t *testing.T) {
 	a := openrtb.Application{}
 	openrtbtest.FillWithNonNilValue(&a)

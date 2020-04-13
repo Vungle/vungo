@@ -59,6 +59,7 @@ func VerifyModelAgainstFile(t Testing, file string, modelType reflect.Type) {
 	}
 
 	if !reflect.DeepEqual(model1, model2) {
+		t.Log(deep.Equal(model1, model2))
 		m1JSON, _ := json.MarshalIndent(model1, "", "  ")
 		m2JSON, _ := json.MarshalIndent(model2, "", "  ")
 		t.Logf("Unmarshaled: %s\nRe-marshaled: %s.", m1JSON, m2JSON)
@@ -136,6 +137,17 @@ func VerifyStructFieldNameWithStandardText(
 		}
 	}
 	return strings.Join(result, "\n")
+}
+
+// VerifyStructFieldNameWithStandardTextFile search all struct field json names
+// in standard text to verify these names are correct.
+// NOTE: Please COPY standard text from iAB OpenRTB Spec pdf file directly,
+// rather than input manually.
+func VerifyStructFieldNameWithStandardTextFile(
+	objPtr interface{}, file string) string {
+	stdBytes, _ := ioutil.ReadFile(file)
+	stdStr := string(stdBytes)
+	return VerifyStructFieldNameWithStandardText(objPtr, stdStr)
 }
 
 // getNumOfJSONFields method returns the number of fields that are not annotated with JSON encoding.

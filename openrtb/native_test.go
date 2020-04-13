@@ -16,6 +16,13 @@ func TestNativeMarshalUnmarshal(t *testing.T) {
 	openrtbtest.VerifyModelAgainstFile(t, "native.json", NativeModelType)
 }
 
+func TestNative_Fields(t *testing.T) {
+	if err := openrtbtest.VerifyStructFieldNameWithStandardTextFile(
+		(*openrtb.Native)(nil), "testdata/native_std.txt"); err != "" {
+		t.Error(err)
+	}
+}
+
 func TestNative_Copy(t *testing.T) {
 	testCases := []struct {
 		native *openrtb.Native
@@ -25,11 +32,11 @@ func TestNative_Copy(t *testing.T) {
 		},
 		{
 			&openrtb.Native{
-				Request:"request payload",
-				Version:"123",
+				Request:                   "request payload",
+				Version:                   "123",
 				BlockedCreativeAttributes: []openrtb.CreativeAttribute{10, 12},
-				APIFrameworks:    []openrtb.APIFramework{openrtb.APIFrameworkVPAID1},
-				Extension:        nil,
+				APIFrameworks:             []openrtb.APIFramework{openrtb.APIFrameworkVPAID1},
+				Extension:                 nil,
 			},
 		},
 	}
@@ -37,10 +44,10 @@ func TestNative_Copy(t *testing.T) {
 	for _, testCase := range testCases {
 		native2 := testCase.native.Copy()
 
-		if &testCase.native.BlockedCreativeAttributes== &native2.BlockedCreativeAttributes{
+		if &testCase.native.BlockedCreativeAttributes == &native2.BlockedCreativeAttributes {
 			t.Errorf("Address of BlockedCreativeAttributes should not be the same in copied audio. BlockedCreativeAttributes1: %p BlockedCreativeAttributes2: %p.", testCase.native.BlockedCreativeAttributes, native2.BlockedCreativeAttributes)
 		}
-		
+
 		if &testCase.native.APIFrameworks == &native2.APIFrameworks {
 			t.Errorf("Address of protocols should not be the same in copied audio. APIFrameworks1: %p APIFrameworks2: %p.", testCase.native.APIFrameworks, native2.APIFrameworks)
 		}
@@ -56,5 +63,3 @@ func TestNative_Copy(t *testing.T) {
 		}
 	}
 }
-
-

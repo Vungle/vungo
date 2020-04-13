@@ -120,7 +120,7 @@
   "tmax": 500,
   "allimps": 1,
   "wseat": ["111", "1ab"],
-  "bseat": [],
+  "bseat": null,
   "badv": ["supercell.com", "machinezone.com"],
   "bapp": ["403639508","479706646"],
   "wlang": ["ab", "aa"],

@@ -16,6 +16,13 @@ func TestVideoMarshalUnmarshal(t *testing.T) {
 	openrtbtest.VerifyModelAgainstFile(t, "video.json", VideoModelType)
 }
 
+func TestVideo_Fields(t *testing.T) {
+	if err := openrtbtest.VerifyStructFieldNameWithStandardTextFile(
+		(*openrtb.Video)(nil), "testdata/video_std.txt"); err != "" {
+		t.Error(err)
+	}
+}
+
 func TestVideo_Copy(t *testing.T) {
 	testInt := 1
 	startDelayGenericMidRoll := openrtb.StartDelayGenericMidRoll

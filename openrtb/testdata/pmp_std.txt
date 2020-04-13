@@ -1,0 +1,17 @@
+Attribute
+Type
+
+     private_auction
+integer;
+default 0
+Description
+
+ Indicator of auction eligibility to seats named in the Direct
+Deals object, where 0 = all bids are accepted, 1 = bids are restricted to the deals specified and the terms thereof.
+
+deals
+object array
+Array of Deal (Section 3.2.12) objects that convey the specific deals applicable to this impression.
+ext
+object
+Placeholder for exchange-specific extensions to OpenRTB.

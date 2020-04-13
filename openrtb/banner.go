@@ -11,23 +11,23 @@ import (
 //go:generate easyjson $GOFILE
 //easyjson:json
 type Banner struct {
-	Format            []Format    `json:"format,omitempty"` // Format is a field for OpenRTB 2.5
-	Width             int         `json:"w,omitempty"`
-	Height            int         `json:"h,omitempty"`
-	MaxWidth          *int        `json:"wmax,omitempty"` // Deprecated in favor of the format since Open RTB 2.5.
-	MaxHeight         *int        `json:"hmax,omitempty"` // Deprecated in favor of the format since Open RTB 2.5.
-	MinWidth          *int        `json:"wmin,omitempty"` // Deprecated in favor of the format since Open RTB 2.5.
-	MinHeight         *int        `json:"hmin,omitempty"` // Deprecated in favor of the format since Open RTB 2.5.
-	BlockedTypes      []int       `json:"btype,omitempty"`
-	BlockedAttributes []int       `json:"battr,omitempty"`
-	Position          AdPosition  `json:"pos,omitempty"`
-	MIMETypes         []string    `json:"mimes,omitempty"`
-	TopFrame          *int        `json:"topframe,omitempty"`
-	ExpandDirections  []int       `json:"expdir,omitempty"`
-	APIFrameworks     []int       `json:"api,omitempty"`
-	ID                *string     `json:"id,omitempty"`
-	VCM								CompanionRenderingMode `json:"vcm,omitempty"`
-	Extension         interface{} `json:"ext,omitempty"`
+	Format            []Format               `json:"format,omitempty"` // Format is a field for OpenRTB 2.5
+	Width             int                    `json:"w,omitempty"`
+	Height            int                    `json:"h,omitempty"`
+	MaxWidth          *int                   `json:"wmax,omitempty"` // Deprecated in favor of the format since Open RTB 2.5.
+	MaxHeight         *int                   `json:"hmax,omitempty"` // Deprecated in favor of the format since Open RTB 2.5.
+	MinWidth          *int                   `json:"wmin,omitempty"` // Deprecated in favor of the format since Open RTB 2.5.
+	MinHeight         *int                   `json:"hmin,omitempty"` // Deprecated in favor of the format since Open RTB 2.5.
+	BlockedTypes      []int                  `json:"btype,omitempty"`
+	BlockedAttributes []int                  `json:"battr,omitempty"`
+	Position          AdPosition             `json:"pos,omitempty"`
+	MIMETypes         []string               `json:"mimes,omitempty"`
+	TopFrame          *int                   `json:"topframe,omitempty"`
+	ExpandDirections  []int                  `json:"expdir,omitempty"`
+	APIFrameworks     []int                  `json:"api,omitempty"`
+	ID                *string                `json:"id,omitempty"`
+	VCM               CompanionRenderingMode `json:"vcm,omitempty"`
+	Extension         interface{}            `json:"ext,omitempty"`
 }
 
 // Validate method implements a Validater interface and return a validation error according to the

@@ -1,0 +1,85 @@
+Attribute
+Type
+Description
+id
+string
+ID uniquely identifying the content.
+episode
+integer
+Episode number.
+title
+string
+Content title.
+Video Examples: “Search Committee” (television), “A New Hope” (movie), or “Endgame” (made for web).
+Non-Video Example: “Why an Antarctic Glacier Is Melting So Quickly” (Time magazine article).
+series
+string
+Content series.
+Video Examples: “The Office” (television), “Star Wars” (movie), or “Arby ‘N’ The Chief” (made for web).
+Non-Video Example: “Ecocentric” (Time Magazine blog).
+season
+string
+Content season (e.g., “Season 3”).
+artist
+string
+Artist credited with the content.
+genre
+string
+Genre that best describes the content (e.g., rock, pop, etc).
+album
+string
+Album to which the content belongs; typically for audio.
+isrc
+string
+International Standard Recording Code conforming to ISO- 3901.
+producer
+object
+Details about the content Producer (Section 3.2.17).
+url
+string
+URL of the content, for buy-side contextualization or review.
+cat
+string array
+Array of IAB content categories that describe the content producer. Refer to List 5.1.
+prodq
+integer
+Production quality. Refer to List 5.13.
+videoquality
+integer; DEPRECATED
+Note: Deprecated in favor of prodq. Video quality. Refer to List 5.13.
+context
+integer
+Type of content (game, video, text, etc.). Refer to List 5.18.
+contentrating
+string
+Content rating (e.g., MPAA).
+userrating
+string
+User rating of the content (e.g., number of stars, likes, etc.).
+qagmediarating
+integer
+Media rating per IQG guidelines. Refer to List 5.19.
+keywords
+string
+Comma separated list of keywords describing the content.
+livestream
+integer
+0 = not live, 1 = content is live (e.g., stream, live blog).
+sourcerelationship
+integer
+0 = indirect, 1 = direct.
+len
+integer
+Length of content in seconds; appropriate for video or audio.
+language
+string
+Content language using ISO-639-1-alpha-2.
+embeddable
+integer
+Indicator of whether or not the content is embeddable (e.g., an embeddable video player), where 0 = no, 1 = yes.
+data
+object array
+Additional content data. Each Data object (Section 3.2.21) represents a different data source.
+ext
+object
+Placeholder for exchange-specific extensions to OpenRTB.

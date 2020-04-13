@@ -16,6 +16,13 @@ func TestAudioMarshalUnmarshal(t *testing.T) {
 	openrtbtest.VerifyModelAgainstFile(t, "audio.json", AudioModelType)
 }
 
+func TestAudio_Fields(t *testing.T) {
+	if err := openrtbtest.VerifyStructFieldNameWithStandardTextFile(
+		(*openrtb.Audio)(nil), "testdata/audio_std.txt"); err != "" {
+		t.Error(err)
+	}
+}
+
 func TestAudio_Copy(t *testing.T) {
 	testInt := 1
 	testString := "TEST"
@@ -51,19 +58,19 @@ func TestAudio_Copy(t *testing.T) {
 						APIFrameworks:     []int{4},
 						Width:             2,
 						Height:            2,
-						Format:            []openrtb.Format{{
-								W:    320,
-								H:    50,
-								WMin: 50,
-							}, {
-								WRatio: 50,
-								HRatio: 80,
-							},
+						Format: []openrtb.Format{{
+							W:    320,
+							H:    50,
+							WMin: 50,
+						}, {
+							WRatio: 50,
+							HRatio: 80,
 						},
-						MinHeight:         &testInt,
-						MaxHeight:         &testInt,
-						MinWidth:          &testInt,
-						MaxWidth:          &testInt,
+						},
+						MinHeight: &testInt,
+						MaxHeight: &testInt,
+						MinWidth:  &testInt,
+						MaxWidth:  &testInt,
 					},
 				},
 				APIFrameworks:    []openrtb.APIFramework{openrtb.APIFrameworkVPAID1},
@@ -102,7 +109,7 @@ func TestAudio_Copy(t *testing.T) {
 			}
 		}
 
-		if &testCase.audio.BlockedCreativeAttributes== &audio2.BlockedCreativeAttributes{
+		if &testCase.audio.BlockedCreativeAttributes == &audio2.BlockedCreativeAttributes {
 			t.Errorf("Address of BlockedCreativeAttributes should not be the same in copied audio. BlockedCreativeAttributes1: %p BlockedCreativeAttributes2: %p.", testCase.audio.BlockedCreativeAttributes, audio2.BlockedCreativeAttributes)
 		}
 
@@ -133,4 +140,3 @@ func TestAudio_Copy(t *testing.T) {
 		}
 	}
 }
-
