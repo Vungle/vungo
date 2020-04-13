@@ -104,6 +104,40 @@ func verifyModelNonEmptyFields(t Testing, jsonBytes []byte, modelType reflect.Ty
 	}
 }
 
+// VerifyStructFieldNameWithStandardText search all struct field json names in
+// standard text to verify these names are correct.
+// NOTE: Please COPY standard text from iAB OpenRTB Spec pdf file directly,
+// rather than input manually.
+func VerifyStructFieldNameWithStandardText(
+	objPtr interface{}, standardText string) string {
+	modelType := reflect.TypeOf(objPtr).Elem()
+	lines := strings.Split(standardText, "\n")
+	possibleFieldNames := map[string]bool{}
+	for _, line := range lines {
+		possibleFieldNames[strings.TrimSpace(line)] = true
+	}
+
+	var result []string
+	// Search json tag name in standard
+	total := modelType.NumField()
+	for i := 0; i < total; i++ {
+		field := modelType.Field(i)
+		if len(field.PkgPath) != 0 { // ignore private field
+			continue
+		}
+		name, ok := getJSONPropertyNameFromFieldTag(field)
+		if !ok || len(name) == 0 { // Ignore fields without a JSON tag.
+			continue
+		}
+		if !possibleFieldNames[name] {
+			result = append(result, fmt.Sprintf("Model %v field %s"+
+				" with json tag %s doesn't exist in standard",
+				modelType, field.Name, name))
+		}
+	}
+	return strings.Join(result, "\n")
+}
+
 // getNumOfJSONFields method returns the number of fields that are not annotated with JSON encoding.
 func getNumOfJSONFields(modelType reflect.Type) (result int) {
 	n := modelType.NumField()

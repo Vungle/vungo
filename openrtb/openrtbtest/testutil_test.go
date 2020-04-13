@@ -2,6 +2,7 @@ package openrtbtest_test
 
 import (
 	"reflect"
+	"regexp"
 	"testing"
 
 	"github.com/Vungle/vungo/openrtb/openrtbtest"
@@ -258,4 +259,86 @@ func TestVerifyDeepCopy(t *testing.T) {
 		t.Errorf("VerifyDeepCopy() with share Struct.IntVP objects want non-nil, got nil")
 	}
 	dst.Struct.IntVP = oldStructIntP
+}
+
+func TestVerifyStructFieldNameWithStandardText(t *testing.T) {
+	type T struct {
+		NoJsonTagField int
+		NormalField    string `json:"normalfield,omitempty"`
+		privateField   int    `json:"privatefield,omitempty"`
+	}
+	type args struct {
+		objPtr       interface{}
+		standardText string
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		{
+			name: "normal case",
+			args: args{
+				objPtr: (*T)(nil),
+				standardText: `
+normalfield
+`,
+			},
+			want: "^$",
+		},
+		{
+			name: "field name wrong",
+			args: args{
+				objPtr: (*T)(nil),
+				standardText: `
+normal_field
+`,
+			},
+			want: `normalfield`,
+		},
+		{
+			name: "field name not exist",
+			args: args{
+				objPtr:       (*T)(nil),
+				standardText: ``,
+			},
+			want: `normalfield`,
+		},
+		{
+			name: "field name not a single line",
+			args: args{
+				objPtr:       (*T)(nil),
+				standardText: `normalfield xx`,
+			},
+			want: `normalfield`,
+		},
+		{
+			name: "field name with case diff",
+			args: args{
+				objPtr:       (*T)(nil),
+				standardText: `Normalfield`,
+			},
+			want: `normalfield`,
+		},
+		{
+			name: "field name in multiple lines",
+			args: args{
+				objPtr: (*T)(nil),
+				standardText: `
+normal
+field`,
+			},
+			want: `normalfield`,
+		},
+	}
+	for _, tt := range tests {
+		tt := tt
+		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+			got := openrtbtest.VerifyStructFieldNameWithStandardText(tt.args.objPtr, tt.args.standardText)
+			if ok, err := regexp.MatchString(tt.want, got); !ok || err != nil {
+				t.Errorf("VerifyStructFieldNameWithStandardText() = \n\t%v\n\twant match %v", got, tt.want)
+			}
+		})
+	}
 }
