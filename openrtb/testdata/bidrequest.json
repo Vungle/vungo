@@ -25,6 +25,7 @@
       "instl": 1,
       "bidfloor": 85.1290,
       "bidfloorcur": "USD",
+      "clickbrowser": 1,
       "ext": {"vungle":{"some":["arbitrary value","that","must be","compact JSON"]}}
     }
   ],
@@ -118,8 +119,10 @@
   "tmax": 500,
   "allimps": 1,
   "wseat": ["111", "1ab"],
+  "bseat": ["222", "2cd"],
   "badv": ["supercell.com", "machinezone.com"],
   "bapp": ["403639508","479706646"],
+  "wlang": ["ab", "aa"],
   "cur": ["USD", "CNY"],
   "bcat": ["IAB7-39"],
   "regs": {

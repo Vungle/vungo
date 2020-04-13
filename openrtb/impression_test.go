@@ -19,6 +19,7 @@ func TestImpressionMarshalUnmarshal(t *testing.T) {
 func TestImpression_Copy(t *testing.T) {
 	testInt := 1
 	testString := "TEST"
+	startDelayGenericMidRoll := openrtb.StartDelayGenericMidRoll
 	testCases := []struct {
 		impression *openrtb.Impression
 	}{
@@ -32,10 +33,10 @@ func TestImpression_Copy(t *testing.T) {
 					MIMETypes:       []string{"testMime"},
 					MinDuration:     &testInt,
 					MaxDuration:     &testInt,
-					Protocols:       []openrtb.VideoProtocol{openrtb.VideoProtocolVAST2},
+					Protocols:       []openrtb.AdProtocol{openrtb.AdProtocolVAST2},
 					Width:           1,
 					Height:          1,
-					StartDelay:      &testInt,
+					StartDelay:      &startDelayGenericMidRoll,
 					Linearity:       openrtb.LinearityLinear,
 					MinBitRate:      1,
 					MaxBitRate:      1,

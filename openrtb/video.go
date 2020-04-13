@@ -3,8 +3,6 @@ package openrtb
 import "errors"
 
 // Video types annotates the parent impression as an video impression.
-// The "protocol", "sequence", "battr", "maxextended", "companionad",
-// "companiontype", and "ext" keys are unused and have been omitted.
 // See OpenRTB 2.3.1 Sec 3.2.4.
 //go:generate easyjson $GOFILE
 //easyjson:json
@@ -12,18 +10,28 @@ type Video struct {
 	MIMETypes       []string         `json:"mimes"`
 	MinDuration     *int             `json:"minduration,omitempty"`
 	MaxDuration     *int             `json:"maxduration,omitempty"`
-	Protocols       []VideoProtocol  `json:"protocols,omitempty"`
+	Protocols       []AdProtocol     `json:"protocols,omitempty"`
 	Width           int              `json:"w,omitempty"`
 	Height          int              `json:"h,omitempty"`
-	StartDelay      *int             `json:"startdelay,omitempty"`
+	StartDelay      *StartDelay `json:"startdelay,omitempty"`
+	PlacementType   VideoPlacementType `json:"placement,omitempty"`
 	Linearity       Linearity        `json:"linearity,omitempty"`
+	Skippable	  		int              `json:"skip,omitempty"`
+	SkipMin         int              `json:"skipmin,omitempty"`
+	SkipAfter       int              `json:"skipafter,omitempty"`
+	Sequence        int              `json:"sequence,omitempty"`
+	BlockedCreativeAttributes []CreativeAttribute            `json:"battr,omitempty"`
+	MaxExtendedDuration       int              `json:"maxextended,omitempty"`
 	MinBitRate      int              `json:"minbitrate,omitempty"`
 	MaxBitRate      int              `json:"maxbitrate,omitempty"`
 	IsBoxingAllowed NumericBool      `json:"boxingallowed,omitempty"`
 	PlaybackMethods []PlaybackMethod `json:"playbackmethod,omitempty"`
+	PlaybackEndEvent PlaybackCessationMode `json:"playbackend,omitempty"`
 	DeliveryMethods []DeliveryMethod `json:"delivery,omitempty"`
 	Position        AdPosition       `json:"pos,omitempty"`
+	CompanionAds              []Banner         `json:"companionad"`
 	APIFrameworks   []APIFramework   `json:"api,omitempty"`
+	CompanionTypes            []CompanionType `json:"companiontype"`
 	Extension       interface{}      `json:"ext,omitempty"`
 }
 
@@ -63,13 +71,18 @@ func (v *Video) Copy() *Video {
 	}
 
 	if v.Protocols != nil {
-		vCopy.Protocols = make([]VideoProtocol, len(v.Protocols))
+		vCopy.Protocols = make([]AdProtocol, len(v.Protocols))
 		copy(vCopy.Protocols, v.Protocols)
 	}
 
 	if v.StartDelay != nil {
 		StartDelayCopy := *v.StartDelay
 		vCopy.StartDelay = &StartDelayCopy
+	}
+	
+	if v.BlockedCreativeAttributes != nil {
+		vCopy.BlockedCreativeAttributes = make([]CreativeAttribute, len(v.BlockedCreativeAttributes))
+		copy(vCopy.BlockedCreativeAttributes, v.BlockedCreativeAttributes)
 	}
 
 	if v.PlaybackMethods != nil {
@@ -85,6 +98,18 @@ func (v *Video) Copy() *Video {
 	if v.APIFrameworks != nil {
 		vCopy.APIFrameworks = make([]APIFramework, len(v.APIFrameworks))
 		copy(vCopy.APIFrameworks, v.APIFrameworks)
+	}
+	
+	if v.CompanionAds != nil {
+		vCopy.CompanionAds = make([]Banner, len(v.CompanionAds))
+		for i, companion := range v.CompanionAds {
+			vCopy.CompanionAds[i] = *companion.Copy()
+		}
+	}
+
+	if v.CompanionTypes!= nil {
+		vCopy.CompanionTypes= make([]CompanionType, len(v.CompanionTypes))
+		copy(vCopy.CompanionTypes, v.CompanionTypes)
 	}
 
 	// extension copying has to be done by the user of this package manually.

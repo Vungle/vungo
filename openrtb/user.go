@@ -14,6 +14,7 @@ type User struct {
 	Keywords   string      `json:"keywords,omitempty"`
 	CustomData string      `json:"customdata,omitempty"`
 	Geo        *Geo        `json:"geo,omitempty"`
+	Data       []Data      `json:"data,omitempty"`
 	Extension  interface{} `json:"ext,omitempty"`
 }
 
@@ -27,6 +28,11 @@ func (u *User) Copy() *User {
 	if u.Geo != nil {
 		GeoCopy := *u.Geo
 		userCopy.Geo = &GeoCopy
+	}
+
+	if u.Data!= nil {
+		u.Data = make([]Data, len(u.Data))
+		copy(userCopy.Data, u.Data)
 	}
 
 	// extension copying has to be done by the user of this package manually.

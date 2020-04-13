@@ -1,23 +1,27 @@
 package openrtb
 
 // Impression type describes an ad placement or impression being auctioned.
-// The "banner", "native", and "iframebuster" keys are unused and have been
-// omitted.
-// See OpenRTB 2.3.1 Sec 3.2.2.
+// See OpenRTB 2.5 Sec 3.2.4.
 //go:generate easyjson $GOFILE
 //easyjson:json
 type Impression struct {
 	ID                    string              `json:"id"`
-	Video                 *Video              `json:"video,omitempty"`
+	Metrics 							[]Metric 						`json:"metric,omitempty"`
 	Banner                *Banner             `json:"banner,omitempty"`
+	Video                 *Video              `json:"video,omitempty"`
+	Audio 								*Audio 							`json:"audio,omitempty"`
+	Native 								*Native 						`json:"native,omitempty"`
+	PrivateMarketplace    *PrivateMarketplace `json:"pmp,omitempty"`
 	DisplayManager        string              `json:"displaymanager,omitempty"`
 	DisplayManagerVersion string              `json:"displaymanagerver,omitempty"`
 	IsInterstitial        NumericBool         `json:"instl,omitempty"`
 	TagID                 string              `json:"tagid,omitempty"`
 	BidFloorPrice         float64             `json:"bidfloor"`
 	BidFloorCurrency      Currency            `json:"bidfloorcur,omitempty"`
+	BrowserTypeUponClick  BrowserType         `json:"clickbrowser,omitempty"`
 	IsSecure              NumericBool         `json:"secure,omitempty"`
-	PrivateMarketplace    *PrivateMarketplace `json:"pmp,omitempty"`
+	IframeBuster 					[]string 						`json:"iframebuster,omitempty"`
+	Exp 									int 								`json:"exp,omitempty"`
 	Extension             interface{}         `json:"ext,omitempty"`
 }
 
@@ -29,7 +33,14 @@ func (imp *Impression) Copy() *Impression {
 	impressionCopy := *imp
 	impressionCopy.Video = imp.Video.Copy()
 	impressionCopy.Banner = imp.Banner.Copy()
+	impressionCopy.Audio= imp.Audio.Copy()
+	impressionCopy.Native= imp.Native.Copy()
 	impressionCopy.PrivateMarketplace = imp.PrivateMarketplace.Copy()
+
+	if imp.IframeBuster!= nil {
+		impressionCopy.IframeBuster = make([]string, len(imp.IframeBuster))
+		copy(impressionCopy.IframeBuster, imp.IframeBuster)
+	}
 
 	// extension copying has to be done by the user of this package manually.
 	impressionCopy.Extension = nil

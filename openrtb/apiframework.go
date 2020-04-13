@@ -10,4 +10,5 @@ const (
 	APIFrameworkMRAID1
 	APIFrameworkORMMA
 	APIFrameworkMRAID2
+	APIFrameworkMRAID3
 )

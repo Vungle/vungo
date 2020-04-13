@@ -3,18 +3,17 @@ package openrtb
 import "errors"
 
 // Banner types annotates the parent impression as an banner impression.
-// See OpenRTB 2.3.1 Sec 3.2.3.
+// See OpenRTB 2.5 Sec 3.2.6.
 //go:generate easyjson $GOFILE
 //easyjson:json
 type Banner struct {
+	Format            []Format    `json:"format,omitempty"` // Format is a field for OpenRTB 2.5
 	Width             int         `json:"w,omitempty"`
 	Height            int         `json:"h,omitempty"`
-	Format            []Format    `json:"format,omitempty"` // Format is a field for OpenRTB 2.5
-	MaxWidth          *int        `json:"wmax,omitempty"`
-	MaxHeight         *int        `json:"hmax,omitempty"`
-	MinWidth          *int        `json:"wmin,omitempty"`
-	MinHeight         *int        `json:"hmin,omitempty"`
-	ID                *string     `json:"id,omitempty"`
+	MaxWidth          *int        `json:"wmax,omitempty"` // Deprecated in favor of the format since Open RTB 2.5.
+	MaxHeight         *int        `json:"hmax,omitempty"` // Deprecated in favor of the format since Open RTB 2.5.
+	MinWidth          *int        `json:"wmin,omitempty"` // Deprecated in favor of the format since Open RTB 2.5.
+	MinHeight         *int        `json:"hmin,omitempty"` // Deprecated in favor of the format since Open RTB 2.5.
 	BlockedTypes      []int       `json:"btype,omitempty"`
 	BlockedAttributes []int       `json:"battr,omitempty"`
 	Position          AdPosition  `json:"pos,omitempty"`
@@ -22,6 +21,8 @@ type Banner struct {
 	TopFrame          *int        `json:"topframe,omitempty"`
 	ExpandDirections  []int       `json:"expdir,omitempty"`
 	APIFrameworks     []int       `json:"api,omitempty"`
+	ID                *string     `json:"id,omitempty"`
+	VCM								CompanionRenderingMode `json:"vcm,omitempty"`
 	Extension         interface{} `json:"ext,omitempty"`
 }
 

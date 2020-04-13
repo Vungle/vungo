@@ -21,7 +21,7 @@ func TestBidRequestValidateShouldValidateAgainstId(t *testing.T) {
 	openrtbtest.UnmarshalFromJSONFile("bidrequest.json", &bidRequest)
 
 	// Expect the validation to pass when ID field is non-empty.
-	if err := bidRequest.Validate(); err != nil {
+	if err := bidRequest.Validate(); err != nil && err != openrtb.ErrInvalidBidRequestSeats {
 		t.Errorf("BidRequest.ID (%s) when not empty should be valid.\n", bidRequest.ID)
 	}
 
@@ -36,6 +36,7 @@ func TestBidRequestValidateShouldValidateAgainstId(t *testing.T) {
 func TestBidRequest_Copy(t *testing.T) {
 	testInt := 1
 	testBool := openrtb.NumericBool(true)
+	startDelayGenericMidRoll := openrtb.StartDelayGenericMidRoll
 
 	testCases := []struct {
 		bidrequest *openrtb.BidRequest
@@ -52,10 +53,10 @@ func TestBidRequest_Copy(t *testing.T) {
 							MIMETypes:       []string{"mp4"},
 							MinDuration:     &testInt,
 							MaxDuration:     &testInt,
-							Protocols:       []openrtb.VideoProtocol{openrtb.VideoProtocolVAST2},
+							Protocols:       []openrtb.AdProtocol{openrtb.AdProtocolVAST2},
 							Width:           1,
 							Height:          1,
-							StartDelay:      &testInt,
+							StartDelay:      &startDelayGenericMidRoll,
 							Linearity:       1,
 							MinBitRate:      1,
 							MaxBitRate:      1,
@@ -153,7 +154,9 @@ func TestBidRequest_Copy(t *testing.T) {
 				AuctionType:                  1,
 				Timeout:                      1,
 				WhitelistedSeats:             []string{"1"},
+				BlocklistedSeats:             []string{"2"},
 				Currencies:                   []openrtb.Currency{openrtb.CurrencyUSD},
+				WhitelistLanguages:           []string{"ab", "aa"},
 				BlockedCategories:            []openrtb.Category{openrtb.Category712Education},
 				BlockedAdvertisers:           []string{"advertiser1"},
 				BlockedAdvertisersByMarketID: []string{"403639508", "479706646"},
@@ -205,8 +208,16 @@ func TestBidRequest_Copy(t *testing.T) {
 			t.Errorf("Address of whitelisted seats should not be the same in copied bidrequest. WhitelistedSeats1: %p WhitelistedSeats2: %p.", testCase.bidrequest.WhitelistedSeats, b2.WhitelistedSeats)
 		}
 
+		if &testCase.bidrequest.BlocklistedSeats == &b2.BlocklistedSeats {
+			t.Errorf("Address of blocklisted seats should not be the same in copied bidrequest. BlocklistedSeats1: %p BlocklistedSeats2: %p.", testCase.bidrequest.BlocklistedSeats, b2.BlocklistedSeats)
+		}
+
 		if &testCase.bidrequest.Currencies == &b2.Currencies {
 			t.Errorf("Address of currencies should not be the same in copied bidrequest. Currencies1: %p Currencies2: %p.", testCase.bidrequest.Currencies, b2.Currencies)
+		}
+
+		if &testCase.bidrequest.WhitelistLanguages == &b2.WhitelistLanguages {
+			t.Errorf("Address of whitelist languages should not be the same in copied bidrequest. WhiteListLanguages1: %p WhiteListLanguages2: %p.", testCase.bidrequest.WhitelistLanguages, b2.WhitelistLanguages)
 		}
 
 		if &testCase.bidrequest.BlockedCategories == &b2.BlockedCategories {

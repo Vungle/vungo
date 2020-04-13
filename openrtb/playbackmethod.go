@@ -1,7 +1,7 @@
 package openrtb
 
 // PlaybackMethod type represents how the video should playback.
-// See OpenRTB 2.3.1 Sec 5.9.
+// See OpenRTB 2.5 Sec 5.10.
 type PlaybackMethod int
 
 // Possible values according to the OpenRTB spec.
@@ -10,4 +10,6 @@ const (
 	PlaybackMethodAutoPlaySoundOff
 	PlaybackMethodClickToPlay
 	PlaybackMethodMouseOver
+	PlaybackMethodEnteringViewportSoundOn
+	PlaybackMethodEnteringViewportSoundOff
 )

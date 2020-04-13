@@ -18,6 +18,9 @@ var ErrInvalidBidRequestID = errors.New("bidrequest.id is invalid")
 // BidRequest does not have any impressions.
 var ErrInvalidBidRequestImpressions = errors.New("bidrequest.imps is invalid")
 
+// ErrInvalidBidRequestSeats represents a validation error when both wseat and bseat exist.
+var ErrInvalidBidRequestSeats = errors.New("bidrequest wseat and bseat should not coexist")
+
 // ErrInvalidBidResponseID represents a validation error when a BidResponse
 // does not have a valid ID.
 var ErrInvalidBidResponseID = errors.New("bidresponse.id is invalid")

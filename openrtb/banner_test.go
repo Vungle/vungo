@@ -37,7 +37,15 @@ func TestBannerCopy(t *testing.T) {
 				APIFrameworks:     []int{4},
 				Width:             2,
 				Height:            2,
-				Format:            []openrtb.Format{{320, 50}, {728, 90}},
+				Format:            []openrtb.Format{{
+						W:320,
+						H:50,
+						WMin:50,
+					},{
+						WRatio:50,
+						HRatio:80,
+					},
+				},
 				MinHeight:         &testInt,
 				MaxHeight:         &testInt,
 				MinWidth:          &testInt,

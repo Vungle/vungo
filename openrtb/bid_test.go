@@ -127,7 +127,7 @@ func TestBid_Copy(t *testing.T) {
 				DealID:              "testDealID",
 				Height:              0,
 				Width:               0,
-				Extension:          json.RawMessage([]byte(`rawr`)),
+				Extension:           json.RawMessage([]byte(`rawr`)),
 			},
 		},
 	}

@@ -23,4 +23,5 @@ const (
 	CreativeAttributeDialog
 	CreativeAttributeHasAudioOnOff
 	CreativeAttributeSkippable
+	CreativeAttributeAdobeFlash
 )

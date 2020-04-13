@@ -18,6 +18,7 @@ func TestVideoMarshalUnmarshal(t *testing.T) {
 
 func TestVideo_Copy(t *testing.T) {
 	testInt := 1
+	startDelayGenericMidRoll := openrtb.StartDelayGenericMidRoll
 	testCases := []struct {
 		video *openrtb.Video
 	}{
@@ -29,10 +30,10 @@ func TestVideo_Copy(t *testing.T) {
 				MIMETypes:       []string{"testMime"},
 				MinDuration:     &testInt,
 				MaxDuration:     &testInt,
-				Protocols:       []openrtb.VideoProtocol{openrtb.VideoProtocolVAST2},
+				Protocols:       []openrtb.AdProtocol{openrtb.AdProtocolVAST2},
 				Width:           1,
 				Height:          1,
-				StartDelay:      &testInt,
+				StartDelay:      &startDelayGenericMidRoll,
 				Linearity:       openrtb.LinearityLinear,
 				MinBitRate:      1,
 				MaxBitRate:      1,

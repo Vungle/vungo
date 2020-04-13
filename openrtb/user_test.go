@@ -42,6 +42,19 @@ func TestUser_Copy(t *testing.T) {
 					ZipCode:   "123",
 					UTCOffset: 1,
 				},
+				Data:[]openrtb.Data{
+						{
+						ID:      "123",
+						Name:    "name",
+						Segment: []openrtb.Segment{
+							{
+								ID:    "id",
+								Name:  "name",
+								Value: "value",
+							},
+						},
+					},
+				},
 			},
 		},
 	}
@@ -54,6 +67,13 @@ func TestUser_Copy(t *testing.T) {
 				t.Errorf("Address of Geo should not be the same in copied user. Geo1: %p Geo2: %p.", testCase.user.Geo, user2.Geo)
 			}
 		}
+
+		if testCase.user.Data != nil {
+			if &testCase.user.Data== &user2.Data{
+				t.Errorf("Address of Data should not be the same in copied user. Data1: %p Data2: %p.", testCase.user.Data, user2.Data)
+			}
+		}
+
 
 		if !reflect.DeepEqual(testCase.user, user2) {
 			user1JSON, _ := json.MarshalIndent(testCase.user, "", "  ")

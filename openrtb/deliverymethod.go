@@ -8,4 +8,5 @@ type DeliveryMethod int
 const (
 	DeliveryMethodStreaming DeliveryMethod = iota + 1
 	DeliveryMethodProgressive
+	DeliveryMethodDownload
 )

@@ -20,8 +20,10 @@ type BidRequest struct {
 	AuctionType                  AuctionType   `json:"at"`
 	Timeout                      int           `json:"tmax,omitempty"`
 	WhitelistedSeats             []string      `json:"wseat,omitempty"`
+	BlocklistedSeats             []string      `json:"bseat,omitempty"`
 	HasAllImpressions            NumericBool   `json:"allimps,omitempty"`
 	Currencies                   []Currency    `json:"cur,omitempty"`
+	WhitelistLanguages           []string      `json:"wlang,omitempty"`
 	BlockedCategories            []Category    `json:"bcat,omitempty"`
 	BlockedAdvertisers           []string      `json:"badv,omitempty"`
 	BlockedAdvertisersByMarketID []string      `json:"bapp,omitempty"` // bapp is for OpenRTB 2.5 onwards.
@@ -39,6 +41,11 @@ func (r *BidRequest) Validate() error {
 	if r.Impressions == nil || len(r.Impressions) == 0 {
 		return ErrInvalidBidRequestImpressions
 	}
+
+	if len(r.WhitelistedSeats) > 0 && len(r.BlocklistedSeats) > 0 {
+		return ErrInvalidBidRequestSeats
+	}
+
 	return nil
 }
 
@@ -72,9 +79,19 @@ func (r *BidRequest) Copy() *BidRequest {
 		copy(brCopy.WhitelistedSeats, r.WhitelistedSeats)
 	}
 
+	if r.BlocklistedSeats != nil {
+		brCopy.BlocklistedSeats = make([]string, len(r.BlocklistedSeats))
+		copy(brCopy.BlocklistedSeats, r.BlocklistedSeats)
+	}
+
 	if r.Currencies != nil {
 		brCopy.Currencies = make([]Currency, len(r.Currencies))
 		copy(brCopy.Currencies, r.Currencies)
+	}
+
+	if r.WhitelistLanguages != nil {
+		brCopy.WhitelistLanguages = make([]string, len(r.WhitelistLanguages))
+		copy(brCopy.WhitelistLanguages, r.WhitelistLanguages)
 	}
 
 	if r.BlockedCategories != nil {
