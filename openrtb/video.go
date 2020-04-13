@@ -11,32 +11,32 @@ import (
 //go:generate easyjson $GOFILE
 //easyjson:json
 type Video struct {
-	MIMETypes       []string         `json:"mimes"`
-	MinDuration     *int             `json:"minduration,omitempty"`
-	MaxDuration     *int             `json:"maxduration,omitempty"`
-	Protocols       []AdProtocol     `json:"protocols,omitempty"`
-	Width           int              `json:"w,omitempty"`
-	Height          int              `json:"h,omitempty"`
-	StartDelay      *StartDelay `json:"startdelay,omitempty"`
-	PlacementType   VideoPlacementType `json:"placement,omitempty"`
-	Linearity       Linearity        `json:"linearity,omitempty"`
-	Skippable	  		int              `json:"skip,omitempty"`
-	SkipMin         int              `json:"skipmin,omitempty"`
-	SkipAfter       int              `json:"skipafter,omitempty"`
-	Sequence        int              `json:"sequence,omitempty"`
-	BlockedCreativeAttributes []CreativeAttribute            `json:"battr,omitempty"`
-	MaxExtendedDuration       int              `json:"maxextended,omitempty"`
-	MinBitRate      int              `json:"minbitrate,omitempty"`
-	MaxBitRate      int              `json:"maxbitrate,omitempty"`
-	IsBoxingAllowed NumericBool      `json:"boxingallowed,omitempty"`
-	PlaybackMethods []PlaybackMethod `json:"playbackmethod,omitempty"`
-	PlaybackEndEvent PlaybackCessationMode `json:"playbackend,omitempty"`
-	DeliveryMethods []DeliveryMethod `json:"delivery,omitempty"`
-	Position        AdPosition       `json:"pos,omitempty"`
-	CompanionAds              []Banner         `json:"companionad"`
-	APIFrameworks   []APIFramework   `json:"api,omitempty"`
-	CompanionTypes            []CompanionType `json:"companiontype"`
-	Extension       interface{}      `json:"ext,omitempty"`
+	MIMETypes                 []string              `json:"mimes"`
+	MinDuration               *int                  `json:"minduration,omitempty"`
+	MaxDuration               *int                  `json:"maxduration,omitempty"`
+	Protocols                 []AdProtocol          `json:"protocols,omitempty"`
+	Width                     int                   `json:"w,omitempty"`
+	Height                    int                   `json:"h,omitempty"`
+	StartDelay                *StartDelay           `json:"startdelay,omitempty"`
+	PlacementType             VideoPlacementType    `json:"placement,omitempty"`
+	Linearity                 Linearity             `json:"linearity,omitempty"`
+	Skippable                 int                   `json:"skip,omitempty"`
+	SkipMin                   int                   `json:"skipmin,omitempty"`
+	SkipAfter                 int                   `json:"skipafter,omitempty"`
+	Sequence                  int                   `json:"sequence,omitempty"`
+	BlockedCreativeAttributes []CreativeAttribute   `json:"battr,omitempty"`
+	MaxExtendedDuration       int                   `json:"maxextended,omitempty"`
+	MinBitRate                int                   `json:"minbitrate,omitempty"`
+	MaxBitRate                int                   `json:"maxbitrate,omitempty"`
+	IsBoxingAllowed           NumericBool           `json:"boxingallowed,omitempty"`
+	PlaybackMethods           []PlaybackMethod      `json:"playbackmethod,omitempty"`
+	PlaybackEndEvent          PlaybackCessationMode `json:"playbackend,omitempty"`
+	DeliveryMethods           []DeliveryMethod      `json:"delivery,omitempty"`
+	Position                  AdPosition            `json:"pos,omitempty"`
+	CompanionAds              []Banner              `json:"companionad"`
+	APIFrameworks             []APIFramework        `json:"api,omitempty"`
+	CompanionTypes            []CompanionType       `json:"companiontype"`
+	Extension                 interface{}           `json:"ext,omitempty"`
 }
 
 // Validate method implements a Validater interface and return a validation error according to the
@@ -68,7 +68,7 @@ func (v *Video) Copy() *Video {
 	}
 
 	vCopy.StartDelay = util.DeepCopyInt(v.StartDelay)
-	
+
 	if v.BlockedCreativeAttributes != nil {
 		vCopy.BlockedCreativeAttributes = make([]CreativeAttribute, len(v.BlockedCreativeAttributes))
 		copy(vCopy.BlockedCreativeAttributes, v.BlockedCreativeAttributes)
@@ -88,7 +88,7 @@ func (v *Video) Copy() *Video {
 		vCopy.APIFrameworks = make([]APIFramework, len(v.APIFrameworks))
 		copy(vCopy.APIFrameworks, v.APIFrameworks)
 	}
-	
+
 	if v.CompanionAds != nil {
 		vCopy.CompanionAds = make([]Banner, len(v.CompanionAds))
 		for i, companion := range v.CompanionAds {
@@ -96,8 +96,8 @@ func (v *Video) Copy() *Video {
 		}
 	}
 
-	if v.CompanionTypes!= nil {
-		vCopy.CompanionTypes= make([]CompanionType, len(v.CompanionTypes))
+	if v.CompanionTypes != nil {
+		vCopy.CompanionTypes = make([]CompanionType, len(v.CompanionTypes))
 		copy(vCopy.CompanionTypes, v.CompanionTypes)
 	}
 

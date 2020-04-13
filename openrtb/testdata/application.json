@@ -23,6 +23,7 @@
     "name": "Spotify",
     "domain": "www.spotify.com"
   },
+  "content": {},
   "keywords": "music,streaming,internet",
   "ext": {"vungle":{"key":"value"}}
 }

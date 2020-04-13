@@ -29,6 +29,7 @@
       "ext": {"vungle":{"some":["arbitrary value","that","must be","compact JSON"]}}
     }
   ],
+  "site": null,
   "app": {
     "id": "d2ae6794cd3e02160755abd460d63008",
     "name": "Spotify Music",
@@ -119,7 +120,7 @@
   "tmax": 500,
   "allimps": 1,
   "wseat": ["111", "1ab"],
-  "bseat": ["222", "2cd"],
+  "bseat": [],
   "badv": ["supercell.com", "machinezone.com"],
   "bapp": ["403639508","479706646"],
   "wlang": ["ab", "aa"],

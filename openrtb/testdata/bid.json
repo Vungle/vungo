@@ -5,6 +5,7 @@
   "price": 3.14159,
   "adid": "d2ae6794cd3e02160755abd460d65008",
   "nurl": "http://demand.gopro.com/win?won=${AUCTION_PRICE}",
+  "burl": null,
   "lurl": "http://demand.gopro.com/loss?won=${AUCTION_PRICE}",
   "adm": "<vast/>",
   "bundle": "com.gopro",
@@ -14,7 +15,13 @@
   "iurl": "http://demand.gopro.com/quality.jpeg",
   "cid": "d2ae6794cd3e02160755abd460d65108",
   "crid": "d2ae6794cd3e02160755abd460d65118",
+  "tactic": null,
   "attr": [1, 4, 6, 9],
+  "api": null,
+  "protocol": null,
+  "qagmediarating": null,
+  "language": null,
+
   "cat": [
     "IAB1",
     "IAB3",
@@ -22,5 +29,8 @@
   ],
   "h": 100,
   "w": 200,
+  "wratio": null,
+  "hratio": null,
+  "exp": null,
   "ext": {"vungle":{"some":["arbitrary value","that","must be","compact JSON"]}}
 }
