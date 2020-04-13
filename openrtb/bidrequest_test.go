@@ -26,11 +26,21 @@ func TestBidRequestValidateShouldValidateAgainstId(t *testing.T) {
 	}
 
 	// Expect the validate to fail when the ID field is empty.
+	originalID := bidRequest.ID
 	bidRequest.ID = ""
 
 	if err := bidRequest.Validate(); err == nil || err != openrtb.ErrInvalidBidRequestID {
 		t.Errorf("BidRequest.ID (%s) must be non-empty to be valid.", bidRequest.ID)
 	}
+	bidRequest.ID = originalID
+
+	// A bid request must not contain both a Site and an App object
+	originalSite := bidRequest.Site
+	bidRequest.Site = &openrtb.Site{}
+	if err := bidRequest.Validate(); err == nil || err != openrtb.ErrBidRequestHasBothAppAndSite {
+		t.Errorf("BidRequest must not contain both a Site and an App object.")
+	}
+	bidRequest.Site = originalSite
 }
 
 func TestBidRequest_Copy(t *testing.T) {

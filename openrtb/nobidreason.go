@@ -39,6 +39,8 @@ const (
 	NoBidReasonUnsupportedDevice
 	NoBidReasonBlockedPublisher
 	NoBidReasonUnmatchedUser
+	NoBidReasonDailyReaderCapMet
+	NoBidReasonDailyDomainCapMet
 	// Add new entries here.
 
 	lastOpenRTBNoBidReason
@@ -116,6 +118,8 @@ var NoBidReasonNames = map[NoBidReason]string{
 	NoBidReasonUnsupportedDevice: "NO_BID_UNSUPPORTED_DEVICE",
 	NoBidReasonBlockedPublisher:  "NO_BID_BLOCKED_PUBLISHER",
 	NoBidReasonUnmatchedUser:     "NO_BID_UNMATCHED_USER",
+	NoBidReasonDailyReaderCapMet: "NO_BID_DAILY_READER_CAP_MET",
+	NoBidReasonDailyDomainCapMet: "NO_BID_DAILY_DOMAIN_CAP_MET",
 
 	NoBidReasonResponseTimeout:       "NO_BID_RESPONSE_TIMEOUT",
 	NoBidReasonRequestError:          "NO_BID_REQUEST_ERROR",

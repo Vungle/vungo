@@ -1,6 +1,10 @@
 package openrtb
 
-import "errors"
+import (
+	"errors"
+
+	"github.com/Vungle/vungo/internal/util"
+)
 
 // Deal type represents a way to describe a specific slice of the exchange's supply via a unique ID
 // shared between sellers and buyers to facilitate selling of an impressions.
@@ -27,18 +31,14 @@ func (d *Deal) Validate() error {
 	return nil
 }
 
-// Copy returns a pointer to a copy of the Impression object.
+// Copy returns a pointer to a deep copy of the Deal object.
 func (d *Deal) Copy() *Deal {
 	if d == nil {
 		return nil
 	}
 
 	dealCopy := *d
-
-	if d.WhitelistedSeats != nil {
-		dealCopy.WhitelistedSeats = make([]string, len(d.WhitelistedSeats))
-		copy(dealCopy.WhitelistedSeats, d.WhitelistedSeats)
-	}
+	dealCopy.WhitelistedSeats = util.DeepCopyStrSlice(d.WhitelistedSeats)
 
 	if d.AdvertiserDomains!= nil {
 		dealCopy.AdvertiserDomains= make([]string, len(d.AdvertiserDomains))
