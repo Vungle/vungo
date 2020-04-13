@@ -8,7 +8,7 @@ import "github.com/Vungle/vungo/internal/util"
 //easyjson:json
 type Impression struct {
 	ID                    string              `json:"id"`
-	Metrics               []Metric            `json:"metric,omitempty"`
+	Metrics               []*Metric           `json:"metric,omitempty"`
 	Banner                *Banner             `json:"banner,omitempty"`
 	Video                 *Video              `json:"video,omitempty"`
 	Audio                 *Audio              `json:"audio,omitempty"`
@@ -33,6 +33,13 @@ func (imp *Impression) Copy() *Impression {
 		return nil
 	}
 	impressionCopy := *imp
+	if imp.Metrics != nil {
+		impressionCopy.Metrics = []*Metric{}
+		for _, m := range imp.Metrics {
+			newM := *m
+			impressionCopy.Metrics = append(impressionCopy.Metrics, &newM)
+		}
+	}
 	impressionCopy.Video = imp.Video.Copy()
 	impressionCopy.Banner = imp.Banner.Copy()
 	impressionCopy.Audio = imp.Audio.Copy()

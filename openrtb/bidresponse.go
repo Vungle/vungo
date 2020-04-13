@@ -76,7 +76,7 @@ func (r *BidResponse) Copy() *BidResponse {
 		brCopy.SeatBids = append(brCopy.SeatBids, seat.Copy())
 	}
 
-	if r.Extension != nil {
+	if r.RawExtension != nil {
 		brCopy.RawExtension = make(json.RawMessage, len(r.RawExtension))
 		copy(brCopy.RawExtension, r.RawExtension)
 	}

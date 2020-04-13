@@ -76,7 +76,7 @@ func (r *BidRequest) Copy() *BidRequest {
 			brCopy.Impressions = append(brCopy.Impressions, r.Impressions[i].Copy())
 		}
 	}
-
+	brCopy.Site = r.Site.Copy()
 	brCopy.Application = r.Application.Copy()
 	brCopy.Device = r.Device.Copy()
 	brCopy.User = r.User.Copy()
@@ -103,6 +103,7 @@ func (r *BidRequest) Copy() *BidRequest {
 	}
 
 	brCopy.BlockedAdvertisers = util.DeepCopyStrSlice(r.BlockedAdvertisers)
+	brCopy.BlockedAdvertisersByMarketID = util.DeepCopyStrSlice(r.BlockedAdvertisersByMarketID)
 	brCopy.Regulation = r.Regulation.Copy()
 	brCopy.Source = r.Source.Copy()
 	brCopy.Extension = util.DeepCopyCopiable(r.Extension)
