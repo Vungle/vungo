@@ -68,6 +68,11 @@ func TestBidValidation(t *testing.T) {
 
 func TestBid_Copy(t *testing.T) {
 	bid := openrtb.Bid{}
+	if err := openrtbtest.VerifyDeepCopy(
+		&bid, bid.Copy()); err != nil {
+		t.Errorf("Copy() should be deep copy\n%v\n", err)
+	}
+
 	openrtbtest.FillWithNonNilValue(&bid)
 	if err := openrtbtest.VerifyDeepCopy(
 		&bid, bid.Copy()); err != nil {

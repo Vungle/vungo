@@ -32,10 +32,11 @@ func (b *SeatBid) Copy() *SeatBid {
 		return nil
 	}
 	bCopy := *b
-	bCopy.Bids = []*Bid{}
-	for _, bid := range b.Bids {
-		bidCopy := bid.Copy()
-		bCopy.Bids = append(bCopy.Bids, bidCopy)
+	if b.Bids != nil {
+		bCopy.Bids = make([]*Bid, len(b.Bids))
+		for i, bid := range b.Bids {
+			bCopy.Bids[i] = bid.Copy()
+		}
 	}
 	return &bCopy
 }

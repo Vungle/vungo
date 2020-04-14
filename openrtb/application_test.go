@@ -23,9 +23,12 @@ func TestApplication_Fields(t *testing.T) {
 
 func TestApplication_Copy(t *testing.T) {
 	a := openrtb.Application{}
+	if err := openrtbtest.VerifyDeepCopy(&a, a.Copy()); err != nil {
+		t.Errorf("Copy() should be deep copy\n%v\n", err)
+	}
+
 	openrtbtest.FillWithNonNilValue(&a)
-	aCopyPtr := a.Copy()
-	if err := openrtbtest.VerifyDeepCopy(&a, aCopyPtr); err != nil {
+	if err := openrtbtest.VerifyDeepCopy(&a, a.Copy()); err != nil {
 		t.Errorf("Copy() should be deep copy\n%v\n", err)
 	}
 }

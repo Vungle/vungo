@@ -23,6 +23,11 @@ func TestAudio_Fields(t *testing.T) {
 
 func TestAudio_Copy(t *testing.T) {
 	audio := openrtb.Audio{}
+	if err := openrtbtest.VerifyDeepCopy(
+		&audio, audio.Copy()); err != nil {
+		t.Errorf("Copy() should be deep copy\n%v\n", err)
+	}
+
 	openrtbtest.FillWithNonNilValue(&audio)
 	if err := openrtbtest.VerifyDeepCopy(
 		&audio, audio.Copy()); err != nil {

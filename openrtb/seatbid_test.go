@@ -41,8 +41,8 @@ func TestSeatBidValidation(t *testing.T) {
 		{
 			&openrtb.SeatBid{
 				Bids: []*openrtb.Bid{
-					&openrtb.Bid{ID: "abidid", ImpressionID: "impid", Price: 1},
-					&openrtb.Bid{ID: "abidid1", ImpressionID: "impid1", Price: 1},
+					{ID: "abidid", ImpressionID: "impid", Price: 1},
+					{ID: "abidid1", ImpressionID: "impid1", Price: 1},
 				},
 			},
 			nil,
@@ -51,7 +51,7 @@ func TestSeatBidValidation(t *testing.T) {
 		{
 			&openrtb.SeatBid{
 				Bids: []*openrtb.Bid{
-					&openrtb.Bid{ID: ""},
+					{ID: ""},
 				},
 			},
 			openrtb.ErrInvalidBidID,
@@ -60,7 +60,7 @@ func TestSeatBidValidation(t *testing.T) {
 		{
 			&openrtb.SeatBid{
 				Bids: []*openrtb.Bid{
-					&openrtb.Bid{ID: "abidid", ImpressionID: "impid", Price: 1},
+					{ID: "abidid", ImpressionID: "impid", Price: 1},
 				},
 			},
 			nil,
@@ -78,6 +78,11 @@ func TestSeatBidValidation(t *testing.T) {
 
 func TestSeatBid_Copy(t *testing.T) {
 	seatBid := openrtb.SeatBid{}
+	if err := openrtbtest.VerifyDeepCopy(
+		&seatBid, seatBid.Copy()); err != nil {
+		t.Errorf("Copy() should be deep copy\n%v\n", err)
+	}
+
 	openrtbtest.FillWithNonNilValue(&seatBid)
 	if err := openrtbtest.VerifyDeepCopy(
 		&seatBid, seatBid.Copy()); err != nil {

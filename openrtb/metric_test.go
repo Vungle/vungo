@@ -9,6 +9,11 @@ import (
 
 func TestMetric_Copy(t *testing.T) {
 	metric := openrtb.Metric{}
+	if err := openrtbtest.VerifyDeepCopy(
+		&metric, metric.Copy()); err != nil {
+		t.Errorf("Copy() should be deep copy\n%v\n", err)
+	}
+
 	openrtbtest.FillWithNonNilValue(&metric)
 	if err := openrtbtest.VerifyDeepCopy(
 		&metric, metric.Copy()); err != nil {

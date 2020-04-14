@@ -17,6 +17,11 @@ func TestPrivateMarketplace_Fields(t *testing.T) {
 
 func TestPrivateMarketplace_Copy(t *testing.T) {
 	privateMarketplace := openrtb.PrivateMarketplace{}
+	if err := openrtbtest.VerifyDeepCopy(
+		&privateMarketplace, privateMarketplace.Copy()); err != nil {
+		t.Errorf("Copy() should be deep copy\n%v\n", err)
+	}
+
 	openrtbtest.FillWithNonNilValue(&privateMarketplace)
 	if err := openrtbtest.VerifyDeepCopy(
 		&privateMarketplace, privateMarketplace.Copy()); err != nil {

@@ -23,6 +23,11 @@ func TestNative_Fields(t *testing.T) {
 
 func TestNative_Copy(t *testing.T) {
 	native := openrtb.Native{}
+	if err := openrtbtest.VerifyDeepCopy(
+		&native, native.Copy()); err != nil {
+		t.Errorf("Copy() should be deep copy\n%v\n", err)
+	}
+
 	openrtbtest.FillWithNonNilValue(&native)
 	if err := openrtbtest.VerifyDeepCopy(
 		&native, native.Copy()); err != nil {

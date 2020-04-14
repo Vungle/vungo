@@ -16,9 +16,12 @@ func TestSite_Fields(t *testing.T) {
 
 func TestSite_Copy(t *testing.T) {
 	site := openrtb.Site{}
+	if err := openrtbtest.VerifyDeepCopy(&site, site.Copy()); err != nil {
+		t.Errorf("Copy() should be deep copy\n%v\n", err)
+	}
+
 	openrtbtest.FillWithNonNilValue(&site)
-	siteCopyPtr := site.Copy()
-	if err := openrtbtest.VerifyDeepCopy(&site, siteCopyPtr); err != nil {
+	if err := openrtbtest.VerifyDeepCopy(&site, site.Copy()); err != nil {
 		t.Errorf("Copy() should be deep copy\n%v\n", err)
 	}
 }

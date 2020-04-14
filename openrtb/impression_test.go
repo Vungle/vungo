@@ -23,6 +23,11 @@ func TestImpression_Fields(t *testing.T) {
 
 func TestImpression_Copy(t *testing.T) {
 	impression := openrtb.Impression{}
+	if err := openrtbtest.VerifyDeepCopy(
+		&impression, impression.Copy()); err != nil {
+		t.Errorf("Copy() should be deep copy\n%v\n", err)
+	}
+
 	openrtbtest.FillWithNonNilValue(&impression)
 	if err := openrtbtest.VerifyDeepCopy(
 		&impression, impression.Copy()); err != nil {

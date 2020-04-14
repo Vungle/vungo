@@ -16,9 +16,12 @@ func TestProducer_Fields(t *testing.T) {
 
 func TestProducer_Copy(t *testing.T) {
 	p := openrtb.Producer{}
+	if err := openrtbtest.VerifyDeepCopy(&p, p.Copy()); err != nil {
+		t.Errorf("Copy() should be deep copy\n%v\n", err)
+	}
+
 	openrtbtest.FillWithNonNilValue(&p)
-	pCopyPtr := p.Copy()
-	if err := openrtbtest.VerifyDeepCopy(&p, pCopyPtr); err != nil {
+	if err := openrtbtest.VerifyDeepCopy(&p, p.Copy()); err != nil {
 		t.Errorf("Copy() should be deep copy\n%v\n", err)
 	}
 }

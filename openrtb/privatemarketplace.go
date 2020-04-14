@@ -19,9 +19,9 @@ func (pmp *PrivateMarketplace) Copy() *PrivateMarketplace {
 	pmpCopy := *pmp
 
 	if pmp.Deals != nil {
-		pmpCopy.Deals = []*Deal{}
-		for i := range pmp.Deals {
-			pmpCopy.Deals = append(pmpCopy.Deals, pmp.Deals[i].Copy())
+		pmpCopy.Deals = make([]*Deal, len(pmp.Deals))
+		for i, d := range pmp.Deals {
+			pmpCopy.Deals[i] = d.Copy()
 		}
 	}
 

@@ -23,6 +23,11 @@ func TestVideo_Fields(t *testing.T) {
 
 func TestVideo_Copy(t *testing.T) {
 	video := openrtb.Video{}
+	if err := openrtbtest.VerifyDeepCopy(
+		&video, video.Copy()); err != nil {
+		t.Errorf("Copy() should be deep copy\n%v\n", err)
+	}
+
 	openrtbtest.FillWithNonNilValue(&video)
 	if err := openrtbtest.VerifyDeepCopy(
 		&video, video.Copy()); err != nil {

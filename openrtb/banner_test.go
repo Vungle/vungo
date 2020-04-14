@@ -23,6 +23,11 @@ func TestBanner_Fields(t *testing.T) {
 
 func TestBannerCopy(t *testing.T) {
 	banner := openrtb.Banner{}
+	if err := openrtbtest.VerifyDeepCopy(
+		&banner, banner.Copy()); err != nil {
+		t.Errorf("Copy() should be deep copy\n%v\n", err)
+	}
+
 	openrtbtest.FillWithNonNilValue(&banner)
 	if err := openrtbtest.VerifyDeepCopy(
 		&banner, banner.Copy()); err != nil {

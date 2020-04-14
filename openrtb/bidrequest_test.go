@@ -23,7 +23,7 @@ func TestBidRequest_Fields(t *testing.T) {
 
 func TestBidRequestValidateShouldValidateAgainstId(t *testing.T) {
 	var bidRequest openrtb.BidRequest
-	openrtbtest.UnmarshalFromJSONFile("bidrequest.json", &bidRequest)
+	_ = openrtbtest.UnmarshalFromJSONFile("bidrequest.json", &bidRequest)
 
 	// Expect the validation to pass when ID field is non-empty.
 	if err := bidRequest.Validate(); err != nil && err != openrtb.ErrInvalidBidRequestSeats {
@@ -50,6 +50,11 @@ func TestBidRequestValidateShouldValidateAgainstId(t *testing.T) {
 
 func TestBidRequest_Copy(t *testing.T) {
 	bidRequest := openrtb.BidRequest{}
+	if err := openrtbtest.VerifyDeepCopy(
+		&bidRequest, bidRequest.Copy()); err != nil {
+		t.Errorf("Copy() should be deep copy\n%v\n", err)
+	}
+
 	openrtbtest.FillWithNonNilValue(&bidRequest)
 	if err := openrtbtest.VerifyDeepCopy(
 		&bidRequest, bidRequest.Copy()); err != nil {

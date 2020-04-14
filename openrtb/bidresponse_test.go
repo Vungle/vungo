@@ -86,7 +86,7 @@ func TestBidResponseValidation(t *testing.T) {
 				SeatBids: []*openrtb.SeatBid{
 					{
 						Bids: []*openrtb.Bid{
-							&openrtb.Bid{ID: "abidid", ImpressionID: "some-impid", Price: 1},
+							{ID: "abidid", ImpressionID: "some-impid", Price: 1},
 						},
 					},
 				},
@@ -105,6 +105,11 @@ func TestBidResponseValidation(t *testing.T) {
 
 func TestBidResponse_Copy(t *testing.T) {
 	bidResponse := openrtb.BidResponse{}
+	if err := openrtbtest.VerifyDeepCopy(
+		&bidResponse, bidResponse.Copy()); err != nil {
+		t.Errorf("Copy() should be deep copy\n%v\n", err)
+	}
+
 	openrtbtest.FillWithNonNilValue(&bidResponse)
 	if err := openrtbtest.VerifyDeepCopy(
 		&bidResponse, bidResponse.Copy()); err != nil {

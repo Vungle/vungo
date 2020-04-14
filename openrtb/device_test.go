@@ -23,9 +23,12 @@ func TestDevice_Fields(t *testing.T) {
 
 func TestDevice_Copy(t *testing.T) {
 	d := openrtb.Device{}
+	if err := openrtbtest.VerifyDeepCopy(&d, d.Copy()); err != nil {
+		t.Errorf("Copy() should be deep copy\n%v\n", err)
+	}
+
 	openrtbtest.FillWithNonNilValue(&d)
-	dCopyPtr := d.Copy()
-	if err := openrtbtest.VerifyDeepCopy(&d, dCopyPtr); err != nil {
+	if err := openrtbtest.VerifyDeepCopy(&d, d.Copy()); err != nil {
 		t.Errorf("Copy() should be deep copy\n%v\n", err)
 	}
 }

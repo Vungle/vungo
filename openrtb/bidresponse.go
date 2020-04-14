@@ -71,9 +71,11 @@ func (r *BidResponse) Copy() *BidResponse {
 
 	brCopy := *r
 
-	brCopy.SeatBids = []*SeatBid{}
-	for _, seat := range r.SeatBids {
-		brCopy.SeatBids = append(brCopy.SeatBids, seat.Copy())
+	if r.SeatBids != nil {
+		brCopy.SeatBids = make([]*SeatBid, len(r.SeatBids))
+		for i, seat := range r.SeatBids {
+			brCopy.SeatBids[i] = seat.Copy()
+		}
 	}
 
 	if r.RawExtension != nil {

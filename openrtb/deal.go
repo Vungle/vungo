@@ -12,13 +12,13 @@ import (
 //go:generate easyjson $GOFILE
 //easyjson:json
 type Deal struct {
-	ID               string      `json:"id"`
-	BidFloorPrice    float64     `json:"bidfloor"`
-	BidFloorCurrency Currency    `json:"bidfloorcur,omitempty"`
-	AuctionType      AuctionType `json:"at,omitempty"`
-	WhitelistedSeats []string    `json:"wseat,omitempty"`
+	ID                string      `json:"id"`
+	BidFloorPrice     float64     `json:"bidfloor"`
+	BidFloorCurrency  Currency    `json:"bidfloorcur,omitempty"`
+	AuctionType       AuctionType `json:"at,omitempty"`
+	WhitelistedSeats  []string    `json:"wseat,omitempty"`
 	AdvertiserDomains []string    `json:"wadomain,omitempty"`
-	Extension             interface{}         `json:"ext,omitempty"`
+	Extension         interface{} `json:"ext,omitempty"`
 }
 
 // Validate method implements a Validater interface and return a validation error according to the
@@ -39,11 +39,7 @@ func (d *Deal) Copy() *Deal {
 
 	dealCopy := *d
 	dealCopy.WhitelistedSeats = util.DeepCopyStrSlice(d.WhitelistedSeats)
-
-	if d.AdvertiserDomains!= nil {
-		dealCopy.AdvertiserDomains= make([]string, len(d.AdvertiserDomains))
-		copy(dealCopy.AdvertiserDomains, d.AdvertiserDomains)
-	}
+	dealCopy.AdvertiserDomains = util.DeepCopyStrSlice(d.AdvertiserDomains)
 
 	return &dealCopy
 }

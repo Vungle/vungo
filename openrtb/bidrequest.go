@@ -81,21 +81,14 @@ func (r *BidRequest) Copy() *BidRequest {
 	brCopy.Device = r.Device.Copy()
 	brCopy.User = r.User.Copy()
 	brCopy.WhitelistedSeats = util.DeepCopyStrSlice(r.WhitelistedSeats)
-
-	if r.BlocklistedSeats != nil {
-		brCopy.BlocklistedSeats = make([]string, len(r.BlocklistedSeats))
-		copy(brCopy.BlocklistedSeats, r.BlocklistedSeats)
-	}
+	brCopy.BlocklistedSeats = util.DeepCopyStrSlice(r.BlocklistedSeats)
 
 	if r.Currencies != nil {
 		brCopy.Currencies = make([]Currency, len(r.Currencies))
 		copy(brCopy.Currencies, r.Currencies)
 	}
 
-	if r.WhitelistLanguages != nil {
-		brCopy.WhitelistLanguages = make([]string, len(r.WhitelistLanguages))
-		copy(brCopy.WhitelistLanguages, r.WhitelistLanguages)
-	}
+	brCopy.WhitelistLanguages = util.DeepCopyStrSlice(r.WhitelistLanguages)
 
 	if r.BlockedCategories != nil {
 		brCopy.BlockedCategories = make([]Category, len(r.BlockedCategories))

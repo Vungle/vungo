@@ -16,6 +16,11 @@ func TestCategoriesMarshalUnmarshal(t *testing.T) {
 
 func TestCategories_Copy(t *testing.T) {
 	publisher := openrtb.Publisher{}
+	if err := openrtbtest.VerifyDeepCopy(
+		&publisher, publisher.Copy()); err != nil {
+		t.Errorf("Copy() should be deep copy\n%v\n", err)
+	}
+
 	openrtbtest.FillWithNonNilValue(&publisher)
 	if err := openrtbtest.VerifyDeepCopy(
 		&publisher, publisher.Copy()); err != nil {
