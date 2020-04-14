@@ -5,6 +5,7 @@ package openrtb
 // see OpenRTB 2.5 Spec 5.23 IP Location Services
 type IPLocationService = int
 
+// IPLocationService enums
 const (
 	// ip2location
 	IPLocationServiceIP2location IPLocationService = 1

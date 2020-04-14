@@ -22,6 +22,7 @@ const (
 	LossReasonMissingMinimumCreativeApprovalData
 )
 
+// Lost reasons about bidding
 const (
 	LossReasonBidWasBelowAuctionFloor LossReason = 100 + iota
 	LossReasonBidWasBelowDealFloor
@@ -30,6 +31,7 @@ const (
 	LossReasonBuyerSeatBlocked
 )
 
+// Lost reasons about creative filter
 const (
 	LossReasonCreativeFilterGeneral LossReason = 200 + iota
 	LossReasonCreativeFilterPendingByExchange

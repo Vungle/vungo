@@ -7,6 +7,7 @@ package openrtb
 // for more information.
 type ProductionQuality = int
 
+// ProductionQuality enums
 const (
 	// Unknown
 	ProductionQualityUnknown ProductionQuality = 0

@@ -5,6 +5,7 @@ package openrtb
 // See OpenRTB 2.5 Spec 5.8 Protocols.
 type Protocol = int
 
+// Protocol enums
 const (
 	// VAST 1.0
 	ProtocolVAST10 Protocol = 1

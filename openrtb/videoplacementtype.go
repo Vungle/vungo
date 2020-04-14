@@ -5,6 +5,7 @@ package openrtb
 // See OpenRTB 2.5 Sec 5.9.
 type VideoPlacementType int
 
+// VideoPlacementType enums
 const (
 	VideoPlacementTypeInStream VideoPlacementType = iota + 1
 	VideoPlacementTypeInBanner
@@ -12,4 +13,3 @@ const (
 	VideoPlacementTypeInFeed
 	VideoPlacementTypeInterstitialSliderFloating
 )
-

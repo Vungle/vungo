@@ -8,6 +8,7 @@ package openrtb
 // Practitioners should keep in sync with updates to the IQG values.
 type ContentContext = int
 
+// ContentContext enums
 const (
 	// Video (i.e., video file or stream such as Internet TV broadcasts)
 	ContentContextVideo ContentContext = 1

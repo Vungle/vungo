@@ -5,6 +5,7 @@ package openrtb
 // Refer to www.iab.com/guidelines/digital-video-suite for more information.
 type IQGMediaRating = int
 
+// IQGMediaRating enums
 const (
 	// All Audiences
 	IQGMediaRatingAll IQGMediaRating = 1

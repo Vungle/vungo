@@ -55,6 +55,9 @@ func (m *Metric) Validate() error {
 	return nil
 }
 
+// Copy do deep copy of Metric.
+// NOTE Ext field should copy by caller if it doesn't implement Copiable
+// interface.
 func (m *Metric) Copy() *Metric {
 	if m == nil {
 		return nil

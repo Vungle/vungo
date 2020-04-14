@@ -268,6 +268,9 @@ type Device struct {
 	Extension interface{} `json:"ext,omitempty"`
 }
 
+// Copy do deep copy of Device.
+// NOTE Ext field should copy by caller if it doesn't implement Copiable
+// interface.
 func (d *Device) Copy() *Device {
 	if d == nil {
 		return nil

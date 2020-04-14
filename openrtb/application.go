@@ -141,6 +141,9 @@ func (a Application) Validate() error {
 	return nil
 }
 
+// Copy do deep copy of Application.
+// NOTE Ext field should copy by caller if it doesn't implement Copiable
+// interface.
 func (a *Application) Copy() *Application {
 	if a == nil {
 		return nil
