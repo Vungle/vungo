@@ -68,6 +68,7 @@ type Geo struct {
 	// Description:
 	//   Service or provider used to determine geolocation from IP
 	//   address if applicable (i.e., type = 2). Refer to List 5.23.
+	// Pointer is not necessary for 0 is useless
 	IPService IPLocationService `json:"ipservice,omitempty"`
 
 	// Attribute:

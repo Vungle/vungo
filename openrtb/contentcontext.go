@@ -6,7 +6,7 @@ package openrtb
 // This OpenRTB list has values derived from the Inventory Quality Guidelines
 // (IQG).
 // Practitioners should keep in sync with updates to the IQG values.
-type ContentContext = int
+type ContentContext int
 
 // ContentContext enums
 const (

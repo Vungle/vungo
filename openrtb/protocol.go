@@ -3,7 +3,7 @@ package openrtb
 // Protocol type
 // Options for the various bid response protocols that could be supported by an exchange.
 // See OpenRTB 2.5 Spec 5.8 Protocols.
-type Protocol = int
+type Protocol int
 
 // Protocol enums
 const (

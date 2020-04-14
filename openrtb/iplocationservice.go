@@ -3,7 +3,7 @@ package openrtb
 // IPLocationService type
 // Services and/or vendors used for resolving IP addresses to geolocations.
 // see OpenRTB 2.5 Spec 5.23 IP Location Services
-type IPLocationService = int
+type IPLocationService int
 
 // IPLocationService enums
 const (

@@ -1,6 +1,10 @@
 package openrtb
 
-import "errors"
+import (
+	"errors"
+
+	"github.com/Vungle/vungo/internal/util"
+)
 
 // Audio represents an audio type impression. Many of the fields are non-essential for minimally
 // viable transactions, but are included to offer fine control when needed. Audio in OpenRTB generally
@@ -23,7 +27,7 @@ type Audio struct {
 	// 		string array; required
 	// Description:
 	//   Content MIME types supported (e.g., “audio/mp4”).
-	MIMETypes                 []string         `json:"mimes"`
+	MIMETypes []string `json:"mimes"`
 
 	// Attribute:
 	//   minduration
@@ -31,7 +35,7 @@ type Audio struct {
 	//   integer; recommended
 	// Description:
 	//   Minimum audio ad duration in seconds.
-	MinDuration               *int             `json:"minduration,omitempty"`
+	MinDuration *int `json:"minduration,omitempty"`
 
 	// Attribute:
 	//   maxduration
@@ -39,7 +43,7 @@ type Audio struct {
 	//   integer; recommended
 	// Description:
 	//   Maximum audio ad duration in seconds.
-	MaxDuration               *int             `json:"maxduration,omitempty"`
+	MaxDuration *int `json:"maxduration,omitempty"`
 
 	// Attribute:
 	//   protocols
@@ -47,7 +51,7 @@ type Audio struct {
 	//   integer array; recommended
 	// Description:
 	//   Array of supported audio protocols. Refer to List 5.8.
-	Protocols                 []AdProtocol     `json:"protocols,omitempty"`
+	Protocols []AdProtocol `json:"protocols,omitempty"`
 
 	// Attribute:
 	//   startdelay
@@ -56,7 +60,7 @@ type Audio struct {
 	// Description:
 	//   Indicates the start delay in seconds for pre-roll, mid-roll, or
 	//   post-roll ad placements. Refer to List 5.12.
-	StartDelay                *StartDelay `json:"startdelay,omitempty"`
+	StartDelay *StartDelay `json:"startdelay,omitempty"`
 
 	// Attribute:
 	//   sequence
@@ -66,7 +70,7 @@ type Audio struct {
 	//   If multiple ad impressions are offered in the same bid request,
 	//   the sequence number will allow for the coordinated delivery of
 	//   multiple creatives.
-	Sequence                  int              `json:"sequence,omitempty"`
+	Sequence int `json:"sequence,omitempty"`
 
 	// Attribute:
 	//   battr
@@ -74,7 +78,7 @@ type Audio struct {
 	//   integer array
 	// Description:
 	//   Blocked creative attributes. Refer to List 5.3.
-	BlockedCreativeAttributes []CreativeAttribute            `json:"battr,omitempty"`
+	BlockedCreativeAttributes []CreativeAttribute `json:"battr,omitempty"`
 
 	// Attribute:
 	//   maxextended
@@ -86,7 +90,7 @@ type Audio struct {
 	//   allowed, and there is no time limit imposed. If greater than 0,
 	//   then the value represents the number of seconds of extended
 	//   play supported beyond the maxduration value.
-	MaxExtendedDuration       int              `json:"maxextended,omitempty"`
+	MaxExtendedDuration int `json:"maxextended,omitempty"`
 
 	// Attribute:
 	//   minbitrate
@@ -94,7 +98,7 @@ type Audio struct {
 	//   integer
 	// Description:
 	//   Minimum bit rate in Kbps.
-	MinBitRate                int              `json:"minbitrate,omitempty"`
+	MinBitRate int `json:"minbitrate,omitempty"`
 
 	// Attribute:
 	//   maxbitrate
@@ -102,7 +106,7 @@ type Audio struct {
 	//   integer
 	// Description:
 	//   Maximum bit rate in Kbps.
-	MaxBitRate                int              `json:"maxbitrate,omitempty"`
+	MaxBitRate int `json:"maxbitrate,omitempty"`
 
 	// Attribute:
 	//   delivery
@@ -111,7 +115,7 @@ type Audio struct {
 	// Description:
 	//   Supported delivery methods (e.g., streaming, progressive). If
 	//   none specified, assume all are supported. Refer to List 5.15.
-	DeliveryMethods           []DeliveryMethod `json:"delivery,omitempty"`
+	DeliveryMethods []DeliveryMethod `json:"delivery,omitempty"`
 
 	// Attribute:
 	//   companionad
@@ -120,7 +124,7 @@ type Audio struct {
 	// Description:
 	//   Array of Banner objects (Section 3.2.6) if companion ads are
 	//   available.
-	CompanionAds              []Banner         `json:"companionad"`
+	CompanionAds []Banner `json:"companionad"`
 
 	// Attribute:
 	//   api
@@ -130,7 +134,7 @@ type Audio struct {
 	//   List of supported API frameworks for this impression. Refer to
 	//   List 5.6. If an API is not explicitly listed, it is assumed not to be
 	//   supported.
-	APIFrameworks             []APIFramework   `json:"api,omitempty"`
+	APIFrameworks []APIFramework `json:"api,omitempty"`
 
 	// Attribute:
 	//   companiontype
@@ -140,7 +144,7 @@ type Audio struct {
 	//   Supported DAAST companion ad types. Refer to List 5.14.
 	//   Recommended if companion Banner objects are included via
 	//   the companionad array.
-	CompanionTypes            []CompanionType `json:"companiontype"`
+	CompanionTypes []CompanionType `json:"companiontype"`
 
 	// Attribute:
 	//   maxseq
@@ -148,7 +152,7 @@ type Audio struct {
 	//   integer
 	// Description:
 	//   The maximum number of ads that can be played in an ad pod.
-	MaxSequence               int              `json:"maxseq,omitempty"`
+	MaxSequence int `json:"maxseq,omitempty"`
 
 	// Attribute:
 	//   feed
@@ -156,8 +160,8 @@ type Audio struct {
 	//   integer
 	// Description:
 	//   Type of audio feed. Refer to List 5.16.
-	Feed                      FeedType `json:"feed,omitempty"`
-	
+	Feed FeedType `json:"feed,omitempty"`
+
 	// Attribute:
 	//   stitched
 	// Type:
@@ -165,7 +169,7 @@ type Audio struct {
 	// Description:
 	//   Indicates if the ad is stitched with audio content or delivered
 	//   independently, where 0 = no, 1 = yes.
-	Stitched                  NumericBool              `json:"stitched,omitempty"`
+	Stitched NumericBool `json:"stitched,omitempty"`
 
 	// Attribute:
 	//   nvol
@@ -173,15 +177,15 @@ type Audio struct {
 	//   integer
 	// Description:
 	//   Volume normalization mode. Refer to List 5.17.
-	NormalizedVolume          VolumeNormalizationMode `json:"nvol,omitempty"`
-	
+	NormalizedVolume VolumeNormalizationMode `json:"nvol,omitempty"`
+
 	// Attribute:
 	//   ext
 	// Type:
 	//   object
 	// Description:
 	//   Placeholder for exchange-specific extensions to OpenRTB.
-	Extension                 interface{}      `json:"ext,omitempty"`
+	Extension interface{} `json:"ext,omitempty"`
 }
 
 // Validate method implements a Validater interface and return a validation error according to the
@@ -191,7 +195,7 @@ func (a Audio) Validate() error {
 		return errors.New("TODO: but need mime types here")
 	}
 
-	for _,banner := range a.CompanionAds {
+	for _, banner := range a.CompanionAds {
 		if err := banner.Validate(); err != nil {
 			return err
 		}
@@ -207,31 +211,16 @@ func (a *Audio) Copy() *Audio {
 	}
 
 	vCopy := *a
-
-	if a.MIMETypes != nil {
-		vCopy.MIMETypes = make([]string, len(a.MIMETypes))
-		copy(vCopy.MIMETypes, a.MIMETypes)
-	}
-
-	if a.MinDuration != nil {
-		minDurationCopy := *a.MinDuration
-		vCopy.MinDuration = &minDurationCopy
-	}
-
-	if a.MaxDuration != nil {
-		MaxDurationCopy := *a.MaxDuration
-		vCopy.MaxDuration = &MaxDurationCopy
-	}
+	vCopy.MIMETypes = util.DeepCopyStrSlice(a.MIMETypes)
+	vCopy.MinDuration = util.DeepCopyInt(a.MinDuration)
+	vCopy.MaxDuration = util.DeepCopyInt(a.MaxDuration)
 
 	if a.Protocols != nil {
 		vCopy.Protocols = make([]AdProtocol, len(a.Protocols))
 		copy(vCopy.Protocols, a.Protocols)
 	}
 
-	if a.StartDelay != nil {
-		StartDelayCopy := *a.StartDelay
-		vCopy.StartDelay = &StartDelayCopy
-	}
+	vCopy.StartDelay = a.StartDelay.Copy()
 
 	if a.BlockedCreativeAttributes != nil {
 		vCopy.BlockedCreativeAttributes = make([]CreativeAttribute, len(a.BlockedCreativeAttributes))
@@ -255,8 +244,8 @@ func (a *Audio) Copy() *Audio {
 		copy(vCopy.APIFrameworks, a.APIFrameworks)
 	}
 
-	if a.CompanionTypes!= nil {
-		vCopy.CompanionTypes= make([]CompanionType, len(a.CompanionTypes))
+	if a.CompanionTypes != nil {
+		vCopy.CompanionTypes = make([]CompanionType, len(a.CompanionTypes))
 		copy(vCopy.CompanionTypes, a.CompanionTypes)
 	}
 

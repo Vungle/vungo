@@ -49,8 +49,6 @@ func (nb *NumericBool) UnmarshalJSON(data []byte) error {
 }
 
 // Copy do deep copy of NumericBool.
-// NOTE Ext field should copy by caller if it doesn't implement Copiable
-// interface.
 func (nb *NumericBool) Copy() *NumericBool {
 	if nb == nil {
 		return nil

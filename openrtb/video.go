@@ -67,7 +67,7 @@ func (v *Video) Copy() *Video {
 		copy(vCopy.Protocols, v.Protocols)
 	}
 
-	vCopy.StartDelay = util.DeepCopyInt(v.StartDelay)
+	vCopy.StartDelay = v.StartDelay.Copy()
 
 	if v.BlockedCreativeAttributes != nil {
 		vCopy.BlockedCreativeAttributes = make([]CreativeAttribute, len(v.BlockedCreativeAttributes))

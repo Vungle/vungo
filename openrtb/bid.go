@@ -212,6 +212,7 @@ type Bid struct {
 	// Description:
 	//   Video response protocol of the markup if applicable. Refer to
 	//   List 5.8.
+	// Pointer is not necessary for 0 is useless
 	Protocol Protocol `json:"protocol,omitempty"`
 
 	// Attribute:
@@ -220,6 +221,7 @@ type Bid struct {
 	//   integer
 	// Description:
 	//   Creative media rating per IQG guidelines. Refer to List 5.19.
+	// Pointer is not necessary for 0 is useless
 	QAGMediaRating IQGMediaRating `json:"qagmediarating,omitempty"`
 
 	// Attribute:

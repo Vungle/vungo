@@ -126,7 +126,8 @@ type Content struct {
 	//   integer
 	// Description:
 	//   Production quality. Refer to List 5.13
-	ProdQ *ProductionQuality `json:"prodq,omitempty"`
+	// Pointer is not necessary for 0 means unknown
+	ProdQ ProductionQuality `json:"prodq,omitempty"`
 
 	// Attribute:
 	//   videoquality
@@ -135,7 +136,8 @@ type Content struct {
 	// Description:
 	//   Note: Deprecated in favor of prodq.
 	//   Video quality. Refer to List 5.13.
-	VideoQuality *ProductionQuality `json:"videoquality,omitempty"`
+	// Pointer is not necessary for 0 means unknown
+	VideoQuality ProductionQuality `json:"videoquality,omitempty"`
 
 	// Attribute:
 	//   context
@@ -143,7 +145,8 @@ type Content struct {
 	//   integer
 	// Description:
 	//   Type of content (game, video, text, etc.). Refer to List 5.18.
-	Context *ContentContext `json:"context,omitempty"`
+	// Pointer is not necessary for 0 is useless
+	Context ContentContext `json:"context,omitempty"`
 
 	// Attribute:
 	//   contentrating
@@ -167,7 +170,8 @@ type Content struct {
 	//   integer
 	// Description:
 	//   Media rating per IQG guidelines. Refer to List 5.19.
-	QAGMediaRating *IQGMediaRating `json:"qagmediarating,omitempty"`
+	// Pointer is not necessary for 0 is useless
+	QAGMediaRating IQGMediaRating `json:"qagmediarating,omitempty"`
 
 	// Attribute:
 	//   keywords
@@ -253,10 +257,6 @@ func (c *Content) Copy() *Content {
 	cCopy.Episode = util.DeepCopyInt(c.Episode)
 	cCopy.Producer = c.Producer.Copy()
 	cCopy.Cat = util.DeepCopyStrSlice(c.Cat)
-	cCopy.ProdQ = util.DeepCopyInt(c.ProdQ)
-	cCopy.VideoQuality = util.DeepCopyInt(c.VideoQuality)
-	cCopy.Context = util.DeepCopyInt(c.Context)
-	cCopy.QAGMediaRating = util.DeepCopyInt(c.QAGMediaRating)
 	cCopy.LiveStream = c.LiveStream.Copy()
 	cCopy.SourceRelationship = c.SourceRelationship.Copy()
 	cCopy.Len = util.DeepCopyInt(c.Len)
