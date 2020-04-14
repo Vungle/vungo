@@ -40,14 +40,14 @@ func TestNewRequestError(t *testing.T) {
 				},
 			},
 			"http://localhost",
-			reflect.TypeOf(&json.UnsupportedTypeError{}),
+			reflect.TypeOf((*json.MarshalerError)(nil)),
 		},
 
 		// Should return URL parsing error.
 		{
 			&openrtb.BidRequest{},
 			"localhost/#宝%贝%约%么%",
-			reflect.TypeOf(&url.Error{}),
+			reflect.TypeOf((*url.Error)(nil)),
 		},
 	}
 

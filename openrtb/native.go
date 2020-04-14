@@ -67,12 +67,12 @@ func (n Native) Validate() error {
 	if n.Request == "" {
 		return errors.New("TODO: request payload is required")
 	}
-	
+
 	return nil
 }
 
 // Copy returns a pointer to a copy of the Native object.
-func (n *Native) Copy() *Native{
+func (n *Native) Copy() *Native {
 	if n == nil {
 		return nil
 	}
@@ -83,12 +83,12 @@ func (n *Native) Copy() *Native{
 		vCopy.BlockedCreativeAttributes = make([]CreativeAttribute, len(n.BlockedCreativeAttributes))
 		copy(vCopy.BlockedCreativeAttributes, n.BlockedCreativeAttributes)
 	}
-	
+
 	if n.APIFrameworks != nil {
 		vCopy.APIFrameworks = make([]APIFramework, len(n.APIFrameworks))
 		copy(vCopy.APIFrameworks, n.APIFrameworks)
 	}
-	
+
 	// extension copying has to be done by the user of this package manually.
 	vCopy.Extension = nil
 

@@ -10,4 +10,3 @@ const (
 	FeedTypeFMAMBroadcast
 	FeedTypePodcast
 )
-

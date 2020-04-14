@@ -12,4 +12,3 @@ const (
 	CompanionTypeHTMLResource
 	CompanionTypeIframeResource
 )
-

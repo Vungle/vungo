@@ -6,11 +6,9 @@ type VolumeNormalizationMode int
 
 // Possible values from the OpenRTB spec.
 const (
-	VolumeNormalizationModeNone VolumeNormalizationMode= iota + 1
+	VolumeNormalizationModeNone VolumeNormalizationMode = iota + 1
 	VolumeNormalizationModeAverage
 	VolumeNormalizationModePeak
 	VolumeNormalizationModeLoudness
 	VolumeNormalizationModeCustom
 )
-
-

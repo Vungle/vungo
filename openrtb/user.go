@@ -30,7 +30,7 @@ func (u *User) Copy() *User {
 		userCopy.Geo = &GeoCopy
 	}
 
-	if u.Data!= nil {
+	if u.Data != nil {
 		u.Data = make([]Data, len(u.Data))
 		copy(userCopy.Data, u.Data)
 	}
