@@ -38,6 +38,7 @@ func (imp *Impression) Copy() *Impression {
 		for i, m := range imp.Metrics {
 			impressionCopy.Metrics[i] = m.Copy()
 		}
+	}
 	impressionCopy.Video = imp.Video.Copy()
 	impressionCopy.Banner = imp.Banner.Copy()
 	impressionCopy.Audio = imp.Audio.Copy()

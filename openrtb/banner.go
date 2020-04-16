@@ -46,8 +46,6 @@ func (v *Banner) Copy() *Banner {
 		return nil
 	}
 
-	}
-
 	vCopy := *v
 	vCopy.ID = util.DeepCopyStr(v.ID)
 	vCopy.MaxHeight = util.DeepCopyInt(v.MaxHeight)

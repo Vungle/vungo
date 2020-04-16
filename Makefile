@@ -22,7 +22,7 @@ fmt:
 	gofmt -w $(GOFMT_FILES)
 
 lint:
-	golint
+	golint $(TEST)
 
 # disallow any parallelism (-j) for Make.
 .NOTPARALLEL:
