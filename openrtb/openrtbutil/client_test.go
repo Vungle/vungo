@@ -11,6 +11,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"net/url"
+	"runtime/debug"
 	"sync/atomic"
 	"testing"
 	"time"
@@ -108,6 +109,7 @@ func TestClientDoShouldDiscardResidualOnInvalidHttpResponse(t *testing.T) {
 	ts.Config.ConnState = func(conn net.Conn, connState http.ConnState) {
 		if connState == http.StateNew {
 			atomic.AddUint32(&connCounter, 1)
+			t.Log(string(debug.Stack()))
 		}
 	}
 
