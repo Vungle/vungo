@@ -3,6 +3,8 @@ GOFMT_FILES?=$$(find . -not -path "./vendor/*" -type f -name '*.go')
 PKG_PREFIX=github.com/Vungle/vungo
 PKGS=$(PKG_PREFIX)/openrtb $(PKG_PREFIX)/vast
 
+export GO111MODULE=on
+
 default: test
 
 # build
