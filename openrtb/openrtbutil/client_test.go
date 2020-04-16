@@ -104,21 +104,8 @@ func TestClientDoShouldDiscardResidualOnInvalidHttpResponse(t *testing.T) {
 		middleware(resp, req)
 	}))
 
-	var connCounter uint32
-	ts.Config.ConnState = func(conn net.Conn, connState http.ConnState) {
-		if connState == http.StateNew {
-			atomic.AddUint32(&connCounter, 1)
-			t.Logf("ConnState connCounter %v", connCounter)
-		}
-	}
-
 	ts.Start()
 	defer ts.Close()
-
-	idle := make(chan struct{}, 1)
-	connDiscardHook = func(*http.Response) {
-		idle <- struct{}{}
-	}
 
 	// When making requests one at a time.
 	for i, test := range tests {
@@ -152,20 +139,6 @@ func TestClientDoShouldDiscardResidualOnInvalidHttpResponse(t *testing.T) {
 		default:
 			t.Error("Expected no bid instead of ", err)
 		}
-
-		t.Logf("after request, connCounter %v", connCounter)
-
-		if connDiscardHook != nil {
-			select {
-			case <-idle:
-				connDiscardHook = nil
-			}
-		}
-	}
-
-	// Expect only one connection is used.
-	if connCounter != 1 {
-		t.Error("Underlying HTTP client should have made exactly one persistent connection instead of ", connCounter)
 	}
 }
 
