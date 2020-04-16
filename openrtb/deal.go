@@ -14,6 +14,10 @@ type Deal struct {
 }
 
 func (d *Deal) Copy() *Deal {
+	if d == nil {
+		return nil
+	}
+
 	dealCopy := *d
 
 	if d.WhitelistedSeats != nil {

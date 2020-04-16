@@ -40,14 +40,17 @@ func TestNewRequestError(t *testing.T) {
 				},
 			},
 			"http://localhost",
-			reflect.TypeOf(&json.UnsupportedTypeError{}),
+			[]reflect.Type{
+				reflect.TypeOf((*json.MarshalerError)(nil)),
+				reflect.TypeOf((*json.UnsupportedTypeError)(nil)),
+			}, // seems like diff os will report diff err type
 		},
 
 		// Should return URL parsing error.
 		{
 			&openrtb.BidRequest{},
 			"localhost/#宝%贝%约%么%",
-			reflect.TypeOf(&url.Error{}),
+			reflect.TypeOf((*url.Error)(nil)),
 		},
 	}
 
@@ -63,6 +66,18 @@ func TestNewRequestError(t *testing.T) {
 		switch e := test.expectedErr.(type) {
 		case reflect.Type:
 			if errType := reflect.TypeOf(err); !reflect.DeepEqual(e, errType) {
+				t.Errorf("Expected error of type %v instead of %v.", e, errType)
+			}
+		case []reflect.Type:
+			errType := reflect.TypeOf(err)
+			exist := false
+			for _, possibleErr := range e {
+				if reflect.DeepEqual(possibleErr, errType) {
+					exist = true
+					break
+				}
+			}
+			if !exist {
 				t.Errorf("Expected error of type %v instead of %v.", e, errType)
 			}
 		case string:

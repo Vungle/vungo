@@ -3,11 +3,14 @@ package openrtbtest
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"reflect"
+	"strconv"
 	"strings"
 
 	"github.com/Vungle/vungo/openrtb"
+	"github.com/go-test/deep"
 )
 
 // UnmarshalFromJSONFile method reads from a testdata/*.json file and unmarshals the content into
@@ -163,4 +166,115 @@ func NewBidRequestWithFloorPriceForTesting(id string, impressionID string, price
 	br.Impressions[0].BidFloorPrice = price
 
 	return br
+}
+
+// FillWithNonNilValue will fill v with non-nil value recursively.
+// NOTE this is not a generic implementation. It only supports openrtb types.
+// NOTE this implementation depends on reflect, please only use for UT.
+func FillWithNonNilValue(v interface{}) {
+	if v == nil {
+		return // v is nil
+	}
+
+	rv, ok := v.(reflect.Value)
+	if !ok {
+		rv = reflect.ValueOf(v)
+	}
+	switch rv.Kind() {
+	case reflect.Ptr:
+		elem := rv.Elem()
+		if rv.IsNil() {
+			if elem.IsValid() && elem.CanSet() {
+				elem.Set(reflect.New(elem.Type().Elem()))
+			} else if rv.CanSet() {
+				rv.Set(reflect.New(rv.Type().Elem()))
+				elem = rv.Elem()
+			}
+		} else if isInvalidPtr(elem) && elem.CanSet() {
+			elem.Set(reflect.New(elem.Type().Elem()))
+		}
+		FillWithNonNilValue(elem)
+	case reflect.Struct:
+		for i := 0; i < rv.NumField(); i++ {
+			FillWithNonNilValue(rv.Field(i))
+		}
+	case reflect.Map:
+		if rv.IsNil() && rv.CanSet() {
+			newMap := reflect.MakeMapWithSize(rv.Type(), 1)
+			newV := reflect.New(rv.Type().Elem())
+			FillWithNonNilValue(newV)
+			newMap.SetMapIndex(
+				reflect.Zero(rv.Type().Key()),
+				newV.Elem())
+			rv.Set(newMap)
+		}
+		if !rv.IsNil() {
+			iter := rv.MapRange()
+			for iter.Next() {
+				FillWithNonNilValue(iter.Value())
+			}
+		}
+	case reflect.Slice:
+		if rv.IsNil() && rv.CanSet() {
+			rv.Set(reflect.MakeSlice(rv.Type(), 1, 1))
+		}
+		if !rv.IsNil() {
+			for i := 0; i < rv.Len(); i++ {
+				FillWithNonNilValue(rv.Index(i))
+			}
+		}
+	default:
+		// primitive types or unsupported types
+		return
+	}
+}
+
+func isInvalidPtr(elem reflect.Value) bool {
+	return elem.Kind() == reflect.Ptr && !elem.Elem().IsValid()
+}
+
+// VerifyDeepCopy will ensure src value and dst value don't share anything.
+// Return human readable reports if not deep copy.
+// NOTE this implementation depends on reflect, please only use for UT.
+func VerifyDeepCopy(src, dst interface{}) []string {
+	if r := deep.Equal(src, dst); r != nil {
+		return r
+	}
+	return verifyDeepCopyImpl(
+		"<root>",
+		reflect.ValueOf(src), reflect.ValueOf(dst))
+}
+
+func verifyDeepCopyImpl(prefix string, src, dst reflect.Value) []string {
+	var r []string
+	if src.Kind() == reflect.Ptr && src.IsNil() {
+		return r
+	}
+	if src.CanAddr() && dst.CanAddr() && dst.Addr() == src.Addr() {
+		r = append(r, fmt.Sprintf("%v share\n\tgot  %#+v\n\twant %#+v\n",
+			prefix, dst.Addr(), src.Addr()))
+	}
+	switch src.Kind() {
+	case reflect.Ptr:
+		return verifyDeepCopyImpl(prefix+"->", src.Elem(), dst.Elem())
+	case reflect.Struct:
+		for i := 0; i < src.NumField(); i++ {
+			r = append(r, verifyDeepCopyImpl(prefix+"."+src.Type().Field(i).Name,
+				src.Field(i), dst.Field(i))...)
+		}
+	case reflect.Slice:
+		for i := 0; i < src.Len(); i++ {
+			r = append(r, verifyDeepCopyImpl(prefix+"."+strconv.Itoa(i),
+				src.Index(i), dst.Index(i))...)
+		}
+	case reflect.Map:
+		iter := src.MapRange()
+		for iter.Next() {
+			k := iter.Key()
+			v := iter.Value()
+			r = append(r, verifyDeepCopyImpl(prefix+"."+k.String(),
+				v, dst.MapIndex(k))...)
+		}
+	}
+	return r
 }

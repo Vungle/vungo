@@ -30,6 +30,10 @@ func (a Application) Validate() error {
 }
 
 func (a *Application) Copy() *Application {
+	if a == nil {
+		return nil
+	}
+
 	appCopy := *a
 
 	if appCopy.Categories != nil {
@@ -47,9 +51,7 @@ func (a *Application) Copy() *Application {
 		copy(appCopy.PageCategories, a.PageCategories)
 	}
 
-	if a.Publisher != nil {
-		appCopy.Publisher = a.Publisher.Copy()
-	}
+	appCopy.Publisher = a.Publisher.Copy()
 
 	// extension copying has to be done by the user of this package manually.
 	appCopy.Extension = nil

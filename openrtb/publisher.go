@@ -14,6 +14,9 @@ type Publisher struct {
 
 // Copy returns a pointer to a copy of the Publisher object.
 func (p *Publisher) Copy() *Publisher {
+	if p == nil {
+		return nil
+	}
 	pubCopy := *p
 
 	if p.Categories != nil {

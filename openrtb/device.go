@@ -38,6 +38,9 @@ type Device struct {
 }
 
 func (d *Device) Copy() *Device {
+	if d == nil {
+		return nil
+	}
 	deviceCopy := *d
 
 	if d.Geo != nil {

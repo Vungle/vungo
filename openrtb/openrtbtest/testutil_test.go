@@ -120,3 +120,142 @@ func TestVerifyModelAgainstFileStructWithNoJsonTagsShouldOnlyMatchEmptyJSON(t *t
 		t.Fatal("Verification should not have any errors.", trec.Replays())
 	}
 }
+
+func TestFillWithNonNilValue(t *testing.T) {
+	var intP *int
+	openrtbtest.FillWithNonNilValue(&intP)
+	if intP == nil {
+		t.Errorf("FillWithNonNilValue() with int pointer got nil, want non-nil")
+	}
+
+	var stringP *string
+	openrtbtest.FillWithNonNilValue(&stringP)
+	if stringP == nil {
+		t.Errorf("FillWithNonNilValue() with string pointer got nil, want non-nil")
+	}
+
+	var boolP *bool
+	openrtbtest.FillWithNonNilValue(&boolP)
+	if boolP == nil {
+		t.Errorf("FillWithNonNilValue() with bool pointer got nil, want non-nil")
+	}
+
+	var float64P *float64
+	openrtbtest.FillWithNonNilValue(&float64P)
+	if float64P == nil {
+		t.Errorf("FillWithNonNilValue() with float64P pointer got nil, want non-nil")
+	}
+
+	var s *struct {
+		IntP *int
+		Map  map[string]int
+		SP   *struct {
+			IntP *int
+			Map  map[string]int
+		}
+	}
+	openrtbtest.FillWithNonNilValue(&s)
+	if s == nil || s.IntP == nil || s.Map == nil || s.SP == nil {
+		t.Errorf("FillWithNonNilValue() with struct pointer got %+v, want non-nil", s)
+	} else if s.SP.IntP == nil || s.SP.Map == nil {
+		t.Errorf("FillWithNonNilValue() with embed struct pointer got %+v, want non-nil", s.SP)
+	}
+
+	var mapV map[string]int
+	openrtbtest.FillWithNonNilValue(&mapV)
+	if mapV == nil || len(mapV) == 0 {
+		t.Errorf("FillWithNonNilValue() with map pointer got %+v, want non-nil", mapV)
+	}
+
+	var mapVP map[string]*int
+	openrtbtest.FillWithNonNilValue(&mapVP)
+	if mapVP == nil || len(mapVP) == 0 || mapVP[""] == nil {
+		t.Errorf("FillWithNonNilValue() with map pointer got %+v, want non-nil", mapV)
+	}
+
+	var sliceV []int
+	openrtbtest.FillWithNonNilValue(&sliceV)
+	if sliceV == nil || len(sliceV) == 0 {
+		t.Errorf("FillWithNonNilValue() with slice pointer got %+v, want non-nil", sliceV)
+	}
+
+	var sliceVP []*int
+	openrtbtest.FillWithNonNilValue(&sliceVP)
+	if sliceVP == nil || len(sliceVP) == 0 || sliceVP[0] == nil {
+		t.Errorf("FillWithNonNilValue() with slice pointer got %+v, want non-nil", sliceV)
+	}
+}
+
+func TestVerifyDeepCopy(t *testing.T) {
+	type AT struct {
+		IntVP  *int
+		StrVP  *string
+		FlatVP *float64
+		BoolVP *bool
+	}
+	type T struct {
+		AT
+		Struct *AT
+		Slice  []AT
+		Map    map[string]AT
+		PSlice []*AT
+		PMap   map[string]*AT
+	}
+	var src T
+	openrtbtest.FillWithNonNilValue(&src)
+	var dst T
+	openrtbtest.FillWithNonNilValue(&dst)
+
+	if r := openrtbtest.VerifyDeepCopy(&src, &dst); r != nil {
+		t.Errorf("VerifyDeepCopy() with equal objects want nil, got %v", r)
+	}
+
+	oldIntVP := dst.IntVP
+	dst.IntVP = src.IntVP
+	if r := openrtbtest.VerifyDeepCopy(&src, &dst); r == nil {
+		t.Errorf("VerifyDeepCopy() with share IntVP objects want non-nil, got nil")
+	}
+	dst.IntVP = oldIntVP
+
+	oldSlice := dst.Slice
+	dst.Slice = src.Slice
+	if r := openrtbtest.VerifyDeepCopy(&src, &dst); r == nil {
+		t.Errorf("VerifyDeepCopy() with share Slice objects want non-nil, got nil")
+	}
+	dst.Slice = oldSlice
+
+	oldSlice0 := dst.PSlice[0]
+	dst.PSlice[0] = src.PSlice[0]
+	if r := openrtbtest.VerifyDeepCopy(&src, &dst); r == nil {
+		t.Errorf("VerifyDeepCopy() with share PSlice[0] objects want non-nil, got nil")
+	}
+	dst.PSlice[0] = oldSlice0
+
+	oldMap := dst.Map
+	dst.Map = src.Map
+	if r := openrtbtest.VerifyDeepCopy(&src, &dst); r == nil {
+		t.Errorf("VerifyDeepCopy() with share Map objects want non-nil, got nil")
+	}
+	dst.Map = oldMap
+
+	oldMap0 := dst.PMap[""]
+	dst.PMap[""] = src.PMap[""]
+	if r := openrtbtest.VerifyDeepCopy(&src, &dst); r == nil {
+		t.Errorf("VerifyDeepCopy() with share PMap[\"\"] objects want non-nil, got nil")
+	}
+	dst.PMap[""] = oldMap0
+
+	oldStruct := dst.Struct
+	dst.Struct = src.Struct
+	if r := openrtbtest.VerifyDeepCopy(&src, &dst); r == nil {
+		t.Errorf("VerifyDeepCopy() with share Struct objects want non-nil, got nil")
+	}
+	dst.Struct = oldStruct
+
+	oldStructIntP := dst.Struct.IntVP
+	dst.Struct.IntVP = src.Struct.IntVP
+	if r := openrtbtest.VerifyDeepCopy(&src, &dst); r == nil {
+		t.Errorf("VerifyDeepCopy() with share Struct.IntVP objects want non-nil, got nil")
+	}
+	dst.Struct.IntVP = oldStructIntP
+}

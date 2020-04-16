@@ -42,6 +42,9 @@ func (v Video) Validate() error {
 
 // Copy returns a pointer to a copy of the Video object.
 func (v *Video) Copy() *Video {
+	if v == nil {
+		return nil
+	}
 	vCopy := *v
 
 	if v.MIMETypes != nil {

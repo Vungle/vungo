@@ -12,6 +12,9 @@ type Regulation struct {
 
 // Copy returns a pointer to a copy of the Regulation object.
 func (r *Regulation) Copy() *Regulation {
+	if r == nil {
+		return nil
+	}
 	regulationCopy := *r
 	if r.IsCoppaCompliant != nil {
 		coppaCopy := *r.IsCoppaCompliant
