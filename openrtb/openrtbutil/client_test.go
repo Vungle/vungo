@@ -11,7 +11,6 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"net/url"
-	"runtime/debug"
 	"sync/atomic"
 	"testing"
 	"time"
@@ -109,7 +108,7 @@ func TestClientDoShouldDiscardResidualOnInvalidHttpResponse(t *testing.T) {
 	ts.Config.ConnState = func(conn net.Conn, connState http.ConnState) {
 		if connState == http.StateNew {
 			atomic.AddUint32(&connCounter, 1)
-			t.Log(string(debug.Stack()))
+			t.Logf("ConnState connCounter %v", connCounter)
 		}
 	}
 
@@ -154,10 +153,15 @@ func TestClientDoShouldDiscardResidualOnInvalidHttpResponse(t *testing.T) {
 			t.Error("Expected no bid instead of ", err)
 		}
 
-		<-idle
-	}
+		t.Logf("after request, connCounter %v", connCounter)
 
-	connDiscardHook = nil
+		if connDiscardHook != nil {
+			select {
+			case <-idle:
+				connDiscardHook = nil
+			}
+		}
+	}
 
 	// Expect only one connection is used.
 	if connCounter != 1 {
