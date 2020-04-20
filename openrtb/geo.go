@@ -36,7 +36,7 @@ type Geo struct {
 	// Description:
 	//   Source of location data; recommended when passing
 	//   lat/lon. Refer to List 5.20.
-	Type GeoType `json:"type,omitempty"`
+	Type LocationType `json:"type,omitempty"`
 
 	// Attribute:
 	//   accuracy

@@ -1,7 +1,7 @@
 package openrtb
 
 // ConnectionType type denotes the network connection type.
-// See OpenRTB 2.3.1 Sec 5.18.
+// See OpenRTB 2.5 Sec 5.22.
 type ConnectionType int
 
 // Possible values from the OpenRTB spec.

@@ -24,7 +24,7 @@ func (n NoBidReason) Validate() error {
 	return nil
 }
 
-// Standard no-bid reasons specified by OpenRTB 2.3.1.
+// Standard no-bid reasons specified by OpenRTB 2.5.
 // See http://www.iab.net/media/file/OpenRTB_API_Specification_Version_2_3_1.pdf.
 //
 // NOTE: Don't rearrange the order. Add new ones to the bottom, above lastOpenRTBNoBidReason, as

@@ -9,7 +9,7 @@ import (
 // BidRequest type represents a top-level object to send to buyers by an ad exchange server for an
 // opportunity to auction one or multiple impressions.
 // The "site" is unused and has been omitted.
-// See OpenRTB 2.3.1 Sec 3.2.1.
+// See OpenRTB 2.5 Sec 3.2.1.
 //go:generate easyjson $GOFILE
 //easyjson:json
 type BidRequest struct {

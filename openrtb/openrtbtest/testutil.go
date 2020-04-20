@@ -25,7 +25,7 @@ func UnmarshalFromJSONFile(file string, model interface{}) error {
 	return json.Unmarshal(jsonBytes, model)
 }
 
-// VerifyModelAgainstFile verifies the correctness of a particular OpenRTB 2.3.1 object against a
+// VerifyModelAgainstFile verifies the correctness of a particular OpenRTB 2.5 object against a
 // *.json file by first unmarshals the JSON file into the specified model object, and then marshals
 // the object back into a string to be compared against the JSON file.
 //

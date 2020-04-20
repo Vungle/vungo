@@ -2,7 +2,7 @@ package openrtb
 
 // User type contains known or derived information about the human user of the device; i.e., the
 // audience of the audience for advertising.
-// See OpenRTB 2.3.1 Sec 3.2.13.
+// See OpenRTB 2.5 Sec 3.2.13.
 // The "data" key is unused and has been omitted.
 //go:generate easyjson $GOFILE
 //easyjson:json

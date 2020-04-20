@@ -2,7 +2,7 @@ package openrtb
 
 // CreativeAttribute type describes attributes of the ad creative being served or filtered by the
 // exchange server.
-// See OpenRTB 2.3.1 Sec 5.3.
+// See OpenRTB 2.5 Sec 5.3.
 type CreativeAttribute int
 
 // Possible values as specified in OpenRTB spec.

@@ -10,7 +10,7 @@ var emptyBid BidResponse
 
 // BidResponse type represents a top-level object received by an ad exchange server from various
 // buyers directly connected or proxy'ed by a DSP connection.
-// See OpenRTB 2.3.1 Sec 4.2.1.
+// See OpenRTB 2.5 Sec 4.2.1.
 //go:generate easyjson $GOFILE
 //easyjson:json
 type BidResponse struct {

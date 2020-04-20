@@ -4,7 +4,7 @@ package openrtb
 // 1 = First Price.
 // 2 = Second Price.
 // 3 = Use bid floor as the deal price.
-// See OpenRTB 2.3.1 Sec 3.2.1.
+// See OpenRTB 2.5 Sec 3.2.1.
 type AuctionType int
 
 // Possible values of auction types.

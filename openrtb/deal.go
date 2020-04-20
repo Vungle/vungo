@@ -8,7 +8,7 @@ import (
 
 // Deal type represents a way to describe a specific slice of the exchange's supply via a unique ID
 // shared between sellers and buyers to facilitate selling of an impressions.
-// See OpenRTB 2.3.1 Sec 3.2.18.
+// See OpenRTB 2.5 Sec 3.2.12.
 //go:generate easyjson $GOFILE
 //easyjson:json
 type Deal struct {

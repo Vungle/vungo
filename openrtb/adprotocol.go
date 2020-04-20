@@ -1,7 +1,7 @@
 package openrtb
 
 // AdProtocol type represents the supported video protocols.
-// See OpenRTB 2.3.1 Sec 5.8.
+// See OpenRTB 2.5 Sec 5.8.
 type AdProtocol int
 
 // Possible values according to the OpenRTB spec.
