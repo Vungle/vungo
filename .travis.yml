@@ -12,5 +12,7 @@ before_install:
   - go get -v golang.org/x/lint/golint
 
 script:
+  - make generate
   - make test
+  - make vet
   - make lint

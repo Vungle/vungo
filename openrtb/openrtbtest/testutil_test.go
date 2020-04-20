@@ -265,7 +265,7 @@ func TestVerifyStructFieldNameWithStandardText(t *testing.T) {
 	type T struct {
 		NoJsonTagField int
 		NormalField    string `json:"normalfield,omitempty"`
-		privateField   int    `json:"privatefield,omitempty"`
+		privateField   int
 	}
 	type args struct {
 		objPtr       interface{}

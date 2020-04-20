@@ -194,13 +194,14 @@ func TestClientDoShouldRespondNoBid(t *testing.T) {
 			}
 		}
 
-		ctx, _ := context.WithTimeout(context.Background(), tmax)
+		ctx, cancel := context.WithTimeout(context.Background(), tmax)
 		br := &openrtb.BidRequest{
 			ID: "br-for-no-bid",
 		}
 
 		req, err := openrtbutil.NewRequest(ctx, br, ts.URL, nil)
 		if err != nil {
+			cancel()
 			t.Fatal("Cannot create a bid request: ", err)
 		}
 
@@ -220,5 +221,6 @@ func TestClientDoShouldRespondNoBid(t *testing.T) {
 		default:
 			t.Errorf("Expected error to be a NoBidError instead of %v.", err)
 		}
+		cancel()
 	}
 }
