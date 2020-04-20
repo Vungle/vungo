@@ -10,7 +10,7 @@ env:
 
 before_install:
   - go get -v golang.org/x/lint/golint
-  - go mod download easyjson
+  - go get -v github.com/mailru/easyjson
   - go mod download
   - go mod graph
 
