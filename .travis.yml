@@ -10,7 +10,9 @@ env:
 
 before_install:
   - go get -v golang.org/x/lint/golint
+  - go mod download easyjson
   - go mod download
+  - go mod graph
 
 script:
   - make generate
