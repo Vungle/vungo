@@ -3,9 +3,8 @@ package openrtb_test
 import (
 	"testing"
 
-	"github.com/Vungle/vungo/openrtb/openrtbtest"
-
 	"github.com/Vungle/vungo/openrtb"
+	"github.com/Vungle/vungo/openrtb/openrtbtest"
 )
 
 func TestDeal_Validate(t *testing.T) {
