@@ -1,5 +1,7 @@
 package util
 
+import "encoding/json"
+
 // Copiable indicates that an object can be deep copied.
 type Copiable interface {
 	Copy() interface{}
@@ -48,6 +50,15 @@ func DeepCopyStrSlice(src []string) []string {
 func DeepCopyCopiable(src interface{}) interface{} {
 	if copiableSrc, ok := src.(Copiable); ok {
 		return copiableSrc.Copy()
+	}
+	return nil
+}
+
+func DeepCopyJsonRawMsg(src json.RawMessage) json.RawMessage {
+	if src != nil {
+		dst := make(json.RawMessage, len(src))
+		copy(dst, src)
+		return dst
 	}
 	return nil
 }

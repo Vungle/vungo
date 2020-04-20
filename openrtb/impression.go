@@ -206,8 +206,7 @@ func (imp *Impression) Copy() *Impression {
 	impressionCopy.PrivateMarketplace = imp.PrivateMarketplace.Copy()
 	impressionCopy.IframeBuster = util.DeepCopyStrSlice(imp.IframeBuster)
 
-	// extension copying has to be done by the user of this package manually.
-	impressionCopy.Extension = nil
+	impressionCopy.Extension = util.DeepCopyCopiable(imp.Extension)
 
 	return &impressionCopy
 }

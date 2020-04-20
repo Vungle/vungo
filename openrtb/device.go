@@ -1,5 +1,7 @@
 package openrtb
 
+import "github.com/Vungle/vungo/internal/util"
+
 // Device object provides information pertaining to the device through which the
 // user is interacting.
 // Device information includes its hardware, platform, location, and carrier data.
@@ -297,8 +299,7 @@ func (d *Device) Copy() *Device {
 		deviceCopy.SupportsJavaScript = &SupportsJavaScriptCopy
 	}
 	deviceCopy.GeoFetch = d.GeoFetch.Copy()
-	// extension copying has to be done by the user of this package manually.
-	deviceCopy.Extension = nil
+	deviceCopy.Extension = util.DeepCopyCopiable(d.Extension)
 
 	return &deviceCopy
 }

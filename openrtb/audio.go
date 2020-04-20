@@ -249,8 +249,7 @@ func (a *Audio) Copy() *Audio {
 		copy(vCopy.CompanionTypes, a.CompanionTypes)
 	}
 
-	// extension copying has to be done by the user of this package manually.
-	vCopy.Extension = nil
+	vCopy.Extension = util.DeepCopyCopiable(a.Extension)
 
 	return &vCopy
 }

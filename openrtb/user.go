@@ -1,5 +1,7 @@
 package openrtb
 
+import "github.com/Vungle/vungo/internal/util"
+
 // User type contains known or derived information about the human user of the device; i.e., the
 // audience of the audience for advertising.
 // See OpenRTB 2.5 Sec 3.2.13.
@@ -35,8 +37,7 @@ func (u *User) Copy() *User {
 		copy(userCopy.Data, u.Data)
 	}
 
-	// extension copying has to be done by the user of this package manually.
-	userCopy.Extension = nil
+	userCopy.Extension = util.DeepCopyCopiable(u.Extension)
 
 	return &userCopy
 }

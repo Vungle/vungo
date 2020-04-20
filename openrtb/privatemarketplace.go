@@ -1,5 +1,7 @@
 package openrtb
 
+import "github.com/Vungle/vungo/internal/util"
+
 // PrivateMarketplace type contains additional metadata about an impression such that individual
 // buyers are encouraged to buy the impressions via a different channel.
 // See OpenRTB 2.5 Sec 3.2.11.
@@ -25,5 +27,6 @@ func (pmp *PrivateMarketplace) Copy() *PrivateMarketplace {
 		}
 	}
 
+	pmpCopy.Extension = util.DeepCopyCopiable(pmp.Extension)
 	return &pmpCopy
 }

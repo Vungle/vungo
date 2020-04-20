@@ -1,5 +1,7 @@
 package openrtb
 
+import "github.com/Vungle/vungo/internal/util"
+
 // Application object should be included if the ad supported content is a
 // non-browser application (typically in mobile) as opposed to a website.
 // A bid request must not contain both an App and a Site object.
@@ -169,8 +171,7 @@ func (a *Application) Copy() *Application {
 	appCopy.Publisher = a.Publisher.Copy()
 	appCopy.Content = a.Content.Copy()
 
-	// extension copying has to be done by the user of this package manually.
-	appCopy.Extension = nil
+	appCopy.Extension = util.DeepCopyCopiable(a.Extension)
 
 	return &appCopy
 }

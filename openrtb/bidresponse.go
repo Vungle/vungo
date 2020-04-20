@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"reflect"
+
+	"github.com/Vungle/vungo/internal/util"
 )
 
 var emptyBid BidResponse
@@ -78,10 +80,7 @@ func (r *BidResponse) Copy() *BidResponse {
 		}
 	}
 
-	if r.RawExtension != nil {
-		brCopy.RawExtension = make(json.RawMessage, len(r.RawExtension))
-		copy(brCopy.RawExtension, r.RawExtension)
-	}
+	brCopy.RawExtension = util.DeepCopyJsonRawMsg(r.RawExtension)
 
 	return &brCopy
 }

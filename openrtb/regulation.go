@@ -1,5 +1,7 @@
 package openrtb
 
+import "github.com/Vungle/vungo/internal/util"
+
 // Regulation types denotes any industry, legal, or governmental regulations with respect to the
 // parent bid request object.
 // See OpenRTB 2.5 Sec 3.2.3.
@@ -20,6 +22,7 @@ func (r *Regulation) Copy() *Regulation {
 		coppaCopy := *r.IsCoppaCompliant
 		regulationCopy.IsCoppaCompliant = &coppaCopy
 	}
+	regulationCopy.Extension = util.DeepCopyCopiable(r.Extension)
 
 	return &regulationCopy
 }

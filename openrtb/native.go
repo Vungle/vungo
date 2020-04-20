@@ -1,6 +1,10 @@
 package openrtb
 
-import "errors"
+import (
+	"errors"
+
+	"github.com/Vungle/vungo/internal/util"
+)
 
 // Native struct represents a native type impression. Native ad units are intended to blend seamlessly into
 // the surrounding content (e.g., a sponsored Twitter or Facebook post). As such, the response must be
@@ -89,8 +93,7 @@ func (n *Native) Copy() *Native {
 		copy(vCopy.APIFrameworks, n.APIFrameworks)
 	}
 
-	// extension copying has to be done by the user of this package manually.
-	vCopy.Extension = nil
+	vCopy.Extension = util.DeepCopyCopiable(n.Extension)
 
 	return &vCopy
 }

@@ -1,6 +1,7 @@
 package util_test
 
 import (
+	"encoding/json"
 	"testing"
 
 	"github.com/Vungle/vungo/internal/util"
@@ -179,6 +180,39 @@ func TestDeepCopyCopiable(t *testing.T) {
 			}
 			if tt.src != nil && dst == tt.src {
 				t.Errorf("DeepCopyCopiable() should copy rather than share")
+			}
+		})
+	}
+}
+
+func TestDeepCopyJsonRawMsg(t *testing.T) {
+	tests := []struct {
+		name string
+		src  json.RawMessage
+	}{
+		{
+			name: "normal json.RawMessage",
+			src:  json.RawMessage{1, 2},
+		},
+		{
+			name: "zero len json.RawMessage",
+			src:  json.RawMessage{},
+		},
+		{
+			name: "nil json.RawMessage",
+			src:  (json.RawMessage)(nil),
+		},
+	}
+	for _, tt := range tests {
+		tt := tt
+		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+			dst := util.DeepCopyJsonRawMsg(tt.src)
+			if diff := deep.Equal(dst, tt.src); diff != nil {
+				t.Error(diff)
+			}
+			if tt.src != nil && len(tt.src) > 0 && &tt.src[0] == &dst[0] {
+				t.Errorf("DeepCopyJsonRawMsg() should copy rather than share")
 			}
 		})
 	}

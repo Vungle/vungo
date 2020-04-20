@@ -216,8 +216,7 @@ func (v *Banner) Copy() *Banner {
 		copy(vCopy.Format, v.Format)
 	}
 
-	// extension copying has to be done by the user of this package manually.
-	vCopy.Extension = nil
+	vCopy.Extension = util.DeepCopyCopiable(v.Extension)
 
 	return &vCopy
 }

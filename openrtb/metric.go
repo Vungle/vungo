@@ -1,6 +1,10 @@
 package openrtb
 
-import "errors"
+import (
+	"errors"
+
+	"github.com/Vungle/vungo/internal/util"
+)
 
 // Metric struct associates with an impression as an array. These metrics can offer insight into
 // the impression to assist with decisioning such as average recent viewability, click-through rate, etc. Each
@@ -63,5 +67,6 @@ func (m *Metric) Copy() *Metric {
 		return nil
 	}
 	mCopy := *m
+	mCopy.Ext = util.DeepCopyCopiable(m.Ext)
 	return &mCopy
 }

@@ -332,10 +332,7 @@ func (b *Bid) Copy() *Bid {
 		copy(bCopy.CreativeAttributes, b.CreativeAttributes)
 	}
 
-	if b.Extension != nil {
-		bCopy.Extension = make(json.RawMessage, len(b.Extension))
-		copy(bCopy.Extension, b.Extension)
-	}
+	bCopy.Extension = util.DeepCopyJsonRawMsg(b.Extension)
 
 	return &bCopy
 }

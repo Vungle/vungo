@@ -40,6 +40,7 @@ func (d *Deal) Copy() *Deal {
 	dealCopy := *d
 	dealCopy.WhitelistedSeats = util.DeepCopyStrSlice(d.WhitelistedSeats)
 	dealCopy.AdvertiserDomains = util.DeepCopyStrSlice(d.AdvertiserDomains)
+	dealCopy.Extension = util.DeepCopyCopiable(d.Extension)
 
 	return &dealCopy
 }
