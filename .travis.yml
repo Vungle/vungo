@@ -9,6 +9,7 @@ env:
   - GO111MODULE=on
 
 before_install:
+  - export GOBIN=$GOPATH/bin
   - go get -v golang.org/x/lint/golint
   - go get -v github.com/mailru/easyjson
   - go mod download
