@@ -17,6 +17,7 @@ test:
 
 # generate runs `go generate` to build the dynamically generated source files.
 generate:
+	@echo PATH=$$PATH
 	find . -name '*_easyjson.go' -delete
 	go generate ./...
 
