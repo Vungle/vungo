@@ -111,8 +111,11 @@ func TestBidResponse_Copy(t *testing.T) {
 	}
 
 	openrtbtest.FillWithNonNilValue(&bidResponse)
+	bidResponse.Extension = true // hack to workaround BidResponse specific Copy implementation about RawExtension
+	respCopy := bidResponse.Copy()
+	respCopy.Extension = true
 	if err := openrtbtest.VerifyDeepCopy(
-		&bidResponse, bidResponse.Copy()); err != nil {
+		&bidResponse, respCopy); err != nil {
 		t.Errorf("Copy() should be deep copy\n%v\n", err)
 	}
 }
