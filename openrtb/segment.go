@@ -7,7 +7,7 @@ import "github.com/Vungle/vungo/internal/util"
 // The parent Data object is a collection of such values from a given data
 // provider.
 // The specific segment names and value options must be published by the
-// exchange a priori to its bidders.
+// exchange a prior to its bidders.
 // See OpenRTB 2.5 Sec 3.2.22.
 //go:generate easyjson $GOFILE
 //easyjson:json
