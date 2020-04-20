@@ -26,7 +26,7 @@ fmt:
 
 lint:
 	@warnings=$$(golint $(TEST)); \
-	if [[ "$$warnings" ]]; then \
+	if [ -n "$$warnings" ]; then \
 	  echo "golint reports warnings:"; \
 	  echo "$$warnings"; \
 	  exit 1; \
@@ -39,7 +39,7 @@ vet:
 
 imports:
 	@warnings=$$(find . -name "*.go" -not -name "*_easyjson.go" | xargs goimports -l -w); \
-	if [[ "$$warnings" ]]; then \
+	if [ -n "$$warnings" ]; then \
 	  echo "goimports reports warnings:"; \
 	  echo "$$warnings"; \
 	  exit 1; \

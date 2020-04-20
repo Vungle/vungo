@@ -7,7 +7,7 @@ go:
 
 before_install:
   - go get -v golang.org/x/lint/golint
-  - go get -v github.com/mailru/easyjson
+  - go get -v github.com/mailru/easyjson/...
   - export GO111MODULE=on
   - go mod download
   - go mod graph
