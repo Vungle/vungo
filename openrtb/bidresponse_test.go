@@ -119,3 +119,10 @@ func TestBidResponse_Copy(t *testing.T) {
 		t.Errorf("Copy() should be deep copy\n%v\n", err)
 	}
 }
+
+func TestResponse_Fields(t *testing.T) {
+	if err := openrtbtest.VerifyStructFieldNameWithStandardTextFile(
+		(*openrtb.BidResponse)(nil), "testdata/bidresponse_std.txt"); err != "" {
+		t.Error(err)
+	}
+}

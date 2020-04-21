@@ -22,3 +22,10 @@ func TestRegulation_Copy(t *testing.T) {
 		t.Errorf("Copy() should be deep copy\n%v\n", err)
 	}
 }
+
+func TestRegulation_Fields(t *testing.T) {
+	if err := openrtbtest.VerifyStructFieldNameWithStandardTextFile(
+		(*openrtb.Regulation)(nil), "testdata/regulation_std.txt"); err != "" {
+		t.Error(err)
+	}
+}

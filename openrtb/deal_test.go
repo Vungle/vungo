@@ -15,3 +15,10 @@ func TestDeal_Validate(t *testing.T) {
 		t.Errorf("Copy() should be deep copy\n%v\n", err)
 	}
 }
+
+func TestDeal_Fields(t *testing.T) {
+	if err := openrtbtest.VerifyStructFieldNameWithStandardTextFile(
+		(*openrtb.Deal)(nil), "testdata/deal_std.txt"); err != "" {
+		t.Error(err)
+	}
+}

@@ -15,3 +15,10 @@ func TestSource_Copy(t *testing.T) {
 		t.Errorf("Copy() should be deep copy\n%v\n", err)
 	}
 }
+
+func TestSource_Fields(t *testing.T) {
+	if err := openrtbtest.VerifyStructFieldNameWithStandardTextFile(
+		(*openrtb.Source)(nil), "testdata/source_std.txt"); err != "" {
+		t.Error(err)
+	}
+}

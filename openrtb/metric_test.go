@@ -58,3 +58,10 @@ func TestMetric_Validate(t *testing.T) {
 		})
 	}
 }
+
+func TestMetric_Fields(t *testing.T) {
+	if err := openrtbtest.VerifyStructFieldNameWithStandardTextFile(
+		(*openrtb.Metric)(nil), "testdata/metric_std.txt"); err != "" {
+		t.Error(err)
+	}
+}

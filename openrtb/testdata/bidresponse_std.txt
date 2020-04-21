@@ -1,0 +1,25 @@
+Attribute
+Type
+Description
+id
+string; required
+ID of the bid request to which this is a response.
+seatbid
+object array
+Array of seatbid objects; 1+ required if a bid is to be made.
+bidid
+string
+Bidder generated response ID to assist with logging/tracking.
+cur
+string; default “USD”
+Bid currency using ISO-4217 alpha codes.
+customdata
+string
+Optional feature to allow a bidder to set data in the exchange’s cookie. The string must be in base85 cookie safe
+characters and be in any format. Proper JSON encoding must be used to include “escaped” quotation marks.
+nbr
+integer
+Reason for not bidding. Refer to List 5.24.
+ext
+object
+Placeholder for bidder-specific extensions to OpenRTB.

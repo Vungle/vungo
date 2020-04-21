@@ -24,7 +24,6 @@ type BidResponse struct {
 	NoBidReason NoBidReason `json:"nbr,omitempty"`
 
 	RawExtension json.RawMessage `json:"ext,omitempty"`
-	Bundle       string          `json:"bundle,omitempty"`
 	Extension    interface{}     `json:"-"` // Opaque value that can be used to store unmarshaled value in ext field.
 }
 
