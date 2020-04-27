@@ -207,12 +207,12 @@ func TestDeepCopyJsonRawMsg(t *testing.T) {
 		tt := tt
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
-			dst := util.DeepCopyJsonRawMsg(tt.src)
+			dst := util.DeepCopyJSONRawMsg(tt.src)
 			if diff := deep.Equal(dst, tt.src); diff != nil {
 				t.Error(diff)
 			}
 			if tt.src != nil && len(tt.src) > 0 && &tt.src[0] == &dst[0] {
-				t.Errorf("DeepCopyJsonRawMsg() should copy rather than share")
+				t.Errorf("DeepCopyJSONRawMsg() should copy rather than share")
 			}
 		})
 	}

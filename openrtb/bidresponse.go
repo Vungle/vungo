@@ -80,7 +80,7 @@ func (r *BidResponse) Copy() *BidResponse {
 	}
 
 	if r.Extension != nil {
-		brCopy.RawExtension = util.DeepCopyJsonRawMsg(r.RawExtension)
+		brCopy.RawExtension = util.DeepCopyJSONRawMsg(r.RawExtension)
 	}
 
 	return &brCopy

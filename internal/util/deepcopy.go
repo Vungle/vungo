@@ -54,7 +54,8 @@ func DeepCopyCopiable(src interface{}) interface{} {
 	return nil
 }
 
-func DeepCopyJsonRawMsg(src json.RawMessage) json.RawMessage {
+// DeepCopyJSONRawMsg deep copy json.RawMessage.
+func DeepCopyJSONRawMsg(src json.RawMessage) json.RawMessage {
 	if src != nil {
 		dst := make(json.RawMessage, len(src))
 		copy(dst, src)
