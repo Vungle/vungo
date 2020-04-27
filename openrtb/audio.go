@@ -51,7 +51,7 @@ type Audio struct {
 	//   integer array; recommended
 	// Description:
 	//   Array of supported audio protocols. Refer to List 5.8.
-	Protocols []AdProtocol `json:"protocols,omitempty"`
+	Protocols []Protocol `json:"protocols,omitempty"`
 
 	// Attribute:
 	//   startdelay
@@ -216,7 +216,7 @@ func (a *Audio) Copy() *Audio {
 	vCopy.MaxDuration = util.DeepCopyInt(a.MaxDuration)
 
 	if a.Protocols != nil {
-		vCopy.Protocols = make([]AdProtocol, len(a.Protocols))
+		vCopy.Protocols = make([]Protocol, len(a.Protocols))
 		copy(vCopy.Protocols, a.Protocols)
 	}
 

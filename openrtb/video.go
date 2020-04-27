@@ -14,7 +14,7 @@ type Video struct {
 	MIMETypes                 []string              `json:"mimes"`
 	MinDuration               *int                  `json:"minduration,omitempty"`
 	MaxDuration               *int                  `json:"maxduration,omitempty"`
-	Protocols                 []AdProtocol          `json:"protocols,omitempty"`
+	Protocols                 []Protocol            `json:"protocols,omitempty"`
 	Width                     int                   `json:"w,omitempty"`
 	Height                    int                   `json:"h,omitempty"`
 	StartDelay                *StartDelay           `json:"startdelay,omitempty"`
@@ -63,7 +63,7 @@ func (v *Video) Copy() *Video {
 	vCopy.MaxDuration = util.DeepCopyInt(v.MaxDuration)
 
 	if v.Protocols != nil {
-		vCopy.Protocols = make([]AdProtocol, len(v.Protocols))
+		vCopy.Protocols = make([]Protocol, len(v.Protocols))
 		copy(vCopy.Protocols, v.Protocols)
 	}
 
