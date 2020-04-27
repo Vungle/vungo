@@ -95,7 +95,7 @@ type BidRequest struct {
 	//    Auction type, where 1 = First Price, 2 = Second Price Plus.
 	//    Exchange-specific auction types can be defined using values
 	//    greater than 500.
-	AuctionType AuctionType `json:"at"`
+	AuctionType BidAuctionType `json:"at"`
 
 	// Attribute:
 	//   tmax
