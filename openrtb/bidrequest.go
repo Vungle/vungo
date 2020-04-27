@@ -201,7 +201,7 @@ type BidRequest struct {
 	// Description:
 	//   A Sorce object (Section 3.2.2) that provides data about the
 	//   inventory source and which entity makes the final decision.
-	Regulation *Regulation `json:"regs,omitempty"`
+	Source *Source `json:"source,omitempty"`
 
 	// Attribute:
 	//   regs
@@ -210,7 +210,7 @@ type BidRequest struct {
 	// Description:
 	//   A Regs object (Section 3.2.3) that specifies any industry, legal,
 	//   or governmental regulations in force for this request.
-	Source *Source `json:"source,omitempty"`
+	Regulation *Regulation `json:"regs,omitempty"`
 
 	// Attribute:
 	//   ext
