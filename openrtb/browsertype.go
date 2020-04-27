@@ -9,7 +9,6 @@ type BrowserType int
 
 // Possible values according to the OpenRTB spec.
 const (
-	BrowserTypeUnknown BrowserType = iota
-	BrowserTypeEmbedded
-	BrowserTypeNative
+	BrowserTypeEmbedded = 0
+	BrowserTypeNative   = 1
 )

@@ -148,7 +148,7 @@ type Impression struct {
 	//   creative in an app, where 0 = embedded, 1 = native. Note that
 	//   the Safari View Controller in iOS 9.x devices is considered a
 	//   native browser for purposes of this attribute.
-	BrowserTypeUponClick BrowserType `json:"clickbrowser,omitempty"`
+	BrowserTypeUponClick *BrowserType `json:"clickbrowser,omitempty"`
 
 	// Attribute:
 	//   secure
@@ -204,6 +204,10 @@ func (imp *Impression) Copy() *Impression {
 	impressionCopy.Audio = imp.Audio.Copy()
 	impressionCopy.Native = imp.Native.Copy()
 	impressionCopy.PrivateMarketplace = imp.PrivateMarketplace.Copy()
+	if imp.BrowserTypeUponClick != nil {
+		newBT := *imp.BrowserTypeUponClick
+		impressionCopy.BrowserTypeUponClick = &newBT
+	}
 	impressionCopy.IframeBuster = util.DeepCopyStrSlice(imp.IframeBuster)
 
 	impressionCopy.Extension = util.DeepCopyCopiable(imp.Extension)
