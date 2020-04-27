@@ -24,7 +24,7 @@ generate:
 fmt:
 	gofmt -w $(GOFMT_FILES)
 
-lint:
+golint:
 	@warnings=$$(golint $(TEST)); \
 	if [ -n "$$warnings" ]; then \
 	  echo "golint reports warnings:"; \
@@ -47,9 +47,9 @@ imports:
 	  echo "goimports no change"; \
 	fi
 
-precommit: imports vet lint
+lint: imports vet golint
 
 # disallow any parallelism (-j) for Make.
 .NOTPARALLEL:
 
-.PHONY: build fmt generate imports lint precommit test vet
+.PHONY: build fmt generate golint imports lint precommit test vet
