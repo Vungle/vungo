@@ -6,6 +6,6 @@ type Linearity int
 
 // Possible values according to the OpenRTB spec.
 const (
-	LinearityLinear Linearity = iota + 1
-	LinearityNonlinear
+	LinearityLinear    Linearity = 1 // Linear / In-Stream
+	LinearityNonlinear Linearity = 2 // Non-Linear / Overlay
 )

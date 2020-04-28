@@ -10,25 +10,11 @@ type ContentContext int
 
 // ContentContext enums
 const (
-	// Video (i.e., video file or stream such as Internet TV broadcasts)
-	ContentContextVideo ContentContext = 1
-
-	// Game (i.e., an interactive software game)
-	ContentContextGame ContentContext = 2
-
-	// Music (i.e., audio file or stream such as Internet radio broadcasts)
-	ContentContextMusic ContentContext = 3
-
-	// Application (i.e., an interactive software application)
-	ContentContextApplication ContentContext = 4
-
-	// Text (i.e., primarily textual document such as a web page, eBook, or news
-	// article)
-	ContentContextText ContentContext = 5
-
-	// Other (i.e., none of the other categories applies)
-	ContentContextOther ContentContext = 6
-
-	// Unknown
-	ContentContextUnknown ContentContext = 7
+	ContentContextVideo       ContentContext = 1 // Video (i.e., video file or stream such as Internet TV broadcasts)
+	ContentContextGame        ContentContext = 2 // Game (i.e., an interactive software game)
+	ContentContextMusic       ContentContext = 3 // Music (i.e., audio file or stream such as Internet radio broadcasts)
+	ContentContextApplication ContentContext = 4 // Application (i.e., an interactive software application)
+	ContentContextText        ContentContext = 5 // Text (i.e., primarily textual document such as a web page, eBook, or news article)
+	ContentContextOther       ContentContext = 6 // Other (i.e., none of the other categories applies)
+	ContentContextUnknown     ContentContext = 7 // Unknown
 )

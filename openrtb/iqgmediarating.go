@@ -7,12 +7,7 @@ type IQGMediaRating int
 
 // IQGMediaRating enums
 const (
-	// All Audiences
-	IQGMediaRatingAll IQGMediaRating = 1
-
-	// Everyone Over 12
-	IQGMediaRatingOver12 IQGMediaRating = 2
-
-	// Mature Audiences
-	IQGMediaRatingMature IQGMediaRating = 3
+	IQGMediaRatingAll    IQGMediaRating = 1 // All Audiences
+	IQGMediaRatingOver12 IQGMediaRating = 2 // Everyone Over 12
+	IQGMediaRatingMature IQGMediaRating = 3 // Mature Audiences
 )

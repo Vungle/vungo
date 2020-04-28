@@ -5,15 +5,13 @@ package openrtb
 // See OpenRTB 2.5 Sec 5.12.
 type StartDelay int
 
+// StartDelay enum values
 const (
 	// > 0 Mid-Roll (value indicates start delay in second)
 
-	// StartDelayPreRoll represents Pre-Roll.
-	StartDelayPreRoll StartDelay = 0
-	// StartDelayGenericMidRoll represents Generic Mid-Roll.
-	StartDelayGenericMidRoll StartDelay = -1
-	// StartDelayGenericPostRoll represents Generic Post-Roll.
-	StartDelayGenericPostRoll StartDelay = -2
+	StartDelayPreRoll         StartDelay = 0  // StartDelayPreRoll represents Pre-Roll.
+	StartDelayGenericMidRoll  StartDelay = -1 // StartDelayGenericMidRoll represents Generic Mid-Roll.
+	StartDelayGenericPostRoll StartDelay = -2 // StartDelayGenericPostRoll represents Generic Post-Roll.
 )
 
 // Copy do deep copy of NumericBool.

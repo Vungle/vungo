@@ -9,15 +9,8 @@ type ProductionQuality int
 
 // ProductionQuality enums
 const (
-	// Unknown
-	ProductionQualityUnknown ProductionQuality = 0
-
-	// Professionally Produced
-	ProductionQualityProfessionallyProduced ProductionQuality = 1
-
-	// Prosumer
-	ProductionQualityProsumer ProductionQuality = 2
-
-	// User Generated (UGC)
-	ProductionQualityUserGenerated ProductionQuality = 3
+	ProductionQualityUnknown                ProductionQuality = 0 // Unknown
+	ProductionQualityProfessionallyProduced ProductionQuality = 1 // Professionally Produced
+	ProductionQualityProsumer               ProductionQuality = 2 // Prosumer
+	ProductionQualityUserGenerated          ProductionQuality = 3 // User Generated (UGC)
 )

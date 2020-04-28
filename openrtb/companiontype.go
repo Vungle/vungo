@@ -8,7 +8,7 @@ type CompanionType int
 
 // Possible values from the OpenRTB spec.
 const (
-	CompanionTypeStaticResource CompanionType = iota + 1
-	CompanionTypeHTMLResource
-	CompanionTypeIframeResource
+	CompanionTypeStaticResource CompanionType = 1 // Static Resource
+	CompanionTypeHTMLResource   CompanionType = 2 // HTML Resource
+	CompanionTypeIframeResource CompanionType = 3 // iframe Resource
 )

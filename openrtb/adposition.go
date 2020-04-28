@@ -7,12 +7,12 @@ type AdPosition int
 
 // Possible values according to the OpenRTB spec.
 const (
-	AdPositionUnknown AdPosition = iota
-	AdPositionAboveFold
-	_ // DEPRECATED - May or may not be initially visible depending on screen size/resolution.
-	AdPositionBelowFold
-	AdPositionHeader
-	AdPositionFooter
-	AdPositionSidebar
-	AdPositionFullscreen
+	AdPositionUnknown    AdPosition = 0
+	AdPositionAboveFold  AdPosition = 1
+	_                               // DEPRECATED - May or may not be initially visible depending on screen size/resolution.
+	AdPositionBelowFold  AdPosition = 3
+	AdPositionHeader     AdPosition = 4
+	AdPositionFooter     AdPosition = 5
+	AdPositionSidebar    AdPosition = 6
+	AdPositionFullscreen AdPosition = 7
 )

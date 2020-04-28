@@ -7,15 +7,8 @@ type IPLocationService int
 
 // IPLocationService enums
 const (
-	// ip2location
-	IPLocationServiceIP2location IPLocationService = 1
-
-	// Neustar (Quova)
-	IPLocationServiceNeustar IPLocationService = 2
-
-	// MaxMind
-	IPLocationServiceMaxMind IPLocationService = 3
-
-	// NetAcuity (Digital Element)
-	IPLocationServiceNetAcuity IPLocationService = 4
+	IPLocationServiceIP2location IPLocationService = 1 // ip2location
+	IPLocationServiceNeustar     IPLocationService = 2 // Neustar (Quova)
+	IPLocationServiceMaxMind     IPLocationService = 3 // MaxMind
+	IPLocationServiceNetAcuity   IPLocationService = 4 // NetAcuity (Digital Element)
 )

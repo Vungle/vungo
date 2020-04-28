@@ -30,20 +30,18 @@ func (n NoBidReason) Validate() error {
 // NOTE: Don't rearrange the order. Add new ones to the bottom, above lastOpenRTBNoBidReason, as
 // well as to NoBidReasonNames.
 const (
-	NoBidReasonUnknown NoBidReason = iota
-	NoBidReasonTechnicalError
-	NoBidReasonInvalidRequest
-	NoBidReasonKnownWebSpider
-	NoBidReasonNonHumanTraffic
-	NoBidReasonProxyIP
-	NoBidReasonUnsupportedDevice
-	NoBidReasonBlockedPublisher
-	NoBidReasonUnmatchedUser
-	NoBidReasonDailyReaderCapMet
-	NoBidReasonDailyDomainCapMet
-	// Add new entries here.
-
-	lastOpenRTBNoBidReason
+	NoBidReasonUnknown           NoBidReason = 0  // Unknown Error
+	NoBidReasonTechnicalError    NoBidReason = 1  // Technical Error
+	NoBidReasonInvalidRequest    NoBidReason = 2  // Invalid Request
+	NoBidReasonKnownWebSpider    NoBidReason = 3  // Known Web Spider
+	NoBidReasonNonHumanTraffic   NoBidReason = 4  // Suspected Non-Human Traffic
+	NoBidReasonProxyIP           NoBidReason = 5  // Cloud, Data center, or Proxy IP
+	NoBidReasonUnsupportedDevice NoBidReason = 6  // Unsupported Device
+	NoBidReasonBlockedPublisher  NoBidReason = 7  // Blocked Publisher or Site
+	NoBidReasonUnmatchedUser     NoBidReason = 8  // Unmatched User
+	NoBidReasonDailyReaderCapMet NoBidReason = 9  // Daily Reader Cap Met
+	NoBidReasonDailyDomainCapMet NoBidReason = 10 // Daily Domain Cap Met
+	lastOpenRTBNoBidReason       NoBidReason = 11
 )
 
 // Custom no-bid reasons reserved by a Vungle ad exchange server, from 10000 - 10999.

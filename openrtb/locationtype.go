@@ -6,7 +6,7 @@ type LocationType int
 
 // Possible values according to the OpenRTB spec.
 const (
-	GeoTypeGPS LocationType = iota + 1
-	GeoTypeIP
-	GeoTypeUser
+	GeoTypeGPS  LocationType = 1 // GPS/Location Services
+	GeoTypeIP   LocationType = 2 // IP Address
+	GeoTypeUser LocationType = 3 // User provided (e.g., registration data)
 )

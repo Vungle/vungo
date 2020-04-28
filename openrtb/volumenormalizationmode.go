@@ -6,9 +6,9 @@ type VolumeNormalizationMode int
 
 // Possible values from the OpenRTB spec.
 const (
-	VolumeNormalizationModeNone     VolumeNormalizationMode = 0
-	VolumeNormalizationModeAverage  VolumeNormalizationMode = 1
-	VolumeNormalizationModePeak     VolumeNormalizationMode = 2
-	VolumeNormalizationModeLoudness VolumeNormalizationMode = 3
-	VolumeNormalizationModeCustom   VolumeNormalizationMode = 4
+	VolumeNormalizationModeNone     VolumeNormalizationMode = 0 // None
+	VolumeNormalizationModeAverage  VolumeNormalizationMode = 1 // Ad Volume Average Normalized to Content
+	VolumeNormalizationModePeak     VolumeNormalizationMode = 2 // Ad Volume Peak Normalized to Content
+	VolumeNormalizationModeLoudness VolumeNormalizationMode = 3 // Ad Loudness Normalized to Content
+	VolumeNormalizationModeCustom   VolumeNormalizationMode = 4 // Custom Volume Normalization
 )
