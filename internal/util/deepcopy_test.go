@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/Vungle/vungo/internal/util"
+	"github.com/Vungle/vungo/internal/util/utiltest"
 	"github.com/go-test/deep"
 )
 
@@ -134,20 +135,6 @@ func TestDeepCopyStr(t *testing.T) {
 	}
 }
 
-type MockCopiable struct {
-	IntV *int
-}
-
-func NewMockCopiable(v int) *MockCopiable {
-	return &MockCopiable{IntV: &v}
-}
-
-func (m *MockCopiable) Copy() interface{} {
-	mCopy := *m
-	mCopy.IntV = util.DeepCopyInt(m.IntV)
-	return &mCopy
-}
-
 func TestDeepCopyCopiable(t *testing.T) {
 	tests := []struct {
 		name string
@@ -156,8 +143,8 @@ func TestDeepCopyCopiable(t *testing.T) {
 	}{
 		{
 			name: "normal Copiable obj",
-			src:  NewMockCopiable(10),
-			want: NewMockCopiable(10),
+			src:  utiltest.NewMockCopiable(10),
+			want: utiltest.NewMockCopiable(10),
 		},
 		{
 			name: "nil Copiable",

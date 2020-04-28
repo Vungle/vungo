@@ -5,6 +5,7 @@ import (
 	"regexp"
 	"testing"
 
+	"github.com/Vungle/vungo/internal/util"
 	"github.com/Vungle/vungo/openrtb/openrtbtest"
 )
 
@@ -150,15 +151,17 @@ func TestFillWithNonNilValue(t *testing.T) {
 	var s *struct {
 		IntP *int
 		Map  map[string]int
+		Itf  interface{}
 		SP   *struct {
 			IntP *int
 			Map  map[string]int
+			Itf  interface{}
 		}
 	}
 	openrtbtest.FillWithNonNilValue(&s)
-	if s == nil || s.IntP == nil || s.Map == nil || s.SP == nil {
+	if s == nil || s.IntP == nil || s.Map == nil || s.SP == nil || s.Itf == nil {
 		t.Errorf("FillWithNonNilValue() with struct pointer got %+v, want non-nil", s)
-	} else if s.SP.IntP == nil || s.SP.Map == nil {
+	} else if s.SP.IntP == nil || s.SP.Map == nil || s.SP.Itf == nil {
 		t.Errorf("FillWithNonNilValue() with embed struct pointer got %+v, want non-nil", s.SP)
 	}
 
@@ -184,6 +187,15 @@ func TestFillWithNonNilValue(t *testing.T) {
 	openrtbtest.FillWithNonNilValue(&sliceVP)
 	if sliceVP == nil || len(sliceVP) == 0 || sliceVP[0] == nil {
 		t.Errorf("FillWithNonNilValue() with slice pointer got %+v, want non-nil", sliceV)
+	}
+
+	var interfaceV interface{}
+	openrtbtest.FillWithNonNilValue(&interfaceV)
+	if interfaceV == nil {
+		t.Errorf("FillWithNonNilValue() with interface pointer got nil, want non-nil")
+	}
+	if _, ok := interfaceV.(util.Copiable); !ok {
+		t.Errorf("FillWithNonNilValue() with interface pointer got non-copiable, want copiable")
 	}
 }
 

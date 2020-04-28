@@ -13,3 +13,15 @@ func TestFormat_Fields(t *testing.T) {
 		t.Error(err)
 	}
 }
+
+func TestFormat_Copy(t *testing.T) {
+	d := openrtb.Format{}
+	if err := openrtbtest.VerifyDeepCopy(&d, d.Copy()); err != nil {
+		t.Errorf("Copy() should be deep copy\n%v\n", err)
+	}
+
+	openrtbtest.FillWithNonNilValue(&d)
+	if err := openrtbtest.VerifyDeepCopy(&d, d.Copy()); err != nil {
+		t.Errorf("Copy() should be deep copy\n%v\n", err)
+	}
+}

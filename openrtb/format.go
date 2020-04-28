@@ -1,5 +1,7 @@
 package openrtb
 
+import "github.com/Vungle/vungo/internal/util"
+
 // Format object represents an allowed size (i.e., height and width combination) or Flex Ad parameters for a banner impression.
 // These are typically used in an array where multiple sizes are permitted.
 //go:generate easyjson $GOFILE
@@ -55,4 +57,16 @@ type Format struct {
 	// Description:
 	//   Placeholder for exchange-specific extensions to OpenRTB.
 	Ext interface{} `json:"ext,omitempty"`
+}
+
+// Copy do deep copy of Format.
+// NOTE Ext field should copy by caller if it doesn't implement Copiable
+// interface.
+func (f *Format) Copy() *Format {
+	if f == nil {
+		return nil
+	}
+	fCopy := *f
+	fCopy.Ext = util.DeepCopyCopiable(f.Ext)
+	return &fCopy
 }

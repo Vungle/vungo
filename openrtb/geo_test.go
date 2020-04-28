@@ -20,3 +20,15 @@ func TestGeo_Fields(t *testing.T) {
 		t.Error(err)
 	}
 }
+
+func TestGeo_Copy(t *testing.T) {
+	d := openrtb.Geo{}
+	if err := openrtbtest.VerifyDeepCopy(&d, d.Copy()); err != nil {
+		t.Errorf("Copy() should be deep copy\n%v\n", err)
+	}
+
+	openrtbtest.FillWithNonNilValue(&d)
+	if err := openrtbtest.VerifyDeepCopy(&d, d.Copy()); err != nil {
+		t.Errorf("Copy() should be deep copy\n%v\n", err)
+	}
+}

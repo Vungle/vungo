@@ -9,6 +9,8 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/Vungle/vungo/internal/util"
+	"github.com/Vungle/vungo/internal/util/utiltest"
 	"github.com/Vungle/vungo/openrtb"
 	"github.com/go-test/deep"
 )
@@ -267,6 +269,11 @@ func FillWithNonNilValue(v interface{}) {
 			for i := 0; i < rv.Len(); i++ {
 				FillWithNonNilValue(rv.Index(i))
 			}
+		}
+	case reflect.Interface:
+		if rv.IsNil() && rv.CanSet() {
+			var copiable util.Copiable = &utiltest.MockCopiable{}
+			rv.Set(reflect.ValueOf(copiable))
 		}
 	default:
 		// primitive types or unsupported types
