@@ -6,7 +6,7 @@ type DeliveryMethod int
 
 // Possible values according to the OpenRTB spec.
 const (
-	DeliveryMethodStreamingDeliveryMethod   = 1 // Streaming
-	DeliveryMethodProgressiveDeliveryMethod = 2 // Progressive
-	DeliveryMethodDownloadDeliveryMethod    = 3 // Download
+	DeliveryMethodStreaming   DeliveryMethod = 1 // Streaming
+	DeliveryMethodProgressive DeliveryMethod = 2 // Progressive
+	DeliveryMethodDownload    DeliveryMethod = 3 // Download
 )

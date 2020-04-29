@@ -6,7 +6,7 @@ type FeedType int
 
 // Possible values from the OpenRTB spec.
 const (
-	FeedTypeMusicServiceFeedType  = 1 // Music Service
-	FeedTypeFMAMBroadcastFeedType = 2 // FM/AM Broadcast
-	FeedTypePodcastFeedType       = 3 // Podcast
+	FeedTypeMusicService  FeedType = 1 // Music Service
+	FeedTypeFMAMBroadcast FeedType = 2 // FM/AM Broadcast
+	FeedTypePodcast       FeedType = 3 // Podcast
 )
