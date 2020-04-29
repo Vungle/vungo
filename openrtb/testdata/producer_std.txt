@@ -1,0 +1,18 @@
+Attribute
+Type
+Description
+id
+string
+Content producer or originator ID. Useful if content is syndicated and may be posted on a site using embed tags.
+name
+string
+Content producer or originator name (e.g., “Warner Bros”).
+cat
+string array
+Array of IAB content categories that describe the content producer. Refer to List 5.1.
+domain
+string
+Highest level domain of the content producer (e.g., “producer.com”).
+ext
+object
+Placeholder for exchange-specific extensions to OpenRTB.

@@ -1,9 +1,11 @@
 package util_test
 
 import (
+	"encoding/json"
 	"testing"
 
 	"github.com/Vungle/vungo/internal/util"
+	"github.com/Vungle/vungo/internal/util/utiltest"
 	"github.com/go-test/deep"
 )
 
@@ -133,20 +135,6 @@ func TestDeepCopyStr(t *testing.T) {
 	}
 }
 
-type MockCopiable struct {
-	IntV *int
-}
-
-func NewMockCopiable(v int) *MockCopiable {
-	return &MockCopiable{IntV: &v}
-}
-
-func (m *MockCopiable) Copy() interface{} {
-	mCopy := *m
-	mCopy.IntV = util.DeepCopyInt(m.IntV)
-	return &mCopy
-}
-
 func TestDeepCopyCopiable(t *testing.T) {
 	tests := []struct {
 		name string
@@ -155,8 +143,8 @@ func TestDeepCopyCopiable(t *testing.T) {
 	}{
 		{
 			name: "normal Copiable obj",
-			src:  NewMockCopiable(10),
-			want: NewMockCopiable(10),
+			src:  utiltest.NewMockCopiable(10),
+			want: utiltest.NewMockCopiable(10),
 		},
 		{
 			name: "nil Copiable",
@@ -179,6 +167,39 @@ func TestDeepCopyCopiable(t *testing.T) {
 			}
 			if tt.src != nil && dst == tt.src {
 				t.Errorf("DeepCopyCopiable() should copy rather than share")
+			}
+		})
+	}
+}
+
+func TestDeepCopyJsonRawMsg(t *testing.T) {
+	tests := []struct {
+		name string
+		src  json.RawMessage
+	}{
+		{
+			name: "normal json.RawMessage",
+			src:  json.RawMessage{1, 2},
+		},
+		{
+			name: "zero len json.RawMessage",
+			src:  json.RawMessage{},
+		},
+		{
+			name: "nil json.RawMessage",
+			src:  (json.RawMessage)(nil),
+		},
+	}
+	for _, tt := range tests {
+		tt := tt
+		t.Run(tt.name, func(t *testing.T) {
+			t.Parallel()
+			dst := util.DeepCopyJSONRawMsg(tt.src)
+			if diff := deep.Equal(dst, tt.src); diff != nil {
+				t.Error(diff)
+			}
+			if tt.src != nil && len(tt.src) > 0 && &tt.src[0] == &dst[0] {
+				t.Errorf("DeepCopyJSONRawMsg() should copy rather than share")
 			}
 		})
 	}

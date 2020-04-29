@@ -2,10 +2,15 @@
   "lat": 35.012345,
   "lon": -115.12345,
   "type": 1,
+  "accuracy": null,
+  "lastfix": null,
+  "ipservice": null,
   "country": "USA",
   "region": "CA",
+  "regionfips104": null,
   "metro": "803",
   "city": "Los Angeles",
   "zip": "90049",
-  "utcoffset": 8
+  "utcoffset": 8,
+  "ext": null
 }

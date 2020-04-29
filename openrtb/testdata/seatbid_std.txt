@@ -1,0 +1,21 @@
+Attribute
+Type
+Description
+
+
+bid
+object array; required
+Array of 1+ Bid objects (Section 4.2.3) each related to an impression. Multiple bids can relate to the same impression.
+
+seat
+string
+ID of the buyer seat (e.g., advertiser, agency) on whose behalf this bid is made.
+
+   group
+integer;
+default 0
+0 = impressions can be won individually; 1 = impressions must
+be won or lost as a group.
+ext
+object
+Placeholder for bidder-specific extensions to OpenRTB.

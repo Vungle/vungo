@@ -1,8 +1,10 @@
 package openrtb
 
+import "github.com/Vungle/vungo/internal/util"
+
 // Regulation types denotes any industry, legal, or governmental regulations with respect to the
 // parent bid request object.
-// See OpenRTB 2.3.1 Sec 3.2.16.
+// See OpenRTB 2.5 Sec 3.2.3.
 //go:generate easyjson $GOFILE
 //easyjson:json
 type Regulation struct {
@@ -20,6 +22,7 @@ func (r *Regulation) Copy() *Regulation {
 		coppaCopy := *r.IsCoppaCompliant
 		regulationCopy.IsCoppaCompliant = &coppaCopy
 	}
+	regulationCopy.Extension = util.DeepCopyCopiable(r.Extension)
 
 	return &regulationCopy
 }

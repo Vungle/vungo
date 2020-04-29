@@ -1,4 +1,19 @@
 language: go
 
 go:
-  - 1.12.14
+  - 1.12.x
+  - 1.13.x
+  - 1.14.x
+
+before_install:
+  - go get -v golang.org/x/lint/golint
+  - go get -v github.com/mailru/easyjson/...
+  - export GO111MODULE=on
+  - go mod download
+  - go mod graph
+
+script:
+  - make generate
+  - make test
+  - make vet
+  - make lint

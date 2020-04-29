@@ -1,8 +1,10 @@
 package openrtb
 
+import "github.com/Vungle/vungo/internal/util"
+
 // User type contains known or derived information about the human user of the device; i.e., the
 // audience of the audience for advertising.
-// See OpenRTB 2.3.1 Sec 3.2.13.
+// See OpenRTB 2.5 Sec 3.2.13.
 // The "data" key is unused and has been omitted.
 //go:generate easyjson $GOFILE
 //easyjson:json
@@ -14,6 +16,7 @@ type User struct {
 	Keywords   string      `json:"keywords,omitempty"`
 	CustomData string      `json:"customdata,omitempty"`
 	Geo        *Geo        `json:"geo,omitempty"`
+	Data       []Data      `json:"data,omitempty"`
 	Extension  interface{} `json:"ext,omitempty"`
 }
 
@@ -29,8 +32,12 @@ func (u *User) Copy() *User {
 		userCopy.Geo = &GeoCopy
 	}
 
-	// extension copying has to be done by the user of this package manually.
-	userCopy.Extension = nil
+	if u.Data != nil {
+		u.Data = make([]Data, len(u.Data))
+		copy(userCopy.Data, u.Data)
+	}
+
+	userCopy.Extension = util.DeepCopyCopiable(u.Extension)
 
 	return &userCopy
 }

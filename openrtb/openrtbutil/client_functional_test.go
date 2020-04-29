@@ -194,19 +194,8 @@ func TestClientDoShouldRespondNoBid(t *testing.T) {
 			}
 		}
 
-		ctx, _ := context.WithTimeout(context.Background(), tmax)
-		br := &openrtb.BidRequest{
-			ID: "br-for-no-bid",
-		}
-
-		req, err := openrtbutil.NewRequest(ctx, br, ts.URL, nil)
-		if err != nil {
-			t.Fatal("Cannot create a bid request: ", err)
-		}
-
-		// Make the request to test server.
-		c := openrtbutil.NewClient(nil)
-		switch resp, err := c.Do(req); e := err.(type) {
+		resp, err := doRequest(t, ts, tmax)
+		switch e := err.(type) {
 		case net.Error:
 			t.Log("No-bid from network error: ", e)
 			if !e.Timeout() {
@@ -221,4 +210,21 @@ func TestClientDoShouldRespondNoBid(t *testing.T) {
 			t.Errorf("Expected error to be a NoBidError instead of %v.", err)
 		}
 	}
+}
+
+func doRequest(t *testing.T, ts *httptest.Server, tmax time.Duration) (*openrtbutil.Response, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), tmax)
+	defer cancel()
+	br := &openrtb.BidRequest{
+		ID: "br-for-no-bid",
+	}
+
+	req, err := openrtbutil.NewRequest(ctx, br, ts.URL, nil)
+	if err != nil {
+		t.Fatal("Cannot create a bid request: ", err)
+	}
+
+	// Make the request to test server.
+	c := openrtbutil.NewClient(nil)
+	return c.Do(req)
 }

@@ -1,7 +1,6 @@
 package openrtb_test
 
 import (
-	"encoding/json"
 	"fmt"
 	"reflect"
 	"testing"
@@ -14,6 +13,13 @@ var SeatBidModelType = reflect.TypeOf(openrtb.SeatBid{})
 
 func TestSeatBidMarshalUnmarshal(t *testing.T) {
 	openrtbtest.VerifyModelAgainstFile(t, "seatbid.json", SeatBidModelType)
+}
+
+func TestSeatBid_Fields(t *testing.T) {
+	if err := openrtbtest.VerifyStructFieldNameWithStandardTextFile(
+		(*openrtb.SeatBid)(nil), "testdata/seatbid_std.txt"); err != "" {
+		t.Error(err)
+	}
 }
 
 func TestSeatBidValidation(t *testing.T) {
@@ -35,8 +41,8 @@ func TestSeatBidValidation(t *testing.T) {
 		{
 			&openrtb.SeatBid{
 				Bids: []*openrtb.Bid{
-					&openrtb.Bid{ID: "abidid", ImpressionID: "impid", Price: 1},
-					&openrtb.Bid{ID: "abidid1", ImpressionID: "impid1", Price: 1},
+					{ID: "abidid", ImpressionID: "impid", Price: 1},
+					{ID: "abidid1", ImpressionID: "impid1", Price: 1},
 				},
 			},
 			nil,
@@ -45,7 +51,7 @@ func TestSeatBidValidation(t *testing.T) {
 		{
 			&openrtb.SeatBid{
 				Bids: []*openrtb.Bid{
-					&openrtb.Bid{ID: ""},
+					{ID: ""},
 				},
 			},
 			openrtb.ErrInvalidBidID,
@@ -54,7 +60,7 @@ func TestSeatBidValidation(t *testing.T) {
 		{
 			&openrtb.SeatBid{
 				Bids: []*openrtb.Bid{
-					&openrtb.Bid{ID: "abidid", ImpressionID: "impid", Price: 1},
+					{ID: "abidid", ImpressionID: "impid", Price: 1},
 				},
 			},
 			nil,
@@ -71,43 +77,15 @@ func TestSeatBidValidation(t *testing.T) {
 }
 
 func TestSeatBid_Copy(t *testing.T) {
-	testCases := []struct {
-		seatbid *openrtb.SeatBid
-	}{
-		{
-			&openrtb.SeatBid{},
-		},
-		{
-			&openrtb.SeatBid{
-				Bids: []*openrtb.Bid{
-					&openrtb.Bid{ID: "1234"},
-				},
-				Seat:  "testSeat",
-				Group: 0,
-			},
-		},
+	seatBid := openrtb.SeatBid{}
+	if err := openrtbtest.VerifyDeepCopy(
+		&seatBid, seatBid.Copy()); err != nil {
+		t.Errorf("Copy() should be deep copy\n%v\n", err)
 	}
-	for _, testCase := range testCases {
-		b2 := testCase.seatbid.Copy()
 
-		if b2 == testCase.seatbid {
-			t.Errorf("Address of seatbid should not be the same. seatbid1: %v seatbid2: %v", &testCase.seatbid, &b2)
-		}
-
-		for i := range testCase.seatbid.Bids {
-			if &testCase.seatbid.Bids[i] == &b2.Bids[i] {
-				t.Errorf("Address of bid should not be the same. bid1: %v bid2: %v.", &testCase.seatbid.Bids[i], &b2.Bids[i])
-			}
-		}
-
-		// Remove pointer slices so we can check other values with reflect.DeepEqual().
-		testCase.seatbid.Bids = nil
-		b2.Bids = nil
-
-		if !reflect.DeepEqual(testCase.seatbid, b2) {
-			b1JSON, _ := json.MarshalIndent(testCase.seatbid, "", "  ")
-			b2JSON, _ := json.MarshalIndent(b2, "", "  ")
-			t.Errorf("Seatbids should hold the same values.\nExpected: %s\n Got: %s", b1JSON, b2JSON)
-		}
+	openrtbtest.FillWithNonNilValue(&seatBid)
+	if err := openrtbtest.VerifyDeepCopy(
+		&seatBid, seatBid.Copy()); err != nil {
+		t.Errorf("Copy() should be deep copy\n%v\n", err)
 	}
 }

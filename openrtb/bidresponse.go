@@ -4,13 +4,15 @@ import (
 	"encoding/json"
 	"fmt"
 	"reflect"
+
+	"github.com/Vungle/vungo/internal/util"
 )
 
 var emptyBid BidResponse
 
 // BidResponse type represents a top-level object received by an ad exchange server from various
 // buyers directly connected or proxy'ed by a DSP connection.
-// See OpenRTB 2.3.1 Sec 4.2.1.
+// See OpenRTB 2.5 Sec 4.2.1.
 //go:generate easyjson $GOFILE
 //easyjson:json
 type BidResponse struct {
@@ -22,7 +24,6 @@ type BidResponse struct {
 	NoBidReason NoBidReason `json:"nbr,omitempty"`
 
 	RawExtension json.RawMessage `json:"ext,omitempty"`
-	Bundle       string          `json:"bundle,omitempty"`
 	Extension    interface{}     `json:"-"` // Opaque value that can be used to store unmarshaled value in ext field.
 }
 
@@ -71,14 +72,15 @@ func (r *BidResponse) Copy() *BidResponse {
 
 	brCopy := *r
 
-	brCopy.SeatBids = []*SeatBid{}
-	for _, seat := range r.SeatBids {
-		brCopy.SeatBids = append(brCopy.SeatBids, seat.Copy())
+	if r.SeatBids != nil {
+		brCopy.SeatBids = make([]*SeatBid, len(r.SeatBids))
+		for i, seat := range r.SeatBids {
+			brCopy.SeatBids[i] = seat.Copy()
+		}
 	}
 
 	if r.Extension != nil {
-		brCopy.RawExtension = make(json.RawMessage, len(r.RawExtension))
-		copy(brCopy.RawExtension, r.RawExtension)
+		brCopy.RawExtension = util.DeepCopyJSONRawMsg(r.RawExtension)
 	}
 
 	return &brCopy

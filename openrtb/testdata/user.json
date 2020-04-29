@@ -14,5 +14,18 @@
     "region": "CA",
     "zip": "90049"
   },
+  "data": [
+    {
+      "id": "id",
+      "name": "name",
+      "segment": [
+        {
+          "id": "1",
+          "name": "name1",
+          "value": "v1"
+        }
+      ]
+    }
+  ],
   "ext": {"vungle":{"some":["arbitrary value","that","must be","compact JSON"]}}
 }

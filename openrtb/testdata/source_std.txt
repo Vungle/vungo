@@ -1,0 +1,15 @@
+Attribute
+Type
+Description
+fd
+Integer; recommended
+Entity responsible for the final impression sale decision, where 0 = exchange, 1 = upstream source.
+tid
+string; recommended
+Transaction ID that must be common across all participants in this bid request (e.g., potentially multiple exchanges).
+pchain
+string; recommended
+Payment ID chain string containing embedded syntax described in the TAG Payment ID Protocol v1.0.
+ext
+object
+Placeholder for exchange-specific extensions to OpenRTB.

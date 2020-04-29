@@ -1,0 +1,15 @@
+Attribute
+Type
+Description
+id
+string
+ID of the data segment specific to the data provider.
+name
+string
+Name of the data segment specific to the data provider.
+value
+string
+String representation of the data segment value.
+ext
+object
+Placeholder for exchange-specific extensions to OpenRTB.

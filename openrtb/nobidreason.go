@@ -24,24 +24,24 @@ func (n NoBidReason) Validate() error {
 	return nil
 }
 
-// Standard no-bid reasons specified by OpenRTB 2.3.1.
-// See http://www.iab.net/media/file/OpenRTB_API_Specification_Version_2_3_1.pdf.
+// Standard no-bid reasons specified by OpenRTB 2.5.
+// See https://www.iab.com/wp-content/uploads/2016/03/OpenRTB-API-Specification-Version-2-5-FINAL.pdf.
 //
 // NOTE: Don't rearrange the order. Add new ones to the bottom, above lastOpenRTBNoBidReason, as
 // well as to NoBidReasonNames.
 const (
-	NoBidReasonUnknown NoBidReason = iota
-	NoBidReasonTechnicalError
-	NoBidReasonInvalidRequest
-	NoBidReasonKnownWebSpider
-	NoBidReasonNonHumanTraffic
-	NoBidReasonProxyIP
-	NoBidReasonUnsupportedDevice
-	NoBidReasonBlockedPublisher
-	NoBidReasonUnmatchedUser
-	// Add new entries here.
-
-	lastOpenRTBNoBidReason
+	NoBidReasonUnknown           NoBidReason = 0  // Unknown Error
+	NoBidReasonTechnicalError    NoBidReason = 1  // Technical Error
+	NoBidReasonInvalidRequest    NoBidReason = 2  // Invalid Request
+	NoBidReasonKnownWebSpider    NoBidReason = 3  // Known Web Spider
+	NoBidReasonNonHumanTraffic   NoBidReason = 4  // Suspected Non-Human Traffic
+	NoBidReasonProxyIP           NoBidReason = 5  // Cloud, Data center, or Proxy IP
+	NoBidReasonUnsupportedDevice NoBidReason = 6  // Unsupported Device
+	NoBidReasonBlockedPublisher  NoBidReason = 7  // Blocked Publisher or Site
+	NoBidReasonUnmatchedUser     NoBidReason = 8  // Unmatched User
+	NoBidReasonDailyReaderCapMet NoBidReason = 9  // Daily Reader Cap Met
+	NoBidReasonDailyDomainCapMet NoBidReason = 10 // Daily Domain Cap Met
+	lastOpenRTBNoBidReason       NoBidReason = 11
 )
 
 // Custom no-bid reasons reserved by a Vungle ad exchange server, from 10000 - 10999.
@@ -116,6 +116,8 @@ var NoBidReasonNames = map[NoBidReason]string{
 	NoBidReasonUnsupportedDevice: "NO_BID_UNSUPPORTED_DEVICE",
 	NoBidReasonBlockedPublisher:  "NO_BID_BLOCKED_PUBLISHER",
 	NoBidReasonUnmatchedUser:     "NO_BID_UNMATCHED_USER",
+	NoBidReasonDailyReaderCapMet: "NO_BID_DAILY_READER_CAP_MET",
+	NoBidReasonDailyDomainCapMet: "NO_BID_DAILY_DOMAIN_CAP_MET",
 
 	NoBidReasonResponseTimeout:       "NO_BID_RESPONSE_TIMEOUT",
 	NoBidReasonRequestError:          "NO_BID_REQUEST_ERROR",

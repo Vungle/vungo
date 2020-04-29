@@ -18,6 +18,14 @@ var ErrInvalidBidRequestID = errors.New("bidrequest.id is invalid")
 // BidRequest does not have any impressions.
 var ErrInvalidBidRequestImpressions = errors.New("bidrequest.imps is invalid")
 
+// ErrInvalidBidRequestSeats represents a validation error when both wseat and bseat exist.
+var ErrInvalidBidRequestSeats = errors.New("bidrequest wseat and bseat should not coexist")
+
+// ErrBidRequestHasBothAppAndSite represents a validation error when an
+// BidRequest contains both non-nil App and non-nil Site.
+// Ref: OpenRTB 2.5 Spec 3.2.13 and 3.2.14
+var ErrBidRequestHasBothAppAndSite = errors.New("bidrequest contains both app and site")
+
 // ErrInvalidBidResponseID represents a validation error when a BidResponse
 // does not have a valid ID.
 var ErrInvalidBidResponseID = errors.New("bidresponse.id is invalid")

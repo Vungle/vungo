@@ -48,6 +48,7 @@ func (nb *NumericBool) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
+// Copy do deep copy of NumericBool.
 func (nb *NumericBool) Copy() *NumericBool {
 	if nb == nil {
 		return nil

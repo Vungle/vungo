@@ -2,7 +2,7 @@ package openrtb
 
 // Publisher type denotes the publisher of the media in which the ad will be displayed. Typically,
 // a publisher identifies the seller of the impression auctioned.
-// See OpenRTB 2.3.1 Sec 3.2.8.
+// See OpenRTB 2.5 Sec 3.2.15.
 //go:generate easyjson $GOFILE
 //easyjson:json
 type Publisher struct {

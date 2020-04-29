@@ -1,0 +1,53 @@
+{
+  "mimes": ["audio/mp4", "audio/mpeg"],
+  "minduration": 1,
+  "maxduration": 15,
+  "protocols": [2, 3, 7, 8],
+  "startdelay": 10,
+  "sequence": 1,
+  "battr": [1, 3, 12, 17],
+  "maxextended": 12,
+  "minbitrate": 128,
+  "maxbitrate": 256,
+  "delivery": [1, 2],
+  "companionad": [{
+    "w": 100,
+    "h": 200,
+    "format": [{
+      "w": 320,
+      "h": 50
+    }],
+    "hmin": 1,
+    "wmin": 1,
+    "hmax": 200,
+    "wmax": 100,
+    "id": "test",
+    "btype": [
+      1,
+      2
+    ],
+    "battr": [
+      1,
+      2
+    ],
+    "pos": 1,
+    "mimes": [
+      "image/jpg"
+    ],
+    "topframe": 1,
+    "expdir": [
+      1
+    ],
+    "api": [
+      1
+    ],
+    "ext": {}
+  }],
+  "api": [1, 5, 6],
+  "companiontype": [1],
+  "maxseq": 2,
+  "feed": 3,
+  "stitched": 1,
+  "nvol": 3,
+  "ext":{"audiotype":"rewarded","skip":1}
+}

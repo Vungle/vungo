@@ -9,6 +9,8 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/Vungle/vungo/internal/util"
+	"github.com/Vungle/vungo/internal/util/utiltest"
 	"github.com/Vungle/vungo/openrtb"
 	"github.com/go-test/deep"
 )
@@ -25,7 +27,7 @@ func UnmarshalFromJSONFile(file string, model interface{}) error {
 	return json.Unmarshal(jsonBytes, model)
 }
 
-// VerifyModelAgainstFile verifies the correctness of a particular OpenRTB 2.3.1 object against a
+// VerifyModelAgainstFile verifies the correctness of a particular OpenRTB 2.5 object against a
 // *.json file by first unmarshals the JSON file into the specified model object, and then marshals
 // the object back into a string to be compared against the JSON file.
 //
@@ -102,6 +104,51 @@ func verifyModelNonEmptyFields(t Testing, jsonBytes []byte, modelType reflect.Ty
 			}
 		}
 	}
+}
+
+// VerifyStructFieldNameWithStandardText search all struct field json names in
+// standard text to verify these names are correct.
+// NOTE: Please COPY standard text from iAB OpenRTB Spec pdf file directly,
+// rather than input manually.
+func VerifyStructFieldNameWithStandardText(
+	objPtr interface{}, standardText string) string {
+	modelType := reflect.TypeOf(objPtr).Elem()
+	lines := strings.Split(standardText, "\n")
+	possibleFieldNames := map[string]bool{}
+	for _, line := range lines {
+		possibleFieldNames[strings.TrimSpace(line)] = true
+	}
+
+	var result []string
+	// Search json tag name in standard
+	total := modelType.NumField()
+	for i := 0; i < total; i++ {
+		field := modelType.Field(i)
+		if len(field.PkgPath) != 0 { // ignore private field
+			continue
+		}
+		name, ok := getJSONPropertyNameFromFieldTag(field)
+		if !ok || len(name) == 0 { // Ignore fields without a JSON tag.
+			continue
+		}
+		if !possibleFieldNames[name] {
+			result = append(result, fmt.Sprintf("Model %v field %s"+
+				" with json tag %s doesn't exist in standard",
+				modelType, field.Name, name))
+		}
+	}
+	return strings.Join(result, "\n")
+}
+
+// VerifyStructFieldNameWithStandardTextFile search all struct field json names
+// in standard text to verify these names are correct.
+// NOTE: Please COPY standard text from iAB OpenRTB Spec pdf file directly,
+// rather than input manually.
+func VerifyStructFieldNameWithStandardTextFile(
+	objPtr interface{}, file string) string {
+	stdBytes, _ := ioutil.ReadFile(file)
+	stdStr := string(stdBytes)
+	return VerifyStructFieldNameWithStandardText(objPtr, stdStr)
 }
 
 // getNumOfJSONFields method returns the number of fields that are not annotated with JSON encoding.
@@ -222,6 +269,11 @@ func FillWithNonNilValue(v interface{}) {
 			for i := 0; i < rv.Len(); i++ {
 				FillWithNonNilValue(rv.Index(i))
 			}
+		}
+	case reflect.Interface:
+		if rv.IsNil() && rv.CanSet() {
+			var copiable util.Copiable = &utiltest.MockCopiable{}
+			rv.Set(reflect.ValueOf(copiable))
 		}
 	default:
 		// primitive types or unsupported types
