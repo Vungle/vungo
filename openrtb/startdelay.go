@@ -14,7 +14,7 @@ const (
 	StartDelayGenericPostRoll StartDelay = -2 // StartDelayGenericPostRoll represents Generic Post-Roll.
 )
 
-// Copy do deep copy of NumericBool.
+// Copy do deep copy of StartDelay.
 func (nb *StartDelay) Copy() *StartDelay {
 	if nb == nil {
 		return nil
