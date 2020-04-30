@@ -13,7 +13,6 @@ before_install:
   - go mod graph
 
 script:
-  - make generate
   - make test
   - make vet
   - make lint
