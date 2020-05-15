@@ -230,7 +230,7 @@ type Video struct {
 	// Description:
 	//   Array of Banner objects (Section 3.2.6) if companion ads are
 	//   available.
-	CompanionAds []Banner `json:"companionad"`
+	CompanionAds []Banner `json:"companionad,omitempty"`
 
 	// Attribute:
 	//   api
@@ -252,7 +252,7 @@ type Video struct {
 	//   the companionad array. If one of these banners will be
 	//   rendered as an end-card, this can be specified using the vcm
 	//   attribute with the particular banner (Section 3.2.6).
-	CompanionTypes []CompanionType `json:"companiontype"`
+	CompanionTypes []CompanionType `json:"companiontype,omitempty"`
 
 	// Attribute:
 	//   ext
