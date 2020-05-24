@@ -22,10 +22,10 @@ generate:
 	go generate ./...
 
 check_git_diff:
-	@if git diff --quiet; then echo "All commited"; else echo "Error: Not commit yet"; exit 1; fi
+	@if git diff --quiet; then echo "All commited"; else echo "Error: Not commit yet"; git diff; exit 1; fi
 
 check_generate: check_git_diff generate
-	@if git diff --quiet; then echo "OK, generate is not needed."; else echo "Error: Not commit yet or need generate."; exit 1; fi
+	@if git diff --quiet; then echo "OK, generate is not needed."; else echo "Error: need generate."; git diff; exit 1; fi
 
 fmt:
 	gofmt -w $(GOFMT_FILES)
