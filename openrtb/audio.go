@@ -124,7 +124,7 @@ type Audio struct {
 	// Description:
 	//   Array of Banner objects (Section 3.2.6) if companion ads are
 	//   available.
-	CompanionAds []Banner `json:"companionad"`
+	CompanionAds []Banner `json:"companionad,omitempty"`
 
 	// Attribute:
 	//   api
@@ -144,7 +144,7 @@ type Audio struct {
 	//   Supported DAAST companion ad types. Refer to List 5.14.
 	//   Recommended if companion Banner objects are included via
 	//   the companionad array.
-	CompanionTypes []CompanionType `json:"companiontype"`
+	CompanionTypes []CompanionType `json:"companiontype,omitempty"`
 
 	// Attribute:
 	//   maxseq
