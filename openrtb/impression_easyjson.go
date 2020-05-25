@@ -1043,12 +1043,10 @@ func easyjson7ebaa60bEncodeGithubComVungleVungoOpenrtb2(out *jwriter.Writer, in 
 		out.RawString(prefix)
 		out.Int(int(in.Position))
 	}
-	{
+	if len(in.CompanionAds) != 0 {
 		const prefix string = ",\"companionad\":"
 		out.RawString(prefix)
-		if in.CompanionAds == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v34, v35 := range in.CompanionAds {
 				if v34 > 0 {
@@ -1073,12 +1071,10 @@ func easyjson7ebaa60bEncodeGithubComVungleVungoOpenrtb2(out *jwriter.Writer, in 
 			out.RawByte(']')
 		}
 	}
-	{
+	if len(in.CompanionTypes) != 0 {
 		const prefix string = ",\"companiontype\":"
 		out.RawString(prefix)
-		if in.CompanionTypes == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
-			out.RawString("null")
-		} else {
+		{
 			out.RawByte('[')
 			for v38, v39 := range in.CompanionTypes {
 				if v38 > 0 {
