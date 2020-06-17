@@ -59,37 +59,42 @@ func TestCheckMediaFileURI(t *testing.T) {
 	}{
 		{
 			desc: "normal case",
-			uri:  "http://v3-ad.ixigua.com/8a3673dd6dd4bc9eb8383c927182d4e4/5ee0485f/video/tos/cn/tos-cn-ve-51/629582a5eaa644ac9a2543c2cde21144/toutiao.mp4",
+			uri:  "http://a.b.c/videofile.mp4",
 			err:  nil,
 		},
 		{
 			desc: "https protocol",
-			uri:  "https://v3-ad.ixigua.com/8a3673dd6dd4bc9eb8383c927182d4e4/5ee0485f/video/tos/cn/tos-cn-ve-51/629582a5eaa644ac9a2543c2cde21144/toutiao.mp4",
+			uri:  "https://a.b.c/videofile.mp4",
 			err:  nil,
 		},
 		{
 			desc: "with subfix",
-			uri:  "https://v3-ad.ixigua.com/8a3673dd6dd4bc9eb8383c927182d4e4/5ee0485f/video/tos/cn/tos-cn-ve-51/629582a5eaa644ac9a2543c2cde21144/toutiao.mp4?1=1",
+			uri:  "https://a.b.c/videofile.mp4?1=1",
 			err:  nil,
 		},
 		{
 			desc: "Upper case extension",
-			uri:  "https://v3-ad.ixigua.com/8a3673dd6dd4bc9eb8383c927182d4e4/5ee0485f/video/tos/cn/tos-cn-ve-51/629582a5eaa644ac9a2543c2cde21144/toutiao.MP4",
+			uri:  "https://a.b.c/videofile.MP4",
+			err:  nil,
+		},
+		{
+			desc: "with invalid subfix",
+			uri:  "https://a.b.c/videofile.mp4#1=1",
 			err:  nil,
 		},
 		{
 			desc: "invalid mime type",
-			uri:  "abchttps://v3-ad.ixigua.com/8a3673dd6dd4bc9eb8383c927182d4e4/5ee0485f/video/tos/cn/tos-cn-ve-51/629582a5eaa644ac9a2543c2cde21144/toutiao_mp4",
+			uri:  "abchttps://a.b.c/videofile_mp4",
 			err:  vast.ErrorInvalidMediaFileURI,
 		},
 		{
 			desc: "with invalid protocal",
-			uri:  "abchttps://v3-ad.ixigua.com/8a3673dd6dd4bc9eb8383c927182d4e4/5ee0485f/video/tos/cn/tos-cn-ve-51/629582a5eaa644ac9a2543c2cde21144/toutiao.mp4",
+			uri:  "abchttps://a.b.c/videofile.mp4",
 			err:  vast.ErrorInvalidMediaFileURI,
 		},
 		{
 			desc: "with invalid subfix",
-			uri:  "https://v3-ad.ixigua.com/8a3673dd6dd4bc9eb8383c927182d4e4/5ee0485f/video/tos/cn/tos-cn-ve-51/629582a5eaa644ac9a2543c2cde21144/toutiao.mp4123",
+			uri:  "https://a.b.c/videofile.mp4123",
 			err:  vast.ErrorInvalidMediaFileURI,
 		},
 		{

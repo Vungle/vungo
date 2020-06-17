@@ -90,6 +90,7 @@ func (mediaFile *MediaFile) Validate() error {
 	return nil
 }
 
+// The regex will check if the given path string has .mp4 extension.
 var re = regexp.MustCompile(`^([^#])+\.mp4$`)
 
 func checkMediaFileURI(uri TrimmedData) error {
