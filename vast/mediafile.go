@@ -1,6 +1,7 @@
 package vast
 
 import (
+	"net/url"
 	"regexp"
 	"strings"
 
@@ -89,10 +90,17 @@ func (mediaFile *MediaFile) Validate() error {
 	return nil
 }
 
-var re = regexp.MustCompile(`^https?://([^#?])+\.mp4([?#].*)?$`)
+var re = regexp.MustCompile(`^([^#])+\.mp4$`)
 
 func checkMediaFileURI(uri TrimmedData) error {
-	if !re.MatchString(strings.ToLower(string(uri))) {
+	u, err := url.Parse(string(uri))
+	if err != nil {
+		return ErrorInvalidMediaFileURI
+	}
+	if strings.ToLower(u.Scheme) != "http" && strings.ToLower(u.Scheme) != "https" {
+		return ErrorInvalidMediaFileURI
+	}
+	if !re.MatchString(strings.ToLower(u.Path)) {
 		return ErrorInvalidMediaFileURI
 	}
 	return nil
