@@ -50,3 +50,65 @@ func TestMediaFileWithWhitespace(t *testing.T) {
 		t.Errorf("Expected CDATA to be 'http://it-is-just-me.com' instead of '%s'.", v.Uri)
 	}
 }
+
+func TestCheckMediaFileURI(t *testing.T) {
+	tests := []struct {
+		desc string
+		uri  vast.TrimmedData
+		err  error
+	}{
+		{
+			desc: "normal case",
+			uri:  "http://v3-ad.ixigua.com/8a3673dd6dd4bc9eb8383c927182d4e4/5ee0485f/video/tos/cn/tos-cn-ve-51/629582a5eaa644ac9a2543c2cde21144/toutiao.mp4",
+			err:  nil,
+		},
+		{
+			desc: "https protocol",
+			uri:  "https://v3-ad.ixigua.com/8a3673dd6dd4bc9eb8383c927182d4e4/5ee0485f/video/tos/cn/tos-cn-ve-51/629582a5eaa644ac9a2543c2cde21144/toutiao.mp4",
+			err:  nil,
+		},
+		{
+			desc: "with subfix",
+			uri:  "https://v3-ad.ixigua.com/8a3673dd6dd4bc9eb8383c927182d4e4/5ee0485f/video/tos/cn/tos-cn-ve-51/629582a5eaa644ac9a2543c2cde21144/toutiao.mp4?1=1",
+			err:  nil,
+		},
+		{
+			desc: "Upper case extension",
+			uri:  "https://v3-ad.ixigua.com/8a3673dd6dd4bc9eb8383c927182d4e4/5ee0485f/video/tos/cn/tos-cn-ve-51/629582a5eaa644ac9a2543c2cde21144/toutiao.MP4",
+			err:  nil,
+		},
+		{
+			desc: "invalid mime type",
+			uri:  "abchttps://v3-ad.ixigua.com/8a3673dd6dd4bc9eb8383c927182d4e4/5ee0485f/video/tos/cn/tos-cn-ve-51/629582a5eaa644ac9a2543c2cde21144/toutiao_mp4",
+			err:  vast.ErrorInvalidMediaFileURI,
+		},
+		{
+			desc: "with invalid protocal",
+			uri:  "abchttps://v3-ad.ixigua.com/8a3673dd6dd4bc9eb8383c927182d4e4/5ee0485f/video/tos/cn/tos-cn-ve-51/629582a5eaa644ac9a2543c2cde21144/toutiao.mp4",
+			err:  vast.ErrorInvalidMediaFileURI,
+		},
+		{
+			desc: "with invalid subfix",
+			uri:  "https://v3-ad.ixigua.com/8a3673dd6dd4bc9eb8383c927182d4e4/5ee0485f/video/tos/cn/tos-cn-ve-51/629582a5eaa644ac9a2543c2cde21144/toutiao.mp4123",
+			err:  vast.ErrorInvalidMediaFileURI,
+		},
+		{
+			desc: "with invalid file extension",
+			uri:  "https://a.b.c/videofile?name=xxx.mp4",
+			err:  vast.ErrorInvalidMediaFileURI,
+		},
+		{
+			desc: "with invalid file extension",
+			uri:  "https://a.b.c/videofile#xxx.mp4",
+			err:  vast.ErrorInvalidMediaFileURI,
+		},
+	}
+	for _, test := range tests {
+		t.Run(test.desc, func(t *testing.T) {
+			got := vast.CheckMediaFileURI(test.uri)
+			if got != test.err {
+				t.Errorf("Expect error %#v, got error %#v", test.err, got)
+			}
+		})
+	}
+}

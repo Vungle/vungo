@@ -48,6 +48,8 @@ var (
 
 	ErrMediaFileMissUri = errors.New("ErrMediaFile miss Uri")
 
+	ErrorInvalidMediaFileURI = errors.New("invalid media file URI")
+
 	ErrMediaFileSize = errors.New("The width and height of MediaFile should be greater than zero")
 
 	ErrMediaFileUnsupportedMimeType = errors.New("The MimeType in the MediaFile is not supported")

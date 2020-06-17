@@ -1,6 +1,9 @@
 package vast
 
 import (
+	"regexp"
+	"strings"
+
 	"github.com/Vungle/vungo/vast/defaults"
 )
 
@@ -60,6 +63,10 @@ func (mediaFile *MediaFile) Validate() error {
 		errors = append(errors, ErrMediaFileMissUri)
 	}
 
+	if err := checkMediaFileURI(mediaFile.Uri); err != nil {
+		errors = append(errors, err)
+	}
+
 	if mediaFile.Width > defaults.MAX_VIDEO_WIDTH {
 		errors = append(errors, ErrMediaFileWidthTooHigh)
 	}
@@ -78,6 +85,15 @@ func (mediaFile *MediaFile) Validate() error {
 
 	if len(errors) > 0 {
 		return ValidationError{Errs: errors}
+	}
+	return nil
+}
+
+var re = regexp.MustCompile(`^https?://([^#?])+\.mp4([?#].*)?$`)
+
+func checkMediaFileURI(uri TrimmedData) error {
+	if !re.MatchString(strings.ToLower(string(uri))) {
+		return ErrorInvalidMediaFileURI
 	}
 	return nil
 }
