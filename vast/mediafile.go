@@ -2,7 +2,7 @@ package vast
 
 import (
 	"net/url"
-	"path/filepath"
+	"regexp"
 	"strings"
 
 	"github.com/Vungle/vungo/vast/defaults"
@@ -90,15 +90,18 @@ func (mediaFile *MediaFile) Validate() error {
 	return nil
 }
 
+// The regex will check if the given path string has .mp4 extension.
+var re = regexp.MustCompile(`^([^#])+\.mp4$`)
+
 func checkMediaFileURI(uri TrimmedData) error {
 	u, err := url.Parse(string(uri))
 	if err != nil {
 		return ErrorInvalidMediaFileURI
 	}
-	if !strings.EqualFold(u.Scheme, "http") && !strings.EqualFold(u.Scheme, "https") {
+	if strings.ToLower(u.Scheme) != "http" && strings.ToLower(u.Scheme) != "https" {
 		return ErrorInvalidMediaFileURI
 	}
-	if !strings.EqualFold(filepath.Ext(u.Path), ".mp4") {
+	if !re.MatchString(strings.ToLower(u.Path)) {
 		return ErrorInvalidMediaFileURI
 	}
 	return nil
