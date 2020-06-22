@@ -65,7 +65,7 @@
         height="16"
         scalable="true"
         maintainAspectRatio="true"
-        apiFramework="Vungle Exchange"><![CDATA[http://link/to/the/video.mp4]]></MediaFile>
+        apiFramework="Vungle Exchange"><![CDATA[http://link/to/the/video]]></MediaFile>
     <MediaFile
         id="some-id"
         delivery="progressive"
@@ -78,7 +78,7 @@
         height="16"
         scalable="true"
         maintainAspectRatio="true"
-        apiFramework="Vungle Exchange"><![CDATA[http://link/to/the/video.mp4]]></MediaFile>
+        apiFramework="Vungle Exchange"><![CDATA[http://link/to/the/video]]></MediaFile>
   </MediaFiles>
   <CreativeExtensions>
     <CreativeExtension>
