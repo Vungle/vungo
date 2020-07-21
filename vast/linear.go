@@ -72,9 +72,9 @@ func (linear *Linear) Validate() error {
 				// Merge all errors which are not mime type errors.
 				if ve.Errs[0] != ErrMediaFileUnsupportedMimeType {
 					noneMimeTypeErrors = append(noneMimeTypeErrors, ve.Errs...)
+				} else {
+					hasMimeTypeErr = true
 				}
-			} else {
-				hasMimeTypeErr = true
 			}
 		}
 	}
