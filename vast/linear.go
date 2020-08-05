@@ -56,34 +56,38 @@ func (linear *Linear) Validate() error {
 		}
 	}
 
-	var validMedia *MediaFile
-
+	var validMediaFiles []*MediaFile
 	var err error
+
+	var hasMimeTypeErr bool
 	noneMimeTypeErrors := make([]error, 0)
 	for _, mediaFile := range linear.MediaFiles {
 		err = mediaFile.Validate()
 		if err == nil {
-			validMedia = mediaFile
-			break
+			validMediaFiles = append(validMediaFiles, mediaFile)
+			//break
 		} else {
 			ve, ok := err.(ValidationError)
 			if ok {
 				// Merge all errors which are not mime type errors.
 				if ve.Errs[0] != ErrMediaFileUnsupportedMimeType {
 					noneMimeTypeErrors = append(noneMimeTypeErrors, ve.Errs...)
+				} else {
+					hasMimeTypeErr = true
 				}
 			}
 		}
 	}
 
-	if err != nil {
+	if len(validMediaFiles) > 0 {
+		linear.MediaFiles = validMediaFiles
+	} else {
 		if len(noneMimeTypeErrors) > 0 {
 			errors = append(errors, noneMimeTypeErrors...)
-		} else {
+		}
+		if hasMimeTypeErr {
 			errors = append(errors, ErrMediaFileUnsupportedMimeType)
 		}
-	} else {
-		linear.MediaFiles = []*MediaFile{validMedia}
 	}
 
 	// No need to validate Icon which is for VAST 3.0 only.
