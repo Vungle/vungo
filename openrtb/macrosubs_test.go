@@ -130,3 +130,37 @@ func TestMacroSubsErrCases(t *testing.T) {
 		t.Errorf(`Expected "auction1234seatbid1", got "%s" instead.`, result)
 	}
 }
+
+func TestMacroSubs_LossNotification(t *testing.T) {
+	bid := &openrtb.Bid{Price: 0.12}
+	seatBid := &openrtb.SeatBid{Bids: []*openrtb.Bid{bid}}
+	bidRes := &openrtb.BidResponse{SeatBids: []*openrtb.SeatBid{seatBid}}
+	tests := []struct {
+		input    string
+		inputPrice float64
+		expected string
+	}{
+		{
+			input:"abc${AUCTION_PRICE}def",
+			inputPrice:0,
+			expected: "abcdef",
+		},
+		{
+			input:"abc${AUCTION_PRICE}def",
+			inputPrice: 1.12,
+			expected: "abc1.120000000def",
+		},
+	}
+	for i, test := range tests {
+		t.Run(fmt.Sprintf("%d", i), func(t *testing.T) {
+			ar := auctionResult{
+				price:    test.inputPrice,
+				currency: openrtb.CurrencyUSD,
+			}
+			actual := openrtb.MacroSubs(test.input, bidRes.SeatBids[0], bidRes.SeatBids[0].Bids[0], ar, testLossReason)
+			if actual != test.expected {
+				t.Errorf(`test MacroSubs() mismatch, expected "%s", but got "%s" instead.`, test.expected, actual)
+			}
+		})
+	}
+}
