@@ -136,19 +136,19 @@ func TestMacroSubs_LossNotification(t *testing.T) {
 	seatBid := &openrtb.SeatBid{Bids: []*openrtb.Bid{bid}}
 	bidRes := &openrtb.BidResponse{SeatBids: []*openrtb.SeatBid{seatBid}}
 	tests := []struct {
-		input    string
+		input      string
 		inputPrice float64
-		expected string
+		expected   string
 	}{
 		{
-			input:"abc${AUCTION_PRICE}def",
-			inputPrice:0,
-			expected: "abcdef",
+			input:      "abc${AUCTION_PRICE}def",
+			inputPrice: 0,
+			expected:   "abcdef",
 		},
 		{
-			input:"abc${AUCTION_PRICE}def",
+			input:      "abc${AUCTION_PRICE}def",
 			inputPrice: 1.12,
-			expected: "abc1.120000000def",
+			expected:   "abc1.120000000def",
 		},
 	}
 	for i, test := range tests {
