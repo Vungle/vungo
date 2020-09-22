@@ -131,7 +131,7 @@ func TestMacroSubsErrCases(t *testing.T) {
 	}
 }
 
-func TestMacroSubs_LossNotification(t *testing.T) {
+func TestMacroUnRevealPrice(t *testing.T) {
 	bid := &openrtb.Bid{Price: 0.12}
 	seatBid := &openrtb.SeatBid{Bids: []*openrtb.Bid{bid}}
 	bidRes := &openrtb.BidResponse{SeatBids: []*openrtb.SeatBid{seatBid}}
