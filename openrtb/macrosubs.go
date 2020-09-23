@@ -72,13 +72,21 @@ var findMatchesPool = sync.Pool{
 // MacroSubs assumes that the BidResponse has exactly one seat, which has exactly one bid.
 // If this is not true, it will return empty string and an error.
 func MacroSubs(stringToSub string, seat *SeatBid, bid *Bid, settlement Settlement, reason LossReason) string {
+	var price string
+	// According to OpenRTB spec2.5, Exchange-specific policy may preclude support for loss notices or
+	// the disclosure of winning clearing prices resulting in ${AUCTION_PRICE} macros being removed (i.e.,
+	// replaced with a zero-length string).
+	if settlement.Price() > 0 {
+		price = strconv.FormatFloat(settlement.Price(), 'f', 9, 64)
+	}
+
 	m := map[macro]string{
 		auctionID:       settlement.AuctionID(),
 		auctionBidID:    bid.ID,
 		auctionImpID:    bid.ImpressionID,
 		auctionSeatID:   seat.Seat,
 		auctionAdID:     bid.AdID,
-		auctionPrice:    strconv.FormatFloat(settlement.Price(), 'f', 9, 64),
+		auctionPrice:    price,
 		auctionCurrency: string(settlement.Currency()),
 		auctionLoss:     strconv.Itoa(int(reason)),
 	}
