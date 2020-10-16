@@ -1,11 +1,11 @@
 package openrtb
 
-// Settlement is the interface that provides auction settlement details.
+// AuctionInfo is the interface that provides auction settlement details.
 //
 // Exchanges should implement this interface on the relevant auction detail objects.
 //
 // Price returns the auction settlement price.
-type Settlement interface {
+type AuctionInfo interface {
 	AuctionID() string
 	Currency() Currency
 	Price() float64
