@@ -13,7 +13,7 @@ type auctionResult struct {
 	id       string
 }
 
-func (ar auctionResult) Price() float64 {
+func (ar auctionResult) AuctionPrice() float64 {
 	return float64(ar.price)
 }
 

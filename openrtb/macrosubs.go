@@ -71,23 +71,23 @@ var findMatchesPool = sync.Pool{
 // It takes a string which the substitutions should be performed on, and a *BidResponse to determine the values to be substituted.
 // MacroSubs assumes that the BidResponse has exactly one seat, which has exactly one bid.
 // If this is not true, it will return empty string and an error.
-func MacroSubs(stringToSub string, seat *SeatBid, bid *Bid, settlement Settlement, reason LossReason) string {
+func MacroSubs(stringToSub string, seat *SeatBid, bid *Bid, auctionInfo AuctionInfo, reason LossReason) string {
 	var price string
 	// According to OpenRTB spec2.5, Exchange-specific policy may preclude support for loss notices or
 	// the disclosure of winning clearing prices resulting in ${AUCTION_PRICE} macros being removed (i.e.,
 	// replaced with a zero-length string).
-	if settlement.Price() > 0 {
-		price = strconv.FormatFloat(settlement.Price(), 'f', 9, 64)
+	if auctionInfo.AuctionPrice() > 0 {
+		price = strconv.FormatFloat(auctionInfo.AuctionPrice(), 'f', 9, 64)
 	}
 
 	m := map[macro]string{
-		auctionID:       settlement.AuctionID(),
+		auctionID:       auctionInfo.AuctionID(),
 		auctionBidID:    bid.ID,
 		auctionImpID:    bid.ImpressionID,
 		auctionSeatID:   seat.Seat,
 		auctionAdID:     bid.AdID,
 		auctionPrice:    price,
-		auctionCurrency: string(settlement.Currency()),
+		auctionCurrency: string(auctionInfo.Currency()),
 		auctionLoss:     strconv.Itoa(int(reason)),
 	}
 	replacer := createReplacer(m)
