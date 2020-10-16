@@ -1,6 +1,6 @@
 package openrtb
 
-// AuctionInfo is the interface that provides auction settlement details.
+// AuctionInfo is the interface that provides auction details.
 //
 // Exchanges should implement this interface on the relevant auction detail objects.
 //
