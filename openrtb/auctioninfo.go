@@ -10,6 +10,6 @@ type AuctionInfo interface {
 	AuctionID() string
 	// Currency method returns currency.
 	Currency() Currency
-	// SettlementPrice method returns the settlement price.
-	SettlementPrice() float64
+	// AuctionPrice method returns the settlement price.
+	AuctionPrice() float64
 }
