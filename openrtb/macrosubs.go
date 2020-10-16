@@ -76,8 +76,8 @@ func MacroSubs(stringToSub string, seat *SeatBid, bid *Bid, auctionInfo AuctionI
 	// According to OpenRTB spec2.5, Exchange-specific policy may preclude support for loss notices or
 	// the disclosure of winning clearing prices resulting in ${AUCTION_PRICE} macros being removed (i.e.,
 	// replaced with a zero-length string).
-	if auctionInfo.Price() > 0 {
-		price = strconv.FormatFloat(auctionInfo.Price(), 'f', 9, 64)
+	if auctionInfo.SettlementPrice() > 0 {
+		price = strconv.FormatFloat(auctionInfo.SettlementPrice(), 'f', 9, 64)
 	}
 
 	m := map[macro]string{
