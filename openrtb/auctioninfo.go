@@ -6,7 +6,10 @@ package openrtb
 //
 // Price returns the auction settlement price.
 type AuctionInfo interface {
+	// AuctionID method returns the auction ID for the bid.
 	AuctionID() string
+	// Currency method returns currency.
 	Currency() Currency
+	// Price method returns the settlement price.
 	Price() float64
 }
