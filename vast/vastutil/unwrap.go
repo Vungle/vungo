@@ -4,6 +4,8 @@ import (
 	"context"
 	"crypto/tls"
 	"encoding/xml"
+	"io"
+	"io/ioutil"
 	"net/http"
 
 	"github.com/Vungle/vungo/vast"
@@ -63,13 +65,12 @@ func unwrap(ctx context.Context, v *vast.Vast, unwrappedList []*vast.Vast, ua, i
 	}
 	defer func() {
 		if resp != nil && resp.Body != nil {
-			resp.Body.Close()
+			_, _ = io.Copy(ioutil.Discard, resp.Body)
+			_ = resp.Body.Close()
 		}
 	}()
 
-	if err != nil {
-		return nil, err
-	} else if err = xml.NewDecoder(resp.Body).Decode(&innerVast); err != nil {
+	if err = xml.NewDecoder(resp.Body).Decode(&innerVast); err != nil {
 		return nil, err
 	} else {
 		// TODO(@garukun): Given a set of super fast VAST hosts and a starting wrapper VAST XML that
