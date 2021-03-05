@@ -4,6 +4,8 @@ import (
 	"context"
 	"crypto/tls"
 	"encoding/xml"
+	"io"
+	"io/ioutil"
 	"net/http"
 
 	"github.com/Vungle/vungo/vast"
@@ -63,7 +65,8 @@ func unwrap(ctx context.Context, v *vast.Vast, unwrappedList []*vast.Vast, ua, i
 	}
 	defer func() {
 		if resp != nil && resp.Body != nil {
-			resp.Body.Close()
+			_, _ = io.Copy(ioutil.Discard, resp.Body)
+			_ = resp.Body.Close()
 		}
 	}()
 
