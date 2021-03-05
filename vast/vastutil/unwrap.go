@@ -70,9 +70,7 @@ func unwrap(ctx context.Context, v *vast.Vast, unwrappedList []*vast.Vast, ua, i
 		}
 	}()
 
-	if err != nil {
-		return nil, err
-	} else if err = xml.NewDecoder(resp.Body).Decode(&innerVast); err != nil {
+	if err = xml.NewDecoder(resp.Body).Decode(&innerVast); err != nil {
 		return nil, err
 	} else {
 		// TODO(@garukun): Given a set of super fast VAST hosts and a starting wrapper VAST XML that
