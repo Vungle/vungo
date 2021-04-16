@@ -1,7 +1,7 @@
 TEST?=./openrtb/...  # vast can't pass go vet and golint right now
 GOFMT_FILES?=$$(find . -not -path "./vendor/*" -type f -name '*.go')
 PKG_PREFIX=github.com/Vungle/vungo
-PKGS=$(PKG_PREFIX)/openrtb $(PKG_PREFIX)/vast
+PKGS=$(PKG_PREFIX)/openrtb $(PKG_PREFIX)/vast $(PKG_PREFIX)/native
 
 export GO111MODULE=on
 
