@@ -1,8 +1,6 @@
 package response
 
 import (
-	"encoding/json"
-
 	"github.com/Vungle/vungo/openrtb/native"
 )
 
@@ -37,16 +35,6 @@ type Data struct {
 	Len int64 `json:"len,omitempty"`
 
 	// Field:
-	//   label
-	// Scope:
-	//   optional in 1.1, deprecated/removed in 1.2
-	// Type:
-	//   string
-	// Description:
-	//   The optional formatted string name of the data type to be displayed.
-	Label string `json:"label,omitempty"`
-
-	// Field:
 	//   value
 	// Scope:
 	//   required
@@ -65,5 +53,5 @@ type Data struct {
 	//   object
 	// Description:
 	//   This object is a placeholder that may contain custom JSON agreed to by the parties to support flexibility beyond the standard defined in this specification
-	Ext json.RawMessage `json:"ext,omitempty"`
+	Extension interface{} `json:"ext,omitempty"`
 }

@@ -1,0 +1,15 @@
+Attribute
+Type
+Description
+
+text
+string; required
+The text associated with the text element.
+
+len
+integer; optional
+Maximum length of the text in the element’s response.
+
+ext
+object; optional
+This object is a placeholder that may contain custom JSON agreed to by the parties to support flexibility beyond the standard defined in this specification

@@ -1,0 +1,36 @@
+Attribute
+Type
+Description
+
+
+id 
+int; required
+Unique asset ID, assigned by exchange. Typically a counter for the array
+
+required 
+int; optional
+Set to 1 if asset is required(exchange will not accept a bidwithout it)
+
+link
+object; optional
+Video object for video assets.See the Video request objectdefinition.  Note that in-stream(ie preroll, etc) video ads are not part of Native.  Native ads may contain a video as the ad creative itself.
+
+title
+object; recommended
+Title object for title assets. See TitleObject definition.
+
+img
+object; recommended
+Image object for image assets.See ImageObject definition.
+
+video
+object; optional
+Video object for video assets.See the Video request objectdefinition.  Note that in-stream(ie preroll, etc) video ads are not part of Native.  Native ads may contain a video as the ad creative itself.
+
+data
+object; recommended
+Data object for brand name,description, ratings, prices etc. See DataObject definition.
+
+ext
+object; optional
+This object is a placeholder that may contain custom JSON agreed to by the parties to support flexibility beyond the standard defined in this specification

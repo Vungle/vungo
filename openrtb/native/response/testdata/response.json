@@ -1,0 +1,28 @@
+{
+  "ver": "1.2",
+  "assets": [
+    {
+      "id": 1,
+      "required": 1,
+      "img": {
+        "type": 3
+      }
+    }
+  ],
+  "eventtrackers": [
+    {
+      "event": 1,
+      "methods": [
+        1,
+        2
+      ]
+    }
+  ],
+  "assetsurl": "abc.jpg",
+  "dcourl": "abc.jpg",
+  "link": {},
+  "jstracker": "",
+  "imptrackers": ["a"],
+  "privacy": "1",
+  "ext": {}
+}

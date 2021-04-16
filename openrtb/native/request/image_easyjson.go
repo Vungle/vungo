@@ -71,8 +71,12 @@ func easyjson220accf5DecodeGithubComVungleVungoOpenrtbNativeRequest(in *jlexer.L
 				in.Delim(']')
 			}
 		case "ext":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.Ext).UnmarshalJSON(data))
+			if m, ok := out.Extension.(easyjson.Unmarshaler); ok {
+				m.UnmarshalEasyJSON(in)
+			} else if m, ok := out.Extension.(json.Unmarshaler); ok {
+				_ = m.UnmarshalJSON(in.Raw())
+			} else {
+				out.Extension = in.Interface()
 			}
 		default:
 			in.SkipRecursive()
@@ -153,7 +157,7 @@ func easyjson220accf5EncodeGithubComVungleVungoOpenrtbNativeRequest(out *jwriter
 			out.RawByte(']')
 		}
 	}
-	if len(in.Ext) != 0 {
+	if in.Extension != nil {
 		const prefix string = ",\"ext\":"
 		if first {
 			first = false
@@ -161,7 +165,13 @@ func easyjson220accf5EncodeGithubComVungleVungoOpenrtbNativeRequest(out *jwriter
 		} else {
 			out.RawString(prefix)
 		}
-		out.Raw((in.Ext).MarshalJSON())
+		if m, ok := in.Extension.(easyjson.Marshaler); ok {
+			m.MarshalEasyJSON(out)
+		} else if m, ok := in.Extension.(json.Marshaler); ok {
+			out.Raw(m.MarshalJSON())
+		} else {
+			out.Raw(json.Marshal(in.Extension))
+		}
 	}
 	out.RawByte('}')
 }

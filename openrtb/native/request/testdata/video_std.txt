@@ -1,0 +1,24 @@
+Attribute
+Type
+Description
+
+
+mimes
+array of string; required
+Content MIME types supported.Popular MIME types include,but are not limited to “video/x-mswmv” for Windows Media, and “video/x-flv” for Flash Video, or “video/mp4”.  Note that native frequently does not support flash.
+
+minduration
+integer; required
+Minimum video ad duration in seconds.
+
+maxduration
+integer; required
+Maximum video ad duration in seconds.
+
+protocols
+array of integers; required
+An array of video protocols the publisher can accept in the bid response.  See OpenRTB Table ‘Video Bid Response Protocols’ for a list of possible values.
+
+ext
+object; optional
+This object is a placeholder that may contain custom JSON agreed to by the parties to support flexibility beyond the standard defined in this specification

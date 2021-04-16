@@ -1,0 +1,24 @@
+Attribute
+Type
+Description
+
+
+event
+integer; required
+Type of event available for tracking.
+
+method
+integer; required
+Array of the types of tracking available for the given event.
+
+url
+text; optional
+Array of the types of tracking available for the given event.
+
+customdata
+object; optional
+Array of the types of tracking available for the given event.
+
+ext
+object; optional
+This object is a placeholder that may contain custom JSON agreed to by the parties to support flexibility beyond the standard defined in this specification

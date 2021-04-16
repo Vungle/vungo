@@ -1,0 +1,44 @@
+Attribute
+Type
+Description
+
+
+ver
+string; recommended
+Version of the Native Markup version in use.
+
+assets
+array of objects; recommended
+An array of Asset Objects. Any bid response must comply with OpenRTB Dynamic Native Ads API Specification Version 1.1 RTB Project OpenRTB Native Ads API Specification Version 1.1 Page 14 the array of elements expressed in the bid request.
+
+assetsurl
+string; optional
+The context in which the ad appears. See Table of ContextIDs below for a list of supported context types.
+
+dcourl
+string; optional
+A more detailed context in which the ad appears. See Table of Context SubType IDs below for a list of supported context subtypes.
+
+link
+object; required
+The design/format/layout of the ad unit being offered. See Table of Placement Type IDs below for a list of supported placement types.
+
+imptrackers
+array of strings; optional
+The number of identical placements in this Layout. Refer Section 8.1 Multiplacement Bid Requests for further detail.
+
+jstracker
+string; optional
+0 for the first ad, 1 for the second ad, and so on. Note this would generally NOT be used in combination with plcmtcnt - either you are auctioning multiple identical placements (in which case plcmtcnt>1, seq=0) or you are holding separate auctions for distinct items in the feed (in which case plcmtcnt=1,seq=>=1)
+
+eventtrackers
+array of objects; optional
+Specifies what type of event  tracking is supported - see Event Trackers Request Object
+
+privacy
+string; optional
+Whether the supply source impression supports returning an assetsurl instead of an asset object.  0 or the absence of the field indicates no such support.
+
+ext
+object; optional
+This object is a placeholder that may contain custom JSON agreed to by the parties to support flexibility beyond the standard defined in this specification

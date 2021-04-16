@@ -69,5 +69,5 @@ type EventTracker struct {
 	//   object
 	// Description:
 	//   This object is a placeholder that may contain custom JSON agreed to by the parties to support flexibility beyond the standard defined in this specification
-	Ext json.RawMessage `json:"ext,omitempty"`
+	Extension interface{} `json:"ext,omitempty"`
 }

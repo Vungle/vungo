@@ -1,7 +1,5 @@
 package response
 
-import "encoding/json"
-
 // Response object is the top level JSON object which identifies a native response.
 //
 // See OpenRTB Native 1.2 Sec 5.1 Native Markup Response Object
@@ -123,5 +121,5 @@ type Response struct {
 	//   object
 	// Description:
 	//   This object is a placeholder that may contain custom JSON agreed to by the parties to support flexibility beyond the standard defined in this specification
-	Ext json.RawMessage `json:"ext,omitempty"`
+	Extension interface{} `json:"ext,omitempty"`
 }
