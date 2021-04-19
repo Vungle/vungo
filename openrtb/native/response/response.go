@@ -25,9 +25,7 @@ type Response struct {
 	// Type:
 	//   object array
 	// Description:
-	//   List of native1 ad’s assets.
-	//   Required if no assetsurl.
-	//   Recommended as fallback even if assetsurl is provided.
+	//   List of native1 ad’s assets. Required if no assetsurl. Recommended as fallback even if assetsurl is provided.
 	Assets []Asset `json:"assets,omitempty"`
 
 	// Field:
@@ -37,10 +35,13 @@ type Response struct {
 	// Type:
 	//   string
 	// Description:
-	//   URL of an alternate source for the assets object.
-	//   The expected response is a JSON object mirroring the assets object in the bid response, subject to certain requirements as specified in the individual objects.
-	//   Where present, overrides the asset object in the response.
-	//   The provided “assetsurl” or “dcourl” should be expected to provide a valid response when called in any context, including importantly the brand name and example thumbnails and headlines (to use for reporting, blacklisting, etc), but it is understood the final actual call should come from the client device from which the ad will be rendered to give the buyer the benefit of the cookies and header data available in that context.
+	//   URL of an alternate source for the assets object. The expected response is a JSON object mirroring the assets
+	//   object in the bid response, subject to certain requirements as specified in the individual objects. Where
+	//   present, overrides the asset object in the response.
+	//   The provided “assetsurl” or “dcourl” should be expected to provide a valid response when called in any context,
+	//   including importantly the brand name and example thumbnails and headlines (to use for reporting, blacklisting,
+	//   etc), but it is understood the final actual call should come from the client device from which the ad will be
+	//   rendered to give the buyer the benefit of the cookies and header data available in that context.
 	AssetsURL string `json:"assetsurl,omitempty"`
 
 	// Field:
@@ -50,9 +51,11 @@ type Response struct {
 	// Type:
 	//   string
 	// Description:
-	//   URL where a dynamic creative specification may be found for populating this ad, per the Dynamic Content Ads Specification.
-	//   Note this is a beta option as the interpretation of the Dynamic Content Ads Specification and how to assign those elements into a native1 ad is outside the scope of this spec and must be agreed offline between the parties or as may be specified in a future revision of the Dynamic Content Ads spec.
-	//   Where present, overrides the asset object in the response.
+	//   URL where a dynamic creative specification may be found for populating this ad, per the Dynamic Content Ads
+	//   Specification. Note this is a beta option as the interpretation of the Dynamic Content Ads Specification and
+	//   how to assign those elements into a native1 ad is outside the scope of this spec and must be agreed offline
+	//   between the parties or as may be specified in a future revision of the Dynamic Content Ads spec. Where present,
+	//   overrides the asset object in the response.
 	DCOURL string `json:"dcourl,omitempty"`
 
 	// Field:
@@ -65,7 +68,7 @@ type Response struct {
 	//   Destination Link.
 	//   This is default link object for the ad.
 	//   Individual assets can also have a link object which applies if the asset is activated(clicked).
-	//   If the asset doesn’t have a link object, the parent link object applies.
+	//   If the asset doesn’t have a link object, the parent link object applies. See LinkObject Definition.
 	Link Link `json:"link"`
 
 	// Field:
@@ -75,8 +78,8 @@ type Response struct {
 	// Type:
 	//   string array
 	// Description:
-	//   Array of impression tracking URLs, expected to return a 1x1 image or 204 response - typically only passed when using 3rd party trackers.
-	//   To be deprecated - replaced with eventtrackers.
+	//   Array of impression tracking URLs, expected to return a 1x1 image or 204 response - typically only passed when
+	//   using 3rd party trackers. To be deprecated - replaced with eventtrackers.
 	ImpTrackers []string `json:"imptrackers,omitempty"`
 
 	// Field:
@@ -87,9 +90,8 @@ type Response struct {
 	//   string
 	// Description:
 	//   Optional JavaScript impression tracker.
-	//   This is a valid HTML, Javascript is already wrapped in <script> tags.
-	//   It should be executed at impression time where it can be supported.
-	//   To be deprecated - replaced with eventtrackers.
+	//   This is a valid HTML, Javascript is already wrapped in <script> tags. It should be executed at impression time
+	//   where it can be supported. To be deprecated - replaced with eventtrackers.
 	JSTracker string `json:"jstracker,omitempty"`
 
 	// Field:
@@ -120,6 +122,7 @@ type Response struct {
 	// Type:
 	//   object
 	// Description:
-	//   This object is a placeholder that may contain custom JSON agreed to by the parties to support flexibility beyond the standard defined in this specification
+	//   This object is a placeholder that may contain custom JSON agreed to by the parties to support flexibility
+	//   beyond the standard defined in this specification.
 	Extension interface{} `json:"ext,omitempty"`
 }

@@ -24,6 +24,7 @@ type Title struct {
 	// Type:
 	//   object
 	// Description:
-	//   This object is a placeholder that may contain custom JSON agreed to by the parties to support flexibility beyond the standard defined in this specification
+	//   This object is a placeholder that may contain custom JSON agreed to by the parties to support flexibility
+	//   beyond the standard defined in this specification.
 	Extension interface{} `json:"ext,omitempty"`
 }

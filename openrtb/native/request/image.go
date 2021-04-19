@@ -1,8 +1,6 @@
 package request
 
-import (
-	"github.com/Vungle/vungo/openrtb/native"
-)
+import "github.com/Vungle/vungo/openrtb/native"
 
 // Image object to be used for all image elements of the Native ad such as Icons, Main Image, etc.
 // Recommended sizes and aspect ratios are included in the Image Asset Types section.
@@ -93,6 +91,7 @@ type Image struct {
 	// Type:
 	//   object
 	// Description:
-	//   This object is a placeholder that may contain custom JSON agreed to by the parties to support flexibility beyond the standard defined in this specification
+	//   This object is a placeholder that may contain custom JSON agreed to by the parties to support flexibility
+	//   beyond the standard defined in this specification.
 	Extension interface{} `json:"ext,omitempty"`
 }

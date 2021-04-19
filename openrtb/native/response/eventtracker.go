@@ -6,9 +6,10 @@ import (
 	"github.com/Vungle/vungo/openrtb/native"
 )
 
-// EventTracker object specifies the types of events the bidder wishes to track and the URLs/information to track them.
-// Bidder must only respond with methods indicated as available in the request.
-// Note that most javascript trackers expect to be loaded at impression time, so it’s not generally recommended for the buyer to respond with javascript trackers on other events, but the appropriateness of this is up to each buyer.
+// EventTracker object is an array of objects and specifies the types of events the bidder wishes to track and the
+// URLs/information to track them. Bidder must only respond with methods indicated as available in the request. Note
+// that most javascript trackers expect to be loaded at impression time, so it’s not generally recommended for the buyer
+// to respond with javascript trackers on other events, but the appropriateness of this is up to each buyer.
 //
 // See OpenRTB Native 1.2 Sec 5.8 Event Tracker Response Object
 //go:generate easyjson $GOFILE
@@ -21,8 +22,7 @@ type EventTracker struct {
 	// Type:
 	//   integer
 	// Description:
-	//   Type of event to track.
-	//   See Event Types table.
+	//   Type of event to track. See Event Types table.
 	Event native.EventType `json:"event"`
 
 	// Field:
@@ -32,8 +32,7 @@ type EventTracker struct {
 	// Type:
 	//   integer
 	// Description:
-	//   Type of tracking requested
-	//   See Event Tracking Methods table.
+	//   Type of tracking requested See Event Tracking Methods table.
 	Method native.EventTrackingMethod `json:"method"`
 
 	// Field:
@@ -43,8 +42,7 @@ type EventTracker struct {
 	// Type:
 	//   text
 	// Description:
-	//   The URL of the image or js.
-	//   Required for image or js, optional for custom.
+	//   The URL of the image or js. Required for image or js, optional for custom.
 	URL string `json:"url,omitempty"`
 
 	// Field:
@@ -54,11 +52,8 @@ type EventTracker struct {
 	// Type:
 	//   object containing key:value pairs
 	// Description:
-	//   To be agreed individually with the exchange, an array of key:value objects for custom tracking, for example the account number of the DSP with a tracking company.
-	//   IE {“accountnumber”:”123”}
-	// Dev note:
-	//   - type is a key-value object (not specified if value is string-only)
-	//   - descriptions says "an array of key:value objects" (???)
+	//   To be agreed individually with the exchange, an array of key:value objects for custom tracking, for example the
+	//   account number of the DSP with a tracking company. IE {“accountnumber”:”123”}
 	CustomData json.RawMessage `json:"customdata,omitempty"`
 
 	// Field:
@@ -68,6 +63,7 @@ type EventTracker struct {
 	// Type:
 	//   object
 	// Description:
-	//   This object is a placeholder that may contain custom JSON agreed to by the parties to support flexibility beyond the standard defined in this specification
+	//   This object is a placeholder that may contain custom JSON agreed to by the parties to support flexibility
+	//   beyond the standard defined in this specification.
 	Extension interface{} `json:"ext,omitempty"`
 }

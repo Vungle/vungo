@@ -1,10 +1,9 @@
 package request
 
-import (
-	"github.com/Vungle/vungo/openrtb/native"
-)
+import "github.com/Vungle/vungo/openrtb/native"
 
-// EventTracker object specifies the types of events the bidder can request to be tracked in the bid response, and which types of tracking are available for each event type, and is included as an array in the request.
+// EventTracker object specifies the types of events the bidder can request to be tracked in the bid response, and which
+//types of tracking are available for each event type, and is included as an array in the request.
 //
 // See OpenRTB Native 1.2 Sec 4.7 Event Trackers Request Object
 //go:generate easyjson $GOFILE
@@ -18,8 +17,7 @@ type EventTracker struct {
 	// Type:
 	//   integer
 	// Description:
-	//   Type of event available for tracking.
-	//   See Event Types table.
+	//   Type of event available for tracking. See Event Types table.
 	Event native.EventType `json:"event"`
 
 	// Field:
@@ -29,8 +27,7 @@ type EventTracker struct {
 	// Type:
 	//   array of integers
 	// Description:
-	//   Array of the types of tracking available for the given event.
-	//   See Event Tracking Methods table
+	//   Array of the types of tracking available for the given event. See Event Tracking Methods table.
 	Methods []native.EventTrackingMethod `json:"methods"`
 
 	// Field:
@@ -40,6 +37,7 @@ type EventTracker struct {
 	// Type:
 	//   object
 	// Description:
-	//   This object is a placeholder that may contain custom JSON agreed to by the parties to support flexibility beyond the standard defined in this specification
+	//   This object is a placeholder that may contain custom JSON agreed to by the parties to support flexibility
+	//   beyond the standard defined in this specification.
 	Extension interface{} `json:"ext,omitempty"`
 }

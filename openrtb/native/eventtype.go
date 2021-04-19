@@ -1,6 +1,7 @@
 package native
 
 // EventType indicates the event type.
+//
 // See OpenRTB Native 1.2 Sec 7.6 Event Types Table
 type EventType int64
 

@@ -13,6 +13,6 @@ type Video struct {
 	// Type:
 	//   string
 	// Description:
-	//   VAST XML
+	//   vast xml.
 	VASTTag string `json:"vasttag"`
 }

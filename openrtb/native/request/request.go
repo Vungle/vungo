@@ -2,10 +2,11 @@ package request
 
 import "github.com/Vungle/vungo/openrtb/native"
 
-// Request Object defines the native1 advertising opportunity available for bid via this bid request.
-// It will be included as a JSON-encoded string in the bid request’s imp.native1 field or as a direct JSON object, depending on the choice of the exchange.
-// While OpenRTB 2.x officially supports only JSON-encoded strings, many exchanges have implemented a formal object.
-// Check with your integration docs.
+// Request Object defines the native advertising opportunity available for bid via this bid
+// request. It will be included as a JSON-encoded string in the bid request’s imp.native field or as a
+// direct JSON object, depending on the choice of the exchange.  While OpenRTB 2.x officially
+// supports only JSON-encoded strings, many exchanges have implemented a formal object.  Check
+// with your integration docs.
 //
 // See OpenRTB Native 1.2 Sec 4.1 Native Markup Request Object
 //go:generate easyjson $GOFILE
@@ -55,7 +56,7 @@ type Request struct {
 	// Description:
 	//   The design/format/layout of the ad unit being offered.
 	//   See Table of Placement Type IDs below for a list of supported placement types.
-	PlcmtType native.PlacementType `json:"plcmttype,omitempty"`
+	PlacementType native.PlacementType `json:"plcmttype,omitempty"`
 
 	// Field:
 	//   plcmtcnt
@@ -68,7 +69,7 @@ type Request struct {
 	// Description:
 	//   The number of identical placements in this Layout.
 	//   Refer Section 8.1 Multiplacement Bid Requests for further detail.
-	PlcmtCnt int64 `json:"plcmtcnt,omitempty"`
+	PlacementCnt int64 `json:"plcmtcnt,omitempty"`
 
 	// Field:
 	//   seq
@@ -80,7 +81,9 @@ type Request struct {
 	//   0
 	// Description:
 	//   0 for the first ad, 1 for the second ad, and so on.
-	//   Note this would generally NOT be used in combination with plcmtcnt - either you are auctioning multiple identical placements (in which case plcmtcnt>1, seq=0) or you are holding separate auctions for distinct items in the feed (in which case plcmtcnt=1, seq=>=1)
+	//   Note this would generally NOT be used in combination with plcmtcnt - either you are auctioning multiple
+	//  identical placements (in which case plcmtcnt>1, seq=0) or you are holding separate auctions for distinct items
+	// in the feed (in which case plcmtcnt=1, seq=>=1)
 	Seq int64 `json:"seq,omitempty"`
 
 	// Field:
@@ -151,6 +154,7 @@ type Request struct {
 	// Type:
 	//   object
 	// Description:
-	// This object is a placeholder that may contain custom JSON agreed to by the parties to support flexibility beyond the standard defined in this specification
+	// This object is a placeholder that may contain custom JSON agreed to by the parties to support flexibility beyond
+	//the standard defined in this specification
 	Extension interface{} `json:"ext,omitempty"`
 }

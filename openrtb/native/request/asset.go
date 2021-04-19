@@ -50,9 +50,7 @@ type Asset struct {
 	// Type:
 	//   object
 	// Description:
-	//   Title object for title assets.
-	//   See TitleObject definition.
-	//   Each asset object may contain only one of title, img, data or video.
+	//   Title object for title assets. See TitleObject definition.
 	Title *Title `json:"title,omitempty"`
 
 	// Field:
@@ -62,9 +60,7 @@ type Asset struct {
 	// Type:
 	//   object
 	// Description:
-	//   Image object for image assets.
-	//   See ImageObject definition.
-	//   Each asset object may contain only one of title, img, data or video.
+	//   Image object for image assets. See ImageObject definition.
 	Img *Image `json:"img,omitempty"`
 
 	// Field:
@@ -78,7 +74,6 @@ type Asset struct {
 	//   See the Video request object definition.
 	//   Note that in-stream (ie preroll, etc) video ads are not part of Native.
 	//   Native ads may contain a video as the ad creative itself.
-	//   Each asset object may contain only one of title, img, data or video.
 	Video *Video `json:"video,omitempty"`
 
 	// Field:
@@ -90,7 +85,6 @@ type Asset struct {
 	// Description:
 	//   Data object for brand name, description, ratings, prices etc.
 	//   See DataObject definition.
-	//   Each asset object may contain only one of title, img, data or video.
 	Data *Data `json:"data,omitempty"`
 
 	// Field:
@@ -100,6 +94,7 @@ type Asset struct {
 	// Type:
 	//   object
 	// Description:
-	//   This object is a placeholder that may contain custom JSON agreed to by the parties to support flexibility beyond the standard defined in this specification
+	//   This object is a placeholder that may contain custom JSON agreed to by the parties to support flexibility
+	//   beyond the standard defined in this specification.
 	Extension interface{} `json:"ext,omitempty"`
 }

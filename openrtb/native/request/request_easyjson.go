@@ -44,9 +44,9 @@ func easyjson3c9d2b01DecodeGithubComVungleVungoOpenrtbNativeRequest(in *jlexer.L
 		case "contextsubtype":
 			out.ContextSubType = native.ContextSubType(in.Int64())
 		case "plcmttype":
-			out.PlcmtType = native.PlacementType(in.Int64())
+			out.PlacementType = native.PlacementType(in.Int64())
 		case "plcmtcnt":
-			out.PlcmtCnt = int64(in.Int64())
+			out.PlacementCnt = int64(in.Int64())
 		case "seq":
 			out.Seq = int64(in.Int64())
 		case "assets":
@@ -149,7 +149,7 @@ func easyjson3c9d2b01EncodeGithubComVungleVungoOpenrtbNativeRequest(out *jwriter
 		}
 		out.Int64(int64(in.ContextSubType))
 	}
-	if in.PlcmtType != 0 {
+	if in.PlacementType != 0 {
 		const prefix string = ",\"plcmttype\":"
 		if first {
 			first = false
@@ -157,9 +157,9 @@ func easyjson3c9d2b01EncodeGithubComVungleVungoOpenrtbNativeRequest(out *jwriter
 		} else {
 			out.RawString(prefix)
 		}
-		out.Int64(int64(in.PlcmtType))
+		out.Int64(int64(in.PlacementType))
 	}
-	if in.PlcmtCnt != 0 {
+	if in.PlacementCnt != 0 {
 		const prefix string = ",\"plcmtcnt\":"
 		if first {
 			first = false
@@ -167,7 +167,7 @@ func easyjson3c9d2b01EncodeGithubComVungleVungoOpenrtbNativeRequest(out *jwriter
 		} else {
 			out.RawString(prefix)
 		}
-		out.Int64(int64(in.PlcmtCnt))
+		out.Int64(int64(in.PlacementCnt))
 	}
 	if in.Seq != 0 {
 		const prefix string = ",\"seq\":"

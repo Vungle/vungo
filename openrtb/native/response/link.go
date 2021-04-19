@@ -1,8 +1,9 @@
 package response
 
 // Link object is used for ‘call to action’ assets, or other links from the Native ad.
-// This Object should be associated to its peer object in the parent Asset Object or as the master link in the top level Native Ad response object.
-// When that peer object is activated (clicked) the action should take the user to the location of the link.
+// This Object should be associated to its peer object in the parent Asset Object or as the master link in the top level
+// Native Ad response object. When that peer object is activated (clicked) the action should take the user to the
+// location of the link.
 //
 // See OpenRTB Native 1.2 Sec 5.7 Link
 //go:generate easyjson $GOFILE
@@ -46,6 +47,7 @@ type Link struct {
 	// Type:
 	//   object
 	// Description:
-	//   This object is a placeholder that may contain custom JSON agreed to by the parties to support flexibility beyond the standard defined in this specification
+	//   This object is a placeholder that may contain custom JSON agreed to by the parties to support flexibility
+	//   beyond the standard defined in this specification.
 	Extension interface{} `json:"ext,omitempty"`
 }
