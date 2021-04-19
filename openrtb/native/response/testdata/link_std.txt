@@ -1,0 +1,20 @@
+Attribute
+Type
+Description
+
+
+url
+string; required
+Landing URL of the clickable link.
+
+clicktrackers
+array of strings; optional
+List of third-party tracker URLs to be fired on click of the URL.
+
+fallback
+string; optional
+Fallback URL for deeplink. To be used if the URL given in url is not supported by the device
+
+ext
+object; optional
+This object is a placeholder that may contain custom JSON agreed to by the parties to support flexibility beyond the standard defined in this specification

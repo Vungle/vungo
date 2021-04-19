@@ -1,0 +1,9 @@
+{
+  "type": 3,
+  "h": 3,
+  "hmin": 3,
+  "w": 3,
+  "wmin": 3,
+  "mimes": ["image/jpg"],
+  "ext": {}
+}

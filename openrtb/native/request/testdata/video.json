@@ -1,0 +1,7 @@
+{
+  "protocols": [3,5],
+  "maxduration": 30,
+  "minduration": 3,
+  "mimes": ["video/mp4"],
+  "ext": {}
+}

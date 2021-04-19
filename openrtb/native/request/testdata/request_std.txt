@@ -1,0 +1,52 @@
+Attribute
+Type
+Description
+
+
+ver
+string; optional
+Version of the Native Markup version in use.
+
+context
+integer; recommended
+The context in which the ad appears. See Table of ContextIDs below for a list of supported context types.
+
+contextsubtype
+integer; optional
+A more detailed context in which the ad appears. See Table of Context SubType IDs below for a list of supported context subtypes.
+
+plcmttype
+integer; recommended
+The design/format/layout of the ad unit being offered. See Table of Placement Type IDs below for a list of supported placement types.
+
+plcmtcnt
+integer; optional
+The number of identical placements in this Layout. Refer Section 8.1 Multiplacement Bid Requests for further detail.
+
+seq
+integer; optional
+0 for the first ad, 1 for the second ad, and so on. Note this would generally NOT be used in combination with plcmtcnt - either you are auctioning multiple identical placements (in which case plcmtcnt>1, seq=0) or you are holding separate auctions for distinct items in the feed (in which case plcmtcnt=1,seq=>=1)
+
+assets
+array of objects; required
+An array of Asset Objects. Any bid response must comply with OpenRTB Dynamic Native Ads API Specification Version 1.1 RTB Project OpenRTB Native Ads API Specification Version 1.1 Page 14 the array of elements expressed in the bid request.
+
+aurlsupport
+int; optional
+Whether the supply source impression supports returning an assetsurl instead of an asset object.  0 or the absence of the field indicates no such support.
+
+durlsupport
+int optional
+Whether the supply source impression supports returning a dco url instead of an asset object. 0 or the absence of the field indicates no such support. Beta
+
+eventtrackers
+array of objects; optional
+Specifies what type of event  tracking is supported - see Event Trackers Request Object
+
+privacy
+integer; recommended
+Set to 1 when the native ad  supports buyer-specific privacy  notice. Set to 0 (or field absent)  when the native ad doesn’t  support custom privacy links or if  support is unknown.
+
+ext
+object; optional
+This object is a placeholder that may contain custom JSON agreed to by the parties to support flexibility beyond the standard defined in this specification

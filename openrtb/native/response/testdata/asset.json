@@ -1,0 +1,18 @@
+{
+  "id": 1,
+  "required": 1,
+  "img": {
+    "type": 3
+  },
+  "data": {
+    "type": 11
+  },
+  "title": {
+    "len": 25
+  },
+  "video": {
+    "minduration": 25
+  },
+  "link": {},
+  "ext": {}
+}

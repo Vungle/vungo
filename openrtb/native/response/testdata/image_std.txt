@@ -1,0 +1,28 @@
+Attribute
+Type
+Description
+
+
+type
+integer; optional
+Type ID of the element supported by the publisher. The publisher can display this information in an appropriate format.  See Data Asset Typestable for commonly used examples.
+
+url
+string; required
+The minimum requested width of the image in pixels.  This option should be used for any rescaling of images by the client. Either w or wmin should be transmitted. If only w is included, it should be considered an exact requirement.
+
+w
+integer; recommended
+Width of the image in pixels.
+
+h
+integer; recommended
+Height of the image in pixels.
+
+hmin
+integer; recommended
+The minimum requested height of the image in pixels.  This option should be used for any rescaling of images by the client. Either h or hmin should be transmitted. If only h is included, it should be considered an exact requirement.
+
+ext
+object; optional
+This object is a placeholder that may contain custom JSON agreed to by the parties to support flexibility beyond the standard defined in this specification

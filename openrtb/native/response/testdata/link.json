@@ -1,0 +1,6 @@
+{
+  "url": "zzz",
+  "clicktrackers": ["a","b"],
+  "fallback": "plan b",
+  "ext": {}
+}
