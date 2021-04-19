@@ -19,7 +19,7 @@ type Video struct {
 	// Description:
 	//   Content MIME types supported.
 	//   Popular MIME types include,but are not limited to “video/x-mswmv” for Windows Media, and “video/x-flv” for Flash Video, or “video/mp4”.
-	//   Note that native1 frequently does not support flash.
+	//   Note that  native frequently does not support flash.
 	MIMEs []string `json:"mimes"`
 
 	// Field:

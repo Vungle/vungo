@@ -3,8 +3,8 @@ package response
 import "github.com/Vungle/vungo/openrtb/native"
 
 // Data corresponds to the Data Object in the request, with the value filled in.  The Data Object is to be used for all
-// miscellaneous elements of the native1 unit such as Brand Name, Ratings, Review Count, Stars, Downloads, Price count
-// etc. It is also generic for future native1 elements not contemplated at the time of the writing of this document.
+// miscellaneous elements of the  native unit such as Brand Name, Ratings, Review Count, Stars, Downloads, Price count
+// etc. It is also generic for future  native elements not contemplated at the time of the writing of this document.
 //
 // See OpenRTB Native 1.2 Sec 5.5 Data
 //go:generate easyjson $GOFILE

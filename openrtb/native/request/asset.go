@@ -10,11 +10,11 @@ package request
 // So if a request for a title object is sent with id 1, then the response containing the title should have an id of 1.
 //
 // Since version 1.1 of the spec, there are recommended sizes/lengths/etc with some of the asset types.
-// The goal for asset requirements standardization is to facilitate adoption of native1 by DSPs by limiting the diverse types/sizes/requirements of assets they must have available to purchase a native ad impression.
+// The goal for asset requirements standardization is to facilitate adoption of  native by DSPs by limiting the diverse types/sizes/requirements of assets they must have available to purchase a native ad impression.
 // While great diversity may exist in publishers, advertisers/DSPs can not be expected to provide infinite headline lengths, thumbnail aspect ratios, etc.
 // While we have not gone as far as creating a single standard, we've honed in on a few options that cover the most common cases.
 // SSPs can deviate from these standards, but should understand they may limit applicable DSP demand by doing so.
-// DSPs should feel confident that if they support these standards they'll be able to access most native1 inventory.
+// DSPs should feel confident that if they support these standards they'll be able to access most  native inventory.
 //
 // See OpenRTB Native 1.2 Sec 4.2 Asset Object
 //go:generate easyjson $GOFILE

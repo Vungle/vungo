@@ -2,8 +2,8 @@ package request
 
 import "github.com/Vungle/vungo/openrtb/native"
 
-// Data Object is to be used for all non-core elements of the native1 unit such as Brand Name, Ratings, Review Count, Stars, Download count, descriptions etc.
-// It is also generic for future native1 elements not contemplated at the time of the writing of this document.
+// Data Object is to be used for all non-core elements of the  native unit such as Brand Name, Ratings, Review Count, Stars, Download count, descriptions etc.
+// It is also generic for future  native elements not contemplated at the time of the writing of this document.
 // In some cases, additional recommendations are also included in the Data Asset Types table.
 //
 // See OpenRTB Native 1.2 Sec 4.6 Data Object

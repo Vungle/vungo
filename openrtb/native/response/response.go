@@ -25,7 +25,7 @@ type Response struct {
 	// Type:
 	//   object array
 	// Description:
-	//   List of native1 ad’s assets. Required if no assetsurl. Recommended as fallback even if assetsurl is provided.
+	//   List of  native ad’s assets. Required if no assetsurl. Recommended as fallback even if assetsurl is provided.
 	Assets []Asset `json:"assets,omitempty"`
 
 	// Field:
@@ -53,7 +53,7 @@ type Response struct {
 	// Description:
 	//   URL where a dynamic creative specification may be found for populating this ad, per the Dynamic Content Ads
 	//   Specification. Note this is a beta option as the interpretation of the Dynamic Content Ads Specification and
-	//   how to assign those elements into a native1 ad is outside the scope of this spec and must be agreed offline
+	//   how to assign those elements into a  native ad is outside the scope of this spec and must be agreed offline
 	//   between the parties or as may be specified in a future revision of the Dynamic Content Ads spec. Where present,
 	//   overrides the asset object in the response.
 	DCOURL string `json:"dcourl,omitempty"`

@@ -143,8 +143,8 @@ type Request struct {
 	// Default:
 	//   0
 	// Description:
-	//   Set to 1 when the native1 ad supports buyer-specific privacy notice.
-	//   Set to 0 (or field absent) when the native1 ad doesn’t support custom privacy links or if support is unknown.
+	//   Set to 1 when the  native ad supports buyer-specific privacy notice.
+	//   Set to 0 (or field absent) when the  native ad doesn’t support custom privacy links or if support is unknown.
 	Privacy int8 `json:"privacy,omitempty"`
 
 	// Field:
