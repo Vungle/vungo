@@ -1,6 +1,7 @@
 package openrtb
 
 import (
+	"encoding/json"
 	"errors"
 
 	"github.com/Vungle/vungo/internal/util"
@@ -185,7 +186,7 @@ type Audio struct {
 	//   object
 	// Description:
 	//   Placeholder for exchange-specific extensions to OpenRTB.
-	Extension interface{} `json:"ext,omitempty"`
+	Extension json.RawMessage `json:"ext,omitempty"`
 }
 
 // Validate method implements a Validater interface and return a validation error according to the
@@ -249,7 +250,7 @@ func (a *Audio) Copy() *Audio {
 		copy(vCopy.CompanionTypes, a.CompanionTypes)
 	}
 
-	vCopy.Extension = util.DeepCopyCopiable(a.Extension)
+	vCopy.Extension = util.DeepCopyJSONRawMsg(a.Extension)
 
 	return &vCopy
 }

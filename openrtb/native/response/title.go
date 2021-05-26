@@ -1,5 +1,7 @@
 package response
 
+import "encoding/json"
+
 // Title corresponds to the Title Object in the request, with the value filled in.
 // If using assetsurl or dcourl response rather than embedded asset response, it is recommended that three title objects
 // be provided, the length of each of which is less than or equal to the three recommended maximum title lengths
@@ -39,5 +41,5 @@ type Title struct {
 	// Description:
 	//   This object is a placeholder that may contain custom JSON agreed to by the parties to support flexibility
 	//   beyond the standard defined in this specification.
-	Extension interface{} `json:"ext,omitempty"`
+	Extension json.RawMessage `json:"ext,omitempty"`
 }

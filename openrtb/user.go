@@ -28,7 +28,7 @@ func (u *User) Copy() *User {
 	userCopy := *u
 
 	if u.Geo != nil {
-		GeoCopy := *u.Geo
+		GeoCopy := *u.Geo.Copy()
 		userCopy.Geo = &GeoCopy
 	}
 

@@ -1,6 +1,7 @@
 package openrtb
 
 import (
+	"encoding/json"
 	"errors"
 
 	"github.com/Vungle/vungo/internal/util"
@@ -62,7 +63,7 @@ type Native struct {
 	//   object
 	// Description:
 	//   Placeholder for exchange-specific extensions to OpenRTB.
-	Extension interface{} `json:"ext,omitempty"`
+	Extension json.RawMessage `json:"ext,omitempty"`
 }
 
 // Validate method implements a Validater interface and return a validation error according to the
@@ -93,7 +94,7 @@ func (n *Native) Copy() *Native {
 		copy(vCopy.APIFrameworks, n.APIFrameworks)
 	}
 
-	vCopy.Extension = util.DeepCopyCopiable(n.Extension)
+	vCopy.Extension = util.DeepCopyJSONRawMsg(n.Extension)
 
 	return &vCopy
 }

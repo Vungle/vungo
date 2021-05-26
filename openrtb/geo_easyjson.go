@@ -63,12 +63,8 @@ func easyjsonA0535929DecodeGithubComVungleVungoOpenrtb(in *jlexer.Lexer, out *Ge
 		case "utcoffset":
 			out.UTCOffset = int(in.Int())
 		case "ext":
-			if m, ok := out.Ext.(easyjson.Unmarshaler); ok {
-				m.UnmarshalEasyJSON(in)
-			} else if m, ok := out.Ext.(json.Unmarshaler); ok {
-				_ = m.UnmarshalJSON(in.Raw())
-			} else {
-				out.Ext = in.Interface()
+			if data := in.Raw(); in.Ok() {
+				in.AddError((out.Ext).UnmarshalJSON(data))
 			}
 		default:
 			in.SkipRecursive()
@@ -210,7 +206,7 @@ func easyjsonA0535929EncodeGithubComVungleVungoOpenrtb(out *jwriter.Writer, in G
 		}
 		out.Int(int(in.UTCOffset))
 	}
-	if in.Ext != nil {
+	if len(in.Ext) != 0 {
 		const prefix string = ",\"ext\":"
 		if first {
 			first = false
@@ -218,13 +214,7 @@ func easyjsonA0535929EncodeGithubComVungleVungoOpenrtb(out *jwriter.Writer, in G
 		} else {
 			out.RawString(prefix)
 		}
-		if m, ok := in.Ext.(easyjson.Marshaler); ok {
-			m.MarshalEasyJSON(out)
-		} else if m, ok := in.Ext.(json.Marshaler); ok {
-			out.Raw(m.MarshalJSON())
-		} else {
-			out.Raw(json.Marshal(in.Ext))
-		}
+		out.Raw((in.Ext).MarshalJSON())
 	}
 	out.RawByte('}')
 }

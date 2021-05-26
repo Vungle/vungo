@@ -1,6 +1,10 @@
 package openrtb
 
-import "github.com/Vungle/vungo/internal/util"
+import (
+	"encoding/json"
+
+	"github.com/Vungle/vungo/internal/util"
+)
 
 // Site object should be included if the ad supported content is a website as
 // opposed to a non-browser application.
@@ -133,7 +137,7 @@ type Site struct {
 	//   object
 	// Description:
 	//   Placeholder for exchange-specific extensions to OpenRTB.
-	Ext interface{} `json:"ext,omitempty"`
+	Ext json.RawMessage `json:"ext,omitempty"`
 }
 
 // Validate method checks to see if the Site object contains required and
@@ -157,6 +161,6 @@ func (s *Site) Copy() *Site {
 	sCopy.PrivacyPolicy = s.PrivacyPolicy.Copy()
 	sCopy.Publisher = s.Publisher.Copy()
 	sCopy.Content = s.Content.Copy()
-	sCopy.Ext = util.DeepCopyCopiable(s.Ext)
+	sCopy.Ext = util.DeepCopyJSONRawMsg(s.Ext)
 	return &sCopy
 }

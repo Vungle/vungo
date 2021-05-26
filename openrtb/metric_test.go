@@ -1,6 +1,7 @@
 package openrtb_test
 
 import (
+	"encoding/json"
 	"testing"
 
 	"github.com/Vungle/vungo/openrtb"
@@ -26,7 +27,7 @@ func TestMetric_Validate(t *testing.T) {
 		Type   string
 		Value  float64
 		Vendor string
-		Ext    interface{}
+		Ext    json.RawMessage
 	}
 	tests := []struct {
 		name    string

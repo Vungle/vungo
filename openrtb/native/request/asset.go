@@ -1,5 +1,7 @@
 package request
 
+import "encoding/json"
+
 // Asset Object is the main container object for each asset requested or supported by Exchange on behalf of the rendering client.
 // Any object that is required is to be flagged as such.
 // Only one of the {title,img,video,data} objects should be present in each object.
@@ -96,5 +98,5 @@ type Asset struct {
 	// Description:
 	//   This object is a placeholder that may contain custom JSON agreed to by the parties to support flexibility
 	//   beyond the standard defined in this specification.
-	Extension interface{} `json:"ext,omitempty"`
+	Extension json.RawMessage `json:"ext,omitempty"`
 }

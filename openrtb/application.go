@@ -1,6 +1,10 @@
 package openrtb
 
-import "github.com/Vungle/vungo/internal/util"
+import (
+	"encoding/json"
+
+	"github.com/Vungle/vungo/internal/util"
+)
 
 // Application object should be included if the ad supported content is a
 // non-browser application (typically in mobile) as opposed to a website.
@@ -134,7 +138,7 @@ type Application struct {
 	//   object
 	// Description:
 	//   Placeholder for exchange-specific extensions to OpenRTB.
-	Extension interface{} `json:"ext,omitempty"`
+	Extension json.RawMessage `json:"ext,omitempty"`
 }
 
 // Validate method checks to see if the Application object contains required and well-formatted data
@@ -171,7 +175,7 @@ func (a *Application) Copy() *Application {
 	appCopy.Publisher = a.Publisher.Copy()
 	appCopy.Content = a.Content.Copy()
 
-	appCopy.Extension = util.DeepCopyCopiable(a.Extension)
+	appCopy.Extension = util.DeepCopyJSONRawMsg(a.Extension)
 
 	return &appCopy
 }
