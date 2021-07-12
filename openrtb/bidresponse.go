@@ -16,15 +16,13 @@ var emptyBid BidResponse
 //go:generate easyjson $GOFILE
 //easyjson:json
 type BidResponse struct {
-	ID          string      `json:"id"`
-	SeatBids    []*SeatBid  `json:"seatbid,omitempty"`
-	BidID       string      `json:"bidid,omitempty"`
-	Currency    Currency    `json:"cur,omitempty"`
-	CustomData  string      `json:"customdata,omitempty"`
-	NoBidReason NoBidReason `json:"nbr,omitempty"`
-
-	RawExtension json.RawMessage `json:"ext,omitempty"`
-	Extension    interface{}     `json:"-"` // Opaque value that can be used to store unmarshaled value in ext field.
+	ID          string          `json:"id"`
+	SeatBids    []*SeatBid      `json:"seatbid,omitempty"`
+	BidID       string          `json:"bidid,omitempty"`
+	Currency    Currency        `json:"cur,omitempty"`
+	CustomData  string          `json:"customdata,omitempty"`
+	NoBidReason NoBidReason     `json:"nbr,omitempty"`
+	Extension   json.RawMessage `json:"ext,omitempty"`
 }
 
 // Validate method validates whether the BidResponse object contains valid data, or returns an
@@ -80,7 +78,7 @@ func (r *BidResponse) Copy() *BidResponse {
 	}
 
 	if r.Extension != nil {
-		brCopy.RawExtension = util.DeepCopyJSONRawMsg(r.RawExtension)
+		brCopy.Extension = util.DeepCopyJSONRawMsg(r.Extension)
 	}
 
 	return &brCopy
