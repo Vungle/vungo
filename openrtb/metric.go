@@ -1,6 +1,7 @@
 package openrtb
 
 import (
+	"encoding/json"
 	"errors"
 
 	"github.com/Vungle/vungo/internal/util"
@@ -46,7 +47,7 @@ type Metric struct {
 	//   object
 	// Description:
 	//   Placeholder for exchange-specific extensions to OpenRTB.
-	Ext interface{} `json:"ext,omitempty"`
+	Ext json.RawMessage `json:"ext,omitempty"`
 }
 
 // Validate method implements a Validater interface and return a validation error according to the
@@ -67,6 +68,6 @@ func (m *Metric) Copy() *Metric {
 		return nil
 	}
 	mCopy := *m
-	mCopy.Ext = util.DeepCopyCopiable(m.Ext)
+	mCopy.Ext = util.DeepCopyJSONRawMsg(m.Ext)
 	return &mCopy
 }

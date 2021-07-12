@@ -1,6 +1,10 @@
 package openrtb
 
-import "github.com/Vungle/vungo/internal/util"
+import (
+	"encoding/json"
+
+	"github.com/Vungle/vungo/internal/util"
+)
 
 // Content object describes the content in which the impression will appear,
 // which may be syndicated or nonsyndicated content.
@@ -237,7 +241,7 @@ type Content struct {
 	//   object
 	// Description:
 	//   Placeholder for exchange-specific extensions to OpenRTB.
-	Ext interface{} `json:"ext,omitempty"`
+	Ext json.RawMessage `json:"ext,omitempty"`
 }
 
 // Validate method checks to see if the Site object contains required and
@@ -267,6 +271,6 @@ func (c *Content) Copy() *Content {
 			cCopy.Data[i] = c.Data[i].Copy()
 		}
 	}
-	cCopy.Ext = util.DeepCopyCopiable(c.Ext)
+	cCopy.Ext = util.DeepCopyJSONRawMsg(c.Ext)
 	return &cCopy
 }

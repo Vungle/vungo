@@ -13,6 +13,7 @@ import (
 	"github.com/Vungle/vungo/internal/util/utiltest"
 	"github.com/Vungle/vungo/openrtb"
 	"github.com/go-test/deep"
+	"github.com/google/go-cmp/cmp"
 )
 
 // UnmarshalFromJSONFile method reads from a testdata/*.json file and unmarshals the content into
@@ -60,11 +61,8 @@ func VerifyModelAgainstFile(t Testing, file string, modelType reflect.Type) {
 		t.Fatalf("Cannot unmarshal JSON data into %v because of\n%v.", modelType, err)
 	}
 
-	if !reflect.DeepEqual(model1, model2) {
-		m1JSON, _ := json.MarshalIndent(model1, "", "  ")
-		m2JSON, _ := json.MarshalIndent(model2, "", "  ")
-		t.Logf("Unmarshaled: %s\nRe-marshaled: %s.", m1JSON, m2JSON)
-		t.Error("Unmarshaled model should be the same as re-marshaled model.")
+	if d := cmp.Diff(model1, model2); d != "" {
+		t.Errorf("Reduce() mismatch (-got +want):\n%s", d)
 	}
 
 	verifyModelNonEmptyFields(t, jsonBytes, modelType)
@@ -79,7 +77,7 @@ func verifyModelNonEmptyFields(t Testing, jsonBytes []byte, modelType reflect.Ty
 		// TODO(@garukun): Consider encapsulate pretty-printing JSON into a common library call for
 		// testing.
 		buf := bytes.NewBuffer(make([]byte, 0, len(jsonBytes)))
-		json.Indent(buf, jsonBytes, "", "  ")
+		_ = json.Indent(buf, jsonBytes, "", "  ")
 		t.Log(buf.String())
 
 		t.Fatalf("Cannot unmarshal json onto %v.\n%v", modelType, err)
@@ -197,7 +195,7 @@ func NewBidRequestForTesting(id string, impressionID string) *openrtb.BidRequest
 	return &openrtb.BidRequest{
 		ID: id,
 		Impressions: []*openrtb.Impression{
-			&openrtb.Impression{
+			{
 				ID:               impressionID,
 				BidFloorCurrency: openrtb.CurrencyUSD,
 			},
@@ -304,7 +302,7 @@ func verifyDeepCopyImpl(prefix string, src, dst reflect.Value) []string {
 	}
 	if src.CanAddr() && dst.CanAddr() && dst.Addr() == src.Addr() {
 		r = append(r, fmt.Sprintf("%v share\n\tgot  %#+v\n\twant %#+v\n",
-			prefix, dst.Addr(), src.Addr()))
+			prefix, dst.Kind().String(), src.Kind().String()))
 	}
 	switch src.Kind() {
 	case reflect.Ptr:

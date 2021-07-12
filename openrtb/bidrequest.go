@@ -1,6 +1,7 @@
 package openrtb
 
 import (
+	"encoding/json"
 	"fmt"
 
 	"github.com/Vungle/vungo/internal/util"
@@ -218,7 +219,7 @@ type BidRequest struct {
 	//   object
 	// Description:
 	//   Placeholder for exchange-specific extensions to OpenRTB.
-	Extension interface{} `json:"ext,omitempty"`
+	Extension json.RawMessage `json:"ext,omitempty"`
 }
 
 // Validate method checks to see if the BidRequest object contains required and well-formatted data
@@ -285,6 +286,6 @@ func (r *BidRequest) Copy() *BidRequest {
 	brCopy.BlockedAdvertisersByMarketID = util.DeepCopyStrSlice(r.BlockedAdvertisersByMarketID)
 	brCopy.Regulation = r.Regulation.Copy()
 	brCopy.Source = r.Source.Copy()
-	brCopy.Extension = util.DeepCopyCopiable(r.Extension)
+	brCopy.Extension = util.DeepCopyJSONRawMsg(r.Extension)
 	return &brCopy
 }

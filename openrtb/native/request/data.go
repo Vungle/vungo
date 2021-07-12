@@ -1,6 +1,10 @@
 package request
 
-import "github.com/Vungle/vungo/openrtb/native"
+import (
+	"encoding/json"
+
+	"github.com/Vungle/vungo/openrtb/native"
+)
 
 // Data Object is to be used for all non-core elements of the  native unit such as Brand Name, Ratings, Review Count, Stars, Download count, descriptions etc.
 // It is also generic for future  native elements not contemplated at the time of the writing of this document.
@@ -41,5 +45,5 @@ type Data struct {
 	//   object
 	// Description:
 	// This object is a placeholder that may contain custom JSON agreed to by the parties to support flexibility beyond the standard defined in this specification
-	Extension interface{} `json:"ext,omitempty"`
+	Extension json.RawMessage `json:"ext,omitempty"`
 }

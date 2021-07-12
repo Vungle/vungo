@@ -1,6 +1,10 @@
 package openrtb
 
-import "github.com/Vungle/vungo/internal/util"
+import (
+	"encoding/json"
+
+	"github.com/Vungle/vungo/internal/util"
+)
 
 // Producer object defines the producer of the content in which the ad will be
 // shown.
@@ -53,7 +57,7 @@ type Producer struct {
 	//   object
 	// Description:
 	//   Placeholder for exchange-specific extensions to OpenRTB.
-	Ext interface{} `json:"ext,omitempty"`
+	Ext json.RawMessage `json:"ext,omitempty"`
 }
 
 // Validate method checks to see if the Site object contains required and
@@ -71,6 +75,6 @@ func (p *Producer) Copy() *Producer {
 	}
 	pCopy := *p
 	pCopy.Cat = util.DeepCopyStrSlice(p.Cat)
-	pCopy.Ext = util.DeepCopyCopiable(p.Ext)
+	pCopy.Ext = util.DeepCopyJSONRawMsg(p.Ext)
 	return &pCopy
 }

@@ -1,6 +1,10 @@
 package openrtb
 
-import "github.com/Vungle/vungo/internal/util"
+import (
+	"encoding/json"
+
+	"github.com/Vungle/vungo/internal/util"
+)
 
 // Geo object encapsulates various methods for specifying a geographic location.
 // When subordinate to a Device object, it indicates the location of the device
@@ -138,7 +142,7 @@ type Geo struct {
 	//   object
 	// Description:
 	//   Placeholder for exchange-specific extensions to OpenRTB.
-	Ext interface{} `json:"ext,omitempty"`
+	Ext json.RawMessage `json:"ext,omitempty"`
 }
 
 // Copy do deep copy of Geo.
@@ -149,6 +153,6 @@ func (g *Geo) Copy() *Geo {
 		return nil
 	}
 	gCopy := *g
-	gCopy.Ext = util.DeepCopyCopiable(g.Ext)
+	gCopy.Ext = util.DeepCopyJSONRawMsg(g.Ext)
 	return &gCopy
 }

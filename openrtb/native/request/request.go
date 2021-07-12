@@ -1,6 +1,10 @@
 package request
 
-import "github.com/Vungle/vungo/openrtb/native"
+import (
+	"encoding/json"
+
+	"github.com/Vungle/vungo/openrtb/native"
+)
 
 // Request Object defines the native advertising opportunity available for bid via this bid
 // request. It will be included as a JSON-encoded string in the bid request’s imp.native field or as a
@@ -156,5 +160,5 @@ type Request struct {
 	// Description:
 	// This object is a placeholder that may contain custom JSON agreed to by the parties to support flexibility beyond
 	//the standard defined in this specification
-	Extension interface{} `json:"ext,omitempty"`
+	Extension json.RawMessage `json:"ext,omitempty"`
 }

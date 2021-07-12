@@ -1,6 +1,7 @@
 package openrtb
 
 import (
+	"encoding/json"
 	"errors"
 
 	"github.com/Vungle/vungo/internal/util"
@@ -75,7 +76,7 @@ type Deal struct {
 	//   object
 	// Description:
 	//   Placeholder for exchange-specific extensions to OpenRTB.
-	Extension interface{} `json:"ext,omitempty"`
+	Extension json.RawMessage `json:"ext,omitempty"`
 }
 
 // Validate method implements a Validater interface and return a validation error according to the
@@ -97,7 +98,7 @@ func (d *Deal) Copy() *Deal {
 	dealCopy := *d
 	dealCopy.WhitelistedSeats = util.DeepCopyStrSlice(d.WhitelistedSeats)
 	dealCopy.AdvertiserDomains = util.DeepCopyStrSlice(d.AdvertiserDomains)
-	dealCopy.Extension = util.DeepCopyCopiable(d.Extension)
+	dealCopy.Extension = util.DeepCopyJSONRawMsg(d.Extension)
 
 	return &dealCopy
 }
