@@ -16,3 +16,70 @@ var (
 	_ *jwriter.Writer
 	_ easyjson.Marshaler
 )
+
+func easyjson3c9ce8c3DecodeGithubComVungleVungoOpenrtbNativeResponse(in *jlexer.Lexer, out *Video) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeFieldName(false)
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "vasttag":
+			out.VASTTag = string(in.String())
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson3c9ce8c3EncodeGithubComVungleVungoOpenrtbNativeResponse(out *jwriter.Writer, in Video) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	{
+		const prefix string = ",\"vasttag\":"
+		out.RawString(prefix[1:])
+		out.String(string(in.VASTTag))
+	}
+	out.RawByte('}')
+}
+
+// MarshalJSON supports json.Marshaler interface
+func (v Video) MarshalJSON() ([]byte, error) {
+	w := jwriter.Writer{}
+	easyjson3c9ce8c3EncodeGithubComVungleVungoOpenrtbNativeResponse(&w, v)
+	return w.Buffer.BuildBytes(), w.Error
+}
+
+// MarshalEasyJSON supports easyjson.Marshaler interface
+func (v Video) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjson3c9ce8c3EncodeGithubComVungleVungoOpenrtbNativeResponse(w, v)
+}
+
+// UnmarshalJSON supports json.Unmarshaler interface
+func (v *Video) UnmarshalJSON(data []byte) error {
+	r := jlexer.Lexer{Data: data}
+	easyjson3c9ce8c3DecodeGithubComVungleVungoOpenrtbNativeResponse(&r, v)
+	return r.Error()
+}
+
+// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
+func (v *Video) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjson3c9ce8c3DecodeGithubComVungleVungoOpenrtbNativeResponse(l, v)
+}

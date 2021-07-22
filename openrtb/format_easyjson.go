@@ -16,3 +16,133 @@ var (
 	_ *jwriter.Writer
 	_ easyjson.Marshaler
 )
+
+func easyjson72863a49DecodeGithubComVungleVungoOpenrtb(in *jlexer.Lexer, out *Format) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeFieldName(false)
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "w":
+			out.W = uint64(in.Uint64())
+		case "h":
+			out.H = uint64(in.Uint64())
+		case "wratio":
+			out.WRatio = uint64(in.Uint64())
+		case "hratio":
+			out.HRatio = uint64(in.Uint64())
+		case "wmin":
+			out.WMin = uint64(in.Uint64())
+		case "ext":
+			if data := in.Raw(); in.Ok() {
+				in.AddError((out.Ext).UnmarshalJSON(data))
+			}
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson72863a49EncodeGithubComVungleVungoOpenrtb(out *jwriter.Writer, in Format) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.W != 0 {
+		const prefix string = ",\"w\":"
+		first = false
+		out.RawString(prefix[1:])
+		out.Uint64(uint64(in.W))
+	}
+	if in.H != 0 {
+		const prefix string = ",\"h\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Uint64(uint64(in.H))
+	}
+	if in.WRatio != 0 {
+		const prefix string = ",\"wratio\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Uint64(uint64(in.WRatio))
+	}
+	if in.HRatio != 0 {
+		const prefix string = ",\"hratio\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Uint64(uint64(in.HRatio))
+	}
+	if in.WMin != 0 {
+		const prefix string = ",\"wmin\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Uint64(uint64(in.WMin))
+	}
+	if len(in.Ext) != 0 {
+		const prefix string = ",\"ext\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Raw((in.Ext).MarshalJSON())
+	}
+	out.RawByte('}')
+}
+
+// MarshalJSON supports json.Marshaler interface
+func (v Format) MarshalJSON() ([]byte, error) {
+	w := jwriter.Writer{}
+	easyjson72863a49EncodeGithubComVungleVungoOpenrtb(&w, v)
+	return w.Buffer.BuildBytes(), w.Error
+}
+
+// MarshalEasyJSON supports easyjson.Marshaler interface
+func (v Format) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjson72863a49EncodeGithubComVungleVungoOpenrtb(w, v)
+}
+
+// UnmarshalJSON supports json.Unmarshaler interface
+func (v *Format) UnmarshalJSON(data []byte) error {
+	r := jlexer.Lexer{Data: data}
+	easyjson72863a49DecodeGithubComVungleVungoOpenrtb(&r, v)
+	return r.Error()
+}
+
+// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
+func (v *Format) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjson72863a49DecodeGithubComVungleVungoOpenrtb(l, v)
+}

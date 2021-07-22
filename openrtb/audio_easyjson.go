@@ -16,3 +16,1006 @@ var (
 	_ *jwriter.Writer
 	_ easyjson.Marshaler
 )
+
+func easyjson48f1e884DecodeGithubComVungleVungoOpenrtb(in *jlexer.Lexer, out *Audio) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeFieldName(false)
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "mimes":
+			if in.IsNull() {
+				in.Skip()
+				out.MIMETypes = nil
+			} else {
+				in.Delim('[')
+				if out.MIMETypes == nil {
+					if !in.IsDelim(']') {
+						out.MIMETypes = make([]string, 0, 4)
+					} else {
+						out.MIMETypes = []string{}
+					}
+				} else {
+					out.MIMETypes = (out.MIMETypes)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v1 string
+					v1 = string(in.String())
+					out.MIMETypes = append(out.MIMETypes, v1)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "minduration":
+			if in.IsNull() {
+				in.Skip()
+				out.MinDuration = nil
+			} else {
+				if out.MinDuration == nil {
+					out.MinDuration = new(int)
+				}
+				*out.MinDuration = int(in.Int())
+			}
+		case "maxduration":
+			if in.IsNull() {
+				in.Skip()
+				out.MaxDuration = nil
+			} else {
+				if out.MaxDuration == nil {
+					out.MaxDuration = new(int)
+				}
+				*out.MaxDuration = int(in.Int())
+			}
+		case "protocols":
+			if in.IsNull() {
+				in.Skip()
+				out.Protocols = nil
+			} else {
+				in.Delim('[')
+				if out.Protocols == nil {
+					if !in.IsDelim(']') {
+						out.Protocols = make([]Protocol, 0, 8)
+					} else {
+						out.Protocols = []Protocol{}
+					}
+				} else {
+					out.Protocols = (out.Protocols)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v2 Protocol
+					v2 = Protocol(in.Int())
+					out.Protocols = append(out.Protocols, v2)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "startdelay":
+			if in.IsNull() {
+				in.Skip()
+				out.StartDelay = nil
+			} else {
+				if out.StartDelay == nil {
+					out.StartDelay = new(StartDelay)
+				}
+				*out.StartDelay = StartDelay(in.Int())
+			}
+		case "sequence":
+			out.Sequence = int(in.Int())
+		case "battr":
+			if in.IsNull() {
+				in.Skip()
+				out.BlockedCreativeAttributes = nil
+			} else {
+				in.Delim('[')
+				if out.BlockedCreativeAttributes == nil {
+					if !in.IsDelim(']') {
+						out.BlockedCreativeAttributes = make([]CreativeAttribute, 0, 8)
+					} else {
+						out.BlockedCreativeAttributes = []CreativeAttribute{}
+					}
+				} else {
+					out.BlockedCreativeAttributes = (out.BlockedCreativeAttributes)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v3 CreativeAttribute
+					v3 = CreativeAttribute(in.Int())
+					out.BlockedCreativeAttributes = append(out.BlockedCreativeAttributes, v3)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "maxextended":
+			out.MaxExtendedDuration = int(in.Int())
+		case "minbitrate":
+			out.MinBitRate = int(in.Int())
+		case "maxbitrate":
+			out.MaxBitRate = int(in.Int())
+		case "delivery":
+			if in.IsNull() {
+				in.Skip()
+				out.DeliveryMethods = nil
+			} else {
+				in.Delim('[')
+				if out.DeliveryMethods == nil {
+					if !in.IsDelim(']') {
+						out.DeliveryMethods = make([]DeliveryMethod, 0, 8)
+					} else {
+						out.DeliveryMethods = []DeliveryMethod{}
+					}
+				} else {
+					out.DeliveryMethods = (out.DeliveryMethods)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v4 DeliveryMethod
+					v4 = DeliveryMethod(in.Int())
+					out.DeliveryMethods = append(out.DeliveryMethods, v4)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "companionad":
+			if in.IsNull() {
+				in.Skip()
+				out.CompanionAds = nil
+			} else {
+				in.Delim('[')
+				if out.CompanionAds == nil {
+					if !in.IsDelim(']') {
+						out.CompanionAds = make([]Banner, 0, 0)
+					} else {
+						out.CompanionAds = []Banner{}
+					}
+				} else {
+					out.CompanionAds = (out.CompanionAds)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v5 Banner
+					easyjson48f1e884DecodeGithubComVungleVungoOpenrtb1(in, &v5)
+					out.CompanionAds = append(out.CompanionAds, v5)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "api":
+			if in.IsNull() {
+				in.Skip()
+				out.APIFrameworks = nil
+			} else {
+				in.Delim('[')
+				if out.APIFrameworks == nil {
+					if !in.IsDelim(']') {
+						out.APIFrameworks = make([]APIFramework, 0, 8)
+					} else {
+						out.APIFrameworks = []APIFramework{}
+					}
+				} else {
+					out.APIFrameworks = (out.APIFrameworks)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v6 APIFramework
+					v6 = APIFramework(in.Int())
+					out.APIFrameworks = append(out.APIFrameworks, v6)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "companiontype":
+			if in.IsNull() {
+				in.Skip()
+				out.CompanionTypes = nil
+			} else {
+				in.Delim('[')
+				if out.CompanionTypes == nil {
+					if !in.IsDelim(']') {
+						out.CompanionTypes = make([]CompanionType, 0, 8)
+					} else {
+						out.CompanionTypes = []CompanionType{}
+					}
+				} else {
+					out.CompanionTypes = (out.CompanionTypes)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v7 CompanionType
+					v7 = CompanionType(in.Int())
+					out.CompanionTypes = append(out.CompanionTypes, v7)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "maxseq":
+			out.MaxSequence = int(in.Int())
+		case "feed":
+			out.Feed = FeedType(in.Int())
+		case "stitched":
+			if data := in.Raw(); in.Ok() {
+				in.AddError((out.Stitched).UnmarshalJSON(data))
+			}
+		case "nvol":
+			out.NormalizedVolume = VolumeNormalizationMode(in.Int())
+		case "ext":
+			if data := in.Raw(); in.Ok() {
+				in.AddError((out.Extension).UnmarshalJSON(data))
+			}
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson48f1e884EncodeGithubComVungleVungoOpenrtb(out *jwriter.Writer, in Audio) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	{
+		const prefix string = ",\"mimes\":"
+		out.RawString(prefix[1:])
+		if in.MIMETypes == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+			out.RawString("null")
+		} else {
+			out.RawByte('[')
+			for v8, v9 := range in.MIMETypes {
+				if v8 > 0 {
+					out.RawByte(',')
+				}
+				out.String(string(v9))
+			}
+			out.RawByte(']')
+		}
+	}
+	if in.MinDuration != nil {
+		const prefix string = ",\"minduration\":"
+		out.RawString(prefix)
+		out.Int(int(*in.MinDuration))
+	}
+	if in.MaxDuration != nil {
+		const prefix string = ",\"maxduration\":"
+		out.RawString(prefix)
+		out.Int(int(*in.MaxDuration))
+	}
+	if len(in.Protocols) != 0 {
+		const prefix string = ",\"protocols\":"
+		out.RawString(prefix)
+		{
+			out.RawByte('[')
+			for v10, v11 := range in.Protocols {
+				if v10 > 0 {
+					out.RawByte(',')
+				}
+				out.Int(int(v11))
+			}
+			out.RawByte(']')
+		}
+	}
+	if in.StartDelay != nil {
+		const prefix string = ",\"startdelay\":"
+		out.RawString(prefix)
+		out.Int(int(*in.StartDelay))
+	}
+	if in.Sequence != 0 {
+		const prefix string = ",\"sequence\":"
+		out.RawString(prefix)
+		out.Int(int(in.Sequence))
+	}
+	if len(in.BlockedCreativeAttributes) != 0 {
+		const prefix string = ",\"battr\":"
+		out.RawString(prefix)
+		{
+			out.RawByte('[')
+			for v12, v13 := range in.BlockedCreativeAttributes {
+				if v12 > 0 {
+					out.RawByte(',')
+				}
+				out.Int(int(v13))
+			}
+			out.RawByte(']')
+		}
+	}
+	if in.MaxExtendedDuration != 0 {
+		const prefix string = ",\"maxextended\":"
+		out.RawString(prefix)
+		out.Int(int(in.MaxExtendedDuration))
+	}
+	if in.MinBitRate != 0 {
+		const prefix string = ",\"minbitrate\":"
+		out.RawString(prefix)
+		out.Int(int(in.MinBitRate))
+	}
+	if in.MaxBitRate != 0 {
+		const prefix string = ",\"maxbitrate\":"
+		out.RawString(prefix)
+		out.Int(int(in.MaxBitRate))
+	}
+	if len(in.DeliveryMethods) != 0 {
+		const prefix string = ",\"delivery\":"
+		out.RawString(prefix)
+		{
+			out.RawByte('[')
+			for v14, v15 := range in.DeliveryMethods {
+				if v14 > 0 {
+					out.RawByte(',')
+				}
+				out.Int(int(v15))
+			}
+			out.RawByte(']')
+		}
+	}
+	if len(in.CompanionAds) != 0 {
+		const prefix string = ",\"companionad\":"
+		out.RawString(prefix)
+		{
+			out.RawByte('[')
+			for v16, v17 := range in.CompanionAds {
+				if v16 > 0 {
+					out.RawByte(',')
+				}
+				easyjson48f1e884EncodeGithubComVungleVungoOpenrtb1(out, v17)
+			}
+			out.RawByte(']')
+		}
+	}
+	if len(in.APIFrameworks) != 0 {
+		const prefix string = ",\"api\":"
+		out.RawString(prefix)
+		{
+			out.RawByte('[')
+			for v18, v19 := range in.APIFrameworks {
+				if v18 > 0 {
+					out.RawByte(',')
+				}
+				out.Int(int(v19))
+			}
+			out.RawByte(']')
+		}
+	}
+	if len(in.CompanionTypes) != 0 {
+		const prefix string = ",\"companiontype\":"
+		out.RawString(prefix)
+		{
+			out.RawByte('[')
+			for v20, v21 := range in.CompanionTypes {
+				if v20 > 0 {
+					out.RawByte(',')
+				}
+				out.Int(int(v21))
+			}
+			out.RawByte(']')
+		}
+	}
+	if in.MaxSequence != 0 {
+		const prefix string = ",\"maxseq\":"
+		out.RawString(prefix)
+		out.Int(int(in.MaxSequence))
+	}
+	if in.Feed != 0 {
+		const prefix string = ",\"feed\":"
+		out.RawString(prefix)
+		out.Int(int(in.Feed))
+	}
+	if in.Stitched {
+		const prefix string = ",\"stitched\":"
+		out.RawString(prefix)
+		out.Raw((in.Stitched).MarshalJSON())
+	}
+	if in.NormalizedVolume != 0 {
+		const prefix string = ",\"nvol\":"
+		out.RawString(prefix)
+		out.Int(int(in.NormalizedVolume))
+	}
+	if len(in.Extension) != 0 {
+		const prefix string = ",\"ext\":"
+		out.RawString(prefix)
+		out.Raw((in.Extension).MarshalJSON())
+	}
+	out.RawByte('}')
+}
+
+// MarshalJSON supports json.Marshaler interface
+func (v Audio) MarshalJSON() ([]byte, error) {
+	w := jwriter.Writer{}
+	easyjson48f1e884EncodeGithubComVungleVungoOpenrtb(&w, v)
+	return w.Buffer.BuildBytes(), w.Error
+}
+
+// MarshalEasyJSON supports easyjson.Marshaler interface
+func (v Audio) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjson48f1e884EncodeGithubComVungleVungoOpenrtb(w, v)
+}
+
+// UnmarshalJSON supports json.Unmarshaler interface
+func (v *Audio) UnmarshalJSON(data []byte) error {
+	r := jlexer.Lexer{Data: data}
+	easyjson48f1e884DecodeGithubComVungleVungoOpenrtb(&r, v)
+	return r.Error()
+}
+
+// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
+func (v *Audio) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjson48f1e884DecodeGithubComVungleVungoOpenrtb(l, v)
+}
+func easyjson48f1e884DecodeGithubComVungleVungoOpenrtb1(in *jlexer.Lexer, out *Banner) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeFieldName(false)
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "format":
+			if in.IsNull() {
+				in.Skip()
+				out.Format = nil
+			} else {
+				in.Delim('[')
+				if out.Format == nil {
+					if !in.IsDelim(']') {
+						out.Format = make([]Format, 0, 1)
+					} else {
+						out.Format = []Format{}
+					}
+				} else {
+					out.Format = (out.Format)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v22 Format
+					easyjson48f1e884DecodeGithubComVungleVungoOpenrtb2(in, &v22)
+					out.Format = append(out.Format, v22)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "w":
+			out.Width = int(in.Int())
+		case "h":
+			out.Height = int(in.Int())
+		case "wmax":
+			if in.IsNull() {
+				in.Skip()
+				out.MaxWidth = nil
+			} else {
+				if out.MaxWidth == nil {
+					out.MaxWidth = new(int)
+				}
+				*out.MaxWidth = int(in.Int())
+			}
+		case "hmax":
+			if in.IsNull() {
+				in.Skip()
+				out.MaxHeight = nil
+			} else {
+				if out.MaxHeight == nil {
+					out.MaxHeight = new(int)
+				}
+				*out.MaxHeight = int(in.Int())
+			}
+		case "wmin":
+			if in.IsNull() {
+				in.Skip()
+				out.MinWidth = nil
+			} else {
+				if out.MinWidth == nil {
+					out.MinWidth = new(int)
+				}
+				*out.MinWidth = int(in.Int())
+			}
+		case "hmin":
+			if in.IsNull() {
+				in.Skip()
+				out.MinHeight = nil
+			} else {
+				if out.MinHeight == nil {
+					out.MinHeight = new(int)
+				}
+				*out.MinHeight = int(in.Int())
+			}
+		case "btype":
+			if in.IsNull() {
+				in.Skip()
+				out.BlockedTypes = nil
+			} else {
+				in.Delim('[')
+				if out.BlockedTypes == nil {
+					if !in.IsDelim(']') {
+						out.BlockedTypes = make([]int, 0, 8)
+					} else {
+						out.BlockedTypes = []int{}
+					}
+				} else {
+					out.BlockedTypes = (out.BlockedTypes)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v23 int
+					v23 = int(in.Int())
+					out.BlockedTypes = append(out.BlockedTypes, v23)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "battr":
+			if in.IsNull() {
+				in.Skip()
+				out.BlockedAttributes = nil
+			} else {
+				in.Delim('[')
+				if out.BlockedAttributes == nil {
+					if !in.IsDelim(']') {
+						out.BlockedAttributes = make([]int, 0, 8)
+					} else {
+						out.BlockedAttributes = []int{}
+					}
+				} else {
+					out.BlockedAttributes = (out.BlockedAttributes)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v24 int
+					v24 = int(in.Int())
+					out.BlockedAttributes = append(out.BlockedAttributes, v24)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "pos":
+			out.Position = AdPosition(in.Int())
+		case "mimes":
+			if in.IsNull() {
+				in.Skip()
+				out.MIMETypes = nil
+			} else {
+				in.Delim('[')
+				if out.MIMETypes == nil {
+					if !in.IsDelim(']') {
+						out.MIMETypes = make([]string, 0, 4)
+					} else {
+						out.MIMETypes = []string{}
+					}
+				} else {
+					out.MIMETypes = (out.MIMETypes)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v25 string
+					v25 = string(in.String())
+					out.MIMETypes = append(out.MIMETypes, v25)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "topframe":
+			if in.IsNull() {
+				in.Skip()
+				out.TopFrame = nil
+			} else {
+				if out.TopFrame == nil {
+					out.TopFrame = new(int)
+				}
+				*out.TopFrame = int(in.Int())
+			}
+		case "expdir":
+			if in.IsNull() {
+				in.Skip()
+				out.ExpandDirections = nil
+			} else {
+				in.Delim('[')
+				if out.ExpandDirections == nil {
+					if !in.IsDelim(']') {
+						out.ExpandDirections = make([]int, 0, 8)
+					} else {
+						out.ExpandDirections = []int{}
+					}
+				} else {
+					out.ExpandDirections = (out.ExpandDirections)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v26 int
+					v26 = int(in.Int())
+					out.ExpandDirections = append(out.ExpandDirections, v26)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "api":
+			if in.IsNull() {
+				in.Skip()
+				out.APIFrameworks = nil
+			} else {
+				in.Delim('[')
+				if out.APIFrameworks == nil {
+					if !in.IsDelim(']') {
+						out.APIFrameworks = make([]int, 0, 8)
+					} else {
+						out.APIFrameworks = []int{}
+					}
+				} else {
+					out.APIFrameworks = (out.APIFrameworks)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v27 int
+					v27 = int(in.Int())
+					out.APIFrameworks = append(out.APIFrameworks, v27)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "id":
+			if in.IsNull() {
+				in.Skip()
+				out.ID = nil
+			} else {
+				if out.ID == nil {
+					out.ID = new(string)
+				}
+				*out.ID = string(in.String())
+			}
+		case "vcm":
+			out.VCM = CompanionRenderingMode(in.Int())
+		case "ext":
+			if data := in.Raw(); in.Ok() {
+				in.AddError((out.Extension).UnmarshalJSON(data))
+			}
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson48f1e884EncodeGithubComVungleVungoOpenrtb1(out *jwriter.Writer, in Banner) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if len(in.Format) != 0 {
+		const prefix string = ",\"format\":"
+		first = false
+		out.RawString(prefix[1:])
+		{
+			out.RawByte('[')
+			for v28, v29 := range in.Format {
+				if v28 > 0 {
+					out.RawByte(',')
+				}
+				easyjson48f1e884EncodeGithubComVungleVungoOpenrtb2(out, v29)
+			}
+			out.RawByte(']')
+		}
+	}
+	if in.Width != 0 {
+		const prefix string = ",\"w\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int(int(in.Width))
+	}
+	if in.Height != 0 {
+		const prefix string = ",\"h\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int(int(in.Height))
+	}
+	if in.MaxWidth != nil {
+		const prefix string = ",\"wmax\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int(int(*in.MaxWidth))
+	}
+	if in.MaxHeight != nil {
+		const prefix string = ",\"hmax\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int(int(*in.MaxHeight))
+	}
+	if in.MinWidth != nil {
+		const prefix string = ",\"wmin\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int(int(*in.MinWidth))
+	}
+	if in.MinHeight != nil {
+		const prefix string = ",\"hmin\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int(int(*in.MinHeight))
+	}
+	if len(in.BlockedTypes) != 0 {
+		const prefix string = ",\"btype\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v30, v31 := range in.BlockedTypes {
+				if v30 > 0 {
+					out.RawByte(',')
+				}
+				out.Int(int(v31))
+			}
+			out.RawByte(']')
+		}
+	}
+	if len(in.BlockedAttributes) != 0 {
+		const prefix string = ",\"battr\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v32, v33 := range in.BlockedAttributes {
+				if v32 > 0 {
+					out.RawByte(',')
+				}
+				out.Int(int(v33))
+			}
+			out.RawByte(']')
+		}
+	}
+	if in.Position != 0 {
+		const prefix string = ",\"pos\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int(int(in.Position))
+	}
+	if len(in.MIMETypes) != 0 {
+		const prefix string = ",\"mimes\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v34, v35 := range in.MIMETypes {
+				if v34 > 0 {
+					out.RawByte(',')
+				}
+				out.String(string(v35))
+			}
+			out.RawByte(']')
+		}
+	}
+	if in.TopFrame != nil {
+		const prefix string = ",\"topframe\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int(int(*in.TopFrame))
+	}
+	if len(in.ExpandDirections) != 0 {
+		const prefix string = ",\"expdir\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v36, v37 := range in.ExpandDirections {
+				if v36 > 0 {
+					out.RawByte(',')
+				}
+				out.Int(int(v37))
+			}
+			out.RawByte(']')
+		}
+	}
+	if len(in.APIFrameworks) != 0 {
+		const prefix string = ",\"api\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v38, v39 := range in.APIFrameworks {
+				if v38 > 0 {
+					out.RawByte(',')
+				}
+				out.Int(int(v39))
+			}
+			out.RawByte(']')
+		}
+	}
+	if in.ID != nil {
+		const prefix string = ",\"id\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(*in.ID))
+	}
+	if in.VCM != 0 {
+		const prefix string = ",\"vcm\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int(int(in.VCM))
+	}
+	if len(in.Extension) != 0 {
+		const prefix string = ",\"ext\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Raw((in.Extension).MarshalJSON())
+	}
+	out.RawByte('}')
+}
+func easyjson48f1e884DecodeGithubComVungleVungoOpenrtb2(in *jlexer.Lexer, out *Format) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeFieldName(false)
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "w":
+			out.W = uint64(in.Uint64())
+		case "h":
+			out.H = uint64(in.Uint64())
+		case "wratio":
+			out.WRatio = uint64(in.Uint64())
+		case "hratio":
+			out.HRatio = uint64(in.Uint64())
+		case "wmin":
+			out.WMin = uint64(in.Uint64())
+		case "ext":
+			if data := in.Raw(); in.Ok() {
+				in.AddError((out.Ext).UnmarshalJSON(data))
+			}
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson48f1e884EncodeGithubComVungleVungoOpenrtb2(out *jwriter.Writer, in Format) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.W != 0 {
+		const prefix string = ",\"w\":"
+		first = false
+		out.RawString(prefix[1:])
+		out.Uint64(uint64(in.W))
+	}
+	if in.H != 0 {
+		const prefix string = ",\"h\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Uint64(uint64(in.H))
+	}
+	if in.WRatio != 0 {
+		const prefix string = ",\"wratio\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Uint64(uint64(in.WRatio))
+	}
+	if in.HRatio != 0 {
+		const prefix string = ",\"hratio\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Uint64(uint64(in.HRatio))
+	}
+	if in.WMin != 0 {
+		const prefix string = ",\"wmin\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Uint64(uint64(in.WMin))
+	}
+	if len(in.Ext) != 0 {
+		const prefix string = ",\"ext\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Raw((in.Ext).MarshalJSON())
+	}
+	out.RawByte('}')
+}

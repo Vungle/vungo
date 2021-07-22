@@ -16,3 +16,86 @@ var (
 	_ *jwriter.Writer
 	_ easyjson.Marshaler
 )
+
+func easyjsonE7952480DecodeGithubComVungleVungoOpenrtbNativeResponse(in *jlexer.Lexer, out *Title) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeFieldName(false)
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "text":
+			out.Text = string(in.String())
+		case "len":
+			out.Len = int64(in.Int64())
+		case "ext":
+			if data := in.Raw(); in.Ok() {
+				in.AddError((out.Extension).UnmarshalJSON(data))
+			}
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjsonE7952480EncodeGithubComVungleVungoOpenrtbNativeResponse(out *jwriter.Writer, in Title) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	{
+		const prefix string = ",\"text\":"
+		out.RawString(prefix[1:])
+		out.String(string(in.Text))
+	}
+	if in.Len != 0 {
+		const prefix string = ",\"len\":"
+		out.RawString(prefix)
+		out.Int64(int64(in.Len))
+	}
+	if len(in.Extension) != 0 {
+		const prefix string = ",\"ext\":"
+		out.RawString(prefix)
+		out.Raw((in.Extension).MarshalJSON())
+	}
+	out.RawByte('}')
+}
+
+// MarshalJSON supports json.Marshaler interface
+func (v Title) MarshalJSON() ([]byte, error) {
+	w := jwriter.Writer{}
+	easyjsonE7952480EncodeGithubComVungleVungoOpenrtbNativeResponse(&w, v)
+	return w.Buffer.BuildBytes(), w.Error
+}
+
+// MarshalEasyJSON supports easyjson.Marshaler interface
+func (v Title) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjsonE7952480EncodeGithubComVungleVungoOpenrtbNativeResponse(w, v)
+}
+
+// UnmarshalJSON supports json.Unmarshaler interface
+func (v *Title) UnmarshalJSON(data []byte) error {
+	r := jlexer.Lexer{Data: data}
+	easyjsonE7952480DecodeGithubComVungleVungoOpenrtbNativeResponse(&r, v)
+	return r.Error()
+}
+
+// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
+func (v *Title) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjsonE7952480DecodeGithubComVungleVungoOpenrtbNativeResponse(l, v)
+}

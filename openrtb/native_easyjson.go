@@ -16,3 +16,160 @@ var (
 	_ *jwriter.Writer
 	_ easyjson.Marshaler
 )
+
+func easyjson3eeb1cddDecodeGithubComVungleVungoOpenrtb(in *jlexer.Lexer, out *Native) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeFieldName(false)
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "request":
+			out.Request = string(in.String())
+		case "ver":
+			out.Version = string(in.String())
+		case "api":
+			if in.IsNull() {
+				in.Skip()
+				out.APIFrameworks = nil
+			} else {
+				in.Delim('[')
+				if out.APIFrameworks == nil {
+					if !in.IsDelim(']') {
+						out.APIFrameworks = make([]APIFramework, 0, 8)
+					} else {
+						out.APIFrameworks = []APIFramework{}
+					}
+				} else {
+					out.APIFrameworks = (out.APIFrameworks)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v1 APIFramework
+					v1 = APIFramework(in.Int())
+					out.APIFrameworks = append(out.APIFrameworks, v1)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "battr":
+			if in.IsNull() {
+				in.Skip()
+				out.BlockedCreativeAttributes = nil
+			} else {
+				in.Delim('[')
+				if out.BlockedCreativeAttributes == nil {
+					if !in.IsDelim(']') {
+						out.BlockedCreativeAttributes = make([]CreativeAttribute, 0, 8)
+					} else {
+						out.BlockedCreativeAttributes = []CreativeAttribute{}
+					}
+				} else {
+					out.BlockedCreativeAttributes = (out.BlockedCreativeAttributes)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v2 CreativeAttribute
+					v2 = CreativeAttribute(in.Int())
+					out.BlockedCreativeAttributes = append(out.BlockedCreativeAttributes, v2)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "ext":
+			if data := in.Raw(); in.Ok() {
+				in.AddError((out.Extension).UnmarshalJSON(data))
+			}
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson3eeb1cddEncodeGithubComVungleVungoOpenrtb(out *jwriter.Writer, in Native) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	{
+		const prefix string = ",\"request\":"
+		out.RawString(prefix[1:])
+		out.String(string(in.Request))
+	}
+	if in.Version != "" {
+		const prefix string = ",\"ver\":"
+		out.RawString(prefix)
+		out.String(string(in.Version))
+	}
+	if len(in.APIFrameworks) != 0 {
+		const prefix string = ",\"api\":"
+		out.RawString(prefix)
+		{
+			out.RawByte('[')
+			for v3, v4 := range in.APIFrameworks {
+				if v3 > 0 {
+					out.RawByte(',')
+				}
+				out.Int(int(v4))
+			}
+			out.RawByte(']')
+		}
+	}
+	if len(in.BlockedCreativeAttributes) != 0 {
+		const prefix string = ",\"battr\":"
+		out.RawString(prefix)
+		{
+			out.RawByte('[')
+			for v5, v6 := range in.BlockedCreativeAttributes {
+				if v5 > 0 {
+					out.RawByte(',')
+				}
+				out.Int(int(v6))
+			}
+			out.RawByte(']')
+		}
+	}
+	if len(in.Extension) != 0 {
+		const prefix string = ",\"ext\":"
+		out.RawString(prefix)
+		out.Raw((in.Extension).MarshalJSON())
+	}
+	out.RawByte('}')
+}
+
+// MarshalJSON supports json.Marshaler interface
+func (v Native) MarshalJSON() ([]byte, error) {
+	w := jwriter.Writer{}
+	easyjson3eeb1cddEncodeGithubComVungleVungoOpenrtb(&w, v)
+	return w.Buffer.BuildBytes(), w.Error
+}
+
+// MarshalEasyJSON supports easyjson.Marshaler interface
+func (v Native) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjson3eeb1cddEncodeGithubComVungleVungoOpenrtb(w, v)
+}
+
+// UnmarshalJSON supports json.Unmarshaler interface
+func (v *Native) UnmarshalJSON(data []byte) error {
+	r := jlexer.Lexer{Data: data}
+	easyjson3eeb1cddDecodeGithubComVungleVungoOpenrtb(&r, v)
+	return r.Error()
+}
+
+// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
+func (v *Native) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjson3eeb1cddDecodeGithubComVungleVungoOpenrtb(l, v)
+}

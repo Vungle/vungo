@@ -16,3 +16,207 @@ var (
 	_ *jwriter.Writer
 	_ easyjson.Marshaler
 )
+
+func easyjson9e1087fdDecodeGithubComVungleVungoOpenrtb(in *jlexer.Lexer, out *User) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeFieldName(false)
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "id":
+			out.ID = string(in.String())
+		case "buyeruid":
+			out.BuyerID = string(in.String())
+		case "yob":
+			out.BirthYear = int(in.Int())
+		case "gender":
+			out.Gender = Gender(in.String())
+		case "keywords":
+			out.Keywords = string(in.String())
+		case "customdata":
+			out.CustomData = string(in.String())
+		case "geo":
+			if in.IsNull() {
+				in.Skip()
+				out.Geo = nil
+			} else {
+				if out.Geo == nil {
+					out.Geo = new(Geo)
+				}
+				(*out.Geo).UnmarshalEasyJSON(in)
+			}
+		case "data":
+			if in.IsNull() {
+				in.Skip()
+				out.Data = nil
+			} else {
+				in.Delim('[')
+				if out.Data == nil {
+					if !in.IsDelim(']') {
+						out.Data = make([]Data, 0, 0)
+					} else {
+						out.Data = []Data{}
+					}
+				} else {
+					out.Data = (out.Data)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v1 Data
+					(v1).UnmarshalEasyJSON(in)
+					out.Data = append(out.Data, v1)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "ext":
+			if data := in.Raw(); in.Ok() {
+				in.AddError((out.Extension).UnmarshalJSON(data))
+			}
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson9e1087fdEncodeGithubComVungleVungoOpenrtb(out *jwriter.Writer, in User) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.ID != "" {
+		const prefix string = ",\"id\":"
+		first = false
+		out.RawString(prefix[1:])
+		out.String(string(in.ID))
+	}
+	if in.BuyerID != "" {
+		const prefix string = ",\"buyeruid\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.BuyerID))
+	}
+	if in.BirthYear != 0 {
+		const prefix string = ",\"yob\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int(int(in.BirthYear))
+	}
+	if in.Gender != "" {
+		const prefix string = ",\"gender\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.Gender))
+	}
+	if in.Keywords != "" {
+		const prefix string = ",\"keywords\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.Keywords))
+	}
+	if in.CustomData != "" {
+		const prefix string = ",\"customdata\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.CustomData))
+	}
+	if in.Geo != nil {
+		const prefix string = ",\"geo\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		(*in.Geo).MarshalEasyJSON(out)
+	}
+	if len(in.Data) != 0 {
+		const prefix string = ",\"data\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v2, v3 := range in.Data {
+				if v2 > 0 {
+					out.RawByte(',')
+				}
+				(v3).MarshalEasyJSON(out)
+			}
+			out.RawByte(']')
+		}
+	}
+	if len(in.Extension) != 0 {
+		const prefix string = ",\"ext\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Raw((in.Extension).MarshalJSON())
+	}
+	out.RawByte('}')
+}
+
+// MarshalJSON supports json.Marshaler interface
+func (v User) MarshalJSON() ([]byte, error) {
+	w := jwriter.Writer{}
+	easyjson9e1087fdEncodeGithubComVungleVungoOpenrtb(&w, v)
+	return w.Buffer.BuildBytes(), w.Error
+}
+
+// MarshalEasyJSON supports easyjson.Marshaler interface
+func (v User) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjson9e1087fdEncodeGithubComVungleVungoOpenrtb(w, v)
+}
+
+// UnmarshalJSON supports json.Unmarshaler interface
+func (v *User) UnmarshalJSON(data []byte) error {
+	r := jlexer.Lexer{Data: data}
+	easyjson9e1087fdDecodeGithubComVungleVungoOpenrtb(&r, v)
+	return r.Error()
+}
+
+// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
+func (v *User) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjson9e1087fdDecodeGithubComVungleVungoOpenrtb(l, v)
+}
