@@ -1,6 +1,7 @@
 package openrtb_test
 
 import (
+	"fmt"
 	"runtime"
 	"strings"
 	"sync"
@@ -40,6 +41,7 @@ func benchmarkMacroSubs(subs int, b *testing.B) {
 	expectedOut := openrtb.MacroSubs(in, br.SeatBids[0], br.SeatBids[0].Bids[0], testAuctionResult, openrtb.LossReasonBidWon)
 	inCh := make(chan *openrtb.BidResponse)
 	outCh := make(chan string, b.N)
+	breakCh := make(chan string)
 
 	var wg sync.WaitGroup
 	wg.Add(workers)
@@ -53,13 +55,18 @@ func benchmarkMacroSubs(subs int, b *testing.B) {
 	go func() {
 		for output := range outCh {
 			if output != expectedOut {
-				b.Fatalf("Expected output: %v. Got %v instead", expectedOut, output)
+				breakCh <- fmt.Sprintf("Expected output: %v. Got %v instead", expectedOut, output)
 			}
 		}
 	}()
 	b.ReportAllocs()
 	b.ResetTimer()
 
+	select {
+	case errStr := <-breakCh:
+		b.Fatalf(errStr)
+	default:
+	}
 	// Create producer.
 	b.RunParallel(func(pb *testing.PB) {
 		for pb.Next() {
