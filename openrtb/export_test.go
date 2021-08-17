@@ -4,7 +4,6 @@ package openrtb
 // section that is offered in nobidreason.go.
 var NoBidReasonSections = map[NoBidReason]NoBidReason{
 	NoBidReasonUnknown:           lastOpenRTBNoBidReason,
-	NoBidReasonNonZeroUnknown:    NoBidReasonNonZeroUnknown,
 	NoBidReasonResponseTimeout:   lastVungleExchangeNoBidReason,
 	NoBidReasonVungleNoCampaigns: lastVungleNoBidReason,
 }

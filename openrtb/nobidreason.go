@@ -24,6 +24,11 @@ func (n NoBidReason) Validate() error {
 	return nil
 }
 
+// Ref returns a pointer to copy of NoBidReason.
+func (n NoBidReason) Ref() *NoBidReason {
+	return &n
+}
+
 // Standard no-bid reasons specified by OpenRTB 2.5.
 // See https://www.iab.com/wp-content/uploads/2016/03/OpenRTB-API-Specification-Version-2-5-FINAL.pdf.
 //
@@ -43,10 +48,6 @@ const (
 	NoBidReasonDailyDomainCapMet NoBidReason = 10 // Daily Domain Cap Met
 	lastOpenRTBNoBidReason       NoBidReason = 11
 )
-
-// NoBidReasonNonZeroUnknown is customized non-zero unknown error.
-// This is more safe than NoBidReasonUnknown, because the zero value can easily be confused with the default value of int.
-const NoBidReasonNonZeroUnknown NoBidReason = 12
 
 // Custom no-bid reasons reserved by a Vungle ad exchange server, from 10000 - 10999.
 //
@@ -122,8 +123,6 @@ var NoBidReasonNames = map[NoBidReason]string{
 	NoBidReasonUnmatchedUser:     "NO_BID_UNMATCHED_USER",
 	NoBidReasonDailyReaderCapMet: "NO_BID_DAILY_READER_CAP_MET",
 	NoBidReasonDailyDomainCapMet: "NO_BID_DAILY_DOMAIN_CAP_MET",
-
-	NoBidReasonNonZeroUnknown: "NO_BID_NON_ZERO_UNKNOWN",
 
 	NoBidReasonResponseTimeout:       "NO_BID_RESPONSE_TIMEOUT",
 	NoBidReasonRequestError:          "NO_BID_REQUEST_ERROR",

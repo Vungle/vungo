@@ -16,12 +16,12 @@ var emptyBid BidResponse
 //go:generate easyjson $GOFILE
 //easyjson:json
 type BidResponse struct {
-	ID          string      `json:"id"`
-	SeatBids    []*SeatBid  `json:"seatbid,omitempty"`
-	BidID       string      `json:"bidid,omitempty"`
-	Currency    Currency    `json:"cur,omitempty"`
-	CustomData  string      `json:"customdata,omitempty"`
-	NoBidReason NoBidReason `json:"nbr,omitempty"`
+	ID          string       `json:"id"`
+	SeatBids    []*SeatBid   `json:"seatbid,omitempty"`
+	BidID       string       `json:"bidid,omitempty"`
+	Currency    Currency     `json:"cur,omitempty"`
+	CustomData  string       `json:"customdata,omitempty"`
+	NoBidReason *NoBidReason `json:"nbr,omitempty"`
 
 	RawExtension json.RawMessage `json:"ext,omitempty"`
 	Extension    interface{}     `json:"-"` // Opaque value that can be used to store unmarshaled value in ext field.
@@ -39,6 +39,9 @@ func (r *BidResponse) Validate() error {
 	}
 
 	if len(r.SeatBids) == 0 {
+		if r.NoBidReason == nil {
+			return ErrInvalidNoBidReason
+		}
 		return r.NoBidReason.Validate()
 	}
 
@@ -71,6 +74,9 @@ func (r *BidResponse) Copy() *BidResponse {
 	}
 
 	brCopy := *r
+	if r.NoBidReason != nil {
+		brCopy.NoBidReason = r.NoBidReason.Ref()
+	}
 
 	if r.SeatBids != nil {
 		brCopy.SeatBids = make([]*SeatBid, len(r.SeatBids))
