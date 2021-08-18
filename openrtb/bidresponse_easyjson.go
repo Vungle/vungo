@@ -76,7 +76,15 @@ func easyjson10eb023eDecodeGithubComVungleVungoOpenrtb(in *jlexer.Lexer, out *Bi
 		case "customdata":
 			out.CustomData = string(in.String())
 		case "nbr":
-			out.NoBidReason = NoBidReason(in.Int())
+			if in.IsNull() {
+				in.Skip()
+				out.NoBidReason = nil
+			} else {
+				if out.NoBidReason == nil {
+					out.NoBidReason = new(NoBidReason)
+				}
+				*out.NoBidReason = NoBidReason(in.Int())
+			}
 		case "ext":
 			if data := in.Raw(); in.Ok() {
 				in.AddError((out.RawExtension).UnmarshalJSON(data))
@@ -133,10 +141,10 @@ func easyjson10eb023eEncodeGithubComVungleVungoOpenrtb(out *jwriter.Writer, in B
 		out.RawString(prefix)
 		out.String(string(in.CustomData))
 	}
-	if in.NoBidReason != 0 {
+	if in.NoBidReason != nil {
 		const prefix string = ",\"nbr\":"
 		out.RawString(prefix)
-		out.Int(int(in.NoBidReason))
+		out.Int(int(*in.NoBidReason))
 	}
 	if len(in.RawExtension) != 0 {
 		const prefix string = ",\"ext\":"

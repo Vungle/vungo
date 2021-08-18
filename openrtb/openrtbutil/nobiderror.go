@@ -17,7 +17,7 @@ type NoBidError interface {
 	// Reason method returns the reason to why there is a no bid response. Reason may summarize no-bid
 	// reasons to a set of non-standard ones for reason that cannot be described by the standard set
 	// of reasons specified in the OpenRTB spec.
-	Reason() openrtb.NoBidReason
+	Reason() *openrtb.NoBidReason
 
 	// Err method returns a non-nil error when the no bid reason was because of this underlying error.
 	Err() error
@@ -46,27 +46,27 @@ func (n *nobid) Response() *openrtb.BidResponse {
 	return n.br
 }
 
-func (n *nobid) Reason() openrtb.NoBidReason {
+func (n *nobid) Reason() *openrtb.NoBidReason {
 	if n.br != nil {
 		return n.br.NoBidReason
 	}
 
 	if n.status == http.StatusNoContent {
-		return openrtb.NoBidReasonNoContent
+		return openrtb.NoBidReasonNoContent.Ref()
 	} else if n.status > 0 {
-		return openrtb.NoBidReasonNonStandardHTTPStatus
+		return openrtb.NoBidReasonNonStandardHTTPStatus.Ref()
 	}
 
 	if n.err == openrtb.ErrInvalidHTTPContentType {
-		return openrtb.NoBidReasonInvalidHTTPHeader
+		return openrtb.NoBidReasonInvalidHTTPHeader.Ref()
 	}
 
 	if n.err != nil {
 		switch n.err.(type) {
 		case *json.SyntaxError, *json.UnmarshalTypeError, *json.UnmarshalFieldError:
-			return openrtb.NoBidReasonMalformattedPayload
+			return openrtb.NoBidReasonMalformattedPayload.Ref()
 		}
 	}
 
-	return openrtb.NoBidReasonUnknown
+	return openrtb.NoBidReasonUnknown.Ref()
 }

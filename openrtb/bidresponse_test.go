@@ -27,7 +27,7 @@ func TestBidResponseShouldValidateInvalidNoBidReasons(t *testing.T) {
 
 	for i, test := range tests {
 		t.Logf("Testing %d...", i)
-		resp := &openrtb.BidResponse{ID: "some-id", NoBidReason: test.nbr}
+		resp := &openrtb.BidResponse{ID: "some-id", NoBidReason: test.nbr.Ref()}
 		err := resp.Validate()
 		if (test.isValid && err != nil) || (!test.isValid && err != openrtb.ErrInvalidNoBidReason) {
 			t.Errorf("Expected no-bid reason to be valid: %t, when the validation error is %v", test.isValid, err)

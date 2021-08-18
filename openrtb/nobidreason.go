@@ -24,6 +24,11 @@ func (n NoBidReason) Validate() error {
 	return nil
 }
 
+// Ref returns a pointer to copy of NoBidReason.
+func (n NoBidReason) Ref() *NoBidReason {
+	return &n
+}
+
 // Standard no-bid reasons specified by OpenRTB 2.5.
 // See https://www.iab.com/wp-content/uploads/2016/03/OpenRTB-API-Specification-Version-2-5-FINAL.pdf.
 //
