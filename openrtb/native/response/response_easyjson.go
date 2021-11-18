@@ -28,7 +28,7 @@ func easyjson6ff3ac1dDecodeGithubComVungleVungoOpenrtbNativeResponse(in *jlexer.
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -46,7 +46,7 @@ func easyjson6ff3ac1dDecodeGithubComVungleVungoOpenrtbNativeResponse(in *jlexer.
 				in.Delim('[')
 				if out.Assets == nil {
 					if !in.IsDelim(']') {
-						out.Assets = make([]Asset, 0, 1)
+						out.Assets = make([]Asset, 0, 0)
 					} else {
 						out.Assets = []Asset{}
 					}
@@ -100,7 +100,7 @@ func easyjson6ff3ac1dDecodeGithubComVungleVungoOpenrtbNativeResponse(in *jlexer.
 				in.Delim('[')
 				if out.EventTrackers == nil {
 					if !in.IsDelim(']') {
-						out.EventTrackers = make([]EventTracker, 0, 1)
+						out.EventTrackers = make([]EventTracker, 0, 0)
 					} else {
 						out.EventTrackers = []EventTracker{}
 					}
