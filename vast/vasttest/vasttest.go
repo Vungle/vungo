@@ -65,7 +65,7 @@ func VerifyModelAgainstFile(t testing.TB, name, file string, modelType reflect.T
 	verifyNonEmptyXMLFields(t, model1, modelType)
 }
 
-// verifyElementName method verifies that a particular root element identified by xmlData has the
+// verifyElementName function verifies that a particular root element identified by xmlData has the
 // expected name.
 func verifyElementName(t testing.TB, name string, xmlData []byte) {
 	n := struct {
@@ -81,8 +81,8 @@ func verifyElementName(t testing.TB, name string, xmlData []byte) {
 	}
 }
 
-// verifyNonEmptyXMLFields method verifies that all the fields defined in the model type has
-// non-zero value after unmarshaled from the XML file.
+// verifyNonEmptyXMLFields function verifies that all the fields defined in the model type has
+// non-zero value after unmarshalled from the XML file.
 func verifyNonEmptyXMLFields(t testing.TB, v interface{}, modelType reflect.Type) {
 	val := reflect.ValueOf(v).Elem()
 	total := modelType.NumField()
@@ -103,14 +103,14 @@ func verifyNonEmptyXMLFields(t testing.TB, v interface{}, modelType reflect.Type
 	}
 }
 
-// isXMLField method returns whether a field is a tagged as a XML encoded field.
+// isXMLField function returns whether a field is a tagged as a XML encoded field.
 func isXMLField(field reflect.StructField) bool {
 	tag := field.Tag.Get("xml")
 
 	return len(tag) != 0 && tag != "-"
 }
 
-// VerifyVastElementErrorAsExpected method verifies whether the actual error is expected.
+// VerifyVastElementErrorAsExpected function verifies whether the actual error is expected.
 func VerifyVastElementErrorAsExpected(t testing.TB, element Validator, err error, expectedError error) {
 	if err != expectedError {
 		ve, ok := err.(vast.ValidationError)
@@ -130,7 +130,7 @@ func VerifyVastElementErrorAsExpected(t testing.TB, element Validator, err error
 	}
 }
 
-// VerifyVastElementFromBytes method verifies Validate errors for the vast element object.
+// VerifyVastElementFromBytes function verifies Validate errors for the vast element object.
 func VerifyVastElementFromBytes(t testing.TB, xmlData []byte, element Validator, expectedError error) {
 	if err := xml.Unmarshal(xmlData, element); err != nil {
 		t.Fatalf("Cannot unmarshal XML data. %v.\n", err)
@@ -138,7 +138,7 @@ func VerifyVastElementFromBytes(t testing.TB, xmlData []byte, element Validator,
 	VerifyVastElementErrorAsExpected(t, element, element.Validate(), expectedError)
 }
 
-// VerifyVastElementFromFile method verifies Validate errors for the Unmarshal object generated from the given file.
+// VerifyVastElementFromFile function verifies Validate errors for the Unmarshal object generated from the given file.
 func VerifyVastElementFromFile(t testing.TB, file string, element Validator, expectedError error) {
 	xmlData, err := ioutil.ReadFile(file)
 
