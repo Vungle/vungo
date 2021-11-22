@@ -5,20 +5,20 @@ type PricingModel string
 
 // Enumeration of all possible pricing models of an ad.
 const (
-	PRICING_MODEL_CPM PricingModel = "cpm"
-	PRICING_MODEL_CPC PricingModel = "cpc"
-	PRICING_MODEL_CPE PricingModel = "cpe"
-	PRICING_MODEL_CPV PricingModel = "cpv"
+	PricingModelCPM PricingModel = "cpm"
+	PricingModelCPC PricingModel = "cpc"
+	PricingModelCPE PricingModel = "cpe"
+	PricingModelCPV PricingModel = "cpv"
 )
 
 // Validate method validates the PricingModel according to the VAST.
 func (module PricingModel) Validate() error {
 
 	switch module {
-	case PRICING_MODEL_CPM:
-	case PRICING_MODEL_CPC:
-	case PRICING_MODEL_CPE:
-	case PRICING_MODEL_CPV:
+	case PricingModelCPM:
+	case PricingModelCPC:
+	case PricingModelCPE:
+	case PricingModelCPV:
 	default:
 		return ValidationError{Errs: []error{ErrUnsupportedPriceModelType}}
 	}

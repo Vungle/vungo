@@ -79,13 +79,13 @@ func TestOnlyOneValidMediaFileRemains(t *testing.T) {
 	}
 
 	mimeTypeIsSupported := false
-	for _, mimeType := range defaults.SUPPORTED_MIME_TYPES {
+	for _, mimeType := range defaults.SupportedMineTypes {
 		if mimeType == l.MediaFiles[0].MimeType {
 			mimeTypeIsSupported = true
 			break
 		}
 	}
 	if !mimeTypeIsSupported {
-		t.Fatalf("MIME type %s should be in %v", l.MediaFiles[0].MimeType, defaults.SUPPORTED_MIME_TYPES)
+		t.Fatalf("MIME type %s should be in %v", l.MediaFiles[0].MimeType, defaults.SupportedMineTypes)
 	}
 }

@@ -46,13 +46,13 @@ func unwrap(ctx context.Context, v *vast.Vast, unwrappedList []*vast.Vast, ua, i
 	}
 
 	w := v.Ads[0].Wrapper
-	if len(w.VastAdTagUri) == 0 {
-		return nil, ErrWrapperMissingAdTagUri
+	if len(w.VastAdTagURI) == 0 {
+		return nil, ErrWrapperMissingAdTagURI
 	}
 
 	var innerVast vast.Vast
 
-	req, err := http.NewRequest("GET", w.VastAdTagUri, nil)
+	req, err := http.NewRequest("GET", w.VastAdTagURI, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -72,11 +72,10 @@ func unwrap(ctx context.Context, v *vast.Vast, unwrappedList []*vast.Vast, ua, i
 
 	if err = xml.NewDecoder(resp.Body).Decode(&innerVast); err != nil {
 		return nil, err
-	} else {
-		// TODO(@garukun): Given a set of super fast VAST hosts and a starting wrapper VAST XML that
-		// wraps the VAST infinitely, this implementation could cause disastrous stack overflow that
-		// even the ctx.Done() cannot enforce exit. We will need to update the logic here eventually
-		// to be more resource aware yet robust. *wink* *wink*, consider channels and goroutines.
-		return unwrap(ctx, &innerVast, append(unwrappedList, v), ua, ip)
 	}
+	// TODO(@garukun): Given a set of super fast VAST hosts and a starting wrapper VAST XML that
+	// wraps the VAST infinitely, this implementation could cause disastrous stack overflow that
+	// even the ctx.Done() cannot enforce exit. We will need to update the logic here eventually
+	// to be more resource aware yet robust. *wink* *wink*, consider channels and goroutines.
+	return unwrap(ctx, &innerVast, append(unwrappedList, v), ua, ip)
 }

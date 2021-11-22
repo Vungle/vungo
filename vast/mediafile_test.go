@@ -21,7 +21,7 @@ var mediaFileTests = []vasttest.VastTest{
 	vasttest.VastTest{&vast.MediaFile{}, vast.ErrUnsupportedDeliveryType, "mediafile_error_delivery.xml"},
 	vasttest.VastTest{&vast.MediaFile{}, vast.ErrMediaFileSize, "mediafile_error_width.xml"},
 	vasttest.VastTest{&vast.MediaFile{}, vast.ErrMediaFileUnsupportedMimeType, "mediafile_without_type.xml"},
-	vasttest.VastTest{&vast.MediaFile{}, vast.ErrMediaFileMissUri, "mediafile_without_uri.xml"},
+	vasttest.VastTest{&vast.MediaFile{}, vast.ErrMediaFileMissURI, "mediafile_without_uri.xml"},
 	vasttest.VastTest{&vast.MediaFile{}, nil, "mediafile_without_bitrate.xml"},
 	vasttest.VastTest{&vast.MediaFile{}, vast.ErrMediaFileHeightTooHigh, "mediafile_height_too_high.xml"},
 	vasttest.VastTest{&vast.MediaFile{}, vast.ErrMediaFileHeightTooLow, "mediafile_height_too_low.xml"},
@@ -46,7 +46,7 @@ func TestMediaFileWithWhitespace(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if v.Uri != "http://it-is-just-me.com" {
-		t.Errorf("Expected CDATA to be 'http://it-is-just-me.com' instead of '%s'.", v.Uri)
+	if v.URI != "http://it-is-just-me.com" {
+		t.Errorf("Expected CDATA to be 'http://it-is-just-me.com' instead of '%s'.", v.URI)
 	}
 }

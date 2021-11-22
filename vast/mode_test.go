@@ -8,9 +8,9 @@ import (
 )
 
 var modeTests = []vasttest.VastTest{
-	vasttest.VastTest{vast.Mode(vast.MODE_ALL), nil, ""},
-	vasttest.VastTest{vast.Mode(vast.MODE_ANY), nil, ""},
-	vasttest.VastTest{vast.Mode(vast.MODE_NONE), nil, ""},
+	vasttest.VastTest{vast.Mode(vast.ModeAll), nil, ""},
+	vasttest.VastTest{vast.Mode(vast.ModeAny), nil, ""},
+	vasttest.VastTest{vast.Mode(vast.ModeNone), nil, ""},
 	vasttest.VastTest{vast.Mode("test"), vast.ErrUnsupportedMode, ""},
 	vasttest.VastTest{vast.Mode(""), vast.ErrUnsupportedMode, ""},
 }

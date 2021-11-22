@@ -5,7 +5,7 @@ import "github.com/Vungle/vungo/vast/defaults"
 // MediaFile represents a <MediaFile> element that contains a reference to the creative asset in a
 // linear creative.
 type MediaFile struct {
-	Id                        string   `xml:"id,attr,omitempty"`
+	ID                        string   `xml:"id,attr,omitempty"`
 	Delivery                  Delivery `xml:"delivery,attr"`             // Required.
 	MimeType                  string   `xml:"type,attr"`                 // Required.
 	Codec                     string   `xml:"codec,attr,omitempty"`      // VAST3.0.
@@ -16,9 +16,9 @@ type MediaFile struct {
 	Height                    int      `xml:"height,attr"`               // Required.
 	IsScalable                bool     `xml:"scalable,attr,omitempty"`
 	ShouldMaintainAspectRatio bool     `xml:"maintainAspectRatio,attr,omitempty"`
-	ApiFramework              string   `xml:"apiFramework,attr,omitempty"` // API used to interact with the MediaFile.
+	APIFramework              string   `xml:"apiFramework,attr,omitempty"` // API used to interact with the MediaFile.
 
-	Uri TrimmedData `xml:",cdata"`
+	URI TrimmedData `xml:",cdata"`
 }
 
 // Validate method validate the MediaFile element according to the VAST.
@@ -28,7 +28,7 @@ func (mediaFile *MediaFile) Validate() error {
 	errors := make([]error, 0)
 
 	mimeTypeIsSupported := false
-	for _, mimeType := range defaults.SUPPORTED_MIME_TYPES {
+	for _, mimeType := range defaults.SupportedMineTypes {
 		if mimeType == mediaFile.MimeType {
 			mimeTypeIsSupported = true
 			break
@@ -54,23 +54,23 @@ func (mediaFile *MediaFile) Validate() error {
 		errors = append(errors, ErrMediaFileSize)
 	}
 
-	if len(mediaFile.Uri) == 0 {
-		errors = append(errors, ErrMediaFileMissUri)
+	if len(mediaFile.URI) == 0 {
+		errors = append(errors, ErrMediaFileMissURI)
 	}
 
-	if mediaFile.Width > defaults.MAX_VIDEO_WIDTH {
+	if mediaFile.Width > defaults.MaxVideoWidth {
 		errors = append(errors, ErrMediaFileWidthTooHigh)
 	}
 
-	if mediaFile.Width < defaults.MIN_VIDEO_WIDTH {
+	if mediaFile.Width < defaults.MinVideoWidth {
 		errors = append(errors, ErrMediaFileWidthTooLow)
 	}
 
-	if mediaFile.Height > defaults.MAX_VIDEO_HEIGHT {
+	if mediaFile.Height > defaults.MaxVideoHeight {
 		errors = append(errors, ErrMediaFileHeightTooHigh)
 	}
 
-	if mediaFile.Height < defaults.MIN_VIDEO_HEIGHT {
+	if mediaFile.Height < defaults.MinVideoHeight {
 		errors = append(errors, ErrMediaFileHeightTooLow)
 	}
 

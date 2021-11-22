@@ -47,13 +47,13 @@ func VerifyModelAgainstFile(t testing.TB, name, file string, modelType reflect.T
 		t.Fatalf("Cannot unmarshal XML data into %v.\n", modelType)
 	}
 
-	newXmlData, err := xml.Marshal(model1)
+	newXMLData, err := xml.Marshal(model1)
 
 	if err != nil {
 		t.Fatalf("Cannot marshal model %v into XML data.", modelType)
 	}
 
-	if err := xml.Unmarshal(newXmlData, model2); err != nil {
+	if err := xml.Unmarshal(newXMLData, model2); err != nil {
 		t.Fatalf("Cannot unmarshal XML data into %v.\n", modelType)
 	}
 
@@ -62,7 +62,7 @@ func VerifyModelAgainstFile(t testing.TB, name, file string, modelType reflect.T
 	}
 
 	verifyElementName(t, name, xmlData)
-	verifyNonEmptyXmlFields(t, model1, modelType)
+	verifyNonEmptyXMLFields(t, model1, modelType)
 }
 
 // verifyElementName method verifies that a particular root element identified by xmlData has the
@@ -81,15 +81,15 @@ func verifyElementName(t testing.TB, name string, xmlData []byte) {
 	}
 }
 
-// verifyNonEmptyXmlFields method verifies that all the fields defined in the model type has
+// verifyNonEmptyXMLFields method verifies that all the fields defined in the model type has
 // non-zero value after unmarshaled from the XML file.
-func verifyNonEmptyXmlFields(t testing.TB, v interface{}, modelType reflect.Type) {
+func verifyNonEmptyXMLFields(t testing.TB, v interface{}, modelType reflect.Type) {
 	val := reflect.ValueOf(v).Elem()
 	total := modelType.NumField()
 
 	for i := 0; i < total; i++ {
 		ft := modelType.Field(i)
-		if isXmlField(ft) {
+		if isXMLField(ft) {
 			f := val.Field(i)
 
 			if f.Kind() == reflect.Slice {
@@ -103,8 +103,8 @@ func verifyNonEmptyXmlFields(t testing.TB, v interface{}, modelType reflect.Type
 	}
 }
 
-// isXmlField method returns whether a field is a tagged as a XML encoded field.
-func isXmlField(field reflect.StructField) bool {
+// isXMLField method returns whether a field is a tagged as a XML encoded field.
+func isXMLField(field reflect.StructField) bool {
 	tag := field.Tag.Get("xml")
 
 	return len(tag) != 0 && tag != "-"

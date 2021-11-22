@@ -5,13 +5,13 @@ type Delivery string
 
 // Enumeration of possible values for Delivery.
 const (
-	DELIVERY_STREAMING   Delivery = "streaming"
-	DELIVERY_PROGRESSIVE Delivery = "progressive"
+	DeliveryStreaming   Delivery = "streaming"
+	DeliveryProgressive Delivery = "progressive"
 )
 
 // Validate method validates Delivery according to the VAST.
 func (delivery Delivery) Validate() error {
-	if delivery != DELIVERY_PROGRESSIVE && delivery != DELIVERY_STREAMING {
+	if delivery != DeliveryProgressive && delivery != DeliveryStreaming {
 		return ValidationError{Errs: []error{ErrUnsupportedDeliveryType}}
 	}
 	return nil
