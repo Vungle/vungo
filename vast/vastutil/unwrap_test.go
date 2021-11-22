@@ -114,7 +114,7 @@ func (c *testUnwrapClient) Init(trace []string) {
 }
 
 // RoundTrip implements the http.RoundTripper interface to mock out the actual HTTP request.
-func (c *testUnwrapClient) RoundTrip(req *http.Request) (*http.Response, error) {
+func (c *testUnwrapClient) RoundTrip(_ *http.Request) (*http.Response, error) {
 	resp := &http.Response{}
 	f := testFilePath(c.trace[c.at])
 	body, err := os.Open(f)

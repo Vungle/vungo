@@ -16,18 +16,18 @@ func TestMediaFileMarshalUnmarshal(t *testing.T) {
 }
 
 var mediaFileTests = []vasttest.VastTest{
-	vasttest.VastTest{&vast.MediaFile{}, nil, "mediafile.xml"},
-	vasttest.VastTest{&vast.MediaFile{}, vast.ErrMediaFileMissDelivery, "mediafile_without_delivery.xml"},
-	vasttest.VastTest{&vast.MediaFile{}, vast.ErrUnsupportedDeliveryType, "mediafile_error_delivery.xml"},
-	vasttest.VastTest{&vast.MediaFile{}, vast.ErrMediaFileSize, "mediafile_error_width.xml"},
-	vasttest.VastTest{&vast.MediaFile{}, vast.ErrMediaFileUnsupportedMimeType, "mediafile_without_type.xml"},
-	vasttest.VastTest{&vast.MediaFile{}, vast.ErrMediaFileMissURI, "mediafile_without_uri.xml"},
-	vasttest.VastTest{&vast.MediaFile{}, nil, "mediafile_without_bitrate.xml"},
-	vasttest.VastTest{&vast.MediaFile{}, vast.ErrMediaFileHeightTooHigh, "mediafile_height_too_high.xml"},
-	vasttest.VastTest{&vast.MediaFile{}, vast.ErrMediaFileHeightTooLow, "mediafile_height_too_low.xml"},
-	vasttest.VastTest{&vast.MediaFile{}, vast.ErrMediaFileWidthTooHigh, "mediafile_width_too_high.xml"},
-	vasttest.VastTest{&vast.MediaFile{}, vast.ErrMediaFileWidthTooLow, "mediafile_width_too_low.xml"},
-	vasttest.VastTest{&vast.MediaFile{}, vast.ErrMediaFileUnsupportedMimeType, "mediafile_unsupported_mimetype.xml"},
+	{&vast.MediaFile{}, nil, "mediafile.xml"},
+	{&vast.MediaFile{}, vast.ErrMediaFileMissDelivery, "mediafile_without_delivery.xml"},
+	{&vast.MediaFile{}, vast.ErrUnsupportedDeliveryType, "mediafile_error_delivery.xml"},
+	{&vast.MediaFile{}, vast.ErrMediaFileSize, "mediafile_error_width.xml"},
+	{&vast.MediaFile{}, vast.ErrMediaFileUnsupportedMimeType, "mediafile_without_type.xml"},
+	{&vast.MediaFile{}, vast.ErrMediaFileMissURI, "mediafile_without_uri.xml"},
+	{&vast.MediaFile{}, nil, "mediafile_without_bitrate.xml"},
+	{&vast.MediaFile{}, vast.ErrMediaFileHeightTooHigh, "mediafile_height_too_high.xml"},
+	{&vast.MediaFile{}, vast.ErrMediaFileHeightTooLow, "mediafile_height_too_low.xml"},
+	{&vast.MediaFile{}, vast.ErrMediaFileWidthTooHigh, "mediafile_width_too_high.xml"},
+	{&vast.MediaFile{}, vast.ErrMediaFileWidthTooLow, "mediafile_width_too_low.xml"},
+	{&vast.MediaFile{}, vast.ErrMediaFileUnsupportedMimeType, "mediafile_unsupported_mimetype.xml"},
 }
 
 func TestMediaFileValidateErrors(t *testing.T) {

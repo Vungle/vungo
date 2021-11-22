@@ -51,9 +51,15 @@ func TestVastFindFirstInlineLinearCreativeShouldReturnFirst(t *testing.T) {
 func newInlineLinearAd(id string) vast.Ad {
 	return vast.Ad{
 		InLine: &vast.InLine{
-			Creatives: []*vast.Creative{&vast.Creative{Linear: &vast.Linear{
-				MediaFiles: []*vast.MediaFile{&vast.MediaFile{ID: id}},
-			}}},
+			Creatives: []*vast.Creative{
+				{
+					Linear: &vast.Linear{
+						MediaFiles: []*vast.MediaFile{
+							{ID: id},
+						},
+					},
+				},
+			},
 		},
 	}
 }
@@ -61,9 +67,9 @@ func newInlineLinearAd(id string) vast.Ad {
 // vastTests is the test set for Vast element.
 // there are other test sets like adTest which is used for Ad element.
 var vastTests = []vasttest.VastTest{
-	vasttest.VastTest{&vast.Vast{}, nil, "vast_valid.xml"},
-	vasttest.VastTest{&vast.Vast{}, vast.ErrVastMissAd, "vast_without_ad.xml"},
-	vasttest.VastTest{&vast.Vast{}, vast.ErrUnsupportedVersion, "vast_error_version.xml"},
+	{&vast.Vast{}, nil, "vast_valid.xml"},
+	{&vast.Vast{}, vast.ErrVastMissAd, "vast_without_ad.xml"},
+	{&vast.Vast{}, vast.ErrUnsupportedVersion, "vast_error_version.xml"},
 }
 
 func TestVastValidateErrors(t *testing.T) {
