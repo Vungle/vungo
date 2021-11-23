@@ -8,7 +8,7 @@ import "github.com/Vungle/vungo/internal/util"
 // The device can refer to a mobile handset, a desktop computer, set top box, or
 // other digital device.
 // See OpenRTB 2.5 Sec 3.2.18 Object: Device.
-//go:generate easyjson $GOFILE
+//go:generate easyjson -no_std_marshalers $GOFILE
 //easyjson:json
 type Device struct {
 	// Attribute:

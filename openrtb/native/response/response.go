@@ -3,7 +3,7 @@ package response
 // Response object is the top level JSON object which identifies a native response.
 //
 // See OpenRTB Native 1.2 Sec 5.1 Native Markup Response Object
-//go:generate easyjson $GOFILE
+//go:generate easyjson -no_std_marshalers $GOFILE
 //easyjson:json
 type Response struct {
 	// Field:

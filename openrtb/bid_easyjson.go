@@ -334,23 +334,9 @@ func easyjson31527abEncodeGithubComVungleVungoOpenrtb(out *jwriter.Writer, in Bi
 	out.RawByte('}')
 }
 
-// MarshalJSON supports json.Marshaler interface
-func (v Bid) MarshalJSON() ([]byte, error) {
-	w := jwriter.Writer{}
-	easyjson31527abEncodeGithubComVungleVungoOpenrtb(&w, v)
-	return w.Buffer.BuildBytes(), w.Error
-}
-
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v Bid) MarshalEasyJSON(w *jwriter.Writer) {
 	easyjson31527abEncodeGithubComVungleVungoOpenrtb(w, v)
-}
-
-// UnmarshalJSON supports json.Unmarshaler interface
-func (v *Bid) UnmarshalJSON(data []byte) error {
-	r := jlexer.Lexer{Data: data}
-	easyjson31527abDecodeGithubComVungleVungoOpenrtb(&r, v)
-	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface

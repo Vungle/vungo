@@ -39,7 +39,7 @@ import (
 // If the bid pertains to a private marketplace deal, the dealid attribute is used to reference that agreement from the
 // bid request.
 // See OpenRTB 2.5 Sec 4.2.3 Object: Bid.
-//go:generate easyjson $GOFILE
+//go:generate easyjson -no_std_marshalers $GOFILE
 //easyjson:json
 type Bid struct {
 	// Attribute:

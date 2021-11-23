@@ -6,7 +6,7 @@ import "github.com/Vungle/vungo/internal/util"
 // audience of the audience for advertising.
 // See OpenRTB 2.5 Sec 3.2.13.
 // The "data" key is unused and has been omitted.
-//go:generate easyjson $GOFILE
+//go:generate easyjson -no_std_marshalers $GOFILE
 //easyjson:json
 type User struct {
 	ID         string      `json:"id,omitempty"`

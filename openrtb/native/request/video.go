@@ -7,7 +7,7 @@ import "github.com/Vungle/vungo/openrtb"
 // Video Object. For optional attributes please refer to OpenRTB.
 //
 // See OpenRTB Native 1.2 Sec 4.5 Video Object
-//go:generate easyjson $GOFILE
+//go:generate easyjson -no_std_marshalers $GOFILE
 //easyjson:json
 type Video struct {
 	// Field:

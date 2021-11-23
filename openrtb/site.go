@@ -8,7 +8,7 @@ import "github.com/Vungle/vungo/internal/util"
 // At a minimum, it is useful to provide a site ID or page URL, but this is not
 // strictly required.
 // See OpenRTB 2.5 Sec 3.2.13.
-//go:generate easyjson $GOFILE
+//go:generate easyjson -no_std_marshalers $GOFILE
 //easyjson:json
 type Site struct {
 

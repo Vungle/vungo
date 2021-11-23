@@ -6,7 +6,7 @@ package response
 // AssetObject array so that the response can be aligned.
 //
 // See OpenRTB Native 1.2 Sec 5.2 Asset
-//go:generate easyjson $GOFILE
+//go:generate easyjson -no_std_marshalers $GOFILE
 //easyjson:json
 type Asset struct {
 	// Field:

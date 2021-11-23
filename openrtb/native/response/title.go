@@ -6,7 +6,7 @@ package response
 // (25,90,140).
 //
 // See OpenRTB Native 1.2 Sec 5.1 Title Response Object
-//go:generate easyjson $GOFILE
+//go:generate easyjson -no_std_marshalers $GOFILE
 //easyjson:json
 type Title struct {
 	// Field:

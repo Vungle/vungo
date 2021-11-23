@@ -8,7 +8,7 @@ import (
 
 // Video types annotates the parent impression as an video impression.
 // See OpenRTB 2.5 Sec 3.2.7.
-//go:generate easyjson $GOFILE
+//go:generate easyjson -no_std_marshalers $GOFILE
 //easyjson:json
 type Video struct {
 	// Attribute:

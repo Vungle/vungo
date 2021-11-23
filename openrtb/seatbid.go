@@ -8,7 +8,7 @@ package openrtb
 // win (default) or if it is only interested in winning any if it can win them
 // all as a group.
 // See OpenRTB 2.5 Sec 4.2.2 Object: SeatBid.
-//go:generate easyjson $GOFILE
+//go:generate easyjson -no_std_marshalers $GOFILE
 //easyjson:json
 type SeatBid struct {
 	Bids  []*Bid `json:"bid,omitempty"`

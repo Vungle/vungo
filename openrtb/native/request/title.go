@@ -3,7 +3,7 @@ package request
 // Title object is to be used for title element of the Native ad.
 //
 // See OpenRTB Native 1.2 Sec 4.3 Title Object
-//go:generate easyjson $GOFILE
+//go:generate easyjson -no_std_marshalers $GOFILE
 //easyjson:json
 type Title struct {
 	// Field:

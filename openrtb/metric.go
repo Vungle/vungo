@@ -11,7 +11,7 @@ import (
 // metric is identified by its type, reports the value of the metric, and optionally identifies the source or
 // vendor measuring the value.
 // See OpenRTB 2.5 Sec 3.2.5.
-//go:generate easyjson $GOFILE
+//go:generate easyjson -no_std_marshalers $GOFILE
 //easyjson:json
 type Metric struct {
 
