@@ -9,23 +9,23 @@ import (
 	"github.com/Vungle/vungo/vast/vasttest"
 )
 
-var HtmlResourceModelType = reflect.TypeOf(vast.HtmlResource{})
+var HTMLResourceModelType = reflect.TypeOf(vast.HTMLResource{})
 
 func TestHtmlResourceMarshalUnmarshal(t *testing.T) {
-	vasttest.VerifyModelAgainstFile(t, "HTMLResource", "htmlresource.xml", HtmlResourceModelType)
+	vasttest.VerifyModelAgainstFile(t, "HTMLResource", "htmlresource.xml", HTMLResourceModelType)
 }
 
 func TestHtmlResourceWithWhitespace(t *testing.T) {
-	xmlData := `<HtmlResource>
+	xmlData := `<HTMLResource>
 	<![CDATA[just me]]>
-	</HtmlResource>`
+	</HTMLResource>`
 
-	v := &vast.HtmlResource{}
+	v := &vast.HTMLResource{}
 	if err := xml.Unmarshal([]byte(xmlData), v); err != nil {
 		t.Fatal(err)
 	}
 
-	if v.Html != "just me" {
-		t.Errorf("Expected CDATA to be 'just me' instead of '%s'.", v.Html)
+	if v.HTML != "just me" {
+		t.Errorf("Expected CDATA to be 'just me' instead of '%s'.", v.HTML)
 	}
 }

@@ -3,7 +3,7 @@ package vast
 // NonLinearWrapper type represents a <NonLinear> element within a <Wrapper> element that defines
 // a non-linear ad in a wrapper.
 type NonLinearWrapper struct {
-	Id                        string    `xml:"id,attr,omitempty"`
+	ID                        string    `xml:"id,attr,omitempty"`
 	Width                     int       `xml:"width,attr"`  // Required.
 	Height                    int       `xml:"height,attr"` // Required.
 	ExpandedWidth             int       `xml:"expandedWidth,attr"`
@@ -11,7 +11,7 @@ type NonLinearWrapper struct {
 	IsScalable                bool      `xml:"scalable,attr,omitempty"`
 	ShouldMaintainAspectRatio bool      `xml:"maintainAspectRatio,attr,omitempty"`
 	MinSuggestedDuration      *Duration `xml:"minSuggestedDuration,attr,omitempty"`
-	ApiFramework              string    `xml:"apiFramework,attr,omitempty"`
+	APIFramework              string    `xml:"apiFramework,attr,omitempty"`
 
 	ClickTrackings []string     `xml:"NonLinearClickTracking,omitempty"`               // VAST 3.0.
 	Extensions     []*Extension `xml:"CreativeExtensions>CreativeExtension,omitempty"` // VAST 3.0.

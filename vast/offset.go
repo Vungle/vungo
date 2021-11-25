@@ -29,11 +29,11 @@ func (o *Offset) UnmarshalText(data []byte) error {
 		p, err := strconv.ParseInt(string(data[:len(data)-1]), 10, 8)
 
 		if err != nil {
-			return fmt.Errorf("Invalid offset: %s.", data)
+			return fmt.Errorf("invalid offset: %s", data)
 		}
 
 		if p < 0 || p > 100 {
-			return fmt.Errorf("Invalid offset, exceeded bound: %s.", data)
+			return fmt.Errorf("invalid offset, exceeded bound: %s", data)
 		}
 
 		o.Percent = int8(p)

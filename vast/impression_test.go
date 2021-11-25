@@ -18,7 +18,7 @@ func TestImpressionMarshalUnmarshal(t *testing.T) {
 func TestImpressionValidateError(t *testing.T) {
 	vasttest.VerifyVastElementFromFile(t, "testdata/impression.xml", &vast.Impression{}, nil)
 	vasttest.VerifyVastElementFromBytes(t, []byte(`<Impression id="show-me-money"></Impression>`),
-		&vast.Impression{}, vast.ErrImpressionMissUri)
+		&vast.Impression{}, vast.ErrImpressionMissURI)
 	vasttest.VerifyVastElementFromBytes(t, []byte(`<Impression><![CDATA[http://impression/here]]></Impression>`),
 		&vast.Impression{}, nil)
 }
@@ -33,7 +33,7 @@ func TestImpressionWithWhitespace(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if v.Uri != "http://it-is-just-me.com" {
-		t.Errorf("Expected CDATA to be 'http://it-is-just-me.com' instead of '%s'.", v.Uri)
+	if v.URI != "http://it-is-just-me.com" {
+		t.Errorf("Expected CDATA to be 'http://it-is-just-me.com' instead of '%s'.", v.URI)
 	}
 }

@@ -4,7 +4,7 @@ package vast
 // static resource, such as URL of the image of SWF file.
 type StaticResource struct {
 	MimeType string      `xml:"creativeType,attr"` // Required.
-	Uri      TrimmedData `xml:",cdata"`
+	URI      TrimmedData `xml:",cdata"`
 }
 
 // Validate method validates the StaticResource according to the VAST.

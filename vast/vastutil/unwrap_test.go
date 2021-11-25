@@ -30,7 +30,7 @@ func TestUnwrap(t *testing.T) {
 		{"malformed1", []string{}, &xml.SyntaxError{Line: 4, Msg: "unexpected EOF"}},
 		{"inline1", []string{}, nil},
 		{"wrapper3ads", []string{}, vastutil.ErrUnwrapWithMultipleAds},
-		{"wrapper4nouri", []string{}, vastutil.ErrWrapperMissingAdTagUri},
+		{"wrapper4nouri", []string{}, vastutil.ErrWrapperMissingAdTagURI},
 		{"wrapper1", []string{"malformed1"}, &xml.SyntaxError{Line: 4, Msg: "unexpected EOF"}},
 		{"wrapper1", []string{"inline1"}, nil},
 		{"wrapper1", []string{"wrapper2", "inline1"}, nil},
@@ -114,7 +114,7 @@ func (c *testUnwrapClient) Init(trace []string) {
 }
 
 // RoundTrip implements the http.RoundTripper interface to mock out the actual HTTP request.
-func (c *testUnwrapClient) RoundTrip(req *http.Request) (*http.Response, error) {
+func (c *testUnwrapClient) RoundTrip(_ *http.Request) (*http.Response, error) {
 	resp := &http.Response{}
 	f := testFilePath(c.trace[c.at])
 	body, err := os.Open(f)

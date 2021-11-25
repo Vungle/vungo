@@ -18,17 +18,17 @@ func TestLinearMarshalUnmarshal(t *testing.T) {
 }
 
 var linearTests = []vasttest.VastTest{
-	vasttest.VastTest{&vast.Linear{}, nil, "linear_valid.xml"},
-	vasttest.VastTest{&vast.Linear{}, nil, "linear_at_least_one_valid_mediafile.xml"},
-	vasttest.VastTest{&vast.Linear{}, vast.ErrLinearMissMediaFiles, "linear_without_mediafiles.xml"},
-	vasttest.VastTest{&vast.Linear{}, nil, "linear_error_adparameters.xml"},
-	vasttest.VastTest{&vast.Linear{}, vast.ErrDurationEqualZero, "linear_error_duration.xml"},
-	vasttest.VastTest{&vast.Linear{}, vast.ErrMediaFileSize, "linear_error_mediafiles.xml"},
-	vasttest.VastTest{&vast.Linear{}, nil, "linear_error_videoclicks.xml"},
-	vasttest.VastTest{&vast.Linear{}, vast.ErrDurationEqualZero, "linear_error_skipoffset.xml"},
-	vasttest.VastTest{&vast.Linear{}, vast.ErrVideoDurationTooLong, "linear_error_too_long.xml"},
-	vasttest.VastTest{&vast.Linear{}, vast.ErrVideoDurationTooShort, "linear_error_too_short.xml"},
-	vasttest.VastTest{
+	{&vast.Linear{}, nil, "linear_valid.xml"},
+	{&vast.Linear{}, nil, "linear_at_least_one_valid_mediafile.xml"},
+	{&vast.Linear{}, vast.ErrLinearMissMediaFiles, "linear_without_mediafiles.xml"},
+	{&vast.Linear{}, nil, "linear_error_adparameters.xml"},
+	{&vast.Linear{}, vast.ErrDurationEqualZero, "linear_error_duration.xml"},
+	{&vast.Linear{}, vast.ErrMediaFileSize, "linear_error_mediafiles.xml"},
+	{&vast.Linear{}, nil, "linear_error_videoclicks.xml"},
+	{&vast.Linear{}, vast.ErrDurationEqualZero, "linear_error_skipoffset.xml"},
+	{&vast.Linear{}, vast.ErrVideoDurationTooLong, "linear_error_too_long.xml"},
+	{&vast.Linear{}, vast.ErrVideoDurationTooShort, "linear_error_too_short.xml"},
+	{
 		&vast.Linear{},
 		&vast.ValidationError{
 			Errs: []error{
@@ -36,7 +36,7 @@ var linearTests = []vasttest.VastTest{
 				vast.ErrMediaFileHeightTooLow,
 			},
 		}, "linear_at_least_one_invalid_mediafile.xml"},
-	vasttest.VastTest{
+	{
 		&vast.Linear{},
 		&vast.ValidationError{
 			Errs: []error{
@@ -72,20 +72,20 @@ func TestOnlyOneValidMediaFileRemains(t *testing.T) {
 		t.Fatalf("Test XML should have at least 2 MediaFile elements.")
 	}
 
-	l.Validate()
+	_ = l.Validate()
 
 	if n := len(l.MediaFiles); n != 1 {
 		t.Fatalf("Validated test XML should have exactly 1 MediaFile element but got %d.", n)
 	}
 
 	mimeTypeIsSupported := false
-	for _, mimeType := range defaults.SUPPORTED_MIME_TYPES {
+	for _, mimeType := range defaults.SupportedMineTypes {
 		if mimeType == l.MediaFiles[0].MimeType {
 			mimeTypeIsSupported = true
 			break
 		}
 	}
 	if !mimeTypeIsSupported {
-		t.Fatalf("MIME type %s should be in %v", l.MediaFiles[0].MimeType, defaults.SUPPORTED_MIME_TYPES)
+		t.Fatalf("MIME type %s should be in %v", l.MediaFiles[0].MimeType, defaults.SupportedMineTypes)
 	}
 }

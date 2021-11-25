@@ -8,11 +8,11 @@ import (
 )
 
 var modeTests = []vasttest.VastTest{
-	vasttest.VastTest{vast.Mode(vast.MODE_ALL), nil, ""},
-	vasttest.VastTest{vast.Mode(vast.MODE_ANY), nil, ""},
-	vasttest.VastTest{vast.Mode(vast.MODE_NONE), nil, ""},
-	vasttest.VastTest{vast.Mode("test"), vast.ErrUnsupportedMode, ""},
-	vasttest.VastTest{vast.Mode(""), vast.ErrUnsupportedMode, ""},
+	{vast.ModeAll, nil, ""},
+	{vast.ModeAny, nil, ""},
+	{vast.ModeNone, nil, ""},
+	{vast.Mode("test"), vast.ErrUnsupportedMode, ""},
+	{vast.Mode(""), vast.ErrUnsupportedMode, ""},
 }
 
 func TestModeValidateErrors(t *testing.T) {

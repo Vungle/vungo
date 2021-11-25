@@ -41,7 +41,7 @@ func TestVastFindFirstInlineLinearCreativeShouldReturnFirst(t *testing.T) {
 	// Expect the first to be found.
 	if l == nil {
 		t.Error("The first inline linear creative should be found.")
-	} else if len(l.MediaFiles) == 0 || l.MediaFiles[0].Id != "i1" {
+	} else if len(l.MediaFiles) == 0 || l.MediaFiles[0].ID != "i1" {
 		t.Errorf("Expected inline linear creative to be %s instead of %v.", "i1", l)
 	}
 }
@@ -51,9 +51,15 @@ func TestVastFindFirstInlineLinearCreativeShouldReturnFirst(t *testing.T) {
 func newInlineLinearAd(id string) vast.Ad {
 	return vast.Ad{
 		InLine: &vast.InLine{
-			Creatives: []*vast.Creative{&vast.Creative{Linear: &vast.Linear{
-				MediaFiles: []*vast.MediaFile{&vast.MediaFile{Id: id}},
-			}}},
+			Creatives: []*vast.Creative{
+				{
+					Linear: &vast.Linear{
+						MediaFiles: []*vast.MediaFile{
+							{ID: id},
+						},
+					},
+				},
+			},
 		},
 	}
 }
@@ -61,9 +67,9 @@ func newInlineLinearAd(id string) vast.Ad {
 // vastTests is the test set for Vast element.
 // there are other test sets like adTest which is used for Ad element.
 var vastTests = []vasttest.VastTest{
-	vasttest.VastTest{&vast.Vast{}, nil, "vast_valid.xml"},
-	vasttest.VastTest{&vast.Vast{}, vast.ErrVastMissAd, "vast_without_ad.xml"},
-	vasttest.VastTest{&vast.Vast{}, vast.ErrUnsupportedVersion, "vast_error_version.xml"},
+	{&vast.Vast{}, nil, "vast_valid.xml"},
+	{&vast.Vast{}, vast.ErrVastMissAd, "vast_without_ad.xml"},
+	{&vast.Vast{}, vast.ErrUnsupportedVersion, "vast_error_version.xml"},
 }
 
 func TestVastValidateErrors(t *testing.T) {
@@ -73,8 +79,8 @@ func TestVastValidateErrors(t *testing.T) {
 }
 
 func TestVastElementNameMarshal(t *testing.T) {
-	vastXml := vast.Vast{}
-	str, _ := xml.Marshal(&vastXml)
+	vastXML := vast.Vast{}
+	str, _ := xml.Marshal(&vastXML)
 	vastString := string(str)
 	expected := `<VAST version=""></VAST>`
 	if vastString != expected {
@@ -116,7 +122,7 @@ func TestVast_FindFirstInlineCompanionAdsCreative(t *testing.T) {
 											{
 												StaticResource: &vast.StaticResource{
 													MimeType: "jpg",
-													Uri:      "http://abc/a.jpg",
+													URI:      "http://abc/a.jpg",
 												},
 											},
 										},
@@ -131,7 +137,7 @@ func TestVast_FindFirstInlineCompanionAdsCreative(t *testing.T) {
 					{
 						StaticResource: &vast.StaticResource{
 							MimeType: "jpg",
-							Uri:      "http://abc/a.jpg",
+							URI:      "http://abc/a.jpg",
 						},
 					},
 				},

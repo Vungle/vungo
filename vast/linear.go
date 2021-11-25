@@ -30,11 +30,11 @@ func (linear *Linear) Validate() error {
 		return err
 	}
 
-	if linear.Duration > Duration(defaults.MAX_VIDEO_DURATION) {
+	if linear.Duration > Duration(defaults.MaxVideoDuration) {
 		errors = append(errors, ErrVideoDurationTooLong)
 	}
 
-	if linear.Duration < Duration(defaults.MIN_VIDEO_DURATION) {
+	if linear.Duration < Duration(defaults.MinVideoDuration) {
 		errors = append(errors, ErrVideoDurationTooShort)
 	}
 

@@ -9,8 +9,8 @@ import (
 
 func TestVersionValidateErrors(t *testing.T) {
 	version1 := vast.Version("1.0")
-	version2 := vast.Version(vast.VERSION_2)
-	version3 := vast.Version(vast.VERSION_3)
+	version2 := vast.Version(vast.Version2)
+	version3 := vast.Version(vast.Version3)
 	version4 := vast.Version("")
 	vasttest.VerifyVastElementErrorAsExpected(t, version1, version1.Validate(), vast.ErrUnsupportedVersion)
 	vasttest.VerifyVastElementErrorAsExpected(t, version2, version2.Validate(), nil)

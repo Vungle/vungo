@@ -32,7 +32,7 @@ func TestStaticResourceWithWhitespace(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if v.Uri != "http://it-is-just-me.com" {
-		t.Errorf("Expected CDATA to be 'http://it-is-just-me.com' instead of '%s'.", v.Uri)
+	if v.URI != "http://it-is-just-me.com" {
+		t.Errorf("Expected CDATA to be 'http://it-is-just-me.com' instead of '%s'.", v.URI)
 	}
 }
