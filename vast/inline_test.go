@@ -15,13 +15,13 @@ func TestInLineMarshalUnmarshal(t *testing.T) {
 }
 
 var inlineTests = []vasttest.VastTest{
-	vasttest.VastTest{&vast.InLine{}, nil, "inline_valid.xml"},
-	vasttest.VastTest{&vast.InLine{}, vast.ErrInlineMissAdTitle, "inline_without_adtitle.xml"},
-	vasttest.VastTest{&vast.InLine{}, vast.ErrInlineMissCreatives, "inline_without_creatives.xml"},
-	vasttest.VastTest{&vast.InLine{}, vast.ErrInlineMissImpressions, "inline_without_impressions.xml"},
-	vasttest.VastTest{&vast.InLine{}, vast.ErrCreativeType, "inline_error_creatives.xml"},
-	vasttest.VastTest{&vast.InLine{}, nil, "inline_error_impressions.xml"},
-	vasttest.VastTest{&vast.InLine{}, nil, "inline_error_pricing.xml"},
+	{VastElement: &vast.InLine{}, File: "inline_valid.xml"},
+	{VastElement: &vast.InLine{}, Err: vast.ErrInlineMissAdTitle, File: "inline_without_adtitle.xml"},
+	{VastElement: &vast.InLine{}, Err: vast.ErrInlineMissCreatives, File: "inline_without_creatives.xml"},
+	{VastElement: &vast.InLine{}, Err: vast.ErrInlineMissImpressions, File: "inline_without_impressions.xml"},
+	{VastElement: &vast.InLine{}, Err: vast.ErrCreativeType, File: "inline_error_creatives.xml"},
+	{VastElement: &vast.InLine{}, File: "inline_error_impressions.xml"},
+	{VastElement: &vast.InLine{}, File: "inline_error_pricing.xml"},
 }
 
 func TestInlineValidateErrors(t *testing.T) {

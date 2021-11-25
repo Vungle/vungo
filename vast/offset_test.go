@@ -92,9 +92,9 @@ func TestOffsetUnmarshalErrors(t *testing.T) {
 }
 
 var offsetValidTests = []vasttest.VastTest{
-	{&vast.Offset{Duration: vast.Duration(time.Hour), Percent: -1}, vast.ErrOffsetPercentNegative, ""},
-	{&vast.Offset{Duration: vast.Duration(time.Hour), Percent: 0}, nil, ""},
-	{&vast.Offset{}, vast.ErrDurationEqualZero, ""},
+	{VastElement: &vast.Offset{Duration: vast.Duration(time.Hour), Percent: -1}, Err: vast.ErrOffsetPercentNegative},
+	{VastElement: &vast.Offset{Duration: vast.Duration(time.Hour), Percent: 0}},
+	{VastElement: &vast.Offset{}, Err: vast.ErrDurationEqualZero},
 }
 
 func TestOffsetValidateErrors(t *testing.T) {
