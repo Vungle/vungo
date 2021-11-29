@@ -15,15 +15,15 @@ func TestIconMarshalUnmarshal(t *testing.T) {
 }
 
 var iconTests = []vasttest.VastTest{
-	vasttest.VastTest{&vast.Icon{}, vast.ErrIconResourcesFormat, "icon.xml"},
-	vasttest.VastTest{&vast.Icon{}, nil, "icon_with_staticresource.xml"},
-	vasttest.VastTest{&vast.Icon{}, nil, "icon_with_htmlresource.xml"},
-	vasttest.VastTest{&vast.Icon{}, nil, "icon_with_iframeresource.xml"},
-	vasttest.VastTest{&vast.Icon{}, vast.ErrIconResourcesFormat, "icon_without_staticresource.xml"},
-	vasttest.VastTest{&vast.Icon{}, vast.ErrIconResourcesFormat, "icon_without_htmlresource.xml"},
-	vasttest.VastTest{&vast.Icon{}, vast.ErrIconResourcesFormat, "icon_without_iframeresource.xml"},
-	vasttest.VastTest{&vast.Icon{}, vast.ErrIconResourcesFormat, "icon_without_resource.xml"},
-	vasttest.VastTest{&vast.Icon{}, nil, "icon_error_htmlresource.xml"},
+	{VastElement: &vast.Icon{}, Err: vast.ErrIconResourcesFormat, File: "icon.xml"},
+	{VastElement: &vast.Icon{}, File: "icon_with_staticresource.xml"},
+	{VastElement: &vast.Icon{}, File: "icon_with_htmlresource.xml"},
+	{VastElement: &vast.Icon{}, File: "icon_with_iframeresource.xml"},
+	{VastElement: &vast.Icon{}, Err: vast.ErrIconResourcesFormat, File: "icon_without_staticresource.xml"},
+	{VastElement: &vast.Icon{}, Err: vast.ErrIconResourcesFormat, File: "icon_without_htmlresource.xml"},
+	{VastElement: &vast.Icon{}, Err: vast.ErrIconResourcesFormat, File: "icon_without_iframeresource.xml"},
+	{VastElement: &vast.Icon{}, Err: vast.ErrIconResourcesFormat, File: "icon_without_resource.xml"},
+	{VastElement: &vast.Icon{}, File: "icon_error_htmlresource.xml"},
 }
 
 func TestIconValidateErrors(t *testing.T) {

@@ -15,9 +15,9 @@ func TestCompanionAdsWrapperMarshalUnmarshal(t *testing.T) {
 }
 
 var companionAdsWrapperTests = []vasttest.VastTest{
-	vasttest.VastTest{&vast.CompanionAdsWrapper{}, vast.ErrCompanionAdsWrapperMissCompanions, "companionadswrapper_without_companion.xml"},
-	vasttest.VastTest{&vast.CompanionAdsWrapper{}, nil, "companionadswrapper_valid.xml"},
-	vasttest.VastTest{&vast.CompanionAdsWrapper{}, nil, "companionadswrapper.xml"},
+	{VastElement: &vast.CompanionAdsWrapper{}, Err: vast.ErrCompanionAdsWrapperMissCompanions, File: "companionadswrapper_without_companion.xml"},
+	{VastElement: &vast.CompanionAdsWrapper{}, File: "companionadswrapper_valid.xml"},
+	{VastElement: &vast.CompanionAdsWrapper{}, File: "companionadswrapper.xml"},
 }
 
 func TestCompanionAdsWrapperValidateErrors(t *testing.T) {
