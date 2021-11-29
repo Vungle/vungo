@@ -15,12 +15,12 @@ func TestAdMarshalUnmarshal(t *testing.T) {
 }
 
 var adTests = []vasttest.VastTest{
-	vasttest.VastTest{&vast.Ad{}, vast.ErrAdType, "ad.xml"},
-	vasttest.VastTest{&vast.Ad{}, nil, "ad_with_inline.xml"},
-	vasttest.VastTest{&vast.Ad{}, nil, "ad_with_wrapper.xml"},
-	vasttest.VastTest{&vast.Ad{}, vast.ErrAdType, "ad_no_wrapper_no_inline.xml"},
-	vasttest.VastTest{&vast.Ad{}, vast.ErrInlineMissImpressions, "ad_error_inline.xml"},
-	vasttest.VastTest{&vast.Ad{}, vast.ErrWrapperMissImpressions, "ad_error_wrapper.xml"},
+	{VastElement: &vast.Ad{}, Err: vast.ErrAdType, File: "ad.xml"},
+	{VastElement: &vast.Ad{}, File: "ad_with_inline.xml"},
+	{VastElement: &vast.Ad{}, File: "ad_with_wrapper.xml"},
+	{VastElement: &vast.Ad{}, Err: vast.ErrAdType, File: "ad_no_wrapper_no_inline.xml"},
+	{VastElement: &vast.Ad{}, Err: vast.ErrInlineMissImpressions, File: "ad_error_inline.xml"},
+	{VastElement: &vast.Ad{}, Err: vast.ErrWrapperMissImpressions, File: "ad_error_wrapper.xml"},
 }
 
 func TestAdValidateErrors(t *testing.T) {

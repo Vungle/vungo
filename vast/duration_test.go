@@ -14,27 +14,27 @@ type durationTest struct {
 }
 
 var durationTests = []durationTest{
-	durationTest{
+	{
 		vast.Duration(time.Hour),
 		"01:00:00",
 	},
-	durationTest{
+	{
 		vast.Duration(time.Minute * 33),
 		"00:33:00",
 	},
-	durationTest{
+	{
 		vast.Duration(time.Second * 45),
 		"00:00:45",
 	},
-	durationTest{
+	{
 		vast.Duration(time.Hour + time.Second*50),
 		"01:00:50",
 	},
-	durationTest{
+	{
 		vast.Duration(time.Hour*2 + time.Millisecond*202),
 		"02:00:00.202",
 	},
-	durationTest{
+	{
 		vast.Duration(time.Minute*30 + time.Second*2 + time.Millisecond*33),
 		"00:30:02.033",
 	},
@@ -69,28 +69,28 @@ func TestDurationUnmarshalErrors(t *testing.T) {
 	t.Parallel()
 
 	tests := []struct{ input, expected string }{
-		{"", "Invalid duration length: ."},
-		{"11", "Invalid duration length: 11."},
-		{"12:45", "Invalid duration length: 12:45."},
-		{"12:45:56.", "Invalid duration length: 12:45:56.."},
+		{"", "invalid duration length: "},
+		{"11", "invalid duration length: 11"},
+		{"12:45", "invalid duration length: 12:45"},
+		{"12:45:56.", "invalid duration length: 12:45:56."},
 
-		{"12:45:56-100", "Invalid duration millis separator: 12:45:56-100."},
-		{"12-45-56.100", "Invalid duration separator: 12-45-56.100."},
+		{"12:45:56-100", "invalid duration millis separator: 12:45:56-100"},
+		{"12-45-56.100", "invalid duration separator: 12-45-56.100"},
 
-		{"--:45:56.100", "Invalid duration: --:45:56.100."},
-		{"12:--:56.100", "Invalid duration: 12:--:56.100."},
-		{"12:45:--.100", "Invalid duration: 12:45:--.100."},
+		{"--:45:56.100", "invalid duration: --:45:56.100"},
+		{"12:--:56.100", "invalid duration: 12:--:56.100"},
+		{"12:45:--.100", "invalid duration: 12:45:--.100"},
 
-		{"-1:45:56.100", "Invalid duration, exceeded bound: -1:45:56.100."},
-		{"12:-1:56.100", "Invalid duration, exceeded bound: 12:-1:56.100."},
-		{"12:45:-1.100", "Invalid duration, exceeded bound: 12:45:-1.100."},
+		{"-1:45:56.100", "invalid duration, exceeded bound: -1:45:56.100"},
+		{"12:-1:56.100", "invalid duration, exceeded bound: 12:-1:56.100"},
+		{"12:45:-1.100", "invalid duration, exceeded bound: 12:45:-1.100"},
 
-		{"99:45:56.100", "Invalid duration, exceeded bound: 99:45:56.100."},
-		{"12:99:56.100", "Invalid duration, exceeded bound: 12:99:56.100."},
-		{"12:45:99.100", "Invalid duration, exceeded bound: 12:45:99.100."},
+		{"99:45:56.100", "invalid duration, exceeded bound: 99:45:56.100"},
+		{"12:99:56.100", "invalid duration, exceeded bound: 12:99:56.100"},
+		{"12:45:99.100", "invalid duration, exceeded bound: 12:45:99.100"},
 
-		{"12:45:56.abc", "Invalid duration, millis: 12:45:56.abc."},
-		{"12:45:56.-10", "Invalid duration, millis exceeded bound: 12:45:56.-10."},
+		{"12:45:56.abc", "invalid duration, millis: 12:45:56.abc"},
+		{"12:45:56.-10", "invalid duration, millis exceeded bound: 12:45:56.-10"},
 	}
 
 	for _, et := range tests {

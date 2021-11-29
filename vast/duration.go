@@ -26,11 +26,11 @@ func (d Duration) MarshalText() ([]byte, error) {
 // UnmarshalText implements the encoding.TextUnmarshaler interface.
 func (d *Duration) UnmarshalText(data []byte) (err error) {
 	if len(data) != 8 && len(data) != 12 {
-		return fmt.Errorf("Invalid duration length: %s.", data)
+		return fmt.Errorf("invalid duration length: %s", data)
 	} else if len(data) == 12 && data[8] != '.' {
-		return fmt.Errorf("Invalid duration millis separator: %s.", data)
+		return fmt.Errorf("invalid duration millis separator: %s", data)
 	} else if data[2] != ':' || data[5] != ':' {
-		return fmt.Errorf("Invalid duration separator: %s.", data)
+		return fmt.Errorf("invalid duration separator: %s", data)
 	}
 
 	f := Duration(time.Hour)
@@ -38,9 +38,9 @@ func (d *Duration) UnmarshalText(data []byte) (err error) {
 	// Unmarshal hours, minutes, and seconds parts.
 	for i := 0; i <= 6; i += 3 {
 		if n, err := strconv.ParseInt(string(data[i:i+2]), 10, 0); err != nil {
-			return fmt.Errorf("Invalid duration: %s.", data)
+			return fmt.Errorf("invalid duration: %s", data)
 		} else if n < 0 || n > 59 {
-			return fmt.Errorf("Invalid duration, exceeded bound: %s.", data)
+			return fmt.Errorf("invalid duration, exceeded bound: %s", data)
 		} else {
 			*d += Duration(n) * f
 		}
@@ -54,9 +54,9 @@ func (d *Duration) UnmarshalText(data []byte) (err error) {
 
 	// Unmarshal millis part.
 	if n, err := strconv.ParseInt(string(data[9:12]), 10, 0); err != nil {
-		return fmt.Errorf("Invalid duration, millis: %s.", data)
+		return fmt.Errorf("invalid duration, millis: %s", data)
 	} else if n < 0 || n > 999 {
-		return fmt.Errorf("Invalid duration, millis exceeded bound: %s.", data)
+		return fmt.Errorf("invalid duration, millis exceeded bound: %s", data)
 	} else {
 		*d += Duration(n) * Duration(time.Millisecond)
 	}

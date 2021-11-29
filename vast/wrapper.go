@@ -6,7 +6,7 @@ package vast
 // eventually resolves to the actual ad.
 type Wrapper struct {
 	AdSystem     *AdSystem          `xml:"AdSystem"`     // Required.
-	VastAdTagUri string             `xml:"VASTAdTagURI"` // Required.
+	VastAdTagURI string             `xml:"VASTAdTagURI"` // Required.
 	Impressions  []*Impression      `xml:"Impression"`   // Required.
 	Errors       []string           `xml:"Error,omitempty"`
 	Creatives    []*CreativeWrapper `xml:"Creatives>Creative"` // Required.
@@ -14,12 +14,12 @@ type Wrapper struct {
 }
 
 // Validate method validates the Wrapper according to the VAST.
-// AdSystem, VastAdTagUri, and Impressions are required.
+// AdSystem, VastAdTagURI, and Impressions are required.
 // Creatives are optional, if it exists, we'll also validate it.
 func (w *Wrapper) Validate() error {
 	errors := make([]error, 0)
-	if len(w.VastAdTagUri) == 0 {
-		errors = append(errors, ErrWrapperMissVastAdTagUri)
+	if len(w.VastAdTagURI) == 0 {
+		errors = append(errors, ErrWrapperMissVastAdTagURI)
 	}
 
 	if len(w.Impressions) == 0 {

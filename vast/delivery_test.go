@@ -9,8 +9,8 @@ import (
 
 func TestDeliveryValidateErrors(t *testing.T) {
 	delivery1 := vast.Delivery("test")
-	delivery2 := vast.Delivery(vast.DELIVERY_PROGRESSIVE)
-	delivery3 := vast.Delivery(vast.DELIVERY_STREAMING)
+	delivery2 := vast.Delivery(vast.DeliveryProgressive)
+	delivery3 := vast.Delivery(vast.DeliveryStreaming)
 	delivery4 := vast.Delivery("")
 	vasttest.VerifyVastElementErrorAsExpected(t, delivery1, delivery1.Validate(), vast.ErrUnsupportedDeliveryType)
 	vasttest.VerifyVastElementErrorAsExpected(t, delivery2, delivery2.Validate(), nil)

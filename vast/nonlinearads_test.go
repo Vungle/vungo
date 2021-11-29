@@ -15,9 +15,9 @@ func TestNonLinearAdsMarshalUnmarshal(t *testing.T) {
 }
 
 var nonLinearAdsTests = []vasttest.VastTest{
-	vasttest.VastTest{&vast.NonLinearAds{}, nil, "nonlinearads.xml"},
-	vasttest.VastTest{&vast.NonLinearAds{}, nil, "nonlinearads_valid.xml"},
-	vasttest.VastTest{&vast.NonLinearAds{}, vast.ErrNonLinearAdsMissNonLinears, "nonlinearads_without_nonlinears.xml"},
+	{VastElement: &vast.NonLinearAds{}, File: "nonlinearads.xml"},
+	{VastElement: &vast.NonLinearAds{}, File: "nonlinearads_valid.xml"},
+	{VastElement: &vast.NonLinearAds{}, Err: vast.ErrNonLinearAdsMissNonLinears, File: "nonlinearads_without_nonlinears.xml"},
 }
 
 func TestNonLinearAdsValidateErrors(t *testing.T) {

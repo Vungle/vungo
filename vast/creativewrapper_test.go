@@ -15,15 +15,15 @@ func TestCreativeWrapperMarshalUnmarshal(t *testing.T) {
 }
 
 var creativeWrapperTests = []vasttest.VastTest{
-	vasttest.VastTest{&vast.CreativeWrapper{}, vast.ErrCreativeWrapperType, "creativewrapper.xml"},
-	vasttest.VastTest{&vast.CreativeWrapper{}, nil, "creativewrapper_with_linear.xml"},
-	vasttest.VastTest{&vast.CreativeWrapper{}, nil, "creativewrapper_with_nonlinearads.xml"},
-	vasttest.VastTest{&vast.CreativeWrapper{}, nil, "creativewrapper_with_companionads.xml"},
-	vasttest.VastTest{&vast.CreativeWrapper{}, vast.ErrCreativeWrapperType, "creativewrapper_without_linear.xml"},
-	vasttest.VastTest{&vast.CreativeWrapper{}, vast.ErrCreativeWrapperType, "creativewrapper_without_nonlinearads.xml"},
-	vasttest.VastTest{&vast.CreativeWrapper{}, vast.ErrCreativeWrapperType, "creativewrapper_without_companionads.xml"},
-	vasttest.VastTest{&vast.CreativeWrapper{}, vast.ErrCompanionAdsWrapperMissCompanions, "creativewrapper_error_companionads.xml"},
-	vasttest.VastTest{&vast.CreativeWrapper{}, nil, "creativewrapper_without_ads.xml"},
+	{VastElement: &vast.CreativeWrapper{}, Err: vast.ErrCreativeWrapperType, File: "creativewrapper.xml"},
+	{VastElement: &vast.CreativeWrapper{}, File: "creativewrapper_with_linear.xml"},
+	{VastElement: &vast.CreativeWrapper{}, File: "creativewrapper_with_nonlinearads.xml"},
+	{VastElement: &vast.CreativeWrapper{}, File: "creativewrapper_with_companionads.xml"},
+	{VastElement: &vast.CreativeWrapper{}, Err: vast.ErrCreativeWrapperType, File: "creativewrapper_without_linear.xml"},
+	{VastElement: &vast.CreativeWrapper{}, Err: vast.ErrCreativeWrapperType, File: "creativewrapper_without_nonlinearads.xml"},
+	{VastElement: &vast.CreativeWrapper{}, Err: vast.ErrCreativeWrapperType, File: "creativewrapper_without_companionads.xml"},
+	{VastElement: &vast.CreativeWrapper{}, Err: vast.ErrCompanionAdsWrapperMissCompanions, File: "creativewrapper_error_companionads.xml"},
+	{VastElement: &vast.CreativeWrapper{}, File: "creativewrapper_without_ads.xml"},
 }
 
 func TestCreativeWrapperValidateErrors(t *testing.T) {

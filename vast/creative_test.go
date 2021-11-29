@@ -15,17 +15,17 @@ func TestCreativeMarshalUnmarshal(t *testing.T) {
 }
 
 var creativeTests = []vasttest.VastTest{
-	vasttest.VastTest{&vast.Creative{}, vast.ErrCreativeType, "creative.xml"},
-	vasttest.VastTest{&vast.Creative{}, nil, "creative_with_linear.xml"},
-	vasttest.VastTest{&vast.Creative{}, nil, "creative_with_nonlinearads.xml"},
-	vasttest.VastTest{&vast.Creative{}, nil, "creative_with_companionads.xml"},
-	vasttest.VastTest{&vast.Creative{}, vast.ErrCreativeType, "creative_without_linear.xml"},
-	vasttest.VastTest{&vast.Creative{}, vast.ErrCreativeType, "creative_without_nonlinearads.xml"},
-	vasttest.VastTest{&vast.Creative{}, vast.ErrCreativeType, "creative_without_companionads.xml"},
-	vasttest.VastTest{&vast.Creative{}, vast.ErrCreativeType, "creative_without_ads.xml"},
-	vasttest.VastTest{&vast.Creative{}, vast.ErrLinearMissMediaFiles, "creative_error_linear.xml"},
-	vasttest.VastTest{&vast.Creative{}, vast.ErrNonLinearAdsMissNonLinears, "creative_error_nonlinearads.xml"},
-	vasttest.VastTest{&vast.Creative{}, nil, "creative_error_companionads.xml"},
+	{VastElement: &vast.Creative{}, Err: vast.ErrCreativeType, File: "creative.xml"},
+	{VastElement: &vast.Creative{}, File: "creative_with_linear.xml"},
+	{VastElement: &vast.Creative{}, File: "creative_with_nonlinearads.xml"},
+	{VastElement: &vast.Creative{}, File: "creative_with_companionads.xml"},
+	{VastElement: &vast.Creative{}, Err: vast.ErrCreativeType, File: "creative_without_linear.xml"},
+	{VastElement: &vast.Creative{}, Err: vast.ErrCreativeType, File: "creative_without_nonlinearads.xml"},
+	{VastElement: &vast.Creative{}, Err: vast.ErrCreativeType, File: "creative_without_companionads.xml"},
+	{VastElement: &vast.Creative{}, Err: vast.ErrCreativeType, File: "creative_without_ads.xml"},
+	{VastElement: &vast.Creative{}, Err: vast.ErrLinearMissMediaFiles, File: "creative_error_linear.xml"},
+	{VastElement: &vast.Creative{}, Err: vast.ErrNonLinearAdsMissNonLinears, File: "creative_error_nonlinearads.xml"},
+	{VastElement: &vast.Creative{}, File: "creative_error_companionads.xml"},
 }
 
 func TestCreativeValidateErrors(t *testing.T) {

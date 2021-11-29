@@ -18,34 +18,34 @@ func TestLinearMarshalUnmarshal(t *testing.T) {
 }
 
 var linearTests = []vasttest.VastTest{
-	vasttest.VastTest{&vast.Linear{}, nil, "linear_valid.xml"},
-	vasttest.VastTest{&vast.Linear{}, nil, "linear_at_least_one_valid_mediafile.xml"},
-	vasttest.VastTest{&vast.Linear{}, vast.ErrLinearMissMediaFiles, "linear_without_mediafiles.xml"},
-	vasttest.VastTest{&vast.Linear{}, nil, "linear_error_adparameters.xml"},
-	vasttest.VastTest{&vast.Linear{}, vast.ErrDurationEqualZero, "linear_error_duration.xml"},
-	vasttest.VastTest{&vast.Linear{}, vast.ErrMediaFileSize, "linear_error_mediafiles.xml"},
-	vasttest.VastTest{&vast.Linear{}, nil, "linear_error_videoclicks.xml"},
-	vasttest.VastTest{&vast.Linear{}, vast.ErrDurationEqualZero, "linear_error_skipoffset.xml"},
-	vasttest.VastTest{&vast.Linear{}, vast.ErrVideoDurationTooLong, "linear_error_too_long.xml"},
-	vasttest.VastTest{&vast.Linear{}, vast.ErrVideoDurationTooShort, "linear_error_too_short.xml"},
-	vasttest.VastTest{
-		&vast.Linear{},
-		&vast.ValidationError{
+	{VastElement: &vast.Linear{}, File: "linear_valid.xml"},
+	{VastElement: &vast.Linear{}, File: "linear_at_least_one_valid_mediafile.xml"},
+	{VastElement: &vast.Linear{}, Err: vast.ErrLinearMissMediaFiles, File: "linear_without_mediafiles.xml"},
+	{VastElement: &vast.Linear{}, File: "linear_error_adparameters.xml"},
+	{VastElement: &vast.Linear{}, Err: vast.ErrDurationEqualZero, File: "linear_error_duration.xml"},
+	{VastElement: &vast.Linear{}, Err: vast.ErrMediaFileSize, File: "linear_error_mediafiles.xml"},
+	{VastElement: &vast.Linear{}, File: "linear_error_videoclicks.xml"},
+	{VastElement: &vast.Linear{}, Err: vast.ErrDurationEqualZero, File: "linear_error_skipoffset.xml"},
+	{VastElement: &vast.Linear{}, Err: vast.ErrVideoDurationTooLong, File: "linear_error_too_long.xml"},
+	{VastElement: &vast.Linear{}, Err: vast.ErrVideoDurationTooShort, File: "linear_error_too_short.xml"},
+	{
+		VastElement: &vast.Linear{},
+		Err: &vast.ValidationError{
 			Errs: []error{
 				vast.ErrMediaFileWidthTooLow,
 				vast.ErrMediaFileHeightTooLow,
 			},
-		}, "linear_at_least_one_invalid_mediafile.xml"},
-	vasttest.VastTest{
-		&vast.Linear{},
-		&vast.ValidationError{
+		}, File: "linear_at_least_one_invalid_mediafile.xml"},
+	{
+		VastElement: &vast.Linear{},
+		Err: &vast.ValidationError{
 			Errs: []error{
 				vast.ErrMediaFileWidthTooLow,
 				vast.ErrMediaFileHeightTooLow,
 				vast.ErrMediaFileWidthTooHigh,
 				vast.ErrMediaFileHeightTooHigh,
 			},
-		}, "invalid_mediafiles_with_invalid_mimetype.xml"},
+		}, File: "invalid_mediafiles_with_invalid_mimetype.xml"},
 }
 
 func TestLinearValidateErrors(t *testing.T) {
@@ -72,20 +72,20 @@ func TestOnlyOneValidMediaFileRemains(t *testing.T) {
 		t.Fatalf("Test XML should have at least 2 MediaFile elements.")
 	}
 
-	l.Validate()
+	_ = l.Validate()
 
 	if n := len(l.MediaFiles); n != 1 {
 		t.Fatalf("Validated test XML should have exactly 1 MediaFile element but got %d.", n)
 	}
 
 	mimeTypeIsSupported := false
-	for _, mimeType := range defaults.SUPPORTED_MIME_TYPES {
+	for _, mimeType := range defaults.SupportedMineTypes {
 		if mimeType == l.MediaFiles[0].MimeType {
 			mimeTypeIsSupported = true
 			break
 		}
 	}
 	if !mimeTypeIsSupported {
-		t.Fatalf("MIME type %s should be in %v", l.MediaFiles[0].MimeType, defaults.SUPPORTED_MIME_TYPES)
+		t.Fatalf("MIME type %s should be in %v", l.MediaFiles[0].MimeType, defaults.SupportedMineTypes)
 	}
 }

@@ -15,10 +15,10 @@ func TestWrapperMarshalUnmarshal(t *testing.T) {
 }
 
 var wrapperTests = []vasttest.VastTest{
-	vasttest.VastTest{&vast.Wrapper{}, nil, "wrapper_valid.xml"},
-	vasttest.VastTest{&vast.Wrapper{}, nil, "wrapper_error_impression.xml"},
-	vasttest.VastTest{&vast.Wrapper{}, vast.ErrWrapperMissVastAdTagUri, "wrapper_without_adtaguri.xml"},
-	vasttest.VastTest{&vast.Wrapper{}, vast.ErrWrapperMissImpressions, "wrapper_without_impression.xml"},
+	{VastElement: &vast.Wrapper{}, File: "wrapper_valid.xml"},
+	{VastElement: &vast.Wrapper{}, File: "wrapper_error_impression.xml"},
+	{VastElement: &vast.Wrapper{}, Err: vast.ErrWrapperMissVastAdTagURI, File: "wrapper_without_adtaguri.xml"},
+	{VastElement: &vast.Wrapper{}, Err: vast.ErrWrapperMissImpressions, File: "wrapper_without_impression.xml"},
 }
 
 func TestWrapperValidateErrors(t *testing.T) {

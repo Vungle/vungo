@@ -3,9 +3,9 @@ package vast
 // CreativeWrapper type represents a <Creative> element within a <Wrapper> element that defines
 // a wrapped Creative's parent trackers.
 type CreativeWrapper struct {
-	Id       string `xml:"id,attr,omitempty"`
+	ID       string `xml:"id,attr,omitempty"`
 	Sequence int    `xml:"sequence,attr,omitempty"`
-	AdId     string `xml:"AdID,attr,omitempty"`
+	AdID     string `xml:"AdID,attr,omitempty"`
 
 	Linear       *LinearWrapper       `xml:"Linear,omitempty"`
 	CompanionAds *CompanionAdsWrapper `xml:"CompanionAds,omitempty"`

@@ -17,16 +17,16 @@ func TestCompanionMarshalUnmarshal(t *testing.T) {
 }
 
 var companionTests = []vasttest.VastTest{
-	vasttest.VastTest{&vast.Companion{}, nil, "companion.xml"},
-	vasttest.VastTest{&vast.Companion{}, nil, "companion_with_staticresource.xml"},
-	vasttest.VastTest{&vast.Companion{}, nil, "companion_with_iframeresource.xml"},
-	vasttest.VastTest{&vast.Companion{}, nil, "companion_with_htmlresource.xml"},
-	vasttest.VastTest{&vast.Companion{}, nil, "companion_error_adparameters.xml"},
-	vasttest.VastTest{&vast.Companion{}, nil, "companion_error_htmlresource.xml"},
-	vasttest.VastTest{&vast.Companion{}, nil, "companion_without_resource.xml"},
-	vasttest.VastTest{&vast.Companion{}, nil, "companion_without_staticresource.xml"},
-	vasttest.VastTest{&vast.Companion{}, nil, "companion_without_iframeresource.xml"},
-	vasttest.VastTest{&vast.Companion{}, nil, "companion_without_htmlresource.xml"},
+	{VastElement: &vast.Companion{}, File: "companion.xml"},
+	{VastElement: &vast.Companion{}, File: "companion_with_staticresource.xml"},
+	{VastElement: &vast.Companion{}, File: "companion_with_iframeresource.xml"},
+	{VastElement: &vast.Companion{}, File: "companion_with_htmlresource.xml"},
+	{VastElement: &vast.Companion{}, File: "companion_error_adparameters.xml"},
+	{VastElement: &vast.Companion{}, File: "companion_error_htmlresource.xml"},
+	{VastElement: &vast.Companion{}, File: "companion_without_resource.xml"},
+	{VastElement: &vast.Companion{}, File: "companion_without_staticresource.xml"},
+	{VastElement: &vast.Companion{}, File: "companion_without_iframeresource.xml"},
+	{VastElement: &vast.Companion{}, File: "companion_without_htmlresource.xml"},
 }
 
 func TestCompanionValidateErrors(t *testing.T) {
