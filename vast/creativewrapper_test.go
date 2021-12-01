@@ -22,7 +22,6 @@ var creativeWrapperTests = []vasttest.VastTest{
 	{VastElement: &vast.CreativeWrapper{}, Err: vast.ErrCreativeWrapperType, File: "creativewrapper_without_linear.xml"},
 	{VastElement: &vast.CreativeWrapper{}, Err: vast.ErrCreativeWrapperType, File: "creativewrapper_without_nonlinearads.xml"},
 	{VastElement: &vast.CreativeWrapper{}, Err: vast.ErrCreativeWrapperType, File: "creativewrapper_without_companionads.xml"},
-	{VastElement: &vast.CreativeWrapper{}, Err: vast.ErrCompanionAdsWrapperMissCompanions, File: "creativewrapper_error_companionads.xml"},
 	{VastElement: &vast.CreativeWrapper{}, File: "creativewrapper_without_ads.xml"},
 }
 

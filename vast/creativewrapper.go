@@ -8,7 +8,7 @@ type CreativeWrapper struct {
 	AdID     string `xml:"AdID,attr,omitempty"`
 
 	Linear       *LinearWrapper       `xml:"Linear,omitempty"`
-	CompanionAds *CompanionAdsWrapper `xml:"CompanionAds,omitempty"`
+	CompanionAds *CompanionAds        `xml:"CompanionAds,omitempty"`
 	NonLinearAds *NonLinearAdsWrapper `xml:"NonLinearAds,omitempty"`
 }
 
