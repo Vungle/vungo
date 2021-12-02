@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<NonLinearAds>
+  <TrackingEvents>
+    <Tracking event="mute"><![CDATA[http://mute/me]]></Tracking>
+    <Tracking event="unmute"><![CDATA[http://unmute/me]]></Tracking>
+  </TrackingEvents>
+</NonLinearAds>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<NonLinear
+    id="some-id"
+    width="123"
+    height="456"
+    expandedWidth="111"
+    expandedHeight="222"
+    scalable="true"
+    maintainAspectRatio="true"
+    minSuggestedDuration="12:00:10.111"
+    apiFramework="Vungle Exchange">
+  <NonLinearClickTracking><![CDATA[http://track/me/1]]></NonLinearClickTracking>
+  <NonLinearClickTracking><![CDATA[http://track/me/2]]></NonLinearClickTracking>
+  <NonLinearClickTracking><![CDATA[http://track/me/3]]></NonLinearClickTracking>
+  <NonLinearClickTracking><![CDATA[http://track/me/4]]></NonLinearClickTracking>
+  <NonLinearClickThrough><![CDATA[http://clickthrough/url]]></NonLinearClickThrough>
+  <AdParameters xmlEncoded="true"><![CDATA[Some ad parameters.]]></AdParameters>
+  <IFrameResource><![CDATA[http://where/is/the/iframe]]></IFrameResource>
+  <HTMLResource xmlEncoded="true"><![CDATA[http://where/is/the/HTML]]></HTMLResource>
+  <CreativeExtensions>
+    <CreativeExtension>
+      <Random><XMLDATA>Is Cool</XMLDATA></Random>
+    </CreativeExtension>
+    <CreativeExtension>
+      <With><AChance>Of Jägermeister</AChance></With>
+    </CreativeExtension>
+  </CreativeExtensions>
+</NonLinear>

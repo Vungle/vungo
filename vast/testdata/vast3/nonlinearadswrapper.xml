@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<NonLinearAds>
+<TrackingEvents>
+  <Tracking event="mute"><![CDATA[http://mute/me]]></Tracking>
+  <Tracking event="unmute"><![CDATA[http://unmute/me]]></Tracking>
+</TrackingEvents>
+<NonLinear
+    id="some-id"
+    width="123"
+    height="456"
+    expandedWidth="111"
+    expandedHeight="222"
+    scalable="true"
+    maintainAspectRatio="true"
+    minSuggestedDuration="12:00:10.111"
+    apiFramework="Vungle Exchange">
+  <TrackingEvents>
+    <Tracking event="mute"><![CDATA[http://mute/me]]></Tracking>
+    <Tracking event="unmute"><![CDATA[http://unmute/me]]></Tracking>
+  </TrackingEvents>
+  <NonLinearClickTracking><![CDATA[http://track/me/1]]></NonLinearClickTracking>
+  <NonLinearClickTracking><![CDATA[http://track/me/2]]></NonLinearClickTracking>
+  <NonLinearClickTracking><![CDATA[http://track/me/3]]></NonLinearClickTracking>
+  <NonLinearClickTracking><![CDATA[http://track/me/4]]></NonLinearClickTracking>
+  <NonLinearClickThrough><![CDATA[http://clickthrough/url]]></NonLinearClickThrough>
+  <CreativeExtensions>
+    <CreativeExtension>
+      <Random><XMLDATA>Is Cool</XMLDATA></Random>
+    </CreativeExtension>
+    <CreativeExtension>
+      <With><AChance>Of Jägermeister</AChance></With>
+    </CreativeExtension>
+  </CreativeExtensions>
+</NonLinear>
+<NonLinear
+    id="some-id"
+    width="123"
+    height="456"
+    expandedWidth="111"
+    expandedHeight="222"
+    scalable="true"
+    maintainAspectRatio="true"
+    minSuggestedDuration="12:00:10.111"
+    apiFramework="Vungle Exchange">
+  <TrackingEvents>
+    <Tracking event="mute"><![CDATA[http://mute/me]]></Tracking>
+    <Tracking event="unmute"><![CDATA[http://unmute/me]]></Tracking>
+  </TrackingEvents>
+  <NonLinearClickTracking><![CDATA[http://track/me/1]]></NonLinearClickTracking>
+  <NonLinearClickTracking><![CDATA[http://track/me/2]]></NonLinearClickTracking>
+  <NonLinearClickTracking><![CDATA[http://track/me/3]]></NonLinearClickTracking>
+  <NonLinearClickTracking><![CDATA[http://track/me/4]]></NonLinearClickTracking>
+  <NonLinearClickThrough><![CDATA[http://clickthrough/url]]></NonLinearClickThrough>
+  <CreativeExtensions>
+    <CreativeExtension>
+      <Random><XMLDATA>Is Cool</XMLDATA></Random>
+    </CreativeExtension>
+    <CreativeExtension>
+      <With><AChance>Of Jägermeister</AChance></With>
+    </CreativeExtension>
+  </CreativeExtensions>
+</NonLinear>
+</NonLinearAds>

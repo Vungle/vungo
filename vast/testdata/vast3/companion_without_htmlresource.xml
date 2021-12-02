@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Companion
+    id="some-id"
+    width="128"
+    height="256"
+    assetWidth="64"
+    assetHeight="32"
+    expandedHeight="16"
+    expandedWidth="8"
+    apiFramework="Vungle Exchange"
+    adSlotId="ad-slot-id">
+  <CompanionClickThrough><![CDATA[http://clickthrough/url]]></CompanionClickThrough>
+  <AltText><![CDATA[Alt text for HTML rendering.]]></AltText>
+  <TrackingEvents>
+    <Tracking event="mute"><![CDATA[http://mute/me]]></Tracking>
+    <Tracking event="unmute"><![CDATA[http://unmute/me]]></Tracking>
+  </TrackingEvents>
+  <AdParameters xmlEncoded="true"><![CDATA[Some ad parameters.]]></AdParameters>
+  <StaticResource creativeType="image/gif"><![CDATA[http://where/is/my/gif]]></StaticResource>
+  <IFrameResource><![CDATA[http://where/is/the/iframe]]></IFrameResource>
+  <CreativeExtensions>
+    <CreativeExtension>
+      <Random><XMLDATA>Is Cool</XMLDATA></Random>
+    </CreativeExtension>
+    <CreativeExtension>
+      <With><AChance>Of Jägermeister</AChance></With>
+    </CreativeExtension>
+  </CreativeExtensions>
+</Companion>

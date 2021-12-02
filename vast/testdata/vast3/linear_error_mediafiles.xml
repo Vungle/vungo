@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Linear skipoffset="11:22:00.123">
+  <Duration>00:00:33.123</Duration>
+  <AdParameters xmlEncoded="true"><![CDATA[Some ad parameters.]]></AdParameters>
+  <Icons>
+    <Icon
+        program="Vungle"
+        width="128"
+        height="256"
+        xPosition="64"
+        yPosition="32"
+        offset="75%"
+        duration="00:30:00.123"
+        apiFramework="Vungle Exchange">
+      <IconClicks>
+        <IconClickThrough><![CDATA[http://clickthrough/url]]></IconClickThrough>
+        <IconClickTracking><![CDATA[http://clicktracking/url/1]]></IconClickTracking>
+        <IconClickTracking><![CDATA[http://clicktracking/url/2]]></IconClickTracking>
+        <IconClickTracking><![CDATA[http://clicktracking/url/3]]></IconClickTracking>
+      </IconClicks>
+      <StaticResource creativeType="image/gif"><![CDATA[http://where/is/my/gif]]></StaticResource>
+    </Icon>
+    <Icon
+        program="Vungle"
+        width="128"
+        height="256"
+        xPosition="64"
+        yPosition="32"
+        offset="75%"
+        duration="00:30:00.123"
+        apiFramework="Vungle Exchange">
+      <IconClicks>
+        <IconClickThrough><![CDATA[http://clickthrough/url]]></IconClickThrough>
+        <IconClickTracking><![CDATA[http://clicktracking/url/1]]></IconClickTracking>
+        <IconClickTracking><![CDATA[http://clicktracking/url/2]]></IconClickTracking>
+        <IconClickTracking><![CDATA[http://clicktracking/url/3]]></IconClickTracking>
+      </IconClicks>
+      <IFrameResource><![CDATA[http://where/is/the/iframe]]></IFrameResource>
+    </Icon>
+  </Icons>
+  <TrackingEvents>
+    <Tracking event="firstQuartile"><![CDATA[http://firstQuartile/me]]></Tracking>
+    <Tracking event="thirdQuartile"><![CDATA[http://thirdQuartile/me]]></Tracking>
+  </TrackingEvents>
+  <VideoClicks>
+    <ClickThrough id="clickthrough-1"><![CDATA[http://link/to/clickthrough/1]]></ClickThrough>
+    <ClickThrough id="clickthrough-2"><![CDATA[http://link/to/clickthrough/2]]></ClickThrough>
+    <ClickTracking id="clicktraccking-3"><![CDATA[http://link/to/clicktraccking/3]]></ClickTracking>
+    <ClickTracking id="clicktraccking-1"><![CDATA[http://link/to/clicktraccking/1]]></ClickTracking>
+    <ClickTracking id="clicktraccking-2"><![CDATA[http://link/to/clicktraccking/2]]></ClickTracking>
+    <CustomClick id="customclick-1"><![CDATA[http://link/to/customclick/1]]></CustomClick>
+    <CustomClick id="customclick-2"><![CDATA[http://link/to/customclick/2]]></CustomClick>
+    <CustomClick id="customclick-3"><![CDATA[http://link/to/customclick/3]]></CustomClick>
+  </VideoClicks>
+  <MediaFiles>
+    <MediaFile
+        id="some-id"
+        delivery="progressive"
+        type="video/mp4"
+        codec="H-264"
+        bitrate="256"
+        minBitrate="488"
+        maxBitrate="900"
+        width="-1"
+        height="16"
+        scalable="true"
+        maintainAspectRatio="true"
+        apiFramework="Vungle Exchange"><![CDATA[http://link/to/the/video]]></MediaFile>
+  </MediaFiles>
+  <CreativeExtensions>
+    <CreativeExtension>
+      <Random><XMLDATA>Is Cool</XMLDATA></Random>
+    </CreativeExtension>
+    <CreativeExtension>
+      <With><AChance>Of Jägermeister</AChance></With>
+    </CreativeExtension>
+  </CreativeExtensions>
+</Linear>

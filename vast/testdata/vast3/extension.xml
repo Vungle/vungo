@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Extension>
+  <Crazy>
+    <Object>
+      <Cool>Thing</Cool>
+      <Ugly>Thang</Ugly>
+    </Object>
+  </Crazy>
+  <Crazy>
+    <Object>
+      <Cool>Beers</Cool>
+      <Ugly>Whiskeys</Ugly>
+    </Object>
+  </Crazy>
+</Extension>

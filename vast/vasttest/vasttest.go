@@ -2,12 +2,13 @@ package vasttest
 
 import (
 	"encoding/xml"
+	"github.com/Vungle/vungo/vast/vast2"
 	"io/ioutil"
 	"reflect"
 	"testing"
-
-	"github.com/Vungle/vungo/vast"
 )
+
+const TestDirName = "../testdata/"
 
 // VastTest is a test case container, VastElement indicates which element to test.
 // Err indicates the expected error. File indicates the input xml file path.
@@ -33,7 +34,7 @@ func VerifyModelAgainstFile(t testing.TB, name, file string, modelType reflect.T
 		t.Fatalf("Mode type %v must not be of pointer kind.\n", modelType)
 	}
 
-	xmlData, err := ioutil.ReadFile("testdata/" + file)
+	xmlData, err := ioutil.ReadFile(TestDirName + file)
 
 	if err != nil {
 		t.Fatalf("Cannot read XML file: %v.\n", err)
@@ -113,8 +114,8 @@ func isXMLField(field reflect.StructField) bool {
 // VerifyVastElementErrorAsExpected function verifies whether the actual error is expected.
 func VerifyVastElementErrorAsExpected(t testing.TB, element Validator, err error, expectedError error) {
 	if err != expectedError {
-		ve, ok := err.(vast.ValidationError)
-		ev, eOk := expectedError.(*vast.ValidationError)
+		ve, ok := err.(vast2.ValidationError)
+		ev, eOk := expectedError.(*vast2.ValidationError)
 		if ok {
 			for i, err := range ve.Errs {
 				if eOk && ev.Errs[i] == err {
