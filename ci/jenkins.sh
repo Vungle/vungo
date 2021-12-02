@@ -7,7 +7,7 @@ function latest_prod_version() {
   git tag --list "v*.*.*" --sort "version:refname" | tail -n 1 | cut -f 2 -d '-'
 }
 
-# app_version returns the version of the main VSL service.
+# app_version returns the version of the main vungo service.
 function app_version() {
   local image=$(awk '{print $NF}' ci/prod/version)
   echo ${image}
@@ -64,18 +64,4 @@ function push_git_tag() {
   git config user.name "Vungo CI by Jenkins"
   git tag -a ${tag} -m "Vungo Release ${tag}"
   git push -q ${repo} ${tag} || exit 1
-}
-
-
-# send_pull_request creates and sends the pull request from the given branch for review.
-function send_pull_request() {
-  tag=$1
-  repo=$2 # Repo URL in HTTPS or SSH.
-  branch=$(release_branch_name ${tag})
-  message="Vungo Release ${tag}"$'\n'$'\n'"# Release Highlights"$'\n'$'\n'"@Vungle/exchange-eng, please fill in release highlights."
-
-  # Omit shell command dump to avoid leaking secret.
-  set +x
-  git push -q ${repo} ${branch} || exit 1
-  hub pull-request -m "${message}" -b "Vungle:master" -h "Vungle:${branch}"
 }
