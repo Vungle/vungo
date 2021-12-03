@@ -26,6 +26,8 @@ function push_git_tag() {
   git push -q ${repo} ${tag} || exit 1
 }
 
+# do_tag_work starts the main process to tag vungo release. It is different from VSL that the basic development branch
+# is master, not dev. So it is relative simpler than VSL. No need to create new pull request, no approve needed.
 function do_tag_work() {
   CURRENT_VERSION=$(latest_prod_version)
   NEXT=$(minor_version_bump $(latest_prod_version))
