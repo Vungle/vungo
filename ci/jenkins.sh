@@ -46,9 +46,10 @@ function update_version() {
   echo ${tag} > ci/prod/version
 
   # Create git branch and commit the change
-  git diff
-  git checkout -b $(release_branch_name ${tag})
+  # git diff
+  # git checkout -b $(release_branch_name ${tag})
   git add ci/prod/version
+  echo "after add"
   git config user.email "platform-bj@vungle.com"
   git config user.name "Vungo CI by Jenkins"
   git commit -m "chore(vungo,release): Vungo version bump"
