@@ -2,25 +2,25 @@ package vast3_test
 
 import (
 	"encoding/xml"
-	"github.com/Vungle/vungo/vast/vast2"
+	"github.com/Vungle/vungo/vast/basic"
 	"reflect"
 	"testing"
 
 	"github.com/Vungle/vungo/vast/vasttest"
 )
 
-var ImpressionModelType = reflect.TypeOf(vast2.Impression{})
+var ImpressionModelType = reflect.TypeOf(vastbasic.Impression{})
 
 func TestImpressionMarshalUnmarshal(t *testing.T) {
 	vasttest.VerifyModelAgainstFile(t, "Impression", "impression.xml", ImpressionModelType)
 }
 
 func TestImpressionValidateError(t *testing.T) {
-	vasttest.VerifyVastElementFromFile(t, "testdata/impression.xml", &vast2.Impression{}, nil)
+	vasttest.VerifyVastElementFromFile(t, "testdata/impression.xml", &vastbasic.Impression{}, nil)
 	vasttest.VerifyVastElementFromBytes(t, []byte(`<Impression id="show-me-money"></Impression>`),
-		&vast2.Impression{}, vast2.ErrImpressionMissURI)
+		&vastbasic.Impression{}, vastbasic.ErrImpressionMissURI)
 	vasttest.VerifyVastElementFromBytes(t, []byte(`<Impression><![CDATA[http://impression/here]]></Impression>`),
-		&vast2.Impression{}, nil)
+		&vastbasic.Impression{}, nil)
 }
 
 func TestImpressionWithWhitespace(t *testing.T) {
@@ -28,7 +28,7 @@ func TestImpressionWithWhitespace(t *testing.T) {
 	<![CDATA[http://it-is-just-me.com]]>
 	</Impression>`
 
-	v := &vast2.Impression{}
+	v := &vastbasic.Impression{}
 	if err := xml.Unmarshal([]byte(xmlData), v); err != nil {
 		t.Fatal(err)
 	}

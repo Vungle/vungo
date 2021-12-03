@@ -1,18 +1,18 @@
 package vast3_test
 
 import (
-	"github.com/Vungle/vungo/vast/vast2"
+	"github.com/Vungle/vungo/vast/basic"
 	"testing"
 
 	"github.com/Vungle/vungo/vast/vasttest"
 )
 
 var modeTests = []vasttest.VastTest{
-	{VastElement: vast2.ModeAll},
-	{VastElement: vast2.ModeAny},
-	{VastElement: vast2.ModeNone},
-	{VastElement: vast2.Mode("test"), Err: vast2.ErrUnsupportedMode},
-	{VastElement: vast2.Mode(""), Err: vast2.ErrUnsupportedMode},
+	{VastElement: vastbasic.ModeAll},
+	{VastElement: vastbasic.ModeAny},
+	{VastElement: vastbasic.ModeNone},
+	{VastElement: vastbasic.Mode("test"), Err: vastbasic.ErrUnsupportedMode},
+	{VastElement: vastbasic.Mode(""), Err: vastbasic.ErrUnsupportedMode},
 }
 
 func TestModeValidateErrors(t *testing.T) {

@@ -1,5 +1,7 @@
 package vast2
 
+import "github.com/Vungle/vungo/vast/basic"
+
 // Companion type represents a complex type that defines a companion ad.
 type Companion struct {
 	ID             string `xml:"id,attr,omitempty"`
@@ -12,16 +14,14 @@ type Companion struct {
 	APIFramework   string `xml:"apiFramework,attr,omitempty"`
 	AdSlotID       string `xml:"adSlotId,attr,omitempty"` // VAST3.0.
 
-	ClickThrough   TrimmedData     `xml:"CompanionClickThrough,omitempty"`
-	ClickTracking  TrimmedData     `xml:"CompanionClickTracking,omitempty"` // VAST3.0.
-	AltText        string          `xml:"AltText,omitempty"`
-	Trackings      []*Tracking     `xml:"TrackingEvents>Tracking,omitempty"` // Required tracking: EventCreativeView
-	AdParameters   *AdParameters   `xml:"AdParameters,omitempty"`            // Just string in VAST2.0.
-	StaticResource *StaticResource `xml:"StaticResource,omitempty"`
-	IFrameResource string          `xml:"IFrameResource,omitempty"`
-	HTMLResource   *HTMLResource   `xml:"HTMLResource,omitempty"` // Just string in VAST2.0.
-
-	Extensions []*Extension `xml:"CreativeExtensions>CreativeExtension,omitempty"` // VAST3.0.
+	ClickThrough   vastbasic.TrimmedData     `xml:"CompanionClickThrough,omitempty"`
+	ClickTracking  vastbasic.TrimmedData     `xml:"CompanionClickTracking,omitempty"` // VAST3.0.
+	AltText        string                    `xml:"AltText,omitempty"`
+	Trackings      []*vastbasic.Tracking     `xml:"TrackingEvents>Tracking,omitempty"` // Required tracking: EventCreativeView
+	AdParameters   *string                   `xml:"AdParameters,omitempty"`
+	StaticResource *vastbasic.StaticResource `xml:"StaticResource,omitempty"`
+	IFrameResource string                    `xml:"IFrameResource,omitempty"`
+	HTMLResource   *string                   `xml:"HTMLResource,omitempty"`
 }
 
 // Validate methods validate the Companion element according to the VAST.
@@ -30,7 +30,7 @@ func (companion *Companion) Validate() error {
 
 	for _, tracking := range companion.Trackings {
 		if err := tracking.Validate(); err != nil {
-			ve, ok := err.(ValidationError)
+			ve, ok := err.(vastbasic.ValidationError)
 			if ok {
 				errors = append(errors, ve.Errs...)
 			}
@@ -38,7 +38,7 @@ func (companion *Companion) Validate() error {
 	}
 
 	if len(errors) > 0 {
-		return ValidationError{Errs: errors}
+		return vastbasic.ValidationError{Errs: errors}
 	}
 	return nil
 }

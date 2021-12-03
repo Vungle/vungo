@@ -1,7 +1,7 @@
 package vast3_test
 
 import (
-	"github.com/Vungle/vungo/vast/vast2"
+	"github.com/Vungle/vungo/vast/basic"
 	"testing"
 )
 
@@ -18,7 +18,7 @@ func TestTrimmedDataUnmarshalText(t *testing.T) {
 	for i, test := range tests {
 		t.Logf("Testing %d...", i)
 
-		var d vast2.TrimmedData
+		var d vastbasic.TrimmedData
 		if err := d.UnmarshalText([]byte(test.actual)); err != nil {
 			t.Fatal(err)
 		}

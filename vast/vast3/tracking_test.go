@@ -2,21 +2,21 @@ package vast3_test
 
 import (
 	"encoding/xml"
-	"github.com/Vungle/vungo/vast/vast2"
+	"github.com/Vungle/vungo/vast/basic"
 	"reflect"
 	"testing"
 
 	"github.com/Vungle/vungo/vast/vasttest"
 )
 
-var TrackingModelType = reflect.TypeOf(vast2.Tracking{})
+var TrackingModelType = reflect.TypeOf(vastbasic.Tracking{})
 
 func TestTrackingMarshalUnmarshal(t *testing.T) {
 	vasttest.VerifyModelAgainstFile(t, "Tracking", "tracking.xml", TrackingModelType)
 }
 
 func TestTrackingValidateErrors(t *testing.T) {
-	vasttest.VerifyVastElementFromFile(t, "testdata/tracking.xml", &vast2.Tracking{}, nil)
+	vasttest.VerifyVastElementFromFile(t, "testdata/tracking.xml", &vastbasic.Tracking{}, nil)
 }
 
 func TestTrackingWithWhitespace(t *testing.T) {
@@ -24,7 +24,7 @@ func TestTrackingWithWhitespace(t *testing.T) {
 	<![CDATA[http://it-is-just-me.com]]>
 	</Tracking>`
 
-	v := &vast2.Tracking{}
+	v := &vastbasic.Tracking{}
 	if err := xml.Unmarshal([]byte(xmlData), v); err != nil {
 		t.Fatal(err)
 	}

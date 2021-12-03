@@ -2,21 +2,21 @@ package vast3_test
 
 import (
 	"encoding/xml"
-	"github.com/Vungle/vungo/vast/vast2"
+	"github.com/Vungle/vungo/vast/basic"
 	"reflect"
 	"testing"
 
 	"github.com/Vungle/vungo/vast/vasttest"
 )
 
-var VideoClickModelType = reflect.TypeOf(vast2.VideoClick{})
+var VideoClickModelType = reflect.TypeOf(vastbasic.VideoClick{})
 
 func TestVideoClickMarshalUnmarshal(t *testing.T) {
 	vasttest.VerifyModelAgainstFile(t, "NotImportant", "videoclick.xml", VideoClickModelType)
 }
 
 func TestVideoClickValidateErrors(t *testing.T) {
-	vasttest.VerifyVastElementFromFile(t, "testdata/videoclick.xml", &vast2.VideoClick{}, nil)
+	vasttest.VerifyVastElementFromFile(t, "testdata/videoclick.xml", &vastbasic.VideoClick{}, nil)
 }
 
 func TestVideoClickWithWhitespace(t *testing.T) {
@@ -24,7 +24,7 @@ func TestVideoClickWithWhitespace(t *testing.T) {
 	<![CDATA[http://it-is-just-me.com]]>
 	</VideoClick>`
 
-	v := &vast2.VideoClick{}
+	v := &vastbasic.VideoClick{}
 	if err := xml.Unmarshal([]byte(xmlData), v); err != nil {
 		t.Fatal(err)
 	}

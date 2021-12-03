@@ -1,6 +1,7 @@
 package vast3_test
 
 import (
+	"github.com/Vungle/vungo/vast/basic"
 	"github.com/Vungle/vungo/vast/vast2"
 	"reflect"
 	"testing"
@@ -15,12 +16,12 @@ func TestAdMarshalUnmarshal(t *testing.T) {
 }
 
 var adTests = []vasttest.VastTest{
-	{VastElement: &vast2.Ad{}, Err: vast2.ErrAdType, File: "ad.xml"},
+	{VastElement: &vast2.Ad{}, Err: vastbasic.ErrAdType, File: "ad.xml"},
 	{VastElement: &vast2.Ad{}, File: "ad_with_inline.xml"},
 	{VastElement: &vast2.Ad{}, File: "ad_with_wrapper.xml"},
-	{VastElement: &vast2.Ad{}, Err: vast2.ErrAdType, File: "ad_no_wrapper_no_inline.xml"},
-	{VastElement: &vast2.Ad{}, Err: vast2.ErrInlineMissImpressions, File: "ad_error_inline.xml"},
-	{VastElement: &vast2.Ad{}, Err: vast2.ErrWrapperMissImpressions, File: "ad_error_wrapper.xml"},
+	{VastElement: &vast2.Ad{}, Err: vastbasic.ErrAdType, File: "ad_no_wrapper_no_inline.xml"},
+	{VastElement: &vast2.Ad{}, Err: vastbasic.ErrInlineMissImpressions, File: "ad_error_inline.xml"},
+	{VastElement: &vast2.Ad{}, Err: vastbasic.ErrWrapperMissImpressions, File: "ad_error_wrapper.xml"},
 }
 
 func TestAdValidateErrors(t *testing.T) {

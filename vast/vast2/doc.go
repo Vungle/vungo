@@ -1,11 +1,11 @@
 /*
-Package vast implements IAB VAST 3.0 specification located at
-http://www.iab.net/media/file/VASTv3.0.pdf. The vast package can also be used to process VAST 2.0
-documents and interact a mixture of VAST wrappers between VAST 2.0 and 3.0 documents.
+Package vast2 implements IAB VAST 2.0 specification located at
+https://iabtechlab.com/wp-content/uploads/2016/04/VAST-2_0-FINAL.pdf.
+Documents and interact a mixture of VAST wrappers for VAST 2.0.
 
 All vast element has already implemented Validate interface.
 Validate() will validate the current vast element node, and will recursively validate its child nodes according to VAST
-3.0 spec.
+2.0 spec.
 
 Example Usage
 

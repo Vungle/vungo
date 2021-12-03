@@ -1,6 +1,7 @@
 package vast3_test
 
 import (
+	"github.com/Vungle/vungo/vast/basic"
 	"github.com/Vungle/vungo/vast/vast2"
 	"reflect"
 	"testing"
@@ -15,16 +16,16 @@ func TestCreativeMarshalUnmarshal(t *testing.T) {
 }
 
 var creativeTests = []vasttest.VastTest{
-	{VastElement: &vast2.Creative{}, Err: vast2.ErrCreativeType, File: "creative.xml"},
+	{VastElement: &vast2.Creative{}, Err: vastbasic.ErrCreativeType, File: "creative.xml"},
 	{VastElement: &vast2.Creative{}, File: "creative_with_linear.xml"},
 	{VastElement: &vast2.Creative{}, File: "creative_with_nonlinearads.xml"},
 	{VastElement: &vast2.Creative{}, File: "creative_with_companionads.xml"},
-	{VastElement: &vast2.Creative{}, Err: vast2.ErrCreativeType, File: "creative_without_linear.xml"},
-	{VastElement: &vast2.Creative{}, Err: vast2.ErrCreativeType, File: "creative_without_nonlinearads.xml"},
-	{VastElement: &vast2.Creative{}, Err: vast2.ErrCreativeType, File: "creative_without_companionads.xml"},
-	{VastElement: &vast2.Creative{}, Err: vast2.ErrCreativeType, File: "creative_without_ads.xml"},
-	{VastElement: &vast2.Creative{}, Err: vast2.ErrLinearMissMediaFiles, File: "creative_error_linear.xml"},
-	{VastElement: &vast2.Creative{}, Err: vast2.ErrNonLinearAdsMissNonLinears, File: "creative_error_nonlinearads.xml"},
+	{VastElement: &vast2.Creative{}, Err: vastbasic.ErrCreativeType, File: "creative_without_linear.xml"},
+	{VastElement: &vast2.Creative{}, Err: vastbasic.ErrCreativeType, File: "creative_without_nonlinearads.xml"},
+	{VastElement: &vast2.Creative{}, Err: vastbasic.ErrCreativeType, File: "creative_without_companionads.xml"},
+	{VastElement: &vast2.Creative{}, Err: vastbasic.ErrCreativeType, File: "creative_without_ads.xml"},
+	{VastElement: &vast2.Creative{}, Err: vastbasic.ErrLinearMissMediaFiles, File: "creative_error_linear.xml"},
+	{VastElement: &vast2.Creative{}, Err: vastbasic.ErrNonLinearAdsMissNonLinears, File: "creative_error_nonlinearads.xml"},
 	{VastElement: &vast2.Creative{}, File: "creative_error_companionads.xml"},
 }
 

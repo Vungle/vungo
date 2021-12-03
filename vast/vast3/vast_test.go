@@ -2,6 +2,7 @@ package vast3_test
 
 import (
 	"encoding/xml"
+	"github.com/Vungle/vungo/vast/basic"
 	"github.com/Vungle/vungo/vast/vast2"
 	"reflect"
 	"testing"
@@ -54,7 +55,7 @@ func newInlineLinearAd(id string) vast2.Ad {
 			Creatives: []*vast2.Creative{
 				{
 					Linear: &vast2.Linear{
-						MediaFiles: []*vast2.MediaFile{
+						MediaFiles: []*vastbasic.MediaFile{
 							{ID: id},
 						},
 					},
@@ -68,8 +69,8 @@ func newInlineLinearAd(id string) vast2.Ad {
 // there are other test sets like adTest which is used for Ad element.
 var vastTests = []vasttest.VastTest{
 	{VastElement: &vast2.Vast{}, File: "vast_valid.xml"},
-	{VastElement: &vast2.Vast{}, Err: vast2.ErrVastMissAd, File: "vast_without_ad.xml"},
-	{VastElement: &vast2.Vast{}, Err: vast2.ErrUnsupportedVersion, File: "vast_error_version.xml"},
+	{VastElement: &vast2.Vast{}, Err: vastbasic.ErrVastMissAd, File: "vast_without_ad.xml"},
+	{VastElement: &vast2.Vast{}, Err: vastbasic.ErrUnsupportedVersion, File: "vast_error_version.xml"},
 }
 
 func TestVastValidateErrors(t *testing.T) {
@@ -104,7 +105,7 @@ func TestVast_FindFirstInlineCompanionAdsCreative(t *testing.T) {
 	tests := []struct {
 		desc   string
 		v      vast2.Vast
-		expect *vast2.CompanionAds
+		expect *vastbasic.CompanionAds
 	}{
 		{
 			desc: "Has CompanionAds.",
@@ -117,10 +118,10 @@ func TestVast_FindFirstInlineCompanionAdsCreative(t *testing.T) {
 									Linear: &vast2.Linear{},
 								},
 								{
-									CompanionAds: &vast2.CompanionAds{
+									CompanionAds: &vastbasic.CompanionAds{
 										Companions: []*vast2.Companion{
 											{
-												StaticResource: &vast2.StaticResource{
+												StaticResource: &vastbasic.StaticResource{
 													MimeType: "jpg",
 													URI:      "http://abc/a.jpg",
 												},
@@ -132,10 +133,10 @@ func TestVast_FindFirstInlineCompanionAdsCreative(t *testing.T) {
 						},
 					},
 				}},
-			expect: &vast2.CompanionAds{
+			expect: &vastbasic.CompanionAds{
 				Companions: []*vast2.Companion{
 					{
-						StaticResource: &vast2.StaticResource{
+						StaticResource: &vastbasic.StaticResource{
 							MimeType: "jpg",
 							URI:      "http://abc/a.jpg",
 						},

@@ -1,7 +1,7 @@
 package vast3_test
 
 import (
-	"github.com/Vungle/vungo/vast/vast2"
+	"github.com/Vungle/vungo/vast/basic"
 	"testing"
 	"time"
 
@@ -9,33 +9,33 @@ import (
 )
 
 type durationTest struct {
-	duration vast2.Duration
+	duration vastbasic.Duration
 	value    string
 }
 
 var durationTests = []durationTest{
 	{
-		vast2.Duration(time.Hour),
+		vastbasic.Duration(time.Hour),
 		"01:00:00",
 	},
 	{
-		vast2.Duration(time.Minute * 33),
+		vastbasic.Duration(time.Minute * 33),
 		"00:33:00",
 	},
 	{
-		vast2.Duration(time.Second * 45),
+		vastbasic.Duration(time.Second * 45),
 		"00:00:45",
 	},
 	{
-		vast2.Duration(time.Hour + time.Second*50),
+		vastbasic.Duration(time.Hour + time.Second*50),
 		"01:00:50",
 	},
 	{
-		vast2.Duration(time.Hour*2 + time.Millisecond*202),
+		vastbasic.Duration(time.Hour*2 + time.Millisecond*202),
 		"02:00:00.202",
 	},
 	{
-		vast2.Duration(time.Minute*30 + time.Second*2 + time.Millisecond*33),
+		vastbasic.Duration(time.Minute*30 + time.Second*2 + time.Millisecond*33),
 		"00:30:02.033",
 	},
 }
@@ -56,7 +56,7 @@ func TestDurationUnmarshal(t *testing.T) {
 	t.Parallel()
 
 	for _, ot := range durationTests {
-		var actual vast2.Duration
+		var actual vastbasic.Duration
 		if err := actual.UnmarshalText([]byte(ot.value)); err != nil {
 			t.Error("Unexpected unmarshal error:", err)
 		} else if actual != ot.duration {
@@ -94,7 +94,7 @@ func TestDurationUnmarshalErrors(t *testing.T) {
 	}
 
 	for _, et := range tests {
-		var d vast2.Duration
+		var d vastbasic.Duration
 
 		if err := d.UnmarshalText([]byte(et.input)); err == nil {
 			t.Error("An unmarshal error is expected.")
@@ -105,7 +105,7 @@ func TestDurationUnmarshalErrors(t *testing.T) {
 }
 
 func TestDurationValidateErrors(t *testing.T) {
-	vasttest.VerifyVastElementErrorAsExpected(t, vast2.Duration(-time.Hour), vast2.Duration(-time.Hour).Validate(), vast2.ErrDurationNegative)
-	vasttest.VerifyVastElementErrorAsExpected(t, vast2.Duration(0), vast2.Duration(0).Validate(), vast2.ErrDurationEqualZero)
-	vasttest.VerifyVastElementErrorAsExpected(t, vast2.Duration(time.Hour), vast2.Duration(time.Hour).Validate(), nil)
+	vasttest.VerifyVastElementErrorAsExpected(t, vastbasic.Duration(-time.Hour), vastbasic.Duration(-time.Hour).Validate(), vastbasic.ErrDurationNegative)
+	vasttest.VerifyVastElementErrorAsExpected(t, vastbasic.Duration(0), vastbasic.Duration(0).Validate(), vastbasic.ErrDurationEqualZero)
+	vasttest.VerifyVastElementErrorAsExpected(t, vastbasic.Duration(time.Hour), vastbasic.Duration(time.Hour).Validate(), nil)
 }

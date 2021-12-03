@@ -1,6 +1,7 @@
 package vast3_test
 
 import (
+	"github.com/Vungle/vungo/vast/basic"
 	"github.com/Vungle/vungo/vast/vast2"
 	"reflect"
 	"testing"
@@ -17,7 +18,7 @@ func TestNonLinearAdsMarshalUnmarshal(t *testing.T) {
 var nonLinearAdsTests = []vasttest.VastTest{
 	{VastElement: &vast2.NonLinearAds{}, File: "nonlinearads.xml"},
 	{VastElement: &vast2.NonLinearAds{}, File: "nonlinearads_valid.xml"},
-	{VastElement: &vast2.NonLinearAds{}, Err: vast2.ErrNonLinearAdsMissNonLinears, File: "nonlinearads_without_nonlinears.xml"},
+	{VastElement: &vast2.NonLinearAds{}, Err: vastbasic.ErrNonLinearAdsMissNonLinears, File: "nonlinearads_without_nonlinears.xml"},
 }
 
 func TestNonLinearAdsValidateErrors(t *testing.T) {

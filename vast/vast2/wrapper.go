@@ -1,16 +1,18 @@
 package vast2
 
+import "github.com/Vungle/vungo/vast/basic"
+
 // Wrapper type represents a <Wrapper> element in VAST document that contains a single URI
 // reference to a vendor ad server, a.k.a. third party ad server, where the actual VAST w
 // content will be served. The vendor ad server may also provide additional wrapper which
 // eventually resolves to the actual ad.
 type Wrapper struct {
-	AdSystem     *AdSystem          `xml:"AdSystem"`     // Required.
-	VastAdTagURI string             `xml:"VASTAdTagURI"` // Required.
-	Impressions  []*Impression      `xml:"Impression"`   // Required.
-	Errors       []string           `xml:"Error,omitempty"`
-	Creatives    []*CreativeWrapper `xml:"Creatives>Creative"` // Required.
-	Extensions   []*Extension       `xml:"Extensions>Extension,omitempty"`
+	AdSystem     *vastbasic.AdSystem     `xml:"AdSystem"`     // Required.
+	VastAdTagURI string                  `xml:"VASTAdTagURI"` // Required.
+	Impressions  []*vastbasic.Impression `xml:"Impression"`   // Required.
+	Errors       []string                `xml:"Error,omitempty"`
+	Creatives    []*CreativeWrapper      `xml:"Creatives>Creative"` // Required.
+	Extensions   []*vastbasic.Extension  `xml:"Extensions>Extension,omitempty"`
 }
 
 // Validate method validates the Wrapper according to the VAST.
@@ -19,16 +21,16 @@ type Wrapper struct {
 func (w *Wrapper) Validate() error {
 	errors := make([]error, 0)
 	if len(w.VastAdTagURI) == 0 {
-		errors = append(errors, ErrWrapperMissVastAdTagURI)
+		errors = append(errors, vastbasic.ErrWrapperMissVastAdTagURI)
 	}
 
 	if len(w.Impressions) == 0 {
-		errors = append(errors, ErrWrapperMissImpressions)
+		errors = append(errors, vastbasic.ErrWrapperMissImpressions)
 	}
 
 	for _, c := range w.Creatives {
 		if err := c.Validate(); err != nil {
-			ve, ok := err.(ValidationError)
+			ve, ok := err.(vastbasic.ValidationError)
 			if ok {
 				errors = append(errors, ve.Errs...)
 			}
@@ -36,7 +38,7 @@ func (w *Wrapper) Validate() error {
 	}
 
 	if len(errors) > 0 {
-		return ValidationError{Errs: errors}
+		return vastbasic.ValidationError{Errs: errors}
 	}
 	return nil
 }

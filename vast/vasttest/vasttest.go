@@ -2,13 +2,13 @@ package vasttest
 
 import (
 	"encoding/xml"
-	"github.com/Vungle/vungo/vast/vast2"
+	vastbasic "github.com/Vungle/vungo/vast/basic"
 	"io/ioutil"
 	"reflect"
 	"testing"
 )
 
-const TestDirName = "../testdata/"
+const TestDirName = "./testdata/"
 
 // VastTest is a test case container, VastElement indicates which element to test.
 // Err indicates the expected error. File indicates the input xml file path.
@@ -114,8 +114,8 @@ func isXMLField(field reflect.StructField) bool {
 // VerifyVastElementErrorAsExpected function verifies whether the actual error is expected.
 func VerifyVastElementErrorAsExpected(t testing.TB, element Validator, err error, expectedError error) {
 	if err != expectedError {
-		ve, ok := err.(vast2.ValidationError)
-		ev, eOk := expectedError.(*vast2.ValidationError)
+		ve, ok := err.(vastbasic.ValidationError)
+		ev, eOk := expectedError.(*vastbasic.ValidationError)
 		if ok {
 			for i, err := range ve.Errs {
 				if eOk && ev.Errs[i] == err {

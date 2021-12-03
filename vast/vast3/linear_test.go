@@ -2,6 +2,7 @@ package vast3_test
 
 import (
 	"encoding/xml"
+	vast22 "github.com/Vungle/vungo/vast/basic"
 	"github.com/Vungle/vungo/vast/vast2"
 	"io/ioutil"
 	"reflect"
@@ -20,30 +21,30 @@ func TestLinearMarshalUnmarshal(t *testing.T) {
 var linearTests = []vasttest.VastTest{
 	{VastElement: &vast2.Linear{}, File: "linear_valid.xml"},
 	{VastElement: &vast2.Linear{}, File: "linear_at_least_one_valid_mediafile.xml"},
-	{VastElement: &vast2.Linear{}, Err: vast2.ErrLinearMissMediaFiles, File: "linear_without_mediafiles.xml"},
+	{VastElement: &vast2.Linear{}, Err: vast22.ErrLinearMissMediaFiles, File: "linear_without_mediafiles.xml"},
 	{VastElement: &vast2.Linear{}, File: "linear_error_adparameters.xml"},
-	{VastElement: &vast2.Linear{}, Err: vast2.ErrDurationEqualZero, File: "linear_error_duration.xml"},
-	{VastElement: &vast2.Linear{}, Err: vast2.ErrMediaFileSize, File: "linear_error_mediafiles.xml"},
+	{VastElement: &vast2.Linear{}, Err: vast22.ErrDurationEqualZero, File: "linear_error_duration.xml"},
+	{VastElement: &vast2.Linear{}, Err: vast22.ErrMediaFileSize, File: "linear_error_mediafiles.xml"},
 	{VastElement: &vast2.Linear{}, File: "linear_error_videoclicks.xml"},
-	{VastElement: &vast2.Linear{}, Err: vast2.ErrDurationEqualZero, File: "linear_error_skipoffset.xml"},
-	{VastElement: &vast2.Linear{}, Err: vast2.ErrVideoDurationTooLong, File: "linear_error_too_long.xml"},
-	{VastElement: &vast2.Linear{}, Err: vast2.ErrVideoDurationTooShort, File: "linear_error_too_short.xml"},
+	{VastElement: &vast2.Linear{}, Err: vast22.ErrDurationEqualZero, File: "linear_error_skipoffset.xml"},
+	{VastElement: &vast2.Linear{}, Err: vast22.ErrVideoDurationTooLong, File: "linear_error_too_long.xml"},
+	{VastElement: &vast2.Linear{}, Err: vast22.ErrVideoDurationTooShort, File: "linear_error_too_short.xml"},
 	{
 		VastElement: &vast2.Linear{},
-		Err: &vast2.ValidationError{
+		Err: &vast22.ValidationError{
 			Errs: []error{
-				vast2.ErrMediaFileWidthTooLow,
-				vast2.ErrMediaFileHeightTooLow,
+				vast22.ErrMediaFileWidthTooLow,
+				vast22.ErrMediaFileHeightTooLow,
 			},
 		}, File: "linear_at_least_one_invalid_mediafile.xml"},
 	{
 		VastElement: &vast2.Linear{},
-		Err: &vast2.ValidationError{
+		Err: &vast22.ValidationError{
 			Errs: []error{
-				vast2.ErrMediaFileWidthTooLow,
-				vast2.ErrMediaFileHeightTooLow,
-				vast2.ErrMediaFileWidthTooHigh,
-				vast2.ErrMediaFileHeightTooHigh,
+				vast22.ErrMediaFileWidthTooLow,
+				vast22.ErrMediaFileHeightTooLow,
+				vast22.ErrMediaFileWidthTooHigh,
+				vast22.ErrMediaFileHeightTooHigh,
 			},
 		}, File: "invalid_mediafiles_with_invalid_mimetype.xml"},
 }
