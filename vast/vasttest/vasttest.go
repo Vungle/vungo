@@ -8,7 +8,7 @@ import (
 	"testing"
 )
 
-const TestDirName = "./testdata/"
+const testDirName = "./testdata/"
 
 // VastTest is a test case container, VastElement indicates which element to test.
 // Err indicates the expected error. File indicates the input xml file path.
@@ -34,7 +34,7 @@ func VerifyModelAgainstFile(t testing.TB, name, file string, modelType reflect.T
 		t.Fatalf("Mode type %v must not be of pointer kind.\n", modelType)
 	}
 
-	xmlData, err := ioutil.ReadFile(TestDirName + file)
+	xmlData, err := ioutil.ReadFile(testDirName + file)
 
 	if err != nil {
 		t.Fatalf("Cannot read XML file: %v.\n", err)

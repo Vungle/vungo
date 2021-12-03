@@ -1,10 +1,10 @@
-package vastbasic
+package vast2
 
-import "github.com/Vungle/vungo/vast/vast2"
+import "github.com/Vungle/vungo/vast/basic"
 
 // CompanionAds type represents a <CompanionAds> element that contains companion creatives.
 type CompanionAds struct {
-	Companions []*vast2.Companion `xml:"Companion,omitempty"`
+	Companions []*Companion `xml:"Companion,omitempty"`
 }
 
 // Validate methods validate the CompanionAds element according to the VAST.
@@ -15,7 +15,7 @@ func (companionAds *CompanionAds) Validate() error {
 
 	for _, companion := range companionAds.Companions {
 		if err := companion.Validate(); err != nil {
-			ve, ok := err.(ValidationError)
+			ve, ok := err.(vastbasic.ValidationError)
 			if ok {
 				errors = append(errors, ve.Errs...)
 			}
@@ -23,7 +23,7 @@ func (companionAds *CompanionAds) Validate() error {
 	}
 
 	if len(errors) > 0 {
-		return ValidationError{Errs: errors}
+		return vastbasic.ValidationError{Errs: errors}
 	}
 	return nil
 }

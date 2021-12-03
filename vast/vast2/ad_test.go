@@ -26,6 +26,6 @@ var adTests = []vasttest.VastTest{
 
 func TestAdValidateErrors(t *testing.T) {
 	for _, test := range adTests {
-		vasttest.VerifyVastElementFromFile(t, vasttest.TestDirName+test.File, test.VastElement, test.Err)
+		vasttest.VerifyVastElementFromFile(t, "./testdata/"+test.File, test.VastElement, test.Err)
 	}
 }

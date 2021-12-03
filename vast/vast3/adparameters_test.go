@@ -2,14 +2,14 @@ package vast3_test
 
 import (
 	"encoding/xml"
-	"github.com/Vungle/vungo/vast/vast2"
+	"github.com/Vungle/vungo/vast/vast3"
 	"reflect"
 	"testing"
 
 	"github.com/Vungle/vungo/vast/vasttest"
 )
 
-var AdParametersModelType = reflect.TypeOf(vast2.AdParameters{})
+var AdParametersModelType = reflect.TypeOf(vast3.AdParameters{})
 
 func TestAdParametersMarshalUnmarshal(t *testing.T) {
 	vasttest.VerifyModelAgainstFile(t, "AdParameters", "adparameters.xml", AdParametersModelType)
@@ -20,7 +20,7 @@ func TestAdParametersWithWhitespace(t *testing.T) {
 	<![CDATA[just me]]>
 	</AdParameters>`
 
-	a := &vast2.AdParameters{}
+	a := &vast3.AdParameters{}
 	if err := xml.Unmarshal([]byte(xmlData), a); err != nil {
 		t.Fatal(err)
 	}

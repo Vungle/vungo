@@ -105,7 +105,7 @@ func TestVast_FindFirstInlineCompanionAdsCreative(t *testing.T) {
 	tests := []struct {
 		desc   string
 		v      vast2.Vast
-		expect *vastbasic.CompanionAds
+		expect *vast2.CompanionAds
 	}{
 		{
 			desc: "Has CompanionAds.",
@@ -118,7 +118,7 @@ func TestVast_FindFirstInlineCompanionAdsCreative(t *testing.T) {
 									Linear: &vast2.Linear{},
 								},
 								{
-									CompanionAds: &vastbasic.CompanionAds{
+									CompanionAds: &vast2.CompanionAds{
 										Companions: []*vast2.Companion{
 											{
 												StaticResource: &vastbasic.StaticResource{
@@ -133,7 +133,7 @@ func TestVast_FindFirstInlineCompanionAdsCreative(t *testing.T) {
 						},
 					},
 				}},
-			expect: &vastbasic.CompanionAds{
+			expect: &vast2.CompanionAds{
 				Companions: []*vast2.Companion{
 					{
 						StaticResource: &vastbasic.StaticResource{

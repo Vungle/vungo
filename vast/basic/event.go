@@ -1,4 +1,4 @@
-package vast2
+package vastbasic
 
 // Event type represents various values of the Tracking event.
 type Event string

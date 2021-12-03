@@ -9,9 +9,9 @@ type CreativeWrapper struct {
 	Sequence int    `xml:"sequence,attr,omitempty"`
 	AdID     string `xml:"AdID,attr,omitempty"`
 
-	Linear       *LinearWrapper                 `xml:"Linear,omitempty"`
-	CompanionAds *vastbasic.CompanionAdsWrapper `xml:"CompanionAds,omitempty"`
-	NonLinearAds *NonLinearAdsWrapper           `xml:"NonLinearAds,omitempty"`
+	Linear       *LinearWrapper       `xml:"Linear,omitempty"`
+	CompanionAds *CompanionAdsWrapper `xml:"CompanionAds,omitempty"`
+	NonLinearAds *NonLinearAdsWrapper `xml:"NonLinearAds,omitempty"`
 }
 
 // Validate method validates the CreativeWrapper.

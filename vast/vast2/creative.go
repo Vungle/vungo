@@ -12,9 +12,9 @@ type Creative struct {
 	AdID         string `xml:"AdID,attr,omitempty"`         // ID of ad associated with the creative.
 	APIFramework string `xml:"apiFramework,attr,omitempty"` // Ad serving API used. VAST3.0.
 
-	Linear       *Linear                 `xml:"Linear,omitempty"`
-	CompanionAds *vastbasic.CompanionAds `xml:"CompanionAds,omitempty"`
-	NonLinearAds *NonLinearAds           `xml:"NonLinearAds,omitempty"`
+	Linear       *Linear       `xml:"Linear,omitempty"`
+	CompanionAds *CompanionAds `xml:"CompanionAds,omitempty"`
+	NonLinearAds *NonLinearAds `xml:"NonLinearAds,omitempty"`
 }
 
 // Validate methods validate the Creative element according to the VAST.

@@ -1,9 +1,5 @@
 package vastbasic
 
-import (
-	vastbasic "github.com/Vungle/vungo/vast copy/basic"
-)
-
 // Impression type represents a URI that directs the video player to a tracking resource file that
 // the video player should request when the first frame of the ad is displayed.
 type Impression struct {
@@ -17,7 +13,7 @@ type Impression struct {
 func (impression *Impression) Validate() error {
 
 	if len(impression.URI) == 0 {
-		return vastbasic.ValidationError{Errs: []error{ErrImpressionMissURI}}
+		return ValidationError{Errs: []error{ErrImpressionMissURI}}
 	}
 
 	return nil

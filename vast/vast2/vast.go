@@ -32,7 +32,7 @@ func (v Vast) FindFirstInlineLinearCreative() *Linear {
 
 // FindFirstInlineCompanionAdsCreative method inspects through all of its inline ads and finds the first
 // CompanionAds creative within, or returns nil when found nothing.
-func (v Vast) FindFirstInlineCompanionAdsCreative() *vastbasic.CompanionAds {
+func (v Vast) FindFirstInlineCompanionAdsCreative() *CompanionAds {
 	for _, ad := range v.Ads {
 		if ad.InLine == nil {
 			continue

@@ -1,23 +1,23 @@
-package vastbasic_test
+package vast2_test
 
 import (
-	"github.com/Vungle/vungo/vast/basic"
+	"github.com/Vungle/vungo/vast/vast2"
 	"reflect"
 	"testing"
 
 	"github.com/Vungle/vungo/vast/vasttest"
 )
 
-var CompanionAdsModelType = reflect.TypeOf(vastbasic.CompanionAds{})
+var CompanionAdsModelType = reflect.TypeOf(vast2.CompanionAds{})
 
 func TestCompanionAdsMarshalUnmarshal(t *testing.T) {
 	vasttest.VerifyModelAgainstFile(t, "CompanionAds", "companionads.xml", CompanionAdsModelType)
 }
 
 var companionAdsTests = []vasttest.VastTest{
-	{VastElement: &vastbasic.CompanionAds{}, File: "companionads_without_companion.xml"},
-	{VastElement: &vastbasic.CompanionAds{}, File: "companionads_valid.xml"},
-	{VastElement: &vastbasic.CompanionAds{}, File: "companionads.xml"},
+	{VastElement: &vast2.CompanionAds{}, File: "companionads_without_companion.xml"},
+	{VastElement: &vast2.CompanionAds{}, File: "companionads_valid.xml"},
+	{VastElement: &vast2.CompanionAds{}, File: "companionads.xml"},
 }
 
 func TestCompanionAdsValidateErrors(t *testing.T) {

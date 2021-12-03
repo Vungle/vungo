@@ -1,4 +1,4 @@
-package vast3_test
+package vastbasic_test
 
 import (
 	"github.com/Vungle/vungo/vast/basic"

@@ -1,11 +1,9 @@
 package vastbasic
 
-import "github.com/Vungle/vungo/vast/vast2"
-
 // Tracking type represents a <Tracking> element that contains a URL to track an event.
 type Tracking struct {
-	Event vast2.Event       `xml:"event,attr"` // Required.
-	URI TrimmedData `xml:",cdata"`
+	Event Event       `xml:"event,attr"` // Required.
+	URI   TrimmedData `xml:",cdata"`
 }
 
 // Validate methods validate the Tracking element according to the VAST.
