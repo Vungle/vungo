@@ -42,7 +42,7 @@ function release_branch_name() {
 # creates the release branch locally.
 function update_version() {
   local tag=$1
-
+  echo "start update version"
   echo ${tag} > ci/prod/version
 
   # Create git branch and commit the change
@@ -53,6 +53,7 @@ function update_version() {
   git config user.name "Vungo CI by Jenkins"
   git commit -m "chore(vungo,release): Vungo version bump"
   git status
+  echo "update version OK"
 }
 
 # push_git_tag pushes the app version to GitHub.
@@ -79,3 +80,5 @@ function do_release_work() {
   # push_git_tag $(app_version) git@github.com:Vungle/vungo.git || true
   #https://${GITHUB_AUTH}@github.com/Vungle/vungo.git
 }
+
+do_release_work
