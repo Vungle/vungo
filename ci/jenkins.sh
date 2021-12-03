@@ -65,3 +65,17 @@ function push_git_tag() {
   git tag -a ${tag} -m "Vungo Release ${tag}"
   git push -q ${repo} ${tag} || exit 1
 }
+
+function do_release_work() {
+  git log --graph --decorate --oneline -5
+  if [ $(latest_prod_version) != $(app_version) ]; then
+    echo "Latest deployed version is different from the configured version, aborting release process!"
+    exit 0
+  fi
+
+  NEXT=$(minor_version_bump $(latest_prod_version))
+  update_version ${NEXT}
+  # send_pull_request ${NEXT} git@github.com:Vungle/vungo.git
+  # push_git_tag $(app_version) git@github.com:Vungle/vungo.git || true
+  #https://${GITHUB_AUTH}@github.com/Vungle/vungo.git
+}
