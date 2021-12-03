@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# type hub >/dev/null 2>&1 || { echo >&2 "hub is required. See https://hub.github.com/"; exit 1; }
-
 # latest_prod_version returns the latest version deployed in production, e.g. v0.9.0.
 function latest_prod_version() {
   git tag --list "v*.*.*" --sort "version:refname" | tail -n 1 | cut -f 2 -d '-'
