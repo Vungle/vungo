@@ -24,8 +24,8 @@ function push_git_tag() {
   git push -q ${repo} ${tag} || exit 1
 }
 
-# do_tag_work starts the main process to tag vungo release. It is different from VSL that the basic development branch
-# is master, not dev. So it is relative simpler than VSL. No need to create new pull request, no approve needed.
+# do_tag_work is used to give a new tag to vungo repository. It will get the latest release tag in github and move
+# forward minor version to minor version plus 1. Then give a new tag to master branch with git command line.
 function do_tag_work() {
   CURRENT_VERSION=$(latest_prod_version)
   NEXT=$(minor_version_bump $(latest_prod_version))
@@ -36,4 +36,11 @@ function do_tag_work() {
   echo "push tag to remote repo ${NEXT}"
 }
 
+# do_tag_work is the main process of vungo release work. It will be invoked by Jenkins job.
+# The vungo release Jenkins job is triggered manually after one pull request to master is approved
+# and it is the only pull request needed in the whole release process. It is different from VSL and Jaeger that vungo's
+# basic development branch is master, not dev, so it is relative simpler than VSL. No need to create a second new pull
+# request from dev to master. The only thing to do is tag this commit in github here.
+# If some other project want to use this release of vungo, it is necessary to update the version in go.mod file to the
+# new version and execute "go mod tidy" command.
 do_tag_work
