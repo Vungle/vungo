@@ -4,7 +4,7 @@ import "github.com/Vungle/vungo/vast/basic"
 
 // CompanionAds type represents a <CompanionAds> element that contains companion creatives.
 type CompanionAds struct {
-	Companions []*Companion `xml:"Companion,omitempty"`
+	Companions []*vastbasic.Companion `xml:"Companion,omitempty"`
 }
 
 // Validate methods validate the CompanionAds element according to the VAST.

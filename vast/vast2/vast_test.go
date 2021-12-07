@@ -119,7 +119,7 @@ func TestVast_FindFirstInlineCompanionAdsCreative(t *testing.T) {
 								},
 								{
 									CompanionAds: &vast2.CompanionAds{
-										Companions: []*vast2.Companion{
+										Companions: []*vastbasic.Companion{
 											{
 												StaticResource: &vastbasic.StaticResource{
 													MimeType: "jpg",
@@ -134,7 +134,7 @@ func TestVast_FindFirstInlineCompanionAdsCreative(t *testing.T) {
 					},
 				}},
 			expect: &vast2.CompanionAds{
-				Companions: []*vast2.Companion{
+				Companions: []*vastbasic.Companion{
 					{
 						StaticResource: &vastbasic.StaticResource{
 							MimeType: "jpg",

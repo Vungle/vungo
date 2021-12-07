@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MediaFile
+    id="some-id"
+    delivery="progressive"
+    type="video/mp4"
+    codec="H-264"
+    width="8"
+    height="16"
+    scalable="true"
+    maintainAspectRatio="true"
+    apiFramework="Vungle Exchange"><![CDATA[http://link/to/the/video]]></MediaFile>

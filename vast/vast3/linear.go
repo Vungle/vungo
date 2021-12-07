@@ -18,10 +18,12 @@ type Linear struct {
 }
 
 // Validate methods validate the Linear element according to the VAST.
-// MediaFiles and Duration are required.
+// Duration are required in Linear but not required in Wrapper.
+// According to VAST2.0 protocol, MediaFile is not required.
 // Icons are optional, but if contained, we'll also validate it.
 func (linear *Linear) Validate() error {
 	errors := make([]error, 0)
+
 	if len(linear.MediaFiles) == 0 {
 		errors = append(errors, ErrLinearMissMediaFiles) // Can be zero?
 	}
