@@ -21,14 +21,10 @@ func TestLinearMarshalUnmarshal(t *testing.T) {
 var linearTests = []vasttest.VastTest{
 	{VastElement: &vast2.Linear{}, File: "linear_valid.xml"},
 	{VastElement: &vast2.Linear{}, File: "linear_at_least_one_valid_mediafile.xml"},
-	{VastElement: &vast2.Linear{}, Err: vast22.ErrLinearMissMediaFiles, File: "linear_without_mediafiles.xml"},
+	{VastElement: &vast2.Linear{}, File: "linear_without_mediafiles.xml"},
 	{VastElement: &vast2.Linear{}, File: "linear_error_adparameters.xml"},
-	{VastElement: &vast2.Linear{}, Err: vast22.ErrDurationEqualZero, File: "linear_error_duration.xml"},
 	{VastElement: &vast2.Linear{}, Err: vast22.ErrMediaFileSize, File: "linear_error_mediafiles.xml"},
 	{VastElement: &vast2.Linear{}, File: "linear_error_videoclicks.xml"},
-	{VastElement: &vast2.Linear{}, Err: vast22.ErrDurationEqualZero, File: "linear_error_skipoffset.xml"},
-	{VastElement: &vast2.Linear{}, Err: vast22.ErrVideoDurationTooLong, File: "linear_error_too_long.xml"},
-	{VastElement: &vast2.Linear{}, Err: vast22.ErrVideoDurationTooShort, File: "linear_error_too_short.xml"},
 	{
 		VastElement: &vast2.Linear{},
 		Err: &vast22.ValidationError{

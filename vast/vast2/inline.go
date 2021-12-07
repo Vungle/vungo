@@ -1,20 +1,23 @@
 package vast2
 
-import "github.com/Vungle/vungo/vast/basic"
+import (
+	"github.com/Vungle/vungo/vast/basic"
+	"github.com/Vungle/vungo/vast/defaults"
+)
 
 // InLine type represents an <InLine> ad element contained with <Ad> element in a VAST document.
 //
 // The <InLine> element contains all necessary assets, URI's, creatives, etc, to display the ad.
 type InLine struct {
-	AdSystem    *vastbasic.AdSystem     `xml:"AdSystem"`           // Required.
-	AdTitle     *string                 `xml:"AdTitle"`            // Required.
-	Impressions []*vastbasic.Impression `xml:"Impression"`         // Required.
-	Creatives   []*Creative             `xml:"Creatives>Creative"` // Creatives node is required.
-	Description string                  `xml:"Description,omitempty"`
-	Advertiser  string                  `xml:"Advertiser,omitempty"` // VAST3.0.
-	SurveyURL   string                  `xml:"Survey,omitempty"`
+	AdSystem    *vastbasic.AdSystem     `xml:"AdSystem"`   // Required.
+	AdTitle     *string                 `xml:"AdTitle"`    // Required.
+	Impressions []*vastbasic.Impression `xml:"Impression"` // Required.
 	Errors      []string                `xml:"Error,omitempty"`
+	Creatives   []*Creative             `xml:"Creatives>Creative"` // Creatives node is required.
 	Extensions  []*vastbasic.Extension  `xml:"Extensions>Extension,omitempty"`
+
+	Description string `xml:"Description,omitempty"`
+	SurveyURL   string `xml:"Survey,omitempty"`
 }
 
 // Validate methods validate the Inline element according to the VAST.
@@ -40,6 +43,18 @@ func (inline *InLine) Validate() error {
 			ve, ok := err.(vastbasic.ValidationError)
 			if ok {
 				errors = append(errors, ve.Errs...)
+			}
+		}
+		// check linear duration
+		if linear := creative.Linear; linear != nil {
+			if err := creative.Linear.Duration.Validate(); err != nil {
+				return err
+			}
+			if creative.Linear.Duration > vastbasic.Duration(defaults.MaxVideoDuration) {
+				errors = append(errors, vastbasic.ErrVideoDurationTooLong)
+			}
+			if creative.Linear.Duration < vastbasic.Duration(defaults.MinVideoDuration) {
+				errors = append(errors, vastbasic.ErrVideoDurationTooShort)
 			}
 		}
 	}

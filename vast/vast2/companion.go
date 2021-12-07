@@ -5,20 +5,17 @@ import "github.com/Vungle/vungo/vast/basic"
 // Companion type represents a complex type that defines a companion ad.
 type Companion struct {
 	ID             string `xml:"id,attr,omitempty"`
-	Width          int    `xml:"width,attr"`       // Required.
-	Height         int    `xml:"height,attr"`      // Required.
-	AssetWidth     int    `xml:"assetWidth,attr"`  // VAST3.0.
-	AssetHeight    int    `xml:"assetHeight,attr"` // VAST3.0.
+	Width          int    `xml:"width,attr"`  // Required.
+	Height         int    `xml:"height,attr"` // Required.
 	ExpandedWidth  int    `xml:"expandedWidth,attr,omitempty"`
 	ExpandedHeight int    `xml:"expandedHeight,attr,omitempty"`
 	APIFramework   string `xml:"apiFramework,attr,omitempty"`
-	AdSlotID       string `xml:"adSlotId,attr,omitempty"` // VAST3.0.
 
-	ClickThrough   vastbasic.TrimmedData     `xml:"CompanionClickThrough,omitempty"`
-	ClickTracking  vastbasic.TrimmedData     `xml:"CompanionClickTracking,omitempty"` // VAST3.0.
-	AltText        string                    `xml:"AltText,omitempty"`
-	Trackings      []*vastbasic.Tracking     `xml:"TrackingEvents>Tracking,omitempty"` // Required tracking: EventCreativeView
-	AdParameters   *string                   `xml:"AdParameters,omitempty"`
+	AltText      string                `xml:"AltText,omitempty"`
+	AdParameters *string               `xml:"AdParameters,omitempty"`
+	ClickThrough vastbasic.TrimmedData `xml:"CompanionClickThrough,omitempty"`
+	Trackings    []*vastbasic.Tracking
+
 	StaticResource *vastbasic.StaticResource `xml:"StaticResource,omitempty"`
 	IFrameResource string                    `xml:"IFrameResource,omitempty"`
 	HTMLResource   *string                   `xml:"HTMLResource,omitempty"`

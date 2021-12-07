@@ -12,7 +12,7 @@ import (
 var AdModelType = reflect.TypeOf(vast2.Ad{})
 
 func TestAdMarshalUnmarshal(t *testing.T) {
-	vasttest.VerifyModelAgainstFile(t, "Ad", "testdata/ad.xml", AdModelType)
+	vasttest.VerifyModelAgainstFile(t, "Ad", "ad.xml", AdModelType)
 }
 
 var adTests = []vasttest.VastTest{

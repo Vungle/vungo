@@ -11,7 +11,7 @@ type Wrapper struct {
 	VastAdTagURI string                  `xml:"VASTAdTagURI"` // Required.
 	Impressions  []*vastbasic.Impression `xml:"Impression"`   // Required.
 	Errors       []string                `xml:"Error,omitempty"`
-	Creatives    []*CreativeWrapper      `xml:"Creatives>Creative"` // Required.
+	Creatives    []*Creative             `xml:"Creatives>Creative"` // Required.
 	Extensions   []*vastbasic.Extension  `xml:"Extensions>Extension,omitempty"`
 }
 
