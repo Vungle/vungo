@@ -22,8 +22,8 @@ var (
 	// ErrCreativeWrapperType error for CreativeWrapper should contain one type of NonLinearAds, Linear, CompanionAds.
 	ErrCreativeWrapperType = errors.New("CreativeWrapper should contain one type of NonLinearAds, Linear, CompanionAds")
 
-	// ErrDurationEqualZero error for Duration is less than zero.
-	ErrDurationEqualZero = errors.New("Duration is less than zero")
+	// ErrDurationEqualZero error for Duration is less than one.
+	ErrDurationEqualZero = errors.New("Duration is less than one")
 
 	// ErrDurationNegative error for Duration is negative.
 	ErrDurationNegative = errors.New("Duration is negative")
