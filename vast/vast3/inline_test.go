@@ -2,12 +2,12 @@ package vast3_test
 
 import (
 	"encoding/xml"
-	"github.com/Vungle/vungo/vast/defaults"
 	"io/ioutil"
 	"reflect"
 	"testing"
 
 	vastbasic "github.com/Vungle/vungo/vast/basic"
+	"github.com/Vungle/vungo/vast/defaults"
 	"github.com/Vungle/vungo/vast/vast3"
 	"github.com/Vungle/vungo/vast/vasttest"
 )
