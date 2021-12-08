@@ -26,10 +26,6 @@ type Linear struct {
 func (linear *Linear) Validate() error {
 	errors := make([]error, 0)
 
-	if len(linear.MediaFiles) == 0 {
-		errors = append(errors, vastbasic.ErrLinearMissMediaFiles) // Can be zero?
-	}
-
 	if linear.VideoClicks != nil {
 		if err := linear.VideoClicks.Validate(); err != nil {
 			ve, ok := err.(vastbasic.ValidationError)
@@ -45,40 +41,6 @@ func (linear *Linear) Validate() error {
 			if ok {
 				errors = append(errors, ve.Errs...)
 			}
-		}
-	}
-
-	var validMediaFiles []*MediaFile
-	var err error
-
-	var hasMimeTypeErr bool
-	noneMimeTypeErrors := make([]error, 0)
-	for _, mediaFile := range linear.MediaFiles {
-		err = mediaFile.Validate()
-		if err == nil {
-			validMediaFiles = append(validMediaFiles, mediaFile)
-			//break
-		} else {
-			ve, ok := err.(vastbasic.ValidationError)
-			if ok {
-				// Merge all errors which are not mime type errors.
-				if ve.Errs[0] != vastbasic.ErrMediaFileUnsupportedMimeType {
-					noneMimeTypeErrors = append(noneMimeTypeErrors, ve.Errs...)
-				} else {
-					hasMimeTypeErr = true
-				}
-			}
-		}
-	}
-
-	if len(validMediaFiles) > 0 {
-		linear.MediaFiles = validMediaFiles
-	} else {
-		if len(noneMimeTypeErrors) > 0 {
-			errors = append(errors, noneMimeTypeErrors...)
-		}
-		if hasMimeTypeErr {
-			errors = append(errors, vastbasic.ErrMediaFileUnsupportedMimeType)
 		}
 	}
 

@@ -24,7 +24,6 @@ var creativeTests = []vasttest.VastTest{
 	{VastElement: &vast3.Creative{}, Err: vastbasic.ErrCreativeType, File: "creative_without_nonlinearads.xml"},
 	{VastElement: &vast3.Creative{}, Err: vastbasic.ErrCreativeType, File: "creative_without_companionads.xml"},
 	{VastElement: &vast3.Creative{}, Err: vastbasic.ErrCreativeType, File: "creative_without_ads.xml"},
-	{VastElement: &vast3.Creative{}, Err: vastbasic.ErrLinearMissMediaFiles, File: "creative_error_linear.xml"},
 	{VastElement: &vast3.Creative{}, Err: vastbasic.ErrNonLinearAdsMissNonLinears, File: "creative_error_nonlinearads.xml"},
 	{VastElement: &vast3.Creative{}, File: "creative_error_companionads.xml"},
 }

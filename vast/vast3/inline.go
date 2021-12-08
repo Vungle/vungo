@@ -58,6 +58,45 @@ func (inline *InLine) Validate() error {
 			if creative.Linear.Duration < vastbasic.Duration(defaults.MinVideoDuration) {
 				errors = append(errors, vastbasic.ErrVideoDurationTooShort)
 			}
+
+			if len(creative.Linear.MediaFiles) == 0 {
+				errors = append(errors, vastbasic.ErrLinearMissMediaFiles)
+			}
+
+			var validMediaFiles []*MediaFile
+			var err error
+
+			var hasMimeTypeErr bool
+			noneMimeTypeErrors := make([]error, 0)
+
+			for _, mediaFile := range creative.Linear.MediaFiles {
+				err = mediaFile.Validate()
+				if err == nil {
+					validMediaFiles = append(validMediaFiles, mediaFile)
+					//break
+				} else {
+					ve, ok := err.(vastbasic.ValidationError)
+					if ok {
+						// Merge all errors which are not mime type errors.
+						if ve.Errs[0] != vastbasic.ErrMediaFileUnsupportedMimeType {
+							noneMimeTypeErrors = append(noneMimeTypeErrors, ve.Errs...)
+						} else {
+							hasMimeTypeErr = true
+						}
+					}
+				}
+			}
+
+			if len(validMediaFiles) > 0 {
+				creative.Linear.MediaFiles = validMediaFiles
+			} else {
+				if len(noneMimeTypeErrors) > 0 {
+					errors = append(errors, noneMimeTypeErrors...)
+				}
+				if hasMimeTypeErr {
+					errors = append(errors, vastbasic.ErrMediaFileUnsupportedMimeType)
+				}
+			}
 		}
 	}
 
