@@ -1,4 +1,4 @@
-package vast3
+package vastbasic
 
 // Icon type represents an <Icon> element for the advertising industry initiatives, e.g. AdChoices.
 type Icon struct {

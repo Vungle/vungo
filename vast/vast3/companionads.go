@@ -1,9 +1,11 @@
 package vast3
 
+import vastbasic "github.com/Vungle/vungo/vast/basic"
+
 // CompanionAds type represents a <CompanionAds> element that contains companion creatives.
 type CompanionAds struct {
-	Required   Mode         `xml:"required,attr,omitempty"` // VAST3.0.
-	Companions []*Companion `xml:"Companion,omitempty"`
+	Required   vastbasic.Mode `xml:"required,attr,omitempty"` // VAST3.0.
+	Companions []*Companion   `xml:"Companion,omitempty"`
 }
 
 // Validate methods validate the CompanionAds element according to the VAST.
@@ -14,7 +16,7 @@ func (companionAds *CompanionAds) Validate() error {
 
 	for _, companion := range companionAds.Companions {
 		if err := companion.Validate(); err != nil {
-			ve, ok := err.(ValidationError)
+			ve, ok := err.(vastbasic.ValidationError)
 			if ok {
 				errors = append(errors, ve.Errs...)
 			}
@@ -22,7 +24,7 @@ func (companionAds *CompanionAds) Validate() error {
 	}
 
 	if len(errors) > 0 {
-		return ValidationError{Errs: errors}
+		return vastbasic.ValidationError{Errs: errors}
 	}
 	return nil
 }

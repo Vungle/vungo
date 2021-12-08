@@ -1,5 +1,7 @@
 package vast3
 
+import vastbasic "github.com/Vungle/vungo/vast/basic"
+
 // NonLinearAdsWrapper type represents a <NonLinearAds> element within a <Wrapper> element that
 // contains non-linear creatives in a wrapper.
 type NonLinearAdsWrapper struct {
@@ -14,7 +16,7 @@ func (nw *NonLinearAdsWrapper) Validate() error {
 	errors := make([]error, 0)
 	for _, tracking := range nw.Trackings {
 		if err := tracking.Validate(); err != nil {
-			ve, ok := err.(ValidationError)
+			ve, ok := err.(vastbasic.ValidationError)
 			if ok {
 				errors = append(errors, ve.Errs...)
 			}
@@ -23,14 +25,14 @@ func (nw *NonLinearAdsWrapper) Validate() error {
 
 	for _, nonLinear := range nw.NonLinears {
 		if err := nonLinear.Validate(); err != nil {
-			ve, ok := err.(ValidationError)
+			ve, ok := err.(vastbasic.ValidationError)
 			if ok {
 				errors = append(errors, ve.Errs...)
 			}
 		}
 	}
 	if len(errors) > 0 {
-		return ValidationError{Errs: errors}
+		return vastbasic.ValidationError{Errs: errors}
 	}
 	return nil
 }

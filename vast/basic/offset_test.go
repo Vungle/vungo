@@ -1,45 +1,45 @@
-package vast3_test
+package vastbasic_test
 
 import (
-	"github.com/Vungle/vungo/vast/basic"
-	"github.com/Vungle/vungo/vast/vast3"
-	"github.com/Vungle/vungo/vast/vasttest"
 	"testing"
 	"time"
+
+	vastbasic "github.com/Vungle/vungo/vast/basic"
+	"github.com/Vungle/vungo/vast/vasttest"
 )
 
 type offsetTest struct {
-	offset vast3.Offset
+	offset vastbasic.Offset
 	value  string
 }
 
 var offsetTests = []offsetTest{
 	{
-		vast3.Offset{},
+		vastbasic.Offset{},
 		"00:00:00",
 	},
 	{
-		vast3.Offset{Duration: vast3.Duration(time.Hour)},
+		vastbasic.Offset{Duration: vastbasic.Duration(time.Hour)},
 		"01:00:00",
 	},
 	{
-		vast3.Offset{Duration: vast3.Duration(time.Hour + (30 * time.Minute))},
+		vastbasic.Offset{Duration: vastbasic.Duration(time.Hour + (30 * time.Minute))},
 		"01:30:00",
 	},
 	{
-		vast3.Offset{Duration: vast3.Duration(time.Second + (128 * time.Millisecond))},
+		vastbasic.Offset{Duration: vastbasic.Duration(time.Second + (128 * time.Millisecond))},
 		"00:00:01.128",
 	},
 	{
-		vast3.Offset{Percent: 1},
+		vastbasic.Offset{Percent: 1},
 		"1%",
 	},
 	{
-		vast3.Offset{Percent: 50},
+		vastbasic.Offset{Percent: 50},
 		"50%",
 	},
 	{
-		vast3.Offset{Percent: 100},
+		vastbasic.Offset{Percent: 100},
 		"100%",
 	},
 }
@@ -60,7 +60,7 @@ func TestOffsetUnmarshal(t *testing.T) {
 	t.Parallel()
 
 	for _, ot := range offsetTests {
-		actual := &vast3.Offset{}
+		actual := &vastbasic.Offset{}
 		if err := actual.UnmarshalText([]byte(ot.value)); err != nil {
 			t.Error("Unexpected unmarshal error:", err)
 		} else if *actual != ot.offset {
@@ -81,7 +81,7 @@ func TestOffsetUnmarshalErrors(t *testing.T) {
 	}
 
 	for _, et := range tests {
-		var o vast3.Offset
+		var o vastbasic.Offset
 
 		if err := o.UnmarshalText([]byte(et.input)); err == nil {
 			t.Error("An unmarshal error is expected.")
@@ -92,9 +92,9 @@ func TestOffsetUnmarshalErrors(t *testing.T) {
 }
 
 var offsetValidTests = []vasttest.VastTest{
-	{VastElement: &vast3.Offset{Duration: vast3.Duration(time.Hour), Percent: -1}, Err: vastbasic.ErrOffsetPercentNegative},
-	{VastElement: &vast3.Offset{Duration: vast3.Duration(time.Hour), Percent: 0}},
-	{VastElement: &vast3.Offset{}, Err: vastbasic.ErrDurationEqualZero},
+	{VastElement: &vastbasic.Offset{Duration: vastbasic.Duration(time.Hour), Percent: -1}, Err: vastbasic.ErrOffsetPercentNegative},
+	{VastElement: &vastbasic.Offset{Duration: vastbasic.Duration(time.Hour), Percent: 0}},
+	{VastElement: &vastbasic.Offset{}, Err: vastbasic.ErrDurationEqualZero},
 }
 
 func TestOffsetValidateErrors(t *testing.T) {

@@ -1,4 +1,4 @@
-package vast3
+package vastbasic
 
 // PricingModel type represents the various values the pricing model of an ad.
 type PricingModel string

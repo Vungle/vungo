@@ -1,6 +1,10 @@
 package vast3
 
-import "encoding/xml"
+import (
+	"encoding/xml"
+
+	vastbasic "github.com/Vungle/vungo/vast/basic"
+)
 
 // Vast type represents the root <VAST> tag.
 type Vast struct {
@@ -50,26 +54,26 @@ func (v Vast) FindFirstInlineCompanionAdsCreative() *CompanionAds {
 func (v *Vast) Validate() error {
 	errors := make([]error, 0)
 	if err := v.Version.Validate(); err != nil {
-		ve, ok := err.(ValidationError)
+		ve, ok := err.(vastbasic.ValidationError)
 		if ok {
 			errors = append(errors, ve.Errs...)
 		}
 	}
 
 	if len(v.Ads) == 0 {
-		errors = append(errors, ErrVastMissAd)
+		errors = append(errors, vastbasic.ErrVastMissAd)
 	}
 
 	for _, ad := range v.Ads {
 		if err := ad.Validate(); err != nil {
-			ve, ok := err.(ValidationError)
+			ve, ok := err.(vastbasic.ValidationError)
 			if ok {
 				errors = append(errors, ve.Errs...)
 			}
 		}
 	}
 	if len(errors) > 0 {
-		return ValidationError{Errs: errors}
+		return vastbasic.ValidationError{Errs: errors}
 	}
 	return nil
 }

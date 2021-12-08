@@ -2,15 +2,15 @@ package vast3_test
 
 import (
 	"encoding/xml"
-	"github.com/Vungle/vungo/vast/basic"
-	"github.com/Vungle/vungo/vast/vast2"
 	"reflect"
 	"testing"
 
+	vastbasic "github.com/Vungle/vungo/vast/basic"
+	"github.com/Vungle/vungo/vast/vast3"
 	"github.com/Vungle/vungo/vast/vasttest"
 )
 
-var VastModelType = reflect.TypeOf(vast2.Vast{})
+var VastModelType = reflect.TypeOf(vast3.Vast{})
 
 func TestVastMarshalUnmarshal(t *testing.T) {
 	vasttest.VerifyModelAgainstFile(t, "VAST", "vast.xml", VastModelType)
@@ -18,8 +18,8 @@ func TestVastMarshalUnmarshal(t *testing.T) {
 
 func TestVastFindFirstInlineLinearCreativeShouldReturnNoLinearCreative(t *testing.T) {
 	// Given a VAST document that contains no InLine ads.
-	v := &vast2.Vast{}
-	v.Ads = append(v.Ads, &vast2.Ad{Wrapper: &vast2.Wrapper{}})
+	v := &vast3.Vast{}
+	v.Ads = append(v.Ads, &vast3.Ad{Wrapper: &vast3.Wrapper{}})
 
 	// When trying to find the first Inline Linear Creative.
 	l := v.FindFirstInlineLinearCreative()
@@ -32,9 +32,9 @@ func TestVastFindFirstInlineLinearCreativeShouldReturnNoLinearCreative(t *testin
 
 func TestVastFindFirstInlineLinearCreativeShouldReturnFirst(t *testing.T) {
 	// Given a VAST document that contains multiple inline ads.
-	v := &vast2.Vast{}
+	v := &vast3.Vast{}
 	i1, i2 := newInlineLinearAd("i1"), newInlineLinearAd("i2")
-	v.Ads = []*vast2.Ad{&i1, &i2}
+	v.Ads = []*vast3.Ad{&i1, &i2}
 
 	// When trying to find the first Inline Linear Creative.
 	l := v.FindFirstInlineLinearCreative()
@@ -49,14 +49,18 @@ func TestVastFindFirstInlineLinearCreativeShouldReturnFirst(t *testing.T) {
 
 // newInlineLinearAd method creates a new vast.Ad object that contains a single MediaFile with a
 // specified ID.
-func newInlineLinearAd(id string) vast2.Ad {
-	return vast2.Ad{
-		InLine: &vast2.InLine{
-			Creatives: []*vast2.Creative{
+func newInlineLinearAd(id string) vast3.Ad {
+	return vast3.Ad{
+		InLine: &vast3.InLine{
+			Creatives: []*vast3.Creative{
 				{
-					Linear: &vast2.Linear{
-						MediaFiles: []*vastbasic.MediaFile{
-							{ID: id},
+					Linear: &vast3.Linear{
+						MediaFiles: []*vast3.MediaFile{
+							{
+								MediaFile: vastbasic.MediaFile{
+									ID: id,
+								},
+							},
 						},
 					},
 				},
@@ -68,9 +72,10 @@ func newInlineLinearAd(id string) vast2.Ad {
 // vastTests is the test set for Vast element.
 // there are other test sets like adTest which is used for Ad element.
 var vastTests = []vasttest.VastTest{
-	{VastElement: &vast2.Vast{}, File: "vast_valid.xml"},
-	{VastElement: &vast2.Vast{}, Err: vastbasic.ErrVastMissAd, File: "vast_without_ad.xml"},
-	{VastElement: &vast2.Vast{}, Err: vastbasic.ErrUnsupportedVersion, File: "vast_error_version.xml"},
+	{VastElement: &vast3.Vast{}, File: "vast_valid.xml"},
+	{VastElement: &vast3.Vast{}, Err: vastbasic.ErrUnsupportedVersion, File: "vast_invalid_version.xml"},
+	{VastElement: &vast3.Vast{}, Err: vastbasic.ErrVastMissAd, File: "vast_without_ad.xml"},
+	{VastElement: &vast3.Vast{}, Err: vastbasic.ErrUnsupportedVersion, File: "vast_error_version.xml"},
 }
 
 func TestVastValidateErrors(t *testing.T) {
@@ -80,7 +85,7 @@ func TestVastValidateErrors(t *testing.T) {
 }
 
 func TestVastElementNameMarshal(t *testing.T) {
-	vastXML := vast2.Vast{}
+	vastXML := vast3.Vast{}
 	str, _ := xml.Marshal(&vastXML)
 	vastString := string(str)
 	expected := `<VAST version=""></VAST>`
@@ -91,7 +96,7 @@ func TestVastElementNameMarshal(t *testing.T) {
 
 func TestVastMarshalUnmarshalError(t *testing.T) {
 	tests := []string{`<vast version="2"></vast>`, `<vaST></vaST>`, `<Vast></Vast>`}
-	v := vast2.Vast{}
+	v := vast3.Vast{}
 	for i, test := range tests {
 		t.Logf("Testing %d...", i)
 
@@ -104,22 +109,22 @@ func TestVastMarshalUnmarshalError(t *testing.T) {
 func TestVast_FindFirstInlineCompanionAdsCreative(t *testing.T) {
 	tests := []struct {
 		desc   string
-		v      vast2.Vast
-		expect *vast2.CompanionAds
+		v      vast3.Vast
+		expect *vast3.CompanionAds
 	}{
 		{
 			desc: "Has CompanionAds.",
-			v: vast2.Vast{
-				Ads: []*vast2.Ad{
+			v: vast3.Vast{
+				Ads: []*vast3.Ad{
 					{
-						InLine: &vast2.InLine{
-							Creatives: []*vast2.Creative{
+						InLine: &vast3.InLine{
+							Creatives: []*vast3.Creative{
 								{
-									Linear: &vast2.Linear{},
+									Linear: &vast3.Linear{},
 								},
 								{
-									CompanionAds: &vast2.CompanionAds{
-										Companions: []*vastbasic.Companion{
+									CompanionAds: &vast3.CompanionAds{
+										Companions: []*vast3.Companion{
 											{
 												StaticResource: &vastbasic.StaticResource{
 													MimeType: "jpg",
@@ -133,8 +138,8 @@ func TestVast_FindFirstInlineCompanionAdsCreative(t *testing.T) {
 						},
 					},
 				}},
-			expect: &vast2.CompanionAds{
-				Companions: []*vastbasic.Companion{
+			expect: &vast3.CompanionAds{
+				Companions: []*vast3.Companion{
 					{
 						StaticResource: &vastbasic.StaticResource{
 							MimeType: "jpg",
@@ -146,13 +151,13 @@ func TestVast_FindFirstInlineCompanionAdsCreative(t *testing.T) {
 		},
 		{
 			desc: "No CompanionAds.",
-			v: vast2.Vast{
-				Ads: []*vast2.Ad{
+			v: vast3.Vast{
+				Ads: []*vast3.Ad{
 					{
-						InLine: &vast2.InLine{
-							Creatives: []*vast2.Creative{
+						InLine: &vast3.InLine{
+							Creatives: []*vast3.Creative{
 								{
-									Linear: &vast2.Linear{},
+									Linear: &vast3.Linear{},
 								},
 							},
 						},

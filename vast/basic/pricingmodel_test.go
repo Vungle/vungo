@@ -1,20 +1,20 @@
-package vast3_test
+package vastbasic_test
 
 import (
-	"github.com/Vungle/vungo/vast/basic"
-	"github.com/Vungle/vungo/vast/vast3"
 	"testing"
+
+	vastbasic "github.com/Vungle/vungo/vast/basic"
 
 	"github.com/Vungle/vungo/vast/vasttest"
 )
 
 func TestPricingModelValidateErrors(t *testing.T) {
-	model1 := vast3.PricingModel("cpp")
-	model2 := vast3.PricingModel(vast3.PricingModelCPC)
-	model3 := vast3.PricingModel(vast3.PricingModelCPE)
-	model4 := vast3.PricingModel(vast3.PricingModelCPM)
-	model5 := vast3.PricingModel(vast3.PricingModelCPV)
-	model6 := vast3.PricingModel("")
+	model1 := vastbasic.PricingModel("cpp")
+	model2 := vastbasic.PricingModel(vastbasic.PricingModelCPC)
+	model3 := vastbasic.PricingModel(vastbasic.PricingModelCPE)
+	model4 := vastbasic.PricingModel(vastbasic.PricingModelCPM)
+	model5 := vastbasic.PricingModel(vastbasic.PricingModelCPV)
+	model6 := vastbasic.PricingModel("")
 	vasttest.VerifyVastElementErrorAsExpected(t, model1, model1.Validate(), vastbasic.ErrUnsupportedPriceModelType)
 	vasttest.VerifyVastElementErrorAsExpected(t, model2, model2.Validate(), nil)
 	vasttest.VerifyVastElementErrorAsExpected(t, model3, model3.Validate(), nil)

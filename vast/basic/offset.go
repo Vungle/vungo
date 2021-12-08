@@ -1,4 +1,4 @@
-package vast3
+package vastbasic
 
 import (
 	"fmt"

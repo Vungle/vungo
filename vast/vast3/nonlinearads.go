@@ -1,5 +1,7 @@
 package vast3
 
+import vastbasic "github.com/Vungle/vungo/vast/basic"
+
 // NonLinearAds type represents a <NonLinearAds> element that contains non-linear creatives.
 type NonLinearAds struct {
 	Trackings  []*Tracking  `xml:"TrackingEvents>Tracking,omitempty"`
@@ -11,12 +13,12 @@ type NonLinearAds struct {
 func (nonLinearAds *NonLinearAds) Validate() error {
 	errors := make([]error, 0)
 	if len(nonLinearAds.NonLinears) == 0 {
-		errors = append(errors, ErrNonLinearAdsMissNonLinears)
+		errors = append(errors, vastbasic.ErrNonLinearAdsMissNonLinears)
 	}
 
 	for _, nonLinear := range nonLinearAds.NonLinears {
 		if err := nonLinear.Validate(); err != nil {
-			ve, ok := err.(ValidationError)
+			ve, ok := err.(vastbasic.ValidationError)
 			if ok {
 				errors = append(errors, ve.Errs...)
 			}
@@ -25,14 +27,14 @@ func (nonLinearAds *NonLinearAds) Validate() error {
 
 	for _, tracking := range nonLinearAds.Trackings {
 		if err := tracking.Validate(); err != nil {
-			ve, ok := err.(ValidationError)
+			ve, ok := err.(vastbasic.ValidationError)
 			if ok {
 				errors = append(errors, ve.Errs...)
 			}
 		}
 	}
 	if len(errors) > 0 {
-		return ValidationError{Errs: errors}
+		return vastbasic.ValidationError{Errs: errors}
 	}
 	return nil
 }

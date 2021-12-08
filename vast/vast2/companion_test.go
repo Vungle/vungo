@@ -1,12 +1,11 @@
 package vast2_test
 
 import (
-	"github.com/Vungle/vungo/vast/basic"
+	"fmt"
 	"reflect"
 	"testing"
 
-	"fmt"
-
+	vastbasic "github.com/Vungle/vungo/vast/basic"
 	"github.com/Vungle/vungo/vast/vasttest"
 )
 

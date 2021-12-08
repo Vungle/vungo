@@ -1,6 +1,6 @@
 package vast2
 
-import "github.com/Vungle/vungo/vast/basic"
+import vastbasic "github.com/Vungle/vungo/vast/basic"
 
 // Version type represents the VAST document version.
 type Version string

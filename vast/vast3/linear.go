@@ -1,20 +1,22 @@
 package vast3
 
-import "github.com/Vungle/vungo/vast/defaults"
+import (
+	vastbasic "github.com/Vungle/vungo/vast/basic"
+)
 
 // Linear type represents an <Linear> element within a <InLine> element.
 type Linear struct {
 	// SkipOffset is time delay at which ad becomes skippable;
 	// if absent, the ad is unskippable. VAST3.0.
-	SkipOffset *Offset `xml:"skipoffset,attr,omitempty"`
+	SkipOffset *vastbasic.Offset `xml:"skipoffset,attr,omitempty"`
 
-	Duration     Duration      `xml:"Duration"`               // Required.
-	AdParameters *AdParameters `xml:"AdParameters,omitempty"` // Just string in VAST2.0.
-	Icons        []*Icon       `xml:"Icons>Icon"`             // VAST3.0.
-	Trackings    []*Tracking   `xml:"TrackingEvents>Tracking,omitempty"`
-	VideoClicks  *VideoClicks  `xml:"VideoClicks,omitempty"`
-	MediaFiles   []*MediaFile  `xml:"MediaFiles>MediaFile,omitempty"`
-	Extensions   []*Extension  `xml:"CreativeExtensions>CreativeExtension,omitempty"` // VAST3.0.
+	Duration     vastbasic.Duration     `xml:"Duration"`               // Required in InLine, optional in Wrapper
+	AdParameters *AdParameters          `xml:"AdParameters,omitempty"` // Type changes from string to struct in VAST3.0.
+	Icons        []*vastbasic.Icon      `xml:"Icons>Icon"`             // VAST3.0.
+	Trackings    []*Tracking            `xml:"TrackingEvents>Tracking,omitempty"`
+	VideoClicks  *vastbasic.VideoClicks `xml:"VideoClicks,omitempty"`
+	MediaFiles   []*MediaFile           `xml:"MediaFiles>MediaFile,omitempty"`
+	Extensions   []*vastbasic.Extension `xml:"CreativeExtensions>CreativeExtension,omitempty"` // VAST3.0.
 }
 
 // Validate methods validate the Linear element according to the VAST.
@@ -25,24 +27,12 @@ func (linear *Linear) Validate() error {
 	errors := make([]error, 0)
 
 	if len(linear.MediaFiles) == 0 {
-		errors = append(errors, ErrLinearMissMediaFiles) // Can be zero?
-	}
-
-	if err := linear.Duration.Validate(); err != nil {
-		return err
-	}
-
-	if linear.Duration > Duration(defaults.MaxVideoDuration) {
-		errors = append(errors, ErrVideoDurationTooLong)
-	}
-
-	if linear.Duration < Duration(defaults.MinVideoDuration) {
-		errors = append(errors, ErrVideoDurationTooShort)
+		errors = append(errors, vastbasic.ErrLinearMissMediaFiles) // Can be zero?
 	}
 
 	if linear.VideoClicks != nil {
 		if err := linear.VideoClicks.Validate(); err != nil {
-			ve, ok := err.(ValidationError)
+			ve, ok := err.(vastbasic.ValidationError)
 			if ok {
 				errors = append(errors, ve.Errs...)
 			}
@@ -51,7 +41,7 @@ func (linear *Linear) Validate() error {
 
 	if linear.SkipOffset != nil {
 		if err := linear.SkipOffset.Validate(); err != nil {
-			ve, ok := err.(ValidationError)
+			ve, ok := err.(vastbasic.ValidationError)
 			if ok {
 				errors = append(errors, ve.Errs...)
 			}
@@ -69,10 +59,10 @@ func (linear *Linear) Validate() error {
 			validMediaFiles = append(validMediaFiles, mediaFile)
 			//break
 		} else {
-			ve, ok := err.(ValidationError)
+			ve, ok := err.(vastbasic.ValidationError)
 			if ok {
 				// Merge all errors which are not mime type errors.
-				if ve.Errs[0] != ErrMediaFileUnsupportedMimeType {
+				if ve.Errs[0] != vastbasic.ErrMediaFileUnsupportedMimeType {
 					noneMimeTypeErrors = append(noneMimeTypeErrors, ve.Errs...)
 				} else {
 					hasMimeTypeErr = true
@@ -88,7 +78,7 @@ func (linear *Linear) Validate() error {
 			errors = append(errors, noneMimeTypeErrors...)
 		}
 		if hasMimeTypeErr {
-			errors = append(errors, ErrMediaFileUnsupportedMimeType)
+			errors = append(errors, vastbasic.ErrMediaFileUnsupportedMimeType)
 		}
 	}
 
@@ -96,14 +86,14 @@ func (linear *Linear) Validate() error {
 
 	for _, tracking := range linear.Trackings {
 		if err := tracking.Validate(); err != nil {
-			ve, ok := err.(ValidationError)
+			ve, ok := err.(vastbasic.ValidationError)
 			if ok {
 				errors = append(errors, ve.Errs...)
 			}
 		}
 	}
 	if len(errors) > 0 {
-		return ValidationError{Errs: errors}
+		return vastbasic.ValidationError{Errs: errors}
 	}
 	return nil
 }

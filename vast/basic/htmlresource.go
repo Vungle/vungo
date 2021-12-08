@@ -1,4 +1,4 @@
-package vast3
+package vastbasic
 
 // HTMLResource type represents an <HTMLResource> element that contains HTML data.
 type HTMLResource struct {

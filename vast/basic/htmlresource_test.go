@@ -1,15 +1,16 @@
-package vast3_test
+package vastbasic_test
 
 import (
 	"encoding/xml"
-	"github.com/Vungle/vungo/vast/vast3"
 	"reflect"
 	"testing"
+
+	vastbasic "github.com/Vungle/vungo/vast/basic"
 
 	"github.com/Vungle/vungo/vast/vasttest"
 )
 
-var HTMLResourceModelType = reflect.TypeOf(vast3.HTMLResource{})
+var HTMLResourceModelType = reflect.TypeOf(vastbasic.HTMLResource{})
 
 func TestHtmlResourceMarshalUnmarshal(t *testing.T) {
 	vasttest.VerifyModelAgainstFile(t, "HTMLResource", "htmlresource.xml", HTMLResourceModelType)
@@ -20,7 +21,7 @@ func TestHtmlResourceWithWhitespace(t *testing.T) {
 	<![CDATA[just me]]>
 	</HTMLResource>`
 
-	v := &vast3.HTMLResource{}
+	v := &vastbasic.HTMLResource{}
 	if err := xml.Unmarshal([]byte(xmlData), v); err != nil {
 		t.Fatal(err)
 	}

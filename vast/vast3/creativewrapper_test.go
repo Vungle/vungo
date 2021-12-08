@@ -1,11 +1,11 @@
 package vast3_test
 
 import (
-	"github.com/Vungle/vungo/vast/basic"
-	"github.com/Vungle/vungo/vast/vast3"
 	"reflect"
 	"testing"
 
+	vastbasic "github.com/Vungle/vungo/vast/basic"
+	"github.com/Vungle/vungo/vast/vast3"
 	"github.com/Vungle/vungo/vast/vasttest"
 )
 

@@ -4,7 +4,7 @@ import vastbasic "github.com/Vungle/vungo/vast/basic"
 
 // Creative type represents a particular asset that is part of a VAST ad.
 //
-// A <Creative> element must contain EXACTLY ONE of any of the following elements:
+// A <Creative> element must contain EXACTLY ONE of the following elements:
 // <Linear>, <CompanionAds>, or <NonLinearAds>.
 type Creative struct {
 	ID       string `xml:"id,attr,omitempty"`       // ID of the creative defined by the ad server.

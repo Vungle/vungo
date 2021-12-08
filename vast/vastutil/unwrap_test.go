@@ -4,13 +4,14 @@ import (
 	"context"
 	"encoding/xml"
 	"fmt"
-	"github.com/Vungle/vungo/vast/vast2"
 	"io/ioutil"
 	"net/http"
 	"os"
 	"reflect"
 	"strings"
 	"testing"
+
+	"github.com/Vungle/vungo/vast/vast2"
 
 	"github.com/Vungle/vungo/vast/vastutil"
 )

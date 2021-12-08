@@ -1,6 +1,6 @@
 package vast2
 
-import "github.com/Vungle/vungo/vast/basic"
+import vastbasic "github.com/Vungle/vungo/vast/basic"
 
 // Ad type represent an <Ad> child element in a VAST document. An <Ad> element usually specifies
 // creatives, prices, delivery method, targeting, etc.

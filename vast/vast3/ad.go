@@ -1,5 +1,7 @@
 package vast3
 
+import vastbasic "github.com/Vungle/vungo/vast/basic"
+
 // Ad type represent an <Ad> child element in a VAST document. An <Ad> element usually specifies
 // creatives, prices, delivery method, targeting, etc.
 //
@@ -18,8 +20,8 @@ func (ad *Ad) Validate() error {
 	errors := make([]error, 0)
 
 	if ad.InLine != nil && ad.Wrapper != nil {
-		errors = append(errors, ErrAdType)
-		return ValidationError{Errs: errors}
+		errors = append(errors, vastbasic.ErrAdType)
+		return vastbasic.ValidationError{Errs: errors}
 	}
 
 	if ad.InLine != nil {
@@ -27,11 +29,11 @@ func (ad *Ad) Validate() error {
 	} else if ad.Wrapper != nil {
 		errors = append(errors, ad.validateWrapper()...)
 	} else {
-		errors = append(errors, ErrAdType)
+		errors = append(errors, vastbasic.ErrAdType)
 	}
 
 	if len(errors) > 0 {
-		return ValidationError{Errs: errors}
+		return vastbasic.ValidationError{Errs: errors}
 	}
 	return nil
 }
@@ -39,7 +41,7 @@ func (ad *Ad) Validate() error {
 func (ad *Ad) validateInline() []error {
 	errors := make([]error, 0)
 	if err := ad.InLine.Validate(); err != nil {
-		ve, ok := err.(ValidationError)
+		ve, ok := err.(vastbasic.ValidationError)
 		if ok {
 			errors = append(errors, ve.Errs...)
 		}
@@ -51,7 +53,7 @@ func (ad *Ad) validateInline() []error {
 func (ad *Ad) validateWrapper() []error {
 	errors := make([]error, 0)
 	if err := ad.Wrapper.Validate(); err != nil {
-		ve, ok := err.(ValidationError)
+		ve, ok := err.(vastbasic.ValidationError)
 		if ok {
 			errors = append(errors, ve.Errs...)
 		}

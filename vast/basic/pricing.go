@@ -1,4 +1,4 @@
-package vast3
+package vastbasic
 
 // Pricing type represents a <Pricing> element that attempts to provide supplemental functionality
 // to RTB systems.

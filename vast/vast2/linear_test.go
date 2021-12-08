@@ -2,13 +2,13 @@ package vast2_test
 
 import (
 	"encoding/xml"
-	vast22 "github.com/Vungle/vungo/vast/basic"
-	"github.com/Vungle/vungo/vast/vast2"
 	"io/ioutil"
 	"reflect"
 	"testing"
 
+	vastbasic "github.com/Vungle/vungo/vast/basic"
 	"github.com/Vungle/vungo/vast/defaults"
+	"github.com/Vungle/vungo/vast/vast2"
 	"github.com/Vungle/vungo/vast/vasttest"
 )
 
@@ -23,24 +23,24 @@ var linearTests = []vasttest.VastTest{
 	{VastElement: &vast2.Linear{}, File: "linear_at_least_one_valid_mediafile.xml"},
 	{VastElement: &vast2.Linear{}, File: "linear_without_mediafiles.xml"},
 	{VastElement: &vast2.Linear{}, File: "linear_error_adparameters.xml"},
-	{VastElement: &vast2.Linear{}, Err: vast22.ErrMediaFileSize, File: "linear_error_mediafiles.xml"},
+	{VastElement: &vast2.Linear{}, Err: vastbasic.ErrMediaFileSize, File: "linear_error_mediafiles.xml"},
 	{VastElement: &vast2.Linear{}, File: "linear_error_videoclicks.xml"},
 	{
 		VastElement: &vast2.Linear{},
-		Err: &vast22.ValidationError{
+		Err: &vastbasic.ValidationError{
 			Errs: []error{
-				vast22.ErrMediaFileWidthTooLow,
-				vast22.ErrMediaFileHeightTooLow,
+				vastbasic.ErrMediaFileWidthTooLow,
+				vastbasic.ErrMediaFileHeightTooLow,
 			},
 		}, File: "linear_at_least_one_invalid_mediafile.xml"},
 	{
 		VastElement: &vast2.Linear{},
-		Err: &vast22.ValidationError{
+		Err: &vastbasic.ValidationError{
 			Errs: []error{
-				vast22.ErrMediaFileWidthTooLow,
-				vast22.ErrMediaFileHeightTooLow,
-				vast22.ErrMediaFileWidthTooHigh,
-				vast22.ErrMediaFileHeightTooHigh,
+				vastbasic.ErrMediaFileWidthTooLow,
+				vastbasic.ErrMediaFileHeightTooLow,
+				vastbasic.ErrMediaFileWidthTooHigh,
+				vastbasic.ErrMediaFileHeightTooHigh,
 			},
 		}, File: "invalid_mediafiles_with_invalid_mimetype.xml"},
 }

@@ -1,9 +1,10 @@
 package vastbasic_test
 
 import (
-	"github.com/Vungle/vungo/vast/basic"
 	"testing"
 	"time"
+
+	vastbasic "github.com/Vungle/vungo/vast/basic"
 
 	"github.com/Vungle/vungo/vast/vasttest"
 )

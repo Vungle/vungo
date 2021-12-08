@@ -2,7 +2,8 @@ package vast2
 
 import (
 	"encoding/xml"
-	"github.com/Vungle/vungo/vast/basic"
+
+	vastbasic "github.com/Vungle/vungo/vast/basic"
 )
 
 // Vast type represents the root <VAST> tag.

@@ -2,54 +2,51 @@ package vast3_test
 
 import (
 	"encoding/xml"
-	vast22 "github.com/Vungle/vungo/vast/basic"
-	"github.com/Vungle/vungo/vast/vast2"
 	"io/ioutil"
 	"reflect"
 	"testing"
 
+	vastbasic "github.com/Vungle/vungo/vast/basic"
 	"github.com/Vungle/vungo/vast/defaults"
+	"github.com/Vungle/vungo/vast/vast3"
 	"github.com/Vungle/vungo/vast/vasttest"
 )
 
-var LinearModelType = reflect.TypeOf(vast2.Linear{})
+var LinearModelType = reflect.TypeOf(vast3.Linear{})
 
 func TestLinearMarshalUnmarshal(t *testing.T) {
 	vasttest.VerifyModelAgainstFile(t, "Linear", "linear.xml", LinearModelType)
 }
 
-var linearTests = []vasttest.VastTest{
-	{VastElement: &vast2.Linear{}, File: "linear_valid.xml"},
-	{VastElement: &vast2.Linear{}, File: "linear_at_least_one_valid_mediafile.xml"},
-	{VastElement: &vast2.Linear{}, Err: vast22.ErrLinearMissMediaFiles, File: "linear_without_mediafiles.xml"},
-	{VastElement: &vast2.Linear{}, File: "linear_error_adparameters.xml"},
-	{VastElement: &vast2.Linear{}, Err: vast22.ErrDurationEqualZero, File: "linear_error_duration.xml"},
-	{VastElement: &vast2.Linear{}, Err: vast22.ErrMediaFileSize, File: "linear_error_mediafiles.xml"},
-	{VastElement: &vast2.Linear{}, File: "linear_error_videoclicks.xml"},
-	{VastElement: &vast2.Linear{}, Err: vast22.ErrDurationEqualZero, File: "linear_error_skipoffset.xml"},
-	{VastElement: &vast2.Linear{}, Err: vast22.ErrVideoDurationTooLong, File: "linear_error_too_long.xml"},
-	{VastElement: &vast2.Linear{}, Err: vast22.ErrVideoDurationTooShort, File: "linear_error_too_short.xml"},
-	{
-		VastElement: &vast2.Linear{},
-		Err: &vast22.ValidationError{
-			Errs: []error{
-				vast22.ErrMediaFileWidthTooLow,
-				vast22.ErrMediaFileHeightTooLow,
-			},
-		}, File: "linear_at_least_one_invalid_mediafile.xml"},
-	{
-		VastElement: &vast2.Linear{},
-		Err: &vast22.ValidationError{
-			Errs: []error{
-				vast22.ErrMediaFileWidthTooLow,
-				vast22.ErrMediaFileHeightTooLow,
-				vast22.ErrMediaFileWidthTooHigh,
-				vast22.ErrMediaFileHeightTooHigh,
-			},
-		}, File: "invalid_mediafiles_with_invalid_mimetype.xml"},
-}
-
 func TestLinearValidateErrors(t *testing.T) {
+	var linearTests = []vasttest.VastTest{
+		{VastElement: &vast3.Linear{}, File: "linear_valid.xml"},
+		{VastElement: &vast3.Linear{}, File: "linear_at_least_one_valid_mediafile.xml"},
+		{VastElement: &vast3.Linear{}, Err: vastbasic.ErrLinearMissMediaFiles, File: "linear_without_mediafiles.xml"},
+		{VastElement: &vast3.Linear{}, File: "linear_error_adparameters.xml"},
+		{VastElement: &vast3.Linear{}, Err: vastbasic.ErrMediaFileSize, File: "linear_error_mediafiles.xml"},
+		{VastElement: &vast3.Linear{}, File: "linear_error_videoclicks.xml"},
+		{VastElement: &vast3.Linear{}, Err: vastbasic.ErrDurationEqualZero, File: "linear_error_skipoffset.xml"},
+		{
+			VastElement: &vast3.Linear{},
+			Err: &vastbasic.ValidationError{
+				Errs: []error{
+					vastbasic.ErrMediaFileWidthTooLow,
+					vastbasic.ErrMediaFileHeightTooLow,
+				},
+			}, File: "linear_at_least_one_invalid_mediafile.xml"},
+		{
+			VastElement: &vast3.Linear{},
+			Err: &vastbasic.ValidationError{
+				Errs: []error{
+					vastbasic.ErrMediaFileWidthTooLow,
+					vastbasic.ErrMediaFileHeightTooLow,
+					vastbasic.ErrMediaFileWidthTooHigh,
+					vastbasic.ErrMediaFileHeightTooHigh,
+				},
+			}, File: "invalid_mediafiles_with_invalid_mimetype.xml"},
+	}
+
 	for i, test := range linearTests {
 		t.Logf("Testing %d...", i)
 		vasttest.VerifyVastElementFromFile(t, "testdata/"+test.File, test.VastElement, test.Err)
@@ -59,7 +56,7 @@ func TestLinearValidateErrors(t *testing.T) {
 func TestOnlyOneValidMediaFileRemains(t *testing.T) {
 	xmlData, err := ioutil.ReadFile("testdata/linear_at_least_one_valid_mediafile.xml")
 
-	l := &vast2.Linear{}
+	l := &vast3.Linear{}
 
 	if err != nil {
 		t.Fatalf("Cannot read XML file: %v.\n", err)

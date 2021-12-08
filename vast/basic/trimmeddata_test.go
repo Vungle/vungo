@@ -1,8 +1,9 @@
 package vastbasic_test
 
 import (
-	"github.com/Vungle/vungo/vast/basic"
 	"testing"
+
+	vastbasic "github.com/Vungle/vungo/vast/basic"
 )
 
 func TestTrimmedDataUnmarshalText(t *testing.T) {

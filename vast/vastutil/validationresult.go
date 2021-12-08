@@ -2,9 +2,10 @@ package vastutil
 
 import (
 	"encoding/xml"
-	"github.com/Vungle/vungo/vast/basic"
 	"net/http"
 	"strconv"
+
+	vastbasic "github.com/Vungle/vungo/vast/basic"
 )
 
 // VastValidationResult type represents the result of unwrapping and validating VAST objects.
