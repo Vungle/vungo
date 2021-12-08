@@ -1,6 +1,6 @@
 package vast2
 
-import "github.com/Vungle/vungo/vast/basic"
+import vastbasic "github.com/Vungle/vungo/vast/basic"
 
 // Creative type represents a particular asset that is part of a VAST ad.
 //

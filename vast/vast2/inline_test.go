@@ -1,7 +1,7 @@
 package vast2_test
 
 import (
-	"github.com/Vungle/vungo/vast/basic"
+	vastbasic "github.com/Vungle/vungo/vast/basic"
 	"github.com/Vungle/vungo/vast/vast2"
 	"reflect"
 	"testing"

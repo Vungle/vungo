@@ -1,7 +1,7 @@
 package vast2
 
 import (
-	"github.com/Vungle/vungo/vast/basic"
+	vastbasic "github.com/Vungle/vungo/vast/basic"
 	"github.com/Vungle/vungo/vast/defaults"
 )
 
@@ -14,7 +14,7 @@ type InLine struct {
 	Impressions []*vastbasic.Impression `xml:"Impression"` // Required.
 	Errors      []string                `xml:"Error,omitempty"`
 	Creatives   []*Creative             `xml:"Creatives>Creative"` // Creatives node is required.
-	Extensions  []*vastbasic.Extension  `xml:"Extensions>Extension,omitempty"`
+	Extensions  []vastbasic.Extension   `xml:"Extensions>Extension,omitempty"`
 
 	Description string `xml:"Description,omitempty"`
 	SurveyURL   string `xml:"Survey,omitempty"`

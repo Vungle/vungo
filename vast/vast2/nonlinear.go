@@ -1,6 +1,6 @@
 package vast2
 
-import "github.com/Vungle/vungo/vast/basic"
+import vastbasic "github.com/Vungle/vungo/vast/basic"
 
 // NonLinear type represents a <NonLinear> element that defines a non-linear ad.
 type NonLinear struct {

@@ -1,10 +1,10 @@
 package vast2
 
-import "github.com/Vungle/vungo/vast/basic"
+import vastbasic "github.com/Vungle/vungo/vast/basic"
 
 // CompanionAds type represents a <CompanionAds> element that contains companion creatives.
 type CompanionAds struct {
-	Companions []*vastbasic.Companion `xml:"Companion,omitempty"`
+	Companions []*Companion `xml:"Companion,omitempty"`
 }
 
 // Validate methods validate the CompanionAds element according to the VAST.

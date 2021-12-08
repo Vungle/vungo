@@ -1,8 +1,6 @@
 package vast2
 
-import (
-	"github.com/Vungle/vungo/vast/basic"
-)
+import vastbasic "github.com/Vungle/vungo/vast/basic"
 
 // Linear type represents an <Linear> element within a <InLine> element.
 type Linear struct {

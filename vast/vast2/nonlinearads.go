@@ -1,6 +1,6 @@
 package vast2
 
-import "github.com/Vungle/vungo/vast/basic"
+import vastbasic "github.com/Vungle/vungo/vast/basic"
 
 // NonLinearAds type represents a <NonLinearAds> element that contains non-linear creatives.
 type NonLinearAds struct {

@@ -1,6 +1,6 @@
 package vast2
 
-import "github.com/Vungle/vungo/vast/basic"
+import vastbasic "github.com/Vungle/vungo/vast/basic"
 
 // Wrapper type represents a <Wrapper> element in VAST document that contains a single URI
 // reference to a vendor ad server, a.k.a. third party ad server, where the actual VAST w
