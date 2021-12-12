@@ -2,6 +2,7 @@ package vast3_test
 
 import (
 	"encoding/xml"
+	"github.com/Vungle/vungo/vast/vast3"
 	"reflect"
 	"testing"
 
@@ -16,18 +17,18 @@ func TestMediaFileMarshalUnmarshal(t *testing.T) {
 }
 
 var mediaFileTests = []vasttest.VastTest{
-	{VastElement: &vastbasic.MediaFile{}, File: "mediafile.xml"},
-	{VastElement: &vastbasic.MediaFile{}, Err: vastbasic.ErrMediaFileMissDelivery, File: "mediafile_without_delivery.xml"},
-	{VastElement: &vastbasic.MediaFile{}, Err: vastbasic.ErrUnsupportedDeliveryType, File: "mediafile_error_delivery.xml"},
-	{VastElement: &vastbasic.MediaFile{}, Err: vastbasic.ErrMediaFileSize, File: "mediafile_error_width.xml"},
-	{VastElement: &vastbasic.MediaFile{}, Err: vastbasic.ErrMediaFileUnsupportedMimeType, File: "mediafile_without_type.xml"},
-	{VastElement: &vastbasic.MediaFile{}, Err: vastbasic.ErrMediaFileMissURI, File: "mediafile_without_uri.xml"},
-	{VastElement: &vastbasic.MediaFile{}, File: "mediafile_without_bitrate.xml"},
-	{VastElement: &vastbasic.MediaFile{}, Err: vastbasic.ErrMediaFileHeightTooHigh, File: "mediafile_height_too_high.xml"},
-	{VastElement: &vastbasic.MediaFile{}, Err: vastbasic.ErrMediaFileHeightTooLow, File: "mediafile_height_too_low.xml"},
-	{VastElement: &vastbasic.MediaFile{}, Err: vastbasic.ErrMediaFileWidthTooHigh, File: "mediafile_width_too_high.xml"},
-	{VastElement: &vastbasic.MediaFile{}, Err: vastbasic.ErrMediaFileWidthTooLow, File: "mediafile_width_too_low.xml"},
-	{VastElement: &vastbasic.MediaFile{}, Err: vastbasic.ErrMediaFileUnsupportedMimeType, File: "mediafile_unsupported_mimetype.xml"},
+	{VastElement: &vast3.MediaFile{}, File: "mediafile.xml"},
+	{VastElement: &vast3.MediaFile{}, Err: vastbasic.ErrMediaFileMissDelivery, File: "mediafile_without_delivery.xml"},
+	{VastElement: &vast3.MediaFile{}, Err: vastbasic.ErrUnsupportedDeliveryType, File: "mediafile_error_delivery.xml"},
+	{VastElement: &vast3.MediaFile{}, Err: vastbasic.ErrMediaFileSize, File: "mediafile_error_width.xml"},
+	{VastElement: &vast3.MediaFile{}, Err: vastbasic.ErrMediaFileUnsupportedMimeType, File: "mediafile_without_type.xml"},
+	{VastElement: &vast3.MediaFile{}, Err: vastbasic.ErrMediaFileMissURI, File: "mediafile_without_uri.xml"},
+	{VastElement: &vast3.MediaFile{}, File: "mediafile_without_bitrate.xml"},
+	{VastElement: &vast3.MediaFile{}, Err: vastbasic.ErrMediaFileHeightTooHigh, File: "mediafile_height_too_high.xml"},
+	{VastElement: &vast3.MediaFile{}, Err: vastbasic.ErrMediaFileHeightTooLow, File: "mediafile_height_too_low.xml"},
+	{VastElement: &vast3.MediaFile{}, Err: vastbasic.ErrMediaFileWidthTooHigh, File: "mediafile_width_too_high.xml"},
+	{VastElement: &vast3.MediaFile{}, Err: vastbasic.ErrMediaFileWidthTooLow, File: "mediafile_width_too_low.xml"},
+	{VastElement: &vast3.MediaFile{}, Err: vastbasic.ErrMediaFileUnsupportedMimeType, File: "mediafile_unsupported_mimetype.xml"},
 }
 
 func TestMediaFileValidateErrors(t *testing.T) {
