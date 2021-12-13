@@ -28,7 +28,7 @@ func easyjson3eeb1cddDecodeGithubComVungleVungoOpenrtb(in *jlexer.Lexer, out *Na
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()

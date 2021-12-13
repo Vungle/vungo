@@ -28,7 +28,7 @@ func easyjsonB2e97d60DecodeGithubComVungleVungoOpenrtb(in *jlexer.Lexer, out *Ap
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -385,7 +385,7 @@ func easyjsonB2e97d60DecodeGithubComVungleVungoOpenrtb2(in *jlexer.Lexer, out *C
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -866,7 +866,7 @@ func easyjsonB2e97d60DecodeGithubComVungleVungoOpenrtb4(in *jlexer.Lexer, out *D
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -999,7 +999,7 @@ func easyjsonB2e97d60DecodeGithubComVungleVungoOpenrtb5(in *jlexer.Lexer, out *S
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -1090,7 +1090,7 @@ func easyjsonB2e97d60DecodeGithubComVungleVungoOpenrtb3(in *jlexer.Lexer, out *P
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
@@ -1223,7 +1223,7 @@ func easyjsonB2e97d60DecodeGithubComVungleVungoOpenrtb1(in *jlexer.Lexer, out *P
 	}
 	in.Delim('{')
 	for !in.IsDelim('}') {
-		key := in.UnsafeString()
+		key := in.UnsafeFieldName(false)
 		in.WantColon()
 		if in.IsNull() {
 			in.Skip()
