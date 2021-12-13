@@ -11,7 +11,7 @@
         AdID="ab12cd34ef56"
         apiFramework="Vungle Exchange">
 
-      <Linear skipoffset="11:22:00.123">
+      <Linear>
         <Duration>00:00:33.123</Duration>
         <AdParameters xmlEncoded="true"><![CDATA[Some ad parameters.]]></AdParameters>
         <Icons>

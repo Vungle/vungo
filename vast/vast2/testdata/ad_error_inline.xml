@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Ad id="some-id" sequence="2">
+<Ad id="some-id">
   <InLine>
     <AdSystem version="1.1"><![CDATA[Crazy Google]]></AdSystem>
     <AdTitle><![CDATA[Super Nice Ad]]></AdTitle>
@@ -10,7 +10,7 @@
           AdID="ab12cd34ef56"
           apiFramework="Vungle Exchange">
 
-        <Linear skipoffset="11:22:00.123">
+        <Linear>
           <Duration>00:00:33.123</Duration>
           <AdParameters xmlEncoded="true"><![CDATA[Some ad parameters.]]></AdParameters>
           <Icons>
