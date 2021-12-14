@@ -1,8 +1,6 @@
 package vastbasic
 
-import (
-	"bytes"
-)
+import "bytes"
 
 // TrimmedData is a convenient string wrapper type for elements that contains CDATA element but
 // usually contain other whitespace characters such as `\n` before and after due to pretty-printing.

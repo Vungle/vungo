@@ -5,7 +5,6 @@ import (
 	"testing"
 
 	vastbasic "github.com/Vungle/vungo/vast/basic"
-
 	"github.com/Vungle/vungo/vast/vasttest"
 )
 

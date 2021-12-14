@@ -1,8 +1,6 @@
 package vast3
 
-import (
-	vastbasic "github.com/Vungle/vungo/vast/basic"
-)
+import vastbasic "github.com/Vungle/vungo/vast/basic"
 
 // MediaFile represents a <MediaFile> element that contains a reference to the creative asset in a
 // linear creative.
