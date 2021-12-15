@@ -8,7 +8,7 @@ import vastbasic "github.com/Vungle/vungo/vast/basic"
 // eventually resolves to the actual ad.
 type Wrapper struct {
 	AdSystem     *vastbasic.AdSystem     `xml:"AdSystem"`     // Required.
-	VastAdTagURI string                  `xml:"VASTAdTagURI"` // Required.
+	VastAdTagURI vastbasic.TrimmedData   `xml:"VASTAdTagURI"` // Required.
 	Impressions  []*vastbasic.Impression `xml:"Impression"`   // Required.
 	Errors       []string                `xml:"Error,omitempty"`
 	Creatives    []*Creative             `xml:"Creatives>Creative"` // Required.
