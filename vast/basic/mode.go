@@ -9,12 +9,3 @@ const (
 	ModeAny  Mode = "any"  // At least one companion ad must be displayed.
 	ModeNone Mode = "none" // Companion ad display is optional.
 )
-
-// Validate method validates Mode according to the VAST.
-func (mode Mode) Validate() error {
-	if mode != ModeAll && mode != ModeAny && mode != ModeNone {
-		return ValidationError{Errs: []error{ErrUnsupportedMode}}
-	}
-
-	return nil
-}

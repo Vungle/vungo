@@ -4,20 +4,6 @@ package vastbasic
 type Tracking struct {
 	Event Event       `xml:"event,attr"` // Required.
 	URI   TrimmedData `xml:",cdata"`
-}
 
-// Validate methods validate the Tracking element according to the VAST.
-func (t *Tracking) Validate() error {
-	errors := make([]error, 0)
-
-	if err := t.Event.Validate(); err != nil {
-		ve, ok := err.(ValidationError)
-		if ok {
-			errors = append(errors, ve.Errs...)
-		}
-	}
-	if len(errors) > 0 {
-		return ValidationError{Errs: errors}
-	}
-	return nil
+	Offset *Offset `xml:"offset,attr,omitempty"` // Time at which the event should be triggered. VAST3.0.
 }

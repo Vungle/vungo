@@ -6,8 +6,3 @@ type StaticResource struct {
 	MimeType string      `xml:"creativeType,attr"` // Required.
 	URI      TrimmedData `xml:",cdata"`
 }
-
-// Validate method validates the StaticResource according to the VAST.
-func (r *StaticResource) Validate() error {
-	return nil
-}

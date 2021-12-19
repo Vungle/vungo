@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<VAST version="2.0">
-  <Error><![CDATA[http://some/error/happened]]></Error>
-  <Error><![CDATA[http://some/error/happened]]></Error>
-  <Error><![CDATA[http://some/error/happened]]></Error>
-</VAST>

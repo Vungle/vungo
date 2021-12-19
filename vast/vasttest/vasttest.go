@@ -2,11 +2,10 @@ package vasttest
 
 import (
 	"encoding/xml"
+	vastbasic "github.com/Vungle/vungo/vast/validator"
 	"io/ioutil"
 	"reflect"
 	"testing"
-
-	vastbasic "github.com/Vungle/vungo/vast/basic"
 )
 
 const testDirName = "./testdata/"
