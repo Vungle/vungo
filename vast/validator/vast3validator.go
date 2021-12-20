@@ -388,7 +388,7 @@ func (vc *Vast3validator) ValidateAdInline(ad *entity.Ad) []error {
 	return errors
 }
 
-// ValidateAdWrapper method validate Wrappe in an Ad vast element
+// ValidateAdWrapper method validate Wrapper in an Ad vast element
 func (vc *Vast3validator) ValidateAdWrapper(ad *entity.Ad) []error {
 	errors := make([]error, 0)
 	if err := vc.ValidateWrapper(ad.Wrapper); err != nil {

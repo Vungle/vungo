@@ -1,10 +1,10 @@
 package entity_test
 
 import (
-	"github.com/Vungle/vungo/vast/entity"
 	"reflect"
 	"testing"
 
+	"github.com/Vungle/vungo/vast/entity"
 	"github.com/Vungle/vungo/vast/vasttest"
 )
 

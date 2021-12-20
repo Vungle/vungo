@@ -2,10 +2,10 @@ package vastbasic_test
 
 import (
 	"encoding/xml"
-	"github.com/Vungle/vungo/vast/basic"
 	"reflect"
 	"testing"
 
+	vastbasic "github.com/Vungle/vungo/vast/basic"
 	"github.com/Vungle/vungo/vast/vasttest"
 )
 

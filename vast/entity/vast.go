@@ -2,6 +2,7 @@ package entity
 
 import (
 	"encoding/xml"
+
 	vastbasic "github.com/Vungle/vungo/vast/basic"
 )
 

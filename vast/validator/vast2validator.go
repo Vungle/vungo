@@ -6,6 +6,7 @@ import (
 	"github.com/Vungle/vungo/vast/entity"
 )
 
+// Vast2validator is used to validate Vast2.0 protocol struct.
 type Vast2validator struct {
 }
 
@@ -18,6 +19,7 @@ func (vc Vast2validator) ValidateVersion(v vastbasic.Version) error {
 	return nil
 }
 
+// ValidateAdSystem method validate AdSystem vast element
 func (vc *Vast2validator) ValidateAdSystem(as *vastbasic.AdSystem) error {
 	if len(as.System) == 0 {
 		return ValidationError{Errs: []error{vastbasic.ErrAdSystemMissSystem}}
@@ -25,6 +27,7 @@ func (vc *Vast2validator) ValidateAdSystem(as *vastbasic.AdSystem) error {
 	return nil
 }
 
+// ValidateDelivery method validate Delivery vast element
 func (vc *Vast2validator) ValidateDelivery(delivery vastbasic.Delivery) error {
 	if delivery != vastbasic.DeliveryProgressive && delivery != vastbasic.DeliveryStreaming {
 		return ValidationError{Errs: []error{vastbasic.ErrUnsupportedDeliveryType}}
@@ -32,6 +35,7 @@ func (vc *Vast2validator) ValidateDelivery(delivery vastbasic.Delivery) error {
 	return nil
 }
 
+// ValidateDuration method validate Duration vast element
 func (vc *Vast2validator) ValidateDuration(d vastbasic.Duration) error {
 	if d < 0 {
 		return ValidationError{Errs: []error{vastbasic.ErrDurationNegative}}
@@ -42,6 +46,7 @@ func (vc *Vast2validator) ValidateDuration(d vastbasic.Duration) error {
 	return nil
 }
 
+// ValidateEvent method validate Event vast element
 func (vc *Vast2validator) ValidateEvent(e vastbasic.Event) error {
 	switch e {
 	case vastbasic.EventCreativeView:
@@ -69,10 +74,12 @@ func (vc *Vast2validator) ValidateEvent(e vastbasic.Event) error {
 	return nil
 }
 
+// ValidateIcon method validate Icon vast element
 func (vc *Vast2validator) ValidateIcon(icon *vastbasic.Icon) error {
 	return nil
 }
 
+// ValidateImpression method validate Impression vast element
 func (vc *Vast2validator) ValidateImpression(impression *vastbasic.Impression) error {
 	if len(impression.URI) == 0 {
 		return ValidationError{Errs: []error{vastbasic.ErrImpressionMissURI}}
@@ -276,6 +283,7 @@ func (vc *Vast2validator) ValidateAd(ad *entity.Ad) error {
 	return nil
 }
 
+// ValidateAdInline method validate Inline in an Ad vast element
 func (vc *Vast2validator) ValidateAdInline(ad *entity.Ad) []error {
 	errors := make([]error, 0)
 	if err := vc.ValidateInLine(ad.InLine); err != nil {
@@ -288,6 +296,7 @@ func (vc *Vast2validator) ValidateAdInline(ad *entity.Ad) []error {
 	return errors
 }
 
+// ValidateAdWrapper method validate Wrapper in an Ad vast element
 func (vc *Vast2validator) ValidateAdWrapper(ad *entity.Ad) []error {
 	errors := make([]error, 0)
 	if err := vc.ValidateWrapper(ad.Wrapper); err != nil {

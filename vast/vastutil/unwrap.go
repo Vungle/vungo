@@ -4,10 +4,11 @@ import (
 	"context"
 	"crypto/tls"
 	"encoding/xml"
-	"github.com/Vungle/vungo/vast/entity"
 	"io"
 	"io/ioutil"
 	"net/http"
+
+	"github.com/Vungle/vungo/vast/entity"
 )
 
 var defaultUnwrapClient = &http.Client{

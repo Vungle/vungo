@@ -5,6 +5,7 @@ import (
 	"github.com/Vungle/vungo/vast/entity"
 )
 
+// Validator is used as the abstract function of vast struct validate tool
 type Validator interface {
 	ValidateVersion(v vastbasic.Version) error
 	ValidateAdSystem(as *vastbasic.AdSystem) error

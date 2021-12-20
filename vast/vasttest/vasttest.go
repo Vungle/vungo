@@ -2,13 +2,13 @@ package vasttest
 
 import (
 	"encoding/xml"
-	"github.com/Vungle/vungo/vast/entity"
-	"github.com/Vungle/vungo/vast/validator"
 	"io/ioutil"
 	"reflect"
 	"testing"
 
 	vastbasic "github.com/Vungle/vungo/vast/basic"
+	"github.com/Vungle/vungo/vast/entity"
+	"github.com/Vungle/vungo/vast/validator"
 )
 
 const testDirName = "./testdata/"

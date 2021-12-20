@@ -3,12 +3,14 @@ package vastutil
 import (
 	"encoding/xml"
 	"fmt"
+	"strings"
+
 	vastbasic "github.com/Vungle/vungo/vast/basic"
 	"github.com/Vungle/vungo/vast/entity"
 	"github.com/Vungle/vungo/vast/validator"
-	"strings"
 )
 
+// Validate method validate VAST data as an external api
 func Validate(vasts []*entity.Vast, version vastbasic.Version) error {
 	validator := validatorOf(version)
 	if validator == nil {
