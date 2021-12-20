@@ -20,9 +20,9 @@ type Companion struct {
 	IFrameResource string                    `xml:"IFrameResource,omitempty"`
 	HTMLResource   *vastbasic.HTMLResource   `xml:"HTMLResource,omitempty"` // Type changed from string to structure in VAST3.0.
 
-	AssetWidth    int                    `xml:"assetWidth,attr"`                                // VAST3.0.
-	AssetHeight   int                    `xml:"assetHeight,attr"`                               // VAST3.0.
-	AdSlotID      string                 `xml:"adSlotId,attr,omitempty"`                        // VAST3.0.
-	ClickTracking vastbasic.TrimmedData  `xml:"CompanionClickTracking,omitempty"`               // VAST3.0.
-	Extensions    []*vastbasic.Extension `xml:"CreativeExtensions>CreativeExtension,omitempty"` // VAST3.0.
+	AssetWidth    int                     `xml:"assetWidth,attr"`                                // VAST3.0.
+	AssetHeight   int                     `xml:"assetHeight,attr"`                               // VAST3.0.
+	AdSlotID      string                  `xml:"adSlotId,attr,omitempty"`                        // VAST3.0.
+	ClickTracking []vastbasic.TrimmedData `xml:"CompanionClickTracking,omitempty"`               // VAST3.0.
+	Extensions    []*vastbasic.Extension  `xml:"CreativeExtensions>CreativeExtension,omitempty"` // VAST3.0.
 }
