@@ -115,7 +115,7 @@ func (vc *Vast3validator) ValidateImpression(impression *vastbasic.Impression) e
 	return nil
 }
 
-// validateMediaFile method validate the MediaFile element according to the VAST.
+// ValidateMediaFile method validate the MediaFile element according to the VAST.
 // Delivery and MimeType, Width, and Height are required.
 // Since the width, and height might be zero, we'll only make sure they are not less than zero.
 func (vc *Vast3validator) ValidateMediaFile(mediaFile *vastbasic.MediaFile) error {
