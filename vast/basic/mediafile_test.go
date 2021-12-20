@@ -32,6 +32,8 @@ var mediaFileTests = []struct {
 	{VastElement: &vastbasic.MediaFile{}, Err: vastbasic.ErrMediaFileWidthTooHigh, File: "mediafile_width_too_high.xml"},
 	{VastElement: &vastbasic.MediaFile{}, Err: vastbasic.ErrMediaFileWidthTooLow, File: "mediafile_width_too_low.xml"},
 	{VastElement: &vastbasic.MediaFile{}, Err: vastbasic.ErrMediaFileUnsupportedMimeType, File: "mediafile_unsupported_mimetype.xml"},
+	{VastElement: &vastbasic.MediaFile{}, Err: vastbasic.ErrMediaMinBitrateLessThanZero, File: "mediafile_err_minbitrate.xml"},
+	{VastElement: &vastbasic.MediaFile{}, Err: vastbasic.ErrMediaMaxBitrateLessThanZero, File: "mediafile_err_maxbitrate.xml"},
 }
 
 func TestMediaFileValidateErrors(t *testing.T) {

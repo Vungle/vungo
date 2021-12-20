@@ -138,4 +138,13 @@ var (
 
 	// ErrWrapperMissVastAdTagURI error for Wrapper misses VastAdTagURI.
 	ErrWrapperMissVastAdTagURI = errors.New("Wrapper misses VastAdTagURI")
+
+	// ErrAdSequenceLessThanZero error from Ad Sequence less than zero
+	ErrAdSequenceLessThanZero = errors.New("Ad Sequence is less than zero")
+
+	// ErrMediaMinBitrateLessThanZero error from Min bit rate of Mediafile is less than zero
+	ErrMediaMinBitrateLessThanZero = errors.New("Min bit rate of Mediafile is less than zero")
+
+	// ErrMediaMaxBitrateLessThanZero error from Max bit rate of Mediafile is less than zero
+	ErrMediaMaxBitrateLessThanZero = errors.New("Max bit rate of Mediafile is less than zero")
 )

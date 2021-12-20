@@ -13,19 +13,6 @@ import (
 
 const testDirName = "./testdata/"
 
-// VastTest is a test case container, VastElement indicates which element to test.
-// Err indicates the expected error. File indicates the input xml file path.
-type VastTest struct {
-	VastElement Validator
-	Err         error
-	File        string
-}
-
-// Validator interface is used to validate current node is correct.
-type Validator interface {
-	Validate() error
-}
-
 // VerifyModelAgainstFile method verifies the correctness of a particular VAST 3.0 object against
 // a VAST XML file. A correct VAST document contains all the fields specified in Go struct, and they
 // are all non-empty fields.
@@ -139,6 +126,7 @@ func VerifyVastElementFromBytes(t testing.TB, xmlData []byte, element interface{
 	if err := xml.Unmarshal(xmlData, element); err != nil {
 		t.Fatalf("Cannot unmarshal XML data. %v.\n", err)
 	}
+
 	VerifyVastElementErrorAsExpected(t, element, ValidateElement(element), expectedError)
 }
 
@@ -155,60 +143,70 @@ func VerifyVastElementFromFile(t testing.TB, file string, element interface{}, e
 // ValidateElement use the latest version to validate xml. Because the validator here is used to check xml parse logic.
 // the specified verification of Validator lies in the vastXvalidator_test.go
 func ValidateElement(element interface{}) error {
-	validator := validator.Vast3validator{}
+	return ValidateElementWithVersion(element, vastbasic.Version3)
+}
+
+// ValidateElementWithVersion use to validate specified vast element
+func ValidateElementWithVersion(element interface{}, version vastbasic.Version) error {
+	var validatorUtil validator.Validator
+	if version == vastbasic.Version2 {
+		validatorUtil = &validator.Vast2validator{}
+	} else {
+		validatorUtil = &validator.Vast3validator{}
+	}
 	switch element.(type) {
 	case vastbasic.Version:
-		return validator.ValidateVersion(element.(vastbasic.Version))
+		return validatorUtil.ValidateVersion(element.(vastbasic.Version))
 	case *vastbasic.AdSystem:
-		return validator.ValidateAdSystem(element.(*vastbasic.AdSystem))
+		return validatorUtil.ValidateAdSystem(element.(*vastbasic.AdSystem))
 	case vastbasic.Delivery:
-		return validator.ValidateDelivery(element.(vastbasic.Delivery))
+		return validatorUtil.ValidateDelivery(element.(vastbasic.Delivery))
 	case vastbasic.Duration:
-		return validator.ValidateDuration(element.(vastbasic.Duration))
+		return validatorUtil.ValidateDuration(element.(vastbasic.Duration))
 	case vastbasic.Event:
-		return validator.ValidateEvent(element.(vastbasic.Event))
+		return validatorUtil.ValidateEvent(element.(vastbasic.Event))
 	case *vastbasic.Icon:
-		return validator.ValidateIcon(element.(*vastbasic.Icon))
+		return validatorUtil.ValidateIcon(element.(*vastbasic.Icon))
 	case *vastbasic.Impression:
-		return validator.ValidateImpression(element.(*vastbasic.Impression))
+		return validatorUtil.ValidateImpression(element.(*vastbasic.Impression))
 	case *vastbasic.MediaFile:
-		return validator.ValidateMediaFile(element.(*vastbasic.MediaFile))
+		return validatorUtil.ValidateMediaFile(element.(*vastbasic.MediaFile))
 	case vastbasic.Mode:
-		return validator.ValidateMode(element.(vastbasic.Mode))
+		return validatorUtil.ValidateMode(element.(vastbasic.Mode))
 	case *vastbasic.Offset:
-		return validator.ValidateOffset(element.(*vastbasic.Offset))
+		return validatorUtil.ValidateOffset(element.(*vastbasic.Offset))
 	case *vastbasic.Pricing:
-		return validator.ValidatePricing(element.(*vastbasic.Pricing))
+		return validatorUtil.ValidatePricing(element.(*vastbasic.Pricing))
 	case vastbasic.PricingModel:
-		return validator.ValidatePricingModel(element.(vastbasic.PricingModel))
+		return validatorUtil.ValidatePricingModel(element.(vastbasic.PricingModel))
 	case *vastbasic.StaticResource:
-		return validator.ValidateStaticResource(element.(*vastbasic.StaticResource))
+		return validatorUtil.ValidateStaticResource(element.(*vastbasic.StaticResource))
 	case *vastbasic.Tracking:
-		return validator.ValidateTracking(element.(*vastbasic.Tracking))
+		return validatorUtil.ValidateTracking(element.(*vastbasic.Tracking))
 	case *vastbasic.VideoClick:
-		return validator.ValidateVideoClick(element.(*vastbasic.VideoClick))
+		return validatorUtil.ValidateVideoClick(element.(*vastbasic.VideoClick))
 	case *vastbasic.VideoClicks:
-		return validator.ValidateVideoClicks(element.(*vastbasic.VideoClicks))
+		return validatorUtil.ValidateVideoClicks(element.(*vastbasic.VideoClicks))
 	case *entity.Ad:
-		return validator.ValidateAd(element.(*entity.Ad))
+		return validatorUtil.ValidateAd(element.(*entity.Ad))
 	case *entity.InLine:
-		return validator.ValidateInLine(element.(*entity.InLine))
+		return validatorUtil.ValidateInLine(element.(*entity.InLine))
 	case *entity.Companion:
-		return validator.ValidateCompanion(element.(*entity.Companion))
+		return validatorUtil.ValidateCompanion(element.(*entity.Companion))
 	case *entity.CompanionAds:
-		return validator.ValidateCompanionAds(element.(*entity.CompanionAds))
+		return validatorUtil.ValidateCompanionAds(element.(*entity.CompanionAds))
 	case *entity.Creative:
-		return validator.ValidateCreative(element.(*entity.Creative))
+		return validatorUtil.ValidateCreative(element.(*entity.Creative))
 	case *entity.Linear:
-		return validator.ValidateLinear(element.(*entity.Linear))
+		return validatorUtil.ValidateLinear(element.(*entity.Linear))
 	case *entity.NonLinear:
-		return validator.ValidateNonLinear(element.(*entity.NonLinear))
+		return validatorUtil.ValidateNonLinear(element.(*entity.NonLinear))
 	case *entity.NonLinearAds:
-		return validator.ValidateNonLinearAds(element.(*entity.NonLinearAds))
+		return validatorUtil.ValidateNonLinearAds(element.(*entity.NonLinearAds))
 	case *entity.Wrapper:
-		return validator.ValidateWrapper(element.(*entity.Wrapper))
+		return validatorUtil.ValidateWrapper(element.(*entity.Wrapper))
 	case *entity.Vast:
-		return validator.ValidateVast(element.(*entity.Vast))
+		return validatorUtil.ValidateVast(element.(*entity.Vast))
 	default:
 		return nil
 	}

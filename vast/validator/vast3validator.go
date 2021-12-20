@@ -6,6 +6,52 @@ import (
 	"github.com/Vungle/vungo/vast/entity"
 )
 
+// Vast3validator is a validate tool for vast 3.0.
+// new feature of Vast 3.0 are listed below:
+//		More events: EventExitFullscreen EventSkip EventProgress
+//		- Ad pods and
+//			sequence			int 			new attribute
+//		- Adparameter
+//			isXmlEncoded 		bool			new attribute
+//		- Icon
+//			Program      		string   		new attribute
+//			Width        		int  			new attribute
+//			Height       		int     		new attribute
+//			XPosition   		string   		new attribute
+//			YPosition    		string 			new attribute
+//			Duration     		Duration		new attribute
+//			APIFramework 		string  		new element
+//			Offset       		Offset   		new attribute
+//			ClickThrough   		string        	new element
+//			ClickTrackings 		[]string        new element
+//			StaticResource 		*StaticResource new element
+//			IFrameResource 		string         	new element
+//			HTMLResource   		*HTMLResource   new element
+//		- Mediafile
+//			Codec				string			new attribute
+//			MinBitrate			*int			new attribute
+//			MaxBitrate			*int			new attribute
+//		- Tracking
+//			offset				*Offset			new attribute
+//		- Companion
+//			AssetWidth			int				new attribute
+//			AssetHeight			int				new attribute
+//			AdSlotID			string			new attribute
+//			ClickTracking		TrimmedData		new element
+//			Extensions    		*Extension 		new element
+//		- CompanionAd
+//			Required			Mode			new attribute
+//		- Creative
+//			APIFramework		string			new attribute
+//		- Inline
+//			Advertiser	 		string      	new element
+//			Pricing    			*Pricing 		new element
+//		- Linear
+//			Extensions 			[]*Extension 	new element
+//			Icons      			[]*Icon			new element
+//		- Nolinear
+//			ClickTracking		[]string		new element
+//			Extensions			[]Extension		new element
 type Vast3validator struct {
 }
 
@@ -18,6 +64,7 @@ func (vc Vast3validator) ValidateVersion(v vastbasic.Version) error {
 	return nil
 }
 
+// ValidateAdSystem method validate AdSystem vast element
 func (vc *Vast3validator) ValidateAdSystem(as *vastbasic.AdSystem) error {
 	if len(as.System) == 0 {
 		return ValidationError{Errs: []error{vastbasic.ErrAdSystemMissSystem}}
@@ -25,6 +72,7 @@ func (vc *Vast3validator) ValidateAdSystem(as *vastbasic.AdSystem) error {
 	return nil
 }
 
+// ValidateDelivery method validate Delivery vast element
 func (vc *Vast3validator) ValidateDelivery(delivery vastbasic.Delivery) error {
 	if delivery != vastbasic.DeliveryProgressive && delivery != vastbasic.DeliveryStreaming {
 		return ValidationError{Errs: []error{vastbasic.ErrUnsupportedDeliveryType}}
@@ -32,6 +80,7 @@ func (vc *Vast3validator) ValidateDelivery(delivery vastbasic.Delivery) error {
 	return nil
 }
 
+// ValidateDuration method validate Duration vast element
 func (vc *Vast3validator) ValidateDuration(d vastbasic.Duration) error {
 	if d < 0 {
 		return ValidationError{Errs: []error{vastbasic.ErrDurationNegative}}
@@ -42,6 +91,7 @@ func (vc *Vast3validator) ValidateDuration(d vastbasic.Duration) error {
 	return nil
 }
 
+// ValidateEvent method validate Event vast element
 func (vc *Vast3validator) ValidateEvent(e vastbasic.Event) error {
 	switch e {
 	case vastbasic.EventCreativeView:
@@ -72,6 +122,7 @@ func (vc *Vast3validator) ValidateEvent(e vastbasic.Event) error {
 	return nil
 }
 
+// ValidateIcon method validate Icon vast element
 func (vc *Vast3validator) ValidateIcon(icon *vastbasic.Icon) error {
 	errors := make([]error, 0)
 	if len(icon.Program) == 0 {
@@ -108,6 +159,7 @@ func (vc *Vast3validator) ValidateIcon(icon *vastbasic.Icon) error {
 	return nil
 }
 
+// ValidateImpression method validate Impression vast element
 func (vc *Vast3validator) ValidateImpression(impression *vastbasic.Impression) error {
 	if len(impression.URI) == 0 {
 		return ValidationError{Errs: []error{vastbasic.ErrImpressionMissURI}}
@@ -166,6 +218,14 @@ func (vc *Vast3validator) ValidateMediaFile(mediaFile *vastbasic.MediaFile) erro
 
 	if mediaFile.Height < defaults.MinVideoHeight {
 		errors = append(errors, vastbasic.ErrMediaFileHeightTooLow)
+	}
+
+	if mediaFile.MinBitrate != nil && *(mediaFile.MinBitrate) < 0 {
+		errors = append(errors, vastbasic.ErrMediaMinBitrateLessThanZero)
+	}
+
+	if mediaFile.MaxBitrate != nil && *(mediaFile.MaxBitrate) < 0 {
+		errors = append(errors, vastbasic.ErrMediaMaxBitrateLessThanZero)
 	}
 
 	if len(errors) > 0 {
@@ -305,12 +365,17 @@ func (vc *Vast3validator) ValidateAd(ad *entity.Ad) error {
 		errors = append(errors, vastbasic.ErrAdType)
 	}
 
+	if ad.Sequence < 0 {
+		errors = append(errors, vastbasic.ErrAdSequenceLessThanZero)
+	}
+
 	if len(errors) > 0 {
 		return ValidationError{Errs: errors}
 	}
 	return nil
 }
 
+// ValidateAdInline method validate Inline in an Ad vast element
 func (vc *Vast3validator) ValidateAdInline(ad *entity.Ad) []error {
 	errors := make([]error, 0)
 	if err := vc.ValidateInLine(ad.InLine); err != nil {
@@ -323,6 +388,7 @@ func (vc *Vast3validator) ValidateAdInline(ad *entity.Ad) []error {
 	return errors
 }
 
+// ValidateAdWrapper method validate Wrappe in an Ad vast element
 func (vc *Vast3validator) ValidateAdWrapper(ad *entity.Ad) []error {
 	errors := make([]error, 0)
 	if err := vc.ValidateWrapper(ad.Wrapper); err != nil {
@@ -492,6 +558,15 @@ func (vc *Vast3validator) ValidateInLine(inline *entity.InLine) error {
 					errors = append(errors, vastbasic.ErrMediaFileUnsupportedMimeType)
 				}
 			}
+
+			if creative.Linear.Icons != nil && len(creative.Linear.Icons) > 0 {
+				for _, icon := range creative.Linear.Icons {
+					err = vc.ValidateIcon(icon)
+					if err != nil {
+						errors = append(errors, err)
+					}
+				}
+			}
 		}
 	}
 
@@ -565,6 +640,7 @@ func (vc Vast3validator) ValidateNonLinear(nonLinear *entity.NonLinear) error {
 	if len(errors) > 0 {
 		return ValidationError{Errs: errors}
 	}
+
 	return nil
 }
 
@@ -655,43 +731,3 @@ func (vc *Vast3validator) ValidateVast(v *entity.Vast) error {
 	}
 	return nil
 }
-
-// more events
-
-// ad pods
-
-// adparameter isXmlEncoded
-
-// icon
-
-// mediafile
-//Codec      string `xml:"codec,attr,omitempty"`      // VAST3.0.
-//MinBitrate *int   `xml:"minBitrate,attr,omitempty"` // In Kbps; absent if Bitrate is present. VAST3.0.
-//MaxBitrate *int   `xml:"maxBitrate,attr,omitempty"` // In Kbps; absent if Bitrate is present. VAST3.0.
-
-// tracking offset
-
-// ad Sequence
-
-// Companion
-//AssetWidth    int                    `xml:"assetWidth,attr"`                                // VAST3.0.
-//AssetHeight   int                    `xml:"assetHeight,attr"`                               // VAST3.0.
-//AdSlotID      string                 `xml:"adSlotId,attr,omitempty"`                        // VAST3.0.
-//ClickTracking vastbasic.TrimmedData  `xml:"CompanionClickTracking,omitempty"`               // VAST3.0.
-//Extensions    []*vastbasic.Extension `xml:"CreativeExtensions>CreativeExtension,omitempty"` // VAST3.0.
-
-// CompanionAd Required
-
-// creative APIFramework
-
-// inline
-//Advertiser string             `xml:"Advertiser,omitempty"` // VAST3.0.
-//Pricing    *vastbasic.Pricing `xml:"Pricing,omitempty"`    // VAST3.0.
-
-// Linear
-//Extensions []*vastbasic.Extension `xml:"CreativeExtensions>CreativeExtension,omitempty"` // VAST3.0.
-//Icons      []*vastbasic.Icon      `xml:"Icons>Icon"`                                     // VAST3.0.
-
-// nolinear
-//ClickTracking []string              `xml:"NonLinearClickTracking,omitempty"`               // VAST3.0.
-//Extensions    []vastbasic.Extension `xml:"CreativeExtensions>CreativeExtension,omitempty"` // VAST3.0.

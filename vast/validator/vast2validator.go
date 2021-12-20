@@ -56,13 +56,10 @@ func (vc *Vast2validator) ValidateEvent(e vastbasic.Event) error {
 	case vastbasic.EventRewind:
 	case vastbasic.EventResume:
 	case vastbasic.EventFullscreen:
-	case vastbasic.EventExitFullscreen:
 	case vastbasic.EventExpand:
 	case vastbasic.EventCollapse:
 	case vastbasic.EventAcceptInvitation:
 	case vastbasic.EventClose:
-	case vastbasic.EventSkip:
-	case vastbasic.EventProgress:
 	default:
 		// Validate function returns error of event.
 		// We do not do the strict validation. If the event type is not defined, just skipped it rather than return validate failure.
