@@ -15,7 +15,11 @@ func TestAdMarshalUnmarshal(t *testing.T) {
 	vasttest.VerifyModelAgainstFile(t, "Ad", "ad.xml", AdModelType)
 }
 
-var adTests = []vasttest.VastTest{
+var adTests = []struct {
+	VastElement *entity.Ad
+	Err         error
+	File        string
+}{
 	{VastElement: &entity.Ad{}, Err: vastbasic.ErrAdType, File: "ad.xml"},
 	{VastElement: &entity.Ad{}, File: "ad_with_inline.xml"},
 	{VastElement: &entity.Ad{}, File: "ad_with_wrapper.xml"},

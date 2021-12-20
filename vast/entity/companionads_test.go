@@ -1,23 +1,27 @@
 package entity_test
 
 import (
+	"github.com/Vungle/vungo/vast/entity"
 	"reflect"
 	"testing"
 
-	"github.com/Vungle/vungo/vast/vast2"
 	"github.com/Vungle/vungo/vast/vasttest"
 )
 
-var CompanionAdsModelType = reflect.TypeOf(vast2.CompanionAds{})
+var CompanionAdsModelType = reflect.TypeOf(entity.CompanionAds{})
 
 func TestCompanionAdsMarshalUnmarshal(t *testing.T) {
 	vasttest.VerifyModelAgainstFile(t, "CompanionAds", "companionads.xml", CompanionAdsModelType)
 }
 
-var companionAdsTests = []vasttest.VastTest{
-	{VastElement: &vast2.CompanionAds{}, File: "companionads_without_companion.xml"},
-	{VastElement: &vast2.CompanionAds{}, File: "companionads_valid.xml"},
-	{VastElement: &vast2.CompanionAds{}, File: "companionads.xml"},
+var companionAdsTests = []struct {
+	VastElement *entity.CompanionAds
+	File        string
+	Err         error
+}{
+	{VastElement: &entity.CompanionAds{}, File: "companionads_without_companion.xml"},
+	{VastElement: &entity.CompanionAds{}, File: "companionads_valid.xml"},
+	{VastElement: &entity.CompanionAds{}, File: "companionads.xml"},
 }
 
 func TestCompanionAdsValidateErrors(t *testing.T) {

@@ -19,7 +19,11 @@ func TestInLineMarshalUnmarshal(t *testing.T) {
 	vasttest.VerifyModelAgainstFile(t, "InLine", "inline.xml", InLineModelType)
 }
 
-var inlineTests = []vasttest.VastTest{
+var inlineTests = []struct {
+	VastElement *entity.InLine
+	Err         error
+	File        string
+}{
 	{VastElement: &entity.InLine{}, File: "inline_valid.xml"},
 	{VastElement: &entity.InLine{}, Err: vastbasic.ErrInlineMissAdTitle, File: "inline_without_adtitle.xml"},
 	{VastElement: &entity.InLine{}, Err: vastbasic.ErrInlineMissCreatives, File: "inline_without_creatives.xml"},
@@ -55,7 +59,7 @@ func TestOnlyOneValidMediaFileRemains(t *testing.T) {
 		t.Fatalf("Test XML should have at least 2 MediaFile elements.")
 	}
 
-	_ = l.Validate()
+	_ = vasttest.ValidateElement(l)
 
 	if n := len(l.Creatives[0].Linear.MediaFiles); n != 1 {
 		t.Fatalf("Validated test XML should have exactly 1 MediaFile element but got %d.", n)
@@ -74,7 +78,11 @@ func TestOnlyOneValidMediaFileRemains(t *testing.T) {
 }
 
 func TestLinearValidateErrors(t *testing.T) {
-	var linearTests = []vasttest.VastTest{
+	var linearTests = []struct {
+		VastElement *entity.InLine
+		Err         error
+		File        string
+	}{
 		{VastElement: &entity.InLine{}, File: "inline_valid_mediafile.xml"},
 		{VastElement: &entity.InLine{}, File: "inline_at_least_one_valid_mediafile.xml"},
 		{

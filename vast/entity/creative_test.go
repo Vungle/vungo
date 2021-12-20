@@ -15,7 +15,11 @@ func TestCreativeMarshalUnmarshal(t *testing.T) {
 	vasttest.VerifyModelAgainstFile(t, "Creative", "creative.xml", CreativeModelType)
 }
 
-var creativeTests = []vasttest.VastTest{
+var creativeTests = []struct {
+	VastElement *entity.Creative
+	Err         error
+	File        string
+}{
 	{VastElement: &entity.Creative{}, Err: vastbasic.ErrCreativeType, File: "creative.xml"},
 	{VastElement: &entity.Creative{}, File: "creative_with_linear.xml"},
 	{VastElement: &entity.Creative{}, File: "creative_with_nonlinearads.xml"},

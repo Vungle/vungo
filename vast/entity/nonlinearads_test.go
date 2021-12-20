@@ -15,7 +15,11 @@ func TestNonLinearAdsMarshalUnmarshal(t *testing.T) {
 	vasttest.VerifyModelAgainstFile(t, "NonLinearAds", "nonlinearads.xml", NonLinearAdsModelType)
 }
 
-var nonLinearAdsTests = []vasttest.VastTest{
+var nonLinearAdsTests = []struct {
+	VastElement *entity.NonLinearAds
+	Err         error
+	File        string
+}{
 	{VastElement: &entity.NonLinearAds{}, File: "nonlinearads.xml"},
 	{VastElement: &entity.NonLinearAds{}, File: "nonlinearads_valid.xml"},
 	{VastElement: &entity.NonLinearAds{}, Err: vastbasic.ErrNonLinearAdsMissNonLinears, File: "nonlinearads_without_nonlinears.xml"},

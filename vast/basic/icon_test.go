@@ -14,7 +14,11 @@ func TestIconMarshalUnmarshal(t *testing.T) {
 	vasttest.VerifyModelAgainstFile(t, "Icon", "icon.xml", IconModelType)
 }
 
-var iconTests = []vasttest.VastTest{
+var iconTests = []struct {
+	VastElement *vastbasic.Icon
+	Err         error
+	File        string
+}{
 	{VastElement: &vastbasic.Icon{}, Err: vastbasic.ErrIconResourcesFormat, File: "icon.xml"},
 	{VastElement: &vastbasic.Icon{}, File: "icon_with_staticresource.xml"},
 	{VastElement: &vastbasic.Icon{}, File: "icon_with_htmlresource.xml"},

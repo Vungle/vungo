@@ -15,7 +15,11 @@ func TestCompanionMarshalUnmarshal(t *testing.T) {
 	vasttest.VerifyModelAgainstFile(t, "Companion", "companion.xml", CompanionModelType)
 }
 
-var companionTests = []vasttest.VastTest{
+var companionTests = []struct {
+	VastElement *entity.Companion
+	File        string
+	Err         error
+}{
 	{VastElement: &entity.Companion{}, File: "companion.xml"},
 	{VastElement: &entity.Companion{}, File: "companion_with_staticresource.xml"},
 	{VastElement: &entity.Companion{}, File: "companion_with_iframeresource.xml"},

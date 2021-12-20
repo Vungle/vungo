@@ -17,11 +17,12 @@ const (
 	EventRewind           Event = "rewind"
 	EventResume           Event = "resume"
 	EventFullscreen       Event = "fullscreen"
-	EventExitFullscreen   Event = "exitFullscreen" //VAST3.0.
 	EventExpand           Event = "expand"
 	EventCollapse         Event = "collapse"
 	EventAcceptInvitation Event = "acceptInvitation"
 	EventClose            Event = "close"
-	EventSkip             Event = "skip"     // VAST3.0.
-	EventProgress         Event = "progress" // VAST3.0.
+
+	EventExitFullscreen Event = "exitFullscreen" //VAST3.0.
+	EventSkip           Event = "skip"           // VAST3.0.
+	EventProgress       Event = "progress"       // VAST3.0.
 )

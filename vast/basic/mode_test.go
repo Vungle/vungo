@@ -7,7 +7,10 @@ import (
 	"github.com/Vungle/vungo/vast/vasttest"
 )
 
-var modeTests = []vasttest.VastTest{
+var modeTests = []struct {
+	VastElement vastbasic.Mode
+	Err         error
+}{
 	{VastElement: vastbasic.ModeAll},
 	{VastElement: vastbasic.ModeAny},
 	{VastElement: vastbasic.ModeNone},
@@ -17,6 +20,6 @@ var modeTests = []vasttest.VastTest{
 
 func TestModeValidateErrors(t *testing.T) {
 	for _, test := range modeTests {
-		vasttest.VerifyVastElementErrorAsExpected(t, test.VastElement, test.VastElement.Validate(), test.Err)
+		vasttest.VerifyVastElementErrorAsExpected(t, test.VastElement, vasttest.ValidateElement(test.VastElement), test.Err)
 	}
 }

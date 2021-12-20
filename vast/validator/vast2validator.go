@@ -7,7 +7,15 @@ import (
 )
 
 type Vast2validator struct {
-	version vastbasic.Version
+}
+
+// ValidateVersion method validates the Version according to the VAST.
+func (vc Vast2validator) ValidateVersion(v vastbasic.Version) error {
+	if v != vastbasic.Version2 {
+		return ValidationError{Errs: []error{vastbasic.ErrUnsupportedVersion}}
+	}
+
+	return nil
 }
 
 func (vc *Vast2validator) ValidateAdSystem(as *vastbasic.AdSystem) error {
@@ -65,38 +73,6 @@ func (vc *Vast2validator) ValidateEvent(e vastbasic.Event) error {
 }
 
 func (vc *Vast2validator) ValidateIcon(icon *vastbasic.Icon) error {
-	errors := make([]error, 0)
-	if len(icon.Program) == 0 {
-		errors = append(errors, vastbasic.ErrIconMissProgram)
-	}
-
-	if len(icon.XPosition) == 0 || len(icon.YPosition) == 0 {
-		errors = append(errors, vastbasic.ErrIconMissPosition)
-	}
-
-	if icon.StaticResource != nil {
-		if len(icon.IFrameResource) != 0 || icon.HTMLResource != nil {
-			errors = append(errors, vastbasic.ErrIconResourcesFormat)
-		}
-	} else if icon.HTMLResource != nil {
-		if len(icon.IFrameResource) != 0 {
-			errors = append(errors, vastbasic.ErrIconResourcesFormat)
-		}
-	} else if len(icon.IFrameResource) == 0 {
-		errors = append(errors, vastbasic.ErrIconResourcesFormat)
-	}
-	if icon.StaticResource != nil {
-		if err := vc.ValidateStaticResource(icon.StaticResource); err != nil {
-			ve, ok := err.(ValidationError)
-			if ok {
-				errors = append(errors, ve.Errs...)
-			}
-		}
-	}
-
-	if len(errors) > 0 {
-		return ValidationError{Errs: errors}
-	}
 	return nil
 }
 
@@ -175,7 +151,7 @@ func (vc *Vast2validator) ValidateMode(mode vastbasic.Mode) error {
 	return nil
 }
 
-// Validate method validate Offset.
+// ValidateOffset method validate Offset.
 func (vc *Vast2validator) ValidateOffset(o *vastbasic.Offset) error {
 	errors := make([]error, 0)
 	if o.Percent < 0 {
@@ -290,9 +266,9 @@ func (vc *Vast2validator) ValidateAd(ad *entity.Ad) error {
 	}
 
 	if ad.InLine != nil {
-		errors = append(errors, vc.validateAdInline(ad)...)
+		errors = append(errors, vc.ValidateAdInline(ad)...)
 	} else if ad.Wrapper != nil {
-		errors = append(errors, vc.validateAdWrapper(ad)...)
+		errors = append(errors, vc.ValidateAdWrapper(ad)...)
 	} else {
 		errors = append(errors, vastbasic.ErrAdType)
 	}
@@ -303,7 +279,7 @@ func (vc *Vast2validator) ValidateAd(ad *entity.Ad) error {
 	return nil
 }
 
-func (vc *Vast2validator) validateAdInline(ad *entity.Ad) []error {
+func (vc *Vast2validator) ValidateAdInline(ad *entity.Ad) []error {
 	errors := make([]error, 0)
 	if err := vc.ValidateInLine(ad.InLine); err != nil {
 		ve, ok := err.(ValidationError)
@@ -315,7 +291,7 @@ func (vc *Vast2validator) validateAdInline(ad *entity.Ad) []error {
 	return errors
 }
 
-func (vc *Vast2validator) validateAdWrapper(ad *entity.Ad) []error {
+func (vc *Vast2validator) ValidateAdWrapper(ad *entity.Ad) []error {
 	errors := make([]error, 0)
 	if err := vc.ValidateWrapper(ad.Wrapper); err != nil {
 		ve, ok := err.(ValidationError)
@@ -591,18 +567,9 @@ func (vc *Vast2validator) ValidateNonLinearAds(nonLinearAds *entity.NonLinearAds
 	return nil
 }
 
-// ValidateVersion method validates the Version according to the VAST.
-func (vc Vast2validator) ValidateVersion(v vastbasic.Version) error {
-	if v != vastbasic.Version2 {
-		return ValidationError{Errs: []error{vastbasic.ErrUnsupportedVersion}}
-	}
-
-	return nil
-}
-
 // ValidateWrapper method validates the Wrapper according to the VAST.
 // AdSystem, VastAdTagURI, and Impressions are required.
-// Creatives are optional, if it exists, we'll also validate it.
+// Creatives are optional, if it exists, we'll also Validate it.
 func (vc *Vast2validator) ValidateWrapper(w *entity.Wrapper) error {
 	errors := make([]error, 0)
 	if len(w.VastAdTagURI) == 0 {

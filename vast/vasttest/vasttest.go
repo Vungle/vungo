@@ -2,10 +2,13 @@ package vasttest
 
 import (
 	"encoding/xml"
-	vastbasic "github.com/Vungle/vungo/vast/validator"
+	"github.com/Vungle/vungo/vast/entity"
+	"github.com/Vungle/vungo/vast/validator"
 	"io/ioutil"
 	"reflect"
 	"testing"
+
+	vastbasic "github.com/Vungle/vungo/vast/basic"
 )
 
 const testDirName = "./testdata/"
@@ -112,10 +115,10 @@ func isXMLField(field reflect.StructField) bool {
 }
 
 // VerifyVastElementErrorAsExpected function verifies whether the actual error is expected.
-func VerifyVastElementErrorAsExpected(t testing.TB, element Validator, err error, expectedError error) {
+func VerifyVastElementErrorAsExpected(t testing.TB, element interface{}, err error, expectedError error) {
 	if err != expectedError {
-		ve, ok := err.(vastbasic.ValidationError)
-		ev, eOk := expectedError.(*vastbasic.ValidationError)
+		ve, ok := err.(validator.ValidationError)
+		ev, eOk := expectedError.(*validator.ValidationError)
 		if ok {
 			for i, err := range ve.Errs {
 				if eOk && ev.Errs[i] == err {
@@ -132,19 +135,81 @@ func VerifyVastElementErrorAsExpected(t testing.TB, element Validator, err error
 }
 
 // VerifyVastElementFromBytes function verifies Validate errors for the vast element object.
-func VerifyVastElementFromBytes(t testing.TB, xmlData []byte, element Validator, expectedError error) {
+func VerifyVastElementFromBytes(t testing.TB, xmlData []byte, element interface{}, expectedError error) {
 	if err := xml.Unmarshal(xmlData, element); err != nil {
 		t.Fatalf("Cannot unmarshal XML data. %v.\n", err)
 	}
-	VerifyVastElementErrorAsExpected(t, element, element.Validate(), expectedError)
+	VerifyVastElementErrorAsExpected(t, element, ValidateElement(element), expectedError)
 }
 
 // VerifyVastElementFromFile function verifies Validate errors for the Unmarshal object generated from the given file.
-func VerifyVastElementFromFile(t testing.TB, file string, element Validator, expectedError error) {
+func VerifyVastElementFromFile(t testing.TB, file string, element interface{}, expectedError error) {
 	xmlData, err := ioutil.ReadFile(file)
 
 	if err != nil {
 		t.Fatalf("Cannot read XML file: %v, error: %v\n", file, err)
 	}
 	VerifyVastElementFromBytes(t, xmlData, element, expectedError)
+}
+
+// ValidateElement use the latest version to validate xml. Because the validator here is used to check xml parse logic.
+// the specified verification of Validator lies in the vastXvalidator_test.go
+func ValidateElement(element interface{}) error {
+	validator := validator.Vast3validator{}
+	switch element.(type) {
+	case vastbasic.Version:
+		return validator.ValidateVersion(element.(vastbasic.Version))
+	case *vastbasic.AdSystem:
+		return validator.ValidateAdSystem(element.(*vastbasic.AdSystem))
+	case vastbasic.Delivery:
+		return validator.ValidateDelivery(element.(vastbasic.Delivery))
+	case vastbasic.Duration:
+		return validator.ValidateDuration(element.(vastbasic.Duration))
+	case vastbasic.Event:
+		return validator.ValidateEvent(element.(vastbasic.Event))
+	case *vastbasic.Icon:
+		return validator.ValidateIcon(element.(*vastbasic.Icon))
+	case *vastbasic.Impression:
+		return validator.ValidateImpression(element.(*vastbasic.Impression))
+	case *vastbasic.MediaFile:
+		return validator.ValidateMediaFile(element.(*vastbasic.MediaFile))
+	case vastbasic.Mode:
+		return validator.ValidateMode(element.(vastbasic.Mode))
+	case *vastbasic.Offset:
+		return validator.ValidateOffset(element.(*vastbasic.Offset))
+	case *vastbasic.Pricing:
+		return validator.ValidatePricing(element.(*vastbasic.Pricing))
+	case vastbasic.PricingModel:
+		return validator.ValidatePricingModel(element.(vastbasic.PricingModel))
+	case *vastbasic.StaticResource:
+		return validator.ValidateStaticResource(element.(*vastbasic.StaticResource))
+	case *vastbasic.Tracking:
+		return validator.ValidateTracking(element.(*vastbasic.Tracking))
+	case *vastbasic.VideoClick:
+		return validator.ValidateVideoClick(element.(*vastbasic.VideoClick))
+	case *vastbasic.VideoClicks:
+		return validator.ValidateVideoClicks(element.(*vastbasic.VideoClicks))
+	case *entity.Ad:
+		return validator.ValidateAd(element.(*entity.Ad))
+	case *entity.InLine:
+		return validator.ValidateInLine(element.(*entity.InLine))
+	case *entity.Companion:
+		return validator.ValidateCompanion(element.(*entity.Companion))
+	case *entity.CompanionAds:
+		return validator.ValidateCompanionAds(element.(*entity.CompanionAds))
+	case *entity.Creative:
+		return validator.ValidateCreative(element.(*entity.Creative))
+	case *entity.Linear:
+		return validator.ValidateLinear(element.(*entity.Linear))
+	case *entity.NonLinear:
+		return validator.ValidateNonLinear(element.(*entity.NonLinear))
+	case *entity.NonLinearAds:
+		return validator.ValidateNonLinearAds(element.(*entity.NonLinearAds))
+	case *entity.Wrapper:
+		return validator.ValidateWrapper(element.(*entity.Wrapper))
+	case *entity.Vast:
+		return validator.ValidateVast(element.(*entity.Vast))
+	default:
+		return nil
+	}
 }

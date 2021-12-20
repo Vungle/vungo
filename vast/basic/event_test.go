@@ -7,7 +7,10 @@ import (
 	"github.com/Vungle/vungo/vast/vasttest"
 )
 
-var eventTests = []vasttest.VastTest{
+var eventTests = []struct {
+	VastElement vastbasic.Event
+	Err         error
+}{
 	{VastElement: vastbasic.EventCreativeView},
 	{VastElement: vastbasic.EventStart},
 	{VastElement: vastbasic.EventFirstQuartile},
@@ -33,6 +36,6 @@ var eventTests = []vasttest.VastTest{
 
 func TestEventValidateErrors(t *testing.T) {
 	for _, test := range eventTests {
-		vasttest.VerifyVastElementErrorAsExpected(t, test.VastElement, test.VastElement.Validate(), test.Err)
+		vasttest.VerifyVastElementErrorAsExpected(t, test.VastElement, vasttest.ValidateElement(test.VastElement), test.Err)
 	}
 }

@@ -15,7 +15,11 @@ func TestWrapperMarshalUnmarshal(t *testing.T) {
 	vasttest.VerifyModelAgainstFile(t, "Wrapper", "wrapper.xml", WrapperModelType)
 }
 
-var wrapperTests = []vasttest.VastTest{
+var wrapperTests = []struct {
+	VastElement *entity.Wrapper
+	Err         error
+	File        string
+}{
 	{VastElement: &entity.Wrapper{}, File: "wrapper_valid.xml"},
 	{VastElement: &entity.Wrapper{}, File: "wrapper_error_impression.xml"},
 	{VastElement: &entity.Wrapper{}, Err: vastbasic.ErrWrapperMissVastAdTagURI, File: "wrapper_without_adtaguri.xml"},

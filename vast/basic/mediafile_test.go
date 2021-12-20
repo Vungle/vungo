@@ -15,7 +15,11 @@ func TestMediaFileMarshalUnmarshal(t *testing.T) {
 	vasttest.VerifyModelAgainstFile(t, "MediaFile", "mediafile.xml", MediaFileModelType)
 }
 
-var mediaFileTests = []vasttest.VastTest{
+var mediaFileTests = []struct {
+	VastElement *vastbasic.MediaFile
+	File        string
+	Err         error
+}{
 	{VastElement: &vastbasic.MediaFile{}, File: "mediafile.xml"},
 	{VastElement: &vastbasic.MediaFile{}, Err: vastbasic.ErrMediaFileMissDelivery, File: "mediafile_without_delivery.xml"},
 	{VastElement: &vastbasic.MediaFile{}, Err: vastbasic.ErrUnsupportedDeliveryType, File: "mediafile_error_delivery.xml"},

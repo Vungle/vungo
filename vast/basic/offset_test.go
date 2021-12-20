@@ -91,7 +91,10 @@ func TestOffsetUnmarshalErrors(t *testing.T) {
 	}
 }
 
-var offsetValidTests = []vasttest.VastTest{
+var offsetValidTests = []struct {
+	VastElement *vastbasic.Offset
+	Err         error
+}{
 	{VastElement: &vastbasic.Offset{Duration: vastbasic.Duration(time.Hour), Percent: -1}, Err: vastbasic.ErrOffsetPercentNegative},
 	{VastElement: &vastbasic.Offset{Duration: vastbasic.Duration(time.Hour), Percent: 0}},
 	{VastElement: &vastbasic.Offset{}, Err: vastbasic.ErrDurationEqualZero},
@@ -99,6 +102,6 @@ var offsetValidTests = []vasttest.VastTest{
 
 func TestOffsetValidateErrors(t *testing.T) {
 	for _, test := range offsetValidTests {
-		vasttest.VerifyVastElementErrorAsExpected(t, test.VastElement, test.VastElement.Validate(), test.Err)
+		vasttest.VerifyVastElementErrorAsExpected(t, test.VastElement, vasttest.ValidateElement(test.VastElement), test.Err)
 	}
 }

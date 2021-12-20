@@ -14,7 +14,11 @@ func TestNonLinearMarshalUnmarshal(t *testing.T) {
 	vasttest.VerifyModelAgainstFile(t, "NonLinear", "nonlinear.xml", NonLinearModelType)
 }
 
-var nonLinearTests = []vasttest.VastTest{
+var nonLinearTests = []struct {
+	VastElement *entity.NonLinear
+	Err         error
+	File        string
+}{
 	{VastElement: &entity.NonLinear{}, File: "nonlinear.xml"},
 	{VastElement: &entity.NonLinear{}, File: "nonlinear_with_staticresource.xml"},
 	{VastElement: &entity.NonLinear{}, File: "nonlinear_with_iframeresource.xml"},
