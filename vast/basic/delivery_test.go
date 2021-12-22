@@ -12,8 +12,8 @@ func TestDeliveryValidateErrors(t *testing.T) {
 	delivery2 := vastbasic.Delivery(vastbasic.DeliveryProgressive)
 	delivery3 := vastbasic.Delivery(vastbasic.DeliveryStreaming)
 	delivery4 := vastbasic.Delivery("")
-	vasttest.VerifyVastElementErrorAsExpected(t, delivery1, vasttest.ValidateElement(delivery1), vastbasic.ErrUnsupportedDeliveryType)
-	vasttest.VerifyVastElementErrorAsExpected(t, delivery2, vasttest.ValidateElement(delivery2), nil)
-	vasttest.VerifyVastElementErrorAsExpected(t, delivery3, vasttest.ValidateElement(delivery3), nil)
-	vasttest.VerifyVastElementErrorAsExpected(t, delivery4, vasttest.ValidateElement(delivery4), vastbasic.ErrUnsupportedDeliveryType)
+	vasttest.VerifyVastElementErrorAsExpected(t, delivery1, delivery1.Validate(vastbasic.Version3), vastbasic.ErrUnsupportedDeliveryType)
+	vasttest.VerifyVastElementErrorAsExpected(t, delivery2, delivery2.Validate(vastbasic.Version3), nil)
+	vasttest.VerifyVastElementErrorAsExpected(t, delivery3, delivery3.Validate(vastbasic.Version3), nil)
+	vasttest.VerifyVastElementErrorAsExpected(t, delivery4, delivery4.Validate(vastbasic.Version3), vastbasic.ErrUnsupportedDeliveryType)
 }

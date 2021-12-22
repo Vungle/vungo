@@ -9,7 +9,6 @@ import (
 	vastbasic "github.com/Vungle/vungo/vast/basic"
 	"github.com/Vungle/vungo/vast/defaults"
 	"github.com/Vungle/vungo/vast/entity"
-	"github.com/Vungle/vungo/vast/validator"
 	"github.com/Vungle/vungo/vast/vasttest"
 )
 
@@ -59,7 +58,7 @@ func TestOnlyOneValidMediaFileRemains(t *testing.T) {
 		t.Fatalf("Test XML should have at least 2 MediaFile elements.")
 	}
 
-	_ = vasttest.ValidateElement(l)
+	_ = l.Validate(vastbasic.Version3)
 
 	if n := len(l.Creatives[0].Linear.MediaFiles); n != 1 {
 		t.Fatalf("Validated test XML should have exactly 1 MediaFile element but got %d.", n)
@@ -87,7 +86,7 @@ func TestLinearValidateErrors(t *testing.T) {
 		{VastElement: &entity.InLine{}, File: "inline_at_least_one_valid_mediafile.xml"},
 		{
 			VastElement: &entity.InLine{},
-			Err: &validator.ValidationError{
+			Err: &vastbasic.ValidationError{
 				Errs: []error{
 					vastbasic.ErrMediaFileWidthTooLow,
 					vastbasic.ErrMediaFileHeightTooLow,
@@ -95,7 +94,7 @@ func TestLinearValidateErrors(t *testing.T) {
 			}, File: "inline_at_least_one_invalid_mediafile.xml"},
 		{
 			VastElement: &entity.InLine{},
-			Err: &validator.ValidationError{
+			Err: &vastbasic.ValidationError{
 				Errs: []error{
 					vastbasic.ErrMediaFileWidthTooLow,
 					vastbasic.ErrMediaFileHeightTooLow,

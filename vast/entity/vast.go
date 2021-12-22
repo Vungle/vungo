@@ -47,3 +47,32 @@ func (v Vast) FindFirstInlineCompanionAdsCreative() *CompanionAds {
 	}
 	return nil
 }
+
+// Validate method validates the Vast element according to the VAST.
+// Version, and Ads are required.
+func (v *Vast) Validate(version vastbasic.Version) error {
+	errors := make([]error, 0)
+	if err := v.Version.Validate(version); err != nil {
+		ve, ok := err.(vastbasic.ValidationError)
+		if ok {
+			errors = append(errors, ve.Errs...)
+		}
+	}
+
+	if len(v.Ads) == 0 {
+		errors = append(errors, vastbasic.ErrVastMissAd)
+	}
+
+	for _, ad := range v.Ads {
+		if err := ad.Validate(version); err != nil {
+			ve, ok := err.(vastbasic.ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
+		}
+	}
+	if len(errors) > 0 {
+		return vastbasic.ValidationError{Errs: errors}
+	}
+	return nil
+}

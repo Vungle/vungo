@@ -105,7 +105,7 @@ func TestDurationUnmarshalErrors(t *testing.T) {
 }
 
 func TestDurationValidateErrors(t *testing.T) {
-	vasttest.VerifyVastElementErrorAsExpected(t, vastbasic.Duration(-time.Hour), vasttest.ValidateElement(vastbasic.Duration(-time.Hour)), vastbasic.ErrDurationNegative)
-	vasttest.VerifyVastElementErrorAsExpected(t, vastbasic.Duration(0), vasttest.ValidateElement(vastbasic.Duration(0)), vastbasic.ErrDurationEqualZero)
-	vasttest.VerifyVastElementErrorAsExpected(t, vastbasic.Duration(time.Hour), vasttest.ValidateElement(vastbasic.Duration(time.Hour)), nil)
+	vasttest.VerifyVastElementErrorAsExpected(t, vastbasic.Duration(-time.Hour), vastbasic.Duration(-time.Hour).Validate(vastbasic.Version3), vastbasic.ErrDurationNegative)
+	vasttest.VerifyVastElementErrorAsExpected(t, vastbasic.Duration(0), vastbasic.Duration(0).Validate(vastbasic.Version3), vastbasic.ErrDurationEqualZero)
+	vasttest.VerifyVastElementErrorAsExpected(t, vastbasic.Duration(time.Hour), vastbasic.Duration(time.Hour).Validate(vastbasic.Version3), nil)
 }

@@ -102,6 +102,6 @@ var offsetValidTests = []struct {
 
 func TestOffsetValidateErrors(t *testing.T) {
 	for _, test := range offsetValidTests {
-		vasttest.VerifyVastElementErrorAsExpected(t, test.VastElement, vasttest.ValidateElement(test.VastElement), test.Err)
+		vasttest.VerifyVastElementErrorAsExpected(t, test.VastElement, test.VastElement.Validate(vastbasic.Version3), test.Err)
 	}
 }

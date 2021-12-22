@@ -7,19 +7,14 @@ import (
 
 	vastbasic "github.com/Vungle/vungo/vast/basic"
 	"github.com/Vungle/vungo/vast/entity"
-	"github.com/Vungle/vungo/vast/validator"
 )
 
 // Validate method validate VAST data as an external api
 func Validate(vasts []*entity.Vast, version vastbasic.Version) error {
-	validator := validatorOf(version)
-	if validator == nil {
-		return fmt.Errorf("[vastutil Validate] fail to get validator (version: %s)", version)
-	}
 	var impressionsErrCount int
 	var hasLinear bool
 	for _, v := range vasts {
-		if err := validator.ValidateVast(v); err != nil {
+		if err := v.Validate(version); err != nil {
 			invalidVast, marshalErr := xml.Marshal(v)
 			if marshalErr != nil {
 				return fmt.Errorf("failed to marshal VAST for logging: %v", marshalErr)
@@ -42,15 +37,4 @@ func Validate(vasts []*entity.Vast, version vastbasic.Version) error {
 	}
 
 	return nil
-}
-
-func validatorOf(version vastbasic.Version) validator.Validator {
-	switch version {
-	case vastbasic.Version2:
-		return &validator.Vast2validator{}
-	case vastbasic.Version3:
-		return &validator.Vast3validator{}
-	default:
-		return nil
-	}
 }

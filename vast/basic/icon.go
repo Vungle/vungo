@@ -17,3 +17,45 @@ type Icon struct {
 	IFrameResource string          `xml:"IFrameResource,omitempty"` // URL of the <iframe> to display the companion element.
 	HTMLResource   *HTMLResource   `xml:"HTMLResource,omitempty"`
 }
+
+// Validate method validate Icon vast element
+func (icon *Icon) Validate(version Version) error {
+	switch version {
+	case Version3:
+		errors := make([]error, 0)
+		if len(icon.Program) == 0 {
+			errors = append(errors, ErrIconMissProgram)
+		}
+
+		if len(icon.XPosition) == 0 || len(icon.YPosition) == 0 {
+			errors = append(errors, ErrIconMissPosition)
+		}
+
+		if icon.StaticResource != nil {
+			if len(icon.IFrameResource) != 0 || icon.HTMLResource != nil {
+				errors = append(errors, ErrIconResourcesFormat)
+			}
+		} else if icon.HTMLResource != nil {
+			if len(icon.IFrameResource) != 0 {
+				errors = append(errors, ErrIconResourcesFormat)
+			}
+		} else if len(icon.IFrameResource) == 0 {
+			errors = append(errors, ErrIconResourcesFormat)
+		}
+		if icon.StaticResource != nil {
+			if err := icon.StaticResource.Validate(version); err != nil {
+				ve, ok := err.(ValidationError)
+				if ok {
+					errors = append(errors, ve.Errs...)
+				}
+			}
+		}
+
+		if len(errors) > 0 {
+			return ValidationError{Errs: errors}
+		}
+		return nil
+	default:
+		return nil
+	}
+}

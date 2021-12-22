@@ -23,6 +23,25 @@ type Companion struct {
 	AssetWidth    int                     `xml:"assetWidth,attr"`                                // VAST3.0.
 	AssetHeight   int                     `xml:"assetHeight,attr"`                               // VAST3.0.
 	AdSlotID      string                  `xml:"adSlotId,attr,omitempty"`                        // VAST3.0.
-	ClickTracking []vastbasic.TrimmedData `xml:"CompanionClickTracking,omitempty"`               // VAST3.0.
+	ClickTracking []vastbasic.TrimmedData `xml:"CompanionClickTracking,omitempty"`               // VAST3.0. only in CompanionWrapper
 	Extensions    []*vastbasic.Extension  `xml:"CreativeExtensions>CreativeExtension,omitempty"` // VAST3.0.
+}
+
+// Validate methods validate the Companion element according to the VAST.
+func (companion *Companion) Validate(version vastbasic.Version) error {
+	errors := make([]error, 0)
+
+	for _, tracking := range companion.Trackings {
+		if err := tracking.Validate(version); err != nil {
+			ve, ok := err.(vastbasic.ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return vastbasic.ValidationError{Errs: errors}
+	}
+	return nil
 }

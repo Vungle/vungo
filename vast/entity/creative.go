@@ -1,5 +1,7 @@
 package entity
 
+import vastbasic "github.com/Vungle/vungo/vast/basic"
+
 // Creative type represents a particular asset that is part of a VAST ad.
 //
 // A <Creative> element must contain EXACTLY ONE of the following elements:
@@ -13,4 +15,45 @@ type Creative struct {
 	NonLinearAds *NonLinearAds `xml:"NonLinearAds,omitempty"`
 
 	APIFramework string `xml:"apiFramework,attr,omitempty"` // Ad serving API used. In doc but not in schema. VAST3.0.
+}
+
+// Validate methods validate the Creative element according to the VAST.
+// Creative must contain EXACTLY ONE of Linear, CompanionAds, or NonLinearAds.
+func (creative *Creative) Validate(version vastbasic.Version) error {
+	//	// Linear, CompanionAds, NonLinearAds are all optional?
+	errors := make([]error, 0)
+	if creative.Linear != nil {
+		if creative.CompanionAds != nil || creative.NonLinearAds != nil {
+			errors = append(errors, vastbasic.ErrCreativeType)
+		}
+		if err := creative.Linear.Validate(version); err != nil {
+			ve, ok := err.(vastbasic.ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
+		}
+	} else if creative.CompanionAds != nil {
+		if creative.NonLinearAds != nil {
+			errors = append(errors, vastbasic.ErrCreativeType)
+		}
+		if err := creative.CompanionAds.Validate(version); err != nil {
+			ve, ok := err.(vastbasic.ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
+		}
+	} else if creative.NonLinearAds == nil {
+		errors = append(errors, vastbasic.ErrCreativeType)
+	} else if creative.NonLinearAds != nil {
+		if err := creative.NonLinearAds.Validate(version); err != nil {
+			ve, ok := err.(vastbasic.ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
+		}
+	}
+	if len(errors) > 0 {
+		return vastbasic.ValidationError{Errs: errors}
+	}
+	return nil
 }

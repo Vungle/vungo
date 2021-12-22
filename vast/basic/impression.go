@@ -6,3 +6,11 @@ type Impression struct {
 	ID  string      `xml:"id,attr,omitempty"`
 	URI TrimmedData `xml:",cdata"`
 }
+
+// Validate method validate Impression vast element
+func (impression *Impression) Validate(version Version) error {
+	if len(impression.URI) == 0 {
+		return ValidationError{Errs: []error{ErrImpressionMissURI}}
+	}
+	return nil
+}

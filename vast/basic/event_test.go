@@ -36,6 +36,6 @@ var eventTests = []struct {
 
 func TestEventValidateErrors(t *testing.T) {
 	for _, test := range eventTests {
-		vasttest.VerifyVastElementErrorAsExpected(t, test.VastElement, vasttest.ValidateElement(test.VastElement), test.Err)
+		vasttest.VerifyVastElementErrorAsExpected(t, test.VastElement, test.VastElement.Validate(vastbasic.Version3), test.Err)
 	}
 }

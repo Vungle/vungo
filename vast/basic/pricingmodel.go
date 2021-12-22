@@ -10,3 +10,17 @@ const (
 	PricingModelCPE PricingModel = "cpe"
 	PricingModelCPV PricingModel = "cpv"
 )
+
+// Validate method validates the PricingModel according to the VAST.
+func (module PricingModel) Validate(version Version) error {
+
+	switch module {
+	case PricingModelCPM:
+	case PricingModelCPC:
+	case PricingModelCPE:
+	case PricingModelCPV:
+	default:
+		return ValidationError{Errs: []error{ErrUnsupportedPriceModelType}}
+	}
+	return nil
+}

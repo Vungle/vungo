@@ -24,3 +24,29 @@ type NonLinear struct {
 	ClickTracking []string              `xml:"NonLinearClickTracking,omitempty"`               // VAST3.0.
 	Extensions    []vastbasic.Extension `xml:"CreativeExtensions>CreativeExtension,omitempty"` // VAST3.0.
 }
+
+// Validate a non linear struct
+func (nonLinear *NonLinear) Validate(version vastbasic.Version) error {
+	errors := make([]error, 0)
+	// TODO(@DevKai): In VAST3.0, NonLinear resources should contain only one of StaticResource, IFrameResource, HTMLResource.
+	if nonLinear.StaticResource != nil {
+		if err := nonLinear.StaticResource.Validate(version); err != nil {
+			ve, ok := err.(vastbasic.ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
+		}
+	}
+	if nonLinear.MinSuggestedDuration != nil {
+		if err := nonLinear.MinSuggestedDuration.Validate(version); err != nil && err != vastbasic.ErrDurationEqualZero {
+			ve, ok := err.(vastbasic.ValidationError)
+			if ok {
+				errors = append(errors, ve.Errs...)
+			}
+		}
+	}
+	if len(errors) > 0 {
+		return vastbasic.ValidationError{Errs: errors}
+	}
+	return nil
+}

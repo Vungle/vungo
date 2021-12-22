@@ -8,3 +8,11 @@ const (
 	Version2 Version = "2.0"
 	Version3 Version = "3.0"
 )
+
+// Validate method validates the Version according to the VAST.
+func (v Version) Validate(version Version) error {
+	if v != version {
+		return ValidationError{Errs: []error{ErrUnsupportedVersion}}
+	}
+	return nil
+}

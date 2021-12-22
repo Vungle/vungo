@@ -6,3 +6,8 @@ type VideoClick struct {
 	ID  string      `xml:"id,attr,omitempty"`
 	URI TrimmedData `xml:",cdata"`
 }
+
+// Validate method validates VideoClick according to the VAST.
+func (videoClick *VideoClick) Validate(version Version) error {
+	return nil
+}

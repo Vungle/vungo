@@ -8,3 +8,11 @@ const (
 	DeliveryStreaming   Delivery = "streaming"
 	DeliveryProgressive Delivery = "progressive"
 )
+
+// Validate method validate Delivery vast element
+func (delivery Delivery) Validate(version Version) error {
+	if delivery != DeliveryProgressive && delivery != DeliveryStreaming {
+		return ValidationError{Errs: []error{ErrUnsupportedDeliveryType}}
+	}
+	return nil
+}

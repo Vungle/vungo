@@ -68,3 +68,14 @@ func (d *Duration) UnmarshalText(data []byte) (err error) {
 func (d Duration) String() string {
 	return time.Duration(d).String()
 }
+
+// Validate method validate Duration vast element
+func (d Duration) Validate(version Version) error {
+	if d < 0 {
+		return ValidationError{Errs: []error{ErrDurationNegative}}
+	}
+	if d == 0 {
+		return ValidationError{Errs: []error{ErrDurationEqualZero}}
+	}
+	return nil
+}
