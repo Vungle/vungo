@@ -11,7 +11,7 @@ const (
 
 // Validate method validates the Version according to the VAST.
 func (v Version) Validate(version Version) error {
-	if v != version {
+	if v != Version2 && v != Version3 {
 		return ValidationError{Errs: []error{ErrUnsupportedVersion}}
 	}
 	return nil
