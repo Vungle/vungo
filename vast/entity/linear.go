@@ -54,6 +54,18 @@ func (linear *Linear) Validate(version vastbasic.Version) error {
 			}
 		}
 	}
+
+	if version == vastbasic.Version3 {
+		for _, icon := range linear.Icons {
+			if err := icon.Validate(version); err != nil {
+				ve, ok := err.(vastbasic.ValidationError)
+				if ok {
+					errors = append(errors, ve.Errs...)
+				}
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return vastbasic.ValidationError{Errs: errors}
 	}
