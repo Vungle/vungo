@@ -5,12 +5,11 @@ import (
 	"fmt"
 	"strings"
 
-	vastbasic "github.com/Vungle/vungo/vast/basic"
-	"github.com/Vungle/vungo/vast/entity"
+	"github.com/Vungle/vungo/vast/vastelement"
 )
 
 // Validate method validate VAST data as an external api
-func Validate(vasts []*entity.Vast, version vastbasic.Version) error {
+func Validate(vasts []*vastelement.Vast, version vastelement.Version) error {
 	var impressionsErrCount int
 	var hasLinear bool
 	for _, v := range vasts {
@@ -19,7 +18,7 @@ func Validate(vasts []*entity.Vast, version vastbasic.Version) error {
 			if marshalErr != nil {
 				return fmt.Errorf("failed to marshal VAST for logging: %v", marshalErr)
 			}
-			if strings.Contains(err.Error(), vastbasic.ErrWrapperMissImpressions.Error()) &&
+			if strings.Contains(err.Error(), vastelement.ErrWrapperMissImpressions.Error()) &&
 				impressionsErrCount < len(vasts)-1 {
 				impressionsErrCount++
 			} else {

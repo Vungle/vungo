@@ -11,7 +11,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/Vungle/vungo/vast/entity"
+	"github.com/Vungle/vungo/vast/vastelement"
 	"github.com/Vungle/vungo/vast/vastutil"
 )
 
@@ -99,7 +99,7 @@ func testFilePath(name string) string {
 type testUnwrapClient struct {
 	*http.Client
 
-	served []*entity.Vast
+	served []*vastelement.Vast
 
 	at    int
 	trace []string
@@ -108,7 +108,7 @@ type testUnwrapClient struct {
 // Init method initializes the client with a slice of XML files to respond with. These XML responses
 // are sequential, so the order matters.
 func (c *testUnwrapClient) Init(trace []string) {
-	c.served = make([]*entity.Vast, 0)
+	c.served = make([]*vastelement.Vast, 0)
 	c.at = 0
 	c.trace = trace
 }
@@ -133,7 +133,7 @@ func (c *testUnwrapClient) RoundTrip(_ *http.Request) (*http.Response, error) {
 
 // AddToServed method adds the actual vast.Vast object to a list for testing purposes.
 func (c *testUnwrapClient) AddToServed(f string) error {
-	var v entity.Vast
+	var v vastelement.Vast
 	if data, err := ioutil.ReadFile(f); err != nil {
 		return err
 	} else if err := xml.Unmarshal(data, &v); err != nil {

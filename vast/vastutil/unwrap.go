@@ -8,7 +8,7 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/Vungle/vungo/vast/entity"
+	"github.com/Vungle/vungo/vast/vastelement"
 )
 
 var defaultUnwrapClient = &http.Client{
@@ -26,8 +26,8 @@ var defaultUnwrapClient = &http.Client{
 // 	1) Unwrapping context, ctx, is done;
 // 	2) Invalid XML format;
 // 	3) Invalid VAST content, (currently, there should be exactly one <Ad> within <VAST>.
-func Unwrap(ctx context.Context, data []byte, userAgent, ip string) ([]*entity.Vast, error) {
-	var v entity.Vast
+func Unwrap(ctx context.Context, data []byte, userAgent, ip string) ([]*vastelement.Vast, error) {
+	var v vastelement.Vast
 	if err := xml.Unmarshal(data, &v); err != nil {
 		return nil, err
 	}
@@ -38,7 +38,7 @@ func Unwrap(ctx context.Context, data []byte, userAgent, ip string) ([]*entity.V
 // unwrap method is a helper function that invokes performs the actual HTTP request to get
 // additional VAST XML and updates the unwrappedList. The unwrap method is invoked recursively until
 // the first Inline VAST is reached or until an error occurs.
-func unwrap(ctx context.Context, v *entity.Vast, unwrappedList []*entity.Vast, ua, ip string) ([]*entity.Vast, error) {
+func unwrap(ctx context.Context, v *vastelement.Vast, unwrappedList []*vastelement.Vast, ua, ip string) ([]*vastelement.Vast, error) {
 	if len(v.Ads) != 1 {
 		return nil, ErrUnwrapWithMultipleAds
 	} else if v.Ads[0].Wrapper == nil {
@@ -50,7 +50,7 @@ func unwrap(ctx context.Context, v *entity.Vast, unwrappedList []*entity.Vast, u
 		return nil, ErrWrapperMissingAdTagURI
 	}
 
-	var innerVast entity.Vast
+	var innerVast vastelement.Vast
 
 	req, err := http.NewRequest("GET", string(w.VastAdTagURI), nil)
 	if err != nil {

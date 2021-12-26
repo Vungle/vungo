@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"strconv"
 
-	vastbasic "github.com/Vungle/vungo/vast/basic"
+	"github.com/Vungle/vungo/vast/vastelement"
 )
 
 // VastValidationResult type represents the result of unwrapping and validating VAST objects.
@@ -96,89 +96,89 @@ func getValidationResultFromErr(err error) VastValidationResult {
 	case ErrWrapperMissingAdTagURI:
 		return ResultWrapperMissingAdTagURI
 
-	case vastbasic.ErrAdSystemMissSystem:
+	case vastelement.ErrAdSystemMissSystem:
 		return ResultAdSystemMissSystem
-	case vastbasic.ErrAdType:
+	case vastelement.ErrAdType:
 		return ResultAdType
-	case vastbasic.ErrCompanionAdsMissCompanions:
+	case vastelement.ErrCompanionAdsMissCompanions:
 		return ResultCompanionAdsMissCompanions
-	case vastbasic.ErrCompanionAdsWrapperMissCompanions:
+	case vastelement.ErrCompanionAdsWrapperMissCompanions:
 		return ResultCompanionAdsWrapperMissCompanions
-	case vastbasic.ErrCreativeType:
+	case vastelement.ErrCreativeType:
 		return ResultCreativeType
-	case vastbasic.ErrCreativeWrapperType:
+	case vastelement.ErrCreativeWrapperType:
 		return ResultCreativeWrapperType
-	case vastbasic.ErrDurationEqualZero:
+	case vastelement.ErrDurationEqualZero:
 		return ResultDurationEqualZero
-	case vastbasic.ErrDurationNegative:
+	case vastelement.ErrDurationNegative:
 		return ResultDurationNegative
-	case vastbasic.ErrIconMissPosition:
+	case vastelement.ErrIconMissPosition:
 		return ResultIconMissPosition
-	case vastbasic.ErrIconMissProgram:
+	case vastelement.ErrIconMissProgram:
 		return ResultIconMissProgram
-	case vastbasic.ErrIconResourcesFormat:
+	case vastelement.ErrIconResourcesFormat:
 		return ResultIconResourcesFormat
-	case vastbasic.ErrImpressionMissURI:
+	case vastelement.ErrImpressionMissURI:
 		return ResultImpressionMissURI
-	case vastbasic.ErrInlineMissAdTitle:
+	case vastelement.ErrInlineMissAdTitle:
 		return ResultInlineMissAdTitle
-	case vastbasic.ErrInlineMissCreatives:
+	case vastelement.ErrInlineMissCreatives:
 		return ResultInlineMissCreatives
-	case vastbasic.ErrInlineMissImpressions:
+	case vastelement.ErrInlineMissImpressions:
 		return ResultInlineMissImpressions
-	case vastbasic.ErrLinearMissMediaFiles:
+	case vastelement.ErrLinearMissMediaFiles:
 		return ResultLinearMissMediaFiles
-	case vastbasic.ErrMediaFileHeightTooHigh:
+	case vastelement.ErrMediaFileHeightTooHigh:
 		return ResultMediaFileHeightTooHigh
-	case vastbasic.ErrMediaFileHeightTooLow:
+	case vastelement.ErrMediaFileHeightTooLow:
 		return ResultModiaFileHeightTooLow
-	case vastbasic.ErrMediaFileMissDelivery:
+	case vastelement.ErrMediaFileMissDelivery:
 		return ResultMediaFileMissDelivery
-	case vastbasic.ErrMediaFileMissMimeType:
+	case vastelement.ErrMediaFileMissMimeType:
 		return ResultMediaFileMissMimeType
-	case vastbasic.ErrMediaFileMissURI:
+	case vastelement.ErrMediaFileMissURI:
 		return ResultMediaFileMissURI
-	case vastbasic.ErrMediaFileSize:
+	case vastelement.ErrMediaFileSize:
 		return ResultMediaFileSize
-	case vastbasic.ErrMediaFileUnsupportedMimeType:
+	case vastelement.ErrMediaFileUnsupportedMimeType:
 		return ResultMediaFileUnsupportedMimeType
-	case vastbasic.ErrMediaFileWidthTooHigh:
+	case vastelement.ErrMediaFileWidthTooHigh:
 		return ResultMediaFileWidthTooHigh
-	case vastbasic.ErrMediaFileWidthTooLow:
+	case vastelement.ErrMediaFileWidthTooLow:
 		return ResultMediaFileWidthTooLow
-	case vastbasic.ErrNonLinearAdsMissNonLinears:
+	case vastelement.ErrNonLinearAdsMissNonLinears:
 		return ResultNonLinearAdsMissNonLinears
-	case vastbasic.ErrNonLinearResourceFormat:
+	case vastelement.ErrNonLinearResourceFormat:
 		return ResultNonLinearResourceFormat
-	case vastbasic.ErrOffsetPercentNegative:
+	case vastelement.ErrOffsetPercentNegative:
 		return ResultOffsetPercentNegative
-	case vastbasic.ErrPricingCurrencyFormat:
+	case vastelement.ErrPricingCurrencyFormat:
 		return ResultPricingCurrencyFormat
-	case vastbasic.ErrPricingMissModel:
+	case vastelement.ErrPricingMissModel:
 		return ResultPricingMissModel
-	case vastbasic.ErrPricingMissPrice:
+	case vastelement.ErrPricingMissPrice:
 		return ResultPricingMissPrice
-	case vastbasic.ErrUnsupportedDeliveryType:
+	case vastelement.ErrUnsupportedDeliveryType:
 		return ResultUnsupportedDeliveryType
-	case vastbasic.ErrUnsupportedEvent:
+	case vastelement.ErrUnsupportedEvent:
 		return ResultUnsupportedEvent
-	case vastbasic.ErrUnsupportedMode:
+	case vastelement.ErrUnsupportedMode:
 		return ResultUnsupportedMode
-	case vastbasic.ErrUnsupportedPriceModelType:
+	case vastelement.ErrUnsupportedPriceModelType:
 		return ResultUnsupportedPriceModelType
-	case vastbasic.ErrUnsupportedVersion:
+	case vastelement.ErrUnsupportedVersion:
 		return ResultUnsupportedVersion
-	case vastbasic.ErrVastMissAd:
+	case vastelement.ErrVastMissAd:
 		return ResultVastMissAd
-	case vastbasic.ErrVideoClicksMissClickThroughs:
+	case vastelement.ErrVideoClicksMissClickThroughs:
 		return ResultVideoClicksMissClickThroughs
-	case vastbasic.ErrVideoDurationTooLong:
+	case vastelement.ErrVideoDurationTooLong:
 		return ResultVideoDurationTooLong
-	case vastbasic.ErrVideoDurationTooShort:
+	case vastelement.ErrVideoDurationTooShort:
 		return ResultVideoDurationTooShort
-	case vastbasic.ErrWrapperMissImpressions:
+	case vastelement.ErrWrapperMissImpressions:
 		return ResultWrapperMissImpressions
-	case vastbasic.ErrWrapperMissVastAdTagURI:
+	case vastelement.ErrWrapperMissVastAdTagURI:
 		return ResultWrapperMissVastAdTagURI
 	}
 
