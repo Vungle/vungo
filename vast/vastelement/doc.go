@@ -1,5 +1,5 @@
 /*
-Package entity implements IAB VAST 3.0 specification located at
+Package vastelement implements IAB VAST 3.0 specification located at
 https://www.iab.com/wp-content/uploads/2015/06/VASTv3_0.pdf
 Documents and interact a mixture of VAST wrappers for VAST 3.0.
 

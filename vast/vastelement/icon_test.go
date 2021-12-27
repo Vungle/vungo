@@ -1,10 +1,10 @@
 package vastelement_test
 
 import (
-	"github.com/Vungle/vungo/vast/vastelement"
 	"reflect"
 	"testing"
 
+	"github.com/Vungle/vungo/vast/vastelement"
 	"github.com/Vungle/vungo/vast/vasttest"
 )
 
