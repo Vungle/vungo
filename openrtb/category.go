@@ -844,9 +844,9 @@ var categoryNameToValue = map[string]Category{
 	string(CategoryCopyrightInfringement): CategoryCopyrightInfringement,
 }
 
-// MarshalCategory converts a string into an Category, and returns an error if
+// UnmarshalToCategory converts a string into an Category, and returns an error if
 // there is no corresponding Category.
-func MarshalCategory(value string) (Category, error) {
+func UnmarshalToCategory(value string) (Category, error) {
 	cat, ok := categoryNameToValue[value]
 	if !ok {
 		return "", fmt.Errorf(`can't marshal "%s" to Category`, value)

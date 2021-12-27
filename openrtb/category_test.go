@@ -40,7 +40,7 @@ func TestMarshalCategory(t *testing.T) {
 
 	for i, test := range tests {
 		t.Run(fmt.Sprintf("Testing TestMarshalCategory case %d...", i), func(t *testing.T) {
-			got, err := openrtb.MarshalCategory(test.input)
+			got, err := openrtb.UnmarshalToCategory(test.input)
 			if (err != nil) != test.hasErr {
 				t.Errorf("TestMarshalCategory(%s) check err incorrect, got:%v, expect:%v", test.desc, err != nil, test.hasErr)
 			}
