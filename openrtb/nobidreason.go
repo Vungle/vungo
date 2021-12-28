@@ -85,6 +85,9 @@ const (
 	// NoBidReasonInvalidContent Denotes when the bid response is invalid for the originating bid
 	// request; e.g., when the bid response ID does not match with that of the bid request.
 	NoBidReasonInvalidContent
+
+	// NoBidReasonRejectedByCircuitBreaker denotes the request is rejected by circuit breaker.
+	NoBidReasonRejectedByCircuitBreaker
 	// Add new entries here.
 
 	lastVungleExchangeNoBidReason
@@ -124,14 +127,15 @@ var NoBidReasonNames = map[NoBidReason]string{
 	NoBidReasonDailyReaderCapMet: "NO_BID_DAILY_READER_CAP_MET",
 	NoBidReasonDailyDomainCapMet: "NO_BID_DAILY_DOMAIN_CAP_MET",
 
-	NoBidReasonResponseTimeout:       "NO_BID_RESPONSE_TIMEOUT",
-	NoBidReasonRequestError:          "NO_BID_REQUEST_ERROR",
-	NoBidReasonNoContent:             "NO_BID_HTTP_NO_CONTENT",
-	NoBidReasonNonStandardHTTPStatus: "NO_BID_NON_STANDARD_HTTP_STATUS",
-	NoBidReasonInvalidHTTPHeader:     "NO_BID_INVALID_HTTP_HEADER",
-	NoBidReasonMalformattedPayload:   "NO_BID_MALFORMATTED_PAYLOAD",
-	NoBidReasonBelowFloor:            "NO_BID_BELOW_FLOOR",
-	NoBidReasonInvalidContent:        "NO_BID_INVALID_CONTENT",
+	NoBidReasonResponseTimeout:          "NO_BID_RESPONSE_TIMEOUT",
+	NoBidReasonRequestError:             "NO_BID_REQUEST_ERROR",
+	NoBidReasonNoContent:                "NO_BID_HTTP_NO_CONTENT",
+	NoBidReasonNonStandardHTTPStatus:    "NO_BID_NON_STANDARD_HTTP_STATUS",
+	NoBidReasonInvalidHTTPHeader:        "NO_BID_INVALID_HTTP_HEADER",
+	NoBidReasonMalformattedPayload:      "NO_BID_MALFORMATTED_PAYLOAD",
+	NoBidReasonBelowFloor:               "NO_BID_BELOW_FLOOR",
+	NoBidReasonInvalidContent:           "NO_BID_INVALID_CONTENT",
+	NoBidReasonRejectedByCircuitBreaker: "NO_BID_REJECTED_BY_CIRCUIT_BREAKER",
 
 	NoBidReasonVungleNoCampaigns:    "NO_BID_VUNGLE_NO_CAMPAIGNS",
 	NoBidReasonVungleNoCreatives:    "NO_BID_VUNGLE_NO_CREATIVES",
