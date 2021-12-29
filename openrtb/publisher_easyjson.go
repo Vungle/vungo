@@ -48,16 +48,16 @@ func easyjsonE9046362DecodeGithubComVungleVungoOpenrtb(in *jlexer.Lexer, out *Pu
 				in.Delim('[')
 				if out.Categories == nil {
 					if !in.IsDelim(']') {
-						out.Categories = make([]Category, 0, 4)
+						out.Categories = make([]string, 0, 4)
 					} else {
-						out.Categories = []Category{}
+						out.Categories = []string{}
 					}
 				} else {
 					out.Categories = (out.Categories)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v1 Category
-					v1 = Category(in.String())
+					var v1 string
+					v1 = string(in.String())
 					out.Categories = append(out.Categories, v1)
 					in.WantComma()
 				}

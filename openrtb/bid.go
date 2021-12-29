@@ -187,7 +187,7 @@ type Bid struct {
 	//   string array
 	// Description:
 	//   IAB content categories of the creative. Refer to List 5.1.
-	Categories []Category `json:"cat,omitempty"`
+	Categories []string `json:"cat,omitempty"`
 
 	// Attribute:
 	//   attr
@@ -323,7 +323,7 @@ func (b *Bid) Copy() *Bid {
 	bCopy.AdvertiserDomains = util.DeepCopyStrSlice(b.AdvertiserDomains)
 
 	if b.Categories != nil {
-		bCopy.Categories = make([]Category, len(b.Categories))
+		bCopy.Categories = make([]string, len(b.Categories))
 		copy(bCopy.Categories, b.Categories)
 	}
 

@@ -6,10 +6,10 @@ package openrtb
 //go:generate easyjson $GOFILE
 //easyjson:json
 type Publisher struct {
-	ID         string     `json:"id"`
-	Name       string     `json:"name,omitempty"`
-	Categories []Category `json:"cat,omitempty"`
-	Domain     string     `json:"domain,omitempty"`
+	ID         string   `json:"id"`
+	Name       string   `json:"name,omitempty"`
+	Categories []string `json:"cat,omitempty"`
+	Domain     string   `json:"domain,omitempty"`
 }
 
 // Copy returns a pointer to a copy of the Publisher object.
@@ -20,7 +20,7 @@ func (p *Publisher) Copy() *Publisher {
 	pubCopy := *p
 
 	if p.Categories != nil {
-		pubCopy.Categories = make([]Category, len(p.Categories))
+		pubCopy.Categories = make([]string, len(p.Categories))
 		copy(pubCopy.Categories, p.Categories)
 	}
 
