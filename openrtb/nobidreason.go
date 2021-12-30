@@ -89,9 +89,6 @@ const (
 	// NoBidReasonRejectedByCircuitBreaker denotes the request is rejected by circuit breaker.
 	NoBidReasonRejectedByCircuitBreaker
 
-	// NoBidReasonHTTPRequestError denotes the error when sending DSP http request.
-	NoBidReasonHTTPRequestError
-
 	// NoBidReasonUnExpectedStatusCode denotes the error of unexpected http status code.
 	NoBidReasonUnExpectedStatusCode
 
@@ -145,7 +142,6 @@ var NoBidReasonNames = map[NoBidReason]string{
 	NoBidReasonBelowFloor:               "NO_BID_BELOW_FLOOR",
 	NoBidReasonInvalidContent:           "NO_BID_INVALID_CONTENT",
 	NoBidReasonRejectedByCircuitBreaker: "NO_BID_REJECTED_BY_CIRCUIT_BREAKER",
-	NoBidReasonHTTPRequestError:         "NO_BID_HTTP_REQUEST_ERROR",
 	NoBidReasonUnExpectedStatusCode:     "NO_BID_UNEXPECTED_STATUS_CODE",
 	NoBidReasonNoBidResponse:            "NO_BID_NO_BID_RESPONSE",
 
