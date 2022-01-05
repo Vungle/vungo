@@ -16,6 +16,9 @@ type Icon struct {
 	StaticResource *StaticResource `xml:"StaticResource,omitempty"`
 	IFrameResource string          `xml:"IFrameResource,omitempty"` // URL of the <iframe> to display the companion element.
 	HTMLResource   *HTMLResource   `xml:"HTMLResource,omitempty"`
+
+	PxRatio          float64       `xml:"pxratio,attr,omitempty"`     // Vast 4.0
+	IconViewTracking []TrimmedData `xml:"IconViewTracking,omitempty"` // Vast 4.0
 }
 
 // Validate method validate Icon vast element

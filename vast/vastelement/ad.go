@@ -9,7 +9,9 @@ type Ad struct {
 	InLine  *InLine  `xml:",omitempty"`
 	Wrapper *Wrapper `xml:",omitempty"`
 
-	Sequence int `xml:"sequence,attr,omitempty"` // Sequence number in which an ad should play. VAST3.0.
+	Sequence int `xml:"sequence,attr,omitempty"` // Sequence number in which an ad should play. Vast 3.0
+
+	ConditionalAd bool `xml:"conditionalAd,attr,omitempty"` // Vast 4.0
 }
 
 // Validate methods validate the Ad element according to the VAST.

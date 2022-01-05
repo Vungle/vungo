@@ -11,6 +11,13 @@ type Wrapper struct {
 	Errors       []string      `xml:"Error,omitempty"`
 	Creatives    []*Creative   `xml:"Creatives>Creative"` // Required.
 	Extensions   []*Extension  `xml:"Extensions>Extension,omitempty"`
+
+	AllowMultipleAds         bool                `xml:"allowMultipleAds,attr,omitempty"`         // Vast 4.0
+	FallbackOnNoAd           bool                `xml:"fallbackOnNoAd,attr,omitempty"`           // Vast 4.0
+	FollowAdditionalWrappers bool                `xml:"followAdditionalWrappers,attr,omitempty"` // Vast 4.0
+	Pricing                  *Pricing            `xml:"Pricing,omitempty"`                       // Vast 4.0
+	ViewableImpression       *ViewableImpression `xml:"ViewableImpression,omitempty"`            // Vast 4.0
+	AdVerification           []*Verification     `xml:"AdVerifications>Verification,omitempty"`  // Vast 4.0
 }
 
 // Validate method validates the Wrapper according to the VAST.

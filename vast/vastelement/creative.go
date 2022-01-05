@@ -12,7 +12,10 @@ type Creative struct {
 	CompanionAds *CompanionAds `xml:"CompanionAds,omitempty"`
 	NonLinearAds *NonLinearAds `xml:"NonLinearAds,omitempty"`
 
-	APIFramework string `xml:"apiFramework,attr,omitempty"` // Ad serving API used. In doc but not in schema. VAST3.0.
+	APIFramework string `xml:"apiFramework,attr,omitempty"` // Ad serving API used. In doc but not in schema. Vast 3.0.
+
+	UniversalAdId *UniversalAdId `xml:"UniversalAdId,omitempty"`                        // Vast 4.0. required, it has to be defined as omitempty here. Because we need to parse multiple versions by the same struct.
+	Extensions    []*Extension   `xml:"CreativeExtensions>CreativeExtension,omitempty"` // Vast 4.0
 }
 
 // Validate methods validate the Creative element according to the VAST.
@@ -50,6 +53,14 @@ func (creative *Creative) Validate(version Version) error {
 			}
 		}
 	}
+
+	switch version {
+	case Version4:
+		if creative.UniversalAdId == nil || len(creative.UniversalAdId.AdId) == 0 {
+			errors = append(errors, ErrUniversalAdIdIsMissing)
+		}
+	}
+
 	if len(errors) > 0 {
 		return ValidationError{Errs: errors}
 	}

@@ -4,6 +4,7 @@ import (
 	"encoding/xml"
 	"io/ioutil"
 	"reflect"
+	"strings"
 	"testing"
 
 	"github.com/Vungle/vungo/vast/vastelement"
@@ -78,7 +79,7 @@ func verifyNonEmptyXMLFields(t testing.TB, v interface{}, modelType reflect.Type
 
 	for i := 0; i < total; i++ {
 		ft := modelType.Field(i)
-		if isXMLField(ft) {
+		if isXMLField(ft) && !isOmitEmpty(ft) {
 			f := val.Field(i)
 
 			if f.Kind() == reflect.Slice {
@@ -97,6 +98,18 @@ func isXMLField(field reflect.StructField) bool {
 	tag := field.Tag.Get("xml")
 
 	return len(tag) != 0 && tag != "-"
+}
+
+// isOmitEmpty function returns whether a field is a tagged as an XML and labeled with omitempty.
+func isOmitEmpty(field reflect.StructField) bool {
+	tag := field.Tag.Get("xml")
+
+	if len(tag) != 0 && tag != "-" {
+		if strings.Contains(tag, "omitempty") {
+			return true
+		}
+	}
+	return false
 }
 
 // VerifyVastElementErrorAsExpected function verifies whether the actual error is expected.

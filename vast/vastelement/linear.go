@@ -11,8 +11,11 @@ type Linear struct {
 	VideoClicks  *VideoClicks  `xml:"VideoClicks,omitempty"`
 	MediaFiles   []*MediaFile  `xml:"MediaFiles>MediaFile,omitempty"`
 
-	Extensions []*Extension `xml:"CreativeExtensions>CreativeExtension,omitempty"` // VAST3.0.
-	Icons      []*Icon      `xml:"Icons>Icon"`                                     // VAST3.0.
+	Extensions []*Extension `xml:"CreativeExtensions>CreativeExtension,omitempty"` // Vast 3.0
+	Icons      []*Icon      `xml:"Icons>Icon"`                                     // Vast 3.0
+
+	Mezzanine               []*Mezzanine `xml:"MediaFiles>Mezzanine,omitempty"`               // Vast 4.0
+	InteractiveCreativeFile []*MediaFile `xml:"MediaFiles>InteractiveCreativeFile,omitempty"` // Vast 4.0
 }
 
 // Validate methods validate the Linear element according to the VAST.

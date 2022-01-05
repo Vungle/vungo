@@ -4,7 +4,7 @@ package vastelement
 type CompanionAds struct {
 	Companions []*Companion `xml:"Companion,omitempty"`
 
-	Required Mode `xml:"required,attr,omitempty"` // VAST3.0.
+	Required Mode `xml:"required,attr,omitempty"` // Vast 3.0
 }
 
 // Validate methods validate the CompanionAds element according to the VAST.

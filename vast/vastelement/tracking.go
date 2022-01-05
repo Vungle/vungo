@@ -5,7 +5,7 @@ type Tracking struct {
 	Event Event       `xml:"event,attr"` // Required.
 	URI   TrimmedData `xml:",cdata"`
 
-	Offset *Offset `xml:"offset,attr,omitempty"` // Time at which the event should be triggered. VAST3.0.
+	Offset *Offset `xml:"offset,attr,omitempty"` // Time at which the event should be triggered. Vast 3.0
 }
 
 // Validate methods validate the Tracking element according to the VAST.

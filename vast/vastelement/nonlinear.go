@@ -17,8 +17,8 @@ type NonLinear struct {
 	IFrameResource            string          `xml:"IFrameResource,omitempty"`
 	HTMLResource              *HTMLResource   `xml:"HTMLResource,omitempty"`
 
-	ClickTracking []string    `xml:"NonLinearClickTracking,omitempty"`               // VAST3.0.
-	Extensions    []Extension `xml:"CreativeExtensions>CreativeExtension,omitempty"` // VAST3.0.
+	ClickTracking []string    `xml:"NonLinearClickTracking,omitempty"`               // Vast 3.0
+	Extensions    []Extension `xml:"CreativeExtensions>CreativeExtension,omitempty"` // Vast 3.0
 }
 
 // Validate a non linear struct

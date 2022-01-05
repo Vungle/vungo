@@ -11,12 +11,16 @@ type InLine struct {
 	Impressions []*Impression `xml:"Impression"`         // Required.
 	Creatives   []*Creative   `xml:"Creatives>Creative"` // Creatives node is required.
 	Description string        `xml:"Description,omitempty"`
-	SurveyURL   string        `xml:"Survey,omitempty"`
+	Survey      *Survey       `xml:"Survey,omitempty"`
 	Errors      []string      `xml:"Error,omitempty"`
 	Extensions  []*Extension  `xml:"Extensions>Extension,omitempty"`
 
-	Advertiser string   `xml:"Advertiser,omitempty"` // VAST3.0.
-	Pricing    *Pricing `xml:"Pricing,omitempty"`    // VAST3.0.
+	Advertiser string   `xml:"Advertiser,omitempty"` // Vast 3.0
+	Pricing    *Pricing `xml:"Pricing,omitempty"`    // Vast 3.0
+
+	Category           *Category           `xml:"Category,omitempty"`                     // Vast 4.0
+	ViewableImpression *ViewableImpression `xml:"ViewableImpression,omitempty"`           // Vast 4.0
+	AdVerification     []*Verification     `xml:"AdVerifications>Verification,omitempty"` // Vast 4.0
 }
 
 // Validate methods validate the Inline element according to the VAST.

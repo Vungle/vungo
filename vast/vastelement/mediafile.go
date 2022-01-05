@@ -14,7 +14,7 @@ type MediaFile struct {
 	IsScalable                bool        `xml:"scalable,attr,omitempty"`
 	ShouldMaintainAspectRatio bool        `xml:"maintainAspectRatio,attr,omitempty"`
 	APIFramework              string      `xml:"apiFramework,attr,omitempty"` // API used to interact with the MediaFile.a
-	URI                       TrimmedData `xml:",cdata"`
+	URI                       TrimmedData `xml:",cdata"`                      // URI
 
 	Codec      string `xml:"codec,attr,omitempty"`      // VAST3.0.
 	MinBitrate *int   `xml:"minBitrate,attr,omitempty"` // In Kbps; absent if Bitrate is present. VAST3.0.

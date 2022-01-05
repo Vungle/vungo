@@ -147,4 +147,10 @@ var (
 
 	// ErrMediaMaxBitrateLessThanZero error from Max bit rate of Mediafile is less than zero
 	ErrMediaMaxBitrateLessThanZero = errors.New("Max bit rate of Mediafile is less than zero")
+
+	// ErrCategoryMissingAuthority error from Category that authority is missing
+	ErrCategoryMissingAuthority = errors.New("authority attribute of Category is missing")
+
+	// ErrUniversalAdIdIsMissing error from Creative that UniversalAdId is missing
+	ErrUniversalAdIdIsMissing = errors.New("universalAdId of Creative is missing")
 )
