@@ -39,9 +39,7 @@ func Unwrap(ctx context.Context, data []byte, userAgent, ip string) ([]*vastelem
 // additional VAST XML and updates the unwrappedList. The unwrap method is invoked recursively until
 // the first Inline VAST is reached or until an error occurs.
 func unwrap(ctx context.Context, v *vastelement.Vast, unwrappedList []*vastelement.Vast, ua, ip string) ([]*vastelement.Vast, error) {
-	if len(v.Ads) != 1 {
-		return nil, ErrUnwrapWithMultipleAds
-	} else if v.Ads[0].Wrapper == nil {
+	if len(v.Ads) == 0 || v.Ads[0].Wrapper == nil {
 		return append(unwrappedList, v), nil
 	}
 
