@@ -29,7 +29,7 @@ func TestUnwrap(t *testing.T) {
 	}{
 		{"malformed1", []string{}, &xml.SyntaxError{Line: 4, Msg: "unexpected EOF"}},
 		{"inline1", []string{}, nil},
-		{"wrapper3ads", []string{}, vastutil.ErrUnwrapWithMultipleAds},
+		{"wrapper3ads", []string{"inline1"}, nil},
 		{"wrapper4nouri", []string{}, vastutil.ErrWrapperMissingAdTagURI},
 		{"wrapper1", []string{"malformed1"}, &xml.SyntaxError{Line: 4, Msg: "unexpected EOF"}},
 		{"wrapper1", []string{"inline1"}, nil},
