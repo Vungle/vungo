@@ -1,0 +1,98 @@
+<VAST version="3.0">
+    <Ad id="1">
+        <Wrapper>
+            <AdSystem>PubMatic</AdSystem>
+            <VASTAdTagURI>
+                <![CDATA[https://insight.adsrvr.org/enduser/vast/?t=1&iid=2058d578-c836-41ca-96b4-14b351a8ddae&crid=jujf97ss&wp=4.000000&aid=1&wpc=USD&sfe=140e3be9&puid=F108773E-2472-4880-B37B-59A8D8A579F6&tdid=313a11f8-4bb9-44cf-93ec-29d73e1b99e9&pid=77uo1k8&ag=qzjbj57&adv=erzny18&sig=1TglzIFpQnZfOIcFUVToJBthw7GdWzfXEkRWkEK-YZ2c.&bp=5&cf=2903307&fq=0&td_s=com.gamebility.onet&rcats=app-4mg,app-zgp&mcat=dv-51001950&mste=&mfld=2&mssi=&mfsi=&uhow=99&agsa=&rgz=35243&svbttd=1&dt=Mobile&osf=Android&os=Android110&br=WebView&rlangs=en&mlang=&svpid=159846&did=&rcxt=InApp&lat=33.444302&lon=-86.753601&tmpc=4.99&daid=b48849b7-2664-4f5c-8150-aeaa432d517b&vp=0&osi=&osv=&bffi=41&mk=Samsung&mdl=SM-G970U&vpb=InterstitialSliderFloating&dc=22&vcc=CAEQLRgtIPoBKJh1MgIIAjoECAEIAkABSAFQBIgBAqABuAioAdIPyAEB0AED6AEK-AEBgAIDigIECAIIBZoCAggHoAIDqAIBsAIAuAIAwAIB&sv=pubmatic&pidi=4264&advi=322644&cmpi=1926731&agi=9804793&cridi=21351466&svi=12&cmp=dpr7ar2&vrtd=14,15&rurl=com.gamebility.onet&tsig=4LN796-ej75noiUzTOwDXuCGEy1kF5t213-OF1bj29A.&c=Cg1Vbml0ZWQgU3RhdGVzEgdBbGFiYW1hGgM2MzAiCkJpcm1pbmdoYW0wBDgCSABQAYABAYgBApABAQ..&dur=CiYKDWNoYXJnZS1hbGwtMzAiFQji__________8BEghpYXhkMDA2aQrYAQoHcHQ3bWV3dhCIDCIQCJ-njGsSCWRhMjVhYXRyayIQCJ-njGsSCWRyMjVhbGlrZSIWCOWwkXQSD0FsbGlhbmNlQWxsaWFudCIRCOWwkXQSCmxyMTVuZXVhbGwiEwjcpL99Egx0aGV0cmFkZWRlc2siEwjmpL99Egx0aGV0cmFkZWRlc2siEwibq799Egx0aGV0cmFkZWRlc2siEwibsb99Egx0aGV0cmFkZWRlc2siEwifsb99Egx0aGV0cmFkZWRlc2siEgjh-5OFARIKdHRka2JtZGF0YQqFAgoHNDY5aWYwZxDCCyIVCLDM10wSDkFsbGlhbmNlOXRoZGVjIhIIsMzXTBILZGV2aWQ5dGhkZWMiFwjI4ulQEhBBbGxpYW5jZUJlZWludG9vIhAIyOLpUBIJYmVpbjIydG9vIhcIkefpUBIQQWxsaWFuY2VCZWVpbnRvbyIQCJHn6VASCWJlaW4yMnRvbyIVCI6V0FISDkFsbGlhbmNlOXRoZGVjIhIIjpXQUhILZGV2aWQ5dGhkZWMiEgi_xp9TEgtkZXZpZDl0aGRlYyIRCJq4t1gSCmxkczAybWF4cHQiDwjYtedsEghjbGFyaXRhcyITCNi152wSDGRhMjBjbGFyaXRhcwowCgxjaGFyZ2UtYWxsLTEiIAj___________8BEhN0dGRfZGF0YV9leGNsdXNpb25zCj4KIWNoYXJnZS1tYXhEb3VibGVWZXJpZnlCcmFuZFNhZmV0eSIZCNv__________wESDGRvdWJsZXZlcmlmeRDCCw..&durs=ckjiDa&crrelr=&adpt=pubo&ipl=3134070&fpa=800&pcm=3&said=C95F37E6-EF86-45EE-B472-59EAB974FA7F&ict=CellularNetworkUnknown&auct=2&us_privacy=1-N-&im=1&mc=36bcba3f-544f-47ff-86ff-cde6eb6aef4f&idl=XY30078FUBD6iLt3YF7JQEfIi-q4SKQrrCXXc6UmUh9P2uygY]]>
+            </VASTAdTagURI>
+            <Error>
+                <![CDATA[https://aktrack.pubmatic.com/track?operId=7&p=159846&s=750212&a=3134070&wa=243&ts=1641462761&wc=22918&crId=jujf97ss&ucrid=12544569933737097930&impid=B71BAE14-5B7A-4ED7-9486-B1BC7FB3A853&advertiser_id=36372&ecpm=5.333333&er=[ERRORCODE]&pfi=5&ch=3&it=2&vadFmt=5&vapi=7&sURL=com.gamebility.onet]]>
+            </Error>
+            <Error>
+                <![CDATA[https://image8.pubmatic.com/AdServer/ImgSync?&fp=1&mpc=20&p=159846&gdpr=0&gdpr_consent=&pmc=-1&pu=https%3A%2F%2Fimage4.pubmatic.com%2FAdServer%2FSPug%3Fpmc%3D-1%26partnerID%3D159846%26partnerUID%3D%28null%29]]>
+            </Error>
+            <Impression>
+                <![CDATA[https://aktrack.pubmatic.com/AdServer/AdDisplayTrackerServlet?operId=1&pubId=159846&siteId=750212&adId=3134070&adType=13&adServerId=243&kefact=5.33333&kaxefact=5.33333&kadNetFrequecy=0&kadwidth=0&kadheight=0&kadsizeid=97&kltstamp=1641462761&indirectAdId=0&adServerOptimizerId=2&ranreq=0.1&kpbmtpfact=4&tldId=0&passback=0&ekefact=6bzWYXS7CwBzXfcLmW2Fq5R9F9f5cN2LQDaRZVEGnST__hTn&ekaxefact=6bzWYXS7CwBzXfcLmW2Fq5R9F9f5cN2LQDaRZVEGnST__hTn&ekpbmtpfact=6bzWYZW7CwA1GgSCvQBKlF5vJBOpvD1UDOj68CSWxWkKVCqp&svr=BIDVA293&adsver=_27888023&adsabzcid=0&cls=BID&enpp=6bzWYa67CwBuuGUzcW11FTKGBUSqW1folVVWEEpcdIXwY9Id&pfi=5&dc=VA1&pubBuyId=27106&crID=jujf97ss&lpu=geico.com&ucrid=12544569933737097930&campaignId=22918&creativeId=0&pctr=0.000000&wDSPByrId=4264&wDspId=377&wbId=1&wrId=0&wAdvID=36372&wDspCampId=dpr7ar2&isRTB=1&rtbId=C95F37E6-EF86-45EE-B472-59EAB974FA7F&imprId=B71BAE14-5B7A-4ED7-9486-B1BC7FB3A853&oid=B71BAE14-5B7A-4ED7-9486-B1BC7FB3A853&mobflag=1&ismobileapp=1&modelid=19349&osid=321&udidtype=1&country=US&carrierid=1350&cntryId=232&sec=1&pAuSt=2&wops=0&sURL=com.gamebility.onet&BrID=5&oiabdvt=4&tpb=3]]>
+            </Impression>
+            <Impression id="pubmatic">
+                <![CDATA[https://s.update.rose.pubmatic.com/2/925744/analytics.gif?dt=9257441544206325357000&c3=5&pv=&pp=159846&si=750212&pi=3134070&ti=B71BAE14-5B7A-4ED7-9486-B1BC7FB3A853&ui=F108773E-2472-4880-B37B-59A8D8A579F6&ap=com.gamebility.onet&di=&ac=22918&cr=12544569933737097930]]>
+            </Impression>
+            <Impression>
+                <![CDATA[https://image8.pubmatic.com/AdServer/ImgSync?&fp=1&mpc=20&p=159846&gdpr=0&gdpr_consent=&pmc=-1&pu=https%3A%2F%2Fimage4.pubmatic.com%2FAdServer%2FSPug%3Fpmc%3D-1%26partnerID%3D159846%26partnerUID%3D%28null%29]]>
+            </Impression>
+            <Creatives>
+                <Creative>
+                    <Linear>
+                        <TrackingEvents>
+                            <Tracking event="creativeView">
+                                <![CDATA[https://aktrack.pubmatic.com/track?operId=7&p=159846&s=750212&a=3134070&wa=243&ts=1641462761&wc=22918&crId=jujf97ss&ucrid=12544569933737097930&impid=B71BAE14-5B7A-4ED7-9486-B1BC7FB3A853&advertiser_id=36372&ecpm=5.333333&e=1]]>
+                            </Tracking>
+                            <Tracking event="start">
+                                <![CDATA[https://aktrack.pubmatic.com/track?operId=7&p=159846&s=750212&a=3134070&wa=243&ts=1641462761&wc=22918&crId=jujf97ss&ucrid=12544569933737097930&impid=B71BAE14-5B7A-4ED7-9486-B1BC7FB3A853&advertiser_id=36372&ecpm=5.333333&e=2&pfi=5&plmt=5&vps=3&instl=1&ch=3&it=2&vadFmt=5&vapi=7&sURL=com.gamebility.onet]]>
+                            </Tracking>
+                            <Tracking event="midpoint">
+                                <![CDATA[https://aktrack.pubmatic.com/track?operId=7&p=159846&s=750212&a=3134070&wa=243&ts=1641462761&wc=22918&crId=jujf97ss&ucrid=12544569933737097930&impid=B71BAE14-5B7A-4ED7-9486-B1BC7FB3A853&advertiser_id=36372&ecpm=5.333333&e=3&pfi=5&plmt=5&vps=3&instl=1&sURL=com.gamebility.onet]]>
+                            </Tracking>
+                            <Tracking event="firstQuartile">
+                                <![CDATA[https://aktrack.pubmatic.com/track?operId=7&p=159846&s=750212&a=3134070&wa=243&ts=1641462761&wc=22918&crId=jujf97ss&ucrid=12544569933737097930&impid=B71BAE14-5B7A-4ED7-9486-B1BC7FB3A853&advertiser_id=36372&ecpm=5.333333&e=4&pfi=5&plmt=5&vps=3&instl=1&sURL=com.gamebility.onet]]>
+                            </Tracking>
+                            <Tracking event="thirdQuartile">
+                                <![CDATA[https://aktrack.pubmatic.com/track?operId=7&p=159846&s=750212&a=3134070&wa=243&ts=1641462761&wc=22918&crId=jujf97ss&ucrid=12544569933737097930&impid=B71BAE14-5B7A-4ED7-9486-B1BC7FB3A853&advertiser_id=36372&ecpm=5.333333&e=5&pfi=5&plmt=5&vps=3&instl=1&sURL=com.gamebility.onet]]>
+                            </Tracking>
+                            <Tracking event="complete">
+                                <![CDATA[https://aktrack.pubmatic.com/track?operId=7&p=159846&s=750212&a=3134070&wa=243&ts=1641462761&wc=22918&crId=jujf97ss&ucrid=12544569933737097930&impid=B71BAE14-5B7A-4ED7-9486-B1BC7FB3A853&advertiser_id=36372&ecpm=5.333333&e=6&pfi=5&plmt=5&vps=3&instl=1&sURL=com.gamebility.onet]]>
+                            </Tracking>
+                            <Tracking event="skip">
+                                <![CDATA[https://aktrack.pubmatic.com/track?operId=7&p=159846&s=750212&a=3134070&wa=243&ts=1641462761&wc=22918&crId=jujf97ss&ucrid=12544569933737097930&impid=B71BAE14-5B7A-4ED7-9486-B1BC7FB3A853&advertiser_id=36372&ecpm=5.333333&e=7]]>
+                            </Tracking>
+                        </TrackingEvents>
+                        <VideoClicks>
+                            <ClickTracking>
+                                <![CDATA[https://aktrack.pubmatic.com/track?operId=7&p=159846&s=750212&a=3134070&wa=243&ts=1641462761&wc=22918&crId=jujf97ss&ucrid=12544569933737097930&impid=B71BAE14-5B7A-4ED7-9486-B1BC7FB3A853&advertiser_id=36372&ecpm=5.333333&e=99]]>
+                            </ClickTracking>
+                        </VideoClicks>
+                    </Linear>
+                </Creative>
+            </Creatives>
+            <Extensions>
+                <Extension>
+                    <Meta>
+                        <![CDATA[name=pm-pixel;ver=1.0]]>
+                    </Meta>
+                    <Pixel purpose="2" loc="1">
+                        <Code type="3">
+                            <![CDATA[https://s.update.rose.pubmatic.com/2/925744/analytics.gif?dt=9257441544206325357000&c3=5&pv=&pp=159846&si=750212&pi=3134070&ti=B71BAE14-5B7A-4ED7-9486-B1BC7FB3A853&ui=F108773E-2472-4880-B37B-59A8D8A579F6&ap=com.gamebility.onet&di=&ac=22918&cr=12544569933737097930]]>
+                        </Code>
+                    </Pixel>
+                </Extension>
+                <Extension>
+                    <Meta>
+                        <![CDATA[name=pm-forcepixel;ver=1.0]]>
+                    </Meta>
+                    <Pixel loc="0">
+                        <Code type="1">
+                            <![CDATA[https://ads.pubmatic.com/AdServer/js/showad.js#PIX&ptask=DSP&SPug=1&fp=1&mpc=20&u=F108773E-2472-4880-B37B-59A8D8A579F6&p=159846&s=750212&d=2&cp=0&sc=1&rs=0&os=1&gdpr=0&gdpr_consent=]]>
+                        </Code>
+                    </Pixel>
+                </Extension>
+                <Extension type="AdVerifications">
+                    <AdVerifications>
+                        <Verification vendor="moat.com-pubmaticomidvideo355142806119">
+                            <JavaScriptResource apiFramework="omid" browserOptional="true">
+                                <![CDATA[https://z.moatads.com/pubmaticomidvideo355142806119/moatvideo.js]]>
+                            </JavaScriptResource>
+                            <TrackingEvents>
+                                <Tracking event="verificationNotExecuted">
+                                    <![CDATA[]]>
+                                </Tracking>
+                            </TrackingEvents>
+                            <VerificationParameters>
+                                <![CDATA[{"moatClientLevel1":"159846","moatClientLevel2":"750212","moatClientLevel3":"3134070","moatClientLevel4":"5","moatClientSlicer1":"com.gamebility.onet","moatClientSlicer2":"","moatClientSlicer3":"", "zMoatPP":"5.33333","zMoatCntry":"232", "zMoatAdv":"36372", "zMoatCamp":"22918", "zMoatDSP":"377", "zMoatBid":"", "zMoatUCR":"12544569933737097930","zMoatDEALID":"","zMoatBUYERID":"27106","zMoatPUBLICSUFFIXPLUSONE":""}]]>
+                            </VerificationParameters>
+                        </Verification>
+                    </AdVerifications>
+                </Extension>
+            </Extensions>
+        </Wrapper>
+    </Ad>
+</VAST>

@@ -29,7 +29,7 @@ func TestUnwrap(t *testing.T) {
 	}{
 		{"malformed1", []string{}, &xml.SyntaxError{Line: 4, Msg: "unexpected EOF"}},
 		{"inline1", []string{}, nil},
-		{"wrapper3ads", []string{}, vastutil.ErrUnwrapWithMultipleAds},
+		{"wrapper3ads", []string{"inline1"}, nil},
 		{"wrapper4nouri", []string{}, vastutil.ErrWrapperMissingAdTagURI},
 		{"wrapper1", []string{"malformed1"}, &xml.SyntaxError{Line: 4, Msg: "unexpected EOF"}},
 		{"wrapper1", []string{"inline1"}, nil},
@@ -71,12 +71,15 @@ func TestUnwrap(t *testing.T) {
 
 func TestUnwrapRealdata(t *testing.T) {
 	tc := newTestUnwrapClient()
+	vastutil.UpdateDefaultUnwrapClient(tc.Client)
+	defer vastutil.RevertDefaultUnwrapClient()
+
 	tests := []struct {
 		entry         string   // entry point for the VAST unwrapping test.
 		trace         []string // list of steps traces through.
 		expectedError error    // expected error in case error occurs.
 	}{
-		{"unwrapper_multiads", []string{}, vastutil.ErrUnwrapWithMultipleAds},
+		{"unwrapper_multiads", []string{"unwrapper_multiads_1", "unwrapper_multiads_2", "unwrapper_multiads_3"}, nil},
 	}
 	ctx := context.Background()
 	for i, test := range tests {
