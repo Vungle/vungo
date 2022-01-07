@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Verification vendor="https://www.adVerify.com/">
+    <FlashResource apiFramework="javascript"><![CDATA[http://ahello.vungle.com/b/1/]]></FlashResource>
+    <FlashResource apiFramework="javascript"><![CDATA[http://ahello.vungle.com/b/2/]]></FlashResource>
+    <JavaScriptResource apiFramework="javascript"><![CDATA[http://ahello.vungle.com/b/3/]]></JavaScriptResource>
+    <JavaScriptResource apiFramework="javascript"><![CDATA[http://ahello.vungle.com/b/4/]]></JavaScriptResource>
+    <ViewableImpression id="13412341"><![CDATA[http://ahello.vungle.com/b/5/]]></ViewableImpression>
+</Verification>
