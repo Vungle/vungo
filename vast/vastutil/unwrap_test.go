@@ -69,6 +69,44 @@ func TestUnwrap(t *testing.T) {
 	}
 }
 
+func TestUnwrapRealdata(t *testing.T) {
+	tc := newTestUnwrapClient()
+	tests := []struct {
+		entry         string   // entry point for the VAST unwrapping test.
+		trace         []string // list of steps traces through.
+		expectedError error    // expected error in case error occurs.
+	}{
+		{"unwrapper_multiads", []string{}, vastutil.ErrUnwrapWithMultipleAds},
+	}
+	ctx := context.Background()
+	for i, test := range tests {
+		t.Logf("Testing %d starting from %s...", i, test.entry)
+		tc.Init(test.trace)
+		data, err := ioutil.ReadFile(testFilePath(test.entry))
+
+		if err != nil {
+			t.Fatal(err)
+		} else if err = tc.AddToServed(testFilePath(test.entry)); err != nil {
+			t.Fatal(err)
+		}
+
+		vasts, err := vastutil.Unwrap(ctx, data, "fake-ua", "1.2.3.4")
+
+		if err != nil && !reflect.DeepEqual(err, test.expectedError) {
+			t.Log(reflect.TypeOf(err))
+			t.Errorf("Expecting error %v instead of %v.", test.expectedError, err)
+		} else if err == nil {
+			if len(tc.served) != len(test.trace)+1 {
+				t.Errorf("Unwrapping VAST should hop %d times instead of %d times.", len(test.trace)+1, len(tc.served))
+			} else if len(vasts) != len(tc.served) {
+				t.Errorf("Unwrapped VAST depth %d was different from served vast, %d.", len(vasts), len(tc.served))
+			} else if !reflect.DeepEqual(vasts, tc.served) {
+				t.Error("Unwrapped VAST does not match with served VAST.", vasts, tc.served)
+			}
+		}
+	}
+}
+
 func TestUnwrapShouldRespectContext(t *testing.T) {
 	// Given a context that is already finished.
 	ctx, cancel := context.WithCancel(context.Background())
