@@ -134,19 +134,29 @@ func VerifyVastElementErrorAsExpected(t testing.TB, element vastelement.Validato
 
 // VerifyVastElementFromBytes function verifies Validate errors for the vast element object.
 func VerifyVastElementFromBytes(t testing.TB, xmlData []byte, element vastelement.Validator, expectedError error) {
+	VerifyVastElementFromBytesWithVersion(t, xmlData, element, expectedError, vastelement.Version3)
+}
+
+// VerifyVastElementFromBytesWithVersion function verifies Validate errors for the vast element object according to specified version.
+func VerifyVastElementFromBytesWithVersion(t testing.TB, xmlData []byte, element vastelement.Validator, expectedError error, version vastelement.Version) {
 	if err := xml.Unmarshal(xmlData, element); err != nil {
 		t.Fatalf("Cannot unmarshal XML data. %v.\n", err)
 	}
 
-	VerifyVastElementErrorAsExpected(t, element, element.Validate(vastelement.Version3), expectedError)
+	VerifyVastElementErrorAsExpected(t, element, element.Validate(version), expectedError)
 }
 
 // VerifyVastElementFromFile function verifies Validate errors for the Unmarshal object generated from the given file.
 func VerifyVastElementFromFile(t testing.TB, file string, element vastelement.Validator, expectedError error) {
+	VerifyVastElementFromFileWithVersion(t, file, element, expectedError, vastelement.Version3)
+}
+
+// VerifyVastElementFromFileWithVersion function verifies Validate errors for the Unmarshal object generated from the given file according to specified version.
+func VerifyVastElementFromFileWithVersion(t testing.TB, file string, element vastelement.Validator, expectedError error, version vastelement.Version) {
 	xmlData, err := ioutil.ReadFile(file)
 
 	if err != nil {
 		t.Fatalf("Cannot read XML file: %v, error: %v\n", file, err)
 	}
-	VerifyVastElementFromBytes(t, xmlData, element, expectedError)
+	VerifyVastElementFromBytesWithVersion(t, xmlData, element, expectedError, version)
 }

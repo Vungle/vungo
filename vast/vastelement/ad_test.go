@@ -25,6 +25,7 @@ var adTests = []struct {
 	{VastElement: &vastelement.Ad{}, Err: vastelement.ErrAdType, File: "ad_no_wrapper_no_inline.xml"},
 	{VastElement: &vastelement.Ad{}, Err: vastelement.ErrInlineMissImpressions, File: "ad_error_inline.xml"},
 	{VastElement: &vastelement.Ad{}, Err: vastelement.ErrWrapperMissImpressions, File: "ad_error_wrapper.xml"},
+	{VastElement: &vastelement.Ad{}, File: "ad_with_inline_v4.xml"},
 }
 
 func TestAdValidateErrors(t *testing.T) {

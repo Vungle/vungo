@@ -30,6 +30,7 @@ var companionTests = []struct {
 	{VastElement: &vastelement.Companion{}, File: "companion_without_staticresource.xml"},
 	{VastElement: &vastelement.Companion{}, File: "companion_without_iframeresource.xml"},
 	{VastElement: &vastelement.Companion{}, File: "companion_without_htmlresource.xml"},
+	{VastElement: &vastelement.Companion{}, File: "companion_v4.xml"},
 }
 
 func TestCompanionValidateErrors(t *testing.T) {

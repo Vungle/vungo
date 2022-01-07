@@ -17,24 +17,39 @@ func TestInLineMarshalUnmarshal(t *testing.T) {
 	vasttest.VerifyModelAgainstFile(t, "InLine", "inline.xml", InLineModelType)
 }
 
-var inlineTests = []struct {
-	VastElement *vastelement.InLine
-	Err         error
-	File        string
-}{
-	{VastElement: &vastelement.InLine{}, File: "inline_valid.xml"},
-	{VastElement: &vastelement.InLine{}, Err: vastelement.ErrInlineMissAdTitle, File: "inline_without_adtitle.xml"},
-	{VastElement: &vastelement.InLine{}, Err: vastelement.ErrInlineMissCreatives, File: "inline_without_creatives.xml"},
-	{VastElement: &vastelement.InLine{}, Err: vastelement.ErrInlineMissImpressions, File: "inline_without_impressions.xml"},
-	{VastElement: &vastelement.InLine{}, Err: vastelement.ErrCreativeType, File: "inline_error_creatives.xml"},
-	{VastElement: &vastelement.InLine{}, File: "inline_error_impressions.xml"},
-	{VastElement: &vastelement.InLine{}, File: "inline_error_pricing.xml"},
-	{VastElement: &vastelement.InLine{}, Err: vastelement.ErrDurationEqualZero, File: "inline_with_no_duration.xml"},
-	{VastElement: &vastelement.InLine{}, Err: vastelement.ErrLinearMissMediaFiles, File: "inline_without_mediafiles.xml"},
-	{VastElement: &vastelement.InLine{}, Err: vastelement.ErrMediaFileSize, File: "inline_error_mediafiles.xml"},
+func TestInlineValidateErrors(t *testing.T) {
+	var inlineTests = []struct {
+		VastElement *vastelement.InLine
+		Err         error
+		File        string
+	}{
+		{VastElement: &vastelement.InLine{}, File: "inline_valid.xml"},
+		{VastElement: &vastelement.InLine{}, Err: vastelement.ErrInlineMissAdTitle, File: "inline_without_adtitle.xml"},
+		{VastElement: &vastelement.InLine{}, Err: vastelement.ErrInlineMissCreatives, File: "inline_without_creatives.xml"},
+		{VastElement: &vastelement.InLine{}, Err: vastelement.ErrInlineMissImpressions, File: "inline_without_impressions.xml"},
+		{VastElement: &vastelement.InLine{}, Err: vastelement.ErrCreativeType, File: "inline_error_creatives.xml"},
+		{VastElement: &vastelement.InLine{}, File: "inline_error_impressions.xml"},
+		{VastElement: &vastelement.InLine{}, File: "inline_error_pricing.xml"},
+		{VastElement: &vastelement.InLine{}, Err: vastelement.ErrDurationEqualZero, File: "inline_with_no_duration.xml"},
+		{VastElement: &vastelement.InLine{}, Err: vastelement.ErrLinearMissMediaFiles, File: "inline_without_mediafiles.xml"},
+		{VastElement: &vastelement.InLine{}, Err: vastelement.ErrMediaFileSize, File: "inline_error_mediafiles.xml"},
+	}
+
+	for _, test := range inlineTests {
+		vasttest.VerifyVastElementFromFile(t, "testdata/"+test.File, test.VastElement, test.Err)
+	}
 }
 
-func TestInlineValidateErrors(t *testing.T) {
+func TestInlineV4(t *testing.T) {
+	var inlineTests = []struct {
+		desc        string
+		VastElement *vastelement.InLine
+		Err         error
+		File        string
+	}{
+		{desc: "valid inline of version 4", VastElement: &vastelement.InLine{}, File: "inline_valid_v4.xml"},
+	}
+
 	for _, test := range inlineTests {
 		vasttest.VerifyVastElementFromFile(t, "testdata/"+test.File, test.VastElement, test.Err)
 	}

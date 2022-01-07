@@ -8,7 +8,8 @@
     expandedHeight="16"
     expandedWidth="8"
     apiFramework="Vungle Exchange"
-    adSlotId="ad-slot-id">
+    adSlotId="ad-slot-id"
+    pxratio="2058.0">
   <CompanionClickThrough><![CDATA[http://clickthrough/url]]></CompanionClickThrough>
   <CompanionClickTracking><![CDATA[http://ClickTracking/url]]></CompanionClickTracking>
   <AltText><![CDATA[Alt text for HTML rendering.]]></AltText>

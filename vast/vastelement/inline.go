@@ -18,7 +18,7 @@ type InLine struct {
 	Advertiser string   `xml:"Advertiser,omitempty"` // Vast 3.0
 	Pricing    *Pricing `xml:"Pricing,omitempty"`    // Vast 3.0
 
-	Category           *Category           `xml:"Category,omitempty"`                     // Vast 4.0
+	Category           []*Category         `xml:"Category,omitempty"`                     // Vast 4.0
 	ViewableImpression *ViewableImpression `xml:"ViewableImpression,omitempty"`           // Vast 4.0
 	AdVerification     []*Verification     `xml:"AdVerifications>Verification,omitempty"` // Vast 4.0
 }
