@@ -55,14 +55,14 @@ func TestUnwrap(t *testing.T) {
 
 		if err != nil && !reflect.DeepEqual(err, test.expectedError) {
 			t.Log(reflect.TypeOf(err))
-			t.Errorf("Expecting error %v instead of %v.", test.expectedError, err)
+			t.Errorf("Failed for %s. Expecting error %v instead of %v.", test.desc, test.expectedError, err)
 		} else if err == nil {
 			if len(tc.served) != len(test.trace)+1 {
-				t.Errorf("Unwrapping VAST should hop %d times instead of %d times.", len(test.trace)+1, len(tc.served))
+				t.Errorf("Failed for %s. Unwrapping VAST should hop %d times instead of %d times.", test.desc, len(test.trace)+1, len(tc.served))
 			} else if len(vasts) != len(tc.served) {
-				t.Errorf("Unwrapped VAST depth %d was different from served vast, %d.", len(vasts), len(tc.served))
+				t.Errorf("Failed for %s. Unwrapped VAST depth %d was different from served vast, %d.", test.desc, len(vasts), len(tc.served))
 			} else if !reflect.DeepEqual(vasts, tc.served) {
-				t.Error("Unwrapped VAST does not match with served VAST.", vasts, tc.served)
+				t.Errorf("Failed for %s. Unwrapped VAST does not match with served VAST. unwrapped: %v, served: %v", test.desc, vasts, tc.served)
 			}
 		}
 	}
