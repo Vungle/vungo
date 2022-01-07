@@ -34,6 +34,7 @@ func TestUnwrap(t *testing.T) {
 		{"wrapper1", []string{"malformed1"}, &xml.SyntaxError{Line: 4, Msg: "unexpected EOF"}},
 		{"wrapper1", []string{"inline1"}, nil},
 		{"wrapper1", []string{"wrapper2", "inline1"}, nil},
+		{"unwrapper_multiads", []string{"unwrapper_multiads_1", "unwrapper_multiads_2", "unwrapper_multiads_3"}, nil},
 	}
 
 	ctx := context.Background()
