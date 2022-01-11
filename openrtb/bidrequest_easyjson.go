@@ -221,16 +221,16 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb(in *jlexer.Lexer, out *Bi
 				in.Delim('[')
 				if out.BlockedCategories == nil {
 					if !in.IsDelim(']') {
-						out.BlockedCategories = make([]Category, 0, 4)
+						out.BlockedCategories = make([]string, 0, 4)
 					} else {
-						out.BlockedCategories = []Category{}
+						out.BlockedCategories = []string{}
 					}
 				} else {
 					out.BlockedCategories = (out.BlockedCategories)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v6 Category
-					v6 = Category(in.String())
+					var v6 string
+					v6 = string(in.String())
 					out.BlockedCategories = append(out.BlockedCategories, v6)
 					in.WantComma()
 				}
@@ -2785,16 +2785,16 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb10(in *jlexer.Lexer, out *
 				in.Delim('[')
 				if out.Categories == nil {
 					if !in.IsDelim(']') {
-						out.Categories = make([]Category, 0, 4)
+						out.Categories = make([]string, 0, 4)
 					} else {
-						out.Categories = []Category{}
+						out.Categories = []string{}
 					}
 				} else {
 					out.Categories = (out.Categories)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v49 Category
-					v49 = Category(in.String())
+					var v49 string
+					v49 = string(in.String())
 					out.Categories = append(out.Categories, v49)
 					in.WantComma()
 				}

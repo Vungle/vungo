@@ -10,7 +10,7 @@ import "github.com/Vungle/vungo/internal/util"
 type Publisher struct {
 	ID         string      `json:"id"`
 	Name       string      `json:"name,omitempty"`
-	Categories []Category  `json:"cat,omitempty"`
+	Categories []string    `json:"cat,omitempty"`
 	Domain     string      `json:"domain,omitempty"`
 	Extension  interface{} `json:"ext,omitempty"`
 }
@@ -23,7 +23,7 @@ func (p *Publisher) Copy() *Publisher {
 	pubCopy := *p
 
 	if p.Categories != nil {
-		pubCopy.Categories = make([]Category, len(p.Categories))
+		pubCopy.Categories = make([]string, len(p.Categories))
 		copy(pubCopy.Categories, p.Categories)
 	}
 	pubCopy.Extension = util.DeepCopyCopiable(p.Extension)
