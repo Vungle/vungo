@@ -1,0 +1,197 @@
+<VAST version="3.0">
+    <Ad id="some-id" sequence="1">
+        <InLine>
+            <AdSystem>
+                <![CDATA[Bytedance]]>
+            </AdSystem>
+            <AdTitle>
+                <![CDATA[只有5%的人能点亮整座城市，你敢挑战吗]]>
+            </AdTitle>
+            <Advertiser>Bytedance</Advertiser>
+            <Pricing model="cpm" currency="USD">10.69</Pricing>
+            <Impression>
+                <![CDATA[https://lf.snssdk.com/api/ad/union/show_event/?req_id=5ec796d603e1e7c01267c88fu8791&extra=4AfhtQRp22DGOBvA5zI0lS%2FcT%2Bw9JJgawOAhIgmdGSHq9mhg2WowlxaVMCnpX9aEnCvZlJ%2F4XnX9Y3ft9EE3jGL6S2ry5oiX6rZbqXq0sxJUwk6QzU%2B01i3d7ImYEWp6enFEt09MtFFv7b48W%2FZZvC%2BTQVUys9SLkZnSUnYc6Q5CX7dTPTqNbxlIs9nqK1F0KLvOxM8q%2Bm1Gz900kSWp4GY%2Fz1AO7%2Bhn43CSs46qVMvHQ5qlcUHNwDBVEqvR%2BZMvsoAwtPPCEEtn1bsriy4PSRosSNLnm5t2jwE%2FnBnj0SlvoC66lIy28a6hdhzOy4LIKGaiuXVujp6TxDzCdjpA7X1Szd%2FrjdCgbfI%2BLcYoeol23e%2BBmoUgqX%2FH%2F7WphfNoIJSQSOnGyTHlCY6H1w2t1E3sg51A4D3JWIVLB2WYzF448pt09nqylG1mJuc6HKOlKdmaXQsLMnmKHg9gVPU5nCTYzRFKx95hlxv%2BexR%2FwUWA%2FFAoOIKyfLDu%2BD6jnvnQ0%2FQKX8EkYvroCF8vbwYCC00trnzQxrzwYJLwPQirebVH7Oahrqz9GC0AWA9eA97aF%2BP4luLedTXeRXiOaV2Z9Ve%2FUiPgVId9oybFaJRbfTHpqGdCCqHmVYhy%2FEsO5Cc%2BQUqd%2FkRSRiqMTFCGbldY2yDqSZw64N8nuy8Q96AyqFxx8c6WzQYgrnl3hNW0h4z9xcGUrpHYMZ77Ur3slw9NZ0bKa57Vabhdr1x5OYeiS7vIzRDpCAbpuj6DfmvWMLp348CcYnwzWuKpXMO3dVopSQ5g9mhqW%2BFMNVwkq1Am9qT1qrLfa%2B1dQEw%2Fy0wIRDiehbfWn6k2HjSptp3j%2BzS4WKomHeWEC4bVofpOKx4hEF73kGEvxzfPjo%2FvM4xTiuH8Fw%2Ftwx3xR%2BCjABzmEmzPMsoGOGdHiGnkYWYekOUmFS8h%2Fi8Jw2JqzHfZF8f%2F2K1dh1jvULJ4N43QBPb4lsbmYS4T6K65SKkJmjYlq4eaFeXjKk40r9KIYmbHhRBeXnFBvc%2FXLPIReEDDLC9HXmnll%2FdgY3JD1e8RBDzUgdF7cRmJDlocZqnJEOFEoT9LO1JpiU4hH7xEXEFul4Z6EgM97YXTfqEBYeQ%2FftyIee07L%2Fo%2Fx0nUdi1El42uLyPyvwzVbzHFeUBprI1M0Svxq1KERKrTVQz%2Fxmxx4YkPhOeU2CmA9cv8IUhsaf%2F%2FCw%2F%2Fv2wwjcZeJG4gdeHp9CfteShvQokMKtq3clCiTf4WkYf9AcgobPOxy6bXQku9aycXoVNKtl%2F4cM9rOe25AwjBFkatpfkUTiOjQVLf5d1me2eUYIU%2FXr1Il4xn%2BbVtahT304xf%2Fy1fQG828mpapX2vSds2dALGa2AFXntrk3%2Bm2KiYKKDSE6MNcn7X80JUWKAcOOZpejPrOYSTo6BN%2BIbvC%2FxTLmn153zkkVvEiaIVVMqwU2aPZX%2FY2PHOkIz9hhSm%2FhQ2%2FDLbizMKEoQ3avvhlz%2B6dP8UlCXQILjqQuoO2sZf80pwEwsBYFAvB2DKRAJzYSsBoTLrjmM4ynP9duq4LGtpakfqjnJdlElsER%2FnWwYQV9OIi3RZPF2EHyjj%2BH7IcqxOAzvK1kyqoC7W8fAWeeDoEvegnTtRwDuzHuP1LsAkQZxB0REPYa0Q%2BP0sn4zipSJv7UHerEHdxSqegawjnqP33o8BrARxatwd1FccDPXVQ%2BARDyQspfmJDFTyw6b%2Fh%2FngyQUsdA8bqAO1Wilg7XdenuaXkNJlXHQaP4bDNS9Q0F94HZiLSmS6OBhgV3IQm79XYxX5%2BlCA%2BEC%2FU%2F6Ec94hNWafV%2FjcG%2FID2AgSFwMkc6M%3D&source_type=1&pack_time=1590630440.65&pc=OMkaunPpDyKzZarhJKk3BmafV%2FjcG%2FID2AgSFwMkc6M%3D&ttdsp_price=${AUCTION_PRICE}]]>
+            </Impression>
+            <Creatives>
+                <Creative id="1665015151804428" apiFramework="Vungle Exchange">
+                    <Linear>
+                        <Duration>00:00:46</Duration>
+                        <Icons>
+                            <Icon
+                                    program="Vungle"
+                                    width="128"
+                                    height="256"
+                                    xPosition="64"
+                                    yPosition="32"
+                                    offset="75%"
+                                    duration="00:30:00.123"
+                                    apiFramework="Vungle Exchange">
+                                <IconClicks>
+                                    <IconClickThrough><![CDATA[http://clickthrough/url]]></IconClickThrough>
+                                    <IconClickTracking><![CDATA[http://clicktracking/url/1]]></IconClickTracking>
+                                    <IconClickTracking><![CDATA[http://clicktracking/url/2]]></IconClickTracking>
+                                    <IconClickTracking><![CDATA[http://clicktracking/url/3]]></IconClickTracking>
+                                </IconClicks>
+                                <StaticResource creativeType="image/gif"><![CDATA[http://where/is/my/gif]]></StaticResource>
+                                <HTMLResource xmlEncoded="true"><![CDATA[http://where/is/the/HTML]]></HTMLResource>
+                            </Icon>
+                            <Icon
+                                    program="Vungle"
+                                    width="128"
+                                    height="256"
+                                    xPosition="64"
+                                    yPosition="32"
+                                    offset="75%"
+                                    duration="00:30:00.123"
+                                    apiFramework="Vungle Exchange">
+                                <IconClicks>
+                                    <IconClickThrough><![CDATA[http://clickthrough/url]]></IconClickThrough>
+                                    <IconClickTracking><![CDATA[http://clicktracking/url/1]]></IconClickTracking>
+                                    <IconClickTracking><![CDATA[http://clicktracking/url/2]]></IconClickTracking>
+                                    <IconClickTracking><![CDATA[http://clicktracking/url/3]]></IconClickTracking>
+                                </IconClicks>
+                                <HTMLResource xmlEncoded="true"><![CDATA[http://where/is/the/HTML]]></HTMLResource>
+                            </Icon>
+                        </Icons>
+                        <TrackingEvents>
+                            <Tracking event="start">
+                                <![CDATA[https://is.snssdk.com/api/ad/union/event_report/?event_type=4&extra=4AfhtQRp22DGOBvA5zI0lS%2FcT%2Bw9JJgawOAhIgmdGSHq9mhg2WowlxaVMCnpX9aEnCvZlJ%2F4XnX9Y3ft9EE3jGL6S2ry5oiX6rZbqXq0sxJUwk6QzU%2B01i3d7ImYEWp6enFEt09MtFFv7b48W%2FZZvC%2BTQVUys9SLkZnSUnYc6Q5CX7dTPTqNbxlIs9nqK1F0KLvOxM8q%2Bm1Gz900kSWp4GY%2Fz1AO7%2Bhn43CSs46qVMvHQ5qlcUHNwDBVEqvR%2BZMvsoAwtPPCEEtn1bsriy4PSRosSNLnm5t2jwE%2FnBnj0SlvoC66lIy28a6hdhzOy4LIKGaiuXVujp6TxDzCdjpA7X1Szd%2FrjdCgbfI%2BLcYoeol23e%2BBmoUgqX%2FH%2F7WphfNoIJSQSOnGyTHlCY6H1w2t1E3sg51A4D3JWIVLB2WYzF448pt09nqylG1mJuc6HKOlKdmaXQsLMnmKHg9gVPU5nCTYzRFKx95hlxv%2BexR%2FwUWA%2FFAoOIKyfLDu%2BD6jnvnQ0%2FQKX8EkYvroCF8vbwYCC00trnzQxrzwYJLwPQirebVH7Oahrqz9GC0AWA9eA97aF%2BP4luLedTXeRXiOaV2Z9Ve%2FUiPgVId9oybFaJRbfTHpqGdCCqHmVYhy%2FEsO5Cc%2BQUqd%2FkRSRiqMTFCGbldY2yDqSZw64N8nuy8Q96AyqFxx8c6WzQYgrnl3hNW0h4z9xcGUrpHYMZ77Ur3slw9NZ0bKa57Vabhdr1x5OYeiS7vIzRDpCAbpuj6DfmvWMLp348CcYnwzWuKpXMO3dVopSQ5g9mhqW%2BFMNVwkq1Am9qT1qrLfa%2B1dQEw%2Fy0wIRDiehbfWn6k2HjSptp3j%2BzS4WKomHeWEC4bVofpOKx4hEF73kGEvxzfPjo%2FvM4xTiuH8Fw%2Ftwx3xR%2BCjABzmEmzPMsoGOGdHiGnkYWYekOUmFS8h%2Fi8Jw2JqzHfZF8f%2F2K1dh1jvULJ4N43QBPb4lsbmYS4T6K65SKkJmjYlq4eaFeXjKk40r9KIYmbHhRBeXnFBvc%2FXLPIReEDDLC9HXmnll%2FdgY3JD1e8RBDzUgdF7cRmJDlocZqnJEOFEoT9LO1JpiU4hH7xEXEFul4Z6EgM97YXTfqEBYeQ%2FftyIee07L%2Fo%2Fx0nUdi1El42uLyPyvwzVbzHFeUBprI1M0Svxq1KERKrTVQz%2Fxmxx4YkPhOeU2CmA9cv8IUhsaf%2F%2FCw%2F%2Fv2wwjcZeJG4gdeHp9CfteShvQokMKtq3clCiTf4WkYf9AcgobPOxy6bXQku9aycXoVNKtl%2F4cM9rOe25AwjBFkatpfkUTiOjQVLf5d1me2eUYIU%2FXr1Il4xn%2BbVtahT304xf%2Fy1fQG828mpapX2vSds2dALGa2AFXntrk3%2Bm2KiYKKDSE6MNcn7X80JUWKAcOOZpejPrOYSTo6BN%2BIbvC%2FxTLmn153zkkVvEiaIVVMqwU2aPZX%2FY2PHOkIz9hhSm%2FhQ2%2FDLbizMKEoQ3avvhlz%2B6dP8UlCXQILjqQuoO2sZf80pwEwsBYFAvB2DKRAJzYSsBoTLrjmM4ynP9duq4LGtpakfqjnJdlElsER%2FnWwYQV9OIi3RZPF2EHyjj%2BH7IcqxOAzvK1kyqoC7W8fAWeeDoEvegnTtRwDuzHuP1LsAkQZxB0REPYa0Q%2BP0sn4zipSJv7UHerEHdxSqegawjnqP33o8BrARxatwd1FccDPXVQ%2BARDyQspfmJDFTyw6b%2Fh%2FngyQUsdA8bqAO1Wilg7XdenuaXkNJlXHQaP4bDNS9Q0F94HZiLSmS6OBhgV3IQm79XYxX5%2BlCA%2BEC%2FU%2F6Ec94hNWafV%2FjcG%2FID2AgSFwMkc6M%3D&video_play_time=0]]>
+                            </Tracking>
+                            <Tracking event="complete">
+                                <![CDATA[https://is.snssdk.com/api/ad/union/event_report/?event_type=6&extra=4AfhtQRp22DGOBvA5zI0lS%2FcT%2Bw9JJgawOAhIgmdGSHq9mhg2WowlxaVMCnpX9aEnCvZlJ%2F4XnX9Y3ft9EE3jGL6S2ry5oiX6rZbqXq0sxJUwk6QzU%2B01i3d7ImYEWp6enFEt09MtFFv7b48W%2FZZvC%2BTQVUys9SLkZnSUnYc6Q5CX7dTPTqNbxlIs9nqK1F0KLvOxM8q%2Bm1Gz900kSWp4GY%2Fz1AO7%2Bhn43CSs46qVMvHQ5qlcUHNwDBVEqvR%2BZMvsoAwtPPCEEtn1bsriy4PSRosSNLnm5t2jwE%2FnBnj0SlvoC66lIy28a6hdhzOy4LIKGaiuXVujp6TxDzCdjpA7X1Szd%2FrjdCgbfI%2BLcYoeol23e%2BBmoUgqX%2FH%2F7WphfNoIJSQSOnGyTHlCY6H1w2t1E3sg51A4D3JWIVLB2WYzF448pt09nqylG1mJuc6HKOlKdmaXQsLMnmKHg9gVPU5nCTYzRFKx95hlxv%2BexR%2FwUWA%2FFAoOIKyfLDu%2BD6jnvnQ0%2FQKX8EkYvroCF8vbwYCC00trnzQxrzwYJLwPQirebVH7Oahrqz9GC0AWA9eA97aF%2BP4luLedTXeRXiOaV2Z9Ve%2FUiPgVId9oybFaJRbfTHpqGdCCqHmVYhy%2FEsO5Cc%2BQUqd%2FkRSRiqMTFCGbldY2yDqSZw64N8nuy8Q96AyqFxx8c6WzQYgrnl3hNW0h4z9xcGUrpHYMZ77Ur3slw9NZ0bKa57Vabhdr1x5OYeiS7vIzRDpCAbpuj6DfmvWMLp348CcYnwzWuKpXMO3dVopSQ5g9mhqW%2BFMNVwkq1Am9qT1qrLfa%2B1dQEw%2Fy0wIRDiehbfWn6k2HjSptp3j%2BzS4WKomHeWEC4bVofpOKx4hEF73kGEvxzfPjo%2FvM4xTiuH8Fw%2Ftwx3xR%2BCjABzmEmzPMsoGOGdHiGnkYWYekOUmFS8h%2Fi8Jw2JqzHfZF8f%2F2K1dh1jvULJ4N43QBPb4lsbmYS4T6K65SKkJmjYlq4eaFeXjKk40r9KIYmbHhRBeXnFBvc%2FXLPIReEDDLC9HXmnll%2FdgY3JD1e8RBDzUgdF7cRmJDlocZqnJEOFEoT9LO1JpiU4hH7xEXEFul4Z6EgM97YXTfqEBYeQ%2FftyIee07L%2Fo%2Fx0nUdi1El42uLyPyvwzVbzHFeUBprI1M0Svxq1KERKrTVQz%2Fxmxx4YkPhOeU2CmA9cv8IUhsaf%2F%2FCw%2F%2Fv2wwjcZeJG4gdeHp9CfteShvQokMKtq3clCiTf4WkYf9AcgobPOxy6bXQku9aycXoVNKtl%2F4cM9rOe25AwjBFkatpfkUTiOjQVLf5d1me2eUYIU%2FXr1Il4xn%2BbVtahT304xf%2Fy1fQG828mpapX2vSds2dALGa2AFXntrk3%2Bm2KiYKKDSE6MNcn7X80JUWKAcOOZpejPrOYSTo6BN%2BIbvC%2FxTLmn153zkkVvEiaIVVMqwU2aPZX%2FY2PHOkIz9hhSm%2FhQ2%2FDLbizMKEoQ3avvhlz%2B6dP8UlCXQILjqQuoO2sZf80pwEwsBYFAvB2DKRAJzYSsBoTLrjmM4ynP9duq4LGtpakfqjnJdlElsER%2FnWwYQV9OIi3RZPF2EHyjj%2BH7IcqxOAzvK1kyqoC7W8fAWeeDoEvegnTtRwDuzHuP1LsAkQZxB0REPYa0Q%2BP0sn4zipSJv7UHerEHdxSqegawjnqP33o8BrARxatwd1FccDPXVQ%2BARDyQspfmJDFTyw6b%2Fh%2FngyQUsdA8bqAO1Wilg7XdenuaXkNJlXHQaP4bDNS9Q0F94HZiLSmS6OBhgV3IQm79XYxX5%2BlCA%2BEC%2FU%2F6Ec94hNWafV%2FjcG%2FID2AgSFwMkc6M%3D&video_play_time=27]]>
+                            </Tracking>
+                            <Tracking event="creativeView">
+                                <![CDATA[http://app05.adfalcon.com/E/78c1743833b34d43991083f92bd5b392_0_b338d452-96f4-4d37-b6e1-d10de8271ff4?ev=creativeview]]>
+                            </Tracking>
+                        </TrackingEvents>
+                        <VideoClicks>
+                            <ClickThrough>
+                                <![CDATA[https://events-dca.bidder.kayzen.io/click?raw=BH4f6iRihnLulIzOXQMUXomi6R2lyBeL6MGU81R%2FVDRIFVcxvyj5kbHDx6lRmuk35AuEIPkGnJB0xLx1lvWnuD00Bh02ghKFeiI8RONNSJ%2BNSb4ANGQvmlTdDS7apSoLjpix1Mwd7isfwajPwP1jSaXYbaYEQ8seFjqNU5XghUC%2FYSYvVq9aObfH04qjspVlAmJGMg10b4t3nikZHK5Bxo7eE4W0h7OCKb1I9%2FXdka8kudVFGEDyXhIOi%2FIgFdU5WaxS5h03E6kil3FD64UQVrV5vWjF5s%2B1UzoRwuZL895Gmm57ddCq2LmX0u4Z9t%2B42WQSOI4HYKHI9UiS58a4FTvM5mDYa0lBH5gQzOF2oNHBIMva7AcQMj7ACSiuBXdKUPX8%2FPwQpWiWHrIsjvRgumlunroJm2eZw9BR4Bw%2BejeJYCp7IgXwsdK7cbedrdKF4LaNOqOMUUdeZV4RXeAw8aVFecojzaGo4PsJ9NAaxX7h5RstugfNIBsB19J3dqRO7jwM03XkVlwy5mdByl%2F38cLjCYWUjrJJbTNIu0kotSZnlwbynqFuMT%2BJ%2F4G2mhLljNv5F8vZ1unnc0v9Al7u4eyfJzKDK1HQsEmNrU8pxzC3Xv3WkFvwmvqcaJTvN7%2FlasL8UPvAr8N4nUeVftr2%2BkAd63EF6%2B%2FeSJ4CPS10J6OePGDIgzAK9de6Nxzz7GoFMd%2FIorShKbGJ6wJCMpTewLV9HGcUjLgUKEQtcuQGFkOsz4W1oqbwSNzjHIpJ7wmdNAhkiJn8ounkC2VxAIVUsNhsCaiZbSRRlio2hMPgdHwQ6BC45Je4KAQcjPwKNvtEUXtE8WRVtWl%2BHu4q%2BNVMDb%2FaH2upa8aqy2gZ8nmoTRIMWdUuOOtQZ0LgheYiX5XJkECA1TvwFMkTSN2JMffi1hLzEIjV%2B4frpzv3Eo3NJawOyiaAQSm8oIAOofhvykWKZFANezUgSSys8UL3hMzAWR46SdrQ%2BttcVxvfcMQ9lt4uJxKDYopHZV1Ij8zdHquvzkyAjpRzSigxcTl%2FcQgO1DS9%2FyXpxDyQbQVRZon80S8DROhReR3sYtCyII7VgF0EDNFN9YrJIpFq7PkX%2FFCTcA%3D%3D&p=0&durl=https%3A%2F%2Fapp.adjust.com%2Fao3hqf5%3Ftracker_limit%3D20000%26campaign%3D170881%26adgroup%3D5d8e165cbea62600175a0b7d%26creative%3DCrossword+Jam%26idfa%3D3CE171BC-65B1-4EA2-A179-AC14B47E17B9%26gps_adid%3D3CE171BC-65B1-4EA2-A179-AC14B47E17B9%26publisher_id%3D5d8e165cbea62600175a0b7d%26impression_id%3D107206517-1630409350-090-1-34-172-4-8V3lq-612e12868d020cc18a72ef8e-10064-170881-50461238%26kayzen_click_id%3D107206517-1630409350-090-1-34-172-4-8V3lq-612e12868d020cc18a72ef8e-10064-170881-50461238%26sk_network_id%3D4468km3ulz.skadnetwork%26sk_campaign_id%3D0%26sk_network_token%3Dxylyea2j143k]]>
+                            </ClickThrough>
+                            <ClickTracking>
+                                <![CDATA[https://lf.snssdk.com/api/ad/union/redirect/?active_extra=dBAOZluLpbktg88y1awPD2bg7gF9T%2BF6SllwqYXihRKdbZEAoq9kCTbQPfHeGuWj21kYt5Qc63RSfRlL91A1hg%3D%3D&call_back=4OeszuGPR9JzWtROWbsgyFBgcUsU1ve3UPw17uco1n9ePHi0qf7oGq7vfSE%2FgprAZp9X%2BNwb8gPYCBIXAyRzow%3D%3D&click_source=1&extra=K%2FmpeEAU9gTcAOwvQsxpEXCQ0RSkek%2FS2SNNUe7hSz1Rl2DO0%2FTy2PAfb9FWkVKsPQzZvb6OJQUB1GzO1L66cb48QDsoKtHAjqfr0Yv468vCtJKCIIWbNqr4cSxdNJRdnIhG0Rq9roAyGBxUMcLJ%2FFPqn%2BEI3maAdb%2B5UsXPL05UsXkxhJrhiNR%2BUtw5D99v%2F553nJNfOQIhUPVUCX7ukh8Bz6bsA7LS2JNLhIcGUMTjKk40r9KIYmbHhRBeXnFBfHdkWpf6aEMtqeKTkeUCZlrh%2FRhPWJlVG3GW%2FhDdvXlYGcIT5XqmPjrHpTP1MPDrXZ4raX29Vw6eUkt98LsllUhQVoweCBlkcyHNmdEgyYY52w99mssEqM%2FpgaG%2B%2BiUBqu%2BDJiO1kcY%2FJtJMIyW%2Fg51GC8C9d%2B9Jc8frsb7Xw3deAyp5Ep5I1fgXPZFM7wPzUu%2ByA4OhQa%2BkmY6EbvTqXqgCckW774o44v51I1Xh4mcaehI5klVYi14PBEYJabir4wU%2FgEoObr9IalC2lNHys8VIB3pZjCbQPQue3xnmyFAkJbTpzK%2FpXRuoH9ofbr50tAYRBIWMIWjMugZk7quJtS%2FwrnvRQfiaQKHWis4uNJ6WFEs5bz2nKETUZeid7zKEpbs4xQ4GXwe%2Bbx9qOx1IBv6ud6fF7dJnCQIPo0pXUmkt7c98DxDeglFltD2KRt3Q0F3wpWbK8wst5E42%2FMpvaBWtv4v9HMsAAE6kdKfKblBFHDeY66C3LdW37yWyA1Egk%2F%2FSpxv%2Fzrik2WCBCjCJPSWnHrUf8vlrZ4fK%2BpNNisrBHUCcyYcJ%2FrX2bvWI3I2NZp9X%2BNwb8gPYCBIXAyRzow%3D%3D&is_dsp=1&pack_time=1590630440.65&req_id=5ec796d603e1e7c01267c88fu8791&rit=920685236&source_type=1&use_pb=1]]>
+                            </ClickTracking>
+                            <CustomClick id="ClickCoordinates-1">
+                                <![CDATA[https://c2.gdt.qq.com/gdt_mclick.fcg?viewid=!s6A4zH!POBbWj7ZQJudpxTBaTzOitZ8Zrj2cUWt!HRqifXlxVXVFYsSbE41QXp8NkVBskWi5Xu3It3wZDq05WhMsgfMLVxU41AQqVoe3wHYs6zZtEO_OtSDOHBiIm_Jn3xRWbR93zoDNI2kpylT7ltMreMCvonlVZ2Br0DCTf8SQOYklg8NNwTiMJCaTcC4xb7pIVEr5A5nkmccS3H9UpiMiJTk3eT_Yn57f4UxnMy9cxrAgVDosJFLJ6rXP6tZHCWVS3kSr0l5iRK1V956hwoVlIAVZCLcI!!qfcKzeS548ctKsM2Ps6ip5M9Cpx60&jtype=0&i=1&os=2&acttype=1&s={"req_width":"__REQ_WIDTH__","req_height":"__REQ_HEIGHT__","width":"__WIDTH__","height":"__HEIGHT__","down_x":"__DOWN_X__","down_y":"__DOWN_Y__","up_x":"__UP_X__","up_y":"__UP_Y__"}&lpp=click_ext=eyJleHBfcGFyYW0iOiJjYXJyaWVyX2VuYWJsZToyIn0=&clklpp=__CLICK_LPP__&nxjp=1&cdnxj=1&xp=1&tl=1]]>
+                            </CustomClick>
+                            <CustomClick id="ClickCoordinates-2">
+                                <![CDATA[http://link/to/customclick/2]]>
+                            </CustomClick>
+                            <CustomClick id="customclick-3">
+                                <![CDATA[http://link/to/customclick/3]]>
+                            </CustomClick>
+                        </VideoClicks>
+                        <MediaFiles>
+                            <MediaFile delivery="progressive" type="video/mp4" width="1280" height="720" minBitrate="488" maxBitrate="19900">
+                                <![CDATA[ asdjfklajsd;fkja;sdlkfjklasdjfklasdjfkl.mp4 ]]>
+                            </MediaFile>
+                            <MediaFile bitrate="206" delivery="progressive" height="180" maintainAspectRatio="false" scalable="false" type="video/3gpp" width="320">
+                                <![CDATA[ test/jsldfjlksdfjk.mp4 ]]>
+                            </MediaFile>
+                            <MediaFile delivery="progressive" type="video/mp4" width="1280" height="720">
+                                <![CDATA[ v3-ad.ixigua.com/kghkhk/toutiao123werwerew.abc ]]>
+                            </MediaFile>
+                            <MediaFile bitrate="56" delivery="progressive" height="144" maintainAspectRatio="false" scalable="false" type="video/3gpp" width="176">
+                                <![CDATA[ https://gcdn.2mdn.net/videoplayback/id/1fe270df6ccb6f2c/itag/17/source/doubleclick_dmm/ctier/L/ip/0.0.0.0/ipbits/0/expire/3738748511/sparams/id,itag,source,ctier,ip,ipbits,expire/signature/8044BE9E3E1793FF36C03998BA13848E7C845ABE.75B6CAFBF57F6F96C78BDFCEB9653E601FD7E8D8/key/ck2/file/file.3gpp ]]>
+                            </MediaFile>
+                            <MediaFile delivery="progressive" type="video/mp4" width="1280" height="720">
+                                <![CDATA[https://v3-ad.ixigua.com/kghkhk/toutiao123]]>
+                            </MediaFile>
+                            <MediaFile bitrate="206" delivery="progressive" height="180" maintainAspectRatio="false" scalable="false" type="video/3gpp" width="320">
+                                <![CDATA[ https://gcdn.2mdn.net/videoplayback/id/1fe270df6ccb6f2c/itag/36/source/doubleclick_dmm/ctier/L/ip/0.0.0.0/ipbits/0/expire/3738748512/sparams/id,itag,source,ctier,ip,ipbits,expire/signature/29EC5A3574F0873D71FF75DEA54B89FD30A0D0B1.82B0C3EBBBAF7046A8DFBF3D94AAD9FC69C5C9A4/key/ck2/file/file.3gpp ]]>
+                            </MediaFile>
+                            <MediaFile delivery="progressive" type="video/mp4" width="1280" height="720">
+                                <![CDATA[https://cdn-cn.vungle.cn/zen/497a5dead8498d62d7c65967729639f7-1280x720-Q2.mp4]]>
+                            </MediaFile>
+                            <MediaFile bitrate="372" delivery="progressive" height="360" maintainAspectRatio="false" scalable="false" type="video/mp4" width="640">
+                                <![CDATA[ https://gcdn.2mdn.net/videoplayback/id/1fe270df6ccb6f2c/itag/18/source/doubleclick_dmm/ctier/L/acao/yes/ip/0.0.0.0/ipbits/0/expire/3738748513/sparams/id,itag,source,ctier,acao,ip,ipbits,expire/signature/484784AD6E9C1516EC07970AB978D11555654A9A.57EFB4F5F3CCE7F30CFBA1951E6434319300BE12/key/ck2/file/file.mp4 ]]>
+                            </MediaFile>
+                            <MediaFile bitrate="1879" delivery="progressive" height="720" maintainAspectRatio="false" scalable="false" type="video/mp4" width="1280">
+                                <![CDATA[ https://gcdn.2mdn.net/videoplayback/id/1fe270df6ccb6f2c/itag/22/source/doubleclick_dmm/ctier/L/acao/yes/ip/0.0.0.0/ipbits/0/expire/3738748528/sparams/id,itag,source,ctier,acao,ip,ipbits,expire/signature/7136B1FF2CD283E5A90276E455C5F970B91A35FF.8E6707BA3249059D7BA09F6E3D59FF6BA1D78FE0/key/ck2/file/file.mp4 ]]>
+                            </MediaFile>
+                        </MediaFiles>
+                    </Linear>
+                </Creative>
+                <Creative>
+                    <CompanionAds>
+                        <Companion id="post-roll" width="1280" height="720">
+                            <CompanionClickThrough>
+
+                                <![CDATA[https://events-dca.bidder.kayzen.io/click?raw=BH4f6iRihnLulIzOXQMUXomi6R2lyBeL6MGU81R%2FVDRIFVcxvyj5kbHDx6lRmuk35AuEIPkGnJB0xLx1lvWnuD00Bh02ghKFeiI8RONNSJ%2BNSb4ANGQvmlTdDS7apSoLjpix1Mwd7isfwajPwP1jSaXYbaYEQ8seFjqNU5XghUC%2FYSYvVq9aObfH04qjspVlAmJGMg10b4t3nikZHK5Bxo7eE4W0h7OCKb1I9%2FXdka8kudVFGEDyXhIOi%2FIgFdU5WaxS5h03E6kil3FD64UQVrV5vWjF5s%2B1UzoRwuZL895Gmm57ddCq2LmX0u4Z9t%2B42WQSOI4HYKHI9UiS58a4FTvM5mDYa0lBH5gQzOF2oNHBIMva7AcQMj7ACSiuBXdKUPX8%2FPwQpWiWHrIsjvRgumlunroJm2eZw9BR4Bw%2BejeJYCp7IgXwsdK7cbedrdKF4LaNOqOMUUdeZV4RXeAw8aVFecojzaGo4PsJ9NAaxX7h5RstugfNIBsB19J3dqRO7jwM03XkVlwy5mdByl%2F38cLjCYWUjrJJbTNIu0kotSZnlwbynqFuMT%2BJ%2F4G2mhLljNv5F8vZ1unnc0v9Al7u4eyfJzKDK1HQsEmNrU8pxzC3Xv3WkFvwmvqcaJTvN7%2FlasL8UPvAr8N4nUeVftr2%2BkAd63EF6%2B%2FeSJ4CPS10J6OePGDIgzAK9de6Nxzz7GoFMd%2FIorShKbGJ6wJCMpTewLV9HGcUjLgUKEQtcuQGFkOsz4W1oqbwSNzjHIpJ7wmdNAhkiJn8ounkC2VxAIVUsNhsCaiZbSRRlio2hMPgdHwQ6BC45Je4KAQcjPwKNvtEUXtE8WRVtWl%2BHu4q%2BNVMDb%2FaH2upa8aqy2gZ8nmoTRIMWdUuOOtQZ0LgheYiX5XJkECA1TvwFMkTSN2JMffi1hLzEIjV%2B4frpzv3Eo3NJawOyiaAQSm8oIAOofhvykWKZFANezUgSSys8UL3hMzAWR46SdrQ%2BttcVxvfcMQ9lt4uJxKDYopHZV1Ij8zdHquvzkyAjpRzSigxcTl%2FcQgO1DS9%2FyXpxDyQbQVRZon80S8DROhReR3sYtCyII7VgF0EDNFN9YrJIpFq7PkX%2FFCTcA%3D%3D&p=0&durl=https%3A%2F%2Fapp.adjust.com%2Fao3hqf5%3Ftracker_limit%3D20000%26campaign%3D170881%26adgroup%3D5d8e165cbea62600175a0b7d%26creative%3DCrossword+Jam%26idfa%3D3CE171BC-65B1-4EA2-A179-AC14B47E17B9%26gps_adid%3D3CE171BC-65B1-4EA2-A179-AC14B47E17B9%26publisher_id%3D5d8e165cbea62600175a0b7d%26impression_id%3D107206517-1630409350-090-1-34-172-4-8V3lq-612e12868d020cc18a72ef8e-10064-170881-50461238%26kayzen_click_id%3D107206517-1630409350-090-1-34-172-4-8V3lq-612e12868d020cc18a72ef8e-10064-170881-50461238%26sk_network_id%3D4468km3ulz.skadnetwork%26sk_campaign_id%3D0%26sk_network_token%3Dxylyea2j143k]]>
+
+                            </CompanionClickThrough>
+                            <CompanionClickTracking>
+
+                                <![CDATA[https://lf.snssdk.com/api/ad/union/redirect/?active_extra=dBAOZluLpbktg88y1awPD2bg7gF9T%2BF6SllwqYXihRKdbZEAoq9kCTbQPfHeGuWj21kYt5Qc63RSfRlL91A1hg%3D%3D&call_back=4OeszuGPR9JzWtROWbsgyFBgcUsU1ve3UPw17uco1n9ePHi0qf7oGq7vfSE%2FgprAZp9X%2BNwb8gPYCBIXAyRzow%3D%3D&click_source=2&extra=K%2FmpeEAU9gTcAOwvQsxpEXCQ0RSkek%2FS2SNNUe7hSz1Rl2DO0%2FTy2PAfb9FWkVKsPQzZvb6OJQUB1GzO1L66cb48QDsoKtHAjqfr0Yv468vCtJKCIIWbNqr4cSxdNJRdnIhG0Rq9roAyGBxUMcLJ%2FFPqn%2BEI3maAdb%2B5UsXPL05UsXkxhJrhiNR%2BUtw5D99v%2F553nJNfOQIhUPVUCX7ukh8Bz6bsA7LS2JNLhIcGUMTjKk40r9KIYmbHhRBeXnFBfHdkWpf6aEMtqeKTkeUCZlrh%2FRhPWJlVG3GW%2FhDdvXlYGcIT5XqmPjrHpTP1MPDrXZ4raX29Vw6eUkt98LsllUhQVoweCBlkcyHNmdEgyYY52w99mssEqM%2FpgaG%2B%2BiUBqu%2BDJiO1kcY%2FJtJMIyW%2Fg51GC8C9d%2B9Jc8frsb7Xw3deAyp5Ep5I1fgXPZFM7wPzUu%2ByA4OhQa%2BkmY6EbvTqXqgCckW774o44v51I1Xh4mcaehI5klVYi14PBEYJabir4wU%2FgEoObr9IalC2lNHys8VIB3pZjCbQPQue3xnmyFAkJbTpzK%2FpXRuoH9ofbr50tAYRBIWMIWjMugZk7quJtS%2FwrnvRQfiaQKHWis4uNJ6WFEs5bz2nKETUZeid7zKEpbs4xQ4GXwe%2Bbx9qOx1IBv6ud6fF7dJnCQIPo0pXUmkt7c98DxDeglFltD2KRt3Q0F3wpWbK8wst5E42%2FMpvaBWtv4v9HMsAAE6kdKfKblBFHDeY66C3LdW37yWyA1Egk%2F%2FSpxv%2Fzrik2WCBCjCJPSWnHrUf8vlrZ4fK%2BpNNisrBHUCcyYcJ%2FrX2bvWI3I2NZp9X%2BNwb8gPYCBIXAyRzow%3D%3D&is_dsp=1&pack_time=1590630440.65&req_id=5ec796d603e1e7c01267c88fu8791&rit=920685236&source_type=1&use_pb=1]]>
+
+
+                            </CompanionClickTracking>
+                            <TrackingEvents>
+                                <Tracking event="creativeView"></Tracking>
+                            </TrackingEvents>
+                            <StaticResource creativeType="image/jpeg">
+                                <![CDATA[https://sf1-ttcdn-tos.pstatp.com/obj/mosaic-legacy/2ff3f000e60c223e67984]]>
+                            </StaticResource>
+                        </Companion>
+                        <Companion id="vungle_endcard_v1">
+                            <CompanionClickThrough>
+
+                                <![CDATA[https://events-dca.bidder.kayzen.io/click?raw=BH4f6iRihnLulIzOXQMUXomi6R2lyBeL6MGU81R%2FVDRIFVcxvyj5kbHDx6lRmuk35AuEIPkGnJB0xLx1lvWnuD00Bh02ghKFeiI8RONNSJ%2BNSb4ANGQvmlTdDS7apSoLjpix1Mwd7isfwajPwP1jSaXYbaYEQ8seFjqNU5XghUC%2FYSYvVq9aObfH04qjspVlAmJGMg10b4t3nikZHK5Bxo7eE4W0h7OCKb1I9%2FXdka8kudVFGEDyXhIOi%2FIgFdU5WaxS5h03E6kil3FD64UQVrV5vWjF5s%2B1UzoRwuZL895Gmm57ddCq2LmX0u4Z9t%2B42WQSOI4HYKHI9UiS58a4FTvM5mDYa0lBH5gQzOF2oNHBIMva7AcQMj7ACSiuBXdKUPX8%2FPwQpWiWHrIsjvRgumlunroJm2eZw9BR4Bw%2BejeJYCp7IgXwsdK7cbedrdKF4LaNOqOMUUdeZV4RXeAw8aVFecojzaGo4PsJ9NAaxX7h5RstugfNIBsB19J3dqRO7jwM03XkVlwy5mdByl%2F38cLjCYWUjrJJbTNIu0kotSZnlwbynqFuMT%2BJ%2F4G2mhLljNv5F8vZ1unnc0v9Al7u4eyfJzKDK1HQsEmNrU8pxzC3Xv3WkFvwmvqcaJTvN7%2FlasL8UPvAr8N4nUeVftr2%2BkAd63EF6%2B%2FeSJ4CPS10J6OePGDIgzAK9de6Nxzz7GoFMd%2FIorShKbGJ6wJCMpTewLV9HGcUjLgUKEQtcuQGFkOsz4W1oqbwSNzjHIpJ7wmdNAhkiJn8ounkC2VxAIVUsNhsCaiZbSRRlio2hMPgdHwQ6BC45Je4KAQcjPwKNvtEUXtE8WRVtWl%2BHu4q%2BNVMDb%2FaH2upa8aqy2gZ8nmoTRIMWdUuOOtQZ0LgheYiX5XJkECA1TvwFMkTSN2JMffi1hLzEIjV%2B4frpzv3Eo3NJawOyiaAQSm8oIAOofhvykWKZFANezUgSSys8UL3hMzAWR46SdrQ%2BttcVxvfcMQ9lt4uJxKDYopHZV1Ij8zdHquvzkyAjpRzSigxcTl%2FcQgO1DS9%2FyXpxDyQbQVRZon80S8DROhReR3sYtCyII7VgF0EDNFN9YrJIpFq7PkX%2FFCTcA%3D%3D&p=0&durl=https%3A%2F%2Fapp.adjust.com%2Fao3hqf5%3Ftracker_limit%3D20000%26campaign%3D170881%26adgroup%3D5d8e165cbea62600175a0b7d%26creative%3DCrossword+Jam%26idfa%3D3CE171BC-65B1-4EA2-A179-AC14B47E17B9%26gps_adid%3D3CE171BC-65B1-4EA2-A179-AC14B47E17B9%26publisher_id%3D5d8e165cbea62600175a0b7d%26impression_id%3D107206517-1630409350-090-1-34-172-4-8V3lq-612e12868d020cc18a72ef8e-10064-170881-50461238%26kayzen_click_id%3D107206517-1630409350-090-1-34-172-4-8V3lq-612e12868d020cc18a72ef8e-10064-170881-50461238%26sk_network_id%3D4468km3ulz.skadnetwork%26sk_campaign_id%3D0%26sk_network_token%3Dxylyea2j143k]]>
+
+                            </CompanionClickThrough>
+                            <CompanionClickTracking>
+
+                                <![CDATA[https://lf.snssdk.com/api/ad/union/redirect/?active_extra=dBAOZluLpbktg88y1awPD2bg7gF9T%2BF6SllwqYXihRKdbZEAoq9kCTbQPfHeGuWj21kYt5Qc63RSfRlL91A1hg%3D%3D&call_back=4OeszuGPR9JzWtROWbsgyFBgcUsU1ve3UPw17uco1n9ePHi0qf7oGq7vfSE%2FgprAZp9X%2BNwb8gPYCBIXAyRzow%3D%3D&click_source=2&extra=K%2FmpeEAU9gTcAOwvQsxpEXCQ0RSkek%2FS2SNNUe7hSz1Rl2DO0%2FTy2PAfb9FWkVKsPQzZvb6OJQUB1GzO1L66cb48QDsoKtHAjqfr0Yv468vCtJKCIIWbNqr4cSxdNJRdnIhG0Rq9roAyGBxUMcLJ%2FFPqn%2BEI3maAdb%2B5UsXPL05UsXkxhJrhiNR%2BUtw5D99v%2F553nJNfOQIhUPVUCX7ukh8Bz6bsA7LS2JNLhIcGUMTjKk40r9KIYmbHhRBeXnFBfHdkWpf6aEMtqeKTkeUCZlrh%2FRhPWJlVG3GW%2FhDdvXlYGcIT5XqmPjrHpTP1MPDrXZ4raX29Vw6eUkt98LsllUhQVoweCBlkcyHNmdEgyYY52w99mssEqM%2FpgaG%2B%2BiUBqu%2BDJiO1kcY%2FJtJMIyW%2Fg51GC8C9d%2B9Jc8frsb7Xw3deAyp5Ep5I1fgXPZFM7wPzUu%2ByA4OhQa%2BkmY6EbvTqXqgCckW774o44v51I1Xh4mcaehI5klVYi14PBEYJabir4wU%2FgEoObr9IalC2lNHys8VIB3pZjCbQPQue3xnmyFAkJbTpzK%2FpXRuoH9ofbr50tAYRBIWMIWjMugZk7quJtS%2FwrnvRQfiaQKHWis4uNJ6WFEs5bz2nKETUZeid7zKEpbs4xQ4GXwe%2Bbx9qOx1IBv6ud6fF7dJnCQIPo0pXUmkt7c98DxDeglFltD2KRt3Q0F3wpWbK8wst5E42%2FMpvaBWtv4v9HMsAAE6kdKfKblBFHDeY66C3LdW37yWyA1Egk%2F%2FSpxv%2Fzrik2WCBCjCJPSWnHrUf8vlrZ4fK%2BpNNisrBHUCcyYcJ%2FrX2bvWI3I2NZp9X%2BNwb8gPYCBIXAyRzow%3D%3D&is_dsp=1&pack_time=1590630440.65&req_id=5ec796d603e1e7c01267c88fu8791&rit=920685236&source_type=1&use_pb=1]]>
+
+
+                            </CompanionClickTracking>
+                            <TrackingEvents></TrackingEvents>
+                            <AdParameters xmlEncoded="true">
+                                <![CDATA[<EndCardAdParameters><icon>https://p3-tt.byteimg.com/img/ad.union.api/7c51525c9163b92843a26bf89aaded1f~100x100.image</icon><app_name>点亮城市-全网开服</app_name><cover_url>https://sf1-ttcdn-tos.pstatp.com/img/mosaic-legacy/2ff3f000e60c223e67984~noop.jpg</cover_url><app_stars>5</app_stars><button_text>点击下载</button_text><download_url>https%3A%2F%2Fapps.apple.com%2Fcn%2Fapp%2Fid1490962424</download_url><description>只有5%的人能点亮整座城市，你敢挑战吗</description></EndCardAdParameters>]]>
+                            </AdParameters>
+                        </Companion>
+                    </CompanionAds>
+                </Creative>
+            </Creatives>
+            <Description>
+                <![CDATA[只有5%的人能点亮整座城市，你敢挑战吗]]>
+            </Description>
+            <Survey></Survey>
+            <Extensions>
+                <Extension type="AdVerifications">
+                    <AdVerifications>
+                        <Verification vendor="moat.com-omsdkvungleinappvideo781943494431">
+                            <JavaScriptResource apiFramework="omid" browserOptional="true">
+                                <![CDATA[https://z.moatads.com/omsdkvungleinappvideo781943494431/moatvideo.js]]>
+                            </JavaScriptResource>
+                            <VerificationParameters>
+                                <![CDATA[{"moatClientLevel1":"{{{app_id}}}","moatClientLevel2":"{{{campaign_id}}}","moatClientLevel3":"{{{creative_id}}}","moatClientLevel4":"{{{placement_id}}}","moatClientSlicer1":"{{{pub_app_id}}}","moatClientLevel5":"{{{rtb_deal_id}}}","moatClientLevel6":"{{{rtb_connection_id}}}"}]]>
+                            </VerificationParameters>
+                        </Verification>
+                    </AdVerifications>
+                </Extension>
+                <Extension type="Extra">
+                    <CTA>
+                        <![CDATA[点击下载]]>
+                    </CTA>
+                    <SystemIcon>
+                        <![CDATA[https://sf1-ttcdn-tos.pstatp.com/img/ad.union.api/07c04164de3140d2cfe4bdd9812aef22~c1_0x0_q100.png]]>
+                    </SystemIcon>
+                    <FullStar>
+                        <![CDATA[https://sf1-ttcdn-tos.pstatp.com/img/ad.union.api/48c275deda9f2daa92acccf8218fc59f~c1_0x0_q100.jpeg]]>
+                    </FullStar>
+                    <HalfStar>
+                        <![CDATA[https://sf1-ttcdn-tos.pstatp.com/img/ad.union.api/b273598ab25fec09a467d2b895e3c53e~c1_0x0_q100.jpeg]]>
+                    </HalfStar>
+                    <EmptyStar>
+                        <![CDATA[https://sf1-ttcdn-tos.pstatp.com/img/ad.union.api/fedbae142b79804e383eed3f4d06e9d5~c1_0x0_q100.jpeg]]>
+                    </EmptyStar>
+                    <Review>
+                        <![CDATA[https://sf1-ttcdn-tos.pstatp.com/img/ad.union.api/297845a2690ec96bd1290a0a289ab373~c1_0x0_q100.jpeg]]>
+                    </Review>
+                    <MoPubCtaText></MoPubCtaText>
+                </Extension>
+            </Extensions>
+        </InLine>
+    </Ad>
+</VAST>
