@@ -60,7 +60,7 @@ type Application struct {
 	//   string array
 	// Description:
 	//   Array of IAB content categories of the app. Refer to List 5.1
-	Categories []Category `json:"cat,omitempty"`
+	Categories []string `json:"cat,omitempty"`
 
 	// Attribute:
 	//   sectioncat
@@ -69,7 +69,7 @@ type Application struct {
 	// Description:
 	//   Array of IAB content categories that describe the current
 	//   section of the app. Refer to List 5.1.
-	SectionCategories []Category `json:"sectioncat,omitempty"`
+	SectionCategories []string `json:"sectioncat,omitempty"`
 
 	// Attribute:
 	//   pagecat
@@ -78,7 +78,7 @@ type Application struct {
 	// Description:
 	//   Array of IAB content categories that describe the current page
 	//   or view of the app. Refer to List 5.1.
-	PageCategories []Category `json:"pagecat,omitempty"`
+	PageCategories []string `json:"pagecat,omitempty"`
 
 	// Attribute:
 	//   ver
@@ -154,17 +154,17 @@ func (a *Application) Copy() *Application {
 	appCopy := *a
 
 	if appCopy.Categories != nil {
-		appCopy.Categories = make([]Category, len(a.Categories))
+		appCopy.Categories = make([]string, len(a.Categories))
 		copy(appCopy.Categories, a.Categories)
 	}
 
 	if appCopy.SectionCategories != nil {
-		appCopy.SectionCategories = make([]Category, len(a.SectionCategories))
+		appCopy.SectionCategories = make([]string, len(a.SectionCategories))
 		copy(appCopy.SectionCategories, a.SectionCategories)
 	}
 
 	if appCopy.PageCategories != nil {
-		appCopy.PageCategories = make([]Category, len(a.PageCategories))
+		appCopy.PageCategories = make([]string, len(a.PageCategories))
 		copy(appCopy.PageCategories, a.PageCategories)
 	}
 
