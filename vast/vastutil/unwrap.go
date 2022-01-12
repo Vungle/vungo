@@ -2,7 +2,6 @@ package vastutil
 
 import (
 	"context"
-	"crypto/tls"
 	"encoding/xml"
 	"io"
 	"io/ioutil"
@@ -11,13 +10,7 @@ import (
 	"github.com/Vungle/vungo/vast/vastelement"
 )
 
-var defaultUnwrapClient = &http.Client{
-	Transport: &http.Transport{
-		// Initialize TLSNextProto to disable HTTP/2 support.
-		// For more details please refer to https://github.com/golang/go/issues/32388
-		TLSNextProto: make(map[string]func(authority string, c *tls.Conn) http.RoundTripper),
-	},
-}
+var defaultUnwrapClient = http.DefaultClient
 
 // Unwrap method recursively unmarshals the VAST XML data from the input and unwraps additional VAST
 // XML content when the current VAST is a wrapper. This method returns a slice of all the VAST XML
