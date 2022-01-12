@@ -23,26 +23,26 @@ func TestUnwrap(t *testing.T) {
 	// The tests performs unwrapping of VAST XML starting from the entry point and is expected to
 	// follow the trace until an error occurs or succeeds.
 	tests := []struct {
+		desc          string   // description for the test case
 		entry         string   // entry point for the VAST unwrapping test.
 		trace         []string // list of steps traces through.
 		expectedError error    // expected error in case error occurs.
 	}{
-		{"malformed1", []string{}, &xml.SyntaxError{Line: 4, Msg: "unexpected EOF"}},
-		{"inline1", []string{}, nil},
-		{"wrapper3ads", []string{}, vastutil.ErrUnwrapWithMultipleAds},
-		{"wrapper4nouri", []string{}, vastutil.ErrWrapperMissingAdTagURI},
-		{"wrapper1", []string{"malformed1"}, &xml.SyntaxError{Line: 4, Msg: "unexpected EOF"}},
-		{"wrapper1", []string{"inline1"}, nil},
-		{"wrapper1", []string{"wrapper2", "inline1"}, nil},
+		{"vast element with error xml format", "malformed1", []string{}, &xml.SyntaxError{Line: 4, Msg: "unexpected EOF"}},
+		{"valid inline vast element", "inline1", []string{}, nil},
+		{"valid wrapper vast element", "wrapper3ads", []string{"inline1"}, nil},
+		{"invalid wrapper without TagURI", "wrapper4nouri", []string{}, vastutil.ErrWrapperMissingAdTagURI},
+		{"invalid xml format in wrapper response", "wrapper1", []string{"malformed1"}, &xml.SyntaxError{Line: 4, Msg: "unexpected EOF"}},
+		{"valid inline in wrapper response", "wrapper1", []string{"inline1"}, nil},
+		{"valid inline in the second wrapper response", "wrapper1", []string{"wrapper2", "inline1"}, nil},
+		{"valid triple wrapper response with one empty vast element", "unwrapper_multiads", []string{"unwrapper_multiads_1", "unwrapper_multiads_2", "unwrapper_multiads_3"}, nil},
 	}
 
 	ctx := context.Background()
 
 	for i, test := range tests {
 		t.Logf("Testing %d starting from %s...", i, test.entry)
-
 		tc.Init(test.trace)
-
 		data, err := ioutil.ReadFile(testFilePath(test.entry))
 
 		if err != nil {
@@ -55,17 +55,16 @@ func TestUnwrap(t *testing.T) {
 
 		if err != nil && !reflect.DeepEqual(err, test.expectedError) {
 			t.Log(reflect.TypeOf(err))
-			t.Errorf("Expecting error %v instead of %v.", test.expectedError, err)
+			t.Errorf("Failed for %s. Expecting error %v instead of %v.", test.desc, test.expectedError, err)
 		} else if err == nil {
 			if len(tc.served) != len(test.trace)+1 {
-				t.Errorf("Unwrapping VAST should hop %d times instead of %d times.", len(test.trace)+1, len(tc.served))
+				t.Errorf("Failed for %s. Unwrapping VAST should hop %d times instead of %d times.", test.desc, len(test.trace)+1, len(tc.served))
 			} else if len(vasts) != len(tc.served) {
-				t.Errorf("Unwrapped VAST depth %d was different from served vast, %d.", len(vasts), len(tc.served))
+				t.Errorf("Failed for %s. Unwrapped VAST depth %d was different from served vast, %d.", test.desc, len(vasts), len(tc.served))
 			} else if !reflect.DeepEqual(vasts, tc.served) {
-				t.Error("Unwrapped VAST does not match with served VAST.", vasts, tc.served)
+				t.Errorf("Failed for %s. Unwrapped VAST does not match with served VAST. unwrapped: %v, served: %v", test.desc, vasts, tc.served)
 			}
 		}
-
 	}
 }
 
