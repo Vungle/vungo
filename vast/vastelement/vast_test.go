@@ -2,6 +2,8 @@ package vastelement_test
 
 import (
 	"encoding/xml"
+	"fmt"
+	"io/ioutil"
 	"reflect"
 	"testing"
 
@@ -13,6 +15,33 @@ var VastModelType = reflect.TypeOf(vastelement.Vast{})
 
 func TestVastMarshalUnmarshal(t *testing.T) {
 	vasttest.VerifyModelAgainstFile(t, "VAST", "vast.xml", VastModelType)
+}
+
+func TestVastMarshalUnmarshal_v3(t *testing.T) {
+	tests := []struct {
+		desc        string
+		VastElement *vastelement.Vast
+		File        string
+		Err         error
+	}{
+		// {desc: "single ad vast v3 adm", VastElement: &vastelement.Vast{}, File: "vast_v3_single_ad.xml"},
+		//{desc: "ad and wrapper vast v3 adm", VastElement: &vastelement.Vast{}, File: "vast_v3.xml"},
+		{desc: "wrong icon vast v3 adm", VastElement: &vastelement.Vast{}, File: "vast_v3_single_ad_with_wrong_icon.xml", Err: vastelement.ErrIconResourcesFormat},
+	}
+	for _, test := range tests {
+		vasttest.VerifyVastElementFromFile(t, "testdata/"+test.File, test.VastElement, test.Err)
+	}
+}
+
+func TestVastMarshalUnmarshalQA(t *testing.T) {
+	xmlData, _ := ioutil.ReadFile("testdata/vast_v3_single_ad.xml")
+	model1 := &vastelement.Vast{}
+	if err := xml.Unmarshal(xmlData, model1); err != nil {
+		fmt.Printf("aaaaaaaa")
+	}
+	error := model1.Validate(vastelement.Version3)
+
+	fmt.Printf("eeeee %s\n", error)
 }
 
 func TestVastFindFirstInlineLinearCreativeShouldReturnNoLinearCreative(t *testing.T) {
@@ -74,10 +103,10 @@ func TestVastValidateErrors(t *testing.T) {
 		File        string
 		Err         error
 	}{
-		//{VastElement: &entity.Vast{}, File: "vast_valid.xml"},
+		{VastElement: &vastelement.Vast{}, File: "vast_valid.xml"},
 		{VastElement: &vastelement.Vast{}, Err: vastelement.ErrUnsupportedVersion, File: "vast_invalid_version.xml"},
-		//{VastElement: &entity.Vast{}, Err: ErrVastMissAd, File: "vast_without_ad.xml"},
-		//{VastElement: &entity.Vast{}, Err: ErrUnsupportedVersion, File: "vast_error_version.xml"},
+		{VastElement: &vastelement.Vast{}, Err: vastelement.ErrVastMissAd, File: "vast_without_ad.xml"},
+		{VastElement: &vastelement.Vast{}, Err: vastelement.ErrUnsupportedVersion, File: "vast_error_version.xml"},
 	}
 	for _, test := range tests {
 		vasttest.VerifyVastElementFromFile(t, "testdata/"+test.File, test.VastElement, test.Err)
