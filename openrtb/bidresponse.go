@@ -21,7 +21,7 @@ type BidResponse struct {
 	BidID       string          `json:"bidid,omitempty"`
 	Currency    Currency        `json:"cur,omitempty"`
 	CustomData  string          `json:"customdata,omitempty"`
-	NoBidReason NoBidReason     `json:"nbr,omitempty"`
+	NoBidReason *NoBidReason    `json:"nbr,omitempty"`
 	Extension   json.RawMessage `json:"ext,omitempty"`
 }
 
@@ -37,6 +37,9 @@ func (r *BidResponse) Validate() error {
 	}
 
 	if len(r.SeatBids) == 0 {
+		if r.NoBidReason == nil {
+			return ErrInvalidNoBidReason
+		}
 		return r.NoBidReason.Validate()
 	}
 
@@ -69,6 +72,9 @@ func (r *BidResponse) Copy() *BidResponse {
 	}
 
 	brCopy := *r
+	if r.NoBidReason != nil {
+		brCopy.NoBidReason = r.NoBidReason.Ref()
+	}
 
 	if r.SeatBids != nil {
 		brCopy.SeatBids = make([]*SeatBid, len(r.SeatBids))

@@ -300,7 +300,7 @@ func TestClientHandleNoBid(t *testing.T) {
 
 		if err, ok := c.handleNoBid(resp).(NoBidError); !ok || err == nil {
 			t.Error("handleNoBid should return a NoBidError.")
-		} else if err.Reason() != test.nbr {
+		} else if err.Reason() == nil || *err.Reason() != test.nbr {
 			t.Errorf("Expected no bid with reason %v instead of %v.", test.nbr, err.Reason())
 		}
 

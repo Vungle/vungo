@@ -1,4 +1,4 @@
-TEST?=./openrtb/...  # vast can't pass go vet and golint right now
+TEST?=./...
 GOFMT_FILES?=$$(find . -not -path "./vendor/*" -type f -name '*.go')
 PKG_PREFIX=github.com/Vungle/vungo
 PKGS=$(PKG_PREFIX)/openrtb $(PKG_PREFIX)/vast

@@ -56,7 +56,7 @@ func TestMacroSubs(t *testing.T) {
 		expected string
 	}{
 		{"abc${AUCTION_ID}def", "abcauction1234def"},
-		{"abc${AUCTION_IDD}def", "abc${AUCTION_IDD}def"},
+		{"abc${AUCTION_IDD}def", "abcdef"},
 		{"abc${AUCTION_ID:B64}def", "abcYXVjdGlvbjEyMzQ=def"},
 		{"abc${AUCTION_BID_ID}def", "abcTheBidId!def"},
 		{"abc${AUCTION_IMP_ID}def", "abcImpressionIdForBiddef"},
@@ -76,6 +76,68 @@ func TestMacroSubs(t *testing.T) {
 	for i, test := range tests {
 		t.Run(fmt.Sprintf("%d", i), func(t *testing.T) {
 			actual := openrtb.MacroSubs(test.input, bidRes.SeatBids[0], bidRes.SeatBids[0].Bids[0], testAuctionResult, testLossReason)
+			if actual != test.expected {
+				t.Errorf(`Expected "%s", but got "%s" instead.`, test.expected, actual)
+			}
+		})
+	}
+}
+
+func TestMacroSubsWithExtraMap(t *testing.T) {
+	bid := openrtb.Bid{
+		AdID:         "Some ad id goes here",
+		ID:           "TheBidId!",
+		ImpressionID: "ImpressionIdForBid",
+		Price:        2.345,
+	}
+	seatBid := openrtb.SeatBid{
+		Seat: "SeatBidIdentifier",
+		Bids: []*openrtb.Bid{&bid},
+	}
+	bidRes := &openrtb.BidResponse{
+		ID:       "1234",
+		SeatBids: []*openrtb.SeatBid{&seatBid},
+		Currency: openrtb.CurrencyUSD,
+	}
+	tests := []struct {
+		desc     string
+		input    string
+		extraMap map[string]string
+		expected string
+	}{
+		{
+			desc:     "normal case",
+			input:    "mim=${MIN_BID_TO_WIN}&abc=${AUCTION_ID}",
+			extraMap: map[string]string{"MIN_BID_TO_WIN": "3.4"},
+			expected: "mim=3.4&abc=auction1234",
+		},
+		{
+			desc:     "normal case, with base64",
+			input:    "mim=${MIN_BID_TO_WIN:B64}&abc=${AUCTION_ID}",
+			extraMap: map[string]string{"MIN_BID_TO_WIN": "3.4"},
+			expected: "mim=My40&abc=auction1234",
+		},
+		{
+			desc:     "normal case not with extra",
+			input:    "abc=${AUCTION_ID}",
+			extraMap: map[string]string{"MIN_BID_TO_WIN": "3.4"},
+			expected: "abc=auction1234",
+		},
+		{
+			desc:     "override case",
+			input:    "mim=${MIN_BID_TO_WIN}&abc=${AUCTION_ID}",
+			extraMap: map[string]string{"AUCTION_ID": "override_account"},
+			expected: "mim=&abc=override_account",
+		},
+		{
+			desc:     "nil case",
+			input:    "mim=${MIN_BID_TO_WIN}&abc=${AUCTION_PRICE}",
+			expected: "mim=&abc=2.345000000",
+		},
+	}
+	for i, test := range tests {
+		t.Run(fmt.Sprintf("%d", i), func(t *testing.T) {
+			actual := openrtb.MacroSubsWithExtraMap(test.input, bidRes.SeatBids[0], bidRes.SeatBids[0].Bids[0], testAuctionResult, testLossReason, test.extraMap)
 			if actual != test.expected {
 				t.Errorf(`Expected "%s", but got "%s" instead.`, test.expected, actual)
 			}

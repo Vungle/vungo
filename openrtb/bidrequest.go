@@ -174,7 +174,7 @@ type BidRequest struct {
 	// Description:
 	//   Blocked advertiser categories using the IAB content
 	//   categories. Refer to List 5.1.
-	BlockedCategories []Category `json:"bcat,omitempty"`
+	BlockedCategories []string `json:"bcat,omitempty"`
 
 	// Attribute:
 	//   badv
@@ -278,7 +278,7 @@ func (r *BidRequest) Copy() *BidRequest {
 	brCopy.WhitelistLanguages = util.DeepCopyStrSlice(r.WhitelistLanguages)
 
 	if r.BlockedCategories != nil {
-		brCopy.BlockedCategories = make([]Category, len(r.BlockedCategories))
+		brCopy.BlockedCategories = make([]string, len(r.BlockedCategories))
 		copy(brCopy.BlockedCategories, r.BlockedCategories)
 	}
 

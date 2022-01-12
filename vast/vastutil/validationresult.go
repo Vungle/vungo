@@ -5,189 +5,188 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/Vungle/vungo/vast"
+	"github.com/Vungle/vungo/vast/vastelement"
 )
 
 // VastValidationResult type represents the result of unwrapping and validating VAST objects.
 type VastValidationResult int
 
-// HEADER_X_INVALID_VAST_RESULT value is an HTTP header that will be embedded in an ad response to
+// HeaderXInvalidVastResult value is an HTTP header that will be embedded in an ad response to
 // indicate an invalid VAST result for a particular ad request.
-const HEADER_X_INVALID_VAST_RESULT = "X-Vungle-Invalid-Vast"
+const HeaderXInvalidVastResult = "X-Vungle-Invalid-Vast"
 
 // The following constants are an enumeration of all possible results output by the VAST unwrapping &
 // validation process.
 const (
-	RESULT_UNKNOWN VastValidationResult = -1
+	ResultUnknown VastValidationResult = -1
+	ResultOK      VastValidationResult = 0
 
-	RESULT_OK VastValidationResult = 0
+	ResultXMLSyntaxError          VastValidationResult = 1
+	ResultXMLTagPathError         VastValidationResult = 2
+	ResultXMLUnmarshalError       VastValidationResult = 3
+	ResultXMLUnsupportedTypeError VastValidationResult = 4
 
-	RESULT_XML_SYNTAX_ERROR           VastValidationResult = 1
-	RESULT_XML_TAG_PATH_ERROR         VastValidationResult = 2
-	RESULT_XML_UNMARSHAL_ERROR        VastValidationResult = 3
-	RESULT_XML_UNSUPPORTED_TYPE_ERROR VastValidationResult = 4
+	ResultUnwrapWithMultipleAds  VastValidationResult = 10000
+	ResultWrapperMissingAdTagURI VastValidationResult = 10001
 
-	RESULT_UNWRAP_WITH_MULTIPLE_ADS   VastValidationResult = 10000
-	RESULT_WRAPPER_MISSING_AD_TAG_URI VastValidationResult = 10001
-
-	RESULT_AD_SYSTEM_MISS_SYSTEM                 VastValidationResult = 20001
-	RESULT_AD_TYPE                               VastValidationResult = 20002
-	RESULT_COMPANION_ADS_MISS_COMPANIONS         VastValidationResult = 20003
-	RESULT_COMPANION_ADS_WRAPPER_MISS_COMPANIONS VastValidationResult = 20004
-	RESULT_COMPANION_RESOURCE_FORMAT             VastValidationResult = 20005
-	RESULT_COMPANION_WRAPPER_RESOURCE_FORMAT     VastValidationResult = 20006
-	RESULT_CREATIVE_TYPE                         VastValidationResult = 20007
-	RESULT_CREATIVE_WRAPPER_TYPE                 VastValidationResult = 20008
-	RESULT_DURATION_EQUAL_ZERO                   VastValidationResult = 20009
-	RESULT_DURATION_NEGATIVE                     VastValidationResult = 20010
-	RESULT_HTML_RESOURCE_MISS_HTML               VastValidationResult = 20011
-	RESULT_ICON_MISS_POSITION                    VastValidationResult = 20012
-	RESULT_ICON_MISS_PROGRAM                     VastValidationResult = 20013
-	RESULT_ICON_RESOURCES_FORMAT                 VastValidationResult = 20014
-	RESULT_INLINE_MISS_AD_TITLE                  VastValidationResult = 20015
-	RESULT_INLINE_MISS_CREATIVES                 VastValidationResult = 20016
-	RESULT_INLINE_MISS_IMPRESSIONS               VastValidationResult = 20017
-	RESULT_IMPRESSION_MISS_URI                   VastValidationResult = 20018
-	RESULT_LINEAR_MISS_MEDIA_FILES               VastValidationResult = 20019
-	RESULT_MEDIA_FILE_MISS_DELIVERY              VastValidationResult = 20020
-	RESULT_MEDIA_FILE_MISS_MIME_TYPE             VastValidationResult = 20021
-	RESULT_MEDIA_FILE_MISS_URI                   VastValidationResult = 20022
-	RESULT_MEDIA_FILE_SIZE                       VastValidationResult = 20023
-	RESULT_NON_LINEAR_ADS_MISS_NON_LINEARS       VastValidationResult = 20024
-	RESULT_NON_LINEAR_RESOURCE_FORMAT            VastValidationResult = 20025
-	RESULT_OFFSET_PERCENT_NEGATIVE               VastValidationResult = 20026
-	RESULT_PRICING_CURRENCY_FORMAT               VastValidationResult = 20027
-	RESULT_PRICING_MISS_MODEL                    VastValidationResult = 20028
-	RESULT_PRICING_MISS_PRICE                    VastValidationResult = 20029
-	RESULT_UNSUPPORTED_DELIVERY_TYPE             VastValidationResult = 20032
-	RESULT_UNSUPPORTED_EVENT                     VastValidationResult = 20033
-	RESULT_UNSUPPORTED_MODE                      VastValidationResult = 20034
-	RESULT_UNSUPPORTED_PRICE_MODEL_TYPE          VastValidationResult = 20035
-	RESULT_UNSUPPORTED_VERSION                   VastValidationResult = 20036
-	RESULT_VAST_MISS_AD                          VastValidationResult = 20037
-	RESULT_VIDEO_CLICKS_MISS_CLICK_THROUGHS      VastValidationResult = 20039
-	RESULT_WRAPPER_MISS_IMPRESSIONS              VastValidationResult = 20040
-	RESULT_WRAPPER_MISS_VAST_AD_TAG_URI          VastValidationResult = 20041
-	RESULT_VIDEO_DURATION_TOO_SHORT              VastValidationResult = 20042
-	RESULT_VIDEO_DURATION_TOO_LONG               VastValidationResult = 20043
-	RESULT_MEDIA_FILE_HEIGHT_TOO_HIGH            VastValidationResult = 20046
-	RESULT_MEDIA_FILE_HEIGHT_TOO_LOW             VastValidationResult = 20047
-	RESULT_MEDIA_FILE_UNSUPPORTED_MIME_TYPE      VastValidationResult = 20048
-	RESULT_MEDIA_FILE_WIDTH_TOO_HIGH             VastValidationResult = 20049
-	RESULT_MEDIA_FILE_WIDTH_TOO_LOW              VastValidationResult = 20050
+	ResultAdSystemMissSystem                VastValidationResult = 20001
+	ResultAdType                            VastValidationResult = 20002
+	ResultCompanionAdsMissCompanions        VastValidationResult = 20003
+	ResultCompanionAdsWrapperMissCompanions VastValidationResult = 20004
+	ResultCompanionResourceFormat           VastValidationResult = 20005
+	ResultCompanionWrapperResourceFormat    VastValidationResult = 20006
+	ResultCreativeType                      VastValidationResult = 20007
+	ResultCreativeWrapperType               VastValidationResult = 20008
+	ResultDurationEqualZero                 VastValidationResult = 20009
+	ResultDurationNegative                  VastValidationResult = 20010
+	ResultHTMLResourceMissHTML              VastValidationResult = 20011
+	ResultIconMissPosition                  VastValidationResult = 20012
+	ResultIconMissProgram                   VastValidationResult = 20013
+	ResultIconResourcesFormat               VastValidationResult = 20014
+	ResultInlineMissAdTitle                 VastValidationResult = 20015
+	ResultInlineMissCreatives               VastValidationResult = 20016
+	ResultInlineMissImpressions             VastValidationResult = 20017
+	ResultImpressionMissURI                 VastValidationResult = 20018
+	ResultLinearMissMediaFiles              VastValidationResult = 20019
+	ResultMediaFileMissDelivery             VastValidationResult = 20020
+	ResultMediaFileMissMimeType             VastValidationResult = 20021
+	ResultMediaFileMissURI                  VastValidationResult = 20022
+	ResultMediaFileSize                     VastValidationResult = 20023
+	ResultNonLinearAdsMissNonLinears        VastValidationResult = 20024
+	ResultNonLinearResourceFormat           VastValidationResult = 20025
+	ResultOffsetPercentNegative             VastValidationResult = 20026
+	ResultPricingCurrencyFormat             VastValidationResult = 20027
+	ResultPricingMissModel                  VastValidationResult = 20028
+	ResultPricingMissPrice                  VastValidationResult = 20029
+	ResultUnsupportedDeliveryType           VastValidationResult = 20032
+	ResultUnsupportedEvent                  VastValidationResult = 20033
+	ResultUnsupportedMode                   VastValidationResult = 20034
+	ResultUnsupportedPriceModelType         VastValidationResult = 20035
+	ResultUnsupportedVersion                VastValidationResult = 20036
+	ResultVastMissAd                        VastValidationResult = 20037
+	ResultVideoClicksMissClickThroughs      VastValidationResult = 20039
+	ResultWrapperMissImpressions            VastValidationResult = 20040
+	ResultWrapperMissVastAdTagURI           VastValidationResult = 20041
+	ResultVideoDurationTooShort             VastValidationResult = 20042
+	ResultVideoDurationTooLong              VastValidationResult = 20043
+	ResultMediaFileHeightTooHigh            VastValidationResult = 20046
+	ResultModiaFileHeightTooLow             VastValidationResult = 20047
+	ResultMediaFileUnsupportedMimeType      VastValidationResult = 20048
+	ResultMediaFileWidthTooHigh             VastValidationResult = 20049
+	ResultMediaFileWidthTooLow              VastValidationResult = 20050
 )
 
 func getValidationResultFromErr(err error) VastValidationResult {
 	switch err.(type) {
 	case nil:
-		return RESULT_OK
+		return ResultOK
 	case *xml.SyntaxError:
-		return RESULT_XML_SYNTAX_ERROR
+		return ResultXMLSyntaxError
 	case *xml.TagPathError:
-		return RESULT_XML_TAG_PATH_ERROR
+		return ResultXMLTagPathError
 	case *xml.UnmarshalError:
-		return RESULT_XML_UNMARSHAL_ERROR
+		return ResultXMLUnmarshalError
 	case *xml.UnsupportedTypeError:
-		return RESULT_XML_UNSUPPORTED_TYPE_ERROR
+		return ResultXMLUnsupportedTypeError
 	}
 
 	switch err {
 	case ErrUnwrapWithMultipleAds:
-		return RESULT_UNWRAP_WITH_MULTIPLE_ADS
-	case ErrWrapperMissingAdTagUri:
-		return RESULT_WRAPPER_MISSING_AD_TAG_URI
+		return ResultUnwrapWithMultipleAds
+	case ErrWrapperMissingAdTagURI:
+		return ResultWrapperMissingAdTagURI
 
-	case vast.ErrAdSystemMissSystem:
-		return RESULT_AD_SYSTEM_MISS_SYSTEM
-	case vast.ErrAdType:
-		return RESULT_AD_TYPE
-	case vast.ErrCompanionAdsMissCompanions:
-		return RESULT_COMPANION_ADS_MISS_COMPANIONS
-	case vast.ErrCompanionAdsWrapperMissCompanions:
-		return RESULT_COMPANION_ADS_WRAPPER_MISS_COMPANIONS
-	case vast.ErrCreativeType:
-		return RESULT_CREATIVE_TYPE
-	case vast.ErrCreativeWrapperType:
-		return RESULT_CREATIVE_WRAPPER_TYPE
-	case vast.ErrDurationEqualZero:
-		return RESULT_DURATION_EQUAL_ZERO
-	case vast.ErrDurationNegative:
-		return RESULT_DURATION_NEGATIVE
-	case vast.ErrIconMissPosition:
-		return RESULT_ICON_MISS_POSITION
-	case vast.ErrIconMissProgram:
-		return RESULT_ICON_MISS_PROGRAM
-	case vast.ErrIconResourcesFormat:
-		return RESULT_ICON_RESOURCES_FORMAT
-	case vast.ErrImpressionMissUri:
-		return RESULT_IMPRESSION_MISS_URI
-	case vast.ErrInlineMissAdTitle:
-		return RESULT_INLINE_MISS_AD_TITLE
-	case vast.ErrInlineMissCreatives:
-		return RESULT_INLINE_MISS_CREATIVES
-	case vast.ErrInlineMissImpressions:
-		return RESULT_INLINE_MISS_IMPRESSIONS
-	case vast.ErrLinearMissMediaFiles:
-		return RESULT_LINEAR_MISS_MEDIA_FILES
-	case vast.ErrMediaFileHeightTooHigh:
-		return RESULT_MEDIA_FILE_HEIGHT_TOO_HIGH
-	case vast.ErrMediaFileHeightTooLow:
-		return RESULT_MEDIA_FILE_HEIGHT_TOO_LOW
-	case vast.ErrMediaFileMissDelivery:
-		return RESULT_MEDIA_FILE_MISS_DELIVERY
-	case vast.ErrMediaFileMissMimeType:
-		return RESULT_MEDIA_FILE_MISS_MIME_TYPE
-	case vast.ErrMediaFileMissUri:
-		return RESULT_MEDIA_FILE_MISS_URI
-	case vast.ErrMediaFileSize:
-		return RESULT_MEDIA_FILE_SIZE
-	case vast.ErrMediaFileUnsupportedMimeType:
-		return RESULT_MEDIA_FILE_UNSUPPORTED_MIME_TYPE
-	case vast.ErrMediaFileWidthTooHigh:
-		return RESULT_MEDIA_FILE_WIDTH_TOO_HIGH
-	case vast.ErrMediaFileWidthTooLow:
-		return RESULT_MEDIA_FILE_WIDTH_TOO_LOW
-	case vast.ErrNonLinearAdsMissNonLinears:
-		return RESULT_NON_LINEAR_ADS_MISS_NON_LINEARS
-	case vast.ErrNonLinearResourceFormat:
-		return RESULT_NON_LINEAR_RESOURCE_FORMAT
-	case vast.ErrOffsetPercentNegative:
-		return RESULT_OFFSET_PERCENT_NEGATIVE
-	case vast.ErrPricingCurrencyFormat:
-		return RESULT_PRICING_CURRENCY_FORMAT
-	case vast.ErrPricingMissModel:
-		return RESULT_PRICING_MISS_MODEL
-	case vast.ErrPricingMissPrice:
-		return RESULT_PRICING_MISS_PRICE
-	case vast.ErrUnsupportedDeliveryType:
-		return RESULT_UNSUPPORTED_DELIVERY_TYPE
-	case vast.ErrUnsupportedEvent:
-		return RESULT_UNSUPPORTED_EVENT
-	case vast.ErrUnsupportedMode:
-		return RESULT_UNSUPPORTED_MODE
-	case vast.ErrUnsupportedPriceModelType:
-		return RESULT_UNSUPPORTED_PRICE_MODEL_TYPE
-	case vast.ErrUnsupportedVersion:
-		return RESULT_UNSUPPORTED_VERSION
-	case vast.ErrVastMissAd:
-		return RESULT_VAST_MISS_AD
-	case vast.ErrVideoClicksMissClickThroughs:
-		return RESULT_VIDEO_CLICKS_MISS_CLICK_THROUGHS
-	case vast.ErrVideoDurationTooLong:
-		return RESULT_VIDEO_DURATION_TOO_LONG
-	case vast.ErrVideoDurationTooShort:
-		return RESULT_VIDEO_DURATION_TOO_SHORT
-	case vast.ErrWrapperMissImpressions:
-		return RESULT_WRAPPER_MISS_IMPRESSIONS
-	case vast.ErrWrapperMissVastAdTagUri:
-		return RESULT_WRAPPER_MISS_VAST_AD_TAG_URI
+	case vastelement.ErrAdSystemMissSystem:
+		return ResultAdSystemMissSystem
+	case vastelement.ErrAdType:
+		return ResultAdType
+	case vastelement.ErrCompanionAdsMissCompanions:
+		return ResultCompanionAdsMissCompanions
+	case vastelement.ErrCompanionAdsWrapperMissCompanions:
+		return ResultCompanionAdsWrapperMissCompanions
+	case vastelement.ErrCreativeType:
+		return ResultCreativeType
+	case vastelement.ErrCreativeWrapperType:
+		return ResultCreativeWrapperType
+	case vastelement.ErrDurationEqualZero:
+		return ResultDurationEqualZero
+	case vastelement.ErrDurationNegative:
+		return ResultDurationNegative
+	case vastelement.ErrIconMissPosition:
+		return ResultIconMissPosition
+	case vastelement.ErrIconMissProgram:
+		return ResultIconMissProgram
+	case vastelement.ErrIconResourcesFormat:
+		return ResultIconResourcesFormat
+	case vastelement.ErrImpressionMissURI:
+		return ResultImpressionMissURI
+	case vastelement.ErrInlineMissAdTitle:
+		return ResultInlineMissAdTitle
+	case vastelement.ErrInlineMissCreatives:
+		return ResultInlineMissCreatives
+	case vastelement.ErrInlineMissImpressions:
+		return ResultInlineMissImpressions
+	case vastelement.ErrLinearMissMediaFiles:
+		return ResultLinearMissMediaFiles
+	case vastelement.ErrMediaFileHeightTooHigh:
+		return ResultMediaFileHeightTooHigh
+	case vastelement.ErrMediaFileHeightTooLow:
+		return ResultModiaFileHeightTooLow
+	case vastelement.ErrMediaFileMissDelivery:
+		return ResultMediaFileMissDelivery
+	case vastelement.ErrMediaFileMissMimeType:
+		return ResultMediaFileMissMimeType
+	case vastelement.ErrMediaFileMissURI:
+		return ResultMediaFileMissURI
+	case vastelement.ErrMediaFileSize:
+		return ResultMediaFileSize
+	case vastelement.ErrMediaFileUnsupportedMimeType:
+		return ResultMediaFileUnsupportedMimeType
+	case vastelement.ErrMediaFileWidthTooHigh:
+		return ResultMediaFileWidthTooHigh
+	case vastelement.ErrMediaFileWidthTooLow:
+		return ResultMediaFileWidthTooLow
+	case vastelement.ErrNonLinearAdsMissNonLinears:
+		return ResultNonLinearAdsMissNonLinears
+	case vastelement.ErrNonLinearResourceFormat:
+		return ResultNonLinearResourceFormat
+	case vastelement.ErrOffsetPercentNegative:
+		return ResultOffsetPercentNegative
+	case vastelement.ErrPricingCurrencyFormat:
+		return ResultPricingCurrencyFormat
+	case vastelement.ErrPricingMissModel:
+		return ResultPricingMissModel
+	case vastelement.ErrPricingMissPrice:
+		return ResultPricingMissPrice
+	case vastelement.ErrUnsupportedDeliveryType:
+		return ResultUnsupportedDeliveryType
+	case vastelement.ErrUnsupportedEvent:
+		return ResultUnsupportedEvent
+	case vastelement.ErrUnsupportedMode:
+		return ResultUnsupportedMode
+	case vastelement.ErrUnsupportedPriceModelType:
+		return ResultUnsupportedPriceModelType
+	case vastelement.ErrUnsupportedVersion:
+		return ResultUnsupportedVersion
+	case vastelement.ErrVastMissAd:
+		return ResultVastMissAd
+	case vastelement.ErrVideoClicksMissClickThroughs:
+		return ResultVideoClicksMissClickThroughs
+	case vastelement.ErrVideoDurationTooLong:
+		return ResultVideoDurationTooLong
+	case vastelement.ErrVideoDurationTooShort:
+		return ResultVideoDurationTooShort
+	case vastelement.ErrWrapperMissImpressions:
+		return ResultWrapperMissImpressions
+	case vastelement.ErrWrapperMissVastAdTagURI:
+		return ResultWrapperMissVastAdTagURI
 	}
 
-	return RESULT_UNKNOWN
+	return ResultUnknown
 }
 
 // EncodeInvalidVastHeader method encodes the invalid vast result into a string header value in the HTTP header.
 func EncodeInvalidVastHeader(header http.Header, vastErr error) {
 	validationResult := getValidationResultFromErr(vastErr)
-	header.Set(HEADER_X_INVALID_VAST_RESULT, strconv.Itoa(int(validationResult)))
+	header.Set(HeaderXInvalidVastResult, strconv.Itoa(int(validationResult)))
 }

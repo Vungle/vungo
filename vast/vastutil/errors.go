@@ -6,8 +6,8 @@ import "errors"
 
 // ErrUnwrapWithMultipleAds error represents the error during unwrapping when the VAST contains
 // multiple Ad elements.
-var ErrUnwrapWithMultipleAds = errors.New("Unsupported unwrapping with multiple ads.")
+var ErrUnwrapWithMultipleAds = errors.New("unsupported unwrapping with multiple ads")
 
-// ErrWrapperMissingAdTagUri error represents when the wrapper VAST xml is missing required
+// ErrWrapperMissingAdTagURI error represents when the wrapper VAST xml is missing required
 // VASTAdTagURI element.
-var ErrWrapperMissingAdTagUri = errors.New("Invalid VAST content, missing ad tag URI.")
+var ErrWrapperMissingAdTagURI = errors.New("invalid VAST content, missing ad tag URI")

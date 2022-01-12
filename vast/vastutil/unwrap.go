@@ -8,7 +8,7 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/Vungle/vungo/vast"
+	"github.com/Vungle/vungo/vast/vastelement"
 )
 
 var defaultUnwrapClient = &http.Client{
@@ -26,8 +26,8 @@ var defaultUnwrapClient = &http.Client{
 // 	1) Unwrapping context, ctx, is done;
 // 	2) Invalid XML format;
 // 	3) Invalid VAST content, (currently, there should be exactly one <Ad> within <VAST>.
-func Unwrap(ctx context.Context, data []byte, userAgent, ip string) ([]*vast.Vast, error) {
-	var v vast.Vast
+func Unwrap(ctx context.Context, data []byte, userAgent, ip string) ([]*vastelement.Vast, error) {
+	var v vastelement.Vast
 	if err := xml.Unmarshal(data, &v); err != nil {
 		return nil, err
 	}
@@ -38,21 +38,19 @@ func Unwrap(ctx context.Context, data []byte, userAgent, ip string) ([]*vast.Vas
 // unwrap method is a helper function that invokes performs the actual HTTP request to get
 // additional VAST XML and updates the unwrappedList. The unwrap method is invoked recursively until
 // the first Inline VAST is reached or until an error occurs.
-func unwrap(ctx context.Context, v *vast.Vast, unwrappedList []*vast.Vast, ua, ip string) ([]*vast.Vast, error) {
-	if len(v.Ads) != 1 {
-		return nil, ErrUnwrapWithMultipleAds
-	} else if v.Ads[0].Wrapper == nil {
+func unwrap(ctx context.Context, v *vastelement.Vast, unwrappedList []*vastelement.Vast, ua, ip string) ([]*vastelement.Vast, error) {
+	if len(v.Ads) == 0 || v.Ads[0].Wrapper == nil {
 		return append(unwrappedList, v), nil
 	}
 
 	w := v.Ads[0].Wrapper
-	if len(w.VastAdTagUri) == 0 {
-		return nil, ErrWrapperMissingAdTagUri
+	if len(w.VastAdTagURI) == 0 {
+		return nil, ErrWrapperMissingAdTagURI
 	}
 
-	var innerVast vast.Vast
+	var innerVast vastelement.Vast
 
-	req, err := http.NewRequest("GET", w.VastAdTagUri, nil)
+	req, err := http.NewRequest("GET", string(w.VastAdTagURI), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -72,11 +70,10 @@ func unwrap(ctx context.Context, v *vast.Vast, unwrappedList []*vast.Vast, ua, i
 
 	if err = xml.NewDecoder(resp.Body).Decode(&innerVast); err != nil {
 		return nil, err
-	} else {
-		// TODO(@garukun): Given a set of super fast VAST hosts and a starting wrapper VAST XML that
-		// wraps the VAST infinitely, this implementation could cause disastrous stack overflow that
-		// even the ctx.Done() cannot enforce exit. We will need to update the logic here eventually
-		// to be more resource aware yet robust. *wink* *wink*, consider channels and goroutines.
-		return unwrap(ctx, &innerVast, append(unwrappedList, v), ua, ip)
 	}
+	// TODO(@garukun): Given a set of super fast VAST hosts and a starting wrapper VAST XML that
+	// wraps the VAST infinitely, this implementation could cause disastrous stack overflow that
+	// even the ctx.Done() cannot enforce exit. We will need to update the logic here eventually
+	// to be more resource aware yet robust. *wink* *wink*, consider channels and goroutines.
+	return unwrap(ctx, &innerVast, append(unwrappedList, v), ua, ip)
 }

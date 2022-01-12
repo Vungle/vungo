@@ -21,12 +21,12 @@ const (
 )
 
 // matchMacroRegexp is a regexp for macro matching and should not be used, use matchMacro instead.
-var matchMacroRegexp = regexp.MustCompile(`^\$\{(AUCTION_[A-Z_]+)(\:B64)?\}$`)
+var matchMacroRegexp = regexp.MustCompile(`^\$\{([A-Z_]+)(\:B64)?\}$`)
 
 // matchMacro is a pool of matchMacroRegexp copies.
 var matchMacroPool = sync.Pool{
 	New: func() interface{} {
-		return matchMacroRegexp.Copy()
+		return matchMacroRegexp
 	},
 }
 
@@ -42,11 +42,13 @@ func createReplacer(subValues map[macro]string) func(string) string {
 		}
 
 		// macro = "AUCTION_ID"
-		var macro = macro(macroMatches[1])
-		subValue, ok := subValues[macro]
+		var macroName = macro(macroMatches[1])
+		subValue, ok := subValues[macroName]
 
 		if !ok {
-			return s
+			// From OpenRTB 2.5, 4.4: Furthermore, if the source value is an optional parameter that was not specified,
+			// the macro will simply be removed (i.e., replaced with a zero-length string).
+			return ""
 		}
 
 		// macroMatches[2] will exist if the :B64 part is present
@@ -58,12 +60,12 @@ func createReplacer(subValues map[macro]string) func(string) string {
 }
 
 // findMatchesRegexp is a regexp for finding auction matches and should not be used, use findMatches instead.
-var findMatchesRegexp = regexp.MustCompile(`\$\{AUCTION_[A-Z_]+(?:\:B64)?\}`)
+var findMatchesRegexp = regexp.MustCompile(`\$\{[A-Z_]+(?:\:B64)?\}`)
 
 // findMatchesPool is a pool of findMatchesRegexp copies.
 var findMatchesPool = sync.Pool{
 	New: func() interface{} {
-		return findMatchesRegexp.Copy()
+		return findMatchesRegexp
 	},
 }
 
@@ -72,6 +74,14 @@ var findMatchesPool = sync.Pool{
 // MacroSubs assumes that the BidResponse has exactly one seat, which has exactly one bid.
 // If this is not true, it will return empty string and an error.
 func MacroSubs(stringToSub string, seat *SeatBid, bid *Bid, auctionInfo AuctionInfo, reason LossReason) string {
+	return MacroSubsWithExtraMap(stringToSub, seat, bid, auctionInfo, reason, nil)
+}
+
+// MacroSubsWithExtraMap performs macro substitutions according to Section 4.4 of the OpenRTB API spec, with extra macro mapping.
+// It takes a string which the substitutions should be performed on, and a *BidResponse to determine the values to be substituted.
+// MacroSubs assumes that the BidResponse has exactly one seat, which has exactly one bid.
+// NOTE: if the extra map has same key with the predefined macro, it will override it.
+func MacroSubsWithExtraMap(stringToSub string, seat *SeatBid, bid *Bid, auctionInfo AuctionInfo, reason LossReason, extra map[string]string) string {
 	var price string
 	// According to OpenRTB spec2.5, Exchange-specific policy may preclude support for loss notices or
 	// the disclosure of winning clearing prices resulting in ${AUCTION_PRICE} macros being removed (i.e.,
@@ -89,6 +99,9 @@ func MacroSubs(stringToSub string, seat *SeatBid, bid *Bid, auctionInfo AuctionI
 		auctionPrice:    price,
 		auctionCurrency: string(auctionInfo.Currency()),
 		auctionLoss:     strconv.Itoa(int(reason)),
+	}
+	for k, v := range extra {
+		m[macro(k)] = v
 	}
 	replacer := createReplacer(m)
 	var re = findMatchesPool.Get().(*regexp.Regexp)
