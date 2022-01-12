@@ -6,21 +6,10 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/Vungle/vungo/vast"
+	"github.com/Vungle/vungo/vast/vastelement"
 )
 
-// VastTest is a test case container, VastElement indicates which element to test.
-// Err indicates the expected error. File indicates the input xml file path.
-type VastTest struct {
-	VastElement Validator
-	Err         error
-	File        string
-}
-
-// Validator interface is used to validate current node is correct.
-type Validator interface {
-	Validate() error
-}
+const testDirName = "./testdata/"
 
 // VerifyModelAgainstFile method verifies the correctness of a particular VAST 3.0 object against
 // a VAST XML file. A correct VAST document contains all the fields specified in Go struct, and they
@@ -33,7 +22,7 @@ func VerifyModelAgainstFile(t testing.TB, name, file string, modelType reflect.T
 		t.Fatalf("Mode type %v must not be of pointer kind.\n", modelType)
 	}
 
-	xmlData, err := ioutil.ReadFile("testdata/" + file)
+	xmlData, err := ioutil.ReadFile(testDirName + file)
 
 	if err != nil {
 		t.Fatalf("Cannot read XML file: %v.\n", err)
@@ -111,10 +100,10 @@ func isXMLField(field reflect.StructField) bool {
 }
 
 // VerifyVastElementErrorAsExpected function verifies whether the actual error is expected.
-func VerifyVastElementErrorAsExpected(t testing.TB, element Validator, err error, expectedError error) {
+func VerifyVastElementErrorAsExpected(t testing.TB, element vastelement.Validator, err error, expectedError error) {
 	if err != expectedError {
-		ve, ok := err.(vast.ValidationError)
-		ev, eOk := expectedError.(*vast.ValidationError)
+		ve, ok := err.(vastelement.ValidationError)
+		ev, eOk := expectedError.(*vastelement.ValidationError)
 		if ok {
 			for i, err := range ve.Errs {
 				if eOk && ev.Errs[i] == err {
@@ -125,25 +114,26 @@ func VerifyVastElementErrorAsExpected(t testing.TB, element Validator, err error
 			}
 			t.Fatalf("Verify Vast element %v failed; expected trigger error %v, actual error %v.", reflect.TypeOf(element), expectedError, err)
 		} else {
-			t.Fatalf("Verify Vast element %v failed; expected error %v, actual error %v.", reflect.TypeOf(element), expectedError, err)
+			t.Errorf("Verify Vast element %v failed; expected error %v, actual error %v.", reflect.TypeOf(element), expectedError, err)
 		}
 	}
 }
 
 // VerifyVastElementFromBytes function verifies Validate errors for the vast element object.
-func VerifyVastElementFromBytes(t testing.TB, xmlData []byte, element Validator, expectedError error) {
+func VerifyVastElementFromBytes(t testing.TB, xmlData []byte, element vastelement.Validator, expectedError error) {
 	if err := xml.Unmarshal(xmlData, element); err != nil {
 		t.Fatalf("Cannot unmarshal XML data. %v.\n", err)
 	}
-	VerifyVastElementErrorAsExpected(t, element, element.Validate(), expectedError)
+
+	VerifyVastElementErrorAsExpected(t, element, element.Validate(vastelement.Version3), expectedError)
 }
 
 // VerifyVastElementFromFile function verifies Validate errors for the Unmarshal object generated from the given file.
-func VerifyVastElementFromFile(t testing.TB, file string, element Validator, expectedError error) {
+func VerifyVastElementFromFile(t testing.TB, file string, element vastelement.Validator, expectedError error) {
 	xmlData, err := ioutil.ReadFile(file)
 
 	if err != nil {
-		t.Fatalf("Cannot read XML file: %v.\n", err)
+		t.Fatalf("Cannot read XML file: %v, error: %v\n", file, err)
 	}
 	VerifyVastElementFromBytes(t, xmlData, element, expectedError)
 }
