@@ -159,7 +159,7 @@ func Test_GetHTTPClient(t *testing.T) {
 	type middleResult struct {
 	}
 	prepare := func(args *caseArgs, mr *middleResult) func() {
-		os.Setenv("vungohttp2", args.httpEnv)
+		os.Setenv("vungohttp2disable", args.httpEnv)
 		return func() {}
 	}
 	tests := []struct {
@@ -170,7 +170,7 @@ func Test_GetHTTPClient(t *testing.T) {
 		{
 			name: "test http2 disable",
 			args: caseArgs{
-				httpEnv: "0",
+				httpEnv: "1",
 			},
 			want: &http.Transport{
 				// Initialize TLSNextProto to disable HTTP/2 support.
@@ -181,7 +181,7 @@ func Test_GetHTTPClient(t *testing.T) {
 		{
 			name: "test http2 enable",
 			args: caseArgs{
-				httpEnv: "1",
+				httpEnv: "0",
 			},
 			want: nil,
 		},
