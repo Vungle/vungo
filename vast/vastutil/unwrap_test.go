@@ -2,6 +2,7 @@ package vastutil_test
 
 import (
 	"context"
+	"crypto/tls"
 	"encoding/xml"
 	"fmt"
 	"io/ioutil"
@@ -149,4 +150,50 @@ func newTestUnwrapClient() *testUnwrapClient {
 	c := &testUnwrapClient{Client: &http.Client{}}
 	c.Transport = c
 	return c
+}
+
+func Test_GetHTTPClient(t *testing.T) {
+	type caseArgs struct {
+		httpEnv string
+	}
+	type middleResult struct {
+	}
+	prepare := func(args *caseArgs, mr *middleResult) func() {
+		os.Setenv("vungohttp2", args.httpEnv)
+		return func() {}
+	}
+	tests := []struct {
+		name string
+		args caseArgs
+		want http.RoundTripper
+	}{
+		{
+			name: "test http2 disable",
+			args: caseArgs{
+				httpEnv: "0",
+			},
+			want: &http.Transport{
+				// Initialize TLSNextProto to disable HTTP/2 support.
+				// For more details please refer to https://github.com/golang/go/issues/32388
+				TLSNextProto: make(map[string]func(authority string, c *tls.Conn) http.RoundTripper),
+			},
+		},
+		{
+			name: "test http2 enable",
+			args: caseArgs{
+				httpEnv: "1",
+			},
+			want: nil,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			mr := &middleResult{}
+			defer prepare(&tt.args, mr)()
+			got := vastutil.GetHTTPClient()
+			if !reflect.DeepEqual(got.Transport, tt.want) {
+				t.Errorf("test GetHTTPClient() failed, transport mismatch, got %v, want %v", got, tt.want)
+			}
+		})
+	}
 }
