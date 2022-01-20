@@ -7,16 +7,29 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
+	"os"
 
 	"github.com/Vungle/vungo/vast/vastelement"
 )
 
-var defaultUnwrapClient = &http.Client{
-	Transport: &http.Transport{
-		// Initialize TLSNextProto to disable HTTP/2 support.
-		// For more details please refer to https://github.com/golang/go/issues/32388
-		TLSNextProto: make(map[string]func(authority string, c *tls.Conn) http.RoundTripper),
-	},
+const (
+	http2Disabled           = "1"
+	vastUnwrapHTTP2Disabled = "VungoVastUnwrapHTTP2Disabled"
+)
+
+var defaultUnwrapClient = getHTTPClient()
+
+func getHTTPClient() *http.Client {
+	if os.Getenv(vastUnwrapHTTP2Disabled) == http2Disabled {
+		return &http.Client{
+			Transport: &http.Transport{
+				// Initialize TLSNextProto to disable HTTP/2 support.
+				// For more details please refer to https://github.com/golang/go/issues/32388
+				TLSNextProto: make(map[string]func(authority string, c *tls.Conn) http.RoundTripper),
+			},
+		}
+	}
+	return http.DefaultClient
 }
 
 // Unwrap method recursively unmarshals the VAST XML data from the input and unwraps additional VAST
