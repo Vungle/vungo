@@ -159,7 +159,7 @@ func Test_GetHTTPClient(t *testing.T) {
 	type middleResult struct {
 	}
 	prepare := func(args *caseArgs, mr *middleResult) func() {
-		os.Setenv("VungoHTTP2DisabledForUnWrap", args.httpEnv)
+		os.Setenv("VungoVastUnwrapHTTP2Disabled", args.httpEnv)
 		return func() {}
 	}
 	tests := []struct {

@@ -13,14 +13,14 @@ import (
 )
 
 const (
-	http2DisabledForUnWrap = "VungoHTTP2DisabledForUnWrap"
-	http2Disabled          = "1"
+	VastUnwrapHTTP2Disabled = "VungoVastUnwrapHTTP2Disabled"
+	http2Disabled           = "1"
 )
 
 var defaultUnwrapClient = getHTTPClient()
 
 func getHTTPClient() *http.Client {
-	if os.Getenv(http2DisabledForUnWrap) == http2Disabled {
+	if os.Getenv(VastUnwrapHTTP2Disabled) == http2Disabled {
 		return &http.Client{
 			Transport: &http.Transport{
 				// Initialize TLSNextProto to disable HTTP/2 support.
