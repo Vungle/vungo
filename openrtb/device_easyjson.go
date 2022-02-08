@@ -46,7 +46,7 @@ func easyjson3073ac56DecodeGithubComVungleVungoOpenrtb(in *jlexer.Lexer, out *De
 				if out.Geo == nil {
 					out.Geo = new(Geo)
 				}
-				(*out.Geo).UnmarshalEasyJSON(in)
+				easyjson3073ac56DecodeGithubComVungleVungoOpenrtb1(in, out.Geo)
 			}
 		case "dnt":
 			if in.IsNull() {
@@ -147,8 +147,12 @@ func easyjson3073ac56DecodeGithubComVungleVungoOpenrtb(in *jlexer.Lexer, out *De
 		case "macmd5":
 			out.MACMD5 = string(in.String())
 		case "ext":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.Extension).UnmarshalJSON(data))
+			if m, ok := out.Extension.(easyjson.Unmarshaler); ok {
+				m.UnmarshalEasyJSON(in)
+			} else if m, ok := out.Extension.(json.Unmarshaler); ok {
+				_ = m.UnmarshalJSON(in.Raw())
+			} else {
+				out.Extension = in.Interface()
 			}
 		default:
 			in.SkipRecursive()
@@ -178,7 +182,7 @@ func easyjson3073ac56EncodeGithubComVungleVungoOpenrtb(out *jwriter.Writer, in D
 		} else {
 			out.RawString(prefix)
 		}
-		(*in.Geo).MarshalEasyJSON(out)
+		easyjson3073ac56EncodeGithubComVungleVungoOpenrtb1(out, *in.Geo)
 	}
 	if in.HasDoNotTrack != nil {
 		const prefix string = ",\"dnt\":"
@@ -460,7 +464,7 @@ func easyjson3073ac56EncodeGithubComVungleVungoOpenrtb(out *jwriter.Writer, in D
 		}
 		out.String(string(in.MACMD5))
 	}
-	if len(in.Extension) != 0 {
+	if in.Extension != nil {
 		const prefix string = ",\"ext\":"
 		if first {
 			first = false
@@ -468,7 +472,13 @@ func easyjson3073ac56EncodeGithubComVungleVungoOpenrtb(out *jwriter.Writer, in D
 		} else {
 			out.RawString(prefix)
 		}
-		out.Raw((in.Extension).MarshalJSON())
+		if m, ok := in.Extension.(easyjson.Marshaler); ok {
+			m.MarshalEasyJSON(out)
+		} else if m, ok := in.Extension.(json.Marshaler); ok {
+			out.Raw(m.MarshalJSON())
+		} else {
+			out.Raw(json.Marshal(in.Extension))
+		}
 	}
 	out.RawByte('}')
 }
@@ -495,4 +505,215 @@ func (v *Device) UnmarshalJSON(data []byte) error {
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Device) UnmarshalEasyJSON(l *jlexer.Lexer) {
 	easyjson3073ac56DecodeGithubComVungleVungoOpenrtb(l, v)
+}
+func easyjson3073ac56DecodeGithubComVungleVungoOpenrtb1(in *jlexer.Lexer, out *Geo) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeFieldName(false)
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "lat":
+			out.Latitude = float64(in.Float64())
+		case "lon":
+			out.Longitude = float64(in.Float64())
+		case "type":
+			out.Type = LocationType(in.Int())
+		case "accuracy":
+			out.Accuracy = int(in.Int())
+		case "lastfix":
+			out.LastFix = int(in.Int())
+		case "ipservice":
+			out.IPService = IPLocationService(in.Int())
+		case "country":
+			out.Country = string(in.String())
+		case "region":
+			out.Region = string(in.String())
+		case "regionfips104":
+			out.RegionFIPS104 = string(in.String())
+		case "metro":
+			out.Metro = string(in.String())
+		case "city":
+			out.City = string(in.String())
+		case "zip":
+			out.ZipCode = string(in.String())
+		case "utcoffset":
+			out.UTCOffset = int(in.Int())
+		case "ext":
+			if m, ok := out.Ext.(easyjson.Unmarshaler); ok {
+				m.UnmarshalEasyJSON(in)
+			} else if m, ok := out.Ext.(json.Unmarshaler); ok {
+				_ = m.UnmarshalJSON(in.Raw())
+			} else {
+				out.Ext = in.Interface()
+			}
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson3073ac56EncodeGithubComVungleVungoOpenrtb1(out *jwriter.Writer, in Geo) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.Latitude != 0 {
+		const prefix string = ",\"lat\":"
+		first = false
+		out.RawString(prefix[1:])
+		out.Float64(float64(in.Latitude))
+	}
+	if in.Longitude != 0 {
+		const prefix string = ",\"lon\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Float64(float64(in.Longitude))
+	}
+	if in.Type != 0 {
+		const prefix string = ",\"type\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int(int(in.Type))
+	}
+	if in.Accuracy != 0 {
+		const prefix string = ",\"accuracy\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int(int(in.Accuracy))
+	}
+	if in.LastFix != 0 {
+		const prefix string = ",\"lastfix\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int(int(in.LastFix))
+	}
+	if in.IPService != 0 {
+		const prefix string = ",\"ipservice\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int(int(in.IPService))
+	}
+	if in.Country != "" {
+		const prefix string = ",\"country\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.Country))
+	}
+	if in.Region != "" {
+		const prefix string = ",\"region\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.Region))
+	}
+	if in.RegionFIPS104 != "" {
+		const prefix string = ",\"regionfips104\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.RegionFIPS104))
+	}
+	if in.Metro != "" {
+		const prefix string = ",\"metro\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.Metro))
+	}
+	if in.City != "" {
+		const prefix string = ",\"city\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.City))
+	}
+	if in.ZipCode != "" {
+		const prefix string = ",\"zip\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.ZipCode))
+	}
+	if in.UTCOffset != 0 {
+		const prefix string = ",\"utcoffset\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int(int(in.UTCOffset))
+	}
+	if in.Ext != nil {
+		const prefix string = ",\"ext\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		if m, ok := in.Ext.(easyjson.Marshaler); ok {
+			m.MarshalEasyJSON(out)
+		} else if m, ok := in.Ext.(json.Marshaler); ok {
+			out.Raw(m.MarshalJSON())
+		} else {
+			out.Raw(json.Marshal(in.Ext))
+		}
+	}
+	out.RawByte('}')
 }
