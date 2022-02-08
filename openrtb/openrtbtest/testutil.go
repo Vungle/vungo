@@ -13,6 +13,7 @@ import (
 	"github.com/Vungle/vungo/internal/util/utiltest"
 	"github.com/Vungle/vungo/openrtb"
 	"github.com/go-test/deep"
+	"github.com/google/go-cmp/cmp"
 )
 
 // UnmarshalFromJSONFile method reads from a testdata/*.json file and unmarshals the content into
@@ -61,6 +62,9 @@ func VerifyModelAgainstFile(t Testing, file string, modelType reflect.Type) {
 	}
 
 	if !reflect.DeepEqual(model1, model2) {
+		if d := cmp.Diff(model1, model2); d != "" {
+			t.Errorf("data mismatch (-got +want):\n%s", d)
+		}
 		m1JSON, _ := json.MarshalIndent(model1, "", "  ")
 		m2JSON, _ := json.MarshalIndent(model2, "", "  ")
 		t.Logf("Unmarshaled: %s\nRe-marshaled: %s.", m1JSON, m2JSON)

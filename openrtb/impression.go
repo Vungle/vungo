@@ -1,6 +1,9 @@
 package openrtb
 
-import "github.com/Vungle/vungo/internal/util"
+import (
+	"encoding/json"
+	"github.com/Vungle/vungo/internal/util"
+)
 
 // Impression object describes an ad placement or impression being auctioned.
 // A single bid request can include multiple Imp objects, a use case for which
@@ -181,10 +184,10 @@ type Impression struct {
 	// Attribute:
 	//   ext
 	// Type:
-	//   object
+	//   json.RawMessage
 	// Description:
 	//   Placeholder for exchange-specific extensions to OpenRTB.
-	Extension interface{} `json:"ext,omitempty"`
+	Extension json.RawMessage `json:"ext,omitempty"`
 }
 
 // Copy returns a pointer to a copy of the Impression object.
@@ -210,7 +213,7 @@ func (imp *Impression) Copy() *Impression {
 	}
 	impressionCopy.IframeBuster = util.DeepCopyStrSlice(imp.IframeBuster)
 
-	impressionCopy.Extension = util.DeepCopyCopiable(imp.Extension)
+	impressionCopy.Extension = util.DeepCopyJSONRawMsg(imp.Extension)
 
 	return &impressionCopy
 }
