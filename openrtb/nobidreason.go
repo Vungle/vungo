@@ -94,6 +94,13 @@ const (
 
 	// NoBidReasonNoBidResponse denotes the error of no bid response and no nbr.
 	NoBidReasonNoBidResponse
+
+	// NoBidReasonBlockedByAdDomain denotes the bid is blocked according to adDomain information.
+	NoBidReasonBlockedByAdDomain
+
+	// NoBidReasonBlockedByAdCreativeID denotes the bid is blocked according to creative ID.
+	NoBidReasonBlockedByAdCreativeID
+
 	// Add new entries here.
 
 	lastVungleExchangeNoBidReason
@@ -144,6 +151,8 @@ var NoBidReasonNames = map[NoBidReason]string{
 	NoBidReasonRejectedByCircuitBreaker: "NO_BID_REJECTED_BY_CIRCUIT_BREAKER",
 	NoBidReasonUnExpectedStatusCode:     "NO_BID_UNEXPECTED_STATUS_CODE",
 	NoBidReasonNoBidResponse:            "NO_BID_NO_BID_RESPONSE",
+	NoBidReasonBlockedByAdDomain:        "NO_BID_BLOCKED_BY_AD_DOMAIN",
+	NoBidReasonBlockedByAdCreativeID:    "NO_BID_BLOCKED_BY_AD_CREATIVE_ID",
 
 	NoBidReasonVungleNoCampaigns:    "NO_BID_VUNGLE_NO_CAMPAIGNS",
 	NoBidReasonVungleNoCreatives:    "NO_BID_VUNGLE_NO_CREATIVES",
