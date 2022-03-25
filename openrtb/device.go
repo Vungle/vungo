@@ -1,9 +1,6 @@
 package openrtb
 
-import (
-	"encoding/json"
-	"github.com/Vungle/vungo/internal/util"
-)
+import "github.com/Vungle/vungo/internal/util"
 
 // Device object provides information pertaining to the device through which the
 // user is interacting.
@@ -267,10 +264,10 @@ type Device struct {
 	// Attribute:
 	//   ext
 	// Type:
-	//   json.RawMessage
+	//   object
 	// Description:
 	//   Placeholder for exchange-specific extensions to OpenRTB.
-	Extension json.RawMessage `json:"ext,omitempty"`
+	Extension interface{} `json:"ext,omitempty"`
 }
 
 // Copy do deep copy of Device.
@@ -302,7 +299,7 @@ func (d *Device) Copy() *Device {
 		deviceCopy.SupportsJavaScript = &SupportsJavaScriptCopy
 	}
 	deviceCopy.GeoFetch = d.GeoFetch.Copy()
-	deviceCopy.Extension = util.DeepCopyJSONRawMsg(d.Extension)
+	deviceCopy.Extension = util.DeepCopyCopiable(d.Extension)
 
 	return &deviceCopy
 }

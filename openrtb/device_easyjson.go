@@ -147,8 +147,12 @@ func easyjson3073ac56DecodeGithubComVungleVungoOpenrtb(in *jlexer.Lexer, out *De
 		case "macmd5":
 			out.MACMD5 = string(in.String())
 		case "ext":
-			if data := in.Raw(); in.Ok() {
-				in.AddError((out.Extension).UnmarshalJSON(data))
+			if m, ok := out.Extension.(easyjson.Unmarshaler); ok {
+				m.UnmarshalEasyJSON(in)
+			} else if m, ok := out.Extension.(json.Unmarshaler); ok {
+				_ = m.UnmarshalJSON(in.Raw())
+			} else {
+				out.Extension = in.Interface()
 			}
 		default:
 			in.SkipRecursive()
@@ -460,7 +464,7 @@ func easyjson3073ac56EncodeGithubComVungleVungoOpenrtb(out *jwriter.Writer, in D
 		}
 		out.String(string(in.MACMD5))
 	}
-	if len(in.Extension) != 0 {
+	if in.Extension != nil {
 		const prefix string = ",\"ext\":"
 		if first {
 			first = false
@@ -468,7 +472,13 @@ func easyjson3073ac56EncodeGithubComVungleVungoOpenrtb(out *jwriter.Writer, in D
 		} else {
 			out.RawString(prefix)
 		}
-		out.Raw((in.Extension).MarshalJSON())
+		if m, ok := in.Extension.(easyjson.Marshaler); ok {
+			m.MarshalEasyJSON(out)
+		} else if m, ok := in.Extension.(json.Marshaler); ok {
+			out.Raw(m.MarshalJSON())
+		} else {
+			out.Raw(json.Marshal(in.Extension))
+		}
 	}
 	out.RawByte('}')
 }

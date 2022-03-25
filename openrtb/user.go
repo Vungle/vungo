@@ -1,10 +1,6 @@
 package openrtb
 
-import (
-	"encoding/json"
-
-	"github.com/Vungle/vungo/internal/util"
-)
+import "github.com/Vungle/vungo/internal/util"
 
 // User type contains known or derived information about the human user of the device; i.e., the
 // audience of the audience for advertising.
@@ -13,15 +9,15 @@ import (
 //go:generate easyjson $GOFILE
 //easyjson:json
 type User struct {
-	ID         string          `json:"id,omitempty"`
-	BuyerID    string          `json:"buyeruid,omitempty"`
-	BirthYear  int             `json:"yob,omitempty"`
-	Gender     Gender          `json:"gender,omitempty"`
-	Keywords   string          `json:"keywords,omitempty"`
-	CustomData string          `json:"customdata,omitempty"`
-	Geo        *Geo            `json:"geo,omitempty"`
-	Data       []Data          `json:"data,omitempty"`
-	Extension  json.RawMessage `json:"ext,omitempty"`
+	ID         string      `json:"id,omitempty"`
+	BuyerID    string      `json:"buyeruid,omitempty"`
+	BirthYear  int         `json:"yob,omitempty"`
+	Gender     Gender      `json:"gender,omitempty"`
+	Keywords   string      `json:"keywords,omitempty"`
+	CustomData string      `json:"customdata,omitempty"`
+	Geo        *Geo        `json:"geo,omitempty"`
+	Data       []Data      `json:"data,omitempty"`
+	Extension  interface{} `json:"ext,omitempty"`
 }
 
 // Copy returns a pointer to a copy of the User object.
@@ -41,7 +37,7 @@ func (u *User) Copy() *User {
 		copy(userCopy.Data, u.Data)
 	}
 
-	userCopy.Extension = util.DeepCopyJSONRawMsg(u.Extension)
+	userCopy.Extension = util.DeepCopyCopiable(u.Extension)
 
 	return &userCopy
 }
