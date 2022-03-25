@@ -11,7 +11,7 @@ import (
 
 func TestSetHeaders(t *testing.T) {
 	expectedFromEmptyHeader := http.Header{
-		textproto.CanonicalMIMEHeaderKey(openrtb.HeaderOpenRTBVersion): []string{openrtb.OpenRTBVersion},
+		textproto.CanonicalMIMEHeaderKey(openrtb.HeaderOpenRTBVersion): []string{openrtb.HeaderOpenRTBVersion25},
 		"Content-Type": []string{"application/json; charset=utf-8"},
 	}
 
@@ -41,7 +41,7 @@ func TestSetHeaders(t *testing.T) {
 		{
 			http.Header{"X-Additional-Header": []string{"for test"}},
 			http.Header{
-				textproto.CanonicalMIMEHeaderKey(openrtb.HeaderOpenRTBVersion): []string{openrtb.OpenRTBVersion},
+				textproto.CanonicalMIMEHeaderKey(openrtb.HeaderOpenRTBVersion): []string{openrtb.HeaderOpenRTBVersion25},
 				"Content-Type":        []string{"application/json; charset=utf-8"},
 				"X-Additional-Header": []string{"for test"},
 			},
