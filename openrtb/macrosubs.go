@@ -4,7 +4,6 @@ import (
 	"encoding/base64"
 	"regexp"
 	"strconv"
-	"sync"
 )
 
 type macro string
@@ -23,20 +22,11 @@ const (
 // matchMacroRegexp is a regexp for macro matching and should not be used, use matchMacro instead.
 var matchMacroRegexp = regexp.MustCompile(`^\$\{([A-Z_]+)(\:B64)?\}$`)
 
-// matchMacro is a pool of matchMacroRegexp copies.
-var matchMacroPool = sync.Pool{
-	New: func() interface{} {
-		return matchMacroRegexp
-	},
-}
-
 // createReplacer returns a function that will be used with regex.ReplaceAllStringsFunc for macro substitutions.
 func createReplacer(subValues map[macro]string) func(string) string {
 	return func(s string) string {
 		// s is a string like "${AUCTION_ID:B64}"
-		var re = matchMacroPool.Get().(*regexp.Regexp)
-		defer matchMacroPool.Put(re)
-		var macroMatches = re.FindStringSubmatch(s)
+		var macroMatches = matchMacroRegexp.FindStringSubmatch(s)
 		if len(macroMatches) < 2 {
 			return s
 		}
@@ -61,13 +51,6 @@ func createReplacer(subValues map[macro]string) func(string) string {
 
 // findMatchesRegexp is a regexp for finding auction matches and should not be used, use findMatches instead.
 var findMatchesRegexp = regexp.MustCompile(`\$\{[A-Z_]+(?:\:B64)?\}`)
-
-// findMatchesPool is a pool of findMatchesRegexp copies.
-var findMatchesPool = sync.Pool{
-	New: func() interface{} {
-		return findMatchesRegexp
-	},
-}
 
 // MacroSubs performs macro substitutions according to Section 4.4 of the OpenRTB API spec.
 // It takes a string which the substitutions should be performed on, and a *BidResponse to determine the values to be substituted.
@@ -104,7 +87,5 @@ func MacroSubsWithExtraMap(stringToSub string, seat *SeatBid, bid *Bid, auctionI
 		m[macro(k)] = v
 	}
 	replacer := createReplacer(m)
-	var re = findMatchesPool.Get().(*regexp.Regexp)
-	defer findMatchesPool.Put(re)
-	return re.ReplaceAllStringFunc(stringToSub, replacer)
+	return findMatchesRegexp.ReplaceAllStringFunc(stringToSub, replacer)
 }
