@@ -191,12 +191,8 @@ func easyjson344736e9DecodeGithubComVungleVungoOpenrtb(in *jlexer.Lexer, out *Co
 				in.Delim(']')
 			}
 		case "ext":
-			if m, ok := out.Ext.(easyjson.Unmarshaler); ok {
-				m.UnmarshalEasyJSON(in)
-			} else if m, ok := out.Ext.(json.Unmarshaler); ok {
-				_ = m.UnmarshalJSON(in.Raw())
-			} else {
-				out.Ext = in.Interface()
+			if data := in.Raw(); in.Ok() {
+				in.AddError((out.Ext).UnmarshalJSON(data))
 			}
 		default:
 			in.SkipRecursive()
@@ -480,7 +476,7 @@ func easyjson344736e9EncodeGithubComVungleVungoOpenrtb(out *jwriter.Writer, in C
 			out.RawByte(']')
 		}
 	}
-	if in.Ext != nil {
+	if len(in.Ext) != 0 {
 		const prefix string = ",\"ext\":"
 		if first {
 			first = false
@@ -488,13 +484,7 @@ func easyjson344736e9EncodeGithubComVungleVungoOpenrtb(out *jwriter.Writer, in C
 		} else {
 			out.RawString(prefix)
 		}
-		if m, ok := in.Ext.(easyjson.Marshaler); ok {
-			m.MarshalEasyJSON(out)
-		} else if m, ok := in.Ext.(json.Marshaler); ok {
-			out.Raw(m.MarshalJSON())
-		} else {
-			out.Raw(json.Marshal(in.Ext))
-		}
+		out.Raw((in.Ext).MarshalJSON())
 	}
 	out.RawByte('}')
 }
@@ -577,12 +567,8 @@ func easyjson344736e9DecodeGithubComVungleVungoOpenrtb2(in *jlexer.Lexer, out *D
 				in.Delim(']')
 			}
 		case "ext":
-			if m, ok := out.Ext.(easyjson.Unmarshaler); ok {
-				m.UnmarshalEasyJSON(in)
-			} else if m, ok := out.Ext.(json.Unmarshaler); ok {
-				_ = m.UnmarshalJSON(in.Raw())
-			} else {
-				out.Ext = in.Interface()
+			if data := in.Raw(); in.Ok() {
+				in.AddError((out.Ext).UnmarshalJSON(data))
 			}
 		default:
 			in.SkipRecursive()
@@ -637,7 +623,7 @@ func easyjson344736e9EncodeGithubComVungleVungoOpenrtb2(out *jwriter.Writer, in 
 			out.RawByte(']')
 		}
 	}
-	if in.Ext != nil {
+	if len(in.Ext) != 0 {
 		const prefix string = ",\"ext\":"
 		if first {
 			first = false
@@ -645,13 +631,7 @@ func easyjson344736e9EncodeGithubComVungleVungoOpenrtb2(out *jwriter.Writer, in 
 		} else {
 			out.RawString(prefix)
 		}
-		if m, ok := in.Ext.(easyjson.Marshaler); ok {
-			m.MarshalEasyJSON(out)
-		} else if m, ok := in.Ext.(json.Marshaler); ok {
-			out.Raw(m.MarshalJSON())
-		} else {
-			out.Raw(json.Marshal(in.Ext))
-		}
+		out.Raw((in.Ext).MarshalJSON())
 	}
 	out.RawByte('}')
 }
@@ -681,12 +661,8 @@ func easyjson344736e9DecodeGithubComVungleVungoOpenrtb3(in *jlexer.Lexer, out *S
 		case "value":
 			out.Value = string(in.String())
 		case "ext":
-			if m, ok := out.Ext.(easyjson.Unmarshaler); ok {
-				m.UnmarshalEasyJSON(in)
-			} else if m, ok := out.Ext.(json.Unmarshaler); ok {
-				_ = m.UnmarshalJSON(in.Raw())
-			} else {
-				out.Ext = in.Interface()
+			if data := in.Raw(); in.Ok() {
+				in.AddError((out.Ext).UnmarshalJSON(data))
 			}
 		default:
 			in.SkipRecursive()
@@ -728,7 +704,7 @@ func easyjson344736e9EncodeGithubComVungleVungoOpenrtb3(out *jwriter.Writer, in 
 		}
 		out.String(string(in.Value))
 	}
-	if in.Ext != nil {
+	if len(in.Ext) != 0 {
 		const prefix string = ",\"ext\":"
 		if first {
 			first = false
@@ -736,13 +712,7 @@ func easyjson344736e9EncodeGithubComVungleVungoOpenrtb3(out *jwriter.Writer, in 
 		} else {
 			out.RawString(prefix)
 		}
-		if m, ok := in.Ext.(easyjson.Marshaler); ok {
-			m.MarshalEasyJSON(out)
-		} else if m, ok := in.Ext.(json.Marshaler); ok {
-			out.Raw(m.MarshalJSON())
-		} else {
-			out.Raw(json.Marshal(in.Ext))
-		}
+		out.Raw((in.Ext).MarshalJSON())
 	}
 	out.RawByte('}')
 }
@@ -795,12 +765,8 @@ func easyjson344736e9DecodeGithubComVungleVungoOpenrtb1(in *jlexer.Lexer, out *P
 		case "domain":
 			out.Domain = string(in.String())
 		case "ext":
-			if m, ok := out.Ext.(easyjson.Unmarshaler); ok {
-				m.UnmarshalEasyJSON(in)
-			} else if m, ok := out.Ext.(json.Unmarshaler); ok {
-				_ = m.UnmarshalJSON(in.Raw())
-			} else {
-				out.Ext = in.Interface()
+			if data := in.Raw(); in.Ok() {
+				in.AddError((out.Ext).UnmarshalJSON(data))
 			}
 		default:
 			in.SkipRecursive()
@@ -861,7 +827,7 @@ func easyjson344736e9EncodeGithubComVungleVungoOpenrtb1(out *jwriter.Writer, in 
 		}
 		out.String(string(in.Domain))
 	}
-	if in.Ext != nil {
+	if len(in.Ext) != 0 {
 		const prefix string = ",\"ext\":"
 		if first {
 			first = false
@@ -869,13 +835,7 @@ func easyjson344736e9EncodeGithubComVungleVungoOpenrtb1(out *jwriter.Writer, in 
 		} else {
 			out.RawString(prefix)
 		}
-		if m, ok := in.Ext.(easyjson.Marshaler); ok {
-			m.MarshalEasyJSON(out)
-		} else if m, ok := in.Ext.(json.Marshaler); ok {
-			out.Raw(m.MarshalJSON())
-		} else {
-			out.Raw(json.Marshal(in.Ext))
-		}
+		out.Raw((in.Ext).MarshalJSON())
 	}
 	out.RawByte('}')
 }

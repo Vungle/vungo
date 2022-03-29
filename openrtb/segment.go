@@ -1,6 +1,10 @@
 package openrtb
 
-import "github.com/Vungle/vungo/internal/util"
+import (
+	"encoding/json"
+
+	"github.com/Vungle/vungo/internal/util"
+)
 
 // Segment objects are essentially key-value pairs that convey specific units of
 // data.
@@ -43,7 +47,7 @@ type Segment struct {
 	//   object
 	// Description:
 	//   Placeholder for exchange-specific extensions to OpenRTB.
-	Ext interface{} `json:"ext,omitempty"`
+	Ext json.RawMessage `json:"ext,omitempty"`
 }
 
 // Validate method checks to see if the Site object contains required and
@@ -60,6 +64,6 @@ func (s *Segment) Copy() *Segment {
 		return nil
 	}
 	sCopy := *s
-	sCopy.Ext = util.DeepCopyCopiable(s.Ext)
+	sCopy.Ext = util.DeepCopyJSONRawMsg(s.Ext)
 	return &sCopy
 }

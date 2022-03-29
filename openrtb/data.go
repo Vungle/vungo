@@ -1,6 +1,10 @@
 package openrtb
 
-import "github.com/Vungle/vungo/internal/util"
+import (
+	"encoding/json"
+
+	"github.com/Vungle/vungo/internal/util"
+)
 
 // Data object
 // The data and segment objects together allow additional data about the related
@@ -46,7 +50,7 @@ type Data struct {
 	//   object
 	// Description:
 	//   Placeholder for exchange-specific extensions to OpenRTB.
-	Ext interface{} `json:"ext,omitempty"`
+	Ext json.RawMessage `json:"ext,omitempty"`
 }
 
 // Validate method checks to see if the Site object contains required and
@@ -69,6 +73,6 @@ func (d *Data) Copy() *Data {
 			dCopy.Segment[i] = d.Segment[i].Copy()
 		}
 	}
-	dCopy.Ext = util.DeepCopyCopiable(d.Ext)
+	dCopy.Ext = util.DeepCopyJSONRawMsg(d.Ext)
 	return &dCopy
 }

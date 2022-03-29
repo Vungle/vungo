@@ -243,12 +243,8 @@ func easyjsonC16456caDecodeGithubComVungleVungoOpenrtb(in *jlexer.Lexer, out *Ba
 		case "vcm":
 			out.VCM = CompanionRenderingMode(in.Int())
 		case "ext":
-			if m, ok := out.Extension.(easyjson.Unmarshaler); ok {
-				m.UnmarshalEasyJSON(in)
-			} else if m, ok := out.Extension.(json.Unmarshaler); ok {
-				_ = m.UnmarshalJSON(in.Raw())
-			} else {
-				out.Extension = in.Interface()
+			if data := in.Raw(); in.Ok() {
+				in.AddError((out.Extension).UnmarshalJSON(data))
 			}
 		default:
 			in.SkipRecursive()
@@ -474,7 +470,7 @@ func easyjsonC16456caEncodeGithubComVungleVungoOpenrtb(out *jwriter.Writer, in B
 		}
 		out.Int(int(in.VCM))
 	}
-	if in.Extension != nil {
+	if len(in.Extension) != 0 {
 		const prefix string = ",\"ext\":"
 		if first {
 			first = false
@@ -482,13 +478,7 @@ func easyjsonC16456caEncodeGithubComVungleVungoOpenrtb(out *jwriter.Writer, in B
 		} else {
 			out.RawString(prefix)
 		}
-		if m, ok := in.Extension.(easyjson.Marshaler); ok {
-			m.MarshalEasyJSON(out)
-		} else if m, ok := in.Extension.(json.Marshaler); ok {
-			out.Raw(m.MarshalJSON())
-		} else {
-			out.Raw(json.Marshal(in.Extension))
-		}
+		out.Raw((in.Extension).MarshalJSON())
 	}
 	out.RawByte('}')
 }
@@ -546,12 +536,8 @@ func easyjsonC16456caDecodeGithubComVungleVungoOpenrtb1(in *jlexer.Lexer, out *F
 		case "wmin":
 			out.WMin = uint64(in.Uint64())
 		case "ext":
-			if m, ok := out.Ext.(easyjson.Unmarshaler); ok {
-				m.UnmarshalEasyJSON(in)
-			} else if m, ok := out.Ext.(json.Unmarshaler); ok {
-				_ = m.UnmarshalJSON(in.Raw())
-			} else {
-				out.Ext = in.Interface()
+			if data := in.Raw(); in.Ok() {
+				in.AddError((out.Ext).UnmarshalJSON(data))
 			}
 		default:
 			in.SkipRecursive()
@@ -613,7 +599,7 @@ func easyjsonC16456caEncodeGithubComVungleVungoOpenrtb1(out *jwriter.Writer, in 
 		}
 		out.Uint64(uint64(in.WMin))
 	}
-	if in.Ext != nil {
+	if len(in.Ext) != 0 {
 		const prefix string = ",\"ext\":"
 		if first {
 			first = false
@@ -621,13 +607,7 @@ func easyjsonC16456caEncodeGithubComVungleVungoOpenrtb1(out *jwriter.Writer, in 
 		} else {
 			out.RawString(prefix)
 		}
-		if m, ok := in.Ext.(easyjson.Marshaler); ok {
-			m.MarshalEasyJSON(out)
-		} else if m, ok := in.Ext.(json.Marshaler); ok {
-			out.Raw(m.MarshalJSON())
-		} else {
-			out.Raw(json.Marshal(in.Ext))
-		}
+		out.Raw((in.Ext).MarshalJSON())
 	}
 	out.RawByte('}')
 }

@@ -1,6 +1,7 @@
 package openrtb
 
 import (
+	"encoding/json"
 	"errors"
 
 	"github.com/Vungle/vungo/internal/util"
@@ -179,7 +180,7 @@ type Banner struct {
 	//   object
 	// Description:
 	//   Placeholder for exchange-specific extensions to OpenRTB.
-	Extension interface{} `json:"ext,omitempty"`
+	Extension json.RawMessage `json:"ext,omitempty"`
 }
 
 // Validate method implements a Validater interface and return a validation error according to the
@@ -213,10 +214,12 @@ func (v *Banner) Copy() *Banner {
 
 	if v.Format != nil {
 		vCopy.Format = make([]Format, len(v.Format))
-		copy(vCopy.Format, v.Format)
+		for i, format := range v.Format {
+			vCopy.Format[i] = *format.Copy()
+		}
 	}
 
-	vCopy.Extension = util.DeepCopyCopiable(v.Extension)
+	vCopy.Extension = util.DeepCopyJSONRawMsg(v.Extension)
 
 	return &vCopy
 }

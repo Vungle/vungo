@@ -1,5 +1,7 @@
 package request
 
+import "encoding/json"
+
 // Title object is to be used for title element of the Native ad.
 //
 // See OpenRTB Native 1.2 Sec 4.3 Title Object
@@ -26,5 +28,5 @@ type Title struct {
 	// Description:
 	//   This object is a placeholder that may contain custom JSON agreed to by the parties to support flexibility
 	//   beyond the standard defined in this specification.
-	Extension interface{} `json:"ext,omitempty"`
+	Extension json.RawMessage `json:"ext,omitempty"`
 }

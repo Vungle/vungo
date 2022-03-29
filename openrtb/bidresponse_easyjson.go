@@ -87,7 +87,7 @@ func easyjson10eb023eDecodeGithubComVungleVungoOpenrtb(in *jlexer.Lexer, out *Bi
 			}
 		case "ext":
 			if data := in.Raw(); in.Ok() {
-				in.AddError((out.RawExtension).UnmarshalJSON(data))
+				in.AddError((out.Extension).UnmarshalJSON(data))
 			}
 		default:
 			in.SkipRecursive()
@@ -146,10 +146,10 @@ func easyjson10eb023eEncodeGithubComVungleVungoOpenrtb(out *jwriter.Writer, in B
 		out.RawString(prefix)
 		out.Int(int(*in.NoBidReason))
 	}
-	if len(in.RawExtension) != 0 {
+	if len(in.Extension) != 0 {
 		const prefix string = ",\"ext\":"
 		out.RawString(prefix)
-		out.Raw((in.RawExtension).MarshalJSON())
+		out.Raw((in.Extension).MarshalJSON())
 	}
 	out.RawByte('}')
 }
