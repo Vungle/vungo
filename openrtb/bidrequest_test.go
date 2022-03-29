@@ -25,10 +25,15 @@ func TestBidRequestValidateShouldValidateAgainstId(t *testing.T) {
 	var bidRequest openrtb.BidRequest
 	_ = openrtbtest.UnmarshalFromJSONFile("bidrequest.json", &bidRequest)
 
-	// Expect the validation to pass when ID field is non-empty.
-	if err := bidRequest.Validate(); err != nil && err != openrtb.ErrInvalidBidRequestSeats {
-		t.Errorf("BidRequest.ID (%s) when not empty should be valid.\n", bidRequest.ID)
+	originalBlocklistedSeats := bidRequest.BlocklistedSeats
+	bidRequest.BlocklistedSeats = []string{"123"}
+
+	// Expect the validation to fail when both wseat and bseat are not empty.
+	if err := bidRequest.Validate(); err == nil || err != openrtb.ErrInvalidBidRequestSeats {
+		t.Errorf("BlocklistedSeats(%v) and WhitelistedSeats(%v) can not be both unempty.\n",
+			bidRequest.BlocklistedSeats, bidRequest.WhitelistedSeats)
 	}
+	bidRequest.BlocklistedSeats = originalBlocklistedSeats
 
 	// Expect the validate to fail when the ID field is empty.
 	originalID := bidRequest.ID
@@ -46,6 +51,24 @@ func TestBidRequestValidateShouldValidateAgainstId(t *testing.T) {
 		t.Errorf("BidRequest must not contain both a Site and an App object.")
 	}
 	bidRequest.Site = originalSite
+
+	// Expect the validate to fail when no impression or no specific type in impressions.
+	originalImps := bidRequest.Impressions
+	bidRequest.Impressions = nil
+	if err := bidRequest.Validate(); err == nil || err != openrtb.ErrInvalidBidRequestImpressions {
+		t.Errorf("BidRequest must contain impressions, actual is %v.", bidRequest.Impressions)
+	}
+
+	bidRequest.Impressions = []*openrtb.Impression{
+		{Video: &openrtb.Video{}},
+		{},
+	}
+
+	if err := bidRequest.Validate(); err == nil || err != openrtb.ErrInvalidBidRequestImpressions {
+		t.Errorf("Specific type is required in each impression , actual is %v.", bidRequest.Impressions)
+	}
+
+	bidRequest.Impressions = originalImps
 }
 
 func TestBidRequest_Copy(t *testing.T) {

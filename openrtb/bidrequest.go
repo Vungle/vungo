@@ -231,6 +231,16 @@ func (r *BidRequest) Validate() error {
 		return ErrInvalidBidRequestImpressions
 	}
 
+	for _, imp := range r.Impressions {
+		if imp == nil {
+			return ErrInvalidBidRequestImpressions
+		}
+
+		if imp.Video == nil && imp.Banner == nil && imp.Native == nil {
+			return ErrInvalidBidRequestImpressions
+		}
+	}
+
 	if len(r.WhitelistedSeats) > 0 && len(r.BlocklistedSeats) > 0 {
 		return ErrInvalidBidRequestSeats
 	}
