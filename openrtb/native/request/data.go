@@ -7,7 +7,7 @@ import "github.com/Vungle/vungo/openrtb/native"
 // In some cases, additional recommendations are also included in the Data Asset Types table.
 //
 // See OpenRTB Native 1.2 Sec 4.6 Data Object
-//go:generate easyjson $GOFILE
+//go:generate easyjson -no_std_marshalers $GOFILE
 //easyjson:json
 type Data struct {
 

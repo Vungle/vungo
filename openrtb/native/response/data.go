@@ -7,7 +7,7 @@ import "github.com/Vungle/vungo/openrtb/native"
 // etc. It is also generic for future  native elements not contemplated at the time of the writing of this document.
 //
 // See OpenRTB Native 1.2 Sec 5.5 Data
-//go:generate easyjson $GOFILE
+//go:generate easyjson -no_std_marshalers $GOFILE
 //easyjson:json
 type Data struct {
 	// Field:

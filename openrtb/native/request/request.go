@@ -9,7 +9,7 @@ import "github.com/Vungle/vungo/openrtb/native"
 // with your integration docs.
 //
 // See OpenRTB Native 1.2 Sec 4.1 Native Markup Request Object
-//go:generate easyjson $GOFILE
+//go:generate easyjson -no_std_marshalers $GOFILE
 //easyjson:json
 type Request struct {
 

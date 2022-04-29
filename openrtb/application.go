@@ -8,7 +8,7 @@ import "github.com/Vungle/vungo/internal/util"
 // At a minimum, it is useful to provide an App ID or bundle, but this is not
 // strictly required.
 // See OpenRTB 2.5 Sec 3.2.14 Object: App
-//go:generate easyjson $GOFILE
+//go:generate easyjson -no_std_marshalers $GOFILE
 //easyjson:json
 type Application struct {
 	// Attribute:

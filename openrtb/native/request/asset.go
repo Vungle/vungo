@@ -17,7 +17,7 @@ package request
 // DSPs should feel confident that if they support these standards they'll be able to access most  native inventory.
 //
 // See OpenRTB Native 1.2 Sec 4.2 Asset Object
-//go:generate easyjson $GOFILE
+//go:generate easyjson -no_std_marshalers $GOFILE
 //easyjson:json
 type Asset struct {
 	// Field:

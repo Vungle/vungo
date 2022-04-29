@@ -6,7 +6,7 @@ import "github.com/Vungle/vungo/openrtb/native"
 // Recommended sizes and aspect ratios are included in the Image Asset Types section.
 //
 // See OpenRTB Native 1.2 Sec 4.4 Image Object
-//go:generate easyjson $GOFILE
+//go:generate easyjson -no_std_marshalers $GOFILE
 //easyjson:json
 type Image struct {
 

@@ -6,7 +6,7 @@ package response
 // location of the link.
 //
 // See OpenRTB Native 1.2 Sec 5.7 Link
-//go:generate easyjson $GOFILE
+//go:generate easyjson -no_std_marshalers $GOFILE
 //easyjson:json
 type Link struct {
 	// Field:

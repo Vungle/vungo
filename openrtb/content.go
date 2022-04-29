@@ -11,7 +11,7 @@ import "github.com/Vungle/vungo/internal/util"
 // For example might be a video impression embedded in an iframe on an unknown
 // web property or device.
 // See OpenRTB 2.5 Sec 3.2.16.
-//go:generate easyjson $GOFILE
+//go:generate easyjson -no_std_marshalers $GOFILE
 //easyjson:json
 type Content struct {
 

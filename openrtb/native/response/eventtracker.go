@@ -12,7 +12,7 @@ import (
 // to respond with javascript trackers on other events, but the appropriateness of this is up to each buyer.
 //
 // See OpenRTB Native 1.2 Sec 5.8 Event Tracker Response Object
-//go:generate easyjson $GOFILE
+//go:generate easyjson -no_std_marshalers $GOFILE
 //easyjson:json
 type EventTracker struct {
 	// Field:

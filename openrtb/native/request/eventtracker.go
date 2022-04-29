@@ -6,7 +6,7 @@ import "github.com/Vungle/vungo/openrtb/native"
 //types of tracking are available for each event type, and is included as an array in the request.
 //
 // See OpenRTB Native 1.2 Sec 4.7 Event Trackers Request Object
-//go:generate easyjson $GOFILE
+//go:generate easyjson -no_std_marshalers $GOFILE
 //easyjson:json
 type EventTracker struct {
 

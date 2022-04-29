@@ -5,7 +5,7 @@ import "github.com/Vungle/vungo/internal/util"
 // Regulation types denotes any industry, legal, or governmental regulations with respect to the
 // parent bid request object.
 // See OpenRTB 2.5 Sec 3.2.3.
-//go:generate easyjson $GOFILE
+//go:generate easyjson -no_std_marshalers $GOFILE
 //easyjson:json
 type Regulation struct {
 	IsCoppaCompliant *NumericBool `json:"coppa,omitempty"`
