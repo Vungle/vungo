@@ -44,13 +44,6 @@ func TestNewRequestError(t *testing.T) {
 				reflect.TypeOf((*json.UnsupportedTypeError)(nil)),
 			}, // seems like diff os will report diff err type
 		},
-
-		// Should return URL parsing error.
-		//{
-		//	&openrtb.BidRequest{},
-		//	"localhost/#宝%贝%约%么%",
-		//	reflect.TypeOf((*url.Error)(nil)),
-		//},
 	}
 
 	for i, test := range tests {
