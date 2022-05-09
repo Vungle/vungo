@@ -3,7 +3,6 @@ package openrtbutil_test
 import (
 	"context"
 	"encoding/json"
-	"net/url"
 	"reflect"
 	"testing"
 
@@ -36,7 +35,7 @@ func TestNewRequestError(t *testing.T) {
 			&openrtb.BidRequest{
 				Application: &openrtb.Application{
 					// Fake a JSON marshaling error by creating an impossible-to-marshal value.
-					Extension: func() {},
+					Extension: json.RawMessage(`abc`),
 				},
 			},
 			"http://localhost",
@@ -44,13 +43,6 @@ func TestNewRequestError(t *testing.T) {
 				reflect.TypeOf((*json.MarshalerError)(nil)),
 				reflect.TypeOf((*json.UnsupportedTypeError)(nil)),
 			}, // seems like diff os will report diff err type
-		},
-
-		// Should return URL parsing error.
-		{
-			&openrtb.BidRequest{},
-			"localhost/#宝%贝%约%么%",
-			reflect.TypeOf((*url.Error)(nil)),
 		},
 	}
 
