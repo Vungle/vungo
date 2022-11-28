@@ -101,6 +101,9 @@ const (
 	// NoBidReasonBlockedByAdCreativeID denotes the bid is blocked according to creative ID.
 	NoBidReasonBlockedByAdCreativeID
 
+	// NoBidReasonDemoAPPParseError denotes the request is a demo app request and Kraken cannot parser the response header.
+	NoBidReasonDemoAPPParseError
+
 	// Add new entries here.
 
 	lastVungleExchangeNoBidReason
@@ -153,6 +156,7 @@ var NoBidReasonNames = map[NoBidReason]string{
 	NoBidReasonNoBidResponse:            "NO_BID_NO_BID_RESPONSE",
 	NoBidReasonBlockedByAdDomain:        "NO_BID_BLOCKED_BY_AD_DOMAIN",
 	NoBidReasonBlockedByAdCreativeID:    "NO_BID_BLOCKED_BY_AD_CREATIVE_ID",
+	NoBidReasonDemoAPPParseError:        "NO_BID_BLOCKED_BY_DEMOAPP_HEADER",
 
 	NoBidReasonVungleNoCampaigns:    "NO_BID_VUNGLE_NO_CAMPAIGNS",
 	NoBidReasonVungleNoCreatives:    "NO_BID_VUNGLE_NO_CREATIVES",
