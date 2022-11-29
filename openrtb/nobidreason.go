@@ -101,7 +101,7 @@ const (
 	// NoBidReasonBlockedByAdCreativeID denotes the bid is blocked according to creative ID.
 	NoBidReasonBlockedByAdCreativeID
 
-	// NoBidReasonDemoAPPParseError denotes the request is a demo app request and Kraken cannot parser the response header.
+	// NoBidReasonDemoAPPParseError denotes the request is a demo app request and cannot be parsed to a bid response.
 	NoBidReasonDemoAPPParseError
 
 	// Add new entries here.
