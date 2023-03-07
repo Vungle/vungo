@@ -8,13 +8,18 @@ import (
 )
 
 type auctionResult struct {
-	price    float64
-	currency openrtb.Currency
-	id       string
+	price              float64
+	secondHighestPrice float64
+	currency           openrtb.Currency
+	id                 string
 }
 
 func (ar auctionResult) AuctionPrice() float64 {
-	return float64(ar.price)
+	return ar.price
+}
+
+func (ar auctionResult) SecondHighestPrice() float64 {
+	return ar.secondHighestPrice
 }
 
 func (ar auctionResult) Currency() openrtb.Currency {
