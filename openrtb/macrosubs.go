@@ -72,13 +72,12 @@ func MacroSubsWithExtraMap(stringToSub string, seat *SeatBid, bid *Bid, auctionI
 	// replaced with a zero-length string).
 	if auctionInfo.AuctionPrice() > 0 {
 		price = strconv.FormatFloat(auctionInfo.AuctionPrice(), 'f', 9, 64)
-		if reason == LossReasonBidWon {
-			if sp := auctionInfo.SecondHighestPrice(); sp > 0 {
-				minToWin = strconv.FormatFloat(sp, 'f', 9, 64)
-			}
-		} else {
-			minToWin = price
-		}
+	}
+	// According to OpenRTB spec2.6, Exchange-specific policy may preclude support for auction min to win
+	// the disclosure of the second-highest prices resulting in ${AUCTION_MIN_TO_WIN} macros being removed (i.e.,
+	// replaced with a zero-length string).
+	if auctionInfo.AuctionMinToWin() > 0 {
+		minToWin = strconv.FormatFloat(auctionInfo.AuctionMinToWin(), 'f', 9, 64)
 	}
 
 	m := map[macro]string{

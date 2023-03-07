@@ -8,18 +8,18 @@ import (
 )
 
 type auctionResult struct {
-	price              float64
-	secondHighestPrice float64
-	currency           openrtb.Currency
-	id                 string
+	price    float64
+	minToWin float64
+	currency openrtb.Currency
+	id       string
 }
 
 func (ar auctionResult) AuctionPrice() float64 {
 	return ar.price
 }
 
-func (ar auctionResult) SecondHighestPrice() float64 {
-	return ar.secondHighestPrice
+func (ar auctionResult) AuctionMinToWin() float64 {
+	return ar.minToWin
 }
 
 func (ar auctionResult) Currency() openrtb.Currency {
@@ -34,6 +34,7 @@ const testPrice = 2.345
 
 var testAuctionResult = auctionResult{
 	price:    2.345,
+	minToWin: 6.789,
 	currency: openrtb.CurrencyUSD,
 	id:       "auction1234",
 }
@@ -70,11 +71,12 @@ func TestMacroSubs(t *testing.T) {
 		{"abc${AUCTION_PRICE}def", "abc2.345000000def"},
 		{"abc${AUCTION_CURRENCY}def", "abcUSDdef"},
 		{"abc${AUCTION_LOSS}def", "abc0def"},
+		{"abc${AUCTION_MIN_TO_WIN}def", "abc6.789000000def"},
 		{
 			"${AUCTION_ID}${AUCTION_BID_ID}${AUCTION_IMP_ID}${AUCTION_SEAT_ID}" +
-				"${AUCTION_AD_ID}${AUCTION_AD_ID:B64}${AUCTION_PRICE}${AUCTION_CURRENCY}${AUCTION_LOSS}",
+				"${AUCTION_AD_ID}${AUCTION_AD_ID:B64}${AUCTION_PRICE}${AUCTION_CURRENCY}${AUCTION_LOSS}${AUCTION_MIN_TO_WIN}",
 			"auction1234TheBidId!ImpressionIdForBidSeatBidIdentifierSome ad id goes here" +
-				"U29tZSBhZCBpZCBnb2VzIGhlcmU=2.345000000USD0",
+				"U29tZSBhZCBpZCBnb2VzIGhlcmU=2.345000000USD06.789000000",
 		},
 		{"abc${AUCTION_ID}${AUCTION_ID}def", "abcauction1234auction1234def"},
 	}
