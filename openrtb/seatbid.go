@@ -8,6 +8,7 @@ package openrtb
 // win (default) or if it is only interested in winning any if it can win them
 // all as a group.
 // See OpenRTB 2.5 Sec 4.2.2 Object: SeatBid.
+//
 //go:generate easyjson $GOFILE
 //easyjson:json
 type SeatBid struct {
@@ -16,8 +17,11 @@ type SeatBid struct {
 	Group int    `json:"group,omitempty"`
 }
 
-// Validate method validates a seatbid object.
+// Validate method validates a SeatBid object.
 func (b SeatBid) Validate() error {
+	if len(b.Bids) == 0 {
+		return ErrNoBidInSeat
+	}
 	for _, bid := range b.Bids {
 		if err := bid.Validate(); err != nil {
 			return err

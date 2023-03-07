@@ -41,3 +41,7 @@ var ErrInvalidNoBidReason = errors.New("bidresponse.nbr is invalid")
 // ErrInvalidImpressionID represents a validation error when an impression in
 // a Bid of a BidResponse does not have a valid ID.
 var ErrInvalidImpressionID = errors.New("imp.id is invalid")
+
+// ErrNoBidInSeat represents a validation error when a SeatBid of a BidResponse
+// does not have bid.
+var ErrNoBidInSeat = errors.New("bidresponse.seat.bid is empty")
