@@ -30,12 +30,12 @@ func TestSeatBidValidation(t *testing.T) {
 		// with empty seat bid
 		{
 			&openrtb.SeatBid{},
-			nil,
+			openrtb.ErrNoBidInSeat,
 		},
 		// with empty bids
 		{
 			&openrtb.SeatBid{Bids: []*openrtb.Bid{}},
-			nil,
+			openrtb.ErrNoBidInSeat,
 		},
 		// with 2 bids
 		{

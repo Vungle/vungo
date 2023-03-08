@@ -12,4 +12,6 @@ type AuctionInfo interface {
 	Currency() Currency
 	// AuctionPrice method returns the settlement price.
 	AuctionPrice() float64
+	// AuctionMinToWin method returns the auction min bid to win price.
+	AuctionMinToWin() float64
 }
