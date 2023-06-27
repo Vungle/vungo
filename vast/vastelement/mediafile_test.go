@@ -21,6 +21,7 @@ var mediaFileTests = []struct {
 	Err         error
 }{
 	{VastElement: &vastelement.MediaFile{}, File: "mediafile.xml"},
+	{VastElement: &vastelement.MediaFile{}, File: "mediafile_streaming.xml"},
 	{VastElement: &vastelement.MediaFile{}, Err: vastelement.ErrMediaFileMissDelivery, File: "mediafile_without_delivery.xml"},
 	{VastElement: &vastelement.MediaFile{}, Err: vastelement.ErrUnsupportedDeliveryType, File: "mediafile_error_delivery.xml"},
 	{VastElement: &vastelement.MediaFile{}, Err: vastelement.ErrMediaFileSize, File: "mediafile_error_width.xml"},
@@ -32,6 +33,7 @@ var mediaFileTests = []struct {
 	{VastElement: &vastelement.MediaFile{}, Err: vastelement.ErrMediaFileWidthTooHigh, File: "mediafile_width_too_high.xml"},
 	{VastElement: &vastelement.MediaFile{}, Err: vastelement.ErrMediaFileWidthTooLow, File: "mediafile_width_too_low.xml"},
 	{VastElement: &vastelement.MediaFile{}, Err: vastelement.ErrMediaFileUnsupportedMimeType, File: "mediafile_unsupported_mimetype.xml"},
+	{VastElement: &vastelement.MediaFile{}, Err: vastelement.ErrMediaFileUnsupportedStreamingAD, File: "mediafile_unsupported_streaming_mediafile.xml"},
 	{VastElement: &vastelement.MediaFile{}, Err: vastelement.ErrMediaMinBitrateLessThanZero, File: "mediafile_err_minbitrate.xml"},
 	{VastElement: &vastelement.MediaFile{}, Err: vastelement.ErrMediaMaxBitrateLessThanZero, File: "mediafile_err_maxbitrate.xml"},
 }
