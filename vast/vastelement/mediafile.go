@@ -1,6 +1,10 @@
 package vastelement
 
-import "github.com/Vungle/vungo/vast/defaults"
+import (
+	"path"
+
+	"github.com/Vungle/vungo/vast/defaults"
+)
 
 // MediaFile represents a <MediaFile> element that contains a reference to the creative asset in a
 // linear creative.
@@ -28,7 +32,7 @@ func (mediaFile *MediaFile) Validate(version Version) error {
 	errors := make([]error, 0)
 
 	mimeTypeIsSupported := false
-	for _, mimeType := range defaults.SupportedMineTypes {
+	for _, mimeType := range defaults.SupportedMimeTypes {
 		if mimeType == mediaFile.MimeType {
 			mimeTypeIsSupported = true
 			break
@@ -48,6 +52,10 @@ func (mediaFile *MediaFile) Validate(version Version) error {
 		if ok {
 			errors = append(errors, ve.Errs...)
 		}
+	}
+
+	if mediaFile.Delivery == DeliveryStreaming && path.Ext(string(mediaFile.URI)) != defaults.SupportedStreamingADSuffix {
+		errors = append(errors, ErrMediaFileUnsupportedStreamingAD)
 	}
 
 	if mediaFile.Width < 0 || mediaFile.Height < 0 {

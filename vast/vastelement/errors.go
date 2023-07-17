@@ -64,6 +64,9 @@ var (
 	// ErrMediaFileMissDelivery error for ErrMediaFile miss Delivery.
 	ErrMediaFileMissDelivery = errors.New("ErrMediaFile miss Delivery")
 
+	// ErrMediaFileUnsupportedStreamingAD error for ErrMediaFile unsupported streaming ad.
+	ErrMediaFileUnsupportedStreamingAD = errors.New("ErrMediaFile unsupported streaming ad")
+
 	// ErrMediaFileMissMimeType error for ErrMediaFile miss MimeType.
 	ErrMediaFileMissMimeType = errors.New("ErrMediaFile miss MimeType")
 
