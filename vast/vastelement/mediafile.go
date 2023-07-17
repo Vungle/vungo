@@ -1,8 +1,6 @@
 package vastelement
 
 import (
-	"path"
-
 	"github.com/Vungle/vungo/vast/defaults"
 )
 
@@ -52,10 +50,6 @@ func (mediaFile *MediaFile) Validate(version Version) error {
 		if ok {
 			errors = append(errors, ve.Errs...)
 		}
-	}
-
-	if mediaFile.Delivery == DeliveryStreaming && path.Ext(string(mediaFile.URI)) != defaults.SupportedStreamingADSuffix {
-		errors = append(errors, ErrMediaFileUnsupportedStreamingAD)
 	}
 
 	if mediaFile.Width < 0 || mediaFile.Height < 0 {
