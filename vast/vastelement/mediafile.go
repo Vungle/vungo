@@ -32,7 +32,7 @@ func (mediaFile *MediaFile) Validate(version Version) error {
 	errors := make([]error, 0)
 
 	mimeTypeIsSupported := false
-	for _, mimeType := range defaults.SupportedMineTypes {
+	for _, mimeType := range defaults.SupportedMimeTypes {
 		if mimeType == mediaFile.MimeType {
 			mimeTypeIsSupported = true
 			break

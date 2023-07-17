@@ -20,8 +20,8 @@ const MaxVideoHeight = 5000
 // MinVideoHeight stands for the min video height with a default 1.
 const MinVideoHeight = 1
 
-// SupportedMineTypes is used for default supported video format.
-var SupportedMineTypes = []string{"video/mp4", "application/x-mpegURL"}
+// SupportedMimeTypes is used for default supported video format.
+var SupportedMimeTypes = []string{"video/mp4", "application/x-mpegURL"}
 
 // SupportedStreamingADSuffix is the only supported format suffix for streaming ad.
 const SupportedStreamingADSuffix = ".m3u8"
