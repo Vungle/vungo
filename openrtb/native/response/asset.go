@@ -1,11 +1,14 @@
 package response
 
+import "encoding/json"
+
 // Asset Object is the main container object for each asset requested or supported by Exchange on behalf of the
 // rendering client. Any object that is required is to be flagged as such. Only one of the {title,img,video,data}
 // objects should be present in each object. All others should be null/absent. The id is to be unique within the
 // AssetObject array so that the response can be aligned.
 //
 // See OpenRTB Native 1.2 Sec 5.2 Asset
+//
 //go:generate easyjson $GOFILE
 //easyjson:json
 type Asset struct {
@@ -98,5 +101,5 @@ type Asset struct {
 	//   This object is a placeholder that may contain custom JSON agreed to by the parties to support flexibility
 	//   beyond the standard defined in this specification.
 	//   Bidders are encouraged not to use asset.ext for exchanging text assets. Use data.ext with custom type instead.
-	Extension interface{} `json:"ext,omitempty"`
+	Extension json.RawMessage `json:"ext,omitempty"`
 }

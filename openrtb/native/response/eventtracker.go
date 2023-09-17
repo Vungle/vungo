@@ -12,6 +12,7 @@ import (
 // to respond with javascript trackers on other events, but the appropriateness of this is up to each buyer.
 //
 // See OpenRTB Native 1.2 Sec 5.8 Event Tracker Response Object
+//
 //go:generate easyjson $GOFILE
 //easyjson:json
 type EventTracker struct {
@@ -65,5 +66,5 @@ type EventTracker struct {
 	// Description:
 	//   This object is a placeholder that may contain custom JSON agreed to by the parties to support flexibility
 	//   beyond the standard defined in this specification.
-	Extension interface{} `json:"ext,omitempty"`
+	Extension json.RawMessage `json:"ext,omitempty"`
 }
