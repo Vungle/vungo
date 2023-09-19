@@ -1,12 +1,17 @@
 package request
 
-import "github.com/Vungle/vungo/openrtb"
+import (
+	"encoding/json"
+
+	"github.com/Vungle/vungo/openrtb"
+)
 
 // Video object to be used for all video elements supported in the Native Ad. This corresponds to the Video object of
 // OpenRTB. Exchange implementers can impose their own specific restrictions. Here are the required attributes of the
 // Video Object. For optional attributes please refer to OpenRTB.
 //
 // See OpenRTB Native 1.2 Sec 4.5 Video Object
+//
 //go:generate easyjson $GOFILE
 //easyjson:json
 type Video struct {
@@ -62,5 +67,5 @@ type Video struct {
 	// Description:
 	// This object is a placeholder that may contain custom JSON agreed to by the parties to support flexibility beyond
 	// the standard defined in this specification.
-	Extension interface{} `json:"ext,omitempty"`
+	Extension json.RawMessage `json:"ext,omitempty"`
 }

@@ -1,12 +1,17 @@
 package response
 
-import "github.com/Vungle/vungo/openrtb/native"
+import (
+	"encoding/json"
+
+	"github.com/Vungle/vungo/openrtb/native"
+)
 
 // Image object to be used for all image elements of the Native ad such as Icons, Main Image, etc.
 // It is recommended that if assetsurl/dcourl is being used rather than embedded assets, that an image of each
 // recommended aspect ratio (per the Image Types table) be provided forimage type 3.
 //
 // See OpenRTB Native 1.2 Sec 5.4 Image
+//
 //go:generate easyjson $GOFILE
 //easyjson:json
 type Image struct {
@@ -64,5 +69,5 @@ type Image struct {
 	// Description:
 	//   This object is a placeholder that may contain custom JSON agreed to by the parties to support flexibility
 	//   beyond the standard defined in this specification.
-	Extension interface{} `json:"ext,omitempty"`
+	Extension json.RawMessage `json:"ext,omitempty"`
 }
