@@ -101,14 +101,14 @@ func (m MediaFile) isValidM3U8URI() bool {
 	return isValidMediaFileURI(m.URI, defaults.SupportedStreamingADSuffix) == nil
 }
 
-func (m MediaFile) isValidProgressiveAd() bool {
+func (m MediaFile) IsValidProgressiveAd() bool {
 	if m.isValidM3U8URI() || m.MimeType == defaults.SupportedStreamingMiMEs {
 		return false
 	}
 	return true
 }
 
-func (m MediaFile) isValidStreamingAd() bool {
+func (m MediaFile) IsValidStreamingAd() bool {
 	if !m.isValidM3U8URI() {
 		return false
 	}
