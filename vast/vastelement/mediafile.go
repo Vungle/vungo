@@ -97,22 +97,35 @@ func (mediaFile *MediaFile) Validate(version Version) error {
 	return nil
 }
 
-func (m MediaFile) isValidM3U8URI() bool {
-	return isValidMediaFileURI(m.URI, defaults.SupportedStreamingADSuffix) == nil
-}
-
-func (m MediaFile) IsValidProgressiveAd() bool {
-	if m.isValidM3U8URI() || m.MimeType == defaults.SupportedStreamingMiMEs {
+func (m MediaFile) IsValidFormat(needFilterURI bool) bool {
+	if m.Delivery == DeliveryProgressive && !m.isValidProgressiveAd() {
+		return false
+	}
+	if m.Delivery == DeliveryStreaming && !m.isValidStreamingAd() {
+		return false
+	}
+	if needFilterURI && !m.isValidFile(defaults.MP4Suffix) {
 		return false
 	}
 	return true
 }
 
-func (m MediaFile) IsValidStreamingAd() bool {
-	if !m.isValidM3U8URI() {
+func (m MediaFile) isValidProgressiveAd() bool {
+	if m.isValidFile(defaults.SupportedStreamingADSuffix) || m.MimeType == defaults.SupportedStreamingMiMEs {
 		return false
 	}
 	return true
+}
+
+func (m MediaFile) isValidStreamingAd() bool {
+	if !m.isValidFile(defaults.SupportedStreamingADSuffix) {
+		return false
+	}
+	return true
+}
+
+func (m MediaFile) isValidFile(fileSuffix string) bool {
+	return isValidMediaFileURI(m.URI, fileSuffix) == nil
 }
 
 func isValidMediaFileURI(uri TrimmedData, extension string) error {
