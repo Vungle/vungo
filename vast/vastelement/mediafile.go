@@ -1,7 +1,11 @@
 package vastelement
 
 import (
+	"fmt"
 	"github.com/Vungle/vungo/vast/defaults"
+	"net/url"
+	"path/filepath"
+	"strings"
 )
 
 // MediaFile represents a <MediaFile> element that contains a reference to the creative asset in a
@@ -89,6 +93,38 @@ func (mediaFile *MediaFile) Validate(version Version) error {
 
 	if len(errors) > 0 {
 		return ValidationError{Errs: errors}
+	}
+	return nil
+}
+
+func (m MediaFile) isValidM3U8URI() bool {
+	return isValidMediaFileURI(m.URI, defaults.SupportedStreamingADSuffix) == nil
+}
+
+func (m MediaFile) isValidProgressiveAd() bool {
+	if m.isValidM3U8URI() || m.MimeType == defaults.SupportedStreamingMiMEs {
+		return false
+	}
+	return true
+}
+
+func (m MediaFile) isValidStreamingAd() bool {
+	if !m.isValidM3U8URI() {
+		return false
+	}
+	return true
+}
+
+func isValidMediaFileURI(uri TrimmedData, extension string) error {
+	u, err := url.Parse(string(uri))
+	if err != nil {
+		return fmt.Errorf(ErrStringUnsupportedMediaFileURI, uri)
+	}
+	if !strings.EqualFold(u.Scheme, "http") && !strings.EqualFold(u.Scheme, "https") {
+		return fmt.Errorf(ErrStringUnsupportedMediaFileURI, uri)
+	}
+	if !strings.EqualFold(filepath.Ext(u.Path), extension) {
+		return fmt.Errorf(ErrStringUnsupportedMediaFileURI, uri)
 	}
 	return nil
 }

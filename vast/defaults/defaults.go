@@ -23,5 +23,8 @@ const MinVideoHeight = 1
 // SupportedMimeTypes is used for default supported video format.
 var SupportedMimeTypes = []string{"video/mp4", "application/x-mpegURL"}
 
+// SupportedStreamingMiMEs
+var SupportedStreamingMiMEs = "application/x-mpegURL"
+
 // SupportedStreamingADSuffix is the only supported format suffix for streaming ad.
 const SupportedStreamingADSuffix = ".m3u8"
