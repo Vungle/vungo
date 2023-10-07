@@ -2,10 +2,11 @@ package vastelement
 
 import (
 	"fmt"
-	"github.com/Vungle/vungo/vast/defaults"
 	"net/url"
 	"path/filepath"
 	"strings"
+
+	"github.com/Vungle/vungo/vast/defaults"
 )
 
 // MediaFile represents a <MediaFile> element that contains a reference to the creative asset in a
