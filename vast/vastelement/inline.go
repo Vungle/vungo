@@ -21,7 +21,7 @@ type InLine struct {
 
 // Validate methods validate the Inline element according to the VAST.
 // AdSystem, AdTitle, Impression, Creatives are required.
-func (inline *InLine) Validate(version Version) error {
+func (inline *InLine) Validate(version Version, needFilterURI bool) error {
 	errors := make([]error, 0)
 	if inline.AdTitle == nil {
 		errors = append(errors, ErrInlineMissAdTitle)
@@ -68,7 +68,7 @@ func (inline *InLine) Validate(version Version) error {
 			noneMimeTypeErrors := make([]error, 0)
 
 			for _, mediaFile := range creative.Linear.MediaFiles {
-				err = mediaFile.Validate(version)
+				err = mediaFile.Validate(version, needFilterURI)
 				if err == nil {
 					validMediaFiles = append(validMediaFiles, mediaFile)
 					//break

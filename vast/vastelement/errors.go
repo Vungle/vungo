@@ -158,5 +158,5 @@ var (
 	ErrStringBitrateTooHigh = "bitrate in VAST should be lower than %d, got %d"
 
 	// ErrStringUnsupportedMediaFileURI represents the format of invalid media file URI message.
-	ErrStringUnsupportedMediaFileURI = "invalid media file URI : %s"
+	ErrStringUnsupportedMediaFileURI = errors.New("invalid media file URI : %s")
 )

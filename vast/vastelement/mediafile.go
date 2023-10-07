@@ -30,7 +30,7 @@ type MediaFile struct {
 // Validate method validate the MediaFile element according to the VAST.
 // Delivery and MimeType, Width, and Height are required.
 // Since the width, and height might be zero, we'll only make sure they are not less than zero.
-func (mediaFile *MediaFile) Validate(version Version) error {
+func (mediaFile *MediaFile) Validate(version Version, needFilterURI bool) error {
 	errors := make([]error, 0)
 
 	mimeTypeIsSupported := false
@@ -43,6 +43,10 @@ func (mediaFile *MediaFile) Validate(version Version) error {
 	if !mimeTypeIsSupported {
 		errors = append(errors, ErrMediaFileUnsupportedMimeType)
 		return ValidationError{Errs: errors}
+	}
+
+	if !mediaFile.IsValidFormat(needFilterURI) {
+		errors = append(errors, ErrStringUnsupportedMediaFileURI)
 	}
 
 	if len(mediaFile.Delivery) == 0 {
@@ -131,13 +135,13 @@ func (m MediaFile) isValidFile(fileSuffix string) bool {
 func isValidMediaFileURI(uri TrimmedData, extension string) error {
 	u, err := url.Parse(string(uri))
 	if err != nil {
-		return fmt.Errorf(ErrStringUnsupportedMediaFileURI, uri)
+		return fmt.Errorf("invalid media file URI : %s", uri)
 	}
 	if !strings.EqualFold(u.Scheme, "http") && !strings.EqualFold(u.Scheme, "https") {
-		return fmt.Errorf(ErrStringUnsupportedMediaFileURI, uri)
+		return fmt.Errorf("invalid media file URI : %s", uri)
 	}
 	if !strings.EqualFold(filepath.Ext(u.Path), extension) {
-		return fmt.Errorf(ErrStringUnsupportedMediaFileURI, uri)
+		return fmt.Errorf("invalid media file URI : %s", uri)
 	}
 	return nil
 }
