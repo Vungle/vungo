@@ -130,17 +130,15 @@ func (m MediaFile) isValidStreamingAd() bool {
 }
 
 func (m MediaFile) isValidFile(fileSuffix string) bool {
-	return isValidMediaFileURI(m.URI, fileSuffix) == nil
+	return isMatchedExtension(m.URI, fileSuffix) == nil
 }
 
-func isValidMediaFileURI(uri TrimmedData, extension string) error {
+func isMatchedExtension(uri TrimmedData, extension string) error {
 	u, err := url.Parse(string(uri))
 	if err != nil {
 		return fmt.Errorf("invalid media file URI : %s", uri)
 	}
-	if !strings.EqualFold(u.Scheme, "http") && !strings.EqualFold(u.Scheme, "https") {
-		return fmt.Errorf("invalid media file URI : %s", uri)
-	}
+
 	if !strings.EqualFold(filepath.Ext(u.Path), extension) {
 		return fmt.Errorf("invalid media file URI : %s", uri)
 	}

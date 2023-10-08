@@ -151,12 +151,6 @@ var (
 	// ErrMediaMaxBitrateLessThanZero error from Max bit rate of Mediafile is less than zero
 	ErrMediaMaxBitrateLessThanZero = errors.New("Max bit rate of Mediafile is less than zero")
 
-	// ErrStringBitrateTooLow represents the format of bit rate too low message.
-	ErrStringBitrateTooLow = "bitrate in VAST should be higher than %d, got %d"
-
-	// ErrStringBitrateTooHigh represents the format of bit rate too high message.
-	ErrStringBitrateTooHigh = "bitrate in VAST should be lower than %d, got %d"
-
 	// ErrStringUnsupportedMediaFileURI represents the format of invalid media file URI message.
 	ErrStringUnsupportedMediaFileURI = errors.New("invalid media file URI : %s")
 )
