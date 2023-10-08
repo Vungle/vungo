@@ -138,7 +138,6 @@ func isMatchedExtension(uri TrimmedData, extension string) error {
 	if err != nil {
 		return fmt.Errorf("invalid media file URI : %s", uri)
 	}
-
 	if !strings.EqualFold(filepath.Ext(u.Path), extension) {
 		return fmt.Errorf("invalid media file URI : %s", uri)
 	}

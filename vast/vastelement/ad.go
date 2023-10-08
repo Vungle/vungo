@@ -14,7 +14,7 @@ type Ad struct {
 
 // Validate methods validate the Ad element according to the VAST.
 // Each <Ad> contains either EXACTLY ONE <InLine> element or <Wrapper> element (but never both).
-func (ad *Ad) Validate(version Version,needFilterURI bool) error {
+func (ad *Ad) Validate(version Version, needFilterURI bool) error {
 	errors := make([]error, 0)
 
 	if ad.InLine != nil && ad.Wrapper != nil {
@@ -23,7 +23,7 @@ func (ad *Ad) Validate(version Version,needFilterURI bool) error {
 	}
 
 	if ad.InLine != nil {
-		errors = append(errors, ad.validateAdInline(version,needFilterURI)...)
+		errors = append(errors, ad.validateAdInline(version, needFilterURI)...)
 	} else if ad.Wrapper != nil {
 		errors = append(errors, ad.validateAdWrapper(version)...)
 	} else {
@@ -37,9 +37,9 @@ func (ad *Ad) Validate(version Version,needFilterURI bool) error {
 }
 
 // validateAdInline method validate Inline in an Ad vast element
-func (ad *Ad) validateAdInline(version Version,needFilterURI bool) []error {
+func (ad *Ad) validateAdInline(version Version, needFilterURI bool) []error {
 	errors := make([]error, 0)
-	if err := ad.InLine.Validate(version,needFilterURI bool); err != nil {
+	if err := ad.InLine.Validate(version, needFilterURI); err != nil {
 		ve, ok := err.(ValidationError)
 		if ok {
 			errors = append(errors, ve.Errs...)

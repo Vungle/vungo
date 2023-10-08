@@ -60,7 +60,7 @@ func (v *Vast) Validate(version Version, needFilterURI bool) error {
 	}
 
 	for _, ad := range v.Ads {
-		if err := ad.Validate(version); err != nil {
+		if err := ad.Validate(version, needFilterURI); err != nil {
 			ve, ok := err.(ValidationError)
 			if ok {
 				errors = append(errors, ve.Errs...)
