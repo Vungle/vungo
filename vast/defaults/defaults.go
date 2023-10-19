@@ -28,5 +28,3 @@ var SupportedStreamingMiMEs = "application/x-mpegURL"
 
 // SupportedStreamingADSuffix is the only supported format suffix for streaming ad.
 const SupportedStreamingADSuffix = ".m3u8"
-
-const MP4Suffix = ".mp4"
