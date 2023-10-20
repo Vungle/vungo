@@ -45,3 +45,7 @@ var ErrInvalidImpressionID = errors.New("imp.id is invalid")
 // ErrNoBidInSeat represents a validation error when a SeatBid of a BidResponse
 // does not have bid.
 var ErrNoBidInSeat = errors.New("bidresponse.seat.bid is empty")
+
+// ErrNilBidInSeat represents a validation error when a SeatBid of a BidResponse
+// contains nil bid.
+var ErrNilBidInSeat = errors.New("bidresponse.seat.bid is empty")
