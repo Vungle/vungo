@@ -12,6 +12,7 @@ import "github.com/Vungle/vungo/internal/util"
 // For example, the centroid of a geographic region such as postal code should
 // not be passed.
 // See OpenRTB 2.5 Sec 3.2.19 Object: Geo
+//
 //go:generate easyjson $GOFILE
 //easyjson:json
 type Geo struct {

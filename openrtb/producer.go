@@ -8,6 +8,7 @@ import "github.com/Vungle/vungo/internal/util"
 // distributed through different publishers and thus when the producer and
 // publisher are not necessarily the same entity.
 // See OpenRTB 2.5 Sec 3.2.17.
+//
 //go:generate easyjson $GOFILE
 //easyjson:json
 type Producer struct {

@@ -4,9 +4,10 @@ import "github.com/Vungle/vungo/internal/util"
 
 // Format object represents an allowed size (i.e., height and width combination) or Flex Ad parameters for a banner impression.
 // These are typically used in an array where multiple sizes are permitted.
+// See OpenRTB 2.5 Sec 3.2.10.
+//
 //go:generate easyjson $GOFILE
 //easyjson:json
-// See OpenRTB 2.5 Sec 3.2.10.
 type Format struct {
 
 	// Attribute:

@@ -12,6 +12,7 @@ import (
 // The device can refer to a mobile handset, a desktop computer, set top box, or
 // other digital device.
 // See OpenRTB 2.5 Sec 3.2.18 Object: Device.
+//
 //go:generate easyjson $GOFILE
 //easyjson:json
 type Device struct {
