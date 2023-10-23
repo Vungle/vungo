@@ -15,9 +15,9 @@ import (
 //
 // References
 //
-// 	https://en.wikipedia.org/wiki/IOS_version_history
-// 	https://en.wikipedia.org/wiki/Android_version_history
-// 	https://en.wikipedia.org/wiki/Windows_Phone_version_history
+//	https://en.wikipedia.org/wiki/IOS_version_history
+//	https://en.wikipedia.org/wiki/Android_version_history
+//	https://en.wikipedia.org/wiki/Windows_Phone_version_history
 type OSVersion string
 
 // IsAbove method checks whether the OSVersion is above the other given OSVersion.

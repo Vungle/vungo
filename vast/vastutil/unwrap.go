@@ -36,9 +36,9 @@ func getHTTPClient() *http.Client {
 // XML content when the current VAST is a wrapper. This method returns a slice of all the VAST XML
 // unwrapped during the process and exactly one Inline VAST; or error on any of the following
 // conditions:
-// 	1) Unwrapping context, ctx, is done;
-// 	2) Invalid XML format;
-// 	3) Invalid VAST content, (currently, there should be exactly one <Ad> within <VAST>.
+//  1. Unwrapping context, ctx, is done;
+//  2. Invalid XML format;
+//  3. Invalid VAST content, (currently, there should be exactly one <Ad> within <VAST>.
 func Unwrap(ctx context.Context, data []byte, userAgent, ip string) ([]*vastelement.Vast, error) {
 	var v vastelement.Vast
 	if err := xml.Unmarshal(data, &v); err != nil {

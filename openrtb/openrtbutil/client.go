@@ -59,11 +59,11 @@ type Client struct {
 // OpenRTB specification and configurations on client.
 //
 // There are generally three kinds of errors that may be returned:
-// 	- A NoBidError is returned when the HTTP status or bid response implies no-bid;
-// 	- A net.Error with Timeout() == true may be returned when the underlying TCP connection or the
-// 	  governing context expires;
-// 	- Any other error unexpected, e.g. context.Canceled, which will be returned as its raw error
-// 	  type; callers can panic or log errors depending on their use case.
+//   - A NoBidError is returned when the HTTP status or bid response implies no-bid;
+//   - A net.Error with Timeout() == true may be returned when the underlying TCP connection or the
+//     governing context expires;
+//   - Any other error unexpected, e.g. context.Canceled, which will be returned as its raw error
+//     type; callers can panic or log errors depending on their use case.
 //
 // When err is nil, resp is always non-nil with non-nil properties. Callers does not need to manage
 // underlying HTTP or TCP connection states but just use the resp to perform additional application

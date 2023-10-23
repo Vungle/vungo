@@ -22,6 +22,7 @@ import (
 // request depending on whether the media is browser-based web content or a
 // non-browser application, respectively.
 // See OpenRTB 2.5 Sec 3.2.1.
+//
 //go:generate easyjson $GOFILE
 //easyjson:json
 type BidRequest struct {

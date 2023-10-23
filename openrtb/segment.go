@@ -9,6 +9,7 @@ import "github.com/Vungle/vungo/internal/util"
 // The specific segment names and value options must be published by the
 // exchange a prior to its bidders.
 // See OpenRTB 2.5 Sec 3.2.22.
+//
 //go:generate easyjson $GOFILE
 //easyjson:json
 type Segment struct {
