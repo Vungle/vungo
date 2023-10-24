@@ -44,9 +44,12 @@ func (v Vast) FindFirstInlineCompanionAdsCreative() *CompanionAds {
 	return nil
 }
 
+// MediaFileChecker is a custom filter, input is MediaFile and the output is an error.
+type MediaFileChecker func(file *MediaFile) error
+
 // Validate method validates the Vast element according to the VAST.
 // Version, and Ads are required.
-func (v *Vast) Validate(version Version, needFilterURI bool) error {
+func (v *Vast) Validate(version Version, checker MediaFileChecker) error {
 	errors := make([]error, 0)
 	if err := v.Version.Validate(version); err != nil {
 		ve, ok := err.(ValidationError)
@@ -60,7 +63,7 @@ func (v *Vast) Validate(version Version, needFilterURI bool) error {
 	}
 
 	for _, ad := range v.Ads {
-		if err := ad.Validate(version, needFilterURI); err != nil {
+		if err := ad.Validate(version, checker); err != nil {
 			ve, ok := err.(ValidationError)
 			if ok {
 				errors = append(errors, ve.Errs...)

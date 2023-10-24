@@ -31,7 +31,7 @@ type MediaFile struct {
 // Validate method validate the MediaFile element according to the VAST.
 // Delivery and MimeType, Width, and Height are required.
 // Since the width, and height might be zero, we'll only make sure they are not less than zero.
-func (mediaFile *MediaFile) Validate(version Version, needFilterURI bool) error {
+func (mediaFile *MediaFile) Validate(version Version, checker MediaFileChecker) error {
 	errors := make([]error, 0)
 
 	mimeTypeIsSupported := false
@@ -46,7 +46,11 @@ func (mediaFile *MediaFile) Validate(version Version, needFilterURI bool) error 
 		return ValidationError{Errs: errors}
 	}
 
-	if !mediaFile.IsValidFormat(needFilterURI) {
+	if !mediaFile.IsValidFormat() {
+		errors = append(errors, ErrStringUnsupportedMediaFileURI)
+	}
+
+	if err := checker(mediaFile); err != nil {
 		errors = append(errors, ErrStringUnsupportedMediaFileURI)
 	}
 
@@ -102,14 +106,11 @@ func (mediaFile *MediaFile) Validate(version Version, needFilterURI bool) error 
 	return nil
 }
 
-func (m MediaFile) IsValidFormat(needFilterURI bool) bool {
+func (m MediaFile) IsValidFormat() bool {
 	if m.Delivery == DeliveryProgressive && !m.isValidProgressiveAd() {
 		return false
 	}
 	if m.Delivery == DeliveryStreaming && !m.isValidStreamingAd() {
-		return false
-	}
-	if needFilterURI && !m.isValidFile("mp4") {
 		return false
 	}
 	return true
