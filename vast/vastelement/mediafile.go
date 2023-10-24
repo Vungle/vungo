@@ -109,6 +109,9 @@ func (m MediaFile) IsValidFormat(needFilterURI bool) bool {
 	if m.Delivery == DeliveryStreaming && !m.isValidStreamingAd() {
 		return false
 	}
+	if needFilterURI && !m.isValidFile("mp4") {
+		return false
+	}
 	return true
 }
 
