@@ -18,9 +18,10 @@ type MediaFile struct {
 	APIFramework              string      `xml:"apiFramework,attr,omitempty"` // API used to interact with the MediaFile.a
 	URI                       TrimmedData `xml:",cdata"`
 
-	Codec      string `xml:"codec,attr,omitempty"`      // VAST3.0.
-	MinBitrate *int   `xml:"minBitrate,attr,omitempty"` // In Kbps; absent if Bitrate is present. VAST3.0.
-	MaxBitrate *int   `xml:"maxBitrate,attr,omitempty"` // In Kbps; absent if Bitrate is present. VAST3.0.
+	IsAlternative *bool  `xml:"alternative,attr"`
+	Codec         string `xml:"codec,attr,omitempty"`      // VAST3.0.
+	MinBitrate    *int   `xml:"minBitrate,attr,omitempty"` // In Kbps; absent if Bitrate is present. VAST3.0.
+	MaxBitrate    *int   `xml:"maxBitrate,attr,omitempty"` // In Kbps; absent if Bitrate is present. VAST3.0.
 }
 
 // Validate method validate the MediaFile element according to the VAST.
