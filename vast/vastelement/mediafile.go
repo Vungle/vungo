@@ -51,7 +51,7 @@ func (mediaFile *MediaFile) Validate(version Version, checker MediaFileChecker) 
 	}
 
 	if err := checker(mediaFile); err != nil {
-		errors = append(errors, ErrStringUnsupportedMediaFileURI)
+		errors = append(errors, err)
 	}
 
 	if len(mediaFile.Delivery) == 0 {
