@@ -17,6 +17,7 @@ import (
 // banner, video, and/or native by also including as Imp subordinates objects of those types. However, any
 // given bid for the impression must conform to one of the offered types.
 // See OpenRTB 2.5 Sec 3.2.8.
+//
 //go:generate easyjson $GOFILE
 //easyjson:json
 type Audio struct {

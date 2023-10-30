@@ -11,6 +11,7 @@ import "github.com/Vungle/vungo/internal/util"
 // The specific data providers in use should be published by the exchange a
 // priori to its bidders.
 // See OpenRTB 2.5 Sec 3.2.21.
+//
 //go:generate easyjson $GOFILE
 //easyjson:json
 type Data struct {

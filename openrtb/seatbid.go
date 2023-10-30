@@ -23,6 +23,9 @@ func (b SeatBid) Validate() error {
 		return ErrNoBidInSeat
 	}
 	for _, bid := range b.Bids {
+		if bid == nil {
+			return ErrNilBidInSeat
+		}
 		if err := bid.Validate(); err != nil {
 			return err
 		}
