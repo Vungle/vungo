@@ -4,12 +4,13 @@ package vastelement
 type Linear struct {
 	// SkipOffset is time delay at which ad becomes skippable;
 	// if absent, the ad is unskippable. VAST3.0.
-	SkipOffset   *Offset       `xml:"skipoffset,attr,omitempty"`
-	Duration     Duration      `xml:"Duration"`               // Required in InLine, optional in Wrapper
-	AdParameters *AdParameters `xml:"AdParameters,omitempty"` // Type changes from string to struct in VAST3.0.
-	Trackings    []*Tracking   `xml:"TrackingEvents>Tracking,omitempty"`
-	VideoClicks  *VideoClicks  `xml:"VideoClicks,omitempty"`
-	MediaFiles   []*MediaFile  `xml:"MediaFiles>MediaFile,omitempty"`
+	SkipOffset    *Offset       `xml:"skipoffset,attr,omitempty"`
+	IsAlternative *bool         `xml:"alternative,attr,omitempty"`
+	Duration      Duration      `xml:"Duration"`               // Required in InLine, optional in Wrapper
+	AdParameters  *AdParameters `xml:"AdParameters,omitempty"` // Type changes from string to struct in VAST3.0.
+	Trackings     []*Tracking   `xml:"TrackingEvents>Tracking,omitempty"`
+	VideoClicks   *VideoClicks  `xml:"VideoClicks,omitempty"`
+	MediaFiles    []*MediaFile  `xml:"MediaFiles>MediaFile,omitempty"`
 
 	Extensions []*Extension `xml:"CreativeExtensions>CreativeExtension,omitempty"` // VAST3.0.
 	Icons      []*Icon      `xml:"Icons>Icon"`                                     // VAST3.0.

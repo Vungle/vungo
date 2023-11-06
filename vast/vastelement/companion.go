@@ -16,7 +16,7 @@ type Companion struct {
 	IFrameResource string          `xml:"IFrameResource,omitempty"`
 	HTMLResource   *HTMLResource   `xml:"HTMLResource,omitempty"` // Type changed from string to structure in VAST3.0.
 
-	IsAlternative bool          `xml:"alternative,attr"`
+	IsAlternative *bool         `xml:"alternative,attr,omitempty"`
 	AssetWidth    int           `xml:"assetWidth,attr"`                                // VAST3.0.
 	AssetHeight   int           `xml:"assetHeight,attr"`                               // VAST3.0.
 	AdSlotID      string        `xml:"adSlotId,attr,omitempty"`                        // VAST3.0.
