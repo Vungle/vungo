@@ -10,5 +10,6 @@
     width="8"
     height="16"
     scalable="true"
+    alternative= "true"
     maintainAspectRatio="true"
     apiFramework="Vungle Exchange"><![CDATA[http://link/to/the/video]]></MediaFile>
