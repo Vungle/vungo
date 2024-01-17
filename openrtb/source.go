@@ -2,6 +2,7 @@ package openrtb
 
 import (
 	"encoding/json"
+
 	"github.com/Vungle/vungo/internal/util"
 )
 
