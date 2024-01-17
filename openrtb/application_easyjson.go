@@ -148,12 +148,8 @@ func easyjsonB2e97d60DecodeGithubComVungleVungoOpenrtb(in *jlexer.Lexer, out *Ap
 		case "keywords":
 			out.Keywords = string(in.String())
 		case "ext":
-			if m, ok := out.Extension.(easyjson.Unmarshaler); ok {
-				m.UnmarshalEasyJSON(in)
-			} else if m, ok := out.Extension.(json.Unmarshaler); ok {
-				_ = m.UnmarshalJSON(in.Raw())
-			} else {
-				out.Extension = in.Interface()
+			if data := in.Raw(); in.Ok() {
+				in.AddError((out.Extension).UnmarshalJSON(data))
 			}
 		default:
 			in.SkipRecursive()
@@ -332,7 +328,7 @@ func easyjsonB2e97d60EncodeGithubComVungleVungoOpenrtb(out *jwriter.Writer, in A
 		}
 		out.String(string(in.Keywords))
 	}
-	if in.Extension != nil {
+	if len(in.Extension) != 0 {
 		const prefix string = ",\"ext\":"
 		if first {
 			first = false
@@ -340,13 +336,7 @@ func easyjsonB2e97d60EncodeGithubComVungleVungoOpenrtb(out *jwriter.Writer, in A
 		} else {
 			out.RawString(prefix)
 		}
-		if m, ok := in.Extension.(easyjson.Marshaler); ok {
-			m.MarshalEasyJSON(out)
-		} else if m, ok := in.Extension.(json.Marshaler); ok {
-			out.Raw(m.MarshalJSON())
-		} else {
-			out.Raw(json.Marshal(in.Extension))
-		}
+		out.Raw((in.Extension).MarshalJSON())
 	}
 	out.RawByte('}')
 }

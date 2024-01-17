@@ -1,6 +1,9 @@
 package openrtb
 
-import "github.com/Vungle/vungo/internal/util"
+import (
+	"encoding/json"
+	"github.com/Vungle/vungo/internal/util"
+)
 
 // Source object describes the nature and behavior of the entity that is the source of the bid request upstream from the exchange.
 // The primary purpose of this object is to define post-auction or upstream decisioning when the exchange itself does not control the final decision.
@@ -40,7 +43,7 @@ type Source struct {
 	//   object
 	// Description:
 	//   Placeholder for exchange-specific extensions to OpenRTB.
-	Ext interface{} `json:"ext,omitempty"`
+	Ext json.RawMessage `json:"ext,omitempty"`
 }
 
 // Copy returns a pointer to a copy of the Source object.
@@ -49,6 +52,6 @@ func (s *Source) Copy() *Source {
 		return nil
 	}
 	sourceCopy := *s
-	sourceCopy.Ext = util.DeepCopyCopiable(s.Ext)
+	sourceCopy.Ext = util.DeepCopyJSONRawMsg(s.Ext)
 	return &sourceCopy
 }
