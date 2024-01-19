@@ -21,11 +21,15 @@ generate:
 	find . -name '*_easyjson.go' -delete
 	go generate ./...
 
-check_git_diff:
+check_git_diff: go_mod_tidy
 	@if git diff --quiet; then echo "All commited"; else echo "Error: Not commit yet"; git diff; exit 1; fi
 
 check_generate: check_git_diff generate
 	@if git diff --quiet; then echo "OK, generate is not needed."; else echo "Error: need generate."; git diff; exit 1; fi
+
+go_mod_tidy:
+	@echo PATH=$$PATH
+	go mod tidy
 
 fmt:
 	gofmt -w $(GOFMT_FILES)
