@@ -50,3 +50,6 @@ const (
 )
 
 // >= 1000 Exchange specific (should be communicated to bidders a priori)
+const (
+	LossReasonBidExceedMaxValue LossReason = 1000 // Bid was higher than max value allowed by the exchange
+)
