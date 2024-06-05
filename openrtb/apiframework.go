@@ -12,4 +12,5 @@ const (
 	APIFrameworkORMMA  APIFramework = 4 // ORMMA
 	APIFrameworkMRAID2 APIFramework = 5 // MRAID-2
 	APIFrameworkMRAID3 APIFramework = 6 // MRAID-3
+	APIFrameworkOMID1  APIFramework = 7 // OMID-1
 )
