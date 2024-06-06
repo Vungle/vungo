@@ -20,6 +20,7 @@ const (
 // See AdCOM v1.0 FINAL.
 type VideoPlcmtType int
 
+// VideoPlcmtType enums
 const (
 	VideoPlcmtTypeInStream            VideoPlcmtType = 1 // Instream: Pre-roll, mid-roll, and post-roll ads that are played before, during or after the streaming video content that the consumer has requested. Instream video must be set to “sound on” by default at player start, or have explicitly clear user intent to watch the video content. While there may be other content surrounding the player, the video content must be the focus of the user’s visit. It should remain the primary content on the page and the only video player in-view capable of audio when playing. If the player converts to floating/sticky subsequent ad calls should accurately convey the updated player size.
 	VideoPlcmtTypeAccompanyingContent VideoPlcmtType = 2 // Accompanying Content: Pre-roll, mid-roll, and post-roll ads that are played before, during, or after streaming video content. The video player loads and plays before, between, or after paragraphs of text or graphical content, and starts playing only when it enters the viewport. Accompanying content should only start playback upon entering the viewport. It may convert to a floating/sticky player as it scrolls off the page.
