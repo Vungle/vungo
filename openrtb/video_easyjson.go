@@ -120,6 +120,8 @@ func easyjson3c9ce8c3DecodeGithubComVungleVungoOpenrtb(in *jlexer.Lexer, out *Vi
 			}
 		case "placement":
 			out.PlacementType = VideoPlacementType(in.Int())
+		case "plcmt":
+			out.PlcmtType = VideoPlcmtType(in.Int())
 		case "linearity":
 			out.Linearity = Linearity(in.Int())
 		case "skip":
@@ -368,6 +370,11 @@ func easyjson3c9ce8c3EncodeGithubComVungleVungoOpenrtb(out *jwriter.Writer, in V
 		const prefix string = ",\"placement\":"
 		out.RawString(prefix)
 		out.Int(int(in.PlacementType))
+	}
+	if in.PlcmtType != 0 {
+		const prefix string = ",\"plcmt\":"
+		out.RawString(prefix)
+		out.Int(int(in.PlcmtType))
 	}
 	if in.Linearity != 0 {
 		const prefix string = ",\"linearity\":"
