@@ -2,6 +2,7 @@ package vastelement
 
 // Linear type represents an <Linear> element within a <InLine> element.
 type Linear struct {
+	ID string `xml:"id,attr,omitempty"` // ID of the Linear defined by the ad server.
 	// SkipOffset is time delay at which ad becomes skippable;
 	// if absent, the ad is unskippable. VAST3.0.
 	SkipOffset    *Offset `xml:"skipoffset,attr,omitempty"`

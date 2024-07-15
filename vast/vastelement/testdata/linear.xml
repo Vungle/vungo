@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Linear skipoffset="11:22:00.123" alternative= "true" looping="true">
+<Linear skipoffset="11:22:00.123" id="linear-1" alternative= "true" looping="true">
   <Duration>00:00:33.123</Duration>
   <AdParameters xmlEncoded="true"><![CDATA[Some ad parameters.]]></AdParameters>
   <Icons>
