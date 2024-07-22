@@ -47,6 +47,7 @@ const (
 	LossReasonCreativeFilterAdTypeExclusions            LossReason = 211 // Creative Filtered – Ad Type Exclusions
 	LossReasonCreativeFilterAnimationTooLong            LossReason = 212 // Creative Filtered – Animation Too Long
 	LossReasonCreativeFilterNotAllowedInPMPDeal         LossReason = 213 // Creative Filtered – Not Allowed in PMP Deal
+	LossReasonCreativeFilterNotAllowedFreeform          LossReason = 214 // Creative Filtered – Freeform not allowed
 )
 
 // >= 1000 Exchange specific (should be communicated to bidders a priori)
