@@ -3,8 +3,9 @@ package vastelement
 // Companion type represents a complex type that defines a companion ad.
 type Companion struct {
 	ID             string          `xml:"id,attr,omitempty"`
-	Width          int             `xml:"width,attr"`  // Required.
-	Height         int             `xml:"height,attr"` // Required.
+	Width          int             `xml:"width,attr"`             // Required.
+	Height         int             `xml:"height,attr"`            // Required.
+	Preload        int             `xml:"preload,attr,omitempty"` // This is supported for accelerate only.
 	ExpandedWidth  int             `xml:"expandedWidth,attr,omitempty"`
 	ExpandedHeight int             `xml:"expandedHeight,attr,omitempty"`
 	APIFramework   string          `xml:"apiFramework,attr,omitempty"`
