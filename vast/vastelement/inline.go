@@ -6,14 +6,15 @@ import "github.com/Vungle/vungo/vast/defaults"
 //
 // The <InLine> element contains all necessary assets, URI's, creatives, etc, to display the ad.
 type InLine struct {
-	AdSystem    *AdSystem     `xml:"AdSystem"`           // Required.
-	AdTitle     *string       `xml:"AdTitle"`            // Required.
-	Impressions []*Impression `xml:"Impression"`         // Required.
-	Creatives   []*Creative   `xml:"Creatives>Creative"` // Creatives node is required.
-	Description string        `xml:"Description,omitempty"`
-	SurveyURL   string        `xml:"Survey,omitempty"`
-	Errors      []string      `xml:"Error,omitempty"`
-	Extensions  []*Extension  `xml:"Extensions>Extension,omitempty"`
+	AdSystem        *AdSystem       `xml:"AdSystem"`                               // Required.
+	AdTitle         *string         `xml:"AdTitle"`                                // Required.
+	Impressions     []*Impression   `xml:"Impression"`                             // Required.
+	AdVerifications []*Verification `xml:"AdVerifications>Verification,omitempty"` // VAST4.0+.
+	Creatives       []*Creative     `xml:"Creatives>Creative"`                     // Creatives node is required.
+	Description     string          `xml:"Description,omitempty"`
+	SurveyURL       string          `xml:"Survey,omitempty"`
+	Errors          []string        `xml:"Error,omitempty"`
+	Extensions      []*Extension    `xml:"Extensions>Extension,omitempty"`
 
 	Advertiser string   `xml:"Advertiser,omitempty"` // VAST3.0.
 	Pricing    *Pricing `xml:"Pricing,omitempty"`    // VAST3.0.
