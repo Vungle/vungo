@@ -7,7 +7,7 @@ type Verification struct {
 	ViewableImpression     *ViewableImpression     `xml:"ViewableImpression,omitempty"` // VAST4.0
 	JavaScriptResource     *JavaScriptResource     `xml:"JavaScriptResource,omitempty"`
 	FlashResource          *FlashResource          `xml:"FlashResource,omitempty"`           // VAST4.0
-	ExecutableResource     *ExecutableResource     `xml:"FlashResource,omitempty"`           // VAST4.1
+	ExecutableResource     *ExecutableResource     `xml:"ExecutableResource,omitempty"`      // VAST4.1
 	VerificationParameters *VerificationParameters `xml:"VerificationParameters,omitempty"`  // VAST4.1
 	TrackingEvents         []*Tracking             `xml:"TrackingEvents>Tracking,omitempty"` // VAST4.1
 }
