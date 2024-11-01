@@ -33,7 +33,6 @@ type ExecutableResource struct {
 
 // VerificationParameters vast element
 type VerificationParameters struct {
-	//ID    string      `xml:"id,attr,omitempty"`
 	Value TrimmedData `xml:",cdata"`
 }
 
