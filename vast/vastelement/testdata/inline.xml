@@ -242,6 +242,16 @@
     </NonLinearAds>
   </Creative>
   </Creatives>
+  <AdVerifications>
+    <Verification vendor="IABTechLab">
+      <JavaScriptResource apiFramework="VPAID"><![CDATA[http://some/js/url]]></JavaScriptResource>
+      <VerificationParameters><![CDATA[http://some/verification/parameters]]></VerificationParameters>
+    </Verification>
+    <Verification vendor="IABTechLab">
+      <JavaScriptResource apiFramework="VPAID"><![CDATA[http://some/js/url]]></JavaScriptResource>
+      <VerificationParameters><![CDATA[http://some/verification/parameters]]></VerificationParameters>
+    </Verification>
+  </AdVerifications>
   <Description><![CDATA[Super Nice Description]]></Description>
   <Advertiser><![CDATA[What advertiser]]></Advertiser>
   <Survey><![CDATA[http://some/survey/url]]></Survey>

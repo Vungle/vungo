@@ -221,6 +221,16 @@
       </NonLinearAds>
     </Creative>
   </Creatives>
+  <AdVerifications>
+    <Verification vendor="IABTechLab">
+      <JavaScriptResource apiFramework="VPAID"><![CDATA[http://where/is/my/js]]></JavaScriptResource>
+      <VerificationParameters><![CDATA[http://where/is/my/params]]></VerificationParameters>
+    </Verification>
+    <Verification vendor="IABTechLab">
+      <JavaScriptResource apiFramework="VPAID"><![CDATA[http://where/is/my/js]]></JavaScriptResource>
+      <VerificationParameters><![CDATA[http://where/is/my/params]]></VerificationParameters>
+    </Verification>
+  </AdVerifications>
   <Extensions>
     <Extension>
       <Random><XMLDATA>Is Cool</XMLDATA></Random>

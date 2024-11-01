@@ -5,12 +5,13 @@ package vastelement
 // content will be served. The vendor ad server may also provide additional wrapper which
 // eventually resolves to the actual ad.
 type Wrapper struct {
-	AdSystem     *AdSystem     `xml:"AdSystem"`     // Required.
-	VastAdTagURI TrimmedData   `xml:"VASTAdTagURI"` // Required.
-	Impressions  []*Impression `xml:"Impression"`   // Required.
-	Errors       []string      `xml:"Error,omitempty"`
-	Creatives    []*Creative   `xml:"Creatives>Creative"` // Required.
-	Extensions   []*Extension  `xml:"Extensions>Extension,omitempty"`
+	AdSystem        *AdSystem       `xml:"AdSystem"`                               // Required.
+	VastAdTagURI    TrimmedData     `xml:"VASTAdTagURI"`                           // Required.
+	Impressions     []*Impression   `xml:"Impression"`                             // Required.
+	AdVerifications []*Verification `xml:"AdVerifications>Verification,omitempty"` // VAST4.0+.
+	Errors          []string        `xml:"Error,omitempty"`
+	Creatives       []*Creative     `xml:"Creatives>Creative"` // Required.
+	Extensions      []*Extension    `xml:"Extensions>Extension,omitempty"`
 }
 
 // Validate method validates the Wrapper according to the VAST.
