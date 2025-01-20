@@ -93,7 +93,7 @@ func unwrap(ctx context.Context, v *vastelement.Vast, unwrappedList []*vasteleme
 	}
 
 	if err = xml.NewDecoder(reader).Decode(&innerVast); err != nil {
-		return nil, "", err
+		return nil, bodyCopy.String(), err
 	}
 	// TODO(@garukun): Given a set of super fast VAST hosts and a starting wrapper VAST XML that
 	// wraps the VAST infinitely, this implementation could cause disastrous stack overflow that
