@@ -1,6 +1,7 @@
 package vastutil
 
 import (
+	"bytes"
 	"context"
 	"crypto/tls"
 	"encoding/xml"
@@ -39,40 +40,40 @@ func getHTTPClient() *http.Client {
 //  1. Unwrapping context, ctx, is done;
 //  2. Invalid XML format;
 //  3. Invalid VAST content, (currently, there should be exactly one <Ad> within <VAST>.
-func Unwrap(ctx context.Context, data []byte, userAgent, ip string) ([]*vastelement.Vast, error) {
+func Unwrap(ctx context.Context, data []byte, userAgent, ip string, logResp ...bool) ([]*vastelement.Vast, string, error) {
 	var v vastelement.Vast
 	if err := xml.Unmarshal(data, &v); err != nil {
-		return nil, err
+		return nil, "", err
 	}
 
-	return unwrap(ctx, &v, nil, userAgent, ip)
+	return unwrap(ctx, &v, nil, userAgent, ip, "", logResp...)
 }
 
 // unwrap method is a helper function that invokes performs the actual HTTP request to get
 // additional VAST XML and updates the unwrappedList. The unwrap method is invoked recursively until
 // the first Inline VAST is reached or until an error occurs.
-func unwrap(ctx context.Context, v *vastelement.Vast, unwrappedList []*vastelement.Vast, ua, ip string) ([]*vastelement.Vast, error) {
+func unwrap(ctx context.Context, v *vastelement.Vast, unwrappedList []*vastelement.Vast, ua, ip, lastAdm string, logResp ...bool) ([]*vastelement.Vast, string, error) {
 	if len(v.Ads) == 0 || v.Ads[0].Wrapper == nil {
-		return append(unwrappedList, v), nil
+		return append(unwrappedList, v), lastAdm, nil
 	}
 
 	w := v.Ads[0].Wrapper
 	if len(w.VastAdTagURI) == 0 {
-		return nil, ErrWrapperMissingAdTagURI
+		return nil, "", ErrWrapperMissingAdTagURI
 	}
 
 	var innerVast vastelement.Vast
 
 	req, err := http.NewRequest("GET", string(w.VastAdTagURI), nil)
 	if err != nil {
-		return nil, err
+		return nil, "", err
 	}
 	req.Header.Set("User-Agent", ua)
 	req.Header.Set("X-Forwarded-For", ip)
 	req = req.WithContext(ctx)
 	resp, err := defaultUnwrapClient.Do(req)
 	if err != nil {
-		return nil, err
+		return nil, "", err
 	}
 	defer func() {
 		if resp != nil && resp.Body != nil {
@@ -81,12 +82,22 @@ func unwrap(ctx context.Context, v *vastelement.Vast, unwrappedList []*vasteleme
 		}
 	}()
 
-	if err = xml.NewDecoder(resp.Body).Decode(&innerVast); err != nil {
-		return nil, err
+	var reader io.Reader
+	var bodyCopy bytes.Buffer
+	if len(logResp) == 1 && logResp[0] {
+		reader = io.TeeReader(resp.Body, &bodyCopy)
+	}
+
+	if reader == nil {
+		reader = resp.Body
+	}
+
+	if err = xml.NewDecoder(reader).Decode(&innerVast); err != nil {
+		return nil, "", err
 	}
 	// TODO(@garukun): Given a set of super fast VAST hosts and a starting wrapper VAST XML that
 	// wraps the VAST infinitely, this implementation could cause disastrous stack overflow that
 	// even the ctx.Done() cannot enforce exit. We will need to update the logic here eventually
 	// to be more resource aware yet robust. *wink* *wink*, consider channels and goroutines.
-	return unwrap(ctx, &innerVast, append(unwrappedList, v), ua, ip)
+	return unwrap(ctx, &innerVast, append(unwrappedList, v), ua, ip, bodyCopy.String(), logResp...)
 }
