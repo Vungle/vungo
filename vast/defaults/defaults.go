@@ -3,7 +3,7 @@ package defaults
 import "time"
 
 // MaxVideoDuration stands for the max video duration with a default of 60 seconds.
-const MaxVideoDuration = 120 * time.Second
+const MaxVideoDuration = 180 * time.Second
 
 // MinVideoDuration stands for the min video duration with a default of 1 second.
 const MinVideoDuration = 1 * time.Second
