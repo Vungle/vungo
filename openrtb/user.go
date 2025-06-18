@@ -44,8 +44,10 @@ func (u *User) Copy() *User {
 	}
 
 	if u.EIDs != nil {
-		userCopy.EIDs = make([]EID, len(u.EIDs))
-		copy(userCopy.EIDs, u.EIDs)
+		userCopy.EIDs = make([]EID, 0, len(u.EIDs))
+		for _, e := range u.EIDs {
+			userCopy.EIDs = append(userCopy.EIDs, *(e.Copy()))
+		}
 	}
 
 	userCopy.Extension = util.DeepCopyJSONRawMsg(u.Extension)

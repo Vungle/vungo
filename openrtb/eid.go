@@ -2,6 +2,8 @@ package openrtb
 
 import (
 	"encoding/json"
+
+	"github.com/Vungle/vungo/internal/util"
 )
 
 // EID allows buyers to use audience data in real-time bidding.
@@ -77,4 +79,23 @@ type EID struct {
 	// Description:
 	//   Placeholder for advertising-system specific extensions to this object.
 	Ext json.RawMessage `json:"ext,omitempty"`
+}
+
+// Copy returns a pointer to a copy of the User object.
+func (e *EID) Copy() *EID {
+	if e == nil {
+		return nil
+	}
+	eidCopy := *e
+
+	if e.UIDs != nil {
+		eidCopy.UIDs = make([]UID, 0, len(e.UIDs))
+		for _, u := range e.UIDs {
+			eidCopy.UIDs = append(eidCopy.UIDs, *(u.Copy()))
+		}
+	}
+
+	eidCopy.Ext = util.DeepCopyJSONRawMsg(e.Ext)
+
+	return &eidCopy
 }

@@ -2,6 +2,8 @@ package openrtb
 
 import (
 	"encoding/json"
+
+	"github.com/Vungle/vungo/internal/util"
 )
 
 // UID contains a single user identifier provided as part of extended identifiers.
@@ -36,4 +38,16 @@ type UID struct {
 	// Description:
 	//   Placeholder for advertising-system specific extensions to this object.
 	Ext json.RawMessage `json:"ext,omitempty"`
+}
+
+// Copy returns a pointer to a copy of the User object.
+func (u *UID) Copy() *UID {
+	if u == nil {
+		return nil
+	}
+	uidCopy := *u
+
+	uidCopy.Ext = util.DeepCopyJSONRawMsg(u.Ext)
+
+	return &uidCopy
 }
