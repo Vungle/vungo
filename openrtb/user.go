@@ -44,7 +44,7 @@ func (u *User) Copy() *User {
 	}
 
 	if u.EIDs != nil {
-		u.EIDs = make([]EID, len(u.EIDs))
+		userCopy.EIDs = make([]EID, len(u.EIDs))
 		copy(userCopy.EIDs, u.EIDs)
 	}
 
