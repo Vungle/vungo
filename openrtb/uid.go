@@ -4,9 +4,7 @@ import (
 	"encoding/json"
 )
 
-// 3.2.28 Object: UID
-//
-// This object contains a single user identifier provided as part of extended identifiers.
+// UID contains a single user identifier provided as part of extended identifiers.
 // The exchange should ensure that business agreements allow for the sending of this data.
 //
 //go:generate easyjson $GOFILE

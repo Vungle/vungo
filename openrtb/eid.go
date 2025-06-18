@@ -4,9 +4,7 @@ import (
 	"encoding/json"
 )
 
-// 3.2.27 Object: EID
-//
-// Extended identifiers support in the OpenRTB specification allows buyers to use audience data in real-time bidding.
+// EID allows buyers to use audience data in real-time bidding.
 // This object can contain one or more UIDs from a single source or a technology provider.
 // The exchange should ensure that business agreements allow for the sending of this data.
 //
