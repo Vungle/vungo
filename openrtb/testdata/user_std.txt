@@ -27,6 +27,9 @@ Location of the user’s home base defined by a Geo object (Section 3.2.19). Thi
 data
 object array
 Additional user data. Each Data object (Section 3.2.21) represents a different data source.
+eids
+object array
+Details for support of a standard protocol for multiple third party identity providers (Section 3.2.27)
 ext
 object
 Placeholder for exchange-specific extensions to OpenRTB.
