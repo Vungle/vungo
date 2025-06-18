@@ -22,6 +22,7 @@ type User struct {
 	CustomData string          `json:"customdata,omitempty"`
 	Geo        *Geo            `json:"geo,omitempty"`
 	Data       []Data          `json:"data,omitempty"`
+	EIDs       []EID           `json:"eids,omitempty"`
 	Extension  json.RawMessage `json:"ext,omitempty"`
 }
 
@@ -40,6 +41,11 @@ func (u *User) Copy() *User {
 	if u.Data != nil {
 		u.Data = make([]Data, len(u.Data))
 		copy(userCopy.Data, u.Data)
+	}
+
+	if u.EIDs != nil {
+		u.EIDs = make([]EID, len(u.EIDs))
+		copy(userCopy.EIDs, u.EIDs)
 	}
 
 	userCopy.Extension = util.DeepCopyJSONRawMsg(u.Extension)

@@ -736,6 +736,29 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb4(in *jlexer.Lexer, out *U
 				}
 				in.Delim(']')
 			}
+		case "eids":
+			if in.IsNull() {
+				in.Skip()
+				out.EIDs = nil
+			} else {
+				in.Delim('[')
+				if out.EIDs == nil {
+					if !in.IsDelim(']') {
+						out.EIDs = make([]EID, 0, 0)
+					} else {
+						out.EIDs = []EID{}
+					}
+				} else {
+					out.EIDs = (out.EIDs)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v26 EID
+					easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb9(in, &v26)
+					out.EIDs = append(out.EIDs, v26)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
 		case "ext":
 			if data := in.Raw(); in.Ok() {
 				in.AddError((out.Extension).UnmarshalJSON(data))
@@ -830,11 +853,30 @@ func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb4(out *jwriter.Writer, in 
 		}
 		{
 			out.RawByte('[')
-			for v26, v27 := range in.Data {
-				if v26 > 0 {
+			for v27, v28 := range in.Data {
+				if v27 > 0 {
 					out.RawByte(',')
 				}
-				easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb8(out, v27)
+				easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb8(out, v28)
+			}
+			out.RawByte(']')
+		}
+	}
+	if len(in.EIDs) != 0 {
+		const prefix string = ",\"eids\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v29, v30 := range in.EIDs {
+				if v29 > 0 {
+					out.RawByte(',')
+				}
+				easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb9(out, v30)
 			}
 			out.RawByte(']')
 		}
@@ -848,6 +890,210 @@ func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb4(out *jwriter.Writer, in 
 			out.RawString(prefix)
 		}
 		out.Raw((in.Extension).MarshalJSON())
+	}
+	out.RawByte('}')
+}
+func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb9(in *jlexer.Lexer, out *EID) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeFieldName(false)
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "inserter":
+			out.Inserter = string(in.String())
+		case "matcher":
+			out.Matcher = string(in.String())
+		case "mm":
+			out.MM = MatchMethod(in.Int64())
+		case "source":
+			out.Source = string(in.String())
+		case "uids":
+			if in.IsNull() {
+				in.Skip()
+				out.UIDs = nil
+			} else {
+				in.Delim('[')
+				if out.UIDs == nil {
+					if !in.IsDelim(']') {
+						out.UIDs = make([]UID, 0, 1)
+					} else {
+						out.UIDs = []UID{}
+					}
+				} else {
+					out.UIDs = (out.UIDs)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v31 UID
+					easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb10(in, &v31)
+					out.UIDs = append(out.UIDs, v31)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "ext":
+			if data := in.Raw(); in.Ok() {
+				in.AddError((out.Ext).UnmarshalJSON(data))
+			}
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb9(out *jwriter.Writer, in EID) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.Inserter != "" {
+		const prefix string = ",\"inserter\":"
+		first = false
+		out.RawString(prefix[1:])
+		out.String(string(in.Inserter))
+	}
+	if in.Matcher != "" {
+		const prefix string = ",\"matcher\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.Matcher))
+	}
+	if in.MM != 0 {
+		const prefix string = ",\"mm\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.MM))
+	}
+	if in.Source != "" {
+		const prefix string = ",\"source\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.String(string(in.Source))
+	}
+	if len(in.UIDs) != 0 {
+		const prefix string = ",\"uids\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v32, v33 := range in.UIDs {
+				if v32 > 0 {
+					out.RawByte(',')
+				}
+				easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb10(out, v33)
+			}
+			out.RawByte(']')
+		}
+	}
+	if len(in.Ext) != 0 {
+		const prefix string = ",\"ext\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Raw((in.Ext).MarshalJSON())
+	}
+	out.RawByte('}')
+}
+func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb10(in *jlexer.Lexer, out *UID) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeFieldName(false)
+		in.WantColon()
+		if in.IsNull() {
+			in.Skip()
+			in.WantComma()
+			continue
+		}
+		switch key {
+		case "id":
+			out.ID = string(in.String())
+		case "atype":
+			out.AType = AgentType(in.Int64())
+		case "ext":
+			if data := in.Raw(); in.Ok() {
+				in.AddError((out.Ext).UnmarshalJSON(data))
+			}
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb10(out *jwriter.Writer, in UID) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	if in.ID != "" {
+		const prefix string = ",\"id\":"
+		first = false
+		out.RawString(prefix[1:])
+		out.String(string(in.ID))
+	}
+	if in.AType != 0 {
+		const prefix string = ",\"atype\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Int64(int64(in.AType))
+	}
+	if len(in.Ext) != 0 {
+		const prefix string = ",\"ext\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		out.Raw((in.Ext).MarshalJSON())
 	}
 	out.RawByte('}')
 }
@@ -890,17 +1136,17 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb8(in *jlexer.Lexer, out *D
 					out.Segment = (out.Segment)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v28 *Segment
+					var v34 *Segment
 					if in.IsNull() {
 						in.Skip()
-						v28 = nil
+						v34 = nil
 					} else {
-						if v28 == nil {
-							v28 = new(Segment)
+						if v34 == nil {
+							v34 = new(Segment)
 						}
-						easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb9(in, v28)
+						easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb11(in, v34)
 					}
-					out.Segment = append(out.Segment, v28)
+					out.Segment = append(out.Segment, v34)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -953,14 +1199,14 @@ func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb8(out *jwriter.Writer, in 
 		}
 		{
 			out.RawByte('[')
-			for v29, v30 := range in.Segment {
-				if v29 > 0 {
+			for v35, v36 := range in.Segment {
+				if v35 > 0 {
 					out.RawByte(',')
 				}
-				if v30 == nil {
+				if v36 == nil {
 					out.RawString("null")
 				} else {
-					easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb9(out, *v30)
+					easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb11(out, *v36)
 				}
 			}
 			out.RawByte(']')
@@ -984,7 +1230,7 @@ func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb8(out *jwriter.Writer, in 
 	}
 	out.RawByte('}')
 }
-func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb9(in *jlexer.Lexer, out *Segment) {
+func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb11(in *jlexer.Lexer, out *Segment) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -1027,7 +1273,7 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb9(in *jlexer.Lexer, out *S
 		in.Consumed()
 	}
 }
-func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb9(out *jwriter.Writer, in Segment) {
+func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb11(out *jwriter.Writer, in Segment) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -1782,9 +2028,9 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb2(in *jlexer.Lexer, out *S
 					out.Cat = (out.Cat)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v31 string
-					v31 = string(in.String())
-					out.Cat = append(out.Cat, v31)
+					var v37 string
+					v37 = string(in.String())
+					out.Cat = append(out.Cat, v37)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -1805,9 +2051,9 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb2(in *jlexer.Lexer, out *S
 					out.SectionCat = (out.SectionCat)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v32 string
-					v32 = string(in.String())
-					out.SectionCat = append(out.SectionCat, v32)
+					var v38 string
+					v38 = string(in.String())
+					out.SectionCat = append(out.SectionCat, v38)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -1828,9 +2074,9 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb2(in *jlexer.Lexer, out *S
 					out.PageCat = (out.PageCat)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v33 string
-					v33 = string(in.String())
-					out.PageCat = append(out.PageCat, v33)
+					var v39 string
+					v39 = string(in.String())
+					out.PageCat = append(out.PageCat, v39)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -1873,7 +2119,7 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb2(in *jlexer.Lexer, out *S
 				if out.Publisher == nil {
 					out.Publisher = new(Publisher)
 				}
-				easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb10(in, out.Publisher)
+				easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb12(in, out.Publisher)
 			}
 		case "content":
 			if in.IsNull() {
@@ -1883,7 +2129,7 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb2(in *jlexer.Lexer, out *S
 				if out.Content == nil {
 					out.Content = new(Content)
 				}
-				easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb11(in, out.Content)
+				easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb13(in, out.Content)
 			}
 		case "keywords":
 			out.Keywords = string(in.String())
@@ -1945,11 +2191,11 @@ func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb2(out *jwriter.Writer, in 
 		}
 		{
 			out.RawByte('[')
-			for v34, v35 := range in.Cat {
-				if v34 > 0 {
+			for v40, v41 := range in.Cat {
+				if v40 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v35))
+				out.String(string(v41))
 			}
 			out.RawByte(']')
 		}
@@ -1964,11 +2210,11 @@ func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb2(out *jwriter.Writer, in 
 		}
 		{
 			out.RawByte('[')
-			for v36, v37 := range in.SectionCat {
-				if v36 > 0 {
+			for v42, v43 := range in.SectionCat {
+				if v42 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v37))
+				out.String(string(v43))
 			}
 			out.RawByte(']')
 		}
@@ -1983,11 +2229,11 @@ func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb2(out *jwriter.Writer, in 
 		}
 		{
 			out.RawByte('[')
-			for v38, v39 := range in.PageCat {
-				if v38 > 0 {
+			for v44, v45 := range in.PageCat {
+				if v44 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v39))
+				out.String(string(v45))
 			}
 			out.RawByte(']')
 		}
@@ -2050,7 +2296,7 @@ func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb2(out *jwriter.Writer, in 
 		} else {
 			out.RawString(prefix)
 		}
-		easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb10(out, *in.Publisher)
+		easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb12(out, *in.Publisher)
 	}
 	if in.Content != nil {
 		const prefix string = ",\"content\":"
@@ -2060,7 +2306,7 @@ func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb2(out *jwriter.Writer, in 
 		} else {
 			out.RawString(prefix)
 		}
-		easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb11(out, *in.Content)
+		easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb13(out, *in.Content)
 	}
 	if in.Keywords != "" {
 		const prefix string = ",\"keywords\":"
@@ -2090,7 +2336,7 @@ func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb2(out *jwriter.Writer, in 
 	}
 	out.RawByte('}')
 }
-func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb11(in *jlexer.Lexer, out *Content) {
+func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb13(in *jlexer.Lexer, out *Content) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -2143,7 +2389,7 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb11(in *jlexer.Lexer, out *
 				if out.Producer == nil {
 					out.Producer = new(Producer)
 				}
-				easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb12(in, out.Producer)
+				easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb14(in, out.Producer)
 			}
 		case "url":
 			out.URL = string(in.String())
@@ -2163,9 +2409,9 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb11(in *jlexer.Lexer, out *
 					out.Cat = (out.Cat)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v40 string
-					v40 = string(in.String())
-					out.Cat = append(out.Cat, v40)
+					var v46 string
+					v46 = string(in.String())
+					out.Cat = append(out.Cat, v46)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -2248,17 +2494,17 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb11(in *jlexer.Lexer, out *
 					out.Data = (out.Data)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v41 *Data
+					var v47 *Data
 					if in.IsNull() {
 						in.Skip()
-						v41 = nil
+						v47 = nil
 					} else {
-						if v41 == nil {
-							v41 = new(Data)
+						if v47 == nil {
+							v47 = new(Data)
 						}
-						easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb8(in, v41)
+						easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb8(in, v47)
 					}
-					out.Data = append(out.Data, v41)
+					out.Data = append(out.Data, v47)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -2281,7 +2527,7 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb11(in *jlexer.Lexer, out *
 		in.Consumed()
 	}
 }
-func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb11(out *jwriter.Writer, in Content) {
+func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb13(out *jwriter.Writer, in Content) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -2379,7 +2625,7 @@ func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb11(out *jwriter.Writer, in
 		} else {
 			out.RawString(prefix)
 		}
-		easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb12(out, *in.Producer)
+		easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb14(out, *in.Producer)
 	}
 	if in.URL != "" {
 		const prefix string = ",\"url\":"
@@ -2401,11 +2647,11 @@ func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb11(out *jwriter.Writer, in
 		}
 		{
 			out.RawByte('[')
-			for v42, v43 := range in.Cat {
-				if v42 > 0 {
+			for v48, v49 := range in.Cat {
+				if v48 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v43))
+				out.String(string(v49))
 			}
 			out.RawByte(']')
 		}
@@ -2540,14 +2786,14 @@ func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb11(out *jwriter.Writer, in
 		}
 		{
 			out.RawByte('[')
-			for v44, v45 := range in.Data {
-				if v44 > 0 {
+			for v50, v51 := range in.Data {
+				if v50 > 0 {
 					out.RawByte(',')
 				}
-				if v45 == nil {
+				if v51 == nil {
 					out.RawString("null")
 				} else {
-					easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb8(out, *v45)
+					easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb8(out, *v51)
 				}
 			}
 			out.RawByte(']')
@@ -2571,7 +2817,7 @@ func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb11(out *jwriter.Writer, in
 	}
 	out.RawByte('}')
 }
-func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb12(in *jlexer.Lexer, out *Producer) {
+func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb14(in *jlexer.Lexer, out *Producer) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -2610,9 +2856,9 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb12(in *jlexer.Lexer, out *
 					out.Cat = (out.Cat)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v46 string
-					v46 = string(in.String())
-					out.Cat = append(out.Cat, v46)
+					var v52 string
+					v52 = string(in.String())
+					out.Cat = append(out.Cat, v52)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -2637,7 +2883,7 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb12(in *jlexer.Lexer, out *
 		in.Consumed()
 	}
 }
-func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb12(out *jwriter.Writer, in Producer) {
+func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb14(out *jwriter.Writer, in Producer) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -2667,11 +2913,11 @@ func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb12(out *jwriter.Writer, in
 		}
 		{
 			out.RawByte('[')
-			for v47, v48 := range in.Cat {
-				if v47 > 0 {
+			for v53, v54 := range in.Cat {
+				if v53 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v48))
+				out.String(string(v54))
 			}
 			out.RawByte(']')
 		}
@@ -2704,7 +2950,7 @@ func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb12(out *jwriter.Writer, in
 	}
 	out.RawByte('}')
 }
-func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb10(in *jlexer.Lexer, out *Publisher) {
+func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb12(in *jlexer.Lexer, out *Publisher) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -2743,9 +2989,9 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb10(in *jlexer.Lexer, out *
 					out.Categories = (out.Categories)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v49 string
-					v49 = string(in.String())
-					out.Categories = append(out.Categories, v49)
+					var v55 string
+					v55 = string(in.String())
+					out.Categories = append(out.Categories, v55)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -2766,7 +3012,7 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb10(in *jlexer.Lexer, out *
 		in.Consumed()
 	}
 }
-func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb10(out *jwriter.Writer, in Publisher) {
+func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb12(out *jwriter.Writer, in Publisher) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -2785,11 +3031,11 @@ func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb10(out *jwriter.Writer, in
 		out.RawString(prefix)
 		{
 			out.RawByte('[')
-			for v50, v51 := range in.Categories {
-				if v50 > 0 {
+			for v56, v57 := range in.Categories {
+				if v56 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v51))
+				out.String(string(v57))
 			}
 			out.RawByte(']')
 		}
@@ -2843,17 +3089,17 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb1(in *jlexer.Lexer, out *I
 					out.Metrics = (out.Metrics)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v52 *Metric
+					var v58 *Metric
 					if in.IsNull() {
 						in.Skip()
-						v52 = nil
+						v58 = nil
 					} else {
-						if v52 == nil {
-							v52 = new(Metric)
+						if v58 == nil {
+							v58 = new(Metric)
 						}
-						easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb13(in, v52)
+						easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb15(in, v58)
 					}
-					out.Metrics = append(out.Metrics, v52)
+					out.Metrics = append(out.Metrics, v58)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -2876,7 +3122,7 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb1(in *jlexer.Lexer, out *I
 				if out.Video == nil {
 					out.Video = new(Video)
 				}
-				easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb14(in, out.Video)
+				easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb16(in, out.Video)
 			}
 		case "audio":
 			if in.IsNull() {
@@ -2896,7 +3142,7 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb1(in *jlexer.Lexer, out *I
 				if out.Native == nil {
 					out.Native = new(Native)
 				}
-				easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb15(in, out.Native)
+				easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb17(in, out.Native)
 			}
 		case "pmp":
 			if in.IsNull() {
@@ -2906,7 +3152,7 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb1(in *jlexer.Lexer, out *I
 				if out.PrivateMarketplace == nil {
 					out.PrivateMarketplace = new(PrivateMarketplace)
 				}
-				easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb16(in, out.PrivateMarketplace)
+				easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb18(in, out.PrivateMarketplace)
 			}
 		case "displaymanager":
 			out.DisplayManager = string(in.String())
@@ -2952,9 +3198,9 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb1(in *jlexer.Lexer, out *I
 					out.IframeBuster = (out.IframeBuster)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v53 string
-					v53 = string(in.String())
-					out.IframeBuster = append(out.IframeBuster, v53)
+					var v59 string
+					v59 = string(in.String())
+					out.IframeBuster = append(out.IframeBuster, v59)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -2989,14 +3235,14 @@ func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb1(out *jwriter.Writer, in 
 		out.RawString(prefix)
 		{
 			out.RawByte('[')
-			for v54, v55 := range in.Metrics {
-				if v54 > 0 {
+			for v60, v61 := range in.Metrics {
+				if v60 > 0 {
 					out.RawByte(',')
 				}
-				if v55 == nil {
+				if v61 == nil {
 					out.RawString("null")
 				} else {
-					easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb13(out, *v55)
+					easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb15(out, *v61)
 				}
 			}
 			out.RawByte(']')
@@ -3010,7 +3256,7 @@ func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb1(out *jwriter.Writer, in 
 	if in.Video != nil {
 		const prefix string = ",\"video\":"
 		out.RawString(prefix)
-		easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb14(out, *in.Video)
+		easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb16(out, *in.Video)
 	}
 	if in.Audio != nil {
 		const prefix string = ",\"audio\":"
@@ -3020,12 +3266,12 @@ func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb1(out *jwriter.Writer, in 
 	if in.Native != nil {
 		const prefix string = ",\"native\":"
 		out.RawString(prefix)
-		easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb15(out, *in.Native)
+		easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb17(out, *in.Native)
 	}
 	if in.PrivateMarketplace != nil {
 		const prefix string = ",\"pmp\":"
 		out.RawString(prefix)
-		easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb16(out, *in.PrivateMarketplace)
+		easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb18(out, *in.PrivateMarketplace)
 	}
 	if in.DisplayManager != "" {
 		const prefix string = ",\"displaymanager\":"
@@ -3072,11 +3318,11 @@ func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb1(out *jwriter.Writer, in 
 		out.RawString(prefix)
 		{
 			out.RawByte('[')
-			for v56, v57 := range in.IframeBuster {
-				if v56 > 0 {
+			for v62, v63 := range in.IframeBuster {
+				if v62 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v57))
+				out.String(string(v63))
 			}
 			out.RawByte(']')
 		}
@@ -3093,7 +3339,7 @@ func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb1(out *jwriter.Writer, in 
 	}
 	out.RawByte('}')
 }
-func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb16(in *jlexer.Lexer, out *PrivateMarketplace) {
+func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb18(in *jlexer.Lexer, out *PrivateMarketplace) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -3132,17 +3378,17 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb16(in *jlexer.Lexer, out *
 					out.Deals = (out.Deals)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v58 *Deal
+					var v64 *Deal
 					if in.IsNull() {
 						in.Skip()
-						v58 = nil
+						v64 = nil
 					} else {
-						if v58 == nil {
-							v58 = new(Deal)
+						if v64 == nil {
+							v64 = new(Deal)
 						}
-						easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb17(in, v58)
+						easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb19(in, v64)
 					}
-					out.Deals = append(out.Deals, v58)
+					out.Deals = append(out.Deals, v64)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -3165,7 +3411,7 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb16(in *jlexer.Lexer, out *
 		in.Consumed()
 	}
 }
-func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb16(out *jwriter.Writer, in PrivateMarketplace) {
+func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb18(out *jwriter.Writer, in PrivateMarketplace) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -3181,14 +3427,14 @@ func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb16(out *jwriter.Writer, in
 			out.RawString("null")
 		} else {
 			out.RawByte('[')
-			for v59, v60 := range in.Deals {
-				if v59 > 0 {
+			for v65, v66 := range in.Deals {
+				if v65 > 0 {
 					out.RawByte(',')
 				}
-				if v60 == nil {
+				if v66 == nil {
 					out.RawString("null")
 				} else {
-					easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb17(out, *v60)
+					easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb19(out, *v66)
 				}
 			}
 			out.RawByte(']')
@@ -3207,7 +3453,7 @@ func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb16(out *jwriter.Writer, in
 	}
 	out.RawByte('}')
 }
-func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb17(in *jlexer.Lexer, out *Deal) {
+func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb19(in *jlexer.Lexer, out *Deal) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -3250,9 +3496,9 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb17(in *jlexer.Lexer, out *
 					out.WhitelistedSeats = (out.WhitelistedSeats)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v61 string
-					v61 = string(in.String())
-					out.WhitelistedSeats = append(out.WhitelistedSeats, v61)
+					var v67 string
+					v67 = string(in.String())
+					out.WhitelistedSeats = append(out.WhitelistedSeats, v67)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -3273,9 +3519,9 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb17(in *jlexer.Lexer, out *
 					out.AdvertiserDomains = (out.AdvertiserDomains)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v62 string
-					v62 = string(in.String())
-					out.AdvertiserDomains = append(out.AdvertiserDomains, v62)
+					var v68 string
+					v68 = string(in.String())
+					out.AdvertiserDomains = append(out.AdvertiserDomains, v68)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -3298,7 +3544,7 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb17(in *jlexer.Lexer, out *
 		in.Consumed()
 	}
 }
-func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb17(out *jwriter.Writer, in Deal) {
+func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb19(out *jwriter.Writer, in Deal) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -3327,11 +3573,11 @@ func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb17(out *jwriter.Writer, in
 		out.RawString(prefix)
 		{
 			out.RawByte('[')
-			for v63, v64 := range in.WhitelistedSeats {
-				if v63 > 0 {
+			for v69, v70 := range in.WhitelistedSeats {
+				if v69 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v64))
+				out.String(string(v70))
 			}
 			out.RawByte(']')
 		}
@@ -3341,11 +3587,11 @@ func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb17(out *jwriter.Writer, in
 		out.RawString(prefix)
 		{
 			out.RawByte('[')
-			for v65, v66 := range in.AdvertiserDomains {
-				if v65 > 0 {
+			for v71, v72 := range in.AdvertiserDomains {
+				if v71 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v66))
+				out.String(string(v72))
 			}
 			out.RawByte(']')
 		}
@@ -3363,7 +3609,7 @@ func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb17(out *jwriter.Writer, in
 	}
 	out.RawByte('}')
 }
-func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb15(in *jlexer.Lexer, out *Native) {
+func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb17(in *jlexer.Lexer, out *Native) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -3402,9 +3648,9 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb15(in *jlexer.Lexer, out *
 					out.APIFrameworks = (out.APIFrameworks)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v67 APIFramework
-					v67 = APIFramework(in.Int())
-					out.APIFrameworks = append(out.APIFrameworks, v67)
+					var v73 APIFramework
+					v73 = APIFramework(in.Int())
+					out.APIFrameworks = append(out.APIFrameworks, v73)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -3425,9 +3671,9 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb15(in *jlexer.Lexer, out *
 					out.BlockedCreativeAttributes = (out.BlockedCreativeAttributes)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v68 CreativeAttribute
-					v68 = CreativeAttribute(in.Int())
-					out.BlockedCreativeAttributes = append(out.BlockedCreativeAttributes, v68)
+					var v74 CreativeAttribute
+					v74 = CreativeAttribute(in.Int())
+					out.BlockedCreativeAttributes = append(out.BlockedCreativeAttributes, v74)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -3450,7 +3696,7 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb15(in *jlexer.Lexer, out *
 		in.Consumed()
 	}
 }
-func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb15(out *jwriter.Writer, in Native) {
+func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb17(out *jwriter.Writer, in Native) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -3469,11 +3715,11 @@ func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb15(out *jwriter.Writer, in
 		out.RawString(prefix)
 		{
 			out.RawByte('[')
-			for v69, v70 := range in.APIFrameworks {
-				if v69 > 0 {
+			for v75, v76 := range in.APIFrameworks {
+				if v75 > 0 {
 					out.RawByte(',')
 				}
-				out.Int(int(v70))
+				out.Int(int(v76))
 			}
 			out.RawByte(']')
 		}
@@ -3483,11 +3729,11 @@ func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb15(out *jwriter.Writer, in
 		out.RawString(prefix)
 		{
 			out.RawByte('[')
-			for v71, v72 := range in.BlockedCreativeAttributes {
-				if v71 > 0 {
+			for v77, v78 := range in.BlockedCreativeAttributes {
+				if v77 > 0 {
 					out.RawByte(',')
 				}
-				out.Int(int(v72))
+				out.Int(int(v78))
 			}
 			out.RawByte(']')
 		}
@@ -3505,7 +3751,7 @@ func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb15(out *jwriter.Writer, in
 	}
 	out.RawByte('}')
 }
-func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb14(in *jlexer.Lexer, out *Video) {
+func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb16(in *jlexer.Lexer, out *Video) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -3540,9 +3786,9 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb14(in *jlexer.Lexer, out *
 					out.MIMETypes = (out.MIMETypes)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v73 string
-					v73 = string(in.String())
-					out.MIMETypes = append(out.MIMETypes, v73)
+					var v79 string
+					v79 = string(in.String())
+					out.MIMETypes = append(out.MIMETypes, v79)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -3583,9 +3829,9 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb14(in *jlexer.Lexer, out *
 					out.Protocols = (out.Protocols)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v74 Protocol
-					v74 = Protocol(in.Int())
-					out.Protocols = append(out.Protocols, v74)
+					var v80 Protocol
+					v80 = Protocol(in.Int())
+					out.Protocols = append(out.Protocols, v80)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -3636,9 +3882,9 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb14(in *jlexer.Lexer, out *
 					out.BlockedCreativeAttributes = (out.BlockedCreativeAttributes)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v75 CreativeAttribute
-					v75 = CreativeAttribute(in.Int())
-					out.BlockedCreativeAttributes = append(out.BlockedCreativeAttributes, v75)
+					var v81 CreativeAttribute
+					v81 = CreativeAttribute(in.Int())
+					out.BlockedCreativeAttributes = append(out.BlockedCreativeAttributes, v81)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -3669,9 +3915,9 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb14(in *jlexer.Lexer, out *
 					out.PlaybackMethods = (out.PlaybackMethods)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v76 PlaybackMethod
-					v76 = PlaybackMethod(in.Int())
-					out.PlaybackMethods = append(out.PlaybackMethods, v76)
+					var v82 PlaybackMethod
+					v82 = PlaybackMethod(in.Int())
+					out.PlaybackMethods = append(out.PlaybackMethods, v82)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -3694,9 +3940,9 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb14(in *jlexer.Lexer, out *
 					out.DeliveryMethods = (out.DeliveryMethods)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v77 DeliveryMethod
-					v77 = DeliveryMethod(in.Int())
-					out.DeliveryMethods = append(out.DeliveryMethods, v77)
+					var v83 DeliveryMethod
+					v83 = DeliveryMethod(in.Int())
+					out.DeliveryMethods = append(out.DeliveryMethods, v83)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -3719,9 +3965,9 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb14(in *jlexer.Lexer, out *
 					out.CompanionAds = (out.CompanionAds)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v78 Banner
-					(v78).UnmarshalEasyJSON(in)
-					out.CompanionAds = append(out.CompanionAds, v78)
+					var v84 Banner
+					(v84).UnmarshalEasyJSON(in)
+					out.CompanionAds = append(out.CompanionAds, v84)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -3742,9 +3988,9 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb14(in *jlexer.Lexer, out *
 					out.APIFrameworks = (out.APIFrameworks)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v79 APIFramework
-					v79 = APIFramework(in.Int())
-					out.APIFrameworks = append(out.APIFrameworks, v79)
+					var v85 APIFramework
+					v85 = APIFramework(in.Int())
+					out.APIFrameworks = append(out.APIFrameworks, v85)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -3765,9 +4011,9 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb14(in *jlexer.Lexer, out *
 					out.CompanionTypes = (out.CompanionTypes)[:0]
 				}
 				for !in.IsDelim(']') {
-					var v80 CompanionType
-					v80 = CompanionType(in.Int())
-					out.CompanionTypes = append(out.CompanionTypes, v80)
+					var v86 CompanionType
+					v86 = CompanionType(in.Int())
+					out.CompanionTypes = append(out.CompanionTypes, v86)
 					in.WantComma()
 				}
 				in.Delim(']')
@@ -3790,7 +4036,7 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb14(in *jlexer.Lexer, out *
 		in.Consumed()
 	}
 }
-func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb14(out *jwriter.Writer, in Video) {
+func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb16(out *jwriter.Writer, in Video) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -3801,11 +4047,11 @@ func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb14(out *jwriter.Writer, in
 			out.RawString("null")
 		} else {
 			out.RawByte('[')
-			for v81, v82 := range in.MIMETypes {
-				if v81 > 0 {
+			for v87, v88 := range in.MIMETypes {
+				if v87 > 0 {
 					out.RawByte(',')
 				}
-				out.String(string(v82))
+				out.String(string(v88))
 			}
 			out.RawByte(']')
 		}
@@ -3825,11 +4071,11 @@ func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb14(out *jwriter.Writer, in
 		out.RawString(prefix)
 		{
 			out.RawByte('[')
-			for v83, v84 := range in.Protocols {
-				if v83 > 0 {
+			for v89, v90 := range in.Protocols {
+				if v89 > 0 {
 					out.RawByte(',')
 				}
-				out.Int(int(v84))
+				out.Int(int(v90))
 			}
 			out.RawByte(']')
 		}
@@ -3894,11 +4140,11 @@ func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb14(out *jwriter.Writer, in
 		out.RawString(prefix)
 		{
 			out.RawByte('[')
-			for v85, v86 := range in.BlockedCreativeAttributes {
-				if v85 > 0 {
+			for v91, v92 := range in.BlockedCreativeAttributes {
+				if v91 > 0 {
 					out.RawByte(',')
 				}
-				out.Int(int(v86))
+				out.Int(int(v92))
 			}
 			out.RawByte(']')
 		}
@@ -3928,11 +4174,11 @@ func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb14(out *jwriter.Writer, in
 		out.RawString(prefix)
 		{
 			out.RawByte('[')
-			for v87, v88 := range in.PlaybackMethods {
-				if v87 > 0 {
+			for v93, v94 := range in.PlaybackMethods {
+				if v93 > 0 {
 					out.RawByte(',')
 				}
-				out.Int(int(v88))
+				out.Int(int(v94))
 			}
 			out.RawByte(']')
 		}
@@ -3947,11 +4193,11 @@ func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb14(out *jwriter.Writer, in
 		out.RawString(prefix)
 		{
 			out.RawByte('[')
-			for v89, v90 := range in.DeliveryMethods {
-				if v89 > 0 {
+			for v95, v96 := range in.DeliveryMethods {
+				if v95 > 0 {
 					out.RawByte(',')
 				}
-				out.Int(int(v90))
+				out.Int(int(v96))
 			}
 			out.RawByte(']')
 		}
@@ -3966,11 +4212,11 @@ func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb14(out *jwriter.Writer, in
 		out.RawString(prefix)
 		{
 			out.RawByte('[')
-			for v91, v92 := range in.CompanionAds {
-				if v91 > 0 {
+			for v97, v98 := range in.CompanionAds {
+				if v97 > 0 {
 					out.RawByte(',')
 				}
-				(v92).MarshalEasyJSON(out)
+				(v98).MarshalEasyJSON(out)
 			}
 			out.RawByte(']')
 		}
@@ -3980,11 +4226,11 @@ func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb14(out *jwriter.Writer, in
 		out.RawString(prefix)
 		{
 			out.RawByte('[')
-			for v93, v94 := range in.APIFrameworks {
-				if v93 > 0 {
+			for v99, v100 := range in.APIFrameworks {
+				if v99 > 0 {
 					out.RawByte(',')
 				}
-				out.Int(int(v94))
+				out.Int(int(v100))
 			}
 			out.RawByte(']')
 		}
@@ -3994,11 +4240,11 @@ func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb14(out *jwriter.Writer, in
 		out.RawString(prefix)
 		{
 			out.RawByte('[')
-			for v95, v96 := range in.CompanionTypes {
-				if v95 > 0 {
+			for v101, v102 := range in.CompanionTypes {
+				if v101 > 0 {
 					out.RawByte(',')
 				}
-				out.Int(int(v96))
+				out.Int(int(v102))
 			}
 			out.RawByte(']')
 		}
@@ -4016,7 +4262,7 @@ func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb14(out *jwriter.Writer, in
 	}
 	out.RawByte('}')
 }
-func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb13(in *jlexer.Lexer, out *Metric) {
+func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb15(in *jlexer.Lexer, out *Metric) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -4059,7 +4305,7 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb13(in *jlexer.Lexer, out *
 		in.Consumed()
 	}
 }
-func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb13(out *jwriter.Writer, in Metric) {
+func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb15(out *jwriter.Writer, in Metric) {
 	out.RawByte('{')
 	first := true
 	_ = first
