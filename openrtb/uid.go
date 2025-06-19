@@ -40,7 +40,7 @@ type UID struct {
 	Ext json.RawMessage `json:"ext,omitempty"`
 }
 
-// Copy returns a pointer to a copy of the User object.
+// Copy returns a pointer to a copy of the UID object.
 func (u *UID) Copy() *UID {
 	if u == nil {
 		return nil
