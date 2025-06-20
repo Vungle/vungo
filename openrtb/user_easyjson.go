@@ -81,6 +81,29 @@ func easyjson9e1087fdDecodeGithubComVungleVungoOpenrtb(in *jlexer.Lexer, out *Us
 				}
 				in.Delim(']')
 			}
+		case "eids":
+			if in.IsNull() {
+				in.Skip()
+				out.EIDs = nil
+			} else {
+				in.Delim('[')
+				if out.EIDs == nil {
+					if !in.IsDelim(']') {
+						out.EIDs = make([]EID, 0, 0)
+					} else {
+						out.EIDs = []EID{}
+					}
+				} else {
+					out.EIDs = (out.EIDs)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v2 EID
+					(v2).UnmarshalEasyJSON(in)
+					out.EIDs = append(out.EIDs, v2)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
 		case "ext":
 			if data := in.Raw(); in.Ok() {
 				in.AddError((out.Extension).UnmarshalJSON(data))
@@ -175,11 +198,30 @@ func easyjson9e1087fdEncodeGithubComVungleVungoOpenrtb(out *jwriter.Writer, in U
 		}
 		{
 			out.RawByte('[')
-			for v2, v3 := range in.Data {
-				if v2 > 0 {
+			for v3, v4 := range in.Data {
+				if v3 > 0 {
 					out.RawByte(',')
 				}
-				(v3).MarshalEasyJSON(out)
+				(v4).MarshalEasyJSON(out)
+			}
+			out.RawByte(']')
+		}
+	}
+	if len(in.EIDs) != 0 {
+		const prefix string = ",\"eids\":"
+		if first {
+			first = false
+			out.RawString(prefix[1:])
+		} else {
+			out.RawString(prefix)
+		}
+		{
+			out.RawByte('[')
+			for v5, v6 := range in.EIDs {
+				if v5 > 0 {
+					out.RawByte(',')
+				}
+				(v6).MarshalEasyJSON(out)
 			}
 			out.RawByte(']')
 		}

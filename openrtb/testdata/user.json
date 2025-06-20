@@ -27,5 +27,6 @@
       ]
     }
   ],
+  "eids": [{"source":"liveramp.com","uids":[{"id":"mossgarden"}]}], 
   "ext": {"vungle":{"some":["arbitrary value","that","must be","compact JSON"]}}
 }
