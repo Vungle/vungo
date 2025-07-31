@@ -22,6 +22,7 @@ var mediaFileTests = []struct {
 }{
 	{VastElement: &vastelement.MediaFile{}, File: "mediafile.xml"},
 	{VastElement: &vastelement.MediaFile{}, File: "mediafile_streaming.xml"},
+	{VastElement: &vastelement.MediaFile{}, File: "mediafile_apple_hls.xml"},
 	{VastElement: &vastelement.MediaFile{}, Err: vastelement.ErrMediaFileMissDelivery, File: "mediafile_without_delivery.xml"},
 	{VastElement: &vastelement.MediaFile{}, Err: vastelement.ErrUnsupportedDeliveryType, File: "mediafile_error_delivery.xml"},
 	{VastElement: &vastelement.MediaFile{}, Err: vastelement.ErrMediaFileSize, File: "mediafile_error_width.xml"},
