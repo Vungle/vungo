@@ -4,6 +4,7 @@ import (
 	"encoding/xml"
 	"io/ioutil"
 	"reflect"
+	"strings"
 	"testing"
 
 	"github.com/Vungle/vungo/vast/defaults"
@@ -65,7 +66,7 @@ func TestOnlyOneValidMediaFileRemains(t *testing.T) {
 
 	mimeTypeIsSupported := false
 	for _, mimeType := range defaults.SupportedMimeTypes {
-		if mimeType == l.Creatives[0].Linear.MediaFiles[0].MimeType {
+		if strings.EqualFold(mimeType, l.Creatives[0].Linear.MediaFiles[0].MimeType) {
 			mimeTypeIsSupported = true
 			break
 		}

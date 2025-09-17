@@ -1,6 +1,8 @@
 package vastelement
 
 import (
+	"strings"
+
 	"github.com/Vungle/vungo/vast/defaults"
 )
 
@@ -31,7 +33,7 @@ func (mediaFile *MediaFile) Validate(version Version) error {
 
 	mimeTypeIsSupported := false
 	for _, mimeType := range defaults.SupportedMimeTypes {
-		if mimeType == mediaFile.MimeType {
+		if strings.EqualFold(mimeType, mediaFile.MimeType) {
 			mimeTypeIsSupported = true
 			break
 		}
