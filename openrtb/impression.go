@@ -19,7 +19,7 @@ import (
 // at their discretion.
 // However, any given bid for the impression must conform to one of the offered
 // types.
-// See OpenRTB 2.5 Sec 3.2.4.
+// See OpenRTB 2.6 Sec 3.2.4.
 //
 //go:generate easyjson $GOFILE
 //easyjson:json
@@ -175,6 +175,31 @@ type Impression struct {
 	IframeBuster []string `json:"iframebuster,omitempty"`
 
 	// Attribute:
+	//   rwdd
+	// Type:
+	//   integer; default 0
+	// Description:
+	//   Indicates whether the user receives a reward for viewing the
+	//   ad, where 0 = no, 1 = yes. Typically video ad implementations
+	//   allow users to read an additional news article for free, receive
+	//   an extra life in a game, or get a sponsored ad-free music
+	//   session. The reward is typically distributed after the video ad is
+	//   completed.
+	Rewarded *int `json:"rwdd,omitempty"`
+
+	// Attribute:
+	//   ssai
+	// Type:
+	//   integer; default 0
+	// Description:
+	//   Indicates if server-side ad insertion (e.g., stitching an ad into an
+	//   audio or video stream) is in use and the impact of this on asset
+	//   and tracker retrieval, where 0 = status unknown, 1 = all client
+	//   side (i.e., not server-side), 2 = assets stitched server-side but
+	//   tracking pixels fired client-side, 3 = all server-side.
+	ServerSideAdInsertion *int `json:"ssai,omitempty"`
+
+	// Attribute:
 	//   exp
 	// Type:
 	//   integer
@@ -214,6 +239,14 @@ func (imp *Impression) Copy() *Impression {
 		impressionCopy.BrowserTypeUponClick = &newBT
 	}
 	impressionCopy.IframeBuster = util.DeepCopyStrSlice(imp.IframeBuster)
+	if imp.Rewarded != nil {
+		newRewarded := *imp.Rewarded
+		impressionCopy.Rewarded = &newRewarded
+	}
+	if imp.ServerSideAdInsertion != nil {
+		newServerSideAdInsertion := *imp.ServerSideAdInsertion
+		impressionCopy.ServerSideAdInsertion = &newServerSideAdInsertion
+	}
 
 	impressionCopy.Extension = util.DeepCopyJSONRawMsg(imp.Extension)
 
