@@ -13,7 +13,7 @@ package openrtb
 // See OpenRTB 2.6 Sec 3.2.4.
 type ServerSideAdInsertionType int
 
-// Possible values of ServerSideAdInsertionType types.
+// Possible values of ServerSideAdInsertionType type.
 const (
 	ServerSideAdInsertionStatusUnknown ServerSideAdInsertionType = 0
 	ServerSideAdInsertionAllClientSide ServerSideAdInsertionType = 1
