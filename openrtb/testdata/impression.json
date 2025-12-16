@@ -111,6 +111,8 @@
   "bidfloorcur": "USD",
   "clickbrowser": 1,
   "iframebuster": ["abc", "def"],
+  "rwdd": 1,
+  "ssai": 2,
   "exp": 40,
   "ext": {"vungle":{"some":["arbitrary value","that","must be","compact JSON"]}}
 }

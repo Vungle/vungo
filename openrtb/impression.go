@@ -239,6 +239,14 @@ func (imp *Impression) Copy() *Impression {
 		impressionCopy.BrowserTypeUponClick = &newBT
 	}
 	impressionCopy.IframeBuster = util.DeepCopyStrSlice(imp.IframeBuster)
+	if imp.Rewarded != nil {
+		newRewarded := *imp.Rewarded
+		impressionCopy.Rewarded = &newRewarded
+	}
+	if imp.ServerSideAdInsertion != nil {
+		newServerSideAdInsertion := *imp.ServerSideAdInsertion
+		impressionCopy.ServerSideAdInsertion = &newServerSideAdInsertion
+	}
 
 	impressionCopy.Extension = util.DeepCopyJSONRawMsg(imp.Extension)
 
