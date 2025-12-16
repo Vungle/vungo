@@ -3211,9 +3211,11 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb1(in *jlexer.Lexer, out *I
 				out.Rewarded = nil
 			} else {
 				if out.Rewarded == nil {
-					out.Rewarded = new(int)
+					out.Rewarded = new(NumericBool)
 				}
-				*out.Rewarded = int(in.Int())
+				if data := in.Raw(); in.Ok() {
+					in.AddError((*out.Rewarded).UnmarshalJSON(data))
+				}
 			}
 		case "ssai":
 			if in.IsNull() {
@@ -3221,9 +3223,9 @@ func easyjson89fe9b30DecodeGithubComVungleVungoOpenrtb1(in *jlexer.Lexer, out *I
 				out.ServerSideAdInsertion = nil
 			} else {
 				if out.ServerSideAdInsertion == nil {
-					out.ServerSideAdInsertion = new(int)
+					out.ServerSideAdInsertion = new(ServerSideAdInsertionType)
 				}
-				*out.ServerSideAdInsertion = int(in.Int())
+				*out.ServerSideAdInsertion = ServerSideAdInsertionType(in.Int())
 			}
 		case "exp":
 			out.Exp = int(in.Int())
@@ -3350,7 +3352,7 @@ func easyjson89fe9b30EncodeGithubComVungleVungoOpenrtb1(out *jwriter.Writer, in 
 	if in.Rewarded != nil {
 		const prefix string = ",\"rwdd\":"
 		out.RawString(prefix)
-		out.Int(int(*in.Rewarded))
+		out.Raw((*in.Rewarded).MarshalJSON())
 	}
 	if in.ServerSideAdInsertion != nil {
 		const prefix string = ",\"ssai\":"
