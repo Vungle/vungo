@@ -185,7 +185,7 @@ type Impression struct {
 	//   an extra life in a game, or get a sponsored ad-free music
 	//   session. The reward is typically distributed after the video ad is
 	//   completed.
-	Rewarded *int `json:"rwdd,omitempty"`
+	Rewarded *NumericBool `json:"rwdd,omitempty"`
 
 	// Attribute:
 	//   ssai
@@ -197,7 +197,7 @@ type Impression struct {
 	//   and tracker retrieval, where 0 = status unknown, 1 = all client
 	//   side (i.e., not server-side), 2 = assets stitched server-side but
 	//   tracking pixels fired client-side, 3 = all server-side.
-	ServerSideAdInsertion *int `json:"ssai,omitempty"`
+	ServerSideAdInsertion *ServerSideAdInsertionType `json:"ssai,omitempty"`
 
 	// Attribute:
 	//   exp
