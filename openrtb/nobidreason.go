@@ -104,6 +104,10 @@ const (
 	// NoBidReasonDemoAPPParseError denotes the request is a demo app request and cannot be parsed to a bid response.
 	NoBidReasonDemoAPPParseError
 
+	// NoBidReasonRejectedByFloorCap denotes the bid request is skipped because the bid floor
+	// exceeds the configured floor cap for the RTB connection.
+	NoBidReasonRejectedByFloorCap
+
 	// Add new entries here.
 
 	lastVungleExchangeNoBidReason
@@ -157,6 +161,7 @@ var NoBidReasonNames = map[NoBidReason]string{
 	NoBidReasonBlockedByAdDomain:        "NO_BID_BLOCKED_BY_AD_DOMAIN",
 	NoBidReasonBlockedByAdCreativeID:    "NO_BID_BLOCKED_BY_AD_CREATIVE_ID",
 	NoBidReasonDemoAPPParseError:        "NO_BID_BLOCKED_BY_DEMOAPP_HEADER",
+	NoBidReasonRejectedByFloorCap:       "NO_BID_REJECTED_BY_FLOOR_CAP",
 
 	NoBidReasonVungleNoCampaigns:    "NO_BID_VUNGLE_NO_CAMPAIGNS",
 	NoBidReasonVungleNoCreatives:    "NO_BID_VUNGLE_NO_CREATIVES",
