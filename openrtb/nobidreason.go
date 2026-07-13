@@ -108,6 +108,10 @@ const (
 	// exceeds the configured floor cap for the RTB connection.
 	NoBidReasonRejectedByFloorCap
 
+	// NoBidReasonRejectedByQPSCap denotes the bid request is dropped because the RTB
+	// connection's configured QPS cap is exhausted.
+	NoBidReasonRejectedByQPSCap
+
 	// Add new entries here.
 
 	lastVungleExchangeNoBidReason
@@ -162,6 +166,7 @@ var NoBidReasonNames = map[NoBidReason]string{
 	NoBidReasonBlockedByAdCreativeID:    "NO_BID_BLOCKED_BY_AD_CREATIVE_ID",
 	NoBidReasonDemoAPPParseError:        "NO_BID_BLOCKED_BY_DEMOAPP_HEADER",
 	NoBidReasonRejectedByFloorCap:       "NO_BID_REJECTED_BY_FLOOR_CAP",
+	NoBidReasonRejectedByQPSCap:         "NO_BID_REJECTED_BY_QPS_CAP",
 
 	NoBidReasonVungleNoCampaigns:    "NO_BID_VUNGLE_NO_CAMPAIGNS",
 	NoBidReasonVungleNoCreatives:    "NO_BID_VUNGLE_NO_CREATIVES",
