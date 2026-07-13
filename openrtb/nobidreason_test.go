@@ -46,6 +46,7 @@ func TestNoBidReasonStrings(t *testing.T) {
 		openrtb.NoBidReasonBlockedByAdCreativeID:    "NO_BID_BLOCKED_BY_AD_CREATIVE_ID",
 		openrtb.NoBidReasonDemoAPPParseError:        "NO_BID_BLOCKED_BY_DEMOAPP_HEADER",
 		openrtb.NoBidReasonRejectedByFloorCap:       "NO_BID_REJECTED_BY_FLOOR_CAP",
+		openrtb.NoBidReasonRejectedByQPSCap:         "NO_BID_REJECTED_BY_QPS_CAP",
 		openrtb.NoBidReasonVungleNoCampaigns:        "NO_BID_VUNGLE_NO_CAMPAIGNS",
 		openrtb.NoBidReasonVungleDataSciNoServe:     "NO_BID_VUNGLE_DATASCI_NO_SERVE",
 		openrtb.NoBidReasonVungleNoCreatives:        "NO_BID_VUNGLE_NO_CREATIVES",
