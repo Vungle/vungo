@@ -52,4 +52,5 @@ const (
 // >= 1000 Exchange specific (should be communicated to bidders a priori)
 const (
 	LossReasonBidExceedMaxValue LossReason = 1000 // Bid was higher than max value allowed by the exchange
+	LossReasonWinnerOverride    LossReason = 1001 // Winning bid demoted by an exchange-side winner-override experiment
 )
