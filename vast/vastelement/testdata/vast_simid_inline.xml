@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VAST version="4.1">
+  <Ad id="simid-inline-ad">
+    <InLine>
+      <AdSystem version="1.0"><![CDATA[Amazon DSP]]></AdSystem>
+      <AdTitle><![CDATA[Shoppable OLV]]></AdTitle>
+      <Impression id="imp-1"><![CDATA[https://aax.example.com/impression?id=1]]></Impression>
+      <Creatives>
+        <Creative id="simid-creative" sequence="1">
+          <Linear>
+            <Duration>00:00:15</Duration>
+            <AdParameters><![CDATA[{"asin":"B0EXAMPLE1","title":"Kids' \"Shoes\" <New> & Improved","price":"$19.99","locale":"en-US","cta":"Shop now →","items":[{"id":1,"url":"https://www.amazon.com/dp/B0EXAMPLE1?ref=olv&tag=x"}],"nested":{"flag":true,"n":null}}]]></AdParameters>
+            <TrackingEvents>
+              <Tracking event="start"><![CDATA[https://aax.example.com/track?e=start]]></Tracking>
+            </TrackingEvents>
+            <VideoClicks>
+              <ClickThrough><![CDATA[https://www.amazon.com/dp/B0EXAMPLE1]]></ClickThrough>
+            </VideoClicks>
+            <MediaFiles>
+              <MediaFile delivery="progressive" type="video/mp4" width="1280" height="720" bitrate="2000"><![CDATA[https://cdn.example.com/video/fallback_720p.mp4]]></MediaFile>
+              <InteractiveCreativeFile type="text/html" apiFramework="SIMID" variableDuration="true"><![CDATA[https://cdn.example.com/simid/shoppable.html]]></InteractiveCreativeFile>
+            </MediaFiles>
+          </Linear>
+        </Creative>
+      </Creatives>
+    </InLine>
+  </Ad>
+</VAST>

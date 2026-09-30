@@ -15,6 +15,9 @@ type Linear struct {
 	Trackings    []*Tracking   `xml:"TrackingEvents>Tracking,omitempty"`
 	VideoClicks  *VideoClicks  `xml:"VideoClicks,omitempty"`
 	MediaFiles   []*MediaFile  `xml:"MediaFiles>MediaFile,omitempty"`
+	// InteractiveCreativeFiles must stay right after MediaFiles so both are marshaled into the
+	// same <MediaFiles> element. VAST4.0+.
+	InteractiveCreativeFiles []*InteractiveCreativeFile `xml:"MediaFiles>InteractiveCreativeFile,omitempty"`
 
 	Extensions []*Extension `xml:"CreativeExtensions>CreativeExtension,omitempty"` // VAST3.0.
 	Icons      []*Icon      `xml:"Icons>Icon"`                                     // VAST3.0.
