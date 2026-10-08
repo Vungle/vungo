@@ -83,6 +83,7 @@
         scalable="true"
         maintainAspectRatio="true"
         apiFramework="Vungle Exchange"><![CDATA[http://link/to/the/video]]></MediaFile>
+    <InteractiveCreativeFile type="text/html" apiFramework="SIMID" variableDuration="true"><![CDATA[http://link/to/the/simid/creative]]></InteractiveCreativeFile>
   </MediaFiles>
   <CreativeExtensions>
     <CreativeExtension>
